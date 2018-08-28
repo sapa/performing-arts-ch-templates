@@ -7,3 +7,4 @@ LdpBase=http://performing-arts.ch/ldp-assets/
 sapa=http://page.performing-arts.ch/
 sapaModule=http://page-module.performing-arts.ch/
 hint=http://www.bigdata.com/queryHints#
+bds=http://www.bigdata.com/rdf/search#
