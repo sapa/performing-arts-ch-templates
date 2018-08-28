@@ -1,0 +1,22 @@
+[[#> sapaModule:BaseSearchPartial limit=500 showTable="true" showChart="true" showMap="true" defaultTabView="table"]]
+  <semantic-search-query-keyword
+    domain='<[[resolvePrefix "crm:E53_Place"]]>'
+    query='SELECT DISTINCT ?subject WHERE {
+      ?subject a crm:E53_Place.
+      ?type skos:prefLabel ?value.
+      ?subject rdfs:label ?label .
+      FILTER(!CONTAINS(STR(?subject),"/u/"))	
+      ?label bds:search ?__token__ ;   
+      bds:minRelevance "0.3" ; 
+      bds:relevance ?score ; 
+      bds:matchAllTerms "true" .
+      BIND(STRLEN(?label) as ?length)
+
+    } ORDER BY DESC(?score) ?length'
+    default-query='SELECT DISTINCT ?subject WHERE {
+      ?subject a crm:E53_Place; rdfs:label ?label.
+      FILTER(!CONTAINS(STR(?subject),"/u/"))	
+    } ORDER BY DESC(?subject)'>
+  </semantic-search-query-keyword>
+[[/sapaModule:BaseSearchPartial]]
+

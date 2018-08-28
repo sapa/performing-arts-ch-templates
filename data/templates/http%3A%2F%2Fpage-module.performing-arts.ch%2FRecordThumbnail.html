@@ -1,0 +1,42 @@
+<div style='height: 120px; width: 120px;'>
+  <semantic-context repository='default'>
+    <semantic-switch
+      query='
+        SELECT ?type WHERE {
+          <{{iri.value}}> a ?type .
+        } LIMIT 1
+      '
+    >
+      <template id='[[resolvePrefix "crm:E39_Actor"]]'>
+        <mp-resource-link-container class="grid-resource-link" uri="{{iri.value}}">
+         {{> sapa:ItemCardThumbnail noImageThumbnail='../images/fcs/actor_no-image.svg'}}
+        </mp-resource-link-container>
+      </template>
+      <template id='[[resolvePrefix "crm:E53_Place"]]'>
+        <mp-resource-link-container class="grid-resource-link" uri="{{iri.value}}">
+          <img style="height: 120px; min-width:50px; max-width: 120px;" src='../images/fcs/place_no-image.svg' />
+        </mp-resource-link-container>
+      </template>
+      <template id='[[resolvePrefix "E22_Man-Made_Object"]]'>
+        <mp-resource-link-container class="grid-resource-link" uri="{{iri.value}}">
+          <semantic-query query='SELECT ?item { <{{iri.value}}> crm:P65_shows_visual_item ?item . } LIMIT 1' template='{{> result}}' no-result-template='{{> noResult }}'>
+            <template id='result'>
+                <span>IIIF tdb</span>
+            </template>
+            <template id='noResult'>
+              <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
+                <i class="fa fa-file-image-o" style="font-size:70px;" aria-hidden="true"></i><br><br>
+                No document preview available.
+              </div>            
+            </template>
+          </semantic-query>      
+        </mp-resource-link-container>
+      </template>
+      <template id="default">
+        <semantic-link class="grid-resource-link" uri="{{iri.value}}">
+          {{> sapa:ItemCardThumbnail noImageThumbnail='../images/no-image.svg'}}
+        </semantic-link>
+      </template>
+    </semantic-switch>
+  </semantic-context>
+</div>

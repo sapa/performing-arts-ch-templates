@@ -1,0 +1,36 @@
+[[#if (hasPermission "forms:ldp:*")]] 
+<bs-tab event-key='place editing' title='Authoring'>
+  <div data-flex-layout='row top-stretch'>
+    <semantic-form 
+      subject='[[this]]'
+      post-action='reload'
+      browser-persistence=true
+      persistence='ldp'
+      form-id='places'
+      fields='[[fieldDefinitions
+        E53_Place_P87_is_identified_by="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_P87_is_identified_by"
+        E53_Place_falls_within="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_falls_within"
+        E1_CRM_Entity_sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
+        E1_CRM_Entity_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type"
+      ]]'>
+      <bs-panel>
+        <semantic-form-recover-notification></semantic-form-recover-notification>
+        <semantic-form-text-input for="E53_Place_P87_is_identified_by" languages='["en","de","fr","it"]'></semantic-form-text-input>
+        <semantic-form-text-input for="E1_CRM_Entity_sameAs"></semantic-form-text-input>
+        <semantic-form-tree-picker-input for="E53_Place_falls_within" ></semantic-form-tree-picker-input>
+        <semantic-form-hidden-input for='E1_CRM_Entity_rdf_type' default-value='[[resolvePrefix "crm:E53_Place"]]'></semantic-form-hidden-input>
+        <semantic-form-errors></semantic-form-errors>
+        <!-- save and reset button for form -->
+        <button
+          name="submit"
+          class="btn btn-default"
+        >Save</button>
+        <button
+          name="reset"
+          class="btn btn-default"
+        >Reset</button>
+      </bs-panel>
+    </semantic-form>
+  </div>
+</bs-tab>
+[[/if]]

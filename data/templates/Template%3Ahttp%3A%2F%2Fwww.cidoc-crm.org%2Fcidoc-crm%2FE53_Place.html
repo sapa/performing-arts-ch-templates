@@ -1,0 +1,118 @@
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+  <li class="active">
+   [[> sapaModule:RecordLabel ]]
+ </li>
+</ol>
+
+<div class="page">
+
+  [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/places.svg"]] 
+  
+  <bs-tabs  class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
+    <bs-tab event-key='about' title='About'>
+     <div data-flex-layout='row top-stretch'> 
+
+       <div style="padding: 15px ;width: 50%" data-flex-self='size-xsmall'>
+        [[> sapa:WikiPlaceMap]]
+
+        <br>
+        <div class="pull-left">
+         <h3> Place Hierarchy</h3>
+         <semantic-tree
+         query='SELECT DISTINCT ?node ?parent WHERE {
+            { 
+              { ?? crm:P89_falls_within* ?node }
+              UNION
+              { ?node crm:P89_falls_within*  ?? } 
+            }
+            OPTIONAL { ?node crm:P89_falls_within ?parent. FILTER(ISIRI(?parent)) }
+            FILTER(ISIRI(?node))
+            FILTER(CONTAINS(STR(?node),"/p/"))
+          }
+
+       '                                  
+       collapsed="true"
+       keys-opened='[[this]]'
+       parentBindingName="parent"
+       nodeBindingName="node"> 
+     </semantic-tree>
+   </div>
+
+
+ </div>
+ <div style="padding: 15px ;width: 70%" class='table-responsive'>             
+   <table class='table'>
+    <thead role='header'>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <mp-field-visualization
+    subject='[[this]]'
+    fields='[[fieldDefinitions 
+      http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_label"
+      http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_is_identified_by="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_is_identified_by"                                            
+    ]]'
+    template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' 
+    [[!-- show in includ [[> sapaModule:FieldBasedVisualization ]] --]]
+    ></mp-field-visualization> 
+  </table>
+</div>
+<semantic-query 
+  query='SELECT ?value ?label WHERE {
+    ?? owl:sameAs ?value
+    BIND (replace(str(?value), ".*\\/", "") as ?localname)
+    BIND (strbefore(str(?value), ?localname) as ?prefix)
+
+    VALUES (?prefix  ?source)
+    {
+      ("http://www.wikidata.org/entity/"  "Wikidata")
+      ("http://classifications.data.admin.ch/municipality/" "Swiss  Municipality")
+      ("http://geonames.org/" "Geonames")
+      ("http://d-nb.info/gnd/" "GND")
+      ("http://viaf.org/viaf/" "VIAF")
+      ("https://www.wikidata.org/wiki/" "WikiData")
+      ("http://classifications.data.admin.ch/canton/" "Swiss  Municipality")
+    }
+    BIND  ( CONCAT(?source," [",?localname,"]") as ?label)
+  }'
+
+  template='<div style="padding: 15px;"><h4>External Databases</h4>
+    <ul>{{#each bindings}}<li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
+      {{/each}}
+    </ul></div>'> 
+</semantic-query>
+</div><!-- end flex row --> 
+
+</bs-tab>
+<bs-tab event-key="2" title="Relations">
+
+  <div class='table-responsive'>
+    <table class='table'>
+      <thead role='header'>
+        <tr>
+          <th>Field</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <mp-field-visualization
+      subject='[[this]]'
+      fields='[[fieldDefinitions 
+        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_has_current_or_former_residence="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_has_current_or_former_residence"
+      ]]'
+      template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' 
+      [[!-- show in include [[> sapaModule:FieldBasedVisualization ]] --]]
+      ></mp-field-visualization> 
+    </table>
+  </div>
+
+</bs-tab>
+
+[[> sapaModule:PlaceEditingTab]]
+
+</bs-tabs>  
+</div>
