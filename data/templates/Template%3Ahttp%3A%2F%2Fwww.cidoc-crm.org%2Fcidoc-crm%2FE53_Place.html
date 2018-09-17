@@ -15,24 +15,23 @@
     <bs-tab event-key='about' title='About'>
      <div data-flex-layout='row top-stretch'> 
 
-       <div style="padding: 15px ;width: 50%" data-flex-self='size-xsmall'>
+       <div style="padding: 15px; width: 50%" data-flex-self='size-xsmall'>
         [[> sapa:WikiPlaceMap]]
-
         <br>
         <div class="pull-left">
-         <h3> Place Hierarchy</h3>
+         <h3>Place Hierarchy</h3>
          <semantic-tree
          query='SELECT DISTINCT ?node ?parent WHERE {
             { 
               { ?? crm:P89_falls_within* ?node }
               UNION
-              { ?node crm:P89_falls_within*  ?? } 
+              { ?node crm:P89_falls_within* ?? } 
+              ?referrer crm:P89_falls_within ?node .
             }
             OPTIONAL { ?node crm:P89_falls_within ?parent. FILTER(ISIRI(?parent)) }
             FILTER(ISIRI(?node))
             FILTER(CONTAINS(STR(?node),"/p/"))
           }
-
        '                                  
        collapsed="true"
        keys-opened='[[this]]'
