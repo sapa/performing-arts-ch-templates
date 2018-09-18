@@ -7,14 +7,14 @@
   </li>
 </ol>
 
-
 <div class="page">
 
-  [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
+    [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
 
-  <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='internal-data' unmount-on-exit=true>
-    <bs-tab event-key='internal-data' title='Summary'>
-     [[> sapaModule:ActorFields ]]
-   </bs-tab>
- </bs-tabs>  
+    <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='internal-data' unmount-on-exit=true>
+        <bs-tab event-key='internal-data' title='About'>
+            [[> sapaModule:ActorFields ]]
+        </bs-tab>
+        [[> sapaModule:GroupEditingTab]]
+    </bs-tabs>  
 </div>

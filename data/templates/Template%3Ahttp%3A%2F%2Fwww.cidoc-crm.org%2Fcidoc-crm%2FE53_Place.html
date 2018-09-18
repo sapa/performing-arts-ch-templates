@@ -32,7 +32,7 @@
             FILTER(ISIRI(?node))
             FILTER(CONTAINS(STR(?node),"/p/"))
           }
-       '                                  
+       '
        collapsed="true"
        keys-opened='[[this]]'
        parentBindingName="parent"
@@ -88,7 +88,7 @@
 </div><!-- end flex row --> 
 
 </bs-tab>
-<bs-tab event-key="2" title="Relations">
+<bs-tab event-key="2" title="Groups and Venues">
 
   <div class='table-responsive'>
     <table class='table'>
@@ -102,6 +102,7 @@
       subject='[[this]]'
       fields='[[fieldDefinitions 
         http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_has_current_or_former_residence="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_has_current_or_former_residence"
+        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_has_Venue="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_has_Venue"
       ]]'
       template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' 
       [[!-- show in include [[> sapaModule:FieldBasedVisualization ]] --]]

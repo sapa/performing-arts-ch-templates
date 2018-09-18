@@ -19,11 +19,11 @@
       <!--Types -->    
       <p>
         <b>Type</b>: <semantic-query query='SELECT DISTINCT ?type WHERE { 
-          ?? a ?type. 
+          ?? a ?type .
           #FILTER NOT EXISTS {?t rdfs:subClassOf ?type} 
-          FILTER(?type!=owl:Thing) 
+          FILTER(?type!=owl:Thing)
         }' style="display:inline;"></semantic-query>
-    </p>
+      </p>
 
     <!--Description -->
     <p>
