@@ -2,8 +2,10 @@
   <semantic-search-query-keyword
     domain='<[[resolvePrefix "crm:E74_Group"]]>'
     query='SELECT ?subject WHERE {
-      ?subject a crm:E74_Group ;
-        crm:P1_is_identified_by ?identifier .
+      { ?subject a crm:E74_Group }
+      UNION
+      { ?subject a crm:E40_Legal_Body }
+      ?subject crm:P1_is_identified_by ?identifier .
       ?identifier rdf:value ?name.  
       FILTER(CONTAINS(STR(?subject), "/a/"))    
       ?name bds:search ?__token__ ;   
