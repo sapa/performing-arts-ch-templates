@@ -2,16 +2,19 @@
   <semantic-search-query-keyword
     domain='<[[resolvePrefix "crm:E74_Group"]]>'
     query='SELECT ?subject WHERE {
-      ?subject a crm:E74_Group.
-      ?subject crm:P1_is_identified_by  ?identifier .
+      ?subject a crm:E74_Group ;
+        crm:P1_is_identified_by ?identifier .
       ?identifier rdf:value ?name.  
       ?name bds:search ?__token__ ;   
-      bds:minRelevance "0.3" ; 
+      bds:minRelevance "0.2" ; 
       bds:relevance ?score ; 
       bds:matchAllTerms "true" .
       BIND(STRLEN(?name) as ?length)
     } ORDER BY DESC(?score) ?length'
-    default-query='SELECT DISTINCT ?subject WHERE {?subject a crm:E74_Group} '
+    default-query='SELECT DISTINCT ?subject WHERE {
+      ?subject a crm:E74_Group .
+      FILTER(CONTAINS(STR(?subject), "/a/"))
+    } '
   >
   
  </semantic-search-query-keyword>
