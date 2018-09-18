@@ -12,7 +12,7 @@
       bds:matchAllTerms "true" .
       BIND(STRLEN(?label) as ?length)
     } ORDER BY DESC(?score) ?length'
-    default-query='SELECT DISTINCT ?subject WHERE {
+    _default-query='SELECT DISTINCT ?subject WHERE {
       ?subject a crm:E53_Place ; 
         rdfs:label ?label .
       FILTER(CONTAINS(STR(?subject), "/p/"))	
