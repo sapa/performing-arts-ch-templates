@@ -13,9 +13,8 @@
   
   <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
     <bs-tab event-key='about' title='About'>
-     <div data-flex-layout='row top-stretch'>
 
-        <div style="padding: 15px ;width: 33%" class='table-responsive'>
+        <bs-col sm="4">
             <semantic-query 
                 query='SELECT ?name ?lang WHERE { 
                     ?? rdfs:label ?name . 
@@ -23,35 +22,6 @@
                 }' 
                 template='<div><h4>Name</h4><ul>{{#each bindings}}<li>{{name.value}} ({{lang.value}})</li>{{/each}}</ul></div>'>
             </semantic-query>
-        </div>
-
-       <div style="padding: 15px; width: 33%" data-flex-self='size-xsmall'>
-            <div class="pull-left">
-                <h4>Place Hierarchy</h4>
-                <semantic-tree
-                     query='SELECT DISTINCT ?node ?parent WHERE {
-                        { 
-                          { ?? crm:P89_falls_within* ?node }
-                          UNION
-                          { ?node crm:P89_falls_within* ?? } 
-                          ?referrer crm:P89_falls_within ?node .
-                        }
-                        OPTIONAL { ?node crm:P89_falls_within ?parent. FILTER(ISIRI(?parent)) }
-                        FILTER(ISIRI(?node))
-                        FILTER(CONTAINS(STR(?node),"/p/"))
-                      }
-                   '
-                   collapsed="true"
-                   keys-opened='[[this]]'
-                   parentBindingName="parent"
-                   nodeBindingName="node"> 
-                </semantic-tree>
-            </div>
-        </div>
-
-        <div style="padding: 15px ;width: 33%" class='table-responsive'>
-            [[> sapa:WikiPlaceMap]]
-            <br>
             <semantic-query 
             query='SELECT ?value ?label WHERE {
                 ?? owl:sameAs ?value
@@ -70,21 +40,44 @@
                 }
                 BIND  ( CONCAT(?source," [",?localname,"]") as ?label)
                 }'
-            template='<div style="padding: 15px;"><h4>External Databases</h4>
+            template='<div style="margin-top: 1.5em;"><h4>External Databases</h4>
             <ul>{{#each bindings}}<li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
               {{/each}}
             </ul></div>'>
             </semantic-query>
-        </div>
+        </bs-col>
 
-    </div><!-- end flex row --> 
+        <bs-col sm="4">
+            <h4>Place Hierarchy</h4>
+            <semantic-tree
+                 query='SELECT DISTINCT ?node ?parent WHERE {
+                    { 
+                      { ?? crm:P89_falls_within* ?node }
+                      UNION
+                      { ?node crm:P89_falls_within* ?? } 
+                      ?referrer crm:P89_falls_within ?node .
+                    }
+                    OPTIONAL { ?node crm:P89_falls_within ?parent. FILTER(ISIRI(?parent)) }
+                    FILTER(ISIRI(?node))
+                    FILTER(CONTAINS(STR(?node),"/p/"))
+                  }
+               '
+               collapsed="true"
+               keys-opened='[[this]]'
+               parentBindingName="parent"
+               nodeBindingName="node"> 
+            </semantic-tree>
+        </bs-col>
+
+        <bs-col sm="4">
+            [[> sapa:WikiPlaceMap]]
+        </bs-col>
 
 </bs-tab>
 <bs-tab event-key="2" title="Groups and Venues">
 
-  <div data-flex-layout='row top-stretch'>
-
-        <div style="padding: 15px; width: 50%" class='table-responsive'>
+    <bs-row>
+        <bs-col sm="4">
             <semantic-query 
                 query='SELECT ?value ?label WHERE {
                   ?site crm:P89_falls_within ?? .
@@ -93,9 +86,9 @@
                 } ORDER BY lcase(?label)'
                 template='<div><h4>Groups</h4><ul>{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
-        </div>
+        </bs-col>
 
-        <div style="padding: 15px; width: 50%" class='table-responsive'>
+        <bs-col sm="4">
             <semantic-query 
                 query='SELECT ?value ?label WHERE {
                   ?site crm:P89_falls_within ?? .
@@ -105,9 +98,12 @@
                 } ORDER BY lcase(?label)'
                 template='<div><h4>Venues</h4><ul>{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
-        </div>
+        </bs-col>
 
-  </div>
+        <bs-col sm="4">
+            
+        </bs-col>
+    </bs-row>
 
 </bs-tab>
 
