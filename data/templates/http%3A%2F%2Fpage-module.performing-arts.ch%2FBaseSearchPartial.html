@@ -1,11 +1,15 @@
-<semantic-search [[#if limit]]limit=[[limit]][[/if]] config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?field a <http://www.metaphacts.com/ontology/fields#Field>; <http://www.metaphacts.com/ontology/fields#range> ?range ; <http://www.metaphacts.com/ontology/fields#range> ?domain . }" escape=false) '{"categories": {"<http://www.cidoc-crm.org/cidoc-crm/E53_Place>": [{"kind": "hierarchy", "queryPattern": "{?subject ?__relation__ ?__value__ .}"}],"<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>": [ { "kind": "date-range", "datatype": "http://www.w3.org/2001/XMLSchema#year" ,"format":"YYYY", "queryPattern": "{ ?event ?__relation__ ?subject ; crm:P4_has_time-span ?timespan .?timespan P82_at_some_time_within ?year ; ?year rdf:value ?__value__  . }" } ]}, "searchProfile": {"categories": [{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>", "label": "Thing"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",  "label": "Group"},   {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",  "label": "Place"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>",  "label": "Date"}, {"iri": "<http://www.w3.org/2000/01/rdf-schema#Class>",  "label": "Concept"}], "relations": [ ]}}"}" ']]'>
+<semantic-search 
+    [[#if limit]]limit=[[limit]][[/if]] 
+    config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?field a <http://www.metaphacts.com/ontology/fields#Field>; <http://www.metaphacts.com/ontology/fields#range> ?range ; <http://www.metaphacts.com/ontology/fields#range> ?domain . }" escape=false) '{"categories": {"<http://www.cidoc-crm.org/cidoc-crm/E53_Place>": [{"kind": "hierarchy", "queryPattern": "{?subject ?__relation__ ?__value__ .}"}],"<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>": [ { "kind": "date-range", "datatype": "http://www.w3.org/2001/XMLSchema#year" ,"format":"YYYY", "queryPattern": "{ ?event ?__relation__ ?subject ; crm:P4_has_time-span ?timespan .?timespan P82_at_some_time_within ?year ; ?year rdf:value ?__value__  . }" } ]}, "searchProfile": {"categories": [{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>", "label": "Thing"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",  "label": "Group"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",  "label": "Place"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",  "label": "Actor"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>",  "label": "Date"}, {"iri": "<http://www.w3.org/2000/01/rdf-schema#Class>",  "label": "Concept"}], "relations": [ ]}}"}" ']]'
+>
   
  [[> @partial-block ]] 
     
   <div data-flex-layout="row stretch-stretch">
     <div data-flex-self="size-1of3" style="flex: 0 0 0;">
       <semantic-search-facet
-        open-by-default=false [[!--listen-to-context-switch=true--]]
+        open-by-default=false 
+        [[!--listen-to-context-switch=true--]]
       ></semantic-search-facet>
     </div>
        <semantic-search-result-holder>
@@ -28,11 +32,16 @@
             </template>
           </mp-sparql-result-counts>
         </semantic-search-result>
+
         <bs-tabs unmount-on-exit=true id='search-results' default-active-key=2 animation=false class='tabs-right'>
+
           [[#if showGrid]] <bs-tab event-key='1' title='Grid'>
             <semantic-search-result>
               <semantic-table 
-                query='SELECT DISTINCT ?subject WHERE {OPTIONAL{?subject rdfs:label ?dLabel} BIND(COALESCE(?dLabel,"zz") as ?displayLabel)} ORDER BY ASC(?displayLabel)' 
+                query='SELECT DISTINCT ?subject WHERE {
+                            OPTIONAL{ ?subject rdfs:label ?dLabel }
+                            BIND(COALESCE(?dLabel, "zz") as ?displayLabel)
+                        } ORDER BY ASC(?displayLabel)' 
                 id="grid-result" tuple-template='{{> itemTemplate}}' 
                 options='{"showFilter": false}'
               >
@@ -42,17 +51,19 @@
               </semantic-table>
             </semantic-search-result>
           </bs-tab>[[else]][[/if]]
+
           [[#if showTable]]<bs-tab event-key='2' title='Table'> 
             <semantic-search-result>
               <semantic-table 
-                query='SELECT DISTINCT ?subject WHERE { 
-  											?subject rdfs:label ?label
-								  }ORDER BY ASC(?label)' 
+                query='SELECT DISTINCT ?subject WHERE {
+  							?subject rdfs:label ?label
+						} ORDER BY ASC(?label)' 
                 id="table-result" 
                 options='{"showFilter": false}'>
               </semantic-table>
             </semantic-search-result>
           </bs-tab>[[else]][[/if]]
+
            [[#if showChart]] <bs-tab event-key="3" title="Chart">
             <semantic-search-result-context ranges='["http://www.cidoc-crm.org/cidoc-crm/E39_Actor","http://www.cidoc-crm.org/cidoc-crm/E74_Group", "http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object", "http://www.cidoc-crm.org/cidoc-crm/E53_Place"]'>
               <semantic-search-result>
@@ -66,8 +77,8 @@
                       id='search-result-chart'
                       query='
                         SELECT DISTINCT ?object (COUNT(DISTINCT ?subject) as ?count) WHERE {
-                          OPTIONAL { FILTER(?__contextRelationPattern__) }
-                          BIND(IF(BOUND(?__value__), ?__value__, "Unknown") as ?object)
+                            OPTIONAL { FILTER(?__contextRelationPattern__) }
+                            BIND(IF(BOUND(?__value__), ?__value__, "Unknown") as ?object)
                         } GROUP BY ?object ORDER BY DESC(?count)
                       '
                       sets='[{
@@ -100,8 +111,11 @@
               </semantic-search-result>
             </semantic-search-result-context>
           </bs-tab>[[else]][[/if]]
-        </bs-tabs>    
+
+        </bs-tabs>
+
         <hr>
+
         <div class="pull-right" style="display: flex;">
           <semantic-search-result>
             <mp-sparql-download id='csv-result' query="SELECT ?subject WHERE { }"
@@ -119,9 +133,8 @@
             <button class="btn btn-default" style="margin-right:10px">Save As Search</button>
           </semantic-search-action-save-search-result>
         </div>
+
       </div>
     </semantic-search-result-holder>
   </div>
-
-
 </semantic-search>
