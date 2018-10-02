@@ -60,7 +60,8 @@
                     OPTIONAL { ?node crm:P89_falls_within ?parent. FILTER(ISIRI(?parent)) }
                     FILTER(ISIRI(?node))
                     FILTER(CONTAINS(STR(?node),"/p/"))
-                  }
+                    ?node rdfs:label ?label .
+                  } ORDER BY ?label
                '
                collapsed="true"
                keys-opened='[[this]]'
