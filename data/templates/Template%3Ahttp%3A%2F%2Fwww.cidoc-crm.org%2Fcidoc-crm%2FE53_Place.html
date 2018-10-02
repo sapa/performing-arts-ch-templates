@@ -82,24 +82,31 @@
 </bs-tab>
 <bs-tab event-key="2" title="Groups and Venues">
 
-  <div class='table-responsive'>
-    <table class='table'>
-      <thead role='header'>
-        <tr>
-          <th>Field</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <mp-field-visualization
-      subject='[[this]]'
-      fields='[[fieldDefinitions 
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_has_current_or_former_residence="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_has_current_or_former_residence"
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_has_Venue="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_has_Venue"
-      ]]'
-      template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' 
-      [[!-- show in include [[> sapaModule:FieldBasedVisualization ]] --]]
-      ></mp-field-visualization> 
-    </table>
+  <div data-flex-layout='row top-stretch'>
+
+        <div style="padding: 15px; width: 50%" class='table-responsive'>
+            <semantic-query 
+                query='SELECT ?value ?label WHERE {
+                  ?site crm:P89_falls_within ?? .
+                  ?value crm:P74_has_current_or_former_residence ?site ;
+                    rdfs:label ?label .
+                } ORDER BY lcase(?label)'
+                template='<div><h4>Groups</h4><ul>{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+            </semantic-query>
+        </div>
+
+        <div style="padding: 15px; width: 50%" class='table-responsive'>
+            <semantic-query 
+                query='SELECT ?value ?label WHERE {
+                  ?site crm:P89_falls_within ?? .
+                  ?value crm:P156_occupies ?site ;
+                    crm:P2_has_type spav:dwmkn ;
+                    rdfs:label ?label .
+                } ORDER BY lcase(?label)'
+                template='<div><h4>Venues</h4><ul>{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+            </semantic-query>
+        </div>
+
   </div>
 
 </bs-tab>
