@@ -15,39 +15,6 @@
     <bs-tab event-key='about' title='About'>
 
         <bs-col sm="4">
-            <semantic-query 
-                query='SELECT ?name ?lang WHERE { 
-                    ?? rdfs:label ?name . 
-                    BIND( LANG(?name) AS ?lang).
-                }' 
-                template='<div><h4>Name</h4><ul>{{#each bindings}}<li>{{name.value}} ({{lang.value}})</li>{{/each}}</ul></div>'>
-            </semantic-query>
-            <semantic-query 
-            query='SELECT ?value ?label WHERE {
-                ?? owl:sameAs ?value
-                BIND (replace(str(?value), ".*\\/", "") as ?localname)
-                BIND (strbefore(str(?value), ?localname) as ?prefix)
-
-                VALUES (?prefix  ?source)
-                {
-                  ("http://www.wikidata.org/entity/"  "Wikidata")
-                  ("http://classifications.data.admin.ch/municipality/" "Swiss  Municipality")
-                  ("http://geonames.org/" "Geonames")
-                  ("http://d-nb.info/gnd/" "GND")
-                  ("http://viaf.org/viaf/" "VIAF")
-                  ("https://www.wikidata.org/wiki/" "WikiData")
-                  ("http://classifications.data.admin.ch/canton/" "Swiss  Municipality")
-                }
-                BIND  ( CONCAT(?source," [",?localname,"]") as ?label)
-                }'
-            template='<div style="margin-top: 1.5em;"><h4>External Databases</h4>
-            <ul>{{#each bindings}}<li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
-              {{/each}}
-            </ul></div>'>
-            </semantic-query>
-        </bs-col>
-
-        <bs-col sm="4">
             <h4>Place Hierarchy</h4>
             <semantic-tree
                  query='SELECT DISTINCT ?node ?parent WHERE {
@@ -68,6 +35,32 @@
                parentBindingName="parent"
                nodeBindingName="node"> 
             </semantic-tree>
+        </bs-col>
+
+        <bs-col sm="4">
+            <semantic-query 
+            query='SELECT ?value ?label WHERE {
+                ?? owl:sameAs ?value
+                BIND (replace(str(?value), ".*\\/", "") as ?localname)
+                BIND (strbefore(str(?value), ?localname) as ?prefix)
+
+                VALUES (?prefix  ?source)
+                {
+                  ("http://www.wikidata.org/entity/"  "Wikidata")
+                  ("http://classifications.data.admin.ch/municipality/" "Swiss  Municipality")
+                  ("http://geonames.org/" "Geonames")
+                  ("http://d-nb.info/gnd/" "GND")
+                  ("http://viaf.org/viaf/" "VIAF")
+                  ("https://www.wikidata.org/wiki/" "WikiData")
+                  ("http://classifications.data.admin.ch/canton/" "Swiss  Municipality")
+                }
+                BIND  ( CONCAT(?source," [",?localname,"]") as ?label)
+                }'
+            template='<div><h4>External Databases</h4>
+            <ul>{{#each bindings}}<li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
+              {{/each}}
+            </ul></div>'>
+            </semantic-query>
         </bs-col>
 
         <bs-col sm="4">
