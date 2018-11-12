@@ -1,0 +1,21 @@
+[[#> sapaModule:BaseSearchPartial limit=500 showTable="true" defaultTabView="table"]]
+  <semantic-search-query-keyword
+    domain='<[[resolvePrefix "crm:E21_Person"]]>'
+    query='SELECT ?subject WHERE {
+      ?subject a crm:E21_Person ;
+        crm:P1_is_identified_by ?identifier .
+      ?identifier rdf:value ?name.  
+      FILTER(CONTAINS(STR(?subject), "/a/"))
+      ?name bds:search ?__token__ ;
+        bds:minRelevance "0.2" ;
+        bds:relevance ?score ; 
+        bds:matchAllTerms "true" .
+      BIND(STRLEN(?name) as ?length)
+    } ORDER BY DESC(?score) ?length'
+    _default-query='SELECT DISTINCT ?subject WHERE {
+      ?subject a crm:E21_Person .
+      FILTER(CONTAINS(STR(?subject), "/a/"))
+    } '
+  >
+ </semantic-search-query-keyword>
+[[/sapaModule:BaseSearchPartial]]
