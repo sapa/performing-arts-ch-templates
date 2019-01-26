@@ -15,7 +15,7 @@
     <bs-tab event-key='about' title='About'>
 
         <bs-col sm="4">
-            <h4>Place Hierarchy</h4>
+            <h5>Place Hierarchy</h5>
             <semantic-tree
                  query='SELECT DISTINCT ?node ?parent WHERE {
                     { 
@@ -44,19 +44,19 @@
                 BIND (replace(str(?value), ".*\\/", "") as ?localname)
                 BIND (strbefore(str(?value), ?localname) as ?prefix)
 
-                VALUES (?prefix  ?source)
+                VALUES (?prefix ?source)
                 {
-                  ("http://www.wikidata.org/entity/"  "Wikidata")
-                  ("http://classifications.data.admin.ch/municipality/" "Swiss  Municipality")
+                  ("http://www.wikidata.org/entity/" "Wikidata")
+                  ("https://www.wikidata.org/wiki/" "Wikidata")
                   ("http://geonames.org/" "Geonames")
-                  ("http://d-nb.info/gnd/" "GND")
                   ("http://viaf.org/viaf/" "VIAF")
-                  ("https://www.wikidata.org/wiki/" "WikiData")
-                  ("http://classifications.data.admin.ch/canton/" "Swiss  Municipality")
+                  ("http://d-nb.info/gnd/" "GND")
+                  ("http://classifications.data.admin.ch/municipality/" "Swiss Municipality")
+                  ("http://classifications.data.admin.ch/canton/" "Swiss Municipality")
                 }
-                BIND  ( CONCAT(?source," [",?localname,"]") as ?label)
-                }'
-            template='<div><h4>External Databases</h4>
+                BIND (CONCAT(?source," [",?localname,"]") as ?label)
+            }'
+            template='<div><h5>External Databases</h5>
             <ul>{{#each bindings}}<li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
               {{/each}}
             </ul></div>'>
@@ -78,7 +78,7 @@
                   ?value crm:P74_has_current_or_former_residence ?site ;
                     rdfs:label ?label .
                 } ORDER BY lcase(?label)'
-                template='<div><h4>Groups</h4><ul>{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+                template='<div><h5>Groups</h5><ul>{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
         </bs-col>
 
@@ -90,7 +90,7 @@
                     crm:P2_has_type spav:dwmkn ;
                     rdfs:label ?label .
                 } ORDER BY lcase(?label)'
-                template='<div><h4>Venues</h4><ul>{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+                template='<div><h5>Venues</h5><ul>{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
         </bs-col>
 

@@ -11,10 +11,13 @@
 
     [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
 
-    <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='internal-data' unmount-on-exit=true>
-        <bs-tab event-key='internal-data' title='About'>
+    <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
+        <bs-tab event-key='about' title='About'>
+            [[> sapaModule:GroupSummary]]
+        </bs-tab>
+        <bs-tab event-key='internal-data' title='All'>
             [[> sapaModule:ActorFields ]]
         </bs-tab>
         [[> sapaModule:GroupEditingTab]]
-    </bs-tabs>  
+    </bs-tabs>
 </div>
