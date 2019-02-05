@@ -8,10 +8,13 @@
       ?subject crm:P1_is_identified_by ?identifier .
       ?identifier rdf:value ?name.  
       FILTER(CONTAINS(STR(?subject), "/a/"))
+   SERVICE <http://www.bigdata.com/rdf/search#search>
+           {
       ?name bds:search ?__token__ ;
         bds:minRelevance "0.2" ;
         bds:relevance ?score ; 
         bds:matchAllTerms "true" .
+     }
       BIND(STRLEN(?name) as ?length)
     } ORDER BY DESC(?score) ?length'
     _default-query='SELECT DISTINCT ?subject WHERE {
