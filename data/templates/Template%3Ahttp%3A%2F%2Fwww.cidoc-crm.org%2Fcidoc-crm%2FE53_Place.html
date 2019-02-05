@@ -38,29 +38,15 @@
         </bs-col>
 
         <bs-col sm="4">
-            <semantic-query 
-            query='SELECT ?value ?label WHERE {
-                ?? owl:sameAs ?value
-                BIND (replace(str(?value), ".*\\/", "") as ?localname)
-                BIND (strbefore(str(?value), ?localname) as ?prefix)
-
-                VALUES (?prefix ?source)
-                {
-                  ("http://www.wikidata.org/entity/" "Wikidata")
-                  ("https://www.wikidata.org/wiki/" "Wikidata")
-                  ("http://geonames.org/" "Geonames")
-                  ("http://viaf.org/viaf/" "VIAF")
-                  ("http://d-nb.info/gnd/" "GND")
-                  ("http://classifications.data.admin.ch/municipality/" "Swiss Municipality")
-                  ("http://classifications.data.admin.ch/canton/" "Swiss Municipality")
-                }
-                BIND (CONCAT(?source," [",?localname,"]") as ?label)
-            }'
-            template='<div><h5>External Databases</h5>
-            <ul>{{#each bindings}}<li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
-              {{/each}}
-            </ul></div>'>
-            </semantic-query>
+            <mp-field-visualization
+                subject='[[this]]'
+                fields='[[fieldDefinitions
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
+                ]]'
+                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+            >
+            </mp-field-visualization> 
         </bs-col>
 
         <bs-col sm="4">
