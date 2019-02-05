@@ -8,3 +8,6 @@ sapa=http://page.performing-arts.ch/
 sapaModule=http://page-module.performing-arts.ch/
 hint=http://www.bigdata.com/queryHints#
 bds=http://www.bigdata.com/rdf/search#
+ore=http://www.openarchives.org/ore/terms/
+rdaa=http://rdaregistry.info/Elements/a/
+rdau=http://rdaregistry.info/Elements/u/
