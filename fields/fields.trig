@@ -560,7 +560,7 @@ WHERE {
 		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI ;
 		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-5ef45b35ab7647008c4a352410e815b2-5F69A5F1E55711B820E1909929FDF1B1 ;
 		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-5ef45b35ab7647008c4a352410e815b2-B8E6E15017528A9786C85E81619C64EC ;
-		<http://www.metaphacts.com/ontology/fields#maxOccurs> "1" ;
+		
 		<http://www.metaphacts.com/ontology/fields#minOccurs> "1" .
 	
 	_:genid-5ef45b35ab7647008c4a352410e815b2-5F69A5F1E55711B820E1909929FDF1B1 a sp:Query ;
