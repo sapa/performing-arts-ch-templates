@@ -3,12 +3,11 @@
   <div data-flex-layout='row top-stretch'>
     <semantic-form 
       subject='[[this]]'
-      new-subject-template='http://data.performing-arts.ch/a/{{UUID}}'
       post-action='reload'
       browser-persistence=true
-      persistence='ldp'
       form-id='groups'
-      fields='[[fieldDefinitions
+       persistence='ldp'             
+       fields='[[fieldDefinitions
         Official_Name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Official_Name"
         Alternative_Name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Alternative_Name"
         Acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Acronym"
@@ -18,9 +17,14 @@
         E4_Agent_is_association_member="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E4_Agent_is_association_member"
         Subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of"
         E1_CRM_Entity_sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
+        E1_CRM_Entity_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type"
+       
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
+        <div style="display: none;">  
+          <semantic-form-hidden-input for='E1_CRM_Entity_rdf_type'  default-values='http://www.cidoc-crm.org/cidoc-crm/E74_Group'></semantic-form-hidden-input>
+        </div>
         <semantic-form-text-input for="Official_Name"></semantic-form-text-input>
         <semantic-form-text-input for="Alternative_Name"></semantic-form-text-input>
         <semantic-form-text-input for="Acronym"></semantic-form-text-input>
