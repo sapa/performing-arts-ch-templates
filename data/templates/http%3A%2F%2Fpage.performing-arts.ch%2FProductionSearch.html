@@ -1,9 +1,9 @@
 [[#> sapaModule:BaseSearchPartial limit=500 showTable="true" defaultTabView="table"]]
   <semantic-search-query-keyword
-    domain='<[[resolvePrefix "frbr:F25_Performance_Plan"]]>'
+    domain='<[[resolvePrefix "frbr:F31_Performance"]]>'
     query='
-              SELECT ?subject WHERE {
-       ?subject a frbr:F25_Performance_Plan .
+              SELECT DISTINCT ?subject WHERE {
+       ?subject a frbr:F31_Performance .
 
       ?subject rdfs:label ?name .
      
@@ -18,7 +18,7 @@
       BIND(STRLEN(?name) as ?length)
     } ORDER BY DESC(?score) ?length'
     _default-query='SELECT DISTINCT ?subject WHERE {
-      ?subject a frbr:F25_Performance_Plan .
+      ?subject a frbr:F31_Performance .
       FILTER(CONTAINS(STR(?subject), "/w/"))
     } '
   >
