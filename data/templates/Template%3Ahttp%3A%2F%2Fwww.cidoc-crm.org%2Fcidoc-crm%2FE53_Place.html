@@ -38,15 +38,7 @@
         </bs-col>
 
         <bs-col sm="4">
-            <mp-field-visualization
-                subject='[[this]]'
-                fields='[[fieldDefinitions
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
-                ]]'
-                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
-                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
-            >
-            </mp-field-visualization> 
+            [[> sapa:ExternalResources]]
         </bs-col>
 
         <bs-col sm="4">
@@ -66,9 +58,7 @@
                 } ORDER BY lcase(?label)'
                 template='<div><h5>Groups</h5><ul>{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
-        </bs-col>
 
-        <bs-col sm="4">
             <semantic-query 
                 query='SELECT ?value ?label WHERE {
                   ?site crm:P89_falls_within ?? .

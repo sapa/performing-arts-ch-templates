@@ -110,13 +110,5 @@
 </bs-col>
 
 <bs-col sm="4">
-    <mp-field-visualization
-        subject='[[this]]'
-        fields='[[fieldDefinitions
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
-        ]]'
-        template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
-        [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
-    >
-    </mp-field-visualization> 
+    [[> sapa:ExternalResources]]
 </bs-col>
