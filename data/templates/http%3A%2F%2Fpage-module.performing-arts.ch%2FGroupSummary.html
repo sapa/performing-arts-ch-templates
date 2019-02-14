@@ -31,27 +31,21 @@
     <hr/>
 
     <!-- agent type -->
-    <!-- TODO: use selected language -->
     <semantic-query 
-        query='SELECT ?type ?label
+        query="SELECT ?type
         WHERE {
             ?? crm:P2_has_type ?type .
-            ?type skos:prefLabel ?label .
-            FILTER(LANG(?label)="en")
-        }'
-        template='<p>{{#each bindings}}{{#if @first}}{{label.value}}{{else}}, {{label.value}}{{/if}}{{/each}}</p>'>
+        }"
+        template="<p>{{#each bindings}}{{#if @first}}<mp-label iri='{{type.value}}'></mp-label>{{else}}, <mp-label iri='{{type.value}}'></mp-label>{{/if}}{{/each}}</p>">
     </semantic-query>
 
     <!-- place -->
-    <!-- TODO: use selected language -->
     <semantic-query 
-        query='SELECT ?place ?label
+        query="SELECT ?place
         WHERE {
             ?? crm:P74_has_current_or_former_residence ?p .
             ?p crm:P89_falls_within ?place .
-            ?place rdfs:label ?label .
-            FILTER(LANG(?label)="en")
-        }'
+        }"
         template='<p>{{#each bindings}}{{#if @first}}<semantic-link uri="{{place.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link uri="{{place.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</p>'>
     </semantic-query>
 
