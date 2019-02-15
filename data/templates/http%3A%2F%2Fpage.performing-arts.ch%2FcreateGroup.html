@@ -23,7 +23,9 @@
       <bs-panel>
         
         <semantic-form-recover-notification></semantic-form-recover-notification>
-         <semantic-form-hidden-input for="typeset" default-value='http://www.cidoc-crm.org/cidoc-crm/E74_Group'></semantic-form-hidden-input>
+        <div style="display: none;">  
+          <semantic-form-hidden-input for="typeset" default-values='["http://www.cidoc-crm.org/cidoc-crm/E74_Group","http://www.w3.org/ns/prov#Agent"]'></semantic-form-hidden-input>
+        </div>
         <semantic-form-text-input for="Official_Name"></semantic-form-text-input>
         <semantic-form-text-input for="Alternative_Name"></semantic-form-text-input>
         <semantic-form-text-input for="Acronym"></semantic-form-text-input>
@@ -31,7 +33,7 @@
         <semantic-form-tree-picker-input for="E4_Agent_has_current_or_former_residence">
            <semantic-form new-subject-template="http://data.performing-arts.ch/p/{{UUID}}"   
                           fields="[[fieldDefinitions
-     E53_Place_P87_is_identified_by="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_P87_is_identified_by"                  
+       E53_Place_P87_is_identified_by="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_P87_is_identified_by"                  
         E53_Place_falls_within="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_falls_within"
         E1_CRM_Entity_sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
         E1_CRM_Entity_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type"
@@ -59,7 +61,7 @@
         
         </semantic-form-tree-picker-input>
         <semantic-form-text-input for="Website"></semantic-form-text-input>
-        <semantic-form-tree-picker-input for="E4_Agent_is_association_member"></semantic-form-tree-picker-input>
+        <semantic-form-select-input for="E4_Agent_is_association_member"></semantic-form-select-input>
         <semantic-form-text-input for="Subject_of"></semantic-form-text-input>
         <semantic-form-text-input for="E1_CRM_Entity_sameAs"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>
