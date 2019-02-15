@@ -1215,10 +1215,40 @@ WHERE {
 		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-ba6f718421294ce0ac7249c284c62149-xe1joc ;
 		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-ba6f718421294ce0ac7249c284c62149-tswyxd ;
 		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI ;
-		<http://www.metaphacts.com/ontology/fields#maxOccurs> "1" ;
 		<http://www.metaphacts.com/ontology/fields#minOccurs> "1" .
 	
 	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset> .
+}
+
+{
+	Platform:fieldDefinitionContainer a <http://www.w3.org/ns/ldp#Container> , <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> .
+}
+
+
+
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Swiss/context> {
+	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Swiss> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
+		rdfs:label "Swiss" ;
+		<http://www.w3.org/ns/prov#generatedAtTime> "2019-02-15T10:34:55.174+01:00"^^xsd:dateTime ;
+		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
+		<http://www.metaphacts.com/ontology/fields#domain> crm:E21_Person ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-226e889a5aaa417da08b17fcb83072ab-lenc24 ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-226e889a5aaa417da08b17fcb83072ab-m0t01s ;
+		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string .
+	
+	_:genid-226e889a5aaa417da08b17fcb83072ab-lenc24 a sp:Query ;
+		sp:text """INSERT { $subject ore:isAggregatedBy <http://data.performing-arts.ch/a/2ced7bbf-4981-48e0-ab47-2c6b1351c38b>.}
+         
+      WHERE { BIND(\"Yes\" AS ?value)}""" .
+	
+	_:genid-226e889a5aaa417da08b17fcb83072ab-m0t01s a sp:Query ;
+		sp:text """SELECT ?value  WHERE {
+BIND (EXISTS {?subject ore:isAggregatedBy <http://data.performing-arts.ch/a/2ced7bbf-4981-48e0-ab47-2c6b1351c38b>} AS ?swiss)
+  BIND(IF(?swiss ,\"Yes\",\"No\") AS ?value)
+}""" .
+	
+	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Swiss> .
 }
 
 {
