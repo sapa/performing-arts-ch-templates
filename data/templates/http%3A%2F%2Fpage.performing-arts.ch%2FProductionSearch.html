@@ -1,13 +1,13 @@
 [[#> sapaModule:BaseSearchPartial limit=500 showTable="true" defaultTabView="table"]]
   <semantic-search-query-keyword
-    domain='<[[resolvePrefix "crm:E74_Group"]]>'
-    query='SELECT ?subject WHERE {
-      { ?subject a crm:E74_Group }
-      UNION
-      { ?subject a crm:E40_Legal_Body }
-      ?subject crm:P1_is_identified_by ?identifier .
-      ?identifier rdf:value ?name.  
-      FILTER(CONTAINS(STR(?subject), "/a/"))
+    domain='<[[resolvePrefix "frbr:F31_Performance"]]>'
+    query='
+              SELECT DISTINCT ?subject WHERE {
+       ?subject a frbr:F31_Performance .
+
+      ?subject rdfs:label ?name .
+     
+      FILTER(CONTAINS(STR(?subject), "/w/"))
    SERVICE <http://www.bigdata.com/rdf/search#search>
            {
       ?name bds:search ?__token__ ;
@@ -18,8 +18,8 @@
       BIND(STRLEN(?name) as ?length)
     } ORDER BY DESC(?score) ?length'
     _default-query='SELECT DISTINCT ?subject WHERE {
-      ?subject a crm:E74_Group .
-      FILTER(CONTAINS(STR(?subject), "/a/"))
+      ?subject a frbr:F31_Performance .
+      FILTER(CONTAINS(STR(?subject), "/w/"))
     } '
   >
  </semantic-search-query-keyword>
