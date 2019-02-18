@@ -51,27 +51,24 @@
     <bs-row>
         <bs-col sm="4">
             <semantic-query 
-                query='SELECT ?value ?label WHERE {
-                  ?site crm:P89_falls_within ?? .
-                  ?value crm:P74_has_current_or_former_residence ?site ;
+                query='SELECT ?group ?label WHERE {
+                  ?groupsite crm:P89_falls_within ?? .
+                  ?group crm:P74_has_current_or_former_residence ?groupsite ;
                     rdfs:label ?label .
                 } ORDER BY lcase(?label)'
-                template='<div><h5>Groups</h5><ul>{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+                template='<div><h5>Groups</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link uri="{{group.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
-
+        </bs-col>
+        <bs-col sm="4">
             <semantic-query 
-                query='SELECT ?value ?label WHERE {
-                  ?site crm:P89_falls_within ?? .
-                  ?value crm:P156_occupies ?site ;
+                query='SELECT ?venue ?label WHERE {
+                  ?venuesite crm:P89_falls_within ?? .
+                  ?venue crm:P156_occupies ?venuesite ;
                     crm:P2_has_type spav:dwmkn ;
                     rdfs:label ?label .
                 } ORDER BY lcase(?label)'
-                template='<div><h5>Venues</h5><ul>{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+                template='<div><h5>Venues</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link uri="{{venue.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
-        </bs-col>
-
-        <bs-col sm="4">
-            
         </bs-col>
     </bs-row>
 
