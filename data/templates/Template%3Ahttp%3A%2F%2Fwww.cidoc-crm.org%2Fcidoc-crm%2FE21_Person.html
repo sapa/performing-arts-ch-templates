@@ -11,31 +11,75 @@
     [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
       <bs-tab event-key='Summary' title='Summary'>
-        <div class='table-responsive'>
-          <table class='table'>
-            <thead role='header'>
-              <tr>
-                <th>Field</th>
-                <th>Value</th>
-              </tr>
-            </thead>
+        <bs-col sm="4">
+            <!-- official name -->
+            <semantic-query 
+                query='SELECT ?typelabel ?value
+                WHERE {
+                    ?? crm:P1_is_identified_by ?app .
+                    ?app a crm:E41_Appellation ; 
+                    crm:P2_has_type spav:yanuj ;
+                    rdf:value ?value .
+                } LIMIT 1'
+            template='<div><h3>{{#each bindings}}{{value.value}}{{/each}}</h3></div>'>
+            </semantic-query>
+
+            <!-- alternative names -->
+            <semantic-query 
+                query='SELECT distinct ?value ?type ?typesort
+                WHERE {
+                    VALUES (?type ?typesort) { (spav:yamqk 1) (spav:yavtx 2) }
+                    ?? crm:P1_is_identified_by ?appellation .
+                    ?appellation a crm:E41_Appellation ; 
+                    crm:P2_has_type ?type ;
+                    rdf:value ?value .
+                    { ?appellation crm:P2_has_type spav:yamqk . }
+                    UNION
+                    { ?appellation crm:P2_has_type spav:yavtx . }
+                } ORDER BY ?typesort'
+                template='<div>({{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}})</div>'>
+            </semantic-query>
+
+            <!-- pseudonym -->
+            <semantic-query 
+                query='SELECT ?value
+                WHERE {
+                    ?? crm:P1_is_identified_by ?appellation .
+                    ?appellation a crm:E41_Appellation ; 
+                        crm:P2_has_type spav:yaajh ;
+                        rdf:value ?value .
+                }'
+                template='<div>AKA {{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- Swiss -->
+            <semantic-query 
+                query='SELECT ?swiss ?value WHERE {
+                    BIND (EXISTS {?? ore:isAggregatedBy <http://data.performing-arts.ch/a/2ced7bbf-4981-48e0-ab47-2c6b1351c38b>} AS ?swiss)
+                    BIND(IF(?swiss ,"CH","") AS ?value)
+                }'
+                template='<div>{{#each bindings}}{{value.value}}{{/each}}</div>'>
+            </semantic-query>
+
+        </bs-col>
+        <bs-col sm="4">
             <mp-field-visualization
             subject='[[this]]'
             fields='[[fieldDefinitions    
               http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E21_Person_is_current_or_former_member_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E21_Person_is_current_or_former_member_of"
-              
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Official_Name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Official_Name"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Alternative_Name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Alternative_Name"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Swiss="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Swiss"
-              
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Pseudonym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Pseudonym"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Comment"
-              
             ]]'
-            template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' [[!-- show in include [[> sapaModule:FieldBasedVisualization ]] --]]
+            template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
             ></mp-field-visualization> 
-          </table>
-        </div>
+        </bs-col>
+        <bs-col sm="4">
+            <mp-field-visualization
+            subject='[[this]]'
+            fields='[[fieldDefinitions    
+              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
+            ]]'
+            template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+            ></mp-field-visualization> 
+        </bs-col>
       </bs-tab>
     </bs-tabs>  
 </div>
