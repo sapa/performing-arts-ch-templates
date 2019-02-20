@@ -1,59 +1,132 @@
 <ol class="page-breadcrumb">
-  <li>
-    <mp-link title="Home" url="/">Home</mp-link>
-  </li>
-  <li class="active">
-    [[> sapaModule:RecordLabel ]]
-  </li>
+    <li>
+        <mp-link title="Home" url="/">Home</mp-link>
+    </li>
+    <li class="active">
+        [[> sapaModule:RecordLabel ]]
+    </li>
 </ol>
 
 <div class="page">
 
-  [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]]
+    [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]]
   
-  <bs-tabs id='record-tabs' class='page__body-navtabs--borderless' default-active-key='summary' unmount-on-exit=true>
-    <bs-tab event-key='summary' title='Summary'>
-      <div data-flex-layout='row top-stretch'>
-        [[#if (ask "ASK { ?? crm:P65_shows_visual_item ?item . }")]]
-        <div data-flex-self='size-xsmall'>
-          [[!--  IIIF configuration here --]] IIIF t.b.d.
-        </div>
-        [[else]]
-        <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
-          <i class="fa fa-file-image-o" style="font-size:70px;" aria-hidden="true"></i><br><br>
-          No document preview available.
-        </div>
-        [[/if]]
-        <div class='table-responsive'>
-          <table class='table'>
-            <thead role='header'>
-              <tr>
-                <th>Field</th>
-                <th>Value</th>
-              </tr>
-            </thead>
+    <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
+        <bs-tab event-key='about' title='About'>
+
+        <bs-col sm="4">
+
+            <!-- official name -->
+            <semantic-query 
+                query='SELECT ?typelabel ?value
+                WHERE {
+                    ?? crm:P1_is_identified_by ?app .
+                    ?app a crm:E41_Appellation ; 
+                    crm:P2_has_type spav:yanuj ;
+                    rdf:value ?value .
+                } LIMIT 1'
+            template='<div><h3>{{#each bindings}}{{value.value}}{{/each}}</h3></div>'>
+            </semantic-query>
+
+            <!-- alternative names -->
+            <semantic-query 
+                query='SELECT distinct ?value ?type ?typesort
+                WHERE {
+                    VALUES (?type ?typesort) { (spav:yamqk 1) (spav:yavtx 2) }
+                    ?? crm:P1_is_identified_by ?appellation .
+                    ?appellation a crm:E41_Appellation ; 
+                    crm:P2_has_type ?type ;
+                    rdf:value ?value .
+                    { ?appellation crm:P2_has_type spav:yamqk . }
+                    UNION
+                    { ?appellation crm:P2_has_type spav:yavtx . }
+                } ORDER BY ?typesort'
+                template='<div>({{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}})</div>'>
+            </semantic-query>
+
+            <hr/>
+
+            <!-- agent type -->
+            <semantic-query 
+                query="SELECT ?type
+                WHERE {
+                    ?? crm:P2_has_type ?type .
+                }"
+                template="<p>{{#each bindings}}{{#if @first}}<mp-label iri='{{type.value}}'></mp-label>{{else}}, <mp-label iri='{{type.value}}'></mp-label>{{/if}}{{/each}}</p>">
+            </semantic-query>
+
+            <!-- place -->
+            <semantic-query 
+                query="SELECT ?place
+                WHERE {
+                    ?? crm:P156_occupies ?p .
+                    ?p crm:P89_falls_within ?place .
+                }"
+                template='<p>{{#each bindings}}{{#if @first}}<semantic-link uri="{{place.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link uri="{{place.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</p>'>
+            </semantic-query>
+
+            <!-- dates -->
+            <semantic-query 
+                query='SELECT ?dates
+                WHERE {
+                    OPTIONAL {
+                        ?? crm:P95i_was_formed_by ?formation .
+                        ?formation a crm:E66_Formation ;
+                        crm:P4_has_time-span ?formationtime .
+                        ?formationtime rdfs:label ?formationlabel .
+                    }
+                    OPTIONAL {
+                        ?? crm:P99i_was_dissolved_by ?dissolution .
+                        ?dissolution a crm:E68_Dissolution ;
+                        crm:P4_has_time-span ?dissolutiontime .
+                        ?dissolutiontime rdfs:label ?dissolutionlabel .
+                    }
+                    BIND(CONCAT(COALESCE(?formationlabel, ""), "-", COALESCE(?dissolutionlabel, "")) as ?dates)
+                }'
+                template='{{#each bindings}}<p>{{dates.value}}</p>{{/each}}'>
+            </semantic-query>
+            <!-- TODO: filter for no dates -->
+
+            <!-- managed by -->
+            <semantic-query 
+                query="SELECT ?actor
+                WHERE {
+                    ?? crm:P16i_was_used_for ?act .
+                    ?act crm:P14_carried_out_by ?actor .
+                }"
+                template='<div><h5>Managed by</h5>{{#each bindings}}{{#if @first}}<semantic-link uri="{{actor.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link uri="{{actor.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- contains -->
             <mp-field-visualization
-            subject='[[this]]'
-            fields='[[fieldDefinitions
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_type"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_contact_point="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_contact_point"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E22_Man-Made_Object_forms_part_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E22_Man-Made_Object_forms_part_of"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E19_Physical_Object_has_current_permanent_location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E19_Physical_Object_has_current_permanent_location"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_current_or_former_member_of_group="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_current_or_former_member_of_group"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_dissolved_by_timespan="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_dissolved_by_timespan"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_occupies_locartion="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_occupies_locartion"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
+                subject='[[this]]'
+                fields='[[fieldDefinitions
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of"
+                ]]'
+                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+                >
+            </mp-field-visualization> 
 
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E22_Man-Made_Object_Venue_managed_by="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E22_Man-Made_Object_Venue_managed_by"
-            ]]'
+        </bs-col>
 
-            template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' [[!-- [[>sapaModule:FieldBasedVisualization]] --]] 
-            ></mp-field-visualization>
-          </table>
-        </div>
-      </div>
+        <bs-col sm="4">
+            <mp-field-visualization
+                subject='[[this]]'
+                fields='[[fieldDefinitions
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of"
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
+                ]]'
+                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+            >
+            </mp-field-visualization> 
+        </bs-col>
+
+        <bs-col sm="4">
+            [[> sapa:ExternalResources]]
+        </bs-col>
+
     </bs-tab>
   </bs-tabs>  
 </div>
