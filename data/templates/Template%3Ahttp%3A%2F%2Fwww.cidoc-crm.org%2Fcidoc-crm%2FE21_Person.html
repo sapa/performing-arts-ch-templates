@@ -21,7 +21,7 @@
                     crm:P2_has_type spav:yanuj ;
                     rdf:value ?value .
                 } LIMIT 1'
-            template='<div><h3>{{#each bindings}}{{value.value}}{{/each}}</h3></div>'>
+            template='<p><strong>{{#each bindings}}{{value.value}}{{/each}}</strong></p>'>
             </semantic-query>
 
             <!-- alternative names -->
@@ -37,7 +37,7 @@
                     UNION
                     { ?appellation crm:P2_has_type spav:yavtx . }
                 } ORDER BY ?typesort'
-                template='<div>({{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}})</div>'>
+                template='<p>({{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}})</p>'>
             </semantic-query>
 
             <!-- pseudonym -->
@@ -49,7 +49,7 @@
                         crm:P2_has_type spav:yaajh ;
                         rdf:value ?value .
                 }'
-                template='<div>AKA {{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}}</div>'>
+                template='<p>AKA {{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- Swiss -->
@@ -58,7 +58,7 @@
                     BIND (EXISTS {?? ore:isAggregatedBy <http://data.performing-arts.ch/a/2ced7bbf-4981-48e0-ab47-2c6b1351c38b>} AS ?swiss)
                     BIND(IF(?swiss ,"CH","") AS ?value)
                 }'
-                template='<div>{{#each bindings}}{{value.value}}{{/each}}</div>'>
+                template='<p>{{#each bindings}}{{value.value}}{{/each}}</p>'>
             </semantic-query>
 
         </bs-col>
