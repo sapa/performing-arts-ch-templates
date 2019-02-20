@@ -12,28 +12,29 @@
             </mp-draggable>
         </div>
 
-        <!-- type -->
-        <semantic-query 
-            query="SELECT ?type
-            WHERE {
-                ?? a ?class . 
-                OPTIONAL { ?? crm:P2_has_type ?crmtype . }
-                FILTER(CONTAINS(STR(?class), 'crm'))
-                BIND(IF(BOUND(?crmtype), ?crmtype, ?class) AS ?type)
-            }"
-            template="<p>{{#each bindings}}{{#if @first}}<mp-label iri='{{type.value}}'></mp-label>{{else}}, <mp-label iri='{{type.value}}'></mp-label>{{/if}}{{/each}}</p>">
-        </semantic-query>
-
-        <!--description -->
         <p>
+            <!-- type -->
+            <semantic-query 
+                query="SELECT ?type
+                WHERE {
+                    ?? a ?class . 
+                    FILTER(CONTAINS(STR(?class), 'crm'))
+                    OPTIONAL { ?? crm:P2_has_type ?crmtype . }
+                    BIND(IF(BOUND(?crmtype), ?crmtype, ?class) AS ?type)
+                }"
+                template="<span>{{#each bindings}}{{#if @first}}<mp-label iri='{{type.value}}'></mp-label>{{else}}, <mp-label iri='{{type.value}}'></mp-label>{{/if}}{{/each}}</span>">
+            </semantic-query>
+
+            <!-- TODO: integrate into previous query -->
+            <!-- description -->
             <semantic-query 
                 query='SELECT ?description WHERE { ?? rdfs:comment ?description } LIMIT 1' 
-                template='{{#each bindings}}<span><b>Description</b>: {{description.value}}</span>{{/each}}'>
+                template='<span>{{#each bindings}}, {{description.value}}{{/each}}</span>'>
             </semantic-query>
         </p>
 
-        <p>
-            <b>URI</b>: <i style="font-size: 12px;">[[this]]</i>
+        <p style="font-size: 12px;">
+            <b>URI</b>: <i>[[this]]</i>
         </p>
 
     </div>
