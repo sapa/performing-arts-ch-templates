@@ -1,0 +1,36 @@
+ <div data-flex-layout='row top-stretch'>
+ <semantic-form 
+ [[#if create]]
+   new-subject-template='http://data.performing-arts.ch/w/{{UUID}}/p/{{UUID}}'
+  [[else]]
+  subject='[[this]]'
+ [[/if]]
+       post-action="redirect"
+       browser-persistence=true
+       form-id='Productions'
+       persistence='ldp'             
+       fields='[[fieldDefinitions
+        Performance_Title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Title"
+          typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
+    
+       
+      ]]'>
+      <bs-panel>
+        <semantic-form-recover-notification></semantic-form-recover-notification>
+        <div style="display: none;">  
+          <semantic-form-hidden-input for='typeset'  default-values='http://www.cidoc-crm.org/frbr/F31_Performance'></semantic-form-hidden-input>
+        </div>
+        <semantic-form-text-input for="Performance_Title"></semantic-form-text-input>
+              <semantic-form-errors></semantic-form-errors>
+        <!-- save and reset button for form -->
+        <button
+          name="submit"
+          class="btn btn-default"
+        >Save</button>
+        <button
+          name="reset"
+          class="btn btn-default"
+        >Reset</button>
+      </bs-panel>
+    </semantic-form>
+  </div>
