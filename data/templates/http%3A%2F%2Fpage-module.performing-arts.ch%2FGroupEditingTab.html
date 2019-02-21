@@ -16,7 +16,9 @@
         E39_Actor_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_type"
         E1_Entity_has_current_or_former_residence="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_Entity_has_current_or_former_residence"
         Website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
+        Venues="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_manages_venue"
         E1_Entity_is_association_member="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_Entity_is_association_member"
+        Predecessor="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_successor_of"
         Subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of"
         E1_CRM_Entity_sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
         typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
@@ -33,9 +35,11 @@
         <semantic-form-select-input for="E39_Actor_type"></semantic-form-select-input>
         <semantic-form-tree-picker-input for="E1_Entity_has_current_or_former_residence"></semantic-form-tree-picker-input>
         <semantic-form-text-input for="Website"></semantic-form-text-input>
-       <semantic-form-select-input for="E1_Entity_is_association_member"></semantic-form-select-input>
+        <semantic-form-select-input for="Venues"></semantic-form-select-input>
+        <semantic-form-select-input for="E1_Entity_is_association_member"></semantic-form-select-input>
         <semantic-form-text-input for="Subject_of"></semantic-form-text-input>
         <semantic-form-text-input for="E1_CRM_Entity_sameAs"></semantic-form-text-input>
+        <semantic-form-select-input for="Predecessor"></semantic-form-select-input>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
         <button
