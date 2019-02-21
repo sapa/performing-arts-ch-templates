@@ -15,6 +15,11 @@
         <bs-tab event-key='about' title='About'>
             [[> sapaModule:GroupSummary]]
         </bs-tab>
+      [[#if (hasPermission "forms:ldp:*")]] 
+<bs-tab event-key='group' title='Edit'>
         [[> sapaModule:GroupEditingTab]]
+  </bs-tab>
+[[/if]]      
     </bs-tabs>
 </div>
+

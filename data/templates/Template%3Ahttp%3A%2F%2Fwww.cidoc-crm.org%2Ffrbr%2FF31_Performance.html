@@ -27,11 +27,21 @@
              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Premiere_Type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Premiere_Type"
              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Premiere_Date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Premiere_Date"
              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Venue="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Venue"
+             http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/misc_performance_functions="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/misc_performance_functions"
+             http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_20Plan="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_20Plan"
             ]]'
             template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' [[!-- show in include [[> sapaModule:FieldBasedVisualization ]] --]]
             ></mp-field-visualization> 
           </table>
         </div>
       </bs-tab>
+      
+         [[#if (hasPermission "forms:ldp:*")]] 
+<bs-tab event-key='Edit' title='Edit'>
+        [[> sapaModule:ProductionEditingTab]]
+  </bs-tab>
+[[/if]]      
+      
+      
     </bs-tabs>  
 </div>
