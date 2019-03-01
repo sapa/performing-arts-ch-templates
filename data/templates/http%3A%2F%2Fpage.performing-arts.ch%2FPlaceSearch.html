@@ -4,7 +4,7 @@
     query='SELECT DISTINCT ?subject WHERE {
       ?subject a crm:E53_Place ; 
         rdfs:label ?label .
-      ?referrer crm:P89_falls_within ?subject .
+      
       FILTER(CONTAINS(STR(?subject), "/p/"))	
    SERVICE <http://www.bigdata.com/rdf/search#search> {
       ?label bds:search ?__token__ ;   

@@ -5,7 +5,7 @@
   [[else]]
   subject='[[this]]'
  [[/if]]
-      post-action="redirect"
+      post-action="reload"
       browser-persistence=true
       form-id='groups'
        persistence='ldp'             
@@ -22,7 +22,8 @@
         Subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of"
         E1_CRM_Entity_sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
         typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
-       
+        members="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_current_or_former_member"
+        note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
@@ -31,15 +32,44 @@
         </div>
         <semantic-form-text-input for="Official_Name"></semantic-form-text-input>
         <semantic-form-text-input for="Alternative_Name"></semantic-form-text-input>
+         <semantic-form-text-input for="note"></semantic-form-text-input>
         <semantic-form-text-input for="Acronym"></semantic-form-text-input>
         <semantic-form-select-input for="E39_Actor_type"></semantic-form-select-input>
         <semantic-form-tree-picker-input for="E1_Entity_has_current_or_former_residence"></semantic-form-tree-picker-input>
         <semantic-form-text-input for="Website"></semantic-form-text-input>
-        <semantic-form-select-input for="Venues"></semantic-form-select-input>
-        <semantic-form-select-input for="E1_Entity_is_association_member"></semantic-form-select-input>
-        <semantic-form-text-input for="Subject_of"></semantic-form-text-input>
+       <semantic-form-autocomplete-input for="Venues"></semantic-form-autocomplete-input>
+         <semantic-form-composite-input for="members" new-subject-template="http://data.performing-arts.ch/a/{{UUID}}" 
+              fields='[[fieldDefinitions
+           typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
+           name="https://dev.performing-arts.ch/container/fieldDefinitionContainer/Member_Name"
+                 			        		]]'>
+           <div style="display: none;">  
+			<semantic-form-hidden-input for='typeset'default-values='["http://www.cidoc-crm.org/cidoc-crm/E21_Person","http://www.w3.org/ns/prov#Agent"]'>     </semantic-form-hidden-input></div>   
+ <semantic-form-text-input for='name'></semantic-form-text-input>
+  
+              
+          </semantic-form-composite-input>
+           
+        
+        
+         <semantic-form-composite-input for="Subject_of" new-subject-template="http://data.performing-arts.ch/u/{{UUID}}"
+                                          fields='[[fieldDefinitions
+           typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
+           name="https://dev.performing-arts.ch/container/fieldDefinitionContainer/Aggregation_Name"
+                 			        		]]'>
+           <div style="display: none;">  
+			<semantic-form-hidden-input for='typeset' default-value='http://www.openarchives.org/ore/terms/Aggregation'>     </semantic-form-hidden-input></div>   
+ <semantic-form-text-input for='name'></semantic-form-text-input>
+  
+              
+          </semantic-form-composite-input>
+        
+                                        
+                                        
+        
+         <semantic-form-autocomplete-input for="E1_Entity_is_association_member"></semantic-form-autocomplete-input>
         <semantic-form-text-input for="E1_CRM_Entity_sameAs"></semantic-form-text-input>
-        <semantic-form-select-input for="Predecessor"></semantic-form-select-input>
+        <semantic-form-autocomplete-input for="Predecessor"></semantic-form-autocomplete-input>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
         <button

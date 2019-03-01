@@ -1,8 +1,8 @@
 [[#> sapaModule:BaseSearchPartial limit=500 showTable="true" defaultTabView="table"]]
   <semantic-search-query-keyword
-    domain='<[[resolvePrefix "frbr:F31_Performance"]]>'
+    domain='<[[resolvePrefix "frbr:F25_Performance_Plan"]]>'
     query='SELECT DISTINCT ?subject WHERE {
-        ?subject a frbr:F31_Performance .
+        ?subject a frbr:F25_Performance_Plan .
         ?subject rdfs:label ?name .
         FILTER(CONTAINS(STR(?subject), "/w/"))
         SERVICE <http://www.bigdata.com/rdf/search#search> {
