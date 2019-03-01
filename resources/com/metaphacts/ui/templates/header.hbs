@@ -41,7 +41,7 @@
 
 
       </bs-nav-dropdown>
-
+        <mp-has-permission permission='ldp:*'>
         <bs-nav-dropdown title="Create Entities" id="bg-nested-dropdown">
 
           <mp-resource-link-container uri='http://page.performing-arts.ch/createPlace'>
@@ -51,6 +51,7 @@
         <mp-resource-link-container uri='http://page.performing-arts.ch/createGroup'>
           <bs-menu-item>Group</bs-menu-item>
         </mp-resource-link-container>
+        </mp-has-permission>
 
         </bs-nav-dropdown>
 

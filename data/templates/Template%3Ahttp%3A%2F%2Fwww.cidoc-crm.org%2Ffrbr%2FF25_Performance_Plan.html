@@ -1,0 +1,50 @@
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+  <li class="active">
+    [[> sapaModule:RecordLabel ]]
+  </li>
+</ol>
+<div class="page">
+    [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
+    <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
+      <bs-tab event-key='Summary' title='Summary'>
+        <div class='table-responsive'>
+          <table class='table'>
+            <thead role='header'>
+              <tr>
+                <th>Field</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <mp-field-visualization
+            subject='[[this]]'
+            fields='[[fieldDefinitions    
+       
+            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Title"
+            http://www.metaphacts.com/fieldDefinition/reference_work_functions="http://www.metaphacts.com/fieldDefinition/reference_work_functions"
+           
+            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Venue="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Venue"
+            
+            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity"
+            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language"
+            http://www.metaphacts.com/fieldDefinition/Subtitle_Language="http://www.metaphacts.com/fieldDefinition/Subtitle_Language"
+            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Genre="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Genre"
+           
+            ]]'
+            template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' [[!-- show in include [[> sapaModule:FieldBasedVisualization ]] --]]
+            ></mp-field-visualization> 
+          </table>
+        </div>
+      </bs-tab>
+      
+         [[#if (hasPermission "forms:ldp:*")]] 
+<bs-tab event-key='Edit' title='Edit'>
+        [[> sapaModule:ProductionEditingTab]]
+  </bs-tab>
+[[/if]]      
+      
+      
+    </bs-tabs>  
+</div>

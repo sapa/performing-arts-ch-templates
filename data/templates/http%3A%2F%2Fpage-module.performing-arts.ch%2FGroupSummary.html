@@ -9,7 +9,7 @@
             crm:P2_has_type spav:yanuj ;
             rdf:value ?value .
         } LIMIT 1'
-    template='<div><h3>{{#each bindings}}{{value.value}}{{/each}}</h3></div>'>
+    template='<p><strong>{{#each bindings}}{{value.value}}{{/each}}</strong></p>'>
     </semantic-query>
 
     <!-- alternative names -->
@@ -25,33 +25,16 @@
             UNION
             { ?appellation crm:P2_has_type spav:yavtx . }
         } ORDER BY ?typesort'
-        template='<div>({{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}})</div>'>
-    </semantic-query>
-
-    <hr/>
-
-    <!-- agent type -->
-    <!-- TODO: use selected language -->
-    <semantic-query 
-        query='SELECT ?type ?label
-        WHERE {
-            ?? crm:P2_has_type ?type .
-            ?type skos:prefLabel ?label .
-            FILTER(LANG(?label)="en")
-        }'
-        template='<p>{{#each bindings}}{{#if @first}}{{label.value}}{{else}}, {{label.value}}{{/if}}{{/each}}</p>'>
+        template='<p>({{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}})</p>'>
     </semantic-query>
 
     <!-- place -->
-    <!-- TODO: use selected language -->
     <semantic-query 
-        query='SELECT ?place ?label
+        query="SELECT ?place
         WHERE {
             ?? crm:P74_has_current_or_former_residence ?p .
             ?p crm:P89_falls_within ?place .
-            ?place rdfs:label ?label .
-            FILTER(LANG(?label)="en")
-        }'
+        }"
         template='<p>{{#each bindings}}{{#if @first}}<semantic-link uri="{{place.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link uri="{{place.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</p>'>
     </semantic-query>
 
@@ -95,7 +78,7 @@
     <mp-field-visualization
         subject='[[this]]'
         fields='[[fieldDefinitions
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E21_Person_is_current_or_former_member="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E21_Person_is_current_or_former_member"
+       
        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_current_or_former_member="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_current_or_former_member"
         http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_manages_venue="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_manages_venue"
         http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_Entity_is_association_member="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_Entity_is_association_member"
@@ -110,13 +93,5 @@
 </bs-col>
 
 <bs-col sm="4">
-    <mp-field-visualization
-        subject='[[this]]'
-        fields='[[fieldDefinitions
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
-        ]]'
-        template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
-        [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
-    >
-    </mp-field-visualization> 
+    [[> sapa:ExternalResources]]
 </bs-col>
