@@ -1,11 +1,12 @@
   <div data-flex-layout='row top-stretch'>
  <semantic-form 
  [[#if create]]
-   new-subject-template='http://data.performing-arts.ch/a/{{UUID}}'
+    new-subject-template='http://data.performing-arts.ch/a/{{UUID}}'
+    post-action="redirect"
   [[else]]
-  subject='[[this]]'
+    subject='[[this]]'
+    post-action="reload"
  [[/if]]
-      post-action="reload"
       browser-persistence=true
       form-id='groups'
        persistence='ldp'             
