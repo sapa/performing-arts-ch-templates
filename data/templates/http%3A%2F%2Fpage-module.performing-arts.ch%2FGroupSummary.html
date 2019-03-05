@@ -54,7 +54,8 @@
                 crm:P4_has_time-span ?dissolutiontime .
                 ?dissolutiontime rdfs:label ?dissolutionlabel .
             }
-            BIND(CONCAT(COALESCE(?formationlabel, ""), "-", COALESCE(?dissolutionlabel, "")) as ?dates)
+            BIND(CONCAT(COALESCE(?formationlabel, "X"), "-", COALESCE(?dissolutionlabel, "X")) AS ?predates)
+            BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
         }'
         template='{{#each bindings}}<p>{{dates.value}}</p>{{/each}}'>
     </semantic-query>
