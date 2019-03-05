@@ -61,6 +61,35 @@
                 template='<p>{{#each bindings}}{{value.value}}{{/each}}</p>'>
             </semantic-query>
 
+            <!-- Live dates -->
+            <semantic-query 
+                query='SELECT ?wikidata ?birthyear ?birthplacelabel ?deathyear ?deathplacelabel
+    WHERE {
+        ?? owl:sameAs ?wikidata .
+        FILTER (CONTAINS(STR(?wikidata), "wikidata"))
+        SERVICE <https://wikidata.metaphacts.com/sparql> {
+            OPTIONAL {
+                ?wikidata <http://www.wikidata.org/prop/direct/P569> ?birthdate .
+                BIND(YEAR(?birthdate) AS ?birthyear)
+            }
+            OPTIONAL {
+                ?wikidata <http://www.wikidata.org/prop/direct/P570> ?deathdate .
+                BIND(YEAR(?deathdate) AS ?deathyear)
+            }
+            OPTIONAL {
+                ?wikidata <http://www.wikidata.org/prop/direct/P19> ?birthplace .
+                ?birthplace rdfs:label ?birthplacelabel .
+            }
+            OPTIONAL {
+                ?wikidata <http://www.wikidata.org/prop/direct/P20> ?deathplace .
+                ?deathplace rdfs:label ?deathplacelabel .
+            }
+        }
+    }'
+                template='{{#each bindings}}<p>{{birthyear.value}}-{{deathyear.value}}</p>{{/each}}'>
+            </semantic-query>
+
+
         </bs-col>
         <bs-col sm="4">
             <mp-field-visualization
@@ -72,13 +101,7 @@
             ></mp-field-visualization> 
         </bs-col>
         <bs-col sm="4">
-            <mp-field-visualization
-            subject='[[this]]'
-            fields='[[fieldDefinitions    
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
-            ]]'
-            template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
-            ></mp-field-visualization> 
+            [[> sapa:ExternalResources]]
         </bs-col>
       </bs-tab>
     </bs-tabs>  
