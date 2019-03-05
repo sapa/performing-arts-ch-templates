@@ -7,16 +7,18 @@
         VALUES (?prefix ?source)
         {
           ("http://www.wikidata.org/entity/" "Wikidata")
-          ("https://www.wikidata.org/wiki/" "Wikidata")
-          ("http://geonames.org/" "Geonames")
+          ("http://www.isni.org/" "ISNI")
           ("http://viaf.org/viaf/" "VIAF")
           ("http://d-nb.info/gnd/" "GND")
+          ("https://catalogue.bnf.fr/ark:/12148/cb" "BnF")
+          ("http://geonames.org/" "Geonames")
           ("http://classifications.data.admin.ch/municipality/" "Swiss Municipality")
           ("http://classifications.data.admin.ch/canton/" "Swiss Municipality")
+          ("http://tls.theaterwissenschaft.ch/wiki/" "Theaterlexikon")
         }
         BIND (CONCAT(?source," [",?localname,"]") as ?label)
     }'
-    template='<div><h5>External Resources</h5>
+    template='<div><h5>External resources</h5>
     <ul class="list-unstyled">{{#each bindings}}<li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
       {{/each}}
     </ul></div>'>
