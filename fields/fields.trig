@@ -340,30 +340,6 @@ WHERE {
 }""" .
 }
 
-<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_contact_point/context> {
-	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_contact_point> .
-	
-	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_contact_point> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
-		rdfs:label "Contact Point" ;
-		<http://www.w3.org/ns/prov#generatedAtTime> "2018-09-17T13:34:33.807Z"^^xsd:dateTime ;
-		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
-		<http://www.metaphacts.com/ontology/fields#domain> crm:E39_Actor ;
-		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-5ef45b35ab7647008c4a352410e815b2-B753E53AF78678E7EB8A5C2175573FCF ;
-		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI ;
-		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-5ef45b35ab7647008c4a352410e815b2-355905E70CC12862762B00F4EB642D7E ;
-		<http://www.metaphacts.com/ontology/fields#range> <http://metaphacts.com/Link> .
-	
-	_:genid-5ef45b35ab7647008c4a352410e815b2-355905E70CC12862762B00F4EB642D7E a sp:Query ;
-		sp:text """SELECT ?value  WHERE {
-  $subject crm:P76_has_contact_point ?c.
-      ?c rdf:value ?value.
-    
-}""" .
-	
-	_:genid-5ef45b35ab7647008c4a352410e815b2-B753E53AF78678E7EB8A5C2175573FCF a sp:Query ;
-		sp:text "INSERT { $subject crm:P76_has_contact_point $value} WHERE {}" .
-}
-
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by/context> {
 	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by> .
 	
@@ -424,36 +400,6 @@ WHERE {
 } WHERE {
   BIND(IRI(CONCAT(STR($subject),\"/appellation\")) as ?identifier)
 }""" .
-}
-
-<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note/context> {
-	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note> .
-	
-	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
-		rdfs:label "Notes" ;
-		<http://www.w3.org/ns/prov#generatedAtTime> "2018-09-17T13:34:33.824Z"^^xsd:dateTime ;
-		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
-		<http://www.metaphacts.com/ontology/fields#domain> crm:E1_CRM_Entity ;
-		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-5ef45b35ab7647008c4a352410e815b2-B3EBE8C0F522D86041C4E00CADF7E471 ;
-		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string ;
-		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-5ef45b35ab7647008c4a352410e815b2-134ABF08C9C9A0C8B04498C950A869BD ;
-		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-5ef45b35ab7647008c4a352410e815b2-F8366D5DBE700E36DCC0605E57ECA14C .
-	
-	_:genid-5ef45b35ab7647008c4a352410e815b2-134ABF08C9C9A0C8B04498C950A869BD a sp:Query ;
-		sp:text """SELECT ?value WHERE {
- $subject crm:P3_has_note $note.
-         $note rdf:value $value.
-}""" .
-	
-	_:genid-5ef45b35ab7647008c4a352410e815b2-B3EBE8C0F522D86041C4E00CADF7E471 a sp:Query ;
-		sp:text """INSERT { $subject crm:P3_has_note $note.
-         $note rdf:value $value.} WHERE {}""" .
-	
-	_:genid-5ef45b35ab7647008c4a352410e815b2-F8366D5DBE700E36DCC0605E57ECA14C a sp:Query ;
-		sp:text """DELETE { $subject crm:P3_has_note $note.
-         $note rdf:value $value.} WHERE {}
-      
-      """ .
 }
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_Entity_performed_activity/context> {
@@ -1436,22 +1382,29 @@ WHERE {  BIND(IRI(CONCAT(STR(?subject),\"/p\")) as ?perform)}
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language/context> {
 	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
 		rdfs:label "Performance Language" ;
-		<http://www.w3.org/ns/prov#generatedAtTime> "2019-03-01T13:27:28.976Z"^^xsd:dateTime ;
-		<http://www.w3.org/ns/prov#wasAttributedTo> User:metaphacts ;
+		<http://www.w3.org/ns/prov#generatedAtTime> "2019-03-05T14:41:18.074+01:00"^^xsd:dateTime ;
+		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
 		<http://www.metaphacts.com/ontology/fields#domain> frbr:F25_Performance_Plan ;
-		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-48a380d3ef284b04a7924170bcee6e24-khktbl ;
-		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-48a380d3ef284b04a7924170bcee6e24-2v3oc ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-7fb928e5f9ce4c0793e793214d877957-gctt6j ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-7fb928e5f9ce4c0793e793214d877957-niptm4 ;
 		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI ;
-		<http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-48a380d3ef284b04a7924170bcee6e24-9za4hf .
+		<http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-7fb928e5f9ce4c0793e793214d877957-xc2znr .
 	
-	_:genid-48a380d3ef284b04a7924170bcee6e24-2v3oc a sp:Query ;
+	_:genid-7fb928e5f9ce4c0793e793214d877957-gctt6j a sp:Query ;
+		sp:text """INSERT {?pw frbr:R12_is_realised_in $subject.          
+         ?pw  <http://schema.org/inLanguage>  $value} 
+      
+      WHERE { 
+      BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , MD5(STR(?value)), \"/w\") ) AS ?pw)   }""" .
+	
+	_:genid-7fb928e5f9ce4c0793e793214d877957-niptm4 a sp:Query ;
 		sp:text """SELECT ?value WHERE { 
           ?pw frbr:R12_is_realised_in $subject.          
          ?pw  <http://schema.org/inLanguage>  $value.
         
 }""" .
 	
-	_:genid-48a380d3ef284b04a7924170bcee6e24-9za4hf a sp:Query ;
+	_:genid-7fb928e5f9ce4c0793e793214d877957-xc2znr a sp:Query ;
 		sp:text """SELECT ?value ?label WHERE {
   ?value a crm:E55_Type ;
         skos:inScheme spav:lg;
@@ -1460,13 +1413,6 @@ WHERE {  BIND(IRI(CONCAT(STR(?subject),\"/p\")) as ?perform)}
 } LIMIT 10
   """ .
 	
-	_:genid-48a380d3ef284b04a7924170bcee6e24-khktbl a sp:Query ;
-		sp:text """INSERT {?pw frbr:R12_is_realised_in $subject.          
-         ?pw  <http://schema.org/inLanguage>  $value} 
-      
-      WHERE { 
-      BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , STR(UUID())) ) AS ?pw)}""" .
-	
 	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language> .
 }
 
@@ -1474,51 +1420,7 @@ WHERE {  BIND(IRI(CONCAT(STR(?subject),\"/p\")) as ?perform)}
 	Platform:fieldDefinitionContainer a <http://www.w3.org/ns/ldp#Container> , <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> .
 }
 
-	
 
-<http://www.metaphacts.com/fieldDefinition/reference_work_functions/context> {
-	<http://www.metaphacts.com/fieldDefinition/reference_work_functions> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
-		rdfs:label "reference work functions" ;
-		<http://www.w3.org/ns/prov#generatedAtTime> "2019-02-25T18:46:25.715Z"^^xsd:dateTime ;
-		<http://www.w3.org/ns/prov#wasAttributedTo> User:metaphacts ;
-		<http://www.metaphacts.com/ontology/fields#domain> frbr:F25_Performance_Plan ;
-		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f128eab702044e3b836a80f3532183c4-pnlov ;
-		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-f128eab702044e3b836a80f3532183c4-6y2sgn ;
-		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI .
-	
-	_:genid-f128eab702044e3b836a80f3532183c4-6y2sgn a sp:Query ;
-		sp:text """SELECT  DISTINCT ?value    WHERE {
-   ?subject  frbr:R14_incorporates ?sce.
-   ?ec frbr:R17_created ?sce;
-       crm:P9_consists_of ?activity.
-  ?activity crm:P2_has_type ?value.
-}
-      """ .
-	
-	_:genid-f128eab702044e3b836a80f3532183c4-pnlov a sp:Query ;
-		sp:text """INSERT { $subject ?predicate $value} WHERE {
-  
-   ?subject  frbr:R14_incorporates ?sce.
-   ?ec frbr:R17_created ?sce;
-       crm:P9_consists_of ?activity.
-  ?activity crm:P2_has_type ?value.
-      ?value a <http://www.cidoc-crm.org/cidoc-crm/E7_Activity>.
-      
-
-      BIND(IRI(CONCAT(\"http://data.performing-arts.ch/u/\",STR(UUID()))) AS ?sce)
-      BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\",STR(UUID()))) AS ?ec)
-      BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\",STR(UUID()))) AS ?activity)}
-
-
-
-""" .
-	
-	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://www.metaphacts.com/fieldDefinition/reference_work_functions> .
-}
-
-{
-	Platform:fieldDefinitionContainer a <http://www.w3.org/ns/ldp#Container> , <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> .
-}
 
 
 
@@ -1578,42 +1480,42 @@ WHERE {  BIND(IRI(CONCAT(STR(?subject),\"/p\")) as ?perform)}
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Acronym/context> {
 	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Acronym> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
 		rdfs:label "Acronym" ;
-		<http://www.w3.org/ns/prov#generatedAtTime> "2019-02-28T11:13:58.359Z"^^xsd:dateTime ;
-		<http://www.w3.org/ns/prov#wasAttributedTo> User:metaphacts ;
-		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-788db0bc2d744db8be03239eb8f57550-2nwzvj ;
+		<http://www.w3.org/ns/prov#generatedAtTime> "2019-03-05T14:13:54.092+01:00"^^xsd:dateTime ;
+		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
+		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-f9fbc942b25c4114b50b72148984e39d-ro59du ;
 		<http://www.metaphacts.com/ontology/fields#domain> crm:E1_CRM_Entity ;
-		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-788db0bc2d744db8be03239eb8f57550-sppa37 ;
-		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-788db0bc2d744db8be03239eb8f57550-dwkrs9 ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f9fbc942b25c4114b50b72148984e39d-b6vzfl ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-f9fbc942b25c4114b50b72148984e39d-l86nm5 ;
 		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:langString .
 	
-	_:genid-788db0bc2d744db8be03239eb8f57550-2nwzvj a sp:Query ;
-		sp:text """DELETE {
-  $subject crm:P1_is_identified_by $identifier.
-  $identifier crm:P2_has_type spav:yamqk ;
-    rdf:value ?value .
-} WHERE {}      """ .
-	
-	_:genid-788db0bc2d744db8be03239eb8f57550-dwkrs9 a sp:Query ;
-		sp:text """SELECT ?value WHERE {
-  $subject crm:P1_is_identified_by $identifier .
-  $identifier crm:P2_has_type spav:yamqk ;
-    rdf:value ?value .
-}""" .
-	
-	_:genid-788db0bc2d744db8be03239eb8f57550-sppa37 a sp:Query ;
+	_:genid-f9fbc942b25c4114b50b72148984e39d-b6vzfl a sp:Query ;
 		sp:text """INSERT { 
-  $subject rdfs:label $value.
+ 
   $subject crm:P1_is_identified_by $identifier.
   $identifier a crm:E41_Appellation ;
     crm:P2_has_type spav:yamqk ;
     rdf:value $value .
 } WHERE {
 
-       BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(CONCAT(\"Acronym/\",STR($value))))) as ?identifier)
+       BIND (IRI(CONCAT (\"http://data.performing-arts.ch/x/\" , MD5(?value))) AS $identifier)
 }
       
 
       """ .
+	
+	_:genid-f9fbc942b25c4114b50b72148984e39d-l86nm5 a sp:Query ;
+		sp:text """SELECT DISTINCT ?value WHERE {
+  $subject crm:P1_is_identified_by $identifier .
+  $identifier crm:P2_has_type spav:yamqk ;
+    rdf:value ?value .
+}""" .
+	
+	_:genid-f9fbc942b25c4114b50b72148984e39d-ro59du a sp:Query ;
+		sp:text """DELETE {
+  $subject crm:P1_is_identified_by $identifier.
+  $identifier crm:P2_has_type spav:yamqk ;
+    rdf:value ?value .
+} WHERE {}      """ .
 	
 	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Acronym> .
 }
@@ -1625,33 +1527,25 @@ WHERE {  BIND(IRI(CONCAT(STR(?subject),\"/p\")) as ?perform)}
 
 
 
-
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Alternative_Name/context> {
 	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Alternative_Name> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
 		rdfs:label "Alternative name" ;
-		<http://www.w3.org/ns/prov#generatedAtTime> "2019-02-28T11:10:14.110Z"^^xsd:dateTime ;
-		<http://www.w3.org/ns/prov#wasAttributedTo> User:metaphacts ;
-		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-c1eb7055121346718d1728878b431aa8-3jsow4 ;
+		<http://www.w3.org/ns/prov#generatedAtTime> "2019-03-05T14:12:07.035+01:00"^^xsd:dateTime ;
+		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
+		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-f63781c591394694b593ecc6dd5f4830-tyy1sh ;
 		<http://www.metaphacts.com/ontology/fields#domain> crm:E1_CRM_Entity ;
-		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c1eb7055121346718d1728878b431aa8-uwz8j ;
-		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-c1eb7055121346718d1728878b431aa8-atw1vf ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f63781c591394694b593ecc6dd5f4830-9ie4i ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-f63781c591394694b593ecc6dd5f4830-1s21n7 ;
 		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:langString .
 	
-	_:genid-c1eb7055121346718d1728878b431aa8-3jsow4 a sp:Query ;
-		sp:text """DELETE {
-  $subject crm:P1_is_identified_by $identifier.
-  $identifier crm:P2_has_type spav:yavtx ;
-    rdf:value ?value .
-} WHERE {}      """ .
-	
-	_:genid-c1eb7055121346718d1728878b431aa8-atw1vf a sp:Query ;
-		sp:text """SELECT ?value WHERE {
+	_:genid-f63781c591394694b593ecc6dd5f4830-1s21n7 a sp:Query ;
+		sp:text """SELECT DISTINCT ?value WHERE {
   $subject crm:P1_is_identified_by $identifier .
   $identifier crm:P2_has_type spav:yavtx ;
     rdf:value ?value .
 }""" .
 	
-	_:genid-c1eb7055121346718d1728878b431aa8-uwz8j a sp:Query ;
+	_:genid-f63781c591394694b593ecc6dd5f4830-9ie4i a sp:Query ;
 		sp:text """INSERT { 
   $subject crm:P1_is_identified_by $identifier.
   $identifier a crm:E41_Appellation ;
@@ -1659,8 +1553,15 @@ WHERE {  BIND(IRI(CONCAT(STR(?subject),\"/p\")) as ?perform)}
     rdf:value $value .
 } WHERE {
 
-       BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(CONCAT(\"AlternativeName/\",STR($value))))) as ?identifier)
+      BIND (IRI(CONCAT (\"http://data.performing-arts.ch/x/\" , MD5(?value))) AS $identifier)
 }""" .
+	
+	_:genid-f63781c591394694b593ecc6dd5f4830-tyy1sh a sp:Query ;
+		sp:text """DELETE {
+  $subject crm:P1_is_identified_by $identifier.
+  $identifier crm:P2_has_type spav:yavtx ;
+    rdf:value ?value .
+} WHERE {}      """ .
 	
 	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Alternative_Name> .
 }
@@ -1670,20 +1571,19 @@ WHERE {  BIND(IRI(CONCAT(STR(?subject),\"/p\")) as ?perform)}
 }
 
 
-
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Official_Name/context> {
 	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Official_Name> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
 		rdfs:label "Official name" ;
-		<http://www.w3.org/ns/prov#generatedAtTime> "2019-02-28T11:06:47.322Z"^^xsd:dateTime ;
-		<http://www.w3.org/ns/prov#wasAttributedTo> User:metaphacts ;
-		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-738556ae262c47bfa2a24a7c86b5f53a-25v7s ;
+		<http://www.w3.org/ns/prov#generatedAtTime> "2019-03-05T14:13:37.248+01:00"^^xsd:dateTime ;
+		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
+		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-fbdb67371f3943e195bbb5427e3750e0-4o3xnp ;
 		<http://www.metaphacts.com/ontology/fields#domain> crm:E1_CRM_Entity ;
-		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-738556ae262c47bfa2a24a7c86b5f53a-4wh8r ;
-		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-738556ae262c47bfa2a24a7c86b5f53a-3ge3ge ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-fbdb67371f3943e195bbb5427e3750e0-gnyt9l ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-fbdb67371f3943e195bbb5427e3750e0-o2sye5 ;
 		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:langString ;
 		<http://www.metaphacts.com/ontology/fields#maxOccurs> "1" .
 	
-	_:genid-738556ae262c47bfa2a24a7c86b5f53a-25v7s a sp:Query ;
+	_:genid-fbdb67371f3943e195bbb5427e3750e0-4o3xnp a sp:Query ;
 		sp:text """DELETE {
   $subject rdfs:label $value .
   $subject crm:P1_is_identified_by $identifier .
@@ -1691,14 +1591,7 @@ WHERE {  BIND(IRI(CONCAT(STR(?subject),\"/p\")) as ?perform)}
     rdf:value ?value .
 } WHERE {}      """ .
 	
-	_:genid-738556ae262c47bfa2a24a7c86b5f53a-3ge3ge a sp:Query ;
-		sp:text """SELECT ?value WHERE {
-  $subject crm:P1_is_identified_by $identifier .
-  $identifier crm:P2_has_type spav:yanuj ;
-    rdf:value ?value .
-}""" .
-	
-	_:genid-738556ae262c47bfa2a24a7c86b5f53a-4wh8r a sp:Query ;
+	_:genid-fbdb67371f3943e195bbb5427e3750e0-gnyt9l a sp:Query ;
 		sp:text """INSERT { 
   $subject rdfs:label $value .
   $subject crm:P1_is_identified_by $identifier .
@@ -1706,11 +1599,18 @@ WHERE {  BIND(IRI(CONCAT(STR(?subject),\"/p\")) as ?perform)}
     crm:P2_has_type spav:yanuj ;
     rdf:value $value .
 } WHERE {
-      BIND(IRI(CONCAT(STR($subject),\"/appellation/\", MD5(CONCAT(\"OfficialName/\",STR($value))))) as ?identifier)
+     BIND (IRI(CONCAT (\"http://data.performing-arts.ch/x/\" , MD5(?value))) AS $identifier)
 }
       
   
       """ .
+	
+	_:genid-fbdb67371f3943e195bbb5427e3750e0-o2sye5 a sp:Query ;
+		sp:text """SELECT DISTINCT ?value WHERE {
+  $subject crm:P1_is_identified_by $identifier .
+  $identifier crm:P2_has_type spav:yanuj ;
+    rdf:value ?value .
+}""" .
 	
 	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Official_Name> .
 }
@@ -1844,42 +1744,6 @@ WHERE {  BIND(IRI(CONCAT(STR(?subject),\"/p\")) as ?perform)}
 }
 
 
-
-
-<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website/context> {
-	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
-		rdfs:label "Website" ;
-		<http://www.w3.org/ns/prov#generatedAtTime> "2019-02-28T09:56:24.389Z"^^xsd:dateTime ;
-		<http://www.w3.org/ns/prov#wasAttributedTo> User:metaphacts ;
-		<http://www.metaphacts.com/ontology/fields#domain> crm:E39_Actor ;
-		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-fc682f57a7014116a06a2302766be7be-gcn05o ;
-		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-fc682f57a7014116a06a2302766be7be-w2oero ;
-		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI ;
-		<http://www.metaphacts.com/ontology/fields#range> <http://metaphacts.com/Link> .
-	
-	_:genid-fc682f57a7014116a06a2302766be7be-gcn05o a sp:Query ;
-		sp:text """INSERT {
-  $subject crm:P76_has_contact_point $c .
-  $c crm:P2_has_type spav:ihctx ;
-    rdf:value ?value.	
-} WHERE {
-      BIND (IRI(CONCAT(\"http://data.performing-arts.ch/x/\" , STR(UUID())) ) AS $c )
-
-}""" .
-	
-	_:genid-fc682f57a7014116a06a2302766be7be-w2oero a sp:Query ;
-		sp:text """SELECT ?value  WHERE {
-  $subject crm:P76_has_contact_point ?c.
-  ?c crm:P2_has_type spav:ihctx ;
-    rdf:value ?value.  
-}""" .
-	
-	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website> .
-}
-
-{
-	Platform:fieldDefinitionContainer a <http://www.w3.org/ns/ldp#Container> , <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> .
-}
 
 
 
@@ -2098,6 +1962,246 @@ SELECT DISTINCT ?value WHERE {
       """ .
 	
 	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_successor_of> .
+}
+
+{
+	Platform:fieldDefinitionContainer a <http://www.w3.org/ns/ldp#Container> , <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> .
+}
+
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note/context> {
+	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
+		rdfs:label "Notes" ;
+		<http://www.w3.org/ns/prov#generatedAtTime> "2019-03-05T16:12:48.112+01:00"^^xsd:dateTime ;
+		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
+		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-e3d5d3ef343c4393908913d8e56496c6-cv9scr ;
+		<http://www.metaphacts.com/ontology/fields#domain> crm:E1_CRM_Entity ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-e3d5d3ef343c4393908913d8e56496c6-aq7t ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-e3d5d3ef343c4393908913d8e56496c6-ns1pvg ;
+		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string .
+	
+	_:genid-e3d5d3ef343c4393908913d8e56496c6-aq7t a sp:Query ;
+		sp:text """INSERT { $subject crm:P3_has_note $note.
+         $note rdf:value $value.
+          $note a crm:E62_String .
+          $note  crm:P2_has_type spav:eoept} WHERE {
+      BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\",MD5(?value))) AS ?note)
+}""" .
+	
+	_:genid-e3d5d3ef343c4393908913d8e56496c6-cv9scr a sp:Query ;
+		sp:text """DELETE { $subject crm:P3_has_note $note.
+         $note rdf:value $value.} WHERE {}
+      
+      """ .
+	
+	_:genid-e3d5d3ef343c4393908913d8e56496c6-ns1pvg a sp:Query ;
+		sp:text """SELECT DISTINCT ?value WHERE {
+ $subject crm:P3_has_note $note.
+         $note rdf:value $value.
+}""" .
+	
+	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note> .
+}
+
+{
+	Platform:fieldDefinitionContainer a <http://www.w3.org/ns/ldp#Container> , <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> .
+}
+
+
+
+
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website/context> {
+	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
+		rdfs:label "Website" ;
+		<http://www.w3.org/ns/prov#generatedAtTime> "2019-03-05T16:03:34.716+01:00"^^xsd:dateTime ;
+		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
+		<http://www.metaphacts.com/ontology/fields#domain> crm:E39_Actor ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-6026583ead1c46f28f89ecd76c2a13e8-lint6 ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-6026583ead1c46f28f89ecd76c2a13e8-ldf65 ;
+		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI ;
+		<http://www.metaphacts.com/ontology/fields#range> <http://metaphacts.com/Link> .
+	
+	_:genid-6026583ead1c46f28f89ecd76c2a13e8-ldf65 a sp:Query ;
+		sp:text """SELECT ?value  WHERE {
+  $subject crm:P76_has_contact_point ?c.
+  ?c crm:P2_has_type spav:ihctx ;
+    rdf:value ?value.  
+}""" .
+	
+	_:genid-6026583ead1c46f28f89ecd76c2a13e8-lint6 a sp:Query ;
+		sp:text """INSERT {
+  $subject crm:P76_has_contact_point $c .
+  $c crm:P2_has_type spav:ihctx ;
+    rdf:value ?value.
+      ?c a crm:E51_Contact_Point.
+} WHERE {
+       BIND (IRI(CONCAT("http://data.performing-arts.ch/x/" , MD5(STR(?value))) ) AS $c )
+
+}""" .
+	
+	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website> .
+}
+
+
+
+{
+	Platform:fieldDefinitionContainer a <http://www.w3.org/ns/ldp#Container> , <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> .
+}
+
+
+
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_contact_point/context> {
+	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_contact_point> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
+		rdfs:label "Contact Point" ;
+		<http://www.w3.org/ns/prov#generatedAtTime> "2019-03-05T14:58:35.343+01:00"^^xsd:dateTime ;
+		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
+		<http://www.metaphacts.com/ontology/fields#domain> crm:E39_Actor ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-927aab569c9044da964e54b93fc3ee04-vlgx3 ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-927aab569c9044da964e54b93fc3ee04-xkxav ;
+		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI ;
+		<http://www.metaphacts.com/ontology/fields#range> <http://metaphacts.com/Link> .
+	
+	_:genid-927aab569c9044da964e54b93fc3ee04-vlgx3 a sp:Query ;
+		sp:text """INSERT { $subject crm:P76_has_contact_point $c.
+      ?c a crm:E51_Contact_Point.
+      ?c rdf:value ?value.
+   } WHERE {  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\" , MD5(STR(?value)))) AS ?c)}""" .
+	
+	_:genid-927aab569c9044da964e54b93fc3ee04-xkxav a sp:Query ;
+		sp:text """SELECT ?value  WHERE {
+  $subject crm:P76_has_contact_point ?c.
+      ?c rdf:value ?value.
+    
+}""" .
+	
+	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_contact_point> .
+}
+
+{
+	Platform:fieldDefinitionContainer a <http://www.w3.org/ns/ldp#Container> , <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> .
+}
+
+
+
+
+
+<http://www.metaphacts.com/fieldDefinition/reference_work_functions/context> {
+	<http://www.metaphacts.com/fieldDefinition/reference_work_functions> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
+		rdfs:label "reference work functions" ;
+		<http://www.w3.org/ns/prov#generatedAtTime> "2019-03-05T14:47:15.131+01:00"^^xsd:dateTime ;
+		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
+		<http://www.metaphacts.com/ontology/fields#domain> frbr:F25_Performance_Plan ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-703a2997ea3c49a6b4e0a778d5ca1b1d-ilkefu ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-703a2997ea3c49a6b4e0a778d5ca1b1d-hk8a4 ;
+		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI .
+	
+	_:genid-703a2997ea3c49a6b4e0a778d5ca1b1d-hk8a4 a sp:Query ;
+		sp:text """SELECT  DISTINCT ?value    WHERE {
+   ?subject  frbr:R14_incorporates ?sce.
+   ?ec frbr:R17_created ?sce;
+       crm:P9_consists_of ?activity.
+  ?activity crm:P2_has_type ?value.
+}
+      """ .
+	
+	_:genid-703a2997ea3c49a6b4e0a778d5ca1b1d-ilkefu a sp:Query ;
+		sp:text """INSERT { $subject ?predicate $value} WHERE {
+  
+   ?subject  frbr:R14_incorporates ?sce.
+   ?ec frbr:R17_created ?sce;
+       crm:P9_consists_of ?activity.
+  ?activity crm:P2_has_type ?value.
+      ?value a <http://www.cidoc-crm.org/cidoc-crm/E7_Activity>.
+      
+
+     BIND  (IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(STR(?value)))) AS ?ec)
+       BIND  (IRI(CONCAT(\" http://data.performing-arts.ch/u/\", MD5(STR(?value)))) AS ?sec)
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\",MD5(STR(UUID())))) AS ?activity)}
+
+
+
+
+""" .
+	
+	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://www.metaphacts.com/fieldDefinition/reference_work_functions> .
+}
+
+{
+	Platform:fieldDefinitionContainer a <http://www.w3.org/ns/ldp#Container> , <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> .
+}
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity/context> {
+	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
+		rdfs:label "Activity" ;
+		<http://www.w3.org/ns/prov#generatedAtTime> "2019-03-05T14:43:43.709+01:00"^^xsd:dateTime ;
+		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
+		<http://www.metaphacts.com/ontology/fields#domain> frbr:F25_Performance_Plan ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-57b25f99ce4942c38c76369561625bd9-x7421u ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-57b25f99ce4942c38c76369561625bd9-kuev5 ;
+		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI ;
+		<http://www.metaphacts.com/ontology/fields#range> crm:E7_Activity .
+	
+	_:genid-57b25f99ce4942c38c76369561625bd9-kuev5 a sp:Query ;
+		sp:text """SELECT ?value  WHERE {
+ ?subject  frbr:R14_incorporates ?sce.
+         ?ec frbr:R17_created  ?sce;
+          crm:P9_consists_of  $value. 
+}""" .
+	
+	_:genid-57b25f99ce4942c38c76369561625bd9-x7421u a sp:Query ;
+		sp:text """INSERT { ?subject  frbr:R14_incorporates ?sce.
+         ?ec frbr:R17_created  ?sce;
+          crm:P9_consists_of  $value. 
+      } WHERE {
+
+ 
+     BIND  (IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(STR(?value)))) AS ?ec)
+       BIND  (IRI(CONCAT(\" http://data.performing-arts.ch/u/\", MD5(STR(?value)))) AS ?sec)
+}""" .
+	
+	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity> .
+}
+
+{
+	Platform:fieldDefinitionContainer a <http://www.w3.org/ns/ldp#Container> , <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> .
+}
+
+
+
+
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity/context> {
+	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity> a <http://www.w3.org/ns/ldp#Resource> , <http://www.w3.org/ns/prov#Entity> , <http://www.metaphacts.com/ontology/fields#Field> ;
+		rdfs:label "Activity" ;
+		<http://www.w3.org/ns/prov#generatedAtTime> "2019-03-05T14:43:43.709+01:00"^^xsd:dateTime ;
+		<http://www.w3.org/ns/prov#wasAttributedTo> User:admin ;
+		<http://www.metaphacts.com/ontology/fields#domain> frbr:F25_Performance_Plan ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-57b25f99ce4942c38c76369561625bd9-x7421u ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-57b25f99ce4942c38c76369561625bd9-kuev5 ;
+		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI ;
+		<http://www.metaphacts.com/ontology/fields#range> crm:E7_Activity .
+	
+	_:genid-57b25f99ce4942c38c76369561625bd9-kuev5 a sp:Query ;
+		sp:text """SELECT ?value  WHERE {
+ ?subject  frbr:R14_incorporates ?sce.
+         ?ec frbr:R17_created  ?sce;
+          crm:P9_consists_of  $value. 
+}""" .
+	
+	_:genid-57b25f99ce4942c38c76369561625bd9-x7421u a sp:Query ;
+		sp:text """INSERT { ?subject  frbr:R14_incorporates ?sce.
+         ?ec frbr:R17_created  ?sce;
+          crm:P9_consists_of  $value. 
+      } WHERE {
+
+ 
+     BIND  (IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(STR(?value)))) AS ?ec)
+       BIND  (IRI(CONCAT(\" http://data.performing-arts.ch/u/\", MD5(STR(?value)))) AS ?sec)
+}""" .
+	
+	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity> .
 }
 
 {
