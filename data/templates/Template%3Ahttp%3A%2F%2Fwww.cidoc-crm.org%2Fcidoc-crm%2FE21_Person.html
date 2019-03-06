@@ -85,8 +85,11 @@
                 ?deathplace rdfs:label ?deathplacelabel .
             }
         }
-    }'
-                template='{{#each bindings}}<p>{{birthyear.value}}-{{deathyear.value}}</p>{{/each}}'>
+    } LIMIT 1'
+                template='{{#each bindings}}<div>
+                    {{#if birthyear}}<p>* {{birthyear.value}}{{#if birthplacelabel}}, {{birthplacelabel.value}}{{/if}}</p>{{/if}}
+                    {{#if deathyear}}<p>† {{deathyear.value}}{{#if deathplacelabel}}, {{deathplacelabel.value}}{{/if}}</p>{{/if}}
+                    </div>{{/each}}'>
             </semantic-query>
 
 
