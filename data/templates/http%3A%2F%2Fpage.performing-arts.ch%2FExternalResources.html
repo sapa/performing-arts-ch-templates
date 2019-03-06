@@ -1,23 +1,25 @@
     <semantic-query 
     query='SELECT ?value ?label WHERE {
         ?? owl:sameAs ?value
-        BIND (replace(str(?value), ".*\\/", "") as ?localname)
-        BIND (strbefore(str(?value), ?localname) as ?prefix)
+        BIND (REPLACE(STR(?value), ".*\\/c*b*", "") as ?localname)
+        BIND (STRBEFORE(STR(?value), ?localname) as ?prefix)
 
-        VALUES (?prefix ?source)
+        VALUES (?prefix ?source ?order)
         {
-          ("http://www.wikidata.org/entity/" "Wikidata")
-          ("http://www.isni.org/" "ISNI")
-          ("http://viaf.org/viaf/" "VIAF")
-          ("http://d-nb.info/gnd/" "GND")
-          ("https://catalogue.bnf.fr/ark:/12148/cb" "BnF")
-          ("http://geonames.org/" "Geonames")
-          ("http://classifications.data.admin.ch/municipality/" "Swiss Municipality")
-          ("http://classifications.data.admin.ch/canton/" "Swiss Municipality")
-          ("http://tls.theaterwissenschaft.ch/wiki/" "Theaterlexikon")
+          ("http://www.wikidata.org/entity/" "Wikidata" 0)
+          ("http://www.isni.org/" "ISNI" 1)
+          ("http://viaf.org/viaf/" "VIAF" 2)
+          ("http://d-nb.info/gnd/" "GND" 3)
+          ("https://catalogue.bnf.fr/ark:/12148/cb" "BnF" 4)
+          ("http://geonames.org/" "Geonames" 5)
+          ("http://classifications.data.admin.ch/municipality/" "Swiss Municipality" 6)
+          ("http://classifications.data.admin.ch/canton/" "Swiss Municipality" 7)
+          ("http://tls.theaterwissenschaft.ch/wiki/" "Theaterlexikon der Schweiz" 8)
         }
-        BIND (CONCAT(?source," [",?localname,"]") as ?label)
-    }'
+        BIND (IF(?order<8,
+        CONCAT(?source,": ",?localname) ,
+        ?source) as ?label)
+    } ORDER BY ASC(?order)'
     template='<div><h5>External resources</h5>
     <ul class="list-unstyled">{{#each bindings}}<li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
       {{/each}}
