@@ -63,33 +63,52 @@
 
             <!-- Live dates -->
             <semantic-query 
-                query='SELECT ?wikidata ?birthyear ?birthplacelabel ?deathyear ?deathplacelabel
+                query='SELECT ?wikibirthyear ?wikibirthplacelabel ?birthplace ?wikideathyear ?wikideathplacelabel ?deathplace
     WHERE {
         ?? owl:sameAs ?wikidata .
         FILTER (CONTAINS(STR(?wikidata), "wikidata"))
         SERVICE <https://wikidata.metaphacts.com/sparql> {
             OPTIONAL {
-                ?wikidata <http://www.wikidata.org/prop/direct/P569> ?birthdate .
-                BIND(YEAR(?birthdate) AS ?birthyear)
+                ?wikidata <http://www.wikidata.org/prop/direct/P569> ?wikibirthdate .
+                BIND(YEAR(?wikibirthdate) AS ?wikibirthyear)
             }
             OPTIONAL {
-                ?wikidata <http://www.wikidata.org/prop/direct/P570> ?deathdate .
-                BIND(YEAR(?deathdate) AS ?deathyear)
+                ?wikidata <http://www.wikidata.org/prop/direct/P19> ?wikibirthplace .
+                ?wikibirthplace rdfs:label ?wikibirthplacelabel .
             }
             OPTIONAL {
-                ?wikidata <http://www.wikidata.org/prop/direct/P19> ?birthplace .
-                ?birthplace rdfs:label ?birthplacelabel .
+                ?wikidata <http://www.wikidata.org/prop/direct/P570> ?wikideathdate .
+                BIND(YEAR(?wikideathdate) AS ?wikideathyear)
             }
             OPTIONAL {
-                ?wikidata <http://www.wikidata.org/prop/direct/P20> ?deathplace .
-                ?deathplace rdfs:label ?deathplacelabel .
+                ?wikidata <http://www.wikidata.org/prop/direct/P20> ?wikideathplace .
+                ?wikideathplace rdfs:label ?wikideathplacelabel .
             }
         }
+        OPTIONAL {
+            ?birthplace owl:sameAs ?wikibirthplace .
+        }
+        OPTIONAL {
+            ?deathplace owl:sameAs ?wikideathplace .
+        }
     } LIMIT 1'
-                template='{{#each bindings}}<div>
-                    {{#if birthyear}}<p>* {{birthyear.value}}{{#if birthplacelabel}}, {{birthplacelabel.value}}{{/if}}</p>{{/if}}
-                    {{#if deathyear}}<p>† {{deathyear.value}}{{#if deathplacelabel}}, {{deathplacelabel.value}}{{/if}}</p>{{/if}}
-                    </div>{{/each}}'>
+                template='{{#each bindings}}<p>
+                    {{#if wikibirthyear}}* {{wikibirthyear.value}}{{#if wikibirthplacelabel}}, 
+                        {{#if birthplace}} 
+                            <semantic-link uri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>
+                        {{else}}
+                            {{wikibirthplacelabel.value}}
+                        {{/if}}
+                    {{/if}}{{/if}}
+                    {{#if wikibirthyear}}{{#if wikideathyear}}<br>{{/if}}{{/if}}
+                    {{#if wikideathyear}}† {{wikideathyear.value}}{{#if wikideathplacelabel}}, 
+                        {{#if deathplace}} 
+                            <semantic-link uri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>
+                        {{else}}
+                            {{wikideathplacelabel.value}}
+                        {{/if}}
+                    {{/if}}{{/if}}
+                    </p>{{/each}}'>
             </semantic-query>
 
 
