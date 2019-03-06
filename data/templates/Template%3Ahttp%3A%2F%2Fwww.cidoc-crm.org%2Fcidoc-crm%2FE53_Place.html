@@ -22,8 +22,7 @@
                       { ?? crm:P89_falls_within* ?node }
                       UNION
                       { ?node crm:P89_falls_within* ?? } 
-                      ?referrer crm:P89_falls_within ?node .
-                    }
+                                          }
                     OPTIONAL { ?node crm:P89_falls_within ?parent. FILTER(ISIRI(?parent)) }
                     FILTER(ISIRI(?node))
                     FILTER(CONTAINS(STR(?node),"/p/"))
