@@ -24,6 +24,8 @@
         typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
         members="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_current_or_former_member"
         note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
+        Formationyear="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan"
+        DissolutionYear="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Dissolved_In"
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
@@ -37,6 +39,8 @@
         <semantic-form-select-input for="E39_Actor_type"></semantic-form-select-input>
         <semantic-form-tree-picker-input for="E1_Entity_has_current_or_former_residence"></semantic-form-tree-picker-input>
         <semantic-form-text-input for="Website"></semantic-form-text-input>
+         <semantic-form-text-input for="Formationyear"></semantic-form-text-input>
+         <semantic-form-text-input for="DissolutionYear"></semantic-form-text-input>
        <semantic-form-autocomplete-input for="Venues"></semantic-form-autocomplete-input>
          <semantic-form-composite-input for="members" new-subject-template="http://data.performing-arts.ch/a/{{UUID}}" 
               fields='[[fieldDefinitions
