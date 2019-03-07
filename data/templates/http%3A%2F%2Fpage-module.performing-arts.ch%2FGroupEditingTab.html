@@ -43,32 +43,9 @@
          <semantic-form-text-input for="Formationyear"></semantic-form-text-input>
          <semantic-form-text-input for="DissolutionYear"></semantic-form-text-input>
        <semantic-form-autocomplete-input for="Venues"></semantic-form-autocomplete-input>
-         <semantic-form-composite-input for="members" new-subject-template="http://data.performing-arts.ch/a/{{UUID}}" 
-              fields='[[fieldDefinitions
-           typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
-           name="https://dev.performing-arts.ch/container/fieldDefinitionContainer/Member_Name"
-                 			        		]]'>
-           <div style="display: none;">  
-			<semantic-form-hidden-input for='typeset'default-values='["http://www.cidoc-crm.org/cidoc-crm/E21_Person","http://www.w3.org/ns/prov#Agent"]'>     </semantic-form-hidden-input></div>   
- <semantic-form-text-input for='name'></semantic-form-text-input>
-  
+        <semantic-form-autocomplete-input for="members"></semantic-form-autocomplete-input>
+            <semantic-form-autocomplete-input for="Subject_of"></semantic-form-autocomplete-input>
               
-          </semantic-form-composite-input>
-           
-        
-        
-         <semantic-form-composite-input for="Subject_of" new-subject-template="http://data.performing-arts.ch/u/{{UUID}}"
-                                          fields='[[fieldDefinitions
-           typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
-           name="https://dev.performing-arts.ch/container/fieldDefinitionContainer/Aggregation_Name"
-                 			        		]]'>
-           <div style="display: none;">  
-			<semantic-form-hidden-input for='typeset' default-value='http://www.openarchives.org/ore/terms/Aggregation'>     </semantic-form-hidden-input></div>   
- <semantic-form-text-input for='name'></semantic-form-text-input>
-  
-              
-          </semantic-form-composite-input>
-        
                                         
                                         
         
