@@ -15,14 +15,14 @@
     <bs-tab event-key='about' title='About'>
 
         <bs-col sm="4">
-            <h5>Place Hierarchy</h5>
+            <h5>Place hierarchy</h5>
             <semantic-tree
                  query='SELECT DISTINCT ?node ?parent WHERE {
                     { 
                       { ?? crm:P89_falls_within* ?node }
                       UNION
                       { ?node crm:P89_falls_within* ?? } 
-                                          }
+                    }
                     OPTIONAL { ?node crm:P89_falls_within ?parent. FILTER(ISIRI(?parent)) }
                     FILTER(ISIRI(?node))
                     FILTER(CONTAINS(STR(?node),"/p/"))
