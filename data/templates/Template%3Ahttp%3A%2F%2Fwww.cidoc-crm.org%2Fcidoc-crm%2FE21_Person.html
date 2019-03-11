@@ -63,22 +63,22 @@
 
             <!-- Live dates -->
             <semantic-query 
-                query='SELECT ?wikibirthyear ?wikibirthplacelabel ?birthplace ?wikideathyear ?wikideathplacelabel ?deathplace
+                query='SELECT ?wikibirthday ?wikibirthplacelabel ?birthplace ?wikideathday ?wikideathplacelabel ?deathplace
     WHERE {
         ?? owl:sameAs ?wikidata .
         FILTER (CONTAINS(STR(?wikidata), "wikidata"))
         SERVICE <https://wikidata.metaphacts.com/sparql> {
             OPTIONAL {
-                ?wikidata <http://www.wikidata.org/prop/direct/P569> ?wikibirthdate .
-                BIND(YEAR(?wikibirthdate) AS ?wikibirthyear)
+                ?wikidata <http://www.wikidata.org/prop/direct/P569> ?dob .
+                BIND(CONCAT(STR(DAY(?dob)), ".", STR(MONTH(?dob)), ".", STR(YEAR(?dob))) AS ?wikibirthday)
             }
             OPTIONAL {
                 ?wikidata <http://www.wikidata.org/prop/direct/P19> ?wikibirthplace .
                 ?wikibirthplace rdfs:label ?wikibirthplacelabel .
             }
             OPTIONAL {
-                ?wikidata <http://www.wikidata.org/prop/direct/P570> ?wikideathdate .
-                BIND(YEAR(?wikideathdate) AS ?wikideathyear)
+                ?wikidata <http://www.wikidata.org/prop/direct/P570> ?dod .
+                BIND(CONCAT(STR(DAY(?dod)), ".", STR(MONTH(?dod)), ".", STR(YEAR(?dod))) AS ?wikideathday)
             }
             OPTIONAL {
                 ?wikidata <http://www.wikidata.org/prop/direct/P20> ?wikideathplace .
@@ -93,15 +93,15 @@
         }
     } LIMIT 1'
                 template='{{#each bindings}}<p>
-                    {{#if wikibirthyear}}* {{wikibirthyear.value}}{{#if wikibirthplacelabel}}, 
+                    {{#if wikibirthday}}* {{wikibirthday.value}}{{#if wikibirthplacelabel}}, 
                         {{#if birthplace}} 
                             <semantic-link uri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>
                         {{else}}
                             {{wikibirthplacelabel.value}}
                         {{/if}}
                     {{/if}}{{/if}}
-                    {{#if wikibirthyear}}{{#if wikideathyear}}<br>{{/if}}{{/if}}
-                    {{#if wikideathyear}}† {{wikideathyear.value}}{{#if wikideathplacelabel}}, 
+                    {{#if wikibirthday}}{{#if wikideathday}}<br>{{/if}}{{/if}}
+                    {{#if wikideathday}}† {{wikideathday.value}}{{#if wikideathplacelabel}}, 
                         {{#if deathplace}} 
                             <semantic-link uri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>
                         {{else}}
