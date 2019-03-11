@@ -11,47 +11,43 @@
       form-id='groups'
        persistence='ldp'             
        fields='[[fieldDefinitions
-        Official_Name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Official_Name"
-        Alternative_Name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Alternative_Name"
-        Acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Acronym"
-        E39_Actor_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_type"
-        E1_Entity_has_current_or_former_residence="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_Entity_has_current_or_former_residence"
-        Website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
-        Venues="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_manages_venue"
-        E1_Entity_is_association_member="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_Entity_is_association_member"
-        Predecessor="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_successor_of"
-        Subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of"
-        E1_CRM_Entity_sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
-        typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
+        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type"
+        official_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Official_Name"
+        alternative_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Alternative_Name"
+        acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Acronym"
+        actor_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_type"
+        residence="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_Entity_has_current_or_former_residence"
+        predecessor="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_successor_of"
+        formation_year="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan"
+        dissolution_year="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Dissolved_In"
+        website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
+        venues="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_manages_venue"
         members="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_current_or_former_member"
+        associations="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_Entity_is_association_member"
+        record_sets="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of"
+        sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
         note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
-        Formationyear="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan"
-        DissolutionYear="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Dissolved_In"
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
-        <div style="display: none;">  
-          <semantic-form-hidden-input for='typeset'  default-values='["http://www.cidoc-crm.org/cidoc-crm/E74_Group","http://www.w3.org/ns/prov#Agent"]'></semantic-form-hidden-input>
+        <div style="display: none;">
+        <semantic-form-hidden-input for='rdf_type' default-values='["http://www.cidoc-crm.org/cidoc-crm/E74_Group","http://www.w3.org/ns/prov#Agent"]'></semantic-form-hidden-input>
         </div>
-        <semantic-form-text-input for="Official_Name"></semantic-form-text-input>
-        <semantic-form-text-input for="Alternative_Name"></semantic-form-text-input>
-         <semantic-form-text-input for="note"></semantic-form-text-input>
-        <semantic-form-text-input for="Acronym"></semantic-form-text-input>
-        <semantic-form-select-input for="E39_Actor_type"></semantic-form-select-input>
-        <semantic-form-tree-picker-input for="E1_Entity_has_current_or_former_residence"></semantic-form-tree-picker-input>
-        <semantic-form-text-input for="Website"></semantic-form-text-input>
-         <semantic-form-text-input for="Formationyear"></semantic-form-text-input>
-         <semantic-form-text-input for="DissolutionYear"></semantic-form-text-input>
-       <semantic-form-autocomplete-input for="Venues"></semantic-form-autocomplete-input>
+        <semantic-form-text-input for="official_name"></semantic-form-text-input>
+        <semantic-form-text-input for="alternative_name"></semantic-form-text-input>
+        <semantic-form-text-input for="acronym"></semantic-form-text-input>
+        <semantic-form-select-input for="actor_type"></semantic-form-select-input>
+        <semantic-form-tree-picker-input for="residence"></semantic-form-tree-picker-input>
+        <semantic-form-autocomplete-input for="predecessor"></semantic-form-autocomplete-input>
+        <semantic-form-text-input for="formation_year"></semantic-form-text-input>
+        <semantic-form-text-input for="dissolution_year"></semantic-form-text-input>
+        <semantic-form-text-input for="website"></semantic-form-text-input>
+        <semantic-form-autocomplete-input for="venues"></semantic-form-autocomplete-input>
         <semantic-form-autocomplete-input for="members"></semantic-form-autocomplete-input>
-            <semantic-form-autocomplete-input for="Subject_of"></semantic-form-autocomplete-input>
-              
-                                        
-                                        
-        
-         <semantic-form-autocomplete-input for="E1_Entity_is_association_member"></semantic-form-autocomplete-input>
-        <semantic-form-text-input for="E1_CRM_Entity_sameAs"></semantic-form-text-input>
-        <semantic-form-autocomplete-input for="Predecessor"></semantic-form-autocomplete-input>
+        <semantic-form-autocomplete-input for="associations"></semantic-form-autocomplete-input>
+        <semantic-form-autocomplete-input for="record_sets"></semantic-form-autocomplete-input>
+        <semantic-form-text-input for="sameAs"></semantic-form-text-input>
+        <semantic-form-text-input for="note"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
         <button
