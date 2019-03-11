@@ -73,7 +73,11 @@
 
 </bs-tab>
 
+[[#if (hasPermission "forms:ldp:*")]] 
+<bs-tab event-key='place editing' title='Edit'>
 [[> sapaModule:PlaceEditingTab]]
+</bs-tab>
+[[/if]]
 
 </bs-tabs>  
 </div>

@@ -1,9 +1,12 @@
-[[#if (hasPermission "forms:ldp:*")]] 
-<bs-tab event-key='place editing' title='Edit'>
   <div data-flex-layout='row top-stretch'>
     <semantic-form 
-      subject='[[this]]'
-      post-action='reload'
+     [[#if create]]
+        new-subject-template='http://data.performing-arts.ch/a/{{UUID}}'
+        post-action="redirect"
+      [[else]]
+        subject='[[this]]'
+        post-action="reload"
+     [[/if]]
       
       browser-persistence=true
       persistence='ldp' 
@@ -16,10 +19,12 @@
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
+        <div style="display: none;">
+        <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "crm:E53_Place"]]'></semantic-form-hidden-input>
+        </div>
         <semantic-form-text-input for="place_name" languages='["en","de","fr","it"]'></semantic-form-text-input>
         <semantic-form-tree-picker-input for="falls_within" ></semantic-form-tree-picker-input>
         <semantic-form-text-input for="sameAs"></semantic-form-text-input>
-        <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "crm:E53_Place"]]'></semantic-form-hidden-input>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
         <button
@@ -33,5 +38,3 @@
       </bs-panel>
     </semantic-form>
   </div>
-</bs-tab>
-[[/if]]
