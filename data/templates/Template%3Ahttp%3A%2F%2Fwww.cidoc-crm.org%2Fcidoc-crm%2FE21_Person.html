@@ -17,7 +17,7 @@
                 query='SELECT ?typelabel ?value
                 WHERE {
                     ?? crm:P1_is_identified_by ?app .
-                    ?app a crm:E41_Appellation ; 
+                    ?app a crm:E82_Actor_Appellation ; 
                     crm:P2_has_type spav:yanuj ;
                     rdf:value ?value .
                 } LIMIT 1'
@@ -30,7 +30,7 @@
                 WHERE {
                     VALUES (?type ?typesort) { (spav:yamqk 1) (spav:yavtx 2) }
                     ?? crm:P1_is_identified_by ?appellation .
-                    ?appellation a crm:E41_Appellation ; 
+                    ?appellation a crm:E82_Actor_Appellation ; 
                     crm:P2_has_type ?type ;
                     rdf:value ?value .
                     { ?appellation crm:P2_has_type spav:yamqk . }
@@ -45,7 +45,7 @@
                 query='SELECT ?value
                 WHERE {
                     ?? crm:P1_is_identified_by ?appellation .
-                    ?appellation a crm:E41_Appellation ; 
+                    ?appellation a crm:E82_Actor_Appellation ; 
                         crm:P2_has_type spav:yaajh ;
                         rdf:value ?value .
                 }'
