@@ -126,5 +126,10 @@
             [[> sapa:ExternalResources]]
         </bs-col>
       </bs-tab>
+    [[#if (hasPermission "forms:ldp:*")]] 
+    <bs-tab event-key='person editing' title='Edit'>
+    [[> sapaModule:PersonForm]]
+    </bs-tab>
+    [[/if]]
     </bs-tabs>  
 </div>
