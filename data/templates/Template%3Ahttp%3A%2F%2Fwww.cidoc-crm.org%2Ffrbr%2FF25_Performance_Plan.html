@@ -7,36 +7,45 @@
   </li>
 </ol>
 <div class="page">
-    [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
+    [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]]
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
       <bs-tab event-key='Summary' title='Summary'>
-        <div class='table-responsive'>
-          <table class='table'>
-            <thead role='header'>
-              <tr>
-                <th>Field</th>
-                <th>Value</th>
-              </tr>
-            </thead>
-            <mp-field-visualization
-            subject='[[this]]'
-            fields='[[fieldDefinitions    
-       
-            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Title"
-            http://www.metaphacts.com/fieldDefinition/reference_work_functions="http://www.metaphacts.com/fieldDefinition/reference_work_functions"
-           
-            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Venue="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Venue"
-            
-            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity"
-            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language"
-            http://www.metaphacts.com/fieldDefinition/Subtitle_Language="http://www.metaphacts.com/fieldDefinition/Subtitle_Language"
-            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Genre="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Genre"
-           
-            ]]'
-            template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' [[!-- show in include [[> sapaModule:FieldBasedVisualization ]] --]]
-            ></mp-field-visualization> 
-          </table>
-        </div>
+
+            <!-- season -->
+            <semantic-query 
+                query='SELECT ?season
+                WHERE {
+                    ?expressioncreation frbr:R17_created ?? ;
+                        crm:P10_falls_within ?season .
+                    FILTER(CONTAINS(STR(?season), "/s/"))
+                }'
+            template='<p>{{#each bindings}}<semantic-link uri="{{season.value}}"></semantic-link>{{/each}}</p>'>
+            </semantic-query>
+
+            <!-- producer -->
+            <semantic-query 
+                query='SELECT ?producer
+                WHERE {
+                    ?expressioncreation frbr:R17_created ?? ;
+                        crm:P9_consists_of ?production .
+                    ?production crm:P2_has_type spav:muwgo ;
+                        crm:P14_carried_out_by ?producer .
+                }'
+            template='<div>{{#each bindings}}<p><semantic-link uri="{{producer.value}}"></semantic-link></p>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- director -->
+            <semantic-query 
+                query='SELECT ?director
+                WHERE {
+                    ?expressioncreation frbr:R17_created ?? ;
+                        crm:P9_consists_of ?direction .
+                    ?direction crm:P2_has_type spav:mutnt ;
+                        crm:P14_carried_out_by ?director .
+                }'
+            template='<div>{{#each bindings}}<p><semantic-link uri="{{director.value}}"></semantic-link></p>{{/each}}</div>'>
+            </semantic-query>
+
       </bs-tab>
       
          [[#if (hasPermission "forms:ldp:*")]] 
