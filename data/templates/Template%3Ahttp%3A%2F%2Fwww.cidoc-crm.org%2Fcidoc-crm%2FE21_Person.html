@@ -61,7 +61,7 @@
                 template='<p>{{#each bindings}}{{value.value}}{{/each}}</p>'>
             </semantic-query>
 
-            <!-- Live dates -->
+            <!-- live dates -->
             <semantic-query 
                 query='SELECT ?wikibirthday ?wikibirthplacelabel ?birthplace ?wikideathday ?wikideathplacelabel ?deathplace
     WHERE {
@@ -114,13 +114,19 @@
 
         </bs-col>
         <bs-col sm="4">
-            <mp-field-visualization
-            subject='[[this]]'
-            fields='[[fieldDefinitions    
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E21_Person_is_current_or_former_member_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E21_Person_is_current_or_former_member_of"
-            ]]'
-            template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
-            ></mp-field-visualization> 
+
+            <!-- groups -->
+            <semantic-query 
+                query='SELECT ?value ?label WHERE {
+                    ?value crm:P107_has_current_or_former_member ?? ;
+                        rdfs:label ?label .
+                }'
+                template='<div><h5>Groups</h5>
+    <ul class="list-unstyled">{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>
+      {{/each}}
+    </ul></div>'>
+            </semantic-query>
+
         </bs-col>
         <bs-col sm="4">
             [[> sapa:ExternalResources]]
