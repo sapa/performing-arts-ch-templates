@@ -11,39 +11,61 @@
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
       <bs-tab event-key='Summary' title='Summary'>
 
-            <!-- season -->
+            <!-- theater & season -->
             <semantic-query 
-                query='SELECT ?season
-                WHERE {
-                    ?expressioncreation frbr:R17_created ?? ;
-                        crm:P10_falls_within ?season .
-                    FILTER(CONTAINS(STR(?season), "/s/"))
-                }'
-            template='<p>{{#each bindings}}<semantic-link uri="{{season.value}}"></semantic-link>{{/each}}</p>'>
-            </semantic-query>
-
-            <!-- producer -->
-            <semantic-query 
-                query='SELECT ?producer
+                query='SELECT ?producer ?season
                 WHERE {
                     ?expressioncreation frbr:R17_created ?? ;
                         crm:P9_consists_of ?production .
                     ?production crm:P2_has_type spav:muwgo ;
                         crm:P14_carried_out_by ?producer .
+                    OPTIONAL {
+                        ?expressioncreation crm:P10_falls_within ?season .
+                        FILTER(CONTAINS(STR(?season), "/s/"))
+                    }
                 }'
-            template='<div>{{#each bindings}}<p><semantic-link uri="{{producer.value}}"></semantic-link></p>{{/each}}</div>'>
+            template='<p>{{#each bindings}}
+                <semantic-link uri="{{producer.value}}"></semantic-link>{{#if season}}, <semantic-link uri="{{season.value}}"></semantic-link>{{/if}}
+                {{/each}}</p>'>
             </semantic-query>
 
-            <!-- director -->
+            <!-- genre -->
             <semantic-query 
-                query='SELECT ?director
+                query='SELECT ?genre
                 WHERE {
+                    ?work frbr:R12_is_realised_in ?? ;
+                        crm:P2_has_type ?genre .
+                }'
+            template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</p>'>
+            </semantic-query>
+
+            <!-- premiere -->
+            <semantic-query 
+                query='SELECT ?premiere ?premieretype ?timespan
+                WHERE {
+                    ?performance frbr:R25_performed ?? ;
+                        crm:P9_consists_of ?premiere .
+                    ?premiere crm:P2_has_type ?premieretype .
+                    ?premieretype skos:inScheme spav:hl .
+                    OPTIONAL {
+                        ?premiere crm:P4_has_time-span ?timespan .
+                    }
+                }'
+            template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{/each}}{{#each bindings}}, <mp-label iri="{{timespan.value}}"></mp-label>{{/each}}</p>'>
+            </semantic-query>
+
+            <!-- stage direction -->
+            <semantic-query 
+                query='SELECT ?director ?function
+                WHERE {
+                    VALUES (?function) { (spav:mutnt) }
                     ?expressioncreation frbr:R17_created ?? ;
                         crm:P9_consists_of ?direction .
-                    ?direction crm:P2_has_type spav:mutnt ;
+                    ?direction crm:P2_has_type ?function ;
                         crm:P14_carried_out_by ?director .
                 }'
-            template='<div>{{#each bindings}}<p><semantic-link uri="{{director.value}}"></semantic-link></p>{{/each}}</div>'>
+            template='<p>{{#each bindings}}{{#if @first}}
+                <mp-label iri="{{function.value}}"></mp-label><br/><semantic-link uri="{{director.value}}"></semantic-link>{{else}}, <semantic-link uri="{{director.value}}"></semantic-link>{{/if}}{{/each}}</p>'>
             </semantic-query>
 
       </bs-tab>
