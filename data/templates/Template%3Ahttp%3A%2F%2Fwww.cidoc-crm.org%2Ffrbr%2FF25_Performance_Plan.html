@@ -11,6 +11,26 @@
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
       <bs-tab event-key='Summary' title='Summary'>
 
+            <!-- titles -->
+            <semantic-query 
+                query='SELECT ?titlevalue ?titletype ?order
+                WHERE {
+                    ?? crm:P1_is_identified_by ?appellation .
+                    ?appellation a crm:E41_Appellation ;
+                        crm:P2_has_type ?titletype ;
+                        rdf:value ?titlevalue .
+                    VALUES (?titletype ?order) {
+                        (spav:gotlb 1)
+                        (spav:goctm 2)
+                        (spav:goctj 3)
+                        (spav:gogja 4)
+                        (spav:gowgn 5)
+                    }
+                } ORDER BY ASC(?order)'
+            template='<p>{{log bindings}}{{#each bindings}}
+                {{#if @first}}<strong>{{titlevalue.value}}</strong>{{else}}<br>{{titlevalue.value}}{{/if}}{{/each}}</p>'>
+            </semantic-query>
+
             <!-- theater & season -->
             <semantic-query 
                 query='SELECT ?producer ?season
