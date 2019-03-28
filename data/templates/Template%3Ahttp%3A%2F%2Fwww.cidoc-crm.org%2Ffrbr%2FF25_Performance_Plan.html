@@ -54,9 +54,7 @@
                         FILTER(CONTAINS(STR(?season), "/s/"))
                     }
                 }'
-            template='<p>{{#each bindings}}
-                <semantic-link uri="{{producer.value}}"></semantic-link>{{#if season}}, <semantic-link uri="{{season.value}}"></semantic-link>{{/if}}
-                {{/each}}</p>'>
+            template='<p>{{#each bindings}}{{#if @first}}<semantic-link uri="{{producer.value}}"></semantic-link>{{else}}, <semantic-link uri="{{producer.value}}"></semantic-link>{{/if}}{{#if @last}}{{#if season}}, <semantic-link uri="{{season.value}}"></semantic-link>{{/if}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- premiere -->
