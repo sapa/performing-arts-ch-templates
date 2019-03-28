@@ -31,6 +31,16 @@
                 {{#if @first}}<strong>{{titlevalue.value}}</strong>{{else}}<br>{{titlevalue.value}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
+            <!-- genre -->
+            <semantic-query 
+                query='SELECT ?genre
+                WHERE {
+                    ?work frbr:R12_is_realised_in ?? ;
+                        crm:P2_has_type ?genre .
+                }'
+            template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</p>'>
+            </semantic-query>
+
             <!-- theater & season -->
             <semantic-query 
                 query='SELECT ?producer ?season
@@ -49,16 +59,6 @@
                 {{/each}}</p>'>
             </semantic-query>
 
-            <!-- genre -->
-            <semantic-query 
-                query='SELECT ?genre
-                WHERE {
-                    ?work frbr:R12_is_realised_in ?? ;
-                        crm:P2_has_type ?genre .
-                }'
-            template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</p>'>
-            </semantic-query>
-
             <!-- premiere -->
             <semantic-query 
                 query='SELECT ?premiere ?premieretype ?timespan
@@ -72,6 +72,16 @@
                     }
                 }'
             template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{/each}}{{#each bindings}}, <mp-label iri="{{timespan.value}}"></mp-label>{{/each}}</p>'>
+            </semantic-query>
+
+            <!-- venue -->
+            <semantic-query 
+                query='SELECT ?venue
+                WHERE {
+                    ?performance frbr:R25_performed ?? ;
+                        crm:P8_took_place_on_or_within ?venue .
+                }'
+            template='<p>{{#each bindings}}{{#if @first}}<semantic-link uri="{{venue.value}}"></semantic-link>{{else}}, <semantic-link uri="{{venue.value}}"></semantic-link>{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- stage direction -->
