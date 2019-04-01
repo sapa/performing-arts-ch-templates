@@ -14,42 +14,39 @@
         <bs-col sm="4">
             <!-- official name -->
             <semantic-query 
-                query='SELECT ?typelabel ?value
+                query='SELECT ?appellation 
                 WHERE {
-                    ?? crm:P1_is_identified_by ?app .
-                    ?app a crm:E82_Actor_Appellation ; 
-                    crm:P2_has_type spav:yanuj ;
-                    rdf:value ?value .
+                    ?? crm:P1_is_identified_by ?appellation .
+                    ?appellation a crm:E82_Actor_Appellation ; 
+                        crm:P2_has_type spav:yanuj .
                 } LIMIT 1'
-            template='<p><strong>{{#each bindings}}{{value.value}}{{/each}}</strong></p>'>
+            template='<p><strong>{{#each bindings}}<mp-label iri="{{appellation.value}}"></mp-label>{{/each}}</strong></p>'>
             </semantic-query>
 
             <!-- alternative names -->
             <semantic-query 
-                query='SELECT distinct ?value ?type ?typesort
+                query='SELECT ?appellation ?typesort
                 WHERE {
                     VALUES (?type ?typesort) { (spav:yamqk 1) (spav:yavtx 2) }
                     ?? crm:P1_is_identified_by ?appellation .
                     ?appellation a crm:E82_Actor_Appellation ; 
-                    crm:P2_has_type ?type ;
-                    rdf:value ?value .
+                    crm:P2_has_type ?type .
                     { ?appellation crm:P2_has_type spav:yamqk . }
                     UNION
                     { ?appellation crm:P2_has_type spav:yavtx . }
                 } ORDER BY ?typesort'
-                template='<p>({{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}})</p>'>
+                template='<p>({{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label>{{else}}, <mp-label iri="{{appellation.value}}"></mp-label>{{/if}}{{/each}})</p>'>
             </semantic-query>
 
             <!-- pseudonym -->
             <semantic-query 
-                query='SELECT ?value
+                query='SELECT ?appellation
                 WHERE {
                     ?? crm:P1_is_identified_by ?appellation .
                     ?appellation a crm:E82_Actor_Appellation ; 
-                        crm:P2_has_type spav:yaajh ;
-                        rdf:value ?value .
+                        crm:P2_has_type spav:yaajh .
                 }'
-                template='<p>AKA {{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}}</p>'>
+                template='<p>AKA {{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label>{{else}}, <mp-label iri="{{appellation.value}}"></mp-label>{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- Swiss -->
