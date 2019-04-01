@@ -44,7 +44,7 @@
 
             <!-- theater & season -->
             <semantic-query 
-                query='SELECT ?producer ?season
+                query='SELECT ?producer ?class ?season
                 WHERE {
                     ?expressioncreation frbr:R17_created ?? ;
                         crm:P9_consists_of ?production .
@@ -54,8 +54,9 @@
                         ?expressioncreation crm:P10_falls_within ?season .
                         FILTER(CONTAINS(STR(?season), "/s/"))
                     }
+                    BIND(IF(CONTAINS(STR($producer), "/u/"), "unidentified", "identified") AS ?class)
                 }'
-            template='<p>{{#each bindings}}{{#if @first}}<semantic-link uri="{{producer.value}}"></semantic-link>{{else}}, <semantic-link uri="{{producer.value}}"></semantic-link>{{/if}}{{#if @last}}{{#if season}}, <semantic-link uri="{{season.value}}"></semantic-link>{{/if}}{{/if}}{{/each}}</p>'>
+            template='<p>{{#each bindings}}{{#if @first}}<semantic-link class="{{class.value}}" uri="{{producer.value}}"></semantic-link>{{else}}, <semantic-link class="{{class.value}}" uri="{{producer.value}}"></semantic-link>{{/if}}{{#if @last}}{{#if season}}, <semantic-link uri="{{season.value}}"></semantic-link>{{/if}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- premiere -->
@@ -75,12 +76,13 @@
 
             <!-- venue -->
             <semantic-query 
-                query='SELECT ?venue
+                query='SELECT ?venue ?class
                 WHERE {
                     ?performance frbr:R25_performed ?? ;
                         crm:P8_took_place_on_or_within ?venue .
+                    BIND(IF(CONTAINS(STR($venue), "/u/"), "unidentified", "identified") AS ?class)
                 }'
-            template='<p>{{#each bindings}}{{#if @first}}<semantic-link uri="{{venue.value}}"></semantic-link>{{else}}, <semantic-link uri="{{venue.value}}"></semantic-link>{{/if}}{{/each}}</p>'>
+            template='<p>{{#each bindings}}{{#if @first}}<semantic-link class="{{class.value}}" uri="{{venue.value}}"></semantic-link>{{else}}, <semantic-link class="{{class.value}}" uri="{{venue.value}}"></semantic-link>{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- creation functions -->
