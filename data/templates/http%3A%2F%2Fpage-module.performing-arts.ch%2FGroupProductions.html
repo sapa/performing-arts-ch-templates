@@ -1,0 +1,19 @@
+<semantic-table 
+  query='SELECT ?plan ?season
+    WHERE {
+        ?production crm:P14_carried_out_by ?? ;
+            crm:P2_has_type spav:muwgo .
+        ?expressioncreation crm:P9_consists_of ?production ;
+            frbr:R17_created ?plan .
+        OPTIONAL {
+            ?expressioncreation crm:P10_falls_within ?season .
+            FILTER(CONTAINS(STR(?season), "/s/"))
+        }
+    } ORDER BY ASC(?season)'
+  column-configuration='[
+    {"variableName": "season", "displayName": "Season"}, 
+    {"variableName": "plan", "displayName": "Production"}
+  ]'
+  number-of-displayed-rows=20
+  options='{"showFilter": false}'
+></semantic-table>
