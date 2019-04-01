@@ -55,7 +55,7 @@
                   ?group crm:P74_has_current_or_former_residence ?groupsite ;
                     rdfs:label ?label .
                 } ORDER BY lcase(?label)'
-                template='<div><h5>Groups</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link uri="{{group.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+                template='<div><h5>Groups</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{group.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
         </bs-col>
         <bs-col sm="4">
@@ -66,7 +66,7 @@
                     crm:P2_has_type spav:dwmkn ;
                     rdfs:label ?label .
                 } ORDER BY lcase(?label)'
-                template='<div><h5>Venues</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link uri="{{venue.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+                template='<div><h5>Venues</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{venue.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
         </bs-col>
     </bs-row>

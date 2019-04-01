@@ -5,9 +5,9 @@
         {{#ifCond field.xsdDatatype.value "==" "http://www.w3.org/2001/XMLSchema#anyURI"}}
             [[!-- un-comment for debugging only {{log value}} --]]
             {{#if value.label}}
-                <semantic-link class="{{value.binding.class.value}}" uri="{{value.value.value}}">{{value.label}}</semantic-link> 
+                <semantic-link class="{{value.binding.class.value}}" iri="{{value.value.value}}">{{value.label}}</semantic-link> 
             {{else}}
-                <semantic-link class="{{value.binding.class.value}}" uri="{{value.value.value}}"></semantic-link>
+                <semantic-link class="{{value.binding.class.value}}" iri="{{value.value.value}}"></semantic-link>
             {{/if}}
     	{{else}}
             {{#if value.label}}

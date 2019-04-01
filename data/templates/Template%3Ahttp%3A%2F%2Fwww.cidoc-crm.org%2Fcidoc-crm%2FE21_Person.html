@@ -128,7 +128,7 @@
                 template='{{#each bindings}}<p>
                     {{#if wikibirthday}}* {{wikibirthday.value}}{{#if wikibirthplacelabel}}, 
                         {{#if birthplace}} 
-                            <semantic-link uri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>
+                            <semantic-link iri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>
                         {{else}}
                             {{wikibirthplacelabel.value}}
                         {{/if}}
@@ -136,7 +136,7 @@
                     {{#if wikibirthday}}{{#if wikideathday}}<br>{{/if}}{{/if}}
                     {{#if wikideathday}}† {{wikideathday.value}}{{#if wikideathplacelabel}}, 
                         {{#if deathplace}} 
-                            <semantic-link uri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>
+                            <semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>
                         {{else}}
                             {{wikideathplacelabel.value}}
                         {{/if}}
@@ -155,7 +155,7 @@
                         rdfs:label ?label .
                 }'
                 template='<div><h5>Groups</h5>
-    <ul class="list-unstyled">{{#each bindings}}<li><semantic-link uri="{{value.value}}">{{label.value}}</semantic-link></li>
+    <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{value.value}}">{{label.value}}</semantic-link></li>
       {{/each}}
     </ul></div>'>
             </semantic-query>
