@@ -11,6 +11,7 @@
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
       <bs-tab event-key='Summary' title='Summary'>
 
+        <bs-col sm="4">
             <!-- titles -->
             <semantic-query 
                 query='SELECT ?titlevalue ?titletype ?order
@@ -27,7 +28,7 @@
                         (spav:gowgn 5)
                     }
                 } ORDER BY ASC(?order)'
-            template='<p>{{log bindings}}{{#each bindings}}
+            template='<p>{{#each bindings}}
                 {{#if @first}}<strong>{{titlevalue.value}}</strong>{{else}}<br>{{titlevalue.value}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
@@ -82,25 +83,99 @@
             template='<p>{{#each bindings}}{{#if @first}}<semantic-link uri="{{venue.value}}"></semantic-link>{{else}}, <semantic-link uri="{{venue.value}}"></semantic-link>{{/if}}{{/each}}</p>'>
             </semantic-query>
 
-            <!-- stage direction -->
+            <!-- creation functions -->
             <semantic-query 
-                query='SELECT ?director ?function
-                WHERE {
-                    VALUES (?function) { (spav:mutnt) }
-                    ?expressioncreation frbr:R17_created ?? ;
-                        crm:P9_consists_of ?direction .
-                    ?direction crm:P2_has_type ?function ;
-                        crm:P14_carried_out_by ?director .
-                }'
-            template='<p>{{#each bindings}}{{#if @first}}
-                <mp-label iri="{{function.value}}"></mp-label><br/><semantic-link uri="{{director.value}}"></semantic-link>{{else}}, <semantic-link uri="{{director.value}}"></semantic-link>{{/if}}{{/each}}</p>'>
+                query='SELECT ?order ?function ?actor ?class ?activitylabel WHERE {
+                      VALUES (?function ?order) {
+                        (spav:mutnt 1) # stage direction
+                        (spav:mugkn 2) # assistant stage direction
+                        (spav:musim 3) # dramaturgy
+                        (spav:mubbv 4) # choreography
+                        (spav:muqfg 5) # conductor
+                        (spav:mufcc 6) # choral conductor
+                        (spav:mulga 7) # stage design
+                        (spav:murni 8) # light
+                        (spav:muecs 9) # costume design
+                        (spav:muqju 10) # video
+                        (spav:mufwk 11) # projection
+                        (spav:muxzh 12) # sound
+                      }
+                      ?expressioncreation frbr:R17_created ?? ;
+                        crm:P9_consists_of ?activity .
+                      ?activity crm:P2_has_type ?function ;
+                        crm:P14_carried_out_by ?actor .
+                        OPTIONAL {
+                            ?activity rdfs:label ?activitylabel .
+                        }
+                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
+                      } ORDER BY ASC(?order)'
+            template='<div>{{#each bindings}}<p>{{#if activitylabel}}{{activitylabel.value}} (<mp-label iri="{{function.value}}"></mp-label>){{else}}<mp-label iri="{{function.value}}"></mp-label>{{/if}}
+                <br/><semantic-link class="{{class.value}}" uri="{{actor.value}}"></semantic-link></p>{{/each}}</div>'>
+            </semantic-query>
+        </bs-col>
+        <bs-col sm="4">
+
+            <!-- performance functions -->
+            <semantic-query 
+                query='SELECT ?order ?function ?actor ?class ?activitylabel WHERE {
+                      VALUES (?function ?order) {
+                        (spav:munib 1) # acting
+                        (spav:mulcp 2) # dance
+                        (spav:muawx 3) # performance
+                        (spav:mujhq 4) # pantomine
+                        (spav:muhkf 5) # puppet show
+                        (spav:muiim 6) # music performance
+                        (spav:muygg 7) # singing
+                        (spav:mupah 8) # intrumental performance
+                        (spav:mudat 9) # oeil extérieur
+                        (spav:muacs 10) # narration
+                        (spav:mupfz 11) # host
+                        (spav:mumnc 12) # moderation
+                        (spav:munuj 13) # contribution
+                      }
+                      ?genericperformance frbr:R25_performed ?? ;
+                        crm:P9_consists_of ?activity .
+                      ?activity crm:P2_has_type ?function ;
+                        crm:P14_carried_out_by ?actor .
+                        OPTIONAL {
+                            ?activity rdfs:label ?activitylabel .
+                        }
+                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
+                      } ORDER BY ASC(?order)'
+            template='<div>{{#each bindings}}<p>{{#if activitylabel}}{{activitylabel.value}} (<mp-label iri="{{function.value}}"></mp-label>){{else}}<mp-label iri="{{function.value}}"></mp-label>{{/if}}
+                <br/><semantic-link class="{{class.value}}" uri="{{actor.value}}"></semantic-link></p>{{/each}}</div>'>
             </semantic-query>
 
+        </bs-col>
+        <bs-col sm="4">
+
+            <!-- reference functions -->
+            <semantic-query 
+                query='SELECT ?order ?function ?actor ?class ?activitylabel WHERE {
+                      VALUES (?function ?order) {
+                        (spav:mujmh 1) # libretto
+                        (spav:mufbo 2) # composition
+                      }
+                      ?? frbr:R14_incorporates ?reference .
+                      ?expressioncreation frbr:R17_created ?reference ;
+                        crm:P9_consists_of ?activity .
+                      ?activity crm:P2_has_type ?function ;
+                        crm:P14_carried_out_by ?actor .
+                        OPTIONAL {
+                            ?activity rdfs:label ?activitylabel .
+                        }
+                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
+                      } ORDER BY ASC(?order)'
+            template='<div>{{#each bindings}}<p>{{#if activitylabel}}{{activitylabel.value}} (<mp-label iri="{{function.value}}"></mp-label>){{else}}<mp-label iri="{{function.value}}"></mp-label>{{/if}}
+                <br/><semantic-link class="{{class.value}}" uri="{{actor.value}}"></semantic-link></p>{{/each}}</div>'>
+            </semantic-query>
+
+        </bs-col>
       </bs-tab>
       
          [[#if (hasPermission "forms:ldp:*")]] 
 <bs-tab event-key='Edit' title='Edit'>
-        [[> sapaModule:ProductionEditingTab]]
+        [[> sapaModule:PerformancePlanForm]]
   </bs-tab>
 [[/if]]      
       

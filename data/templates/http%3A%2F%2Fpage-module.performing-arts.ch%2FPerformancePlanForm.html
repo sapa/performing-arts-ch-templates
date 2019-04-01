@@ -1,0 +1,43 @@
+  <div data-flex-layout='row top-stretch'>
+    <semantic-form 
+     [[#if create]]
+        new-subject-template='http://data.performing-arts.ch/a/{{UUID}}'
+        post-action="redirect"
+      [[else]]
+        subject='[[this]]'
+        post-action="reload"
+     [[/if]]
+      
+      browser-persistence=true
+      persistence='ldp' 
+      form-id='places'
+      fields='[[fieldDefinitions
+        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type"
+
+        genre="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Genre"
+
+        comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Comment"
+        sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
+      ]]'>
+      <bs-panel>
+        <semantic-form-recover-notification></semantic-form-recover-notification>
+        <div style="display: none;">
+        <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "frbr:F25_Performance_Plan"]]'></semantic-form-hidden-input>
+        </div>
+
+        <semantic-form-tree-picker-input for="genre"></semantic-form-tree-picker-input>
+
+        <semantic-form-text-input for="comment"></semantic-form-text-input>
+        <semantic-form-text-input for="sameAs"></semantic-form-text-input>
+        <semantic-form-errors></semantic-form-errors>
+        <button
+          name="submit"
+          class="btn btn-default"
+        >Save</button>
+        <button
+          name="reset"
+          class="btn btn-default"
+        >Reset</button>
+      </bs-panel>
+    </semantic-form>
+  </div>
