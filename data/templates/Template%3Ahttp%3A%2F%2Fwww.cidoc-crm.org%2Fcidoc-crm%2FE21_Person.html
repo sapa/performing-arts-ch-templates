@@ -53,13 +53,46 @@
             </semantic-query>
 
             <!-- Swiss -->
-            <semantic-query 
+            <!-- <semantic-query 
                 query='SELECT ?swiss ?value WHERE {
                     BIND (EXISTS {?? ore:isAggregatedBy <http://data.performing-arts.ch/a/2ced7bbf-4981-48e0-ab47-2c6b1351c38b>} AS ?swiss)
                     BIND(IF(?swiss ,"CH","") AS ?value)
                 }'
                 template='<p>{{#each bindings}}{{value.value}}{{/each}}</p>'>
+            </semantic-query>-->
+
+            <p>
+            <!-- gender -->
+            <semantic-query 
+                query='SELECT ?gendericon WHERE {
+                    ?? owl:sameAs ?wikidata .
+                        FILTER (CONTAINS(STR(?wikidata), "wikidata"))
+                        SERVICE <https://wikidata.metaphacts.com/sparql> {
+                            ?wikidata <http://www.wikidata.org/prop/direct/P21> ?gender .
+                        }
+                        VALUES (?gender ?gendericon) { 
+                            (<http://www.wikidata.org/entity/Q6581072> "♀") 
+                            (<http://www.wikidata.org/entity/Q6581097> "♂") 
+                            (<http://www.wikidata.org/entity/Q189125> "⚥") 
+                        }
+                }'
+                template='<span>{{log bindings}}{{#each bindings}}{{gendericon.value}}{{/each}}</span>'>
             </semantic-query>
+
+            <!-- nationality -->
+            <semantic-query 
+                query='SELECT ?unicode ?code WHERE {
+                    ?? owl:sameAs ?wikidata .
+                        FILTER (CONTAINS(STR(?wikidata), "wikidata"))
+                        SERVICE <https://wikidata.metaphacts.com/sparql> {
+                            ?wikidata <http://www.wikidata.org/prop/direct/P27> ?country .
+                            ?country <http://www.wikidata.org/prop/direct/P487> ?unicode ;
+                                <http://www.wikidata.org/prop/direct/P395> ?code ;
+                        }
+                }'
+                template='<span>{{#each bindings}}<semantic-label title="{{code.value}}">{{unicode.value}}</semantic-label>{{/each}}</span>'>
+            </semantic-query>
+            </p>
 
             <!-- live dates -->
             <semantic-query 
