@@ -117,5 +117,26 @@
         </bs-col>
 
     </bs-tab>
+    <bs-tab event-key='productions' title='Productions'>
+
+        <semantic-table 
+          query='SELECT ?plan ?season
+            WHERE {
+                ?genericperformance crm:P8_took_place_on_or_within ?? ;
+                    frbr:R25_performed ?plan .
+                OPTIONAL {
+                    ?expressioncreation crm:P10_falls_within ?season .
+                    FILTER(CONTAINS(STR(?season), "/s/"))
+                }
+            } ORDER BY ASC(?season)'
+          column-configuration='[
+            {"variableName": "season", "displayName": "Season"}, 
+            {"variableName": "plan", "displayName": "Production"}
+          ]'
+          number-of-displayed-rows=20
+          options='{"showFilter": false}'
+        ></semantic-table>
+
+    </bs-tab>
   </bs-tabs>  
 </div>
