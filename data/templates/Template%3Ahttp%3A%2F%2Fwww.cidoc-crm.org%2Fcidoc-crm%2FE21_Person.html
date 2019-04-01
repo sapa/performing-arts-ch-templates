@@ -172,21 +172,26 @@
             WHERE {
                 ?personactivity crm:P14_carried_out_by ?? ;
                     crm:P2_has_type ?function .
-                ?superactivity crm:P9_consists_of ?personactivity ;
                 {
-                    # reference
-                    ?superactivity frbr:R17_created ?expression .
-                    ?plan frbr:R14_incorporates ?expression .
+                    # reference work
+                    ?referencecreation crm:P9_consists_of ?personactivity ;
+                        frbr:R17_created ?reference .
+                    ?plan frbr:R14_incorporates ?reference .
+                    ?expressioncreation frbr:R17_created ?plan .
                 } UNION {
                     # expression creation
-                    ?superactivity frbr:R17_created ?plan .
+                    ?expressioncreation crm:P9_consists_of ?personactivity ;
+                        frbr:R17_created ?plan .
                 } UNION {
                     # performance
-                    ?superactivity frbr:R25_performed ?plan .
+                    ?genericperformance crm:P9_consists_of ?personactivity ;
+                        frbr:R25_performed ?plan .
+                    ?expressioncreation frbr:R17_created ?plan .
                 }
                 ?plan a frbr:F25_Performance_Plan .
                 OPTIONAL {
-                    ?expressioncreation crm:P10_falls_within ?season .
+                    ?expressioncreation a frbr:F28_Expression_Creation ;
+                        crm:P10_falls_within ?season .
                     FILTER(CONTAINS(STR(?season), "/s/"))
                 }
             } ORDER BY ASC(?season)'
