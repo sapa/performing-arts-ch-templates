@@ -165,6 +165,42 @@
             [[> sapa:ExternalResources]]
         </bs-col>
       </bs-tab>
+    <bs-tab event-key='productions' title='Productions'>
+    
+        <semantic-table 
+          query='SELECT ?season ?plan ?function
+            WHERE {
+                ?personactivity crm:P14_carried_out_by ?? ;
+                    crm:P2_has_type ?function .
+                ?superactivity crm:P9_consists_of ?personactivity ;
+                {
+                    # reference
+                    ?superactivity frbr:R17_created ?expression .
+                    ?plan frbr:R14_incorporates ?expression .
+                } UNION {
+                    # expression creation
+                    ?superactivity frbr:R17_created ?plan .
+                } UNION {
+                    # performance
+                    ?superactivity frbr:R25_performed ?plan .
+                }
+                ?plan a frbr:F25_Performance_Plan .
+                OPTIONAL {
+                    ?expressioncreation crm:P10_falls_within ?season .
+                    FILTER(CONTAINS(STR(?season), "/s/"))
+                }
+            } ORDER BY ASC(?season)'
+          column-configuration='[
+            {"variableName": "season", "displayName": "Season"}, 
+            {"variableName": "plan", "displayName": "Production"}, 
+            {"variableName": "function", "displayName": "Function"}
+          ]'
+          number-of-displayed-rows=20
+          options='{"showFilter": false}'
+        ></semantic-table>
+
+
+    </bs-tab>
     [[#if (hasPermission "forms:ldp:*")]] 
     <bs-tab event-key='person editing' title='Edit'>
     [[> sapaModule:PersonForm]]
