@@ -76,7 +76,7 @@
                             (<http://www.wikidata.org/entity/Q189125> "⚥") 
                         }
                 }'
-                template='<span>{{log bindings}}{{#each bindings}}{{gendericon.value}}{{/each}}</span>'>
+                template='<span>{{#each bindings}}<span style="padding-right:0.5em;">{{gendericon.value}}</span>{{/each}}</span>'>
             </semantic-query>
 
             <!-- nationality -->
@@ -90,7 +90,7 @@
                                 <http://www.wikidata.org/prop/direct/P395> ?code ;
                         }
                 }'
-                template='<span>{{#each bindings}}<semantic-label title="{{code.value}}">{{unicode.value}}</semantic-label>{{/each}}</span>'>
+                template='<span>{{#each bindings}}<span style="padding-right:0.5em;" title="{{code.value}}">{{unicode.value}}</span>{{/each}}</span>'>
             </semantic-query>
             </p>
 
