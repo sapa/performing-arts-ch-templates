@@ -76,11 +76,35 @@
 </bs-col>
 
 <bs-col sm="4">
+
+    <!-- venues -->
+    <semantic-query 
+        query='SELECT DISTINCT ?venue WHERE {
+                    ?? crm:P14i_performed ?activity .
+                    ?activity a crm:E7_Activity ;
+                        crm:P2_has_type spav:mujfv ;
+                        crm:P16_used_specific_object ?venue .
+                  } LIMIT 1'
+        template='<h5>Venues</h5>'>
+    </semantic-query>
+    <semantic-tree
+         query='SELECT DISTINCT ?node ?parent ?class WHERE {
+            ?? crm:P14i_performed ?activity .
+            ?activity a crm:E7_Activity ;
+                crm:P2_has_type spav:mujfv ;
+                crm:P16_used_specific_object ?parent .
+            ?parent crm:P46_is_composed_of* ?node .
+            FILTER(ISIRI(?node))
+            ?node rdfs:label ?label .
+            BIND(IF(CONTAINS(STR($node), "/u/"), "unidentified", "identified") AS ?class)
+          } ORDER BY ?label'
+          tuple-template='<semantic-link class="{{data.class.value}}" uri="{{data.node.value}}"></semantic-link>'> 
+    </semantic-tree>
+
     <mp-field-visualization
         subject='[[this]]'
         fields='[[fieldDefinitions
         http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_current_or_former_member="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_current_or_former_member"
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_manages_venue="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_manages_venue"
         http://www.metaphacts.com/fieldDefinition/E40_Legal_Body_has_current_or_former_member="http://www.metaphacts.com/fieldDefinition/E40_Legal_Body_has_current_or_former_member"
         http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_association_member="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_association_member"
         http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
