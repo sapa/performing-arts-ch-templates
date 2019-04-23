@@ -83,11 +83,10 @@
                         FILTER (CONTAINS(STR(?wikidata), "wikidata"))
                         SERVICE <https://wikidata.metaphacts.com/sparql> {
                             ?wikidata <http://www.wikidata.org/prop/direct/P27> ?country .
-                            ?country <http://www.wikidata.org/prop/direct/P487> ?unicode ;
-                                <http://www.wikidata.org/prop/direct/P395> ?code ;
+                            ?country <http://www.wikidata.org/prop/direct/P395> ?code .
                         }
                 }'
-                template='<span>{{#each bindings}}<span style="padding-right:0.1em;" title="{{code.value}}">{{unicode.value}}</span>{{/each}}</span>'>
+                template='<span>{{#each bindings}}<span style="padding-right:0.1em;" title="{{code.value}}">{{code.value}}</span>{{/each}}</span>'>
             </semantic-query>
             </p>
 
