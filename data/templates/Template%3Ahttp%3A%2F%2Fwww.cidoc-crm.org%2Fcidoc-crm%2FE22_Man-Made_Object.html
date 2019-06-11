@@ -61,13 +61,13 @@
                     OPTIONAL {
                         ?? crm:P95i_was_formed_by ?formation .
                         ?formation a crm:E66_Formation ;
-                        crm:P4_has_time-span ?formationtime .
+                            crm:P4_has_time-span ?formationtime .
                         ?formationtime rdfs:label ?formationlabel .
                     }
                     OPTIONAL {
                         ?? crm:P99i_was_dissolved_by ?dissolution .
                         ?dissolution a crm:E68_Dissolution ;
-                        crm:P4_has_time-span ?dissolutiontime .
+                            crm:P4_has_time-span ?dissolutiontime .
                         ?dissolutiontime rdfs:label ?dissolutionlabel .
                     }
                     BIND(CONCAT(COALESCE(?formationlabel, "X"), "-", COALESCE(?dissolutionlabel, "X")) AS ?predates)
@@ -78,10 +78,17 @@
 
             <!-- managed by -->
             <semantic-query 
-                query="SELECT ?actor
+                query="SELECT DISTINCT ?actor
                 WHERE {
-                    ?activity crm:P16_used_specific_object ?? ;
-                        crm:P2_has_type spav:mujfv .
+                    {
+                        ?activity crm:P16_used_specific_object ?? .
+                    }
+                    UNION
+                    {
+                        ?parent crm:P46_is_composed_of ?? .
+                        ?activity crm:P16_used_specific_object ?parent .
+                    }
+                    ?activity crm:P2_has_type spav:mujfv .
                     ?actor crm:P14i_performed ?activity .
                 }"
                 template='<div><h5>Managed by</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{actor.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>

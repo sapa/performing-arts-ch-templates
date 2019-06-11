@@ -45,13 +45,13 @@
             OPTIONAL {
                 ?? crm:P95i_was_formed_by ?formation .
                 ?formation a crm:E66_Formation ;
-                crm:P4_has_time-span ?formationtime .
+                    crm:P4_has_time-span ?formationtime .
                 ?formationtime rdfs:label ?formationlabel .
             }
             OPTIONAL {
                 ?? crm:P99i_was_dissolved_by ?dissolution .
                 ?dissolution a crm:E68_Dissolution ;
-                crm:P4_has_time-span ?dissolutiontime .
+                    crm:P4_has_time-span ?dissolutiontime .
                 ?dissolutiontime rdfs:label ?dissolutionlabel .
             }
             BIND(CONCAT(COALESCE(?formationlabel, "X"), "-", COALESCE(?dissolutionlabel, "X")) AS ?predates)
