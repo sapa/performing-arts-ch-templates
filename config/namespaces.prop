@@ -1,7 +1,6 @@
 crm=http://www.cidoc-crm.org/cidoc-crm/
 foaf=http://xmlns.com/foaf/0.1/
 frbr=http://www.cidoc-crm.org/frbr/
-ric=http://ric.org/virtual/
 spav=http://vocab.performing-arts.ch/
 LdpBase=http://performing-arts.ch/ldp-assets/
 sapa=http://page.performing-arts.ch/
