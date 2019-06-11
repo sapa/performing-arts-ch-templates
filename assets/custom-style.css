@@ -5,3 +5,11 @@
 a.unidentified {
     color: black;
 }
+
+span.Tree--leafNode {
+    margin-left: 0;
+}
+
+div.tree-view_children span.Tree--leafNode {
+    margin-left: 20px;
+}
