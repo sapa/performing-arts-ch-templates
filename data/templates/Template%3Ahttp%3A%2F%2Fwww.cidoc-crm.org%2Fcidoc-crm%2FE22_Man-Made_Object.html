@@ -70,11 +70,11 @@
                         crm:P4_has_time-span ?dissolutiontime .
                         ?dissolutiontime rdfs:label ?dissolutionlabel .
                     }
-                    BIND(CONCAT(COALESCE(?formationlabel, ""), "-", COALESCE(?dissolutionlabel, "")) as ?dates)
+                    BIND(CONCAT(COALESCE(?formationlabel, "X"), "-", COALESCE(?dissolutionlabel, "X")) AS ?predates)
+                    BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
                 }'
                 template='{{#each bindings}}<p>{{dates.value}}</p>{{/each}}'>
             </semantic-query>
-            <!-- TODO: filter for no dates -->
 
             <!-- managed by -->
             <semantic-query 
@@ -84,6 +84,15 @@
                     ?act crm:P14_carried_out_by ?actor .
                 }"
                 template='<div><h5>Managed by</h5>{{#each bindings}}{{#if @first}}<semantic-link iri="{{actor.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link iri="{{actor.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- is part of -->
+            <semantic-query 
+                query="SELECT ?parent
+                WHERE {
+                    ?parent crm:P46_is_composed_of ?? .
+                }"
+                template='<div><h5>Is part of</h5>{{#each bindings}}{{#if @first}}<semantic-link iri="{{parent.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link iri="{{parent.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</div>'>
             </semantic-query>
 
             <!-- contains -->
