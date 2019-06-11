@@ -80,10 +80,11 @@
             <semantic-query 
                 query="SELECT ?actor
                 WHERE {
-                    ?? crm:P16i_was_used_for ?act .
-                    ?act crm:P14_carried_out_by ?actor .
+                    ?activity crm:P16_used_specific_object ?? ;
+                        crm:P2_has_type spav:mujfv .
+                    ?actor crm:P14i_performed ?activity .
                 }"
-                template='<div><h5>Managed by</h5>{{#each bindings}}{{#if @first}}<semantic-link iri="{{actor.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link iri="{{actor.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</div>'>
+                template='<div><h5>Managed by</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{actor.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
 
             <!-- is part of -->
