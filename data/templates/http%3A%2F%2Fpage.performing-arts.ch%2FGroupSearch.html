@@ -5,7 +5,7 @@
       { ?subject a crm:E74_Group }
       UNION
       { ?subject a crm:E40_Legal_Body }
-      ?subject crm:P1_is_identified_by ?identifier .
+      ?subject crm:P131_is_identified_by ?identifier .
       ?identifier rdf:value ?name.  
       FILTER(CONTAINS(STR(?subject), "/a/"))
    SERVICE <http://www.bigdata.com/rdf/search#search>
