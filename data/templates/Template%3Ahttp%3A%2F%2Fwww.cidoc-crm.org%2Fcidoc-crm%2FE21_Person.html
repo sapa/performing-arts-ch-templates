@@ -25,7 +25,7 @@
 
             <!-- alternative names -->
             <semantic-query 
-                query='SELECT ?appellation ?typesort
+                query='SELECT ?appellation ?type ?typesort
                 WHERE {
                     VALUES (?type ?typesort) { (spav:yadpx 1) (spav:yallb 2) (spav:yapvc 3) (spav:yaajh 4) (spav:yavtx 5) }
                     ?? crm:P131_is_identified_by ?appellation .
@@ -33,7 +33,7 @@
                         crm:P2_has_type ?type .
                     FILTER ( ?type in (spav:yadpx, spav:yallb, spav:yapvc, spav:yaajh, spav:yavtx) )
                 } ORDER BY ?typesort'
-                template='<p>({{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label>{{else}}, <mp-label iri="{{appellation.value}}"></mp-label>{{/if}}{{/each}})</p>'>
+                template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{else}}<br><mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- Swiss -->
