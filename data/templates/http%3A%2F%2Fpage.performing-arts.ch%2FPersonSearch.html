@@ -3,7 +3,7 @@
     domain='<[[resolvePrefix "crm:E21_Person"]]>'
     query='SELECT ?subject WHERE {
       ?subject a crm:E21_Person ;
-        crm:P1_is_identified_by ?identifier .
+        crm:P131_is_identified_by ?identifier .
       ?identifier rdf:value ?name.  
       FILTER(CONTAINS(STR(?subject), "/a/"))
    SERVICE <http://www.bigdata.com/rdf/search#search> {
