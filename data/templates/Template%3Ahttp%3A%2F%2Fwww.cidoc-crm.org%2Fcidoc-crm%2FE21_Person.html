@@ -36,6 +36,14 @@
                 template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{else}}<br><mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
             </semantic-query>
 
+            <!-- comment -->
+            <semantic-query 
+                query='SELECT ?comment WHERE {
+                    ?? rdfs:comment ?comment .
+                }'
+                template='<p>{{#each bindings}}{{#if @first}}{{comment.value}}{{else}}, {{comment.value}}{{/if}}{{/each}}</p>'>
+            </semantic-query>
+
             <!-- Swiss -->
             <!-- <semantic-query 
                 query='SELECT ?swiss ?value WHERE {
