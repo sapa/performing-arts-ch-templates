@@ -66,13 +66,16 @@
 
             <!-- venue -->
             <semantic-query 
-                query='SELECT ?venue ?class
+                query='SELECT ?type ?venue ?class
                 WHERE {
+                    VALUES (?type) {
+                        (spav:dwmkn) # venue
+                    }
                     ?performance frbr:R25_performed ?? ;
                         crm:P8_took_place_on_or_within ?venue .
                     BIND(IF(CONTAINS(STR($venue), "/u/"), "unidentified", "identified") AS ?class)
                 }'
-            template='<p>{{#each bindings}}{{#if @first}}<semantic-link class="{{class.value}}" iri="{{venue.value}}"></semantic-link>{{else}}, <semantic-link class="{{class.value}}" iri="{{venue.value}}"></semantic-link>{{/if}}{{/each}}</p>'>
+            template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{type.value}}"></mp-label></h5><semantic-link class="{{class.value}}" iri="{{venue.value}}"></semantic-link>{{else}}, <semantic-link class="{{class.value}}" iri="{{venue.value}}"></semantic-link>{{/if}}{{/each}}</div>'>
             </semantic-query>
 
             <!-- creation functions - direction -->
