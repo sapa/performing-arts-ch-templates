@@ -1,5 +1,5 @@
 <semantic-table 
-  query='SELECT ?plan ?season
+  query='SELECT ?plan ?season ?stagedirection ?stagedirectionclass
     WHERE {
         ?production crm:P14_carried_out_by ?? ;
             crm:P2_has_type spav:muwgo .
@@ -9,10 +9,17 @@
             ?expressioncreation crm:P10_falls_within ?season .
             FILTER(CONTAINS(STR(?season), "/s/"))
         }
+        OPTIONAL {
+            ?expressioncreation crm:P9_consists_of ?activity .
+            ?activity crm:P2_has_type spav:mutnt ;
+                crm:P14_carried_out_by ?stagedirection .
+            BIND(IF(CONTAINS(STR($stagedirection), "/u/"), "unidentified", "identified") AS ?stagedirectionclass)
+        }
     } ORDER BY ASC(?season)'
   column-configuration='[
     {"variableName": "season", "displayName": "Season"}, 
-    {"variableName": "plan", "displayName": "Production"}
+    {"variableName": "plan", "displayName": "Production"},
+    {"displayName": "Stage direction", "cellTemplate": "<div>{{#if stagedirection.value}}<semantic-link class=\"{{stagedirectionclass.value}}\" iri=\"{{stagedirection.value}}\">{{/if}}</div>"}
   ]'
   number-of-displayed-rows=20
   options='{"showFilter": false}'
