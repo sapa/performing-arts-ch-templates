@@ -1,0 +1,43 @@
+<ol class="page-breadcrumb">
+    <li>
+        <mp-link title="Home" url="/">Home</mp-link>
+    </li>
+    <li class="active">
+        [[> sapaModule:RecordLabel ]]
+    </li>
+</ol>
+
+<div class="page">
+
+  [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]] 
+  
+  <bs-tabs class='page__body-navtabs' default-active-key='productions' unmount-on-exit=true>
+    <bs-tab event-key='productions' title='Productions'>
+
+<semantic-table 
+  query='SELECT ?producer ?plan ?stagedirection ?stagedirectionclass
+    WHERE {
+        ?expressioncreation crm:P10_falls_within ?? ;
+            crm:P9_consists_of ?production ;
+            frbr:R17_created ?plan .
+        ?production crm:P2_has_type spav:muwgo ;
+            crm:P14_carried_out_by ?producer .
+        OPTIONAL {
+            ?expressioncreation crm:P9_consists_of ?activity .
+            ?activity crm:P2_has_type spav:mutnt ;
+                crm:P14_carried_out_by ?stagedirection .
+            BIND(IF(CONTAINS(STR($stagedirection), "/u/"), "unidentified", "identified") AS ?stagedirectionclass)
+        }
+    } ORDER BY ASC(?producer)'
+  column-configuration='[
+    {"variableName": "producer", "displayName": "Producer"}, 
+    {"variableName": "plan", "displayName": "Production"},
+    {"displayName": "Stage direction", "cellTemplate": "<div>{{#if stagedirection.value}}<semantic-link class=\"{{stagedirectionclass.value}}\" iri=\"{{stagedirection.value}}\">{{/if}}</div>"}
+  ]'
+  number-of-displayed-rows=20
+  options='{"showFilter": false}'
+></semantic-table>
+</bs-tab>
+
+</bs-tabs>  
+</div>

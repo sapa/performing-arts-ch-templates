@@ -32,16 +32,6 @@
                 {{#if @first}}<strong>{{titlevalue.value}}</strong>{{else}}<br>{{titlevalue.value}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
-            <!-- genre -->
-            <semantic-query 
-                query='SELECT ?genre
-                WHERE {
-                    ?work frbr:R12_is_realised_in ?? ;
-                        crm:P2_has_type ?genre .
-                }'
-            template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</p>'>
-            </semantic-query>
-
             <!-- theater & season -->
             <semantic-query 
                 query='SELECT ?producer ?class ?season
