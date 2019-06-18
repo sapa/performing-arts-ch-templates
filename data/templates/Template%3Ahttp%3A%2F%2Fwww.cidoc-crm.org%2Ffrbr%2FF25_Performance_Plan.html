@@ -49,19 +49,29 @@
             template='<p>{{#each bindings}}{{#if @first}}<semantic-link class="{{class.value}}" iri="{{producer.value}}"></semantic-link>{{else}}, <semantic-link class="{{class.value}}" iri="{{producer.value}}"></semantic-link>{{/if}}{{#if @last}}{{#if season}}, <semantic-link iri="{{season.value}}"></semantic-link>{{/if}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
-            <!-- premiere -->
+            <!-- premiere type -->
             <semantic-query 
-                query='SELECT ?premiere ?premieretype ?timespan
+                query='SELECT ?premieretype
                 WHERE {
                     ?performance frbr:R25_performed ?? ;
                         crm:P9_consists_of ?premiere .
                     ?premiere crm:P2_has_type ?premieretype .
                     ?premieretype skos:inScheme spav:hl .
-                    OPTIONAL {
-                        ?premiere crm:P4_has_time-span ?timespan .
-                    }
                 }'
-            template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{/each}}{{#each bindings}}, <mp-label iri="{{timespan.value}}"></mp-label>{{/each}}</p>'>
+            template='<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- premiere -->
+            <semantic-query 
+                query='SELECT ?timespan
+                WHERE {
+                    ?performance frbr:R25_performed ?? ;
+                        crm:P9_consists_of ?premiere .
+                    ?premiere crm:P2_has_type ?premieretype ;
+                        crm:P4_has_time-span ?timespan .
+                    ?premieretype skos:inScheme spav:hl .
+                } LIMIT 1'
+            template='<div>{{#each bindings}}<mp-label iri="{{timespan.value}}"></mp-label>{{/each}}</div>'>
             </semantic-query>
 
             <!-- venue -->
