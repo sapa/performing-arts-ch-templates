@@ -10,3 +10,4 @@ bds=http://www.bigdata.com/rdf/search#
 ore=http://www.openarchives.org/ore/terms/
 rdaa=http://rdaregistry.info/Elements/a/
 rdau=http://rdaregistry.info/Elements/u/
+olo:http://purl.org/ontology/olo/core#
