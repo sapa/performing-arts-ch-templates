@@ -104,7 +104,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - stage direction -->
@@ -123,7 +123,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - assistant stage direction -->
@@ -142,7 +142,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - film direction -->
@@ -161,7 +161,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - dramaturgy -->
@@ -180,7 +180,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - choreography -->
@@ -199,7 +199,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - conductor -->
@@ -218,7 +218,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - choral conductor -->
@@ -237,7 +237,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - stage design -->
@@ -256,7 +256,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - light -->
@@ -275,7 +275,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - costume design -->
@@ -294,7 +294,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - video -->
@@ -313,7 +313,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - projection -->
@@ -332,7 +332,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- creation functions - sound -->
@@ -351,7 +351,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
         </bs-col>
@@ -373,7 +373,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- performance functions - dance -->
@@ -392,7 +392,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- performance functions - performance -->
@@ -411,7 +411,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- performance functions - pantomine -->
@@ -430,7 +430,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- performance functions - puppet show -->
@@ -449,7 +449,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- performance functions - music performance -->
@@ -468,7 +468,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- performance functions - singing -->
@@ -487,7 +487,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- performance functions - intrumental performance -->
@@ -506,7 +506,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <semantic-query 
@@ -524,7 +524,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
 
@@ -544,7 +544,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
 
@@ -564,7 +564,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
 
@@ -584,7 +584,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
 
@@ -604,7 +604,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                     } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
 
@@ -628,7 +628,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- reference functions - libretto -->
@@ -648,7 +648,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- reference functions - lyrics -->
@@ -668,7 +668,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- reference functions - adaption -->
@@ -688,7 +688,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- reference functions - translation -->
@@ -708,7 +708,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- reference functions - added text -->
@@ -728,7 +728,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- reference functions - added lyrics -->
@@ -748,7 +748,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- reference functions - screenplay -->
@@ -768,7 +768,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
             <!-- reference functions - composition -->
@@ -788,7 +788,7 @@
                         BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
                       } ORDER BY ASC(?index)'
             template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}">{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
             </semantic-query>
 
         </bs-col>
