@@ -151,6 +151,17 @@
     </ul></div>'>
             </semantic-query>
 
+        <mp-field-visualization
+            subject='[[this]]'
+            fields='[[fieldDefinitions
+            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of"
+            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
+            ]]'
+            template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+            [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+        >
+        </mp-field-visualization> 
+
         </bs-col>
         <bs-col sm="4">
             [[> sapa:ExternalResources]]
