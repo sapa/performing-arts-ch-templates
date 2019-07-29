@@ -155,5 +155,12 @@
         ></semantic-table>
 
     </bs-tab>
+
+    [[#if (hasPermission "forms:ldp:*")]] 
+    <bs-tab event-key='place editing' title='Edit'>
+    [[> sapaModule:VenueForm]]
+    </bs-tab>
+    [[/if]]
+
   </bs-tabs>  
 </div>
