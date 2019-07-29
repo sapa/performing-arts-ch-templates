@@ -162,22 +162,19 @@
         </mp-field-visualization> 
 
         <!-- record sets -->
-        <semantic-query 
-            query='SELECT ?recordset WHERE {
-                        ?? rdau:P60806 ?recordset .
-                      }'
-            template='<h5>Record sets</h5>'>
-        </semantic-query>
+        <h5>Record sets</h5>
         <semantic-tree
-             query='SELECT DISTINCT ?node ?parent ?comment WHERE {
-                ?? rdau:P60806 ?node .
-                ?parent prov:hadMember ?node .
+             query='SELECT DISTINCT ?node ?parent ?label ?comment WHERE {
+                ?? rdau:P60806 ?record .
+                ?record ric:is_member_of* ?node .
                 FILTER(ISIRI(?node))
+                FILTER(CONTAINS(STR(?node),"/r/"))
+                OPTIONAL { ?node ric:is_member_of ?parent. FILTER(ISIRI(?parent)) }
                 ?node rdfs:label ?label .
                 OPTIONAL {
                     ?node rdfs:comment ?comment .
                 }
-              } ORDER BY ?label'
+              }'
               tuple-template='<span><semantic-link uri="{{data.node.value}}"></semantic-link><br>{{data.comment.value}}</span>'> 
         </semantic-tree>
 

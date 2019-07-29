@@ -17,19 +17,19 @@
         <bs-col sm="4">
             <h5>Record hierarchy</h5>
             <semantic-tree
-                 query='SELECT DISTINCT ?node ?parent WHERE {
+                 query='SELECT DISTINCT ?node ?parent ?label WHERE {
                     { 
-                      { ?? prov:hadMember* ?node }
+                      { ?? ric:is_member_of* ?node }
                       UNION
-                      { ?node prov:hadMember* ?? } 
+                      { ?node ric:is_member_of* ?? } 
                     }
-                    OPTIONAL { ?parent prov:hadMember ?node. FILTER(ISIRI(?parent)) }
+                    OPTIONAL { ?node ric:is_member_of ?parent. FILTER(ISIRI(?parent)) }
                     FILTER(ISIRI(?node))
                     FILTER(CONTAINS(STR(?node),"/r/"))
                     ?node rdfs:label ?label .
                   }
                   ORDER BY ?label'
-               collapsed="true"
+               collapsed="false"
                keys-opened='[[this]]'
                parentBindingName="parent"
                nodeBindingName="node"> 
@@ -61,7 +61,7 @@
 
 [[#if (hasPermission "forms:ldp:*")]] 
 <bs-tab event-key='record editing' title='Edit'>
-[[> sapaModule:PlaceForm]]
+[[> sapaModule:RecordSetForm]]
 </bs-tab>
 [[/if]]
 

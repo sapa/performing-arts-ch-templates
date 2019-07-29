@@ -2,6 +2,7 @@
 @prefix hint: <http://www.bigdata.com/queryHints#> .
 @prefix User: <http://www.metaphacts.com/resource/user/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ric: <http://temp-ric.performing-arts.ch/> .
 @prefix : <http://www.metaphacts.com/resource/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix rdau: <http://rdaregistry.info/Elements/u/> .
@@ -10,7 +11,6 @@
 @prefix ore: <http://www.openarchives.org/ore/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdaa: <http://rdaregistry.info/Elements/a/> .
-@prefix ric: <http://ric.org/virtual/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/inLanguage> .
 @prefix sp: <http://spinrdf.org/sp#> .
@@ -33,7 +33,7 @@
 		prov:generatedAtTime "2019-07-29T10:30:48.294Z"^^xsd:dateTime ;
 		prov:wasAttributedTo User:admin .
 	
-	_:node1dgg5ksmpx3198 <http://www.w3.org/ns/ldp#contains> Platform:fieldDefinitionContainer .
+	_:node1dguq92gqx750 <http://www.w3.org/ns/ldp#contains> Platform:fieldDefinitionContainer .
 }
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Alternative_Name/context> {
@@ -2223,6 +2223,125 @@ BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\",MD5(CONCAT(\"Appelation\",
 		sp:text "INSERT { $subject crm:P2_has_type $value } WHERE {}" .
 }
 
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_label/context> {
+	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_label> .
+	
+	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_label> a <http://www.w3.org/ns/ldp#Resource> , prov:Entity , <http://www.metaphacts.com/ontology/fields#Field> ;
+		rdfs:label "Record set label" ;
+		prov:generatedAtTime "2019-07-29T12:35:30.823Z"^^xsd:dateTime ;
+		prov:wasAttributedTo User:admin ;
+		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-a8321d80ba8547bf83d08baac1c0c773-ex5bl4 ;
+		<http://www.metaphacts.com/ontology/fields#domain> ric:E3_Record_Set ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-a8321d80ba8547bf83d08baac1c0c773-we7xuf ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-a8321d80ba8547bf83d08baac1c0c773-ymofef ;
+		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string ;
+		<http://www.metaphacts.com/ontology/fields#minOccurs> "1" ;
+		<http://www.metaphacts.com/ontology/fields#maxOccurs> "1" .
+	
+	_:genid-a8321d80ba8547bf83d08baac1c0c773-ex5bl4 a sp:Query ;
+		sp:text "DELETE { $subject rdfs:label $value} WHERE {}" .
+	
+	_:genid-a8321d80ba8547bf83d08baac1c0c773-we7xuf a sp:Query ;
+		sp:text "INSERT { $subject rdfs:label $value} WHERE {}" .
+	
+	_:genid-a8321d80ba8547bf83d08baac1c0c773-ymofef a sp:Query ;
+		sp:text """SELECT ?value WHERE {
+  $subject rdfs:label ?value .
+}""" .
+}
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_comment/context> {
+	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_comment> .
+	
+	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_comment> a <http://www.w3.org/ns/ldp#Resource> , prov:Entity , <http://www.metaphacts.com/ontology/fields#Field> ;
+		rdfs:label "Record set comment" ;
+		prov:generatedAtTime "2019-07-29T12:35:43.602Z"^^xsd:dateTime ;
+		prov:wasAttributedTo User:admin ;
+		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-beb17afda4fa4c1499e7bc81473a7e9f-l7if49 ;
+		<http://www.metaphacts.com/ontology/fields#domain> ric:E3_Record_Set ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-beb17afda4fa4c1499e7bc81473a7e9f-18pi1u ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-beb17afda4fa4c1499e7bc81473a7e9f-tebhu ;
+		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string ;
+		<http://www.metaphacts.com/ontology/fields#maxOccurs> "1" .
+	
+	_:genid-beb17afda4fa4c1499e7bc81473a7e9f-18pi1u a sp:Query ;
+		sp:text "INSERT { $subject rdfs:comment $value} WHERE {}" .
+	
+	_:genid-beb17afda4fa4c1499e7bc81473a7e9f-l7if49 a sp:Query ;
+		sp:text "DELETE { $subject rdfs:comment $value} WHERE {}" .
+	
+	_:genid-beb17afda4fa4c1499e7bc81473a7e9f-tebhu a sp:Query ;
+		sp:text """SELECT ?value WHERE {
+  $subject rdfs:comment ?value .
+}""" .
+}
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_subject/context> {
+	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_subject> .
+	
+	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_subject> a <http://www.w3.org/ns/ldp#Resource> , prov:Entity , <http://www.metaphacts.com/ontology/fields#Field> ;
+		rdfs:label "Record set subject" ;
+		prov:generatedAtTime "2019-07-29T12:38:18.211Z"^^xsd:dateTime ;
+		prov:wasAttributedTo User:admin ;
+		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-a6ff949f245c4e36bcb2b88587bab658-71pvaw ;
+		<http://www.metaphacts.com/ontology/fields#domain> ric:E3_Record_Set ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-a6ff949f245c4e36bcb2b88587bab658-36ckyt ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-a6ff949f245c4e36bcb2b88587bab658-huiy7c ;
+		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI .
+	
+	_:genid-a6ff949f245c4e36bcb2b88587bab658-36ckyt a sp:Query ;
+		sp:text "INSERT { $value rdau:P60806 $subject . } WHERE {}" .
+	
+	_:genid-a6ff949f245c4e36bcb2b88587bab658-71pvaw a sp:Query ;
+		sp:text "DELETE { $value rdau:P60806 $subject . } WHERE {}" .
+	
+	_:genid-a6ff949f245c4e36bcb2b88587bab658-huiy7c a sp:Query ;
+		sp:text """SELECT ?value WHERE {
+  $value rdau:P60806 $subject .
+}""" .
+}
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_parent/context> {
+	Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_parent> .
+	
+	<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_parent> a <http://www.w3.org/ns/ldp#Resource> , prov:Entity , <http://www.metaphacts.com/ontology/fields#Field> ;
+		rdfs:label "Record set parent" ;
+		prov:generatedAtTime "2019-07-29T12:45:36.380Z"^^xsd:dateTime ;
+		prov:wasAttributedTo User:admin ;
+		<http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-4aec3cbf2cd146b29b4882b1f826e740-qy95 ;
+		<http://www.metaphacts.com/ontology/fields#domain> ric:E3_Record_Set ;
+		<http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-4aec3cbf2cd146b29b4882b1f826e740-hjhrp8 ;
+		<http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-4aec3cbf2cd146b29b4882b1f826e740-wtyebe ;
+		<http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:anyURI ;
+		<http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-4aec3cbf2cd146b29b4882b1f826e740-zli14s ;
+		<http://www.metaphacts.com/ontology/fields#range> ric:E3_Record_Set ;
+		<http://www.metaphacts.com/ontology/fields#minOccurs> "1" ;
+		<http://www.metaphacts.com/ontology/fields#maxOccurs> "1" ;
+		<http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"simple\",
+  \"schemePattern\": \"?item a ric:E3_Record_Set.\",
+  \"relationPattern\": \"?item ric:is_member_of ?parent.\"
+}"""^^Platform:syntheticJson .
+	
+	_:genid-4aec3cbf2cd146b29b4882b1f826e740-hjhrp8 a sp:Query ;
+		sp:text "INSERT { $subject ric:is_member_of $value} WHERE {}" .
+	
+	_:genid-4aec3cbf2cd146b29b4882b1f826e740-qy95 a sp:Query ;
+		sp:text "DELETE { $subject ric:is_member_of $value} WHERE {}" .
+	
+	_:genid-4aec3cbf2cd146b29b4882b1f826e740-wtyebe a sp:Query ;
+		sp:text """SELECT ?value ?label WHERE {
+  $subject ric:is_member_of ?value .
+}""" .
+	
+	_:genid-4aec3cbf2cd146b29b4882b1f826e740-zli14s a sp:Query ;
+		sp:text """SELECT $value $label WHERE {
+  $value a ric:E3_Record_Set ;
+    rdfs:label $label .
+  FILTER REGEX($label, \"?token\", \"i\")
+}""" .
+}
+
 {
-	_:node1dgg5ksmpx3198 a <http://www.w3.org/ns/ldp#Container> , <http://www.w3.org/ns/ldp#Resource> .
+	_:node1dguq92gqx750 a <http://www.w3.org/ns/ldp#Container> , <http://www.w3.org/ns/ldp#Resource> .
 }
