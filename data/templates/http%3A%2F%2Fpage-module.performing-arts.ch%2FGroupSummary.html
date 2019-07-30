@@ -14,18 +14,17 @@
 
     <!-- alternative names -->
     <semantic-query 
-        query='SELECT distinct ?value ?type ?typesort
+        query='SELECT distinct ?appellation ?type ?typesort
         WHERE {
             VALUES (?type ?typesort) { (spav:yamqk 1) (spav:yavtx 2) }
             ?? crm:P131_is_identified_by ?appellation .
             ?appellation a crm:E82_Actor_Appellation ; 
-            crm:P2_has_type ?type ;
-            rdf:value ?value .
+            crm:P2_has_type ?type .
             { ?appellation crm:P2_has_type spav:yamqk . }
             UNION
             { ?appellation crm:P2_has_type spav:yavtx . }
         } ORDER BY ?typesort'
-        template='<p>({{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}})</p>'>
+        template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{else}}<br><mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
     </semantic-query>
 
     <!-- place -->
