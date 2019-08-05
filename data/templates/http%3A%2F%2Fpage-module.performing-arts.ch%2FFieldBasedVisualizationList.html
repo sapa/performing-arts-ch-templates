@@ -12,8 +12,8 @@
     }
   </style>
   {{#each fields as |field|}}
-  [[!--{{log field}} --]] 
     {{#if field.values}}
+    [[!-- {{log field}} --]] 
     <h5>{{field.label}}</h5>
          {{#ifCond field.values.length "<=" "10"}}
             <ul class="list-unstyled">
@@ -23,7 +23,7 @@
                     {{> sapaModule:FieldValueVisualization field=field value=value }}
                   </li>
               {{/each}}
-						</ul>
+			</ul>
          {{else}}
            <ul class="list-unstyled">
            {{#each field.values as |value|}}
@@ -31,13 +31,13 @@
                 {{> sapaModule:FieldValueVisualization field=field value=value }}
               {{/ifCond}}
                 {{#ifCond @index "==" "10"}}
-                     <a>
-                             <mp-collapsible-div expanded=false>
-                    <mp-collapsible-div-trigger>
-                      <a></a>
-                    </mp-collapsible-div-trigger>
-                   <mp-collapsible-div-content>
-                    <div>
+                    <a>
+                    <mp-collapsible-div expanded=false>
+                        <mp-collapsible-div-trigger>
+                        <a></a>
+                        </mp-collapsible-div-trigger>
+                        <mp-collapsible-div-content>
+                            <div>
                {{/ifCond}}
                {{#ifCond @index ">=" "10"}}
                             <li>
@@ -46,7 +46,7 @@
                             </li>
                 {{/ifCond}}
                 {{#if @last}}
-                     </div>
+                            </div>
                         </mp-collapsible-div-content>
                     </mp-collapsible-div>
                 {{/if}}
