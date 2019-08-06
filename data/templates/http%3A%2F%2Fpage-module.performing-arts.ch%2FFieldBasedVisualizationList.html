@@ -14,7 +14,7 @@
   {{#each fields as |field|}}
     {{#if field.values}}
     [[!-- {{log field}} --]] 
-    <h5>{{field.label}}</h5>
+    <h5>{{#each field.label}}{{this.value}}{{/each}}</h5>
          {{#ifCond field.values.length "<=" "10"}}
             <ul class="list-unstyled">
               {{#each field.values as |value|}}
