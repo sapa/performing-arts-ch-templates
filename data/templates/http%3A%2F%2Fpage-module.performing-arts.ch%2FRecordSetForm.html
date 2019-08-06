@@ -11,21 +11,19 @@
       browser-persistence=true
       persistence='ldp' 
       form-id='places'
-      fields='[[fieldDefinitions
-        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type"
-        record_set_label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_label"
-        record_set_comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_comment"
-        record_set_parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_parent"
-      ]]'>
+      fields='[[fieldDefinitions]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-            <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "ric:E3_Record_Set"]]'></semantic-form-hidden-input>
+            <semantic-form-hidden-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type' default-value='[[resolvePrefix "ric:E3_Record_Set"]]'></semantic-form-hidden-input>
         </div>
-
-        <semantic-form-text-input for="record_set_label"></semantic-form-text-input>
-        <semantic-form-text-input for="record_set_comment"></semantic-form-text-input>
-        <semantic-form-tree-picker-input for="record_set_parent" ></semantic-form-tree-picker-input>
+        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_label"></semantic-form-text-input>
+        <semantic-form-checklist-input type='radio' row=true for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_level"></semantic-form-checklist-input>
+        <semantic-form-tree-picker-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_parent" ></semantic-form-tree-picker-input>
+        <semantic-form-checklist-input type='checkbox' row=true for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_type"></semantic-form-checklist-input>
+        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date"></semantic-form-text-input>
+        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent"></semantic-form-text-input>
+        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_comment"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
         <button
