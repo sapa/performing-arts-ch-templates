@@ -7,7 +7,8 @@
   </li>
 </ol>
 
-<div class="page">
+<div class="page rs-page">
+    [[#>rsp:ClipboardSidebar]]
     [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
       <bs-tab event-key='Summary' title='Summary'>
@@ -170,7 +171,7 @@
                 FILTER(ISIRI(?node))
                 FILTER(CONTAINS(STR(?node),"/r/"))
                 OPTIONAL { ?node ric:is_member_of ?parent. FILTER(ISIRI(?parent)) }
-                ?node rdfs:label ?label .
+                ?node dc:title ?label .
                 OPTIONAL {
                     ?node rdfs:comment ?comment .
                 }
@@ -234,5 +235,6 @@
     [[> sapaModule:PersonForm]]
     </bs-tab>
     [[/if]]
-    </bs-tabs>  
+    </bs-tabs>
+    [[/rsp:ClipboardSidebar]]
 </div>
