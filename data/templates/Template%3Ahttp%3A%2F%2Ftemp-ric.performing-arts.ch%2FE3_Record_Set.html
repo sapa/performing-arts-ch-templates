@@ -16,6 +16,39 @@
     <bs-tab event-key='about' title='About'>
 
         <bs-col sm="4">
+
+            <mp-field-visualization
+                subject='[[this]]'
+                fields='[[fieldDefinitions
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_identifier"
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_level="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_level"
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description"
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent"
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date"
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_comment"
+                ]]'
+                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+            >
+            </mp-field-visualization> 
+
+        </bs-col>
+
+        <bs-col sm="4">
+
+            <!-- subjects -->
+            <semantic-query 
+                query="SELECT DISTINCT ?subject
+                WHERE {
+                    ?subject rdau:P60806 ?? .
+                }"
+                template='<div><h5>Subjects</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{subject.value}}"></semantic-link></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+        </bs-col>
+
+        <bs-col sm="4">
+
             <h5>Record hierarchy</h5>
             <semantic-tree
                  query='SELECT DISTINCT ?node ?parent ?label WHERE {
@@ -35,42 +68,7 @@
                parentBindingName="parent"
                nodeBindingName="node"> 
             </semantic-tree>
-        </bs-col>
 
-        <bs-col sm="4">
-
-            <mp-field-visualization
-                subject='[[this]]'
-                fields='[[fieldDefinitions
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_identifier"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_level="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_level"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_type"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date"
-                ]]'
-                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
-                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
-            >
-            </mp-field-visualization> 
-
-            <!-- subjects -->
-            <semantic-query 
-                query="SELECT DISTINCT ?subject
-                WHERE {
-                    ?subject rdau:P60806 ?? .
-                }"
-                template='<div><h5>Subjects</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{subject.value}}"></semantic-link></li>{{/each}}</ul></div>'>
-            </semantic-query>
-        </bs-col>
-
-        <bs-col sm="4">
-            <!-- comment -->
-            <semantic-query 
-                query='SELECT ?comment WHERE {
-                    ?? rdfs:comment ?comment .
-                }'
-                template='<div><h5>Comments</h5>{{#each bindings}}{{#if @first}}{{comment.value}}{{else}}, {{comment.value}}{{/if}}{{/each}}</div>'>
-            </semantic-query>
         </bs-col>
 
 </bs-tab>

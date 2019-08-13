@@ -329,6 +329,10 @@
   Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_identifier> .
 }
 
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description/context> {
+  Platform:fieldDefinitionContainer <http://www.w3.org/ns/ldp#contains> <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description> .
+}
+
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of>
     prov:generatedAtTime "2019-08-12T14:14:08.016Z"^^xsd:dateTime;
@@ -1222,6 +1226,21 @@
     <http://www.metaphacts.com/ontology/fields#range> crm:E7_Activity;
     a <http://www.w3.org/ns/ldp#Resource>, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
     rdfs:label "Activity" .
+}
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description>
+    prov:generatedAtTime "2019-08-13T12:14:17.366Z"^^xsd:dateTime;
+    prov:wasAttributedTo User:admin;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:t3167608;
+    <http://www.metaphacts.com/ontology/fields#domain> ric:E3_Record_Set;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:t3167610;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:t3167609;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> xsd:string;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    a <http://www.w3.org/ns/ldp#Resource>, prov:Entity, <http://www.metaphacts.com/ontology/fields#Field>;
+    rdfs:label "Inhaltsbeschreibung (record set)"@de, "Content description (record set)"@en,
+      "description du contenu (record set)"@fr, "descrizione dei contenuti (record set)"@it .
 }
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_level/context> {
@@ -2811,6 +2830,22 @@ WHERE {}""" .
 }""" .
 }
 
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description/context> {
+  _:t3167610 a sp:Query .
+  
+  _:t3167608 a sp:Query .
+  
+  _:t3167609 a sp:Query .
+  
+  _:t3167608 sp:text "DELETE { $subject dc:description $value} WHERE {}" .
+  
+  _:t3167609 sp:text """SELECT ?value WHERE {
+  $subject dc:description ?value .
+}""" .
+  
+  _:t3167610 sp:text "INSERT { $subject dc:description $value} WHERE {}" .
+}
+
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_level/context> {
   _:t3167386 sp:text """SELECT ?value ?label WHERE {
   $subject dc:type ?value.
@@ -3029,5 +3064,5 @@ WHERE {  BIND(IRI(CONCAT(STR(?subject),\"/p\")) as ?perform)}
 }
 
 <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer/context> {
-  _:node1dhvrdskfx17 <http://www.w3.org/ns/ldp#contains> Platform:fieldDefinitionContainer .
+  _:node1dhvrdskfx23 <http://www.w3.org/ns/ldp#contains> Platform:fieldDefinitionContainer .
 }

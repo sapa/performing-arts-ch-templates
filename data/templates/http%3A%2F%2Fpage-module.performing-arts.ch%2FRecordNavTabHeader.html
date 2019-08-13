@@ -12,24 +12,23 @@
             </mp-draggable>
         </div>
 
-        <p>
-            <!-- description -->
-            <semantic-query 
-                query="SELECT ?description
-                WHERE {
-                  ?? a ?class .
-                  FILTER(CONTAINS(STR(?class), 'crm'))
-                  OPTIONAL { ?? crm:P2_has_type ?crmtype . }
-                  OPTIONAL { ?? crm:P4_has_time-span ?timespan . }
-                  OPTIONAL {
-                    ?work frbr:R12_is_realised_in ?? ;
-                        crm:P2_has_type ?genre .
-                  }
-                  BIND(IF(BOUND(?timespan), ?timespan, IF(BOUND(?genre), ?genre, IF(BOUND(?crmtype), ?crmtype, ?class))) AS ?description)
-                }"
-                template="<span>{{#each bindings}}{{#if @first}}<mp-label iri='{{description.value}}'></mp-label>{{else}}, <mp-label iri='{{description.value}}'></mp-label>{{/if}}{{/each}}</span>">
-            </semantic-query>
-        </p>
+        <!-- description -->
+        <semantic-query 
+            query="SELECT ?description
+            WHERE {
+              ?? a ?class .
+              FILTER(CONTAINS(STR(?class), 'crm'))
+              OPTIONAL { ?? crm:P2_has_type ?crmtype . }
+              OPTIONAL { ?? crm:P4_has_time-span ?timespan . }
+              OPTIONAL {
+                ?work frbr:R12_is_realised_in ?? ;
+                    crm:P2_has_type ?genre .
+              }
+              OPTIONAL { ?? dc:type ?recordsetlevel . }
+              BIND(IF(BOUND(?timespan), ?timespan, IF(BOUND(?genre), ?genre, IF(BOUND(?crmtype), ?crmtype, IF(BOUND(?recordsetlevel), ?recordsetlevel, ?class)))) AS ?description)
+            }"
+            template="<p>{{#each bindings}}{{#if @first}}<mp-label iri='{{description.value}}'></mp-label>{{else}}, <mp-label iri='{{description.value}}'></mp-label>{{/if}}{{/each}}</p>">
+        </semantic-query>
 
         <p style="font-size: 12px;">
             <b>URI</b>: <i>[[this]]</i>
