@@ -1,0 +1,50 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167418;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167419;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167417;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#range> <http://metaphacts.com/Link>;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "e.g. http://www.sapa.swiss";
+    <http://www.w3.org/2000/01/rdf-schema#label> "Website" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167417 <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject crm:P76_has_contact_point ?c.
+  ?c crm:P2_has_type spav:ihctx ;
+    rdf:value ?value.
+}""" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167419 <http://spinrdf.org/sp#text> """INSERT {
+  $subject crm:P76_has_contact_point $c .
+  $c a crm:E51_Contact_Point ;
+    crm:P2_has_type spav:ihctx ;
+    rdf:value ?value .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(STR(?value)))) AS $c)
+}""" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167418 <http://spinrdf.org/sp#text> """DELETE { 
+  $subject crm:P76_has_contact_point $c .
+  $c a crm:E51_Contact_Point ;
+    crm:P2_has_type spav:ihctx ;
+    rdf:value ?value .
+} WHERE {}""" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167419 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167417 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167418 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website> a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:03.528Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website> a <http://www.w3.org/ns/ldp#Resource> .
+}

@@ -1,0 +1,66 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan>
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167373;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E74_Group>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167372;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167371;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#askPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167374;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "Year, e.g. 1965";
+    <http://www.w3.org/2000/01/rdf-schema#label> "Founded" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167372 <http://spinrdf.org/sp#text> """INSERT {
+  $subject crm:P95i_was_formed_by ?formation .
+  ?formation a crm:E66_Formation ;
+    crm:P4_has_time-span ?timespan .
+  ?timespan a crm:E52_Time-Span ;
+    rdfs:label ?value ;
+    crm:P82a_begin_of_the_begin ?begin ;
+    crm:P82b_end_of_the_end ?end .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(\"formation\", STR(?value))))) AS ?formation)
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(\"time-span\", STR(?value))))) AS ?timespan)
+  BIND(STRDT(CONCAT(?value, \"-01-01\"), xsd:date) AS ?begin)
+  BIND(STRDT(CONCAT(?value, \"-12-31\"), xsd:date) AS ?end)
+}""" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167373 <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P95i_was_formed_by ?formation .
+  ?formation a crm:E66_Formation ;
+    crm:P4_has_time-span ?timespan .
+  ?timespan a crm:E52_Time-Span ;
+    rdfs:label ?value ;
+    crm:P82a_begin_of_the_begin ?begin ;
+    crm:P82b_end_of_the_end ?end .
+} WHERE {}""" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167374 <http://spinrdf.org/sp#text> "ASK { FILTER(REGEX($value, \"^([0-9]{4})?$\")) }" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167371 <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value WHERE {
+  $subject crm:P95i_was_formed_by ?formation .
+  ?formation a crm:E66_Formation ;
+    crm:P4_has_time-span ?ts.
+  ?ts rdfs:label ?value .
+}""" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167373 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167374 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167372 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167371 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan>
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:02.125Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

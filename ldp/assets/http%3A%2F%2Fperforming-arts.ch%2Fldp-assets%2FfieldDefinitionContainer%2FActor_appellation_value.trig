@@ -1,0 +1,43 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_value/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_value>
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167421;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167420;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167422;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "4";
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Actor appellation value" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167420 <http://spinrdf.org/sp#text> """INSERT { 
+  $subject a crm:E82_Actor_Appellation ;
+    rdf:value $value .
+} WHERE {
+}""" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167421 <http://spinrdf.org/sp#text> """DELETE {
+  $subject a crm:E82_Actor_Appellation ;
+      rdf:value $value .
+} WHERE {}""";
+    a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167422 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject rdf:value $value .
+}""" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167420 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_value>
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:03.600Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_value> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_value>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}
