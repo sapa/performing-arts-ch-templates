@@ -1,118 +1,83 @@
 <ol class="page-breadcrumb">
-  <li>
-    <mp-link title="Home" url="/">Home</mp-link>
-  </li>
-  <li class="active">
-   [[> sapaModule:RecordLabel ]]
- </li>
+    <li>
+        <mp-link title="Home" url="/">Home</mp-link>
+    </li>
+    <li class="active">
+        [[> sapaModule:RecordLabel ]]
+    </li>
 </ol>
 
 <div class="page">
 
   [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/places.svg"]] 
   
-  <bs-tabs  class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
+  <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
     <bs-tab event-key='about' title='About'>
-     <div data-flex-layout='row top-stretch'> 
 
-       <div style="padding: 15px ;width: 50%" data-flex-self='size-xsmall'>
-        [[> sapa:WikiPlaceMap]]
+        <bs-col sm="4">
+            <h5>Place hierarchy</h5>
+            <semantic-tree
+                 query='SELECT DISTINCT ?node ?parent WHERE {
+                    { 
+                      { ?? crm:P89_falls_within* ?node }
+                      UNION
+                      { ?node crm:P89_falls_within* ?? } 
+                    }
+                    OPTIONAL { ?node crm:P89_falls_within ?parent. FILTER(ISIRI(?parent)) }
+                    FILTER(ISIRI(?node))
+                    FILTER(CONTAINS(STR(?node),"/p/"))
+                    ?node rdfs:label ?label .
+                  } ORDER BY ?label
+               '
+               collapsed="true"
+               keys-opened='[[this]]'
+               parentBindingName="parent"
+               nodeBindingName="node"> 
+            </semantic-tree>
+        </bs-col>
 
-        <br>
-        <div class="pull-left">
-         <h3> Place Hierarchy</h3>
-         <semantic-tree
-         query='SELECT DISTINCT ?node ?parent WHERE {
-            { 
-              { ?? crm:P89_falls_within* ?node }
-              UNION
-              { ?node crm:P89_falls_within*  ?? } 
-            }
-            OPTIONAL { ?node crm:P89_falls_within ?parent. FILTER(ISIRI(?parent)) }
-            FILTER(ISIRI(?node))
-            FILTER(CONTAINS(STR(?node),"/p/"))
-          }
+        <bs-col sm="4">
+            [[> sapa:ExternalResources]]
+        </bs-col>
 
-       '                                  
-       collapsed="true"
-       keys-opened='[[this]]'
-       parentBindingName="parent"
-       nodeBindingName="node"> 
-     </semantic-tree>
-   </div>
-
-
- </div>
- <div style="padding: 15px ;width: 70%" class='table-responsive'>             
-   <table class='table'>
-    <thead role='header'>
-      <tr>
-        <th>Field</th>
-        <th>Value</th>
-      </tr>
-    </thead>
-    <mp-field-visualization
-    subject='[[this]]'
-    fields='[[fieldDefinitions 
-      http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_label"
-      http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_is_identified_by="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_is_identified_by"                                            
-    ]]'
-    template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' 
-    [[!-- show in includ [[> sapaModule:FieldBasedVisualization ]] --]]
-    ></mp-field-visualization> 
-  </table>
-</div>
-<semantic-query 
-  query='SELECT ?value ?label WHERE {
-    ?? owl:sameAs ?value
-    BIND (replace(str(?value), ".*\\/", "") as ?localname)
-    BIND (strbefore(str(?value), ?localname) as ?prefix)
-
-    VALUES (?prefix  ?source)
-    {
-      ("http://www.wikidata.org/entity/"  "Wikidata")
-      ("http://classifications.data.admin.ch/municipality/" "Swiss  Municipality")
-      ("http://geonames.org/" "Geonames")
-      ("http://d-nb.info/gnd/" "GND")
-      ("http://viaf.org/viaf/" "VIAF")
-      ("https://www.wikidata.org/wiki/" "WikiData")
-      ("http://classifications.data.admin.ch/canton/" "Swiss  Municipality")
-    }
-    BIND  ( CONCAT(?source," [",?localname,"]") as ?label)
-  }'
-
-  template='<div style="padding: 15px;"><h4>External Databases</h4>
-    <ul>{{#each bindings}}<li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
-      {{/each}}
-    </ul></div>'> 
-</semantic-query>
-</div><!-- end flex row --> 
+        <bs-col sm="4">
+            [[> sapa:WikiPlaceMap]]
+        </bs-col>
 
 </bs-tab>
-<bs-tab event-key="2" title="Relations">
+<bs-tab event-key="2" title="Groups and Venues">
 
-  <div class='table-responsive'>
-    <table class='table'>
-      <thead role='header'>
-        <tr>
-          <th>Field</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <mp-field-visualization
-      subject='[[this]]'
-      fields='[[fieldDefinitions 
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_has_current_or_former_residence="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_has_current_or_former_residence"
-      ]]'
-      template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' 
-      [[!-- show in include [[> sapaModule:FieldBasedVisualization ]] --]]
-      ></mp-field-visualization> 
-    </table>
-  </div>
+    <bs-row>
+        <bs-col sm="4">
+            <semantic-query 
+                query='SELECT ?group ?label WHERE {
+                  ?groupsite crm:P89_falls_within ?? .
+                  ?group crm:P74_has_current_or_former_residence ?groupsite ;
+                    rdfs:label ?label .
+                } ORDER BY lcase(?label)'
+                template='<div><h5>Groups</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{group.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+            </semantic-query>
+        </bs-col>
+        <bs-col sm="4">
+            <semantic-query 
+                query='SELECT ?venue ?label WHERE {
+                  ?venuesite crm:P89_falls_within ?? .
+                  ?venue crm:P156_occupies ?venuesite ;
+                    crm:P2_has_type spav:dwmkn ;
+                    rdfs:label ?label .
+                } ORDER BY lcase(?label)'
+                template='<div><h5>Venues</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{venue.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+            </semantic-query>
+        </bs-col>
+    </bs-row>
 
 </bs-tab>
 
-[[> sapaModule:PlaceEditingTab]]
+[[#if (hasPermission "forms:ldp:*")]] 
+<bs-tab event-key='place editing' title='Edit'>
+[[> sapaModule:PlaceForm]]
+</bs-tab>
+[[/if]]
 
 </bs-tabs>  
 </div>

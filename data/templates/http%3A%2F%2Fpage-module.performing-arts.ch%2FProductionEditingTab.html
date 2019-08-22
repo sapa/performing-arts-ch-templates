@@ -1,0 +1,64 @@
+ <div data-flex-layout='row top-stretch'>
+ <semantic-form 
+ [[#if create]]
+   new-subject-template='http://data.performing-arts.ch/w/{{UUID}}'
+  [[else]]
+  subject='[[this]]'
+ [[/if]]
+       post-action="reload"
+       browser-persistence=true
+       form-id='Productions'
+       persistence='ldp'             
+       fields='[[fieldDefinitions
+        Performance_Title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Title"
+        typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
+        Activity="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity"
+        genre ="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Genre"
+        Performance_Language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language"
+        reference_Work_Function="http://www.metaphacts.com/fieldDefinition/reference_work_functions"
+        venue="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Venue"
+        subtitle="http://www.metaphacts.com/fieldDefinition/Subtitle_Language"
+        
+       
+      ]]'>
+      <bs-panel>
+    
+        <div style="display: none;">  
+        
+          <semantic-form-hidden-input for='typeset'  default-values="http://www.cidoc-crm.org/frbr/F25_Performance_Plan"></semantic-form-hidden-input>
+        </div>
+        
+        <semantic-form-text-input for="Performance_Title"></semantic-form-text-input>
+         <semantic-form-autocomplete-input for='Performance_Language'></semantic-form-autocomplete-input>
+        <semantic-form-autocomplete-input for='genre'></semantic-form-autocomplete-input>
+         <semantic-form-autocomplete-input for='venue'></semantic-form-autocomplete-input>
+         <semantic-form-autocomplete-input for='subtitle'></semantic-form-autocomplete-input>
+  
+                                                       
+        	  <semantic-form-composite-input for="Activity" new-subject-template="http://data.performing-arts.ch/x/{{UUID}}"
+
+           fields='[[fieldDefinitions
+           typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
+           Carried_Out_by="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performed_By"
+           Activity_Type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity_Type"
+       			        		]]'>
+           <div style="display: none;">  
+			<semantic-form-hidden-input for='typeset' default-value='http://www.cidoc-crm.org/cidoc-crm/E7_Activity'>     </semantic-form-hidden-input></div>   
+ <semantic-form-autocomplete-input for='Carried_Out_by'  placeholder='Search persons...'></semantic-form-autocomplete-input>
+  <semantic-form-autocomplete-input for='Activity_Type'></semantic-form-autocomplete-input>
+              
+          </semantic-form-composite-input>
+
+              <semantic-form-errors></semantic-form-errors>
+        <!-- save and reset button for form -->
+        <button
+          name="submit"
+          class="btn btn-default"
+        >Save</button>
+        <button
+          name="reset"
+          class="btn btn-default"
+        >Reset</button>
+      </bs-panel>
+    </semantic-form>
+  </div>

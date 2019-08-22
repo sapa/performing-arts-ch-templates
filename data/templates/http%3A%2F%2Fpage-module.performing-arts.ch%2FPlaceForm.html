@@ -1,0 +1,40 @@
+  <div data-flex-layout='row top-stretch'>
+    <semantic-form 
+     [[#if create]]
+        new-subject-template='http://data.performing-arts.ch/a/{{UUID}}'
+        post-action="redirect"
+      [[else]]
+        subject='[[this]]'
+        post-action="reload"
+     [[/if]]
+      
+      browser-persistence=true
+      persistence='ldp' 
+      form-id='places'
+      fields='[[fieldDefinitions
+        place_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_P87_is_identified_by"
+        falls_within="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E53_Place_falls_within"
+        sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
+        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type"
+      ]]'>
+      <bs-panel>
+        <semantic-form-recover-notification></semantic-form-recover-notification>
+        <div style="display: none;">
+        <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "crm:E53_Place"]]'></semantic-form-hidden-input>
+        </div>
+        <semantic-form-text-input for="place_name" languages='["en","de","fr","it"]'></semantic-form-text-input>
+        <semantic-form-tree-picker-input for="falls_within" ></semantic-form-tree-picker-input>
+        <semantic-form-text-input for="sameAs"></semantic-form-text-input>
+        <semantic-form-errors></semantic-form-errors>
+        <!-- save and reset button for form -->
+        <button
+          name="submit"
+          class="btn btn-default"
+        >Save</button>
+        <button
+          name="reset"
+          class="btn btn-default"
+        >Reset</button>
+      </bs-panel>
+    </semantic-form>
+  </div>

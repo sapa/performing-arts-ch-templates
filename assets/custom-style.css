@@ -1,3 +1,83 @@
-/*body {
-    background-color: lightblue;
-}*/
+a {
+  color: #0e619e;
+}
+a.unidentified {
+  color: black;
+}
+a:hover,
+a:focus {
+  color: #158ce4;
+}
+.container-fluid {
+  padding-left: 24px;
+}
+#application .metaphacts-header-navbar li a {
+  font-weight: normal;
+}
+.navbar-inverse {
+  background-color: #083658;
+}
+.navbar-brand {
+  float: none;
+}
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-brand {
+  color: #cccccc;
+}
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+  color: #ffffff;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #cccccc;
+}
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  color: #ffffff;
+}
+.dropdown-menu {
+  background-color: #083658;
+}
+.dropdown > .dropdown-menu > li > a {
+  color: #cccccc;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  background-color: #083658;
+}
+#record-tabs > .nav-tabs > li > a,
+#tabs > .nav-tabs > li > a,
+.page__body-navtabs > .nav-tabs > li > a,
+.open-sidebar__tabs > .nav-tabs > li > a {
+  color: black;
+}
+#tabs > .nav-tabs > li > a:hover {
+  color: #158ce4;
+}
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color: #e6e6e6;
+}
+#tabs > .nav-tabs > li > a:hover {
+  color: black;
+}
+span.Tree--leafNode {
+  margin-left: 0;
+}
+div.tree-view_children span.Tree--leafNode {
+  margin-left: 20px;
+}
+#application > div > .footer {
+  background-color: #083658;
+}
+.footer > .footer__pixel-groove {
+  margin-top: 0;
+  border-width: 0;
+}
+.footer > .footer__outer-flex-row {
+  padding: 16px 20px 16px 20px;
+  background-color: #083658;
+}
+.footer__links-col {
+  font-size: 0.7em;
+}

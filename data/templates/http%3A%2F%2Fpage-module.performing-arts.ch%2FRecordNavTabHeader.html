@@ -1,36 +1,38 @@
 <div class='page__header-navtabs'>
-  <div class='page__header-thumbnail'>
-    <mp-resource-thumbnail no-image-uri='[[defaultImage]]' iri='[[this]]'></mp-resource-thumbnail>
-  </div>
-  <div class='page__header-body'>
-      <div class="page__header-draggable-title">
-        <mp-draggable iri='[[this]]'>
-          <h2 data-flex-layout='row center-left'>
-            <span class="page__header-gripper"></span>
-            [[> sapaModule:RecordLabel ]]
-          </h2>
-        </mp-draggable>
-      </div>
+    <div class='page__header-thumbnail'>
+        <mp-resource-thumbnail no-image-uri='[[defaultImage]]' iri='[[this]]'></mp-resource-thumbnail>
+    </div>
+    <div class='page__header-body'>
+        <div class="page__header-draggable-title">
+            <mp-draggable iri='[[this]]'>
+                <h2 data-flex-layout='row center-left'>
+                    <span class="page__header-gripper"></span>
+                    [[> sapaModule:RecordLabel ]]
+                </h2>
+            </mp-draggable>
+        </div>
 
-      <p>
-        <b>URI</b>: <i style="font-size: 12px;">[[this]]</i>
-      </p>
+        <!-- description -->
+        <semantic-query 
+            query="SELECT ?description
+            WHERE {
+              ?? a ?class .
+              FILTER(CONTAINS(STR(?class), 'crm'))
+              OPTIONAL { ?? crm:P2_has_type ?crmtype . }
+              OPTIONAL { ?? crm:P4_has_time-span ?timespan . }
+              OPTIONAL {
+                ?work frbr:R12_is_realised_in ?? ;
+                    crm:P2_has_type ?genre .
+              }
+              OPTIONAL { ?? dc:type ?recordsetlevel . }
+              BIND(IF(BOUND(?timespan), ?timespan, IF(BOUND(?genre), ?genre, IF(BOUND(?crmtype), ?crmtype, IF(BOUND(?recordsetlevel), ?recordsetlevel, ?class)))) AS ?description)
+            }"
+            template="<p>{{#each bindings}}{{#if @first}}<mp-label iri='{{description.value}}'></mp-label>{{else}}, <mp-label iri='{{description.value}}'></mp-label>{{/if}}{{/each}}</p>">
+        </semantic-query>
 
-      <!--Types -->    
-      <p>
-        <b>Type</b>: <semantic-query query='SELECT DISTINCT ?type WHERE { 
-          ?? a ?type. 
-          #FILTER NOT EXISTS {?t rdfs:subClassOf ?type} 
-          FILTER(?type!=owl:Thing) 
-        }' style="display:inline;"></semantic-query>
-    </p>
+        <p style="font-size: 12px;">
+            <b>URI</b>: <i>[[this]]</i>
+        </p>
 
-    <!--Description -->
-    <p>
-      <semantic-query 
-        query='SELECT ?description WHERE { ?? rdfs:comment ?description } LIMIT 1' 
-        template='{{#each bindings}}<span><b>Description</b>: {{description.value}}</span>{{/each}}'>
-      </semantic-query>
-    </p>
-  </div>
+    </div>
 </div>

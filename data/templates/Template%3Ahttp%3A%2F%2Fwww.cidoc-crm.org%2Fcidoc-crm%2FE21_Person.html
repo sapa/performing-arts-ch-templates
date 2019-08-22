@@ -7,29 +7,234 @@
   </li>
 </ol>
 
-<div class="page">
+<div class="page rs-page">
+    [[#>rsp:ClipboardSidebar]]
     [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
-  
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
       <bs-tab event-key='Summary' title='Summary'>
-        <div class='table-responsive'>
-          <table class='table'>
-            <thead role='header'>
-              <tr>
-                <th>Field</th>
-                <th>Value</th>
-              </tr>
-            </thead>
-            <mp-field-visualization
-            subject='[[this]]'
-            fields='[[fieldDefinitions    
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E21_Person_is_current_or_former_member_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E21_Person_is_current_or_former_member_of"
-            ]]'
-            template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' [[!-- show in include [[> sapaModule:FieldBasedVisualization ]] --]]
-            ></mp-field-visualization> 
-          </table>
-        </div>
-      </bs-tab>
+        <bs-col sm="4">
+            <!-- common name -->
+            <semantic-query 
+                query='SELECT ?appellation 
+                WHERE {
+                    ?? crm:P131_is_identified_by ?appellation .
+                    ?appellation a crm:E82_Actor_Appellation ; 
+                        crm:P2_has_type spav:yatcx .
+                } LIMIT 1'
+            template='<p><strong>{{#each bindings}}<mp-label iri="{{appellation.value}}"></mp-label>{{/each}}</strong></p>'>
+            </semantic-query>
 
-    </bs-tabs>  
+            <!-- alternative names -->
+            <semantic-query 
+                query='SELECT ?appellation ?type ?typesort
+                WHERE {
+                    VALUES (?type ?typesort) { (spav:yapvc 1) (spav:yadpx 2) (spav:yallb 3) (spav:yaajh 4) (spav:yavtx 5) }
+                    ?? crm:P131_is_identified_by ?appellation .
+                    ?appellation a crm:E82_Actor_Appellation ; 
+                        crm:P2_has_type ?type .
+                    FILTER ( ?type in (spav:yadpx, spav:yallb, spav:yapvc, spav:yaajh, spav:yavtx) )
+                } ORDER BY ?typesort'
+                template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{else}}<br><mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
+            </semantic-query>
+
+            <!-- comment -->
+            <semantic-query 
+                query='SELECT ?comment WHERE {
+                    ?? rdfs:comment ?comment .
+                }'
+                template='<p>{{#each bindings}}{{#if @first}}{{comment.value}}{{else}}, {{comment.value}}{{/if}}{{/each}}</p>'>
+            </semantic-query>
+
+            <!-- Swiss -->
+            <!-- <semantic-query 
+                query='SELECT ?swiss ?value WHERE {
+                    BIND (EXISTS {?? ore:isAggregatedBy <http://data.performing-arts.ch/a/2ced7bbf-4981-48e0-ab47-2c6b1351c38b>} AS ?swiss)
+                    BIND(IF(?swiss ,"CH","") AS ?value)
+                }'
+                template='<p>{{#each bindings}}{{value.value}}{{/each}}</p>'>
+            </semantic-query>-->
+
+            <p>
+            <!-- gender -->
+            <semantic-query 
+                query='SELECT ?gendericon WHERE {
+                    ?? owl:sameAs ?wikidata .
+                        FILTER (CONTAINS(STR(?wikidata), "wikidata"))
+                        SERVICE <https://wikidata.metaphacts.com/sparql> {
+                            ?wikidata <http://www.wikidata.org/prop/direct/P21> ?gender .
+                        }
+                        VALUES (?gender ?gendericon) { 
+                            (<http://www.wikidata.org/entity/Q6581072> "♀") 
+                            (<http://www.wikidata.org/entity/Q6581097> "♂") 
+                            (<http://www.wikidata.org/entity/Q189125> "⚥") 
+                        }
+                }'
+                template='<span>{{#each bindings}}<span style="padding-right:0.6em;">{{gendericon.value}}</span>{{/each}}</span>'>
+            </semantic-query>
+
+            <!-- nationality -->
+            <semantic-query 
+                query='SELECT ?unicode ?code WHERE {
+                    ?? owl:sameAs ?wikidata .
+                        FILTER (CONTAINS(STR(?wikidata), "wikidata"))
+                        SERVICE <https://wikidata.metaphacts.com/sparql> {
+                            ?wikidata <http://www.wikidata.org/prop/direct/P27> ?country .
+                            ?country <http://www.wikidata.org/prop/direct/P395> ?code .
+                        }
+                }'
+                template='<span>{{#each bindings}}<span style="padding-right:0.1em;" title="{{code.value}}">{{code.value}}</span>{{/each}}</span>'>
+            </semantic-query>
+            </p>
+
+            <!-- live dates -->
+            <semantic-query 
+                query='SELECT ?wikibirthday ?wikibirthplacelabel ?birthplace ?wikideathday ?wikideathplacelabel ?deathplace
+    WHERE {
+        ?? owl:sameAs ?wikidata .
+        FILTER (CONTAINS(STR(?wikidata), "wikidata"))
+        SERVICE <https://wikidata.metaphacts.com/sparql> {
+            OPTIONAL {
+                ?wikidata <http://www.wikidata.org/prop/direct/P569> ?dob .
+                BIND(CONCAT(STR(DAY(?dob)), ".", STR(MONTH(?dob)), ".", STR(YEAR(?dob))) AS ?wikibirthday)
+            }
+            OPTIONAL {
+                ?wikidata <http://www.wikidata.org/prop/direct/P19> ?wikibirthplace .
+                ?wikibirthplace rdfs:label ?wikibirthplacelabel .
+            }
+            OPTIONAL {
+                ?wikidata <http://www.wikidata.org/prop/direct/P570> ?dod .
+                BIND(CONCAT(STR(DAY(?dod)), ".", STR(MONTH(?dod)), ".", STR(YEAR(?dod))) AS ?wikideathday)
+            }
+            OPTIONAL {
+                ?wikidata <http://www.wikidata.org/prop/direct/P20> ?wikideathplace .
+                ?wikideathplace rdfs:label ?wikideathplacelabel .
+            }
+        }
+        OPTIONAL {
+            ?birthplace owl:sameAs ?wikibirthplace .
+        }
+        OPTIONAL {
+            ?deathplace owl:sameAs ?wikideathplace .
+        }
+    } LIMIT 1'
+                template='{{#each bindings}}<p>
+                    {{#if wikibirthday}}* {{wikibirthday.value}}{{#if wikibirthplacelabel}}, 
+                        {{#if birthplace}} 
+                            <semantic-link iri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>
+                        {{else}}
+                            {{wikibirthplacelabel.value}}
+                        {{/if}}
+                    {{/if}}{{/if}}
+                    {{#if wikibirthday}}{{#if wikideathday}}<br>{{/if}}{{/if}}
+                    {{#if wikideathday}}† {{wikideathday.value}}{{#if wikideathplacelabel}}, 
+                        {{#if deathplace}} 
+                            <semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>
+                        {{else}}
+                            {{wikideathplacelabel.value}}
+                        {{/if}}
+                    {{/if}}{{/if}}
+                    </p>{{/each}}'>
+            </semantic-query>
+
+
+        </bs-col>
+        <bs-col sm="4">
+
+            <!-- groups -->
+            <semantic-query 
+                query='SELECT ?value ?label WHERE {
+                    ?value crm:P107_has_current_or_former_member ?? ;
+                        rdfs:label ?label .
+                }'
+                template='<div><h5>Groups</h5>
+    <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{value.value}}">{{label.value}}</semantic-link></li>
+      {{/each}}
+    </ul></div>'>
+            </semantic-query>
+
+        <mp-field-visualization
+            subject='[[this]]'
+            fields='[[fieldDefinitions
+            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
+            ]]'
+            template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+            [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+        >
+        </mp-field-visualization> 
+
+        <!-- record sets -->
+        <h5>Record sets</h5>
+        <semantic-tree
+             query='SELECT DISTINCT ?node ?parent ?label ?description WHERE {
+                ?? rdau:P60806 ?record .
+                ?record ric:is_member_of* ?node .
+                FILTER(ISIRI(?node))
+                FILTER(CONTAINS(STR(?node),"/r/"))
+                OPTIONAL { ?node ric:is_member_of ?parent. FILTER(ISIRI(?parent)) }
+                ?node dc:title ?label .
+                OPTIONAL {
+                    ?node dc:description ?description .
+                }
+              }'
+              tuple-template='<span><semantic-link uri="{{data.node.value}}"></semantic-link><br>{{data.description.value}}</span>'> 
+        </semantic-tree>
+
+        </bs-col>
+        <bs-col sm="4">
+            [[> sapa:ExternalResources]]
+        </bs-col>
+      </bs-tab>
+    <bs-tab event-key='productions' title='Productions'>
+    
+        <semantic-table 
+          query='SELECT ?season ?plan ?genre ?function
+            WHERE {
+                ?personactivity crm:P14_carried_out_by ?? ;
+                    crm:P2_has_type ?function .
+                {
+                    # reference work
+                    ?referencecreation crm:P9_consists_of ?personactivity ;
+                        frbr:R17_created ?reference .
+                    ?plan frbr:R14_incorporates ?reference .
+                    ?expressioncreation frbr:R17_created ?plan .
+                } UNION {
+                    # expression creation
+                    ?expressioncreation crm:P9_consists_of ?personactivity ;
+                        frbr:R17_created ?plan .
+                } UNION {
+                    # performance
+                    ?genericperformance crm:P9_consists_of ?personactivity ;
+                        frbr:R25_performed ?plan .
+                    ?expressioncreation frbr:R17_created ?plan .
+                }
+                ?plan a frbr:F25_Performance_Plan .
+                OPTIONAL {
+                    ?expressioncreation a frbr:F28_Expression_Creation ;
+                        crm:P10_falls_within ?season .
+                    FILTER(CONTAINS(STR(?season), "/s/"))
+                }
+                OPTIONAL {
+                    ?work frbr:R12_is_realised_in ?plan ;
+                        crm:P2_has_type ?genre .
+                }
+            } ORDER BY ASC(?season)'
+          column-configuration='[
+            {"variableName": "season", "displayName": "Season"}, 
+            {"variableName": "plan", "displayName": "Production"}, 
+            {"variableName": "genre", "displayName": "Genre"}, 
+            {"variableName": "function", "displayName": "Function"}
+          ]'
+          number-of-displayed-rows=20
+          options='{"showFilter": false}'
+        ></semantic-table>
+
+
+    </bs-tab>
+    [[#if (hasPermission "forms:ldp:*")]] 
+    <bs-tab event-key='person editing' title='Edit'>
+    [[> sapaModule:PersonForm]]
+    </bs-tab>
+    [[/if]]
+    </bs-tabs>
+    [[/rsp:ClipboardSidebar]]
 </div>

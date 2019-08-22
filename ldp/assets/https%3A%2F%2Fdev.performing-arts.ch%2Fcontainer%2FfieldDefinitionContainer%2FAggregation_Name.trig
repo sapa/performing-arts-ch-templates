@@ -1,0 +1,30 @@
+
+<https://dev.performing-arts.ch/container/fieldDefinitionContainer/Aggregation_Name/context> {
+  <https://dev.performing-arts.ch/container/fieldDefinitionContainer/Aggregation_Name>
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167400;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167401;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Aggregation Name" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167400 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167401 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value  WHERE {
+  $subject rdfs:label ?value; 
+}
+      """ .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167400 <http://spinrdf.org/sp#text> "INSERT { $subject rdfs:label $value} WHERE {}" .
+  
+  <https://dev.performing-arts.ch/container/fieldDefinitionContainer/Aggregation_Name>
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:02.869Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <https://dev.performing-arts.ch/container/fieldDefinitionContainer/Aggregation_Name> .
+  
+  <https://dev.performing-arts.ch/container/fieldDefinitionContainer/Aggregation_Name>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

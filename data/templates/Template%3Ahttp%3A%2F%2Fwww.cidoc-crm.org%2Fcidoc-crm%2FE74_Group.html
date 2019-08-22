@@ -1,20 +1,30 @@
 <ol class="page-breadcrumb">
-  <li>
-    <mp-link title="Home" url="/">Home</mp-link>
-  </li>
-  <li class="active">
-    [[> sapaModule:RecordLabel ]]
-  </li>
+    <li>
+        <mp-link title="Home" url="/">Home</mp-link>
+    </li>
+    <li class="active">
+        [[> sapaModule:RecordLabel ]]
+    </li>
 </ol>
-
 
 <div class="page">
 
     [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
-  
-  <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='internal-data' unmount-on-exit=true>
-    <bs-tab event-key='internal-data' title='Summary'>
-      [[> sapaModule:ActorFields ]]
-    </bs-tab>
-  </bs-tabs>  
+
+    <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
+        <bs-tab event-key='about' title='About'>
+            [[> sapaModule:GroupSummary]]
+        </bs-tab>
+
+        <bs-tab event-key='productions' title='Productions'>
+            [[> sapaModule:GroupProductions]]
+        </bs-tab>
+
+        [[#if (hasPermission "forms:ldp:*")]] 
+        <bs-tab event-key='group' title='Edit'>
+            [[> sapaModule:GroupForm]]
+        </bs-tab>
+        [[/if]]
+
+    </bs-tabs>
 </div>

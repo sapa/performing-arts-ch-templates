@@ -1,0 +1,52 @@
+  <div data-flex-layout='row top-stretch'>
+    <semantic-form 
+     [[#if create]]
+        new-subject-template='http://data.performing-arts.ch/t/{{UUID}}'
+        post-action="redirect"
+      [[else]]
+        subject='[[this]]'
+        post-action="reload"
+     [[/if]]
+      
+      browser-persistence=true
+      persistence='ldp' 
+      form-id='places'
+      fields='[[fieldDefinitions
+        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type"
+        cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_CIDOC_type"
+        official_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Official_name_(venue)"
+        alternative_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Alternative_name_(venue)"
+        acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Acronym_(venue)"
+        occupies_location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_occupies_location"
+        formation_year="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan"
+        dissolution_year="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_dissolved_by_timespan"
+        website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
+        sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
+      ]]'>
+      <bs-panel>
+        <semantic-form-recover-notification></semantic-form-recover-notification>
+        <div style="display: none;">
+            <semantic-form-hidden-input for='rdf_type' default-value='http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object'></semantic-form-hidden-input>
+            <semantic-form-hidden-input for='cidoc_type' default-value='http://vocab.performing-arts.ch/dwmkn'></semantic-form-hidden-input>
+        </div>
+        <semantic-form-text-input for="official_name"></semantic-form-text-input>
+        <semantic-form-text-input for="alternative_name"></semantic-form-text-input>
+        <semantic-form-text-input for="acronym"></semantic-form-text-input>
+        <semantic-form-tree-picker-input for="occupies_location" ></semantic-form-tree-picker-input>
+        <semantic-form-text-input for="formation_year"></semantic-form-text-input>
+        <semantic-form-text-input for="dissolution_year"></semantic-form-text-input>
+        <semantic-form-text-input for="website"></semantic-form-text-input>
+        <semantic-form-text-input for="sameAs"></semantic-form-text-input>
+        <semantic-form-errors></semantic-form-errors>
+        <!-- save and reset button for form -->
+        <button
+          name="submit"
+          class="btn btn-default"
+        >Save</button>
+        <button
+          name="reset"
+          class="btn btn-default"
+        >Reset</button>
+      </bs-panel>
+    </semantic-form>
+  </div>

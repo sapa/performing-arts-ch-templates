@@ -1,24 +1,21 @@
 <div>
-  {{#ifCond field.range.value "==" "http://metaphacts.com/Link"}}
-    
-    <a href={{value.value.value}}>{{value.value.value}}</a>
-     {{else}}
-    {{#ifCond field.xsdDatatype.value "=="  "http://www.w3.org/2001/XMLSchema#anyURI"}}
-    		[[!-- un-comment for debugging only {{log value}} --]]
-        
-        {{#if value.label}}
-          <semantic-link uri="{{value.value.value}}">{{value.label}}</semantic-link> 
-        {{else}}
-          <semantic-link uri="{{value.value.value}}"></semantic-link>
-        {{/if}}
+    {{#ifCond field.range.value "==" "http://metaphacts.com/Link"}}
+        <a href={{value.value.value}}>{{value.value.value}}</a>
+    {{else}}
+        {{#ifCond field.xsdDatatype.value "==" "http://www.w3.org/2001/XMLSchema#anyURI"}}
+            [[!-- un-comment for debugging only {{log value}} --]]
+            {{#if value.label}}
+                <semantic-link class="{{value.binding.class.value}}" iri="{{value.value.value}}">{{value.label}}</semantic-link> 
+            {{else}}
+                <semantic-link class="{{value.binding.class.value}}" iri="{{value.value.value}}"></semantic-link>
+            {{/if}}
     	{{else}}
-        {{#if value.label}}
-          {{value.label}}
-        {{else}}
-          {{value.value.value}}
+            {{#if value.label}}
+                {{value.label}}
+            {{else}}
+                {{value.value.value}}
     			{{#if value.value.lang}}({{value.value.lang}}){{/if}}
-        {{/if}}
-      {{/ifCond}}
-  {{/ifCond}}
+            {{/if}}
+        {{/ifCond}}
+    {{/ifCond}}
 </div>
-

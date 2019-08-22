@@ -1,0 +1,38 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description>
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167608;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://temp-ric.performing-arts.ch/E3_Record_Set>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167610;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167609;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Inhaltsbeschreibung (record set)"@de,
+      "Content description (record set)"@en, "description du contenu (record set)"@fr, "descrizione dei contenuti (record set)"@it .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167610 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167608 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167609 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167608 <http://spinrdf.org/sp#text> "DELETE { $subject dc:description $value} WHERE {}" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167609 <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject dc:description ?value .
+}""" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167610 <http://spinrdf.org/sp#text> "INSERT { $subject dc:description $value} WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description>
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:07.322Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

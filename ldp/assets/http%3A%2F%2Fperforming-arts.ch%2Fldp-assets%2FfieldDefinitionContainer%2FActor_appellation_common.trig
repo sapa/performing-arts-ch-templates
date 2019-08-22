@@ -1,0 +1,54 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common>
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167413;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167412;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167414;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "4";
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Actor appellation common" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167412 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT { 
+  $subject rdfs:label $value ;
+    crm:P131_is_identified_by ?identifier .
+  ?identifier a crm:E82_Actor_Appellation ;
+    crm:P2_has_type spav:yatcx ;
+  	rdf:value $value .
+} WHERE {
+      BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\",MD5(CONCAT(STR($subject), \"common_appellation\")))) AS ?identifier)
+}""" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167413 <http://spinrdf.org/sp#text> """DELETE {
+  $subject rdfs:label $value .
+  $subject crm:P131_is_identified_by ?identifier.
+  ?identifier a crm:E82_Actor_Appellation ;
+    crm:P2_has_type ?type ;
+    rdf:value $value .
+} WHERE {}""" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167414 <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject crm:P131_is_identified_by ?identifier .
+  ?identifier a crm:E82_Actor_Appellation ;
+    crm:P2_has_type spav:yatcx ;
+  	rdf:value $value .
+}""" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167413 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167414 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common>
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:03.330Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

@@ -1,0 +1,31 @@
+<semantic-table 
+  query='SELECT ?plan ?season ?genre ?stagedirection ?stagedirectionclass
+    WHERE {
+        ?production crm:P14_carried_out_by ?? ;
+            crm:P2_has_type spav:muwgo .
+        ?expressioncreation crm:P9_consists_of ?production ;
+            frbr:R17_created ?plan .
+        OPTIONAL {
+            ?expressioncreation crm:P10_falls_within ?season .
+            FILTER(CONTAINS(STR(?season), "/s/"))
+        }
+        OPTIONAL {
+            ?work frbr:R12_is_realised_in ?plan ;
+                crm:P2_has_type ?genre .
+        }
+        OPTIONAL {
+            ?expressioncreation crm:P9_consists_of ?activity .
+            ?activity crm:P2_has_type spav:mutnt ;
+                crm:P14_carried_out_by ?stagedirection .
+            BIND(IF(CONTAINS(STR($stagedirection), "/u/"), "unidentified", "identified") AS ?stagedirectionclass)
+        }
+    } ORDER BY ASC(?season)'
+  column-configuration='[
+    {"variableName": "season", "displayName": "Season"}, 
+    {"variableName": "plan", "displayName": "Title"},
+    {"variableName": "genre", "displayName": "Genre"},
+    {"displayName": "Stage direction", "cellTemplate": "<div>{{#if stagedirection.value}}<semantic-link class=\"{{stagedirectionclass.value}}\" iri=\"{{stagedirection.value}}\">{{/if}}</div>"}
+  ]'
+  number-of-displayed-rows=20
+  options='{"showFilter": false}'
+></semantic-table>

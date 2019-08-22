@@ -1,0 +1,111 @@
+// LESS Variables
+@sapa-blue: rgb(8, 54, 88);
+@sapa-red: rgb(230, 55, 92);
+
+@base-color: @sapa-blue;
+
+@link: lighten(@sapa-blue, 15%);
+@link-hover: lighten(@sapa-blue, 30%);
+
+@navbar-link: hsl(0, 0%, 80%);
+@navbar-link-hover: hsl(0, 0%, 100%);
+@navbar-back: @base-color;
+// @navbar-back-hover: darken(@base-color, 30%);
+
+a {
+    color: @link;
+}
+
+a.unidentified {
+    color: black;
+}
+
+a:hover, a:focus {
+    color: @link-hover;
+}
+
+.container-fluid {
+    padding-left: 24px; // brand distance left
+}
+
+#application .metaphacts-header-navbar li a {
+    font-weight: normal;
+}
+
+.navbar-inverse  {
+    background-color: @navbar-back; // navigation background
+}
+
+.navbar-brand {
+    float: none;
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-brand {
+    color: @navbar-link; // brand link color
+}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    color: @navbar-link-hover; // brand link hover color
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: @navbar-link; // navigation link color
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: @navbar-link-hover; // navigation link hover color
+}
+
+.dropdown-menu {
+    background-color: @navbar-back;
+}
+
+.dropdown > .dropdown-menu > li > a {
+    color: @navbar-link;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: @navbar-back;
+}
+
+#record-tabs > .nav-tabs > li > a, #tabs > .nav-tabs > li > a, .page__body-navtabs > .nav-tabs > li > a, .open-sidebar__tabs > .nav-tabs > li > a {
+    color: black;
+}
+
+#tabs > .nav-tabs > li > a:hover {
+    color: @link-hover;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: hsl(0, 0%, 90%);
+}
+
+#tabs > .nav-tabs > li > a:hover {
+    color: black;
+}
+
+span.Tree--leafNode {
+    margin-left: 0;
+}
+
+div.tree-view_children span.Tree--leafNode {
+    margin-left: 20px;
+}
+
+#application > div > .footer {
+    background-color: @navbar-back;
+}
+
+.footer > .footer__pixel-groove {
+    margin-top: 0;
+    border-width: 0;
+}
+
+.footer > .footer__outer-flex-row {
+    padding: 16px 20px 16px 20px;
+    background-color: @navbar-back;
+}
+
+.footer__links-col {
+    font-size: 0.7em;
+}

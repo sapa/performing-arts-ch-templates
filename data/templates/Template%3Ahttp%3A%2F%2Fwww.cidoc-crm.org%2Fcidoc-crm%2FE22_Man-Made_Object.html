@@ -1,57 +1,166 @@
 <ol class="page-breadcrumb">
-  <li>
-    <mp-link title="Home" url="/">Home</mp-link>
-  </li>
-  <li class="active">
-    [[> sapaModule:RecordLabel ]]
-  </li>
+    <li>
+        <mp-link title="Home" url="/">Home</mp-link>
+    </li>
+    <li class="active">
+        [[> sapaModule:RecordLabel ]]
+    </li>
 </ol>
 
 <div class="page">
 
-  [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]]
+    [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]]
   
-  <bs-tabs id='record-tabs' class='page__body-navtabs--borderless' default-active-key='summary' unmount-on-exit=true>
-    <bs-tab event-key='summary' title='Summary'>
-      <div data-flex-layout='row top-stretch'>
-        [[#if (ask "ASK { ?? crm:P65_shows_visual_item ?item . }")]]
-        <div data-flex-self='size-xsmall'>
-          [[!--  IIIF configuration here --]] IIIF t.b.d.
-        </div>
-        [[else]]
-        <div data-flex-self='size-xsmall' style="color:#e8e6e6;font-weight:700;" class="text-center">
-          <i class="fa fa-file-image-o" style="font-size:70px;" aria-hidden="true"></i><br><br>
-          No document preview available.
-        </div>
-        [[/if]]
-        <div class='table-responsive'>
-          <table class='table'>
-            <thead role='header'>
-              <tr>
-                <th>Field</th>
-                <th>Value</th>
-              </tr>
-            </thead>
-            <mp-field-visualization
-            subject='[[this]]'
-            fields='[[fieldDefinitions
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_type"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_contact_point="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_contact_point"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E19_Physical_Object_has_current_permanent_location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E19_Physical_Object_has_current_permanent_location"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_current_or_former_member_of_group="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_current_or_former_member_of_group"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_dissolved_by_timespan="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_dissolved_by_timespan"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_occupies_locartion="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_occupies_locartion"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
-              http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E70_Thing_was_used_for_activity="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E70_Thing_was_used_for_activity"
-            ]]'
+    <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
+        <bs-tab event-key='about' title='About'>
 
-            template='{{> sapaModule:FieldBasedVisualization subject="[[this]]"}}' [[!-- [[>sapaModule:FieldBasedVisualization]] --]] 
-            ></mp-field-visualization>
-          </table>
-        </div>
-      </div>
+        <bs-col sm="4">
+
+            <!-- official name -->
+            <semantic-query 
+                query='SELECT ?typelabel ?value
+                WHERE {
+                    ?? crm:P1_is_identified_by ?app .
+                    ?app a crm:E41_Appellation ; 
+                    crm:P2_has_type spav:yanuj ;
+                    rdf:value ?value .
+                } LIMIT 1'
+            template='<p><strong>{{#each bindings}}{{value.value}}{{/each}}</strong></p>'>
+            </semantic-query>
+
+            <!-- alternative names -->
+            <semantic-query 
+                query='SELECT distinct ?value ?type ?typesort
+                WHERE {
+                    VALUES (?type ?typesort) { (spav:yamqk 1) (spav:yavtx 2) }
+                    ?? crm:P1_is_identified_by ?appellation .
+                    ?appellation a crm:E41_Appellation ; 
+                    crm:P2_has_type ?type ;
+                    rdf:value ?value .
+                    { ?appellation crm:P2_has_type spav:yamqk . }
+                    UNION
+                    { ?appellation crm:P2_has_type spav:yavtx . }
+                } ORDER BY ?typesort'
+                template='<p>({{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}})</p>'>
+            </semantic-query>
+
+            <!-- place -->
+            <semantic-query 
+                query="SELECT ?place
+                WHERE {
+                    ?? crm:P156_occupies ?p .
+                    ?p crm:P89_falls_within ?place .
+                }"
+                template='<p>{{#each bindings}}{{#if @first}}<semantic-link iri="{{place.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link iri="{{place.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</p>'>
+            </semantic-query>
+
+            <!-- dates -->
+            <semantic-query 
+                query='SELECT ?dates
+                WHERE {
+                    OPTIONAL {
+                        ?? crm:P95i_was_formed_by ?formation .
+                        ?formation a crm:E66_Formation ;
+                            crm:P4_has_time-span ?formationtime .
+                        ?formationtime rdfs:label ?formationlabel .
+                    }
+                    OPTIONAL {
+                        ?? crm:P99i_was_dissolved_by ?dissolution .
+                        ?dissolution a crm:E68_Dissolution ;
+                            crm:P4_has_time-span ?dissolutiontime .
+                        ?dissolutiontime rdfs:label ?dissolutionlabel .
+                    }
+                    BIND(CONCAT(COALESCE(?formationlabel, "X"), "-", COALESCE(?dissolutionlabel, "X")) AS ?predates)
+                    BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
+                }'
+                template='{{#each bindings}}<p>{{dates.value}}</p>{{/each}}'>
+            </semantic-query>
+
+            <!-- managed by -->
+            <semantic-query 
+                query="SELECT DISTINCT ?actor
+                WHERE {
+                    {
+                        ?activity crm:P16_used_specific_object ?? .
+                    }
+                    UNION
+                    {
+                        ?parent crm:P46_is_composed_of ?? .
+                        ?activity crm:P16_used_specific_object ?parent .
+                    }
+                    ?activity crm:P2_has_type spav:mujfv .
+                    ?actor crm:P14i_performed ?activity .
+                }"
+                template='<div><h5>Managed by</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{actor.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- is part of -->
+            <semantic-query 
+                query="SELECT ?parent
+                WHERE {
+                    ?parent crm:P46_is_composed_of ?? .
+                }"
+                template='<div><h5>Is part of</h5>{{#each bindings}}{{#if @first}}<semantic-link iri="{{parent.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link iri="{{parent.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- contains -->
+            <mp-field-visualization
+                subject='[[this]]'
+                fields='[[fieldDefinitions
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of"
+                ]]'
+                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+                >
+            </mp-field-visualization> 
+
+        </bs-col>
+
+        <bs-col sm="4">
+            <mp-field-visualization
+                subject='[[this]]'
+                fields='[[fieldDefinitions
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of"
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
+                ]]'
+                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+            >
+            </mp-field-visualization> 
+        </bs-col>
+
+        <bs-col sm="4">
+            [[> sapa:ExternalResources]]
+        </bs-col>
+
     </bs-tab>
+    <bs-tab event-key='productions' title='Productions'>
+
+        <semantic-table 
+          query='SELECT ?plan ?season
+            WHERE {
+                ?genericperformance crm:P8_took_place_on_or_within ?? ;
+                    frbr:R25_performed ?plan .
+                OPTIONAL {
+                    ?expressioncreation crm:P10_falls_within ?season .
+                    FILTER(CONTAINS(STR(?season), "/s/"))
+                }
+            } ORDER BY ASC(?season)'
+          column-configuration='[
+            {"variableName": "season", "displayName": "Season"}, 
+            {"variableName": "plan", "displayName": "Production"}
+          ]'
+          number-of-displayed-rows=20
+          options='{"showFilter": false}'
+        ></semantic-table>
+
+    </bs-tab>
+
+    [[#if (hasPermission "forms:ldp:*")]] 
+    <bs-tab event-key='place editing' title='Edit'>
+    [[> sapaModule:VenueForm]]
+    </bs-tab>
+    [[/if]]
+
   </bs-tabs>  
 </div>

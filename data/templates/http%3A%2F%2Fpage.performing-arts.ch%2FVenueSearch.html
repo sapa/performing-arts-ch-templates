@@ -1,27 +1,26 @@
-[[#> sapaModule:BaseSearchPartial limit=500 showTable="true" showChart="true" showMap="true" defaultTabView="table"]]
+[[#> sapaModule:BaseSearchPartial limit=500 showTable="true" defaultTabView="table"]]
   <semantic-search-query-keyword
     domain='<[[resolvePrefix "crm:E22_Man-Made_Object"]]>'
     query='SELECT ?subject WHERE {
-      ?subject a crm:E22_Man-Made_Object.
-      $subject crm:P2_has_type <http://vocab.performing-arts.ch/dwmkn>.
-      ?type skos:prefLabel ?value.
-      ?subject rdfs:label ?label .
+      ?subject a crm:E22_Man-Made_Object ;
+        crm:P2_has_type spav:dwmkn ;
+        rdfs:label ?label .
+      FILTER(CONTAINS(STR(?subject), "/t/"))
+   SERVICE <http://www.bigdata.com/rdf/search#search> {
       ?label bds:search ?__token__ ;   
-        bds:minRelevance "0.3" ; 
+        bds:minRelevance "0.1" ; 
         bds:relevance ?score ; 
         bds:matchAllTerms "true" .
+     }
       BIND(STRLEN(?label) as ?length).
-      FILTER (NOT EXISTS  { ?subject  crm:P46i_forms_part_of  ?v})
-      FILTER(!CONTAINS(STR(?subject),"/u/"))	
-    } ORDER BY  ?label'
-
-    default-query='SELECT DISTINCT ?subject WHERE {
-      ?subject a crm:E22_Man-Made_Object; 
-        rdfs:label ?label. 
-      FILTER(!CONTAINS(STR(?subject),"/u"))
-      $subject crm:P2_has_type <http://vocab.performing-arts.ch/dwmkn>.
-      FILTER (NOT EXISTS  { ?subject  crm:P46i_forms_part_of  ?v})
-    } ORDER BY DESC(?subject) '
+    } ORDER BY ?label'
+    _default-query='SELECT DISTINCT ?subject WHERE {
+      ?subject a crm:E22_Man-Made_Object ;
+        rdfs:label ?label ;
+        crm:P2_has_type spav:dwmkn .
+      FILTER(CONTAINS(STR(?subject), "/t/"))
+      FILTER(NOT EXISTS { ?subject  crm:P46i_forms_part_of  ?v })
+    } ORDER BY ?label'
   >
  </semantic-search-query-keyword>
 [[/sapaModule:BaseSearchPartial]]

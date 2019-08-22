@@ -1,0 +1,46 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_type/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_type> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167430;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://temp-ric.performing-arts.ch/E3_Record_Set>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167432;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167429;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2004/02/skos/core#Concept>;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167431;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Art (record set)"@de, "Type (record set)"@en,
+      "sorte (record set)"@fr, "tipo (record set)"@it .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167429 <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  $subject crm:P2_has_type ?value.
+}""";
+    a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167431 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167432 <http://spinrdf.org/sp#text> "INSERT { $subject crm:P2_has_type $value} WHERE {}" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167430 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject crm:P2_has_type $value} WHERE {}" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167432 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167431 <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
+  VALUES ($value) {
+    (spav:dffop)
+    (spav:dfblx)
+  }
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_type> a
+      <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:03.804Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_type> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_type> a
+      <http://www.w3.org/ns/ldp#Resource> .
+}

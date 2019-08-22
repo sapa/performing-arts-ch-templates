@@ -1,0 +1,15 @@
+@prefix User: <http://www.metaphacts.com/resource/user/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix Platform: <http://www.metaphacts.com/ontologies/platform#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+<http://www.metaphacts.com/ontologies/platform#formContainer/context> {
+  Platform:formContainer rdfs:label "Form Container";
+    <http://www.w3.org/ns/prov#wasAttributedTo> User:admin;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-02-06T11:35:29.455Z"^^xsd:dateTime .
+  
+  Platform:rootContainer <http://www.w3.org/ns/ldp#contains> Platform:formContainer .
+  
+  Platform:formContainer a <http://www.w3.org/ns/ldp#Container>;
+    rdfs:comment "Container to store statement created by froms.";
+    a <http://www.w3.org/ns/ldp#Resource>, <http://www.w3.org/ns/prov#Entity> .
+}
