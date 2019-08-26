@@ -16,9 +16,18 @@
             [[> sapaModule:GroupSummary]]
         </bs-tab>
 
+      
+       [[#if (ask 'ASK {{ ?activity <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ?? . ?activity a <http://www.cidoc-crm.org/cidoc-crm/E7_Activity>}}')]]
+
         <bs-tab event-key='productions' title='Productions'>
+             
             [[> sapaModule:GroupProductions]]
+       
         </bs-tab>
+
+      
+
+        [[/if]]
 
         [[#if (hasPermission "forms:ldp:*")]] 
         <bs-tab event-key='group' title='Edit'>

@@ -1,21 +1,21 @@
 <semantic-search 
     [[#if limit]]limit=[[limit]][[/if]] 
-    config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?field a <http://www.metaphacts.com/ontology/fields#Field>; <http://www.metaphacts.com/ontology/fields#range> ?range ; <http://www.metaphacts.com/ontology/fields#range> ?domain . }" escape=false) '{"categories": {"<http://www.cidoc-crm.org/cidoc-crm/E53_Place>": [{"kind": "hierarchy", "queryPattern": "{?subject ?__relation__ ?__value__ .}"}],"<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>": [ { "kind": "date-range", "datatype": "http://www.w3.org/2001/XMLSchema#year" ,"format":"YYYY", "queryPattern": "{ ?event ?__relation__ ?subject ; crm:P4_has_time-span ?timespan .?timespan P82_at_some_time_within ?year ; ?year rdf:value ?__value__  . }" } ]}, "searchProfile": {"categories": [{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>", "label": "Thing"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",  "label": "Group"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",  "label": "Place"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",  "label": "Actor"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>",  "label": "Date"}, {"iri": "<http://www.w3.org/2000/01/rdf-schema#Class>",  "label": "Concept"}], "relations": [ ]}}"}" ']]'
+    config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?field a <http://www.metaphacts.com/ontology/fields#Field>;  <http://www.metaphacts.com/ontology/fields#domain> <http://internalschema/Common> . }" escape=false) '{"categories": {"<http://www.cidoc-crm.org/cidoc-crm/E53_Place>": [{"kind": "hierarchy", "queryPattern": "{?subject ?__relation__ ?__value__ .}"}],"<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>": [ { "kind": "date-range", "datatype": "http://www.w3.org/2001/XMLSchema#year" ,"format":"YYYY", "queryPattern": "{ ?event ?__relation__ ?subject ; crm:P4_has_time-span ?timespan .?timespan P82_at_some_time_within ?year ; ?year rdf:value ?__value__  . }" } ]}, "searchProfile": {"categories": [{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>", "label": "Venues"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",  "label": "Group"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",  "label": "Place"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",  "label": "Actor"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>",  "label": "Date"},{"iri": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",  "label": "Production"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",  "label": "Person"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E55_Type>",  "label": "Type"},{"iri": "<http://www.w3.org/2000/01/rdf-schema#Class>",  "label": "Concept"}], "relations": [ ]}}"}" ']]'
 >
-  
+
  [[> @partial-block ]] 
     
   <div data-flex-layout="row stretch-stretch">
     <div data-flex-self="size-1of3" style="flex: 0 0 0;">
       <semantic-search-facet
-        open-by-default=false 
+        open-by-default=false            
         [[!--listen-to-context-switch=true--]]
       ></semantic-search-facet>
     </div>
        <semantic-search-result-holder>
           <div data-flex-self="md-full">
         <semantic-search-result>
-          <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}"
+          <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject ?icon ?title {}"
                                    template='{{> template}}'
                                    >
             <template id='template'>
@@ -38,7 +38,7 @@
           [[#if showGrid]] <bs-tab event-key='1' title='Grid'>
             <semantic-search-result>
               <semantic-table 
-                query='SELECT DISTINCT ?subject WHERE {
+                query='SELECT DISTINCT ?subject ?dLabel WHERE {
                             OPTIONAL{ ?subject rdfs:label ?dLabel }
                             BIND(COALESCE(?dLabel, "zz") as ?displayLabel)
                         } ORDER BY ASC(?displayLabel)' 
@@ -55,15 +55,111 @@
           [[#if showTable]]<bs-tab event-key='2' title='Table'> 
             <semantic-search-result>
               <semantic-table 
-                query='SELECT DISTINCT ?subject WHERE {
-  							?subject rdfs:label ?label
-						} ORDER BY ASC(?label)' 
-                id="table-result" 
-                options='{"showFilter": false}'>
-              </semantic-table>
-            </semantic-search-result>
-          </bs-tab>[[else]][[/if]]
+                query='SELECT DISTINCT  ?name ?subject ?icon ?title
+								WHERE {
+  				
 
+                } ORDER BY DESC(?name)' 
+                id="table-result" 
+                options='{"showFilter": false}'
+                column-configuration='[
+ 							  {"variableName": "icon", "displayName": "Icon", "cellTemplate": "<div><img src={{icon.value}} title={{title.value}} height=\"25\" width=\"25\"></div>" },             
+                {"variableName": "subject", "displayName": "Subject"},
+								{"displayName": "Additional Information", "cellTemplate": "{{> first-template}}"}
+  ]'              
+                              >
+
+ 
+         
+                <template id='first-template'> 
+                  
+                {{#ifCond title.value "==" 'Production'}}
+                  			<semantic-query 
+                query='SELECT ?producerlabel ?timespanlabel WHERE {      
+  							<{{subject.value}}> rdfs:label ?label .
+  							?expressioncreation frbr:R17_created <{{subject.value}}> .
+                ?expressioncreation crm:P9_consists_of ?production . 
+                ?production crm:P2_has_type spav:muwgo . 
+                ?production crm:P14_carried_out_by ?producer . 
+                ?producer rdfs:label ?producerlabel .
+								?performance frbr:R25_performed <{{subject.value}}> . 
+                ?performance crm:P9_consists_of ?premiere . 
+                ?premiere crm:P4_has_time-span ?timespan . 
+                ?timespan rdfs:label ?timespanlabel .
+                    } '
+                 template = '{{> second-template}} '>           
+        								<template id='second-template'> 
+         							 		<div>{{#each bindings}}<div>Producer: {{producerlabel.value}} <br> Date: {{timespanlabel.value}}</div>{{/each}}</div>
+                    		</template>
+        							</semantic-query>   
+                  {{/ifCond}}
+                  
+                  {{#ifCond title.value "==" 'Place'}}
+                  			<semantic-query 
+                		query='SELECT ?parentlabel WHERE {      
+  						  	 <{{subject.value}}>  crm:P89_falls_within ?parent . 
+               	 		?parent rdfs:label ?parentlabel .
+                    } '
+                        template = '{{> second-template}} '>           
+        								<template id='second-template'> 
+         							 		<div>{{#each bindings}}<div>Parent Place: {{parentlabel.value}} <br></div>{{/each}}</div>
+                    		</template>
+        							</semantic-query> 
+                  {{/ifCond}}
+                  
+                  {{#ifCond title.value "==" 'Person'}}
+                  			<semantic-query 
+                	query='SELECT ?appellationvalue WHERE {      
+  						    <{{subject.value}}>  crm:P131_is_identified_by ?appellation .
+                  ?appellation rdf:value ?appellationvalue .
+                    } '
+                        template = '{{> second-template}} '>           
+        								<template id='second-template'> 
+         							 		<div> {{log this}}{{#each bindings}}<div>Alternative Name: {{appellationvalue.value}} <br></div>{{/each}}</div>
+                    		</template>
+        							</semantic-query> 
+                  {{/ifCond}}
+                  
+                  
+                   {{#ifCond title.value "==" 'Venue'}}
+                  			<semantic-query 
+                	query='SELECT ?parentvlabel ?vplacelabel WHERE {      
+  								?parentv crm:P46_is_composed_of <{{subject.value}}>  . 
+               	 	?parentv rdfs:label ?parentvlabel .            
+									?subject crm:P156_occupies ?venueplace .
+                	?venueplace crm:P89_falls_within ?vplace . 
+                	?vplace rdfs:label ?vplacelabel 
+
+                    } '
+                        template = '{{> second-template}} '>           
+        								<template id='second-template'> 
+         							 		<div> {{log this}}{{#each bindings}}<div>Parent Venue: {{parentvlabel.value}} <br>Place: {{vplace.value}}</div>{{/each}}</div>
+                    		</template>
+        							</semantic-query> 
+                  {{/ifCond}}
+                  
+                            {{#ifCond title.value "==" 'Group'}}
+                  			<semantic-query 
+                query='SELECT ?appellationvalue WHERE {      
+  						   <{{subject.value}}>  crm:P131_is_identified_by ?appellation .
+                ?appellation rdf:value ?appellationvalue .
+                    } '
+                        template = '{{> second-template}} '>           
+        								<template id='second-template'> 
+         							 		<div> {{log this}}{{#each bindings}}<div>Alternative Name: {{appellationvalue.value}} <br></div>{{/each}}</div>
+                    		</template>
+        							</semantic-query> 
+                  {{/ifCond}}
+								</template> 		
+                     
+              </semantic-table> 
+            </semantic-search-result>
+         
+          </bs-tab>[[else]][[/if]]
+          
+
+          
+          
            [[#if showChart]] <bs-tab event-key="3" title="Chart">
             <semantic-search-result-context ranges='["http://www.cidoc-crm.org/cidoc-crm/E39_Actor","http://www.cidoc-crm.org/cidoc-crm/E74_Group", "http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object", "http://www.cidoc-crm.org/cidoc-crm/E53_Place"]'>
               <semantic-search-result>

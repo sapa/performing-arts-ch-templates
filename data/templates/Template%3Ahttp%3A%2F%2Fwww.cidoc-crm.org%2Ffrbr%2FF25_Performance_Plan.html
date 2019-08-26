@@ -78,703 +78,121 @@
 
         </bs-col>
         <bs-col sm="4">
+          
+           <!-- creation functions - direction -->
+          [[> sapaModule:ShowPerformances function="spav:mucbq"]]
+          
+           <!-- creation functions - stage direction -->
+          [[> sapaModule:ShowPerformances function="spav:mutnt"]]
+          
+          <!-- creation functions - assistant stage direction -->
+          [[> sapaModule:ShowPerformances function="spav:mugkn"]]
+          
+          <!-- creation functions - film direction -->
+          [[> sapaModule:ShowPerformances function="spav:muctj"]]
+          
+          <!-- creation functions - dramaturgy -->
+          [[> sapaModule:ShowPerformances function="spav:musim"]]
+          
+          <!-- creation functions - choreography -->
+          [[> sapaModule:ShowPerformances function="spav:mubbv"]]
+          
+          <!-- creation functions - conductor -->
+          [[> sapaModule:ShowPerformances function="spav:muqfg"]]
+          
+          <!-- creation functions - choral conductor -->
+					[[> sapaModule:ShowPerformances function="spav:mufcc"]]
 
-            <!-- creation functions - direction -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mucbq) # direction
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+					<!-- creation functions - stage design -->
+					[[> sapaModule:ShowPerformances function="spav:mulga"]]
 
-            <!-- creation functions - stage direction -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mutnt) # stage direction
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+					<!-- creation functions - light -->
+					[[> sapaModule:ShowPerformances function="spav:murni"]]
 
-            <!-- creation functions - assistant stage direction -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mugkn) # assistant stage direction
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+          <!-- creation functions - costume design -->
+					[[> sapaModule:ShowPerformances function="spav:muecs"]]
+    
+          <!-- creation functions - video -->
+					[[> sapaModule:ShowPerformances function="spav:muqju"]]
 
-            <!-- creation functions - film direction -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muctj) # film direction
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+          <!-- creation functions - projection -->
+					[[> sapaModule:ShowPerformances function="spav:mufwk"]]
 
-            <!-- creation functions - dramaturgy -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:musim) # dramaturgy
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+          <!-- creation functions - sound -->
+					[[> sapaModule:ShowPerformances function="spav:muxzh"]]
 
-            <!-- creation functions - choreography -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mubbv) # choreography
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+          <hr>
+          
+          <!-- reference functions - authorship -->
+					[[> sapaModule:ShowPerformances2 function="spav:muiuk"]]
 
-            <!-- creation functions - conductor -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muqfg) # conductor
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+          <!-- reference functions - libretto -->
+					[[> sapaModule:ShowPerformances2 function="spav:mujmh"]]
 
-            <!-- creation functions - choral conductor -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mufcc) # choral conductor
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- creation functions - stage design -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mulga) # stage design
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- creation functions - light -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:murni) # light
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- creation functions - costume design -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muecs) # costume design
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- creation functions - video -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muqju) # video
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- creation functions - projection -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mufwk) # projection
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- creation functions - sound -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muxzh) # sound
-                        }
-                        ?expressioncreation frbr:R17_created ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <hr>
-
-            <!-- reference functions - authorship -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muiuk) # authorship
-                        }
-                        ?? frbr:R14_incorporates ?reference .
-                        ?expressioncreation frbr:R17_created ?reference ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- reference functions - libretto -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mujmh) # libretto
-                        }
-                        ?? frbr:R14_incorporates ?reference .
-                        ?expressioncreation frbr:R17_created ?reference ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- reference functions - lyrics -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muvhj) # lyrics
-                        }
-                        ?? frbr:R14_incorporates ?reference .
-                        ?expressioncreation frbr:R17_created ?reference ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- reference functions - adaption -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mudcw) # adaption
-                        }
-                        ?? frbr:R14_incorporates ?reference .
-                        ?expressioncreation frbr:R17_created ?reference ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- reference functions - translation -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muwyo) # translation
-                        }
-                        ?? frbr:R14_incorporates ?reference .
-                        ?expressioncreation frbr:R17_created ?reference ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- reference functions - added text -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mupvk) # added text
-                        }
-                        ?? frbr:R14_incorporates ?reference .
-                        ?expressioncreation frbr:R17_created ?reference ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- reference functions - added lyrics -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muzua) # added lyrics
-                        }
-                        ?? frbr:R14_incorporates ?reference .
-                        ?expressioncreation frbr:R17_created ?reference ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- reference functions - screenplay -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mupot) # screenplay
-                        }
-                        ?? frbr:R14_incorporates ?reference .
-                        ?expressioncreation frbr:R17_created ?reference ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- reference functions - composition -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mufbo) # composition
-                        }
-                        ?? frbr:R14_incorporates ?reference .
-                        ?expressioncreation frbr:R17_created ?reference ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                      } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>            
+          <!-- reference functions - lyrics -->
+					[[> sapaModule:ShowPerformances2 function="spav:muvhj"]]
+          
+          <!-- reference functions - adaption -->
+					[[> sapaModule:ShowPerformances2 function="spav:mudcw"]]
+          
+          <!-- reference functions - translation -->
+					[[> sapaModule:ShowPerformances2 function="spav:muwyo"]]
+          
+          <!-- reference functions - added text -->
+					[[> sapaModule:ShowPerformances2 function="spav:mupvk"]]
+          
+          <!-- reference functions - added lyrics -->
+					[[> sapaModule:ShowPerformances2 function="spav:muzua"]]
+          
+          <!-- reference functions - screenplay -->
+					[[> sapaModule:ShowPerformances2 function="spav:mupot"]]
+          
+          <!-- reference functions - composition -->
+					[[> sapaModule:ShowPerformances2 function="spav:mufbo"]]
+          
+          <hr>
 
         </bs-col>
         <bs-col sm="4">
 
-            <!-- performance functions - acting -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:munib) # acting
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+          <!-- performance functions - acting -->
+					[[> sapaModule:ShowPerformances3 function="spav:munib"]]
+          
+          <!-- performance functions - dance -->
+					[[> sapaModule:ShowPerformances3 function="spav:mulcp"]]
+           
+					<!-- performance functions - performance -->
+				  [[> sapaModule:ShowPerformances3 function="spav:muawx"]]
+         
+					<!-- performance functions - pantomine -->
+				  [[> sapaModule:ShowPerformances3 function="spav:mujhq"]]
 
-            <!-- performance functions - dance -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mulcp) # dance
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+          <!-- performance functions - puppet show -->
+				  [[> sapaModule:ShowPerformances3 function="spav:muhkf"]]
+          
+          <!-- performance functions - music performance -->
+				  [[> sapaModule:ShowPerformances3 function="spav:muiim"]]
+          
+          <!-- performance functions - singing -->
+				  [[> sapaModule:ShowPerformances3 function="spav:muygg"]]
 
-            <!-- performance functions - performance -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muawx) # performance
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+ 					<!-- performance functions - intrumental performance -->
+				  [[> sapaModule:ShowPerformances3 function="spav:mupah"]]
+            
+          <!-- performance functions - oeil extérieure -->
+				  [[> sapaModule:ShowPerformances3 function="spav:mudat"]]
 
-            <!-- performance functions - pantomine -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mujhq) # pantomine
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+          <!-- performance functions - narration -->
+				  [[> sapaModule:ShowPerformances3 function="spav:muacs"]]
 
-            <!-- performance functions - puppet show -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muhkf) # puppet show
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+          <!-- performance functions - host -->
+				  [[> sapaModule:ShowPerformances3 function="spav:mupfz"]]
 
-            <!-- performance functions - music performance -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muiim) # music performance
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- performance functions - singing -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muygg) # singing
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- performance functions - intrumental performance -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mupah) # intrumental performance
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mudat) # oeil extérieur
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- performance functions - narration -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:muacs) # narration
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- performance functions - host -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mupfz) # host
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- performance functions - moderation -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:mumnc) # moderation
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
-
-            <!-- performance functions - contribution -->
-            <semantic-query 
-                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment WHERE {
-                        VALUES (?function) {
-                            (spav:munuj) # contribution
-                        }
-                        ?genericperformance frbr:R25_performed ?? ;
-                            crm:P9_consists_of ?activity .
-                        ?activity crm:P2_has_type ?function ;
-                            crm:P14_carried_out_by ?actor .
-                        OPTIONAL { ?activity olo:index ?index . }
-                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
-                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
-                        BIND(IF(CONTAINS(STR($actor), "/u/"), "unidentified", "identified") AS ?class)
-                    } ORDER BY ASC(?index)'
-            template='<div>{{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
-                <li><semantic-link class="{{class.value}}" iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>{{/each}}{{#if @last}}</ul>{{/if}}</div>'>
-            </semantic-query>
+          <!-- performance functions - moderation -->
+				  [[> sapaModule:ShowPerformances3 function="spav:mumnc"]]
+          
+          <!-- performance functions - contribution -->
+				  [[> sapaModule:ShowPerformances3 function="spav:munuj"]]
 
         </bs-col>
       </bs-tab>
