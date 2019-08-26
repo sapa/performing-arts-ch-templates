@@ -1,0 +1,40 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/cidoc_type_common/context> {
+  _:genid-81db77ffecba40649749f1a6beaf3078-guptf9 <http://spinrdf.org/sp#text> "DELETE {   $subject crm:P2_has_type ?value.} WHERE {}";
+    a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/cidoc_type_common>
+    <http://www.metaphacts.com/ontology/fields#domain> <http://internalschema/Commo>;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-81db77ffecba40649749f1a6beaf3078-gh0ii .
+  
+  _:genid-81db77ffecba40649749f1a6beaf3078-gh0ii <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  $subject crm:P2_has_type ?value.
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/cidoc_type_common>
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-81db77ffecba40649749f1a6beaf3078-guptf9;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
+  
+  _:genid-81db77ffecba40649749f1a6beaf3078-eujch <http://spinrdf.org/sp#text> "INSERT {   $subject crm:P2_has_type ?value.} WHERE {}" .
+  
+  _:genid-81db77ffecba40649749f1a6beaf3078-gh0ii a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/cidoc_type_common>
+    <http://www.w3.org/2000/01/rdf-schema#label> "CIDOC type"@en;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-81db77ffecba40649749f1a6beaf3078-eujch .
+  
+  _:genid-81db77ffecba40649749f1a6beaf3078-eujch a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/cidoc_type_common>
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-26T10:07:58.471Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/cidoc_type_common> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/cidoc_type_common>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

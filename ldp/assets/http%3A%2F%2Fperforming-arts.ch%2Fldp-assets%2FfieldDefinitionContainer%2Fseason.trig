@@ -1,0 +1,42 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/season/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/season> a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/frbr/F25_Performance_Plan> .
+  
+  _:genid-4c670540bcbb42d9836a8a1495a2d0d4-ou6m5 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-4c670540bcbb42d9836a8a1495a2d0d4-j67mah <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+   ?expressioncreation  frbr:R17_created ?subject .
+   ?expressioncreation crm:P10_falls_within ?value .
+       FILTER(CONTAINS(STR(?value), \"/s/\"))
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/season> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#anyURI> .
+  
+  _:genid-4c670540bcbb42d9836a8a1495a2d0d4-ou6m5 <http://spinrdf.org/sp#text> """INSERT {
+ ?expressioncreation  frbr:R17_created ?subject .
+   ?expressioncreation crm:P10_falls_within ?value .
+      
+} WHERE {
+             FILTER(CONTAINS(STR(?value), \"/s/\"))
+} """ .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/season> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-4c670540bcbb42d9836a8a1495a2d0d4-j67mah;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E4_Period>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Season"@en .
+  
+  _:genid-4c670540bcbb42d9836a8a1495a2d0d4-j67mah a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/season> <http://www.metaphacts.com/ontology/fields#insertPattern>
+      _:genid-4c670540bcbb42d9836a8a1495a2d0d4-ou6m5;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-22T21:38:27.770Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/season> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/season> a <http://www.w3.org/ns/ldp#Resource> .
+}
