@@ -70,7 +70,6 @@
                 {{#ifCond title.value "==" 'Production'}}
                   			<semantic-query 
                 query='SELECT ?producer ?timespanlabel WHERE {      
-  							<{{subject.value}}> rdfs:label ?label .
   							?expressioncreation frbr:R17_created <{{subject.value}}> .
                 ?expressioncreation crm:P9_consists_of ?production . 
                 ?production crm:P2_has_type spav:muwgo . 
@@ -89,9 +88,7 @@
                   
                   {{#ifCond title.value "==" 'Place'}}
                   			<semantic-query 
-                		query='SELECT ?parent WHERE {      
-  						  	 <{{subject.value}}> crm:P89_falls_within ?parent .
-                    } LIMIT 1'
+                		    query='SELECT ?parent WHERE { <{{subject.value}}> crm:P89_falls_within ?parent . } LIMIT 1'
                         template = '{{> second-template}} '>           
         								<template id='second-template'> 
          							 		<div>{{#each bindings}}<mp-label iri="{{parent.value}}"></mp-label>{{/each}}</div>
@@ -104,8 +101,8 @@
                 	query='SELECT DISTINCT ?appellation WHERE {      
                   <{{subject.value}}> crm:P131_is_identified_by ?appellation .
                   OPTIONAL {
-                    ?appellation crm:P2_has_type ?appellationtype . 
-                    FILTER(?appellationtype != spav:yatcx)
+                    ?appellation crm:P2_has_type ?appellationtype .
+                    MINUS { ?appellation crm:P2_has_type spav:yatcx . }
                   }
                     } '
                         template = '{{> second-template}} '>           
@@ -117,23 +114,26 @@
                   
                    {{#ifCond title.value "==" 'Venue'}}
                   			<semantic-query 
-                	query='SELECT ?parentvlabel ?vplacelabel WHERE {      
-  								?parentv crm:P46_is_composed_of <{{subject.value}}>  . 
-               	 	?parentv rdfs:label ?parentvlabel .            
-									?subject crm:P156_occupies ?venueplace .
-                	?venueplace crm:P89_falls_within ?vplace . 
-                	?vplace rdfs:label ?vplacelabel 
-
-                    } '
+                        query='SELECT DISTINCT ?parent ?place WHERE {
+                            OPTIONAL {
+                              ?parent crm:P46_is_composed_of <{{subject.value}}> ;
+                                crm:P156_occupies ?venueplace .
+                              ?venueplace crm:P89_falls_within ?place .
+                            }
+                            OPTIONAL {
+                              <{{subject.value}}> crm:P156_occupies ?venueplace .
+                              ?venueplace crm:P89_falls_within ?place . 
+                            }
+                          } LIMIT 1'
                         template = '{{> second-template}} '>           
         								<template id='second-template'> 
-         							 		<div> {{log this}}{{#each bindings}}<div>Parent Venue: {{parentvlabel.value}} <br>Place: {{vplace.value}}</div>{{/each}}</div>
+         							 		<div>{{#each bindings}}{{#if parent}}<mp-label iri="{{parent.value}}"></mp-label>{{#if place}}, <mp-label iri="{{place.value}}"></mp-label>{{/if}}{{else}}{{#if place}}<mp-label iri="{{place.value}}"></mp-label>{{/if}}{{/if}}{{/each}}</div>
                     		</template>
         							</semantic-query> 
                   {{/ifCond}}
                   
-                            {{#ifCond title.value "==" 'Group'}}
-                  			<semantic-query 
+                  {{#ifCond title.value "==" 'Group'}}
+                  		<semantic-query 
                         query='SELECT DISTINCT ?appellation WHERE { <{{subject.value}}> crm:P131_is_identified_by ?appellation . }'
                         template = '{{> second-template}} '>           
         								<template id='second-template'> 
@@ -147,10 +147,7 @@
             </semantic-search-result>
          
           [[else]][[/if]]
-          
-
-          
-          
+                    
            [[#if showChart]] <bs-tab event-key="3" title="Chart">
             <semantic-search-result-context ranges='["http://www.cidoc-crm.org/cidoc-crm/E39_Actor","http://www.cidoc-crm.org/cidoc-crm/E74_Group", "http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object", "http://www.cidoc-crm.org/cidoc-crm/E53_Place"]'>
               <semantic-search-result>
@@ -200,8 +197,6 @@
           </bs-tab>[[else]][[/if]]
 
         </bs-tabs>
-
-        <hr>
 
         <div class="pull-right" style="display: flex;">
           <semantic-search-result>
