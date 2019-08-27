@@ -52,74 +52,68 @@
             </semantic-search-result>
           </bs-tab>[[else]][[/if]]
 
-          [[#if showTable]]<bs-tab event-key='2' title='Table'> 
+          [[#if showTable]]
             <semantic-search-result>
               <semantic-table 
-                query='SELECT DISTINCT  ?name ?subject ?icon ?title
+                query='SELECT DISTINCT ?name ?subject ?icon ?title
 								WHERE {
-  				
-
                 } ORDER BY DESC(?name)' 
                 id="table-result" 
-                options='{"showFilter": false}'
+                options='{"showFilter": false, "showTableHeading": false}'
                 column-configuration='[
  							  {"variableName": "icon", "displayName": "Icon", "cellTemplate": "<div><img src={{icon.value}} title={{title.value}} height=\"25\" width=\"25\"></div>" },             
                 {"variableName": "subject", "displayName": "Subject"},
-								{"displayName": "Additional Information", "cellTemplate": "{{> first-template}}"}
-  ]'              
-                              >
-
- 
-         
+                {"displayName": "Additional Information", "cellTemplate": "{{> first-template}}"}
+                ]'>
                 <template id='first-template'> 
                   
                 {{#ifCond title.value "==" 'Production'}}
                   			<semantic-query 
-                query='SELECT ?producerlabel ?timespanlabel WHERE {      
+                query='SELECT ?producer ?timespanlabel WHERE {      
   							<{{subject.value}}> rdfs:label ?label .
   							?expressioncreation frbr:R17_created <{{subject.value}}> .
                 ?expressioncreation crm:P9_consists_of ?production . 
                 ?production crm:P2_has_type spav:muwgo . 
                 ?production crm:P14_carried_out_by ?producer . 
-                ?producer rdfs:label ?producerlabel .
 								?performance frbr:R25_performed <{{subject.value}}> . 
                 ?performance crm:P9_consists_of ?premiere . 
                 ?premiere crm:P4_has_time-span ?timespan . 
                 ?timespan rdfs:label ?timespanlabel .
-                    } '
+                    } LIMIT 1'
                  template = '{{> second-template}} '>           
         								<template id='second-template'> 
-         							 		<div>{{#each bindings}}<div>Producer: {{producerlabel.value}} <br> Date: {{timespanlabel.value}}</div>{{/each}}</div>
+         							 		<div>{{#each bindings}}<mp-label iri="{{producer.value}}"></mp-label>, {{timespanlabel.value}}{{/each}}</div>
                     		</template>
         							</semantic-query>   
                   {{/ifCond}}
                   
                   {{#ifCond title.value "==" 'Place'}}
                   			<semantic-query 
-                		query='SELECT ?parentlabel WHERE {      
-  						  	 <{{subject.value}}>  crm:P89_falls_within ?parent . 
-               	 		?parent rdfs:label ?parentlabel .
-                    } '
+                		query='SELECT ?parent WHERE {      
+  						  	 <{{subject.value}}> crm:P89_falls_within ?parent .
+                    } LIMIT 1'
                         template = '{{> second-template}} '>           
         								<template id='second-template'> 
-         							 		<div>{{#each bindings}}<div>Parent Place: {{parentlabel.value}} <br></div>{{/each}}</div>
+         							 		<div>{{#each bindings}}<mp-label iri="{{parent.value}}"></mp-label>{{/each}}</div>
                     		</template>
         							</semantic-query> 
                   {{/ifCond}}
                   
                   {{#ifCond title.value "==" 'Person'}}
                   			<semantic-query 
-                	query='SELECT ?appellationvalue WHERE {      
-  						    <{{subject.value}}>  crm:P131_is_identified_by ?appellation .
-                  ?appellation rdf:value ?appellationvalue .
+                	query='SELECT DISTINCT ?appellation WHERE {      
+                  <{{subject.value}}> crm:P131_is_identified_by ?appellation .
+                  OPTIONAL {
+                    ?appellation crm:P2_has_type ?appellationtype . 
+                    FILTER(?appellationtype != spav:yatcx)
+                  }
                     } '
                         template = '{{> second-template}} '>           
         								<template id='second-template'> 
-         							 		<div> {{log this}}{{#each bindings}}<div>Alternative Name: {{appellationvalue.value}} <br></div>{{/each}}</div>
+         							 		<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label>{{else}}, <mp-label iri="{{appellation.value}}"></mp-label>{{/if}}{{/each}}</div>
                     		</template>
         							</semantic-query> 
                   {{/ifCond}}
-                  
                   
                    {{#ifCond title.value "==" 'Venue'}}
                   			<semantic-query 
@@ -140,13 +134,10 @@
                   
                             {{#ifCond title.value "==" 'Group'}}
                   			<semantic-query 
-                query='SELECT ?appellationvalue WHERE {      
-  						   <{{subject.value}}>  crm:P131_is_identified_by ?appellation .
-                ?appellation rdf:value ?appellationvalue .
-                    } '
+                        query='SELECT DISTINCT ?appellation WHERE { <{{subject.value}}> crm:P131_is_identified_by ?appellation . }'
                         template = '{{> second-template}} '>           
         								<template id='second-template'> 
-         							 		<div> {{log this}}{{#each bindings}}<div>Alternative Name: {{appellationvalue.value}} <br></div>{{/each}}</div>
+                          <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label>{{else}}, <mp-label iri="{{appellation.value}}"></mp-label>{{/if}}{{/each}}</div>
                     		</template>
         							</semantic-query> 
                   {{/ifCond}}
@@ -155,7 +146,7 @@
               </semantic-table> 
             </semantic-search-result>
          
-          </bs-tab>[[else]][[/if]]
+          [[else]][[/if]]
           
 
           
