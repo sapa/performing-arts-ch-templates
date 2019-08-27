@@ -11,36 +11,15 @@
       
       browser-persistence=true
       persistence='ldp' 
-      form-id='places'
+      form-id='persons'
       fields='[[fieldDefinitions]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
             <semantic-form-hidden-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type' default-value='[[resolvePrefix "crm:E21_Person"]]'></semantic-form-hidden-input>
         </div>
-  <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common" //languages='["en","de","fr","it"]'></semantic-form-text-input> 
-        
-         <semantic-form-checklist-input type='checkbox' for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common_type"></semantic-form-checklist-input>
-        
-     <!--    <semantic-form-composite-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common_test'  new-subject-template='http://data.performing-arts.ch/xl/{{UUID}}'   fields='[[fieldDefinitions]]'>
-            <bs-col sm="8">
-          
-              <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common_value" languages='["en","de","fr","it"]'></semantic-form-text-input>
-            </bs-col>
-           <bs-col sm="4">
-                <semantic-form-checklist-input type='checkbox' for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common_type"></semantic-form-checklist-input>
-            </bs-col>
-            <bs-col sm="8">
-          <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common_value_label" languages='["en","de","fr","it"]'></semantic-form-text-input>
-            </bs-col>
-          
-          
-           
-        </semantic-form-composite-input> -->
-        
-        
-        
-        
+        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common" languages='["en","de","fr","it"]'></semantic-form-text-input> 
+        <semantic-form-checklist-input type='checkbox' row=true for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common_type"></semantic-form-checklist-input>
         <semantic-form-composite-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_misc' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions]]'>
             <bs-col sm="8">
                 <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_value" languages='["en","de","fr","it"]'></semantic-form-text-input>
