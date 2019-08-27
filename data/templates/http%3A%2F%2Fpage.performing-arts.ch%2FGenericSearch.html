@@ -57,9 +57,10 @@
                 UNION
                 {
 								?subject a crm:E53_Place ; 
-       					rdfs:label ?name . 
-                ?subject  crm:P89_falls_within ?parent . 
-                ?parent rdfs:label ?parentlabel .
+                 rdfs:label ?name . 
+                 OPTIONAL {
+                  ?subject crm:P89_falls_within ?parent .
+                 }
                 BIND (("https://www.picodash.com/icon_places.svg") AS ?icon)
                 BIND (("Place") AS ?title)
 								}
