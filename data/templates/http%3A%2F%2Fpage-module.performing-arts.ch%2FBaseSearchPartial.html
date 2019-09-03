@@ -128,15 +128,16 @@
               </semantic-table> 
             </semantic-search-result>
          
-        <div class="pull-right" style="display: flex;">
+        <div class="pull-right" style="display: flex; margin-top: 12px;">
           <semantic-search-result>
-            <mp-sparql-download id='csv-result' query="SELECT ?subject WHERE { }"
+            <mp-sparql-download id='csv-result' query="SELECT ?title ?subject ?name WHERE {  }"
                                 header="text/csv"
-                                filename="csv-result.csv"
+                                filename="performing-arts-ch-search-result.csv"
                                 >
-              <button class="btn btn-default" style="margin-right:10px">Download CSV</button>
+              <button class="btn btn-default">Download CSV</button>
             </mp-sparql-download>
           </semantic-search-result>
+          <!--
           <semantic-search-action-use-result-in-extended-search>
             <button class="btn btn-default" style="margin-right:10px">Use in Search</button>
           </semantic-search-action-use-result-in-extended-search>
@@ -144,6 +145,7 @@
           <semantic-search-action-save-search-result id='save-search-result-action'>
             <button class="btn btn-default" style="margin-right:10px">Save As Search</button>
           </semantic-search-action-save-search-result>
+          -->
         </div>
 
       </div>
