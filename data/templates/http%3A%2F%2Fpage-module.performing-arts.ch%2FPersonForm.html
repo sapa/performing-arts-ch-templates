@@ -34,6 +34,25 @@
         <bs-col sm="8">
           <semantic-form-checkbox-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Swiss"></semantic-form-checkbox-input>
         </bs-col>
+
+        <semantic-form-composite-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Person_birth' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions]]'>
+          <bs-col sm="6">
+            <semantic-form-datetime-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Date_of_birth"></semantic-form-datetime-input>
+          </bs-col>
+          <bs-col sm="6">
+              <semantic-form-tree-picker-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Person_birth_place'></semantic-form-tree-picker-input>
+          </bs-col>
+        </semantic-form-composite-input>
+
+        <semantic-form-composite-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Person_death' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions]]'>
+          <bs-col sm="6">
+            <semantic-form-datetime-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Date_of_death"></semantic-form-datetime-input>
+          </bs-col>
+          <bs-col sm="6">
+              <semantic-form-tree-picker-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Person_death_place'></semantic-form-tree-picker-input>
+          </bs-col>
+        </semantic-form-composite-input>
+
         <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Comment"></semantic-form-text-input>
         <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"></semantic-form-text-input>
         <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"></semantic-form-text-input>

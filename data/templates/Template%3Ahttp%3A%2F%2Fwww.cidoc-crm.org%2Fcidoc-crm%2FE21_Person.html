@@ -34,25 +34,9 @@
                         crm:P2_has_type ?type .
                     FILTER ( ?type in (spav:yadpx, spav:yallb, spav:yapvc, spav:yaajh, spav:yavtx) )
                 } ORDER BY ?typesort'
-                template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{else}}<br><mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
+                template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{else}}<br>
+                    <mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
             </semantic-query>
-
-            <!-- comment -->
-            <semantic-query 
-                query='SELECT ?comment WHERE {
-                    ?? rdfs:comment ?comment .
-                }'
-                template='<p>{{#each bindings}}{{#if @first}}{{comment.value}}{{else}}, {{comment.value}}{{/if}}{{/each}}</p>'>
-            </semantic-query>
-
-            <!-- Swiss -->
-            <!-- <semantic-query 
-                query='SELECT ?swiss ?value WHERE {
-                    BIND (EXISTS {?? ore:isAggregatedBy <http://data.performing-arts.ch/a/2ced7bbf-4981-48e0-ab47-2c6b1351c38b>} AS ?swiss)
-                    BIND(IF(?swiss ,"CH","") AS ?value)
-                }'
-                template='<p>{{#each bindings}}{{value.value}}{{/each}}</p>'>
-            </semantic-query>-->
 
             <p>
             <!-- gender -->
@@ -79,58 +63,42 @@
             </semantic-query>
             </p>
 
-            <!-- live dates -->
+            <!-- date and place of birth -->
             <semantic-query 
-                query='SELECT ?wikibirthday ?wikibirthplacelabel ?birthplace ?wikideathday ?wikideathplacelabel ?deathplace
-    WHERE {
-        ?? owl:sameAs ?wikidata .
-        FILTER (CONTAINS(STR(?wikidata), "wikidata"))
-        SERVICE <https://wikidata.metaphacts.com/sparql> {
-            OPTIONAL {
-                ?wikidata <http://www.wikidata.org/prop/direct/P569> ?dob .
-                BIND(CONCAT(STR(DAY(?dob)), ".", STR(MONTH(?dob)), ".", STR(YEAR(?dob))) AS ?wikibirthday)
-            }
-            OPTIONAL {
-                ?wikidata <http://www.wikidata.org/prop/direct/P19> ?wikibirthplace .
-                ?wikibirthplace rdfs:label ?wikibirthplacelabel .
-            }
-            OPTIONAL {
-                ?wikidata <http://www.wikidata.org/prop/direct/P570> ?dod .
-                BIND(CONCAT(STR(DAY(?dod)), ".", STR(MONTH(?dod)), ".", STR(YEAR(?dod))) AS ?wikideathday)
-            }
-            OPTIONAL {
-                ?wikidata <http://www.wikidata.org/prop/direct/P20> ?wikideathplace .
-                ?wikideathplace rdfs:label ?wikideathplacelabel .
-            }
-        }
-        OPTIONAL {
-            ?birthplace owl:sameAs ?wikibirthplace .
-        }
-        OPTIONAL {
-            ?deathplace owl:sameAs ?wikideathplace .
-        }
-    } LIMIT 1'
-                template='{{#each bindings}}<p>
-                    {{#if wikibirthday}}* {{wikibirthday.value}}{{#if wikibirthplacelabel}}, 
-                        {{#if birthplace}} 
-                            <semantic-link iri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>
-                        {{else}}
-                            {{wikibirthplacelabel.value}}
-                        {{/if}}
-                    {{/if}}{{/if}}
-                    {{#if wikibirthday}}{{#if wikideathday}}<br>{{/if}}{{/if}}
-                    {{#if wikideathday}}† {{wikideathday.value}}{{#if wikideathplacelabel}}, 
-                        {{#if deathplace}} 
-                            <semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>
-                        {{else}}
-                            {{wikideathplacelabel.value}}
-                        {{/if}}
-                    {{/if}}{{/if}}
-                    </p>{{/each}}'>
+                query='SELECT ?birthdate ?birthplace WHERE {
+                    ?? crm:P98i_was_born ?birth .
+                    ?birth crm:P7_took_place_at ?birthplace ;
+                        crm:P4_has_time-span ?timespan .
+                    ?timespan crm:P82a_begin_of_the_begin ?dob .
+                    BIND(CONCAT(STR(MONTH(?dob)), ".", STR(DAY(?dob)), ".", STR(YEAR(?dob))) as ?birthdate)
+                }'
+                template='<div>{{#each bindings}}{{#if birthdate}}{{#if birthplace}}* {{/if}}{{/if}}<span style="padding-right:0.1em;" title="{{birthdate.value}}">{{birthdate.value}}</span>{{#if birthdate}}{{#if birthplace}}, {{/if}}{{/if}}
+                <semantic-link iri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- date and place of death -->
+            <semantic-query 
+                query='SELECT ?deathdate ?deathplace WHERE {
+                    ?? crm:P100i_died_in ?death .
+                    ?death crm:P7_took_place_at ?deathplace ;
+                        crm:P4_has_time-span ?timespan .
+                    ?timespan crm:P82a_begin_of_the_begin ?dod .
+                    BIND(CONCAT(STR(MONTH(?dod)), ".", STR(DAY(?dod)), ".", STR(YEAR(?dod))) as ?deathdate)
+                }'
+                template='<div>{{#each bindings}}{{#if deathdate}}{{#if deathplace}}† {{/if}}{{/if}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{deathdate.value}}</span>{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
+                <semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- comment -->
+            <semantic-query 
+                query='SELECT ?comment WHERE {
+                    ?? rdfs:comment ?comment .
+                }'
+                template='<p>{{#each bindings}}{{#if @first}}{{comment.value}}{{else}}, {{comment.value}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
 
-        </bs-col>
+    </bs-col>
         <bs-col sm="4">
 
             <!-- groups -->
