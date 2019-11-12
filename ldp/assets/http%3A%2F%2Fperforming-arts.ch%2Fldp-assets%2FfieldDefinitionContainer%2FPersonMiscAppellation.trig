@@ -1,0 +1,49 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellation/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellation>
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-cd7f50724f044cdd84a53769361ce68f-ovwqok <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject crm:P131_is_identified_by ?value .
+  MINUS { ?value crm:P2_has_type spav:yatcx . }
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellation>
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Altro nome (persona)"@it, "Autre nom (personne)"@fr;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
+  
+  _:genid-cd7f50724f044cdd84a53769361ce68f-ovwqok a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellation>
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E21_Person>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Weiterer Name (Person)"@de .
+  
+  _:genid-cd7f50724f044cdd84a53769361ce68f-dixrk <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P131_is_identified_by ?value .
+} WHERE {}""";
+    a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellation>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Miscellaneous Appellation (Person)"@en;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-cd7f50724f044cdd84a53769361ce68f-h242i;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-cd7f50724f044cdd84a53769361ce68f-dixrk .
+  
+  _:genid-cd7f50724f044cdd84a53769361ce68f-h242i <http://spinrdf.org/sp#text> """INSERT { 
+  $subject crm:P131_is_identified_by $value .
+} WHERE {}""";
+    a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellation>
+    <http://www.w3.org/2000/01/rdf-schema#comment> "Any additional appellation";
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-cd7f50724f044cdd84a53769361ce68f-ovwqok;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-12T12:44:41.053Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellation> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellation>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

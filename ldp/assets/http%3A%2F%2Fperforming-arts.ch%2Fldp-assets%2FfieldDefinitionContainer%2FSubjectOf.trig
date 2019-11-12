@@ -1,6 +1,6 @@
 
-<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of> <http://www.metaphacts.com/ontology/fields#deletePattern>
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> <http://www.metaphacts.com/ontology/fields#deletePattern>
       _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167505;
     <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>;
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167504;
@@ -37,12 +37,12 @@
   $subject rdau:P60806 $value .
 } WHERE {}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of> a <http://www.w3.org/ns/prov#Entity>;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
     <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:05.568Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
-      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of> .
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of> a <http://www.w3.org/ns/ldp#Resource> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> a <http://www.w3.org/ns/ldp#Resource> .
 }

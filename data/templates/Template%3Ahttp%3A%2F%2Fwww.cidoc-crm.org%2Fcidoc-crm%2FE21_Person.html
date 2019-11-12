@@ -38,6 +38,12 @@
                     <mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
             </semantic-query>
 
+            <!-- comment -->
+            <semantic-query 
+                query='SELECT ?comment WHERE { ?? rdfs:comment ?comment. }'
+                template='<p>{{#each bindings}}{{#if @first}}{{comment.value}}{{else}}, {{comment.value}}{{/if}}{{/each}}</p>'>
+            </semantic-query>
+
             <p>
             <!-- gender -->
             <semantic-query 
@@ -70,7 +76,7 @@
                     ?birth crm:P7_took_place_at ?birthplace ;
                         crm:P4_has_time-span ?timespan .
                     ?timespan crm:P82a_begin_of_the_begin ?dob .
-                    BIND(CONCAT(STR(MONTH(?dob)), ".", STR(DAY(?dob)), ".", STR(YEAR(?dob))) as ?birthdate)
+                    BIND(CONCAT(STR(MONTH(?dob)), ". ", STR(DAY(?dob)), ". ", STR(YEAR(?dob))) as ?birthdate)
                 }'
                 template='<div>{{#each bindings}}{{#if birthdate}}{{#if birthplace}}* {{/if}}{{/if}}<span style="padding-right:0.1em;" title="{{birthdate.value}}">{{birthdate.value}}</span>{{#if birthdate}}{{#if birthplace}}, {{/if}}{{/if}}
                 <semantic-link iri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>{{/each}}</div>'>
@@ -83,20 +89,11 @@
                     ?death crm:P7_took_place_at ?deathplace ;
                         crm:P4_has_time-span ?timespan .
                     ?timespan crm:P82a_begin_of_the_begin ?dod .
-                    BIND(CONCAT(STR(MONTH(?dod)), ".", STR(DAY(?dod)), ".", STR(YEAR(?dod))) as ?deathdate)
+                    BIND(CONCAT(STR(MONTH(?dod)), ". ", STR(DAY(?dod)), ". ", STR(YEAR(?dod))) as ?deathdate)
                 }'
                 template='<div>{{#each bindings}}{{#if deathdate}}{{#if deathplace}}† {{/if}}{{/if}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{deathdate.value}}</span>{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
                 <semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>{{/each}}</div>'>
             </semantic-query>
-
-            <!-- comment -->
-            <semantic-query 
-                query='SELECT ?comment WHERE {
-                    ?? rdfs:comment ?comment .
-                }'
-                template='<p>{{#each bindings}}{{#if @first}}{{comment.value}}{{else}}, {{comment.value}}{{/if}}{{/each}}</p>'>
-            </semantic-query>
-
 
     </bs-col>
         <bs-col sm="4">
@@ -116,7 +113,7 @@
         <mp-field-visualization
             subject='[[this]]'
             fields='[[fieldDefinitions
-            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
+            http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note"
             ]]'
             template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
             [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
@@ -142,7 +139,15 @@
 
         </bs-col>
         <bs-col sm="4">
-            [[> sapa:ExternalResources]]
+            <mp-field-visualization
+                subject='[[this]]'
+                fields='[[fieldDefinitions
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
+                ]]'
+                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+            >
+            </mp-field-visualization> 
         </bs-col>
       </bs-tab>
     <bs-tab event-key='productions' title='Productions'>

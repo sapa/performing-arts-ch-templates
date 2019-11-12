@@ -1,0 +1,63 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGender/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGender> a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-8677908dedb44ff0973336357febbd85-vcng7d <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
+  VALUES ($value) {
+    (<http://data.performing-arts.ch/g/gender/f>)
+    (<http://data.performing-arts.ch/g/gender/m>)
+    (<http://data.performing-arts.ch/g/gender/d>)
+  }
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGender> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Geschlecht"@de .
+  
+  _:genid-8677908dedb44ff0973336357febbd85-ks0yil <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P107i_is_current_or_former_member_of $value.
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGender> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E21_Person>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-8677908dedb44ff0973336357febbd85-u2fmi .
+  
+  _:genid-8677908dedb44ff0973336357febbd85-ks0yil a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-8677908dedb44ff0973336357febbd85-vcng7d a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGender> <http://www.metaphacts.com/ontology/fields#valueSetPattern>
+      _:genid-8677908dedb44ff0973336357febbd85-vcng7d;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-8677908dedb44ff0973336357febbd85-jwyabu;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Genere"@it .
+  
+  _:genid-8677908dedb44ff0973336357febbd85-u2fmi <http://spinrdf.org/sp#text> """INSERT {
+  $subject crm:P107i_is_current_or_former_member_of $value.
+} WHERE {}""";
+    a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGender> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-8677908dedb44ff0973336357febbd85-ks0yil .
+  
+  _:genid-8677908dedb44ff0973336357febbd85-jwyabu <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  $subject crm:P107i_is_current_or_former_member_of ?value.
+  ?value rdfs:label ?label.
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGender> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Gender"@en;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1" .
+  
+  _:genid-8677908dedb44ff0973336357febbd85-jwyabu a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGender> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Sexe"@fr;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-12T13:07:11.773Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGender> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGender> a <http://www.w3.org/ns/ldp#Resource> .
+}

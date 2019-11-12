@@ -1,0 +1,65 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> <http://www.metaphacts.com/ontology/fields#range>
+      <http://www.cidoc-crm.org/cidoc-crm/E53_Place>;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-0a978211b0de48858522551b80dcd927-ecde6b;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Todesort"@de;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
+  
+  _:genid-0a978211b0de48858522551b80dcd927-qxivrh <http://spinrdf.org/sp#text> """INSERT {
+  $subject crm:P7_took_place_at $value.
+} WHERE {}""" .
+  
+  _:genid-0a978211b0de48858522551b80dcd927-z9kd0d <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  $subject crm:P7_took_place_at ?value.
+  ?value rdfs:label ?label.
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> <http://www.metaphacts.com/ontology/fields#autosuggestionPattern>
+      _:genid-0a978211b0de48858522551b80dcd927-742ne .
+  
+  _:genid-0a978211b0de48858522551b80dcd927-742ne a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-0a978211b0de48858522551b80dcd927-z9kd0d;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Lieu du décès"@fr .
+  
+  _:genid-0a978211b0de48858522551b80dcd927-742ne <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  ?value a crm:E53_Place ;
+    rdfs:label ?label.
+  FILTER(REGEX(STR(?label), \"?token\", \"i\"))
+  FILTER(CONTAINS(STR(?value), \"/p/\"))
+} LIMIT 10""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> <http://www.metaphacts.com/ontology/fields#domain>
+      <http://www.cidoc-crm.org/cidoc-crm/E69_Death>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-0a978211b0de48858522551b80dcd927-qxivrh;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Luogo del decesso"@it, "Place of death"@en .
+  
+  _:genid-0a978211b0de48858522551b80dcd927-z9kd0d a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-0a978211b0de48858522551b80dcd927-ecde6b <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P7_took_place_at $value.
+} WHERE {}""";
+    a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-0a978211b0de48858522551b80dcd927-qxivrh a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> <http://www.metaphacts.com/ontology/fields#maxOccurs>
+      "1";
+    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"simple\",
+  \"schemePattern\": \"?item a crm:E53_Place .\\nFILTER(CONTAINS(STR(?item), \\\"/p/\\\"))\",
+  \"relationPattern\": \"?item crm:P89_falls_within ?parent .\"
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-12T13:03:16.566Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> a
+      <http://www.w3.org/ns/ldp#Resource> .
+}

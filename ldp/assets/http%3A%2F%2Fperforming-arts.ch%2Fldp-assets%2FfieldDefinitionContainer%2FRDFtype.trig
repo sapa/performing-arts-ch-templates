@@ -1,6 +1,6 @@
 
-<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type>
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype>
     <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167441;
     <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>;
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167442;
@@ -20,14 +20,14 @@
   
   _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167441 <http://spinrdf.org/sp#text> "DELETE { $subject a $value } WHERE {}" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype>
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
     <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:04.015Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
-      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type> .
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype>
     a <http://www.w3.org/ns/ldp#Resource> .
 }

@@ -1,0 +1,62 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate/context> {
+  _:genid-c666e2c07d2340cab4311191e12b67cf-g173bh <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject rdfs:label ?value .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Date of death"@en;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Todesdatum"@de;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c666e2c07d2340cab4311191e12b67cf-u8irht .
+  
+  _:genid-c666e2c07d2340cab4311191e12b67cf-e4jb8 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate> <http://www.metaphacts.com/ontology/fields#minOccurs>
+      "0" .
+  
+  _:genid-c666e2c07d2340cab4311191e12b67cf-u8irht a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-c666e2c07d2340cab4311191e12b67cf-g173bh;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Date du décès"@fr;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-c666e2c07d2340cab4311191e12b67cf-e4jb8;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E69_Death> .
+  
+  _:genid-c666e2c07d2340cab4311191e12b67cf-u8irht <http://spinrdf.org/sp#text> """INSERT {
+  $subject rdfs:label ?death_label;
+    crm:P4_has_time-span ?timespan .
+  ?timespan a crm:E52_Time-Span;
+    crm:P82a_begin_of_the_begin ?value;
+    crm:P82b_end_of_the_end ?value.
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"dodtimespan\")))) AS ?timespan)
+  BIND(STR(?value) AS ?death_label)
+}""" .
+  
+  _:genid-c666e2c07d2340cab4311191e12b67cf-g173bh a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#date>;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.w3.org/2000/01/rdf-schema#label> "Data del decesso"@it .
+  
+  _:genid-c666e2c07d2340cab4311191e12b67cf-e4jb8 <http://spinrdf.org/sp#text> """DELETE {
+  $subject rdfs:label ?death_label;
+    crm:P4_has_time-span ?timespan .
+  ?timespan a crm:E52_Time-Span;
+    crm:P82a_begin_of_the_begin ?value;
+    crm:P82b_end_of_the_end ?value.
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate> a
+      <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-12T13:04:42.956Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate> a
+      <http://www.w3.org/ns/ldp#Resource> .
+}

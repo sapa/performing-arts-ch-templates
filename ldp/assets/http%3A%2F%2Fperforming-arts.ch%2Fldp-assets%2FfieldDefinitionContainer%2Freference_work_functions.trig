@@ -1,0 +1,47 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/reference_work_functions/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/reference_work_functions> <http://www.metaphacts.com/ontology/fields#domain>
+      <http://www.cidoc-crm.org/frbr/F25_Performance_Plan>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167571;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167572;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "reference work functions" .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167571 <http://spinrdf.org/sp#text> """INSERT { $subject ?predicate $value} WHERE {
+  
+   ?subject  frbr:R14_incorporates ?sce.
+   ?ec frbr:R17_created ?sce;
+       crm:P9_consists_of ?activity.
+  ?activity crm:P2_has_type ?value.
+      ?value a <http://www.cidoc-crm.org/cidoc-crm/E7_Activity>.
+      
+
+     BIND  (IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(STR(?value)))) AS ?ec)
+       BIND  (IRI(CONCAT(\" http://data.performing-arts.ch/u/\", MD5(STR(?value)))) AS ?sec)
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\",MD5(STR(UUID())))) AS ?activity)}
+
+
+
+
+""";
+    a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167572 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT  DISTINCT ?value    WHERE {
+   ?subject  frbr:R14_incorporates ?sce.
+   ?ec frbr:R17_created ?sce;
+       crm:P9_consists_of ?activity.
+  ?activity crm:P2_has_type ?value.
+}
+      """ .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/reference_work_functions> a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:07.621Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/reference_work_functions> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/reference_work_functions> a <http://www.w3.org/ns/ldp#Resource> .
+}

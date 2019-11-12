@@ -1,0 +1,59 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-852072fbebc54166b3d2275057afca43-nv3jzg;
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-852072fbebc54166b3d2275057afca43-ayijgr a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-852072fbebc54166b3d2275057afca43-2pcqi2 <http://spinrdf.org/sp#text> """INSERT { 
+  $subject crm:P131_is_identified_by ?identifier.
+  ?identifier a crm:E82_Actor_Appellation ;
+    crm:P2_has_type spav:yavtx ;
+    rdf:value $value .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"alternative_name\", $value)))) AS ?identifier)
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName> <http://www.metaphacts.com/ontology/fields#insertPattern>
+      _:genid-852072fbebc54166b3d2275057afca43-2pcqi2 .
+  
+  _:genid-852072fbebc54166b3d2275057afca43-nv3jzg <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P131_is_identified_by ?identifier.
+  ?identifier a crm:E82_Actor_Appellation ;
+    crm:P2_has_type spav:yavtx ;
+    rdf:value $value .
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#langString>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Alternative name (group)"@en;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
+  
+  _:genid-852072fbebc54166b3d2275057afca43-2pcqi2 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Nome alternativo (gruppo)"@it;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-852072fbebc54166b3d2275057afca43-ayijgr .
+  
+  _:genid-852072fbebc54166b3d2275057afca43-nv3jzg a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-852072fbebc54166b3d2275057afca43-ayijgr <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject crm:P131_is_identified_by ?identifier.
+  ?identifier a crm:E82_Actor_Appellation ;
+    crm:P2_has_type spav:yavtx ;
+    rdf:value $value .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Alternativer Name (Gruppe)"@de, "Nom alternatif (groupe)"@fr;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-12T13:44:17.357Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName> a
+      <http://www.w3.org/ns/ldp#Resource> .
+}

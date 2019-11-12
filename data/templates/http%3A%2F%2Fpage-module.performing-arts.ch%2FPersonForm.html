@@ -16,47 +16,47 @@
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-            <semantic-form-hidden-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type' default-value='[[resolvePrefix "crm:E21_Person"]]'></semantic-form-hidden-input>
+            <semantic-form-hidden-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype' default-value='[[resolvePrefix "crm:E21_Person"]]'></semantic-form-hidden-input>
         </div>
-        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common" languages='["en","de","fr","it"]'></semantic-form-text-input> 
-        <semantic-form-checklist-input type='checkbox' row=true for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_common_type"></semantic-form-checklist-input>
-        <semantic-form-composite-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_misc' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions]]'>
+        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation" languages='["en","de","fr","it"]'></semantic-form-text-input> 
+        <semantic-form-checklist-input type='checkbox' row=true for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellationType"></semantic-form-checklist-input>
+        <semantic-form-composite-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellation' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions]]'>
             <bs-col sm="8">
-                <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_value" languages='["en","de","fr","it"]'></semantic-form-text-input>
+                <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationValue" languages='["en","de","fr","it"]'></semantic-form-text-input>
             </bs-col>
             <bs-col sm="4">
-                <semantic-form-checklist-input type='checkbox' for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Actor_appellation_type"></semantic-form-checklist-input>
+                <semantic-form-checklist-input type='checkbox' for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType"></semantic-form-checklist-input>
             </bs-col>
         </semantic-form-composite-input>
         <bs-col sm="4">
-          <semantic-form-checklist-input type='radio' row=true for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/gender"></semantic-form-checklist-input>
+          <semantic-form-checklist-input type='radio' row=true for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGender"></semantic-form-checklist-input>
         </bs-col>
         <bs-col sm="8">
-          <semantic-form-checkbox-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Swiss"></semantic-form-checkbox-input>
+          <semantic-form-checkbox-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonSwiss"></semantic-form-checkbox-input>
         </bs-col>
 
-        <semantic-form-composite-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Person_birth' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions]]'>
+        <semantic-form-composite-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirth' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions]]'>
           <bs-col sm="6">
-            <semantic-form-datetime-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Date_of_birth"></semantic-form-datetime-input>
+            <semantic-form-datetime-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirthDate"></semantic-form-datetime-input>
           </bs-col>
           <bs-col sm="6">
-              <semantic-form-tree-picker-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Person_birth_place'></semantic-form-tree-picker-input>
-          </bs-col>
-        </semantic-form-composite-input>
-
-        <semantic-form-composite-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Person_death' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions]]'>
-          <bs-col sm="6">
-            <semantic-form-datetime-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Date_of_death"></semantic-form-datetime-input>
-          </bs-col>
-          <bs-col sm="6">
-              <semantic-form-tree-picker-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Person_death_place'></semantic-form-tree-picker-input>
+              <semantic-form-tree-picker-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirthPlace'></semantic-form-tree-picker-input>
           </bs-col>
         </semantic-form-composite-input>
 
-        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Comment"></semantic-form-text-input>
-        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"></semantic-form-text-input>
-        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"></semantic-form-text-input>
-        <semantic-form-autocomplete-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of"></semantic-form-autocomplete-input>
+        <semantic-form-composite-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeath' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions]]'>
+          <bs-col sm="6">
+            <semantic-form-datetime-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate"></semantic-form-datetime-input>
+          </bs-col>
+          <bs-col sm="6">
+              <semantic-form-tree-picker-input for='http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace'></semantic-form-tree-picker-input>
+          </bs-col>
+        </semantic-form-composite-input>
+
+        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCComment"></semantic-form-text-input>
+        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"></semantic-form-text-input>
+        <semantic-form-text-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note"></semantic-form-text-input>
+        <semantic-form-autocomplete-input for="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf"></semantic-form-autocomplete-input>
         <semantic-form-errors></semantic-form-errors>
         <button
           name="submit"
