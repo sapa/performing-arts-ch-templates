@@ -1,0 +1,76 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation>
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E53_Place> .
+  
+  _:genid-cc3a091ebefa472db0922259a6e3ea97-9w0hdp <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P156_occupies $loc.
+  $loc a crm:E53_Place ;
+    crm:P89_falls_within ?value.
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation>
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Ort (Bühne)"@de .
+  
+  _:genid-cc3a091ebefa472db0922259a6e3ea97-9w0hdp a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation>
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-cc3a091ebefa472db0922259a6e3ea97-2ud1q8;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-cc3a091ebefa472db0922259a6e3ea97-9w0hdp;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Lieu (étape)"@fr;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-cc3a091ebefa472db0922259a6e3ea97-zy1gjg .
+  
+  _:genid-cc3a091ebefa472db0922259a6e3ea97-2ud1q8 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation>
+    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"simple\",
+  \"schemePattern\": \"?item a crm:E53_Place.\",
+  \"relationPattern\": \"?item crm:P89_falls_within ?parent.\"
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson> .
+  
+  _:genid-cc3a091ebefa472db0922259a6e3ea97-zy1gjg a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation>
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Place (venue)"@en;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-cc3a091ebefa472db0922259a6e3ea97-qydgdi .
+  
+  _:genid-cc3a091ebefa472db0922259a6e3ea97-qydgdi a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-cc3a091ebefa472db0922259a6e3ea97-zy1gjg <http://spinrdf.org/sp#text> """INSERT {
+  $subject crm:P156_occupies $loc.
+  $loc a crm:E53_Place ;
+    crm:P89_falls_within ?value.
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"location\", STR(?value))))) AS $loc)
+}""" .
+  
+  _:genid-cc3a091ebefa472db0922259a6e3ea97-qydgdi <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  $value a crm:E53_Place ;
+    rdfs:label $label .
+  FILTER REGEX($label, \"?token\", \"i\")
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Luogo (fase)"@it .
+  
+  _:genid-cc3a091ebefa472db0922259a6e3ea97-2ud1q8 <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject crm:P156_occupies $loc.
+  $loc a crm:E53_Place ;
+    crm:P89_falls_within ?value.
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation>
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-12T16:54:58.938Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

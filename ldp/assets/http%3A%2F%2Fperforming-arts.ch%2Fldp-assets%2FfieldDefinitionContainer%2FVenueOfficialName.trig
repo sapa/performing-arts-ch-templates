@@ -1,0 +1,61 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialName/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialName>
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-d8f58b097ad647d4acfff6fe9cdb65b7-8iyykh <http://spinrdf.org/sp#text> """DELETE {
+  $subject rdfs:label $value ;
+    crm:P1_is_identified_by $identifier .
+  $identifier a crm:E41_Appellation ;
+    crm:P2_has_type spav:yanuj ;
+    rdf:value ?value .
+} WHERE {}   """ .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialName>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nome ufficiale (fase)"@it .
+  
+  _:genid-d8f58b097ad647d4acfff6fe9cdb65b7-ft0gqi a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialName>
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
+    <http://www.w3.org/2000/01/rdf-schema#label> "Offizieller Name (Bühne)"@de .
+  
+  _:genid-d8f58b097ad647d4acfff6fe9cdb65b7-ft0gqi <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value WHERE {
+  $subject crm:P1_is_identified_by $identifier .
+  $identifier crm:P2_has_type spav:yanuj ;
+    rdf:value ?value .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialName>
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-d8f58b097ad647d4acfff6fe9cdb65b7-86ndy;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
+  
+  _:genid-d8f58b097ad647d4acfff6fe9cdb65b7-86ndy a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT { 
+  $subject rdfs:label $value ;
+    crm:P1_is_identified_by $identifier .
+  $identifier a crm:E41_Appellation ;
+    crm:P2_has_type spav:yanuj ;
+    rdf:value $value .
+} WHERE {
+  BIND(IRI(CONCAT (\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"official_name\", $value)))) AS $identifier)
+}""" .
+  
+  _:genid-d8f58b097ad647d4acfff6fe9cdb65b7-8iyykh a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialName>
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "4";
+    <http://www.w3.org/2000/01/rdf-schema#label> "Official name (venue)"@en, "Nom officiel (étape)"@fr;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-d8f58b097ad647d4acfff6fe9cdb65b7-ft0gqi;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-d8f58b097ad647d4acfff6fe9cdb65b7-8iyykh;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-12T16:34:30.206Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialName> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialName>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}
