@@ -19,12 +19,12 @@
             <mp-field-visualization
                 subject='[[this]]'
                 fields='[[fieldDefinitions
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_identifier"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_level="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_level"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_comment"
+                identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier"
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_level="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel"
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription"
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetExtent"
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate"
+                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
                 ]]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                 [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
@@ -60,7 +60,7 @@
                     FILTER(ISIRI(?node))
                     FILTER(CONTAINS(STR(?node),"/r/"))
                     ?node dc:title ?label .
-                  }
+                  } LIMIT 100
                   ORDER BY ?label'
                collapsed="false"
                keys-opened='[[this]]'

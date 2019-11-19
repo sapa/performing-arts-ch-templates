@@ -1,28 +1,32 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> <http://www.metaphacts.com/ontology/fields#deletePattern>
-      _:genid-227cdf6f3cdf412ca739f1c08f7a21e7-bbj7ts;
-    a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Description"@fr;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-227cdf6f3cdf412ca739f1c08f7a21e7-ero7lp .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-45f623a98dcf492d898e4525f4765996-5xpcw;
+    <http://www.w3.org/2000/01/rdf-schema#label> "description"@fr .
   
-  _:genid-227cdf6f3cdf412ca739f1c08f7a21e7-b5g95r a <http://spinrdf.org/sp#Query> .
+  _:genid-45f623a98dcf492d898e4525f4765996-8wd8eu a <http://spinrdf.org/sp#Query> .
   
-  _:genid-227cdf6f3cdf412ca739f1c08f7a21e7-ero7lp a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-45f623a98dcf492d898e4525f4765996-0vshi .
+  
+  _:genid-45f623a98dcf492d898e4525f4765996-0vshi a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Descrizione"@it, "Beschreibung"@de .
+      "descrizione"@it .
   
-  _:genid-227cdf6f3cdf412ca739f1c08f7a21e7-b5g95r <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-45f623a98dcf492d898e4525f4765996-8wd8eu <http://spinrdf.org/sp#text> """INSERT {
   $subject crm:P3_has_note $note.
-  $note  a crm:E62_String ;
+  $note a crm:E62_String ;
     crm:P2_has_type spav:eoept ;
     rdf:value $value.
 } WHERE {
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), ?value)))) AS ?note)
 }""" .
   
-  _:genid-227cdf6f3cdf412ca739f1c08f7a21e7-ero7lp <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Beschreibung"@de .
+  
+  _:genid-45f623a98dcf492d898e4525f4765996-0vshi <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
   $subject crm:P3_has_note $note.
   $note rdf:value $value.
 }""" .
@@ -31,18 +35,18 @@
       <http://www.w3.org/2001/XMLSchema#string>;
     <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> .
   
-  _:genid-227cdf6f3cdf412ca739f1c08f7a21e7-bbj7ts <http://spinrdf.org/sp#text> """DELETE {
+  _:genid-45f623a98dcf492d898e4525f4765996-5xpcw <http://spinrdf.org/sp#text> """DELETE {
   $subject crm:P3_has_note $note.
   $note rdf:value $value.
 } WHERE {}    """;
     a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Notes"@en;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-227cdf6f3cdf412ca739f1c08f7a21e7-b5g95r;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> <http://www.metaphacts.com/ontology/fields#insertPattern>
+      _:genid-45f623a98dcf492d898e4525f4765996-8wd8eu;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Notes"@en;
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-12T12:54:28.206Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-18T17:50:21.753Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> .

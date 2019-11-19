@@ -1,0 +1,58 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupOfficialName/context> {
+  _:genid-97c00b0e84834f6c9efdf4cda124494d-iesrme <http://spinrdf.org/sp#text> """INSERT { 
+  $subject rdfs:label $value ;
+    crm:P131_is_identified_by $identifier .
+  $identifier a crm:E82_Actor_Appellation ;
+    crm:P2_has_type spav:yanuj ;
+    rdf:value $value .
+} WHERE {
+  BIND(IRI(CONCAT (\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"group_official_name\")))) AS $identifier)
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupOfficialName>
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-97c00b0e84834f6c9efdf4cda124494d-evjsek a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupOfficialName>
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-97c00b0e84834f6c9efdf4cda124494d-iesrme;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Official name (group)"@en .
+  
+  _:genid-97c00b0e84834f6c9efdf4cda124494d-evjsek <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject rdfs:label $value .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupOfficialName>
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
+  
+  _:genid-97c00b0e84834f6c9efdf4cda124494d-pn7ztc <http://spinrdf.org/sp#text> """DELETE {
+  $subject rdfs:label $value ;
+    crm:P131_is_identified_by $identifier .
+  $identifier a crm:E82_Actor_Appellation ;
+    crm:P2_has_type spav:yanuj ;
+    rdf:value ?value .
+} WHERE {}""" .
+  
+  _:genid-97c00b0e84834f6c9efdf4cda124494d-iesrme a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-97c00b0e84834f6c9efdf4cda124494d-pn7ztc a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupOfficialName>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Offizieller Name (Gruppe)"@de;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "4";
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nome ufficiale (gruppo)"@it;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-97c00b0e84834f6c9efdf4cda124494d-evjsek;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-97c00b0e84834f6c9efdf4cda124494d-pn7ztc;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nom officiel (groupe)"@fr;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-18T17:32:37.965Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupOfficialName> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupOfficialName>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

@@ -20,8 +20,8 @@
             <semantic-query 
                 query='SELECT ?typelabel ?value
                 WHERE {
-                    ?? crm:P1_is_identified_by ?app .
-                    ?app a crm:E41_Appellation ; 
+                    ?? crm:P102_has_title ?title .
+                    ?title a crm:E35_Title ; 
                     crm:P2_has_type spav:yanuj ;
                     rdf:value ?value .
                 } LIMIT 1'
@@ -33,13 +33,13 @@
                 query='SELECT distinct ?value ?type ?typesort
                 WHERE {
                     VALUES (?type ?typesort) { (spav:yamqk 1) (spav:yavtx 2) }
-                    ?? crm:P1_is_identified_by ?appellation .
-                    ?appellation a crm:E41_Appellation ; 
+                    ?? crm:P102_has_title ?title .
+                    ?title a crm:E35_Title ; 
                     crm:P2_has_type ?type ;
                     rdf:value ?value .
-                    { ?appellation crm:P2_has_type spav:yamqk . }
+                    { ?title crm:P2_has_type spav:yamqk . }
                     UNION
-                    { ?appellation crm:P2_has_type spav:yavtx . }
+                    { ?title crm:P2_has_type spav:yavtx . }
                 } ORDER BY ?typesort'
                 template='<p>({{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}})</p>'>
             </semantic-query>
@@ -97,9 +97,7 @@
             <!-- is part of -->
             <semantic-query 
                 query="SELECT ?parent
-                WHERE {
-                    ?parent crm:P46_is_composed_of ?? .
-                }"
+                WHERE { ?parent crm:P46_is_composed_of ?? . }"
                 template='<div><h5>Is part of</h5>{{#each bindings}}{{#if @first}}<semantic-link iri="{{parent.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link iri="{{parent.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</div>'>
             </semantic-query>
 

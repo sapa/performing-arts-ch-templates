@@ -14,12 +14,12 @@
       fields='[[fieldDefinitions
         rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
         cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype"
-        official_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialName"
-        alternative_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltName"
+        official_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialTitle"
+        alternative_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle"
         acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym"
         location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation"
-        formation_year="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan"
-        dissolution_year="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_dissolved_by_timespan"
+        begin="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueBegin"
+        end="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueEnd"
         website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
         sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
       ]]'>
@@ -29,12 +29,12 @@
             <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "crm:E22_Man-Made_Object"]]'></semantic-form-hidden-input>
             <semantic-form-hidden-input for='cidoc_type' default-value='http://vocab.performing-arts.ch/dwmkn'></semantic-form-hidden-input>
         </div>
-        <semantic-form-text-input for="official_name" languages='["en","de","fr","it"]'></semantic-form-text-input>
-        <semantic-form-text-input for="alternative_name" languages='["en","de","fr","it"]'></semantic-form-text-input>
+        <semantic-form-text-input for="official_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
+        <semantic-form-text-input for="alternative_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
         <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
         <semantic-form-tree-picker-input for="location" ></semantic-form-tree-picker-input>
-        <semantic-form-text-input for="formation_year"></semantic-form-text-input>
-        <semantic-form-text-input for="dissolution_year"></semantic-form-text-input>
+        <semantic-form-text-input for="begin"></semantic-form-text-input>
+        <semantic-form-text-input for="end"></semantic-form-text-input>
         <semantic-form-text-input for="website"></semantic-form-text-input>
         <semantic-form-text-input for="sameAs"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>

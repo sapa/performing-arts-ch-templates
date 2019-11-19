@@ -1,7 +1,7 @@
 
-<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCComment/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCComment> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Comment (CIDOC)"@en;
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Comment"@en;
     a <http://www.metaphacts.com/ontology/fields#Field>;
     <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-53466868f32a48e2967ba8b83cf5a1b3-9krpme .
   
@@ -9,37 +9,37 @@
   $subject rdfs:comment $value
 } WHERE {}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCComment> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Kommentar (CIDOC)"@de;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Kommentar"@de;
     <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-53466868f32a48e2967ba8b83cf5a1b3-acb2s4;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Nota (CIDOC)"@it, "Commenter (CIDOC)"@fr .
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nota"@it, "Commenter"@fr .
   
   _:genid-53466868f32a48e2967ba8b83cf5a1b3-acb2s4 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
   $subject rdfs:comment ?value.
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCComment> <http://www.metaphacts.com/ontology/fields#insertPattern>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment> <http://www.metaphacts.com/ontology/fields#insertPattern>
       _:genid-53466868f32a48e2967ba8b83cf5a1b3-9pbf4a .
   
   _:genid-53466868f32a48e2967ba8b83cf5a1b3-9pbf4a <http://spinrdf.org/sp#text> """INSERT {
   $subject rdfs:comment $value
 } WHERE {}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCComment> <http://www.metaphacts.com/ontology/fields#domain>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment> <http://www.metaphacts.com/ontology/fields#domain>
       <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> .
   
   _:genid-53466868f32a48e2967ba8b83cf5a1b3-9pbf4a a <http://spinrdf.org/sp#Query> .
   
   _:genid-53466868f32a48e2967ba8b83cf5a1b3-9krpme a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCComment> a <http://www.w3.org/ns/prov#Entity>;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment> a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
     <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-12T12:48:59.751Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
-      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCComment> .
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCComment> a <http://www.w3.org/ns/ldp#Resource> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment> a <http://www.w3.org/ns/ldp#Resource> .
 }

@@ -1,6 +1,6 @@
 
-<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent>
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetExtent/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetExtent>
     <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167538;
     <http://www.metaphacts.com/ontology/fields#domain> <http://temp-ric.performing-arts.ch/E3_Record_Set>;
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167537;
@@ -36,14 +36,14 @@
   
   _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167536 a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetExtent>
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
     <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:06.711Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
-      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent> .
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetExtent> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetExtent>
     a <http://www.w3.org/ns/ldp#Resource> .
 }

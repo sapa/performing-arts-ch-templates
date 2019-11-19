@@ -1,6 +1,6 @@
 
-<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan>
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupFormationYear/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupFormationYear>
     <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167373;
     <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E74_Group>;
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167372;
@@ -53,14 +53,14 @@
   
   _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167371 a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupFormationYear>
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
     <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:02.125Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
-      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan> .
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupFormationYear> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupFormationYear>
     a <http://www.w3.org/ns/ldp#Resource> .
 }

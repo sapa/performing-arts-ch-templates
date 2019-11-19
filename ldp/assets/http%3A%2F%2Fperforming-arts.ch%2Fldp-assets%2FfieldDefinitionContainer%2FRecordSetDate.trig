@@ -1,6 +1,6 @@
 
-<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date> <http://www.metaphacts.com/ontology/fields#deletePattern>
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> <http://www.metaphacts.com/ontology/fields#deletePattern>
       _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167462;
     <http://www.metaphacts.com/ontology/fields#domain> <http://temp-ric.performing-arts.ch/E3_Record_Set>;
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167461;
@@ -23,14 +23,14 @@
   
   _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167461 <http://spinrdf.org/sp#text> "INSERT { $subject dc:date $value} WHERE {}" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date> a
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> a
       <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
     <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:04.473Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
-      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date> .
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date> a
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> a
       <http://www.w3.org/ns/ldp#Resource> .
 }

@@ -1,0 +1,54 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-1a68b12683424d028cdeea55f02dea3b-skds1f;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "predecessore"@it, "Vorgänger"@de .
+  
+  _:genid-1a68b12683424d028cdeea55f02dea3b-a468h5 <http://spinrdf.org/sp#text> "INSERT { $subject rdau:P60683 $value} WHERE {}";
+    a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
+  
+  _:genid-1a68b12683424d028cdeea55f02dea3b-skds1f a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor> <http://www.w3.org/2000/01/rdf-schema#label>
+      "prédécesseur"@fr;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
+  
+  _:genid-1a68b12683424d028cdeea55f02dea3b-1s3lsm <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  ?value rdf:type/rdfs:subClassOf* crm:E74_Group ;
+    rdfs:label ?label .
+  FILTER(REGEX(STR(?label), \"?token\", \"i\"))
+  FILTER(CONTAINS(STR(?value), \"/a/\"))
+} LIMIT 10""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor> <http://www.metaphacts.com/ontology/fields#autosuggestionPattern>
+      _:genid-1a68b12683424d028cdeea55f02dea3b-1s3lsm .
+  
+  _:genid-1a68b12683424d028cdeea55f02dea3b-1s3lsm a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Predecessor"@en .
+  
+  _:genid-1a68b12683424d028cdeea55f02dea3b-skds1f <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  { $subject rdau:P60683 ?value . }
+  UNION
+  { $value rdau:P60686 ?subject . }
+  ?value rdfs:label ?label .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor> <http://www.metaphacts.com/ontology/fields#insertPattern>
+      _:genid-1a68b12683424d028cdeea55f02dea3b-a468h5;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-18T17:39:29.827Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor> a
+      <http://www.w3.org/ns/ldp#Resource> .
+}
