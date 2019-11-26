@@ -67,7 +67,26 @@
             </semantic-form>
         </semantic-form-autocomplete-input>
         <semantic-form-autocomplete-input for="associations"></semantic-form-autocomplete-input>
-        <semantic-form-autocomplete-input for="record_sets"></semantic-form-autocomplete-input>
+        <semantic-form-autocomplete-input for="record_sets">
+          <semantic-form new-subject-template="http://data.performing-arts.ch/r/{{UUID}}" fields='[[fieldDefinitions
+            record_set_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
+            record_set_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier"
+            record_set_label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLabel"
+            record_set_level="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel"
+            record_set_parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent"
+          ]]'>
+            <div style="display: none;">
+                <semantic-form-hidden-input for='record_set_rdf_type' default-value='[[resolvePrefix "ric:E3_Record_Set"]]'></semantic-form-hidden-input>
+                
+            </div>
+            <semantic-form-text-input for="record_set_identifier"></semantic-form-text-input>
+            <semantic-form-text-input for="record_set_label"></semantic-form-text-input>
+            <semantic-form-checklist-input type='radio' row=true for="record_set_level"></semantic-form-checklist-input>
+            <!-- TODO: automatically add correct parent? -->
+            <semantic-form-tree-picker-input for="record_set_parent" ></semantic-form-tree-picker-input>
+            <button name="submit" class="btn btn-default">Create Record Set</button>
+          </semantic-form>
+        </semantic-form-autocomplete-input>
         <semantic-form-text-input for="sameAs"></semantic-form-text-input>
         <semantic-form-text-input for="note"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>

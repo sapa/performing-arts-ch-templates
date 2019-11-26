@@ -1,0 +1,41 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers>
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-c865329eadd04ec4bf63315f47d6b789-f4d1q8 <http://spinrdf.org/sp#text> "INSERT { $value crm:P107i_is_current_or_former_member $subject } WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Association members"@en .
+  
+  _:genid-c865329eadd04ec4bf63315f47d6b789-f4d1q8 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-c865329eadd04ec4bf63315f47d6b789-k9rl0j a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers>
+    <http://www.w3.org/2000/01/rdf-schema#comment> "used for display only";
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "membri dell'associazione"@it;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Verbandsmitglieder"@de .
+  
+  _:genid-c865329eadd04ec4bf63315f47d6b789-k9rl0j <http://spinrdf.org/sp#text> """SELECT $value ?class WHERE {
+  $value crm:P107i_is_current_or_former_member_of $subject .
+  BIND(IF(CONTAINS(STR($value), \"/u/\"), \"unidentified\", \"identified\") AS ?class)
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers>
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "membres des associations"@fr;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-c865329eadd04ec4bf63315f47d6b789-k9rl0j;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c865329eadd04ec4bf63315f47d6b789-f4d1q8;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-25T11:31:25.361Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

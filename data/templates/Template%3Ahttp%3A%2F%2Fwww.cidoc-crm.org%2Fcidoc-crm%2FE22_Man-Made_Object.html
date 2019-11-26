@@ -59,18 +59,20 @@
                 query='SELECT ?dates
                 WHERE {
                     OPTIONAL {
-                        ?? crm:P95i_was_formed_by ?formation .
-                        ?formation a crm:E66_Formation ;
-                            crm:P4_has_time-span ?formationtime .
-                        ?formationtime rdfs:label ?formationlabel .
+                        ?? crm:P16i_was_used_for ?management .
+                        ?management crm:P2_has_type spav:mujfv ;
+                            crm:P4_has_time-span ?timespan .
+                        ?timespan crm:P82a_begin_of_the_begin ?begin .    
+                        BIND(STR(YEAR(?begin)) AS ?beginyear)
                     }
                     OPTIONAL {
-                        ?? crm:P99i_was_dissolved_by ?dissolution .
-                        ?dissolution a crm:E68_Dissolution ;
-                            crm:P4_has_time-span ?dissolutiontime .
-                        ?dissolutiontime rdfs:label ?dissolutionlabel .
+                        ?? crm:P16i_was_used_for ?management .
+                        ?management crm:P2_has_type spav:mujfv ;
+                            crm:P4_has_time-span ?timespan .
+                        ?timespan crm:P82b_end_of_the_end ?end .    
+                        BIND(STR(YEAR(?end)) AS ?endyear)
                     }
-                    BIND(CONCAT(COALESCE(?formationlabel, "X"), "-", COALESCE(?dissolutionlabel, "X")) AS ?predates)
+                    BIND(CONCAT(COALESCE(?beginyear, "X"), "-", COALESCE(?endyear, "X")) AS ?predates)
                     BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
                 }'
                 template='{{#each bindings}}<p>{{dates.value}}</p>{{/each}}'>
@@ -94,21 +96,14 @@
                 template='<div><h5>Managed by</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{actor.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
 
-            <!-- is part of -->
-            <semantic-query 
-                query="SELECT ?parent
-                WHERE { ?parent crm:P46_is_composed_of ?? . }"
-                template='<div><h5>Is part of</h5>{{#each bindings}}{{#if @first}}<semantic-link iri="{{parent.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link iri="{{parent.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</div>'>
-            </semantic-query>
-
-            <!-- contains -->
+            <!-- part of / contains -->
             <mp-field-visualization
                 subject='[[this]]'
                 fields='[[fieldDefinitions
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of"
+                part_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueIsPartOf"
+                contains="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains"
                 ]]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
-                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
                 >
             </mp-field-visualization> 
 
@@ -118,8 +113,8 @@
             <mp-field-visualization
                 subject='[[this]]'
                 fields='[[fieldDefinitions
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
+                subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf"
+                note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note"
                 ]]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                 [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]

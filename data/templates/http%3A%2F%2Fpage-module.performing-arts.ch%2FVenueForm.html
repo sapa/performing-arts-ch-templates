@@ -17,6 +17,7 @@
         official_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialTitle"
         alternative_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle"
         acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym"
+        contains="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains"
         location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation"
         begin="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueBegin"
         end="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueEnd"
@@ -27,14 +28,32 @@
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
             <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "crm:E22_Man-Made_Object"]]'></semantic-form-hidden-input>
-            <semantic-form-hidden-input for='cidoc_type' default-value='http://vocab.performing-arts.ch/dwmkn'></semantic-form-hidden-input>
+            <semantic-form-hidden-input for='cidoc_type' default-value='[[resolvePrefix "spav:dwmkn"]]'></semantic-form-hidden-input>
         </div>
         <semantic-form-text-input for="official_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
         <semantic-form-text-input for="alternative_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
         <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
+        <semantic-form-autocomplete-input for="contains">
+          <semantic-form new-subject-template="http://data.performing-arts.ch/t/{{UUID}}" fields='[[fieldDefinitions
+            subvenue_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
+            subvenue_cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype"
+            subvenue_official_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialTitle"
+          ]]'>
+            <div style="display: none;">
+              <semantic-form-hidden-input for='subvenue_rdf_type' default-value='[[resolvePrefix "crm:E22_Man-Made_Object"]]'></semantic-form-hidden-input>
+              <semantic-form-hidden-input for='subvenue_cidoc_type' default-value='[[resolvePrefix "spav:dwmkn"]]'></semantic-form-hidden-input>
+            </div>
+            <semantic-form-text-input for="subvenue_official_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
+            <button name="submit" class="btn btn-default">Create Venue</button>
+          </semantic-form>
+  </semantic-form-autocomplete-input>
         <semantic-form-tree-picker-input for="location" ></semantic-form-tree-picker-input>
-        <semantic-form-text-input for="begin"></semantic-form-text-input>
-        <semantic-form-text-input for="end"></semantic-form-text-input>
+        <bs-col sm="6">
+          <semantic-form-text-input for="begin"></semantic-form-text-input>
+        </bs-col>
+        <bs-col sm="6">
+          <semantic-form-text-input for="end"></semantic-form-text-input>
+        </bs-col>
         <semantic-form-text-input for="website"></semantic-form-text-input>
         <semantic-form-text-input for="sameAs"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>

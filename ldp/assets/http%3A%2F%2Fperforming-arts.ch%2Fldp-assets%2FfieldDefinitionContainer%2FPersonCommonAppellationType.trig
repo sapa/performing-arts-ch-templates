@@ -1,65 +1,59 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellationType/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellationType>
-    a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type>;
-    <http://www.w3.org/2000/01/rdf-schema#comment> "Additional type of the common appellation" .
-  
-  _:genid-d597a0254d6e4505915c9480b863564d-ksswi1 <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-92842d7f2aa748d7b434da318bc6d356-c4i2 <http://spinrdf.org/sp#text> """INSERT {
   ?identifier crm:P2_has_type $value .
 } WHERE {
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"common_appellation\")))) AS ?identifier)
 }""" .
   
-  _:genid-d597a0254d6e4505915c9480b863564d-opnwsh a <http://spinrdf.org/sp#Query> .
+  _:genid-92842d7f2aa748d7b434da318bc6d356-g1lzdq a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellationType>
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type>;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "Additional type of the common appellation";
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-92842d7f2aa748d7b434da318bc6d356-g1lzdq .
+  
+  _:genid-92842d7f2aa748d7b434da318bc6d356-ofe03r a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellationType>
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-92842d7f2aa748d7b434da318bc6d356-c4i2;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
     <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation> .
   
-  _:genid-d597a0254d6e4505915c9480b863564d-stzo4g <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
-  VALUES ($value) { (spav:yadpx) (spav:yallb) (spav:yaajh) }
-}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellationType>
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-d597a0254d6e4505915c9480b863564d-ksswi1 .
-  
-  _:genid-d597a0254d6e4505915c9480b863564d-opnwsh <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  _:genid-92842d7f2aa748d7b434da318bc6d356-ofe03r <http://spinrdf.org/sp#text> """SELECT $value WHERE {
   $subject crm:P131_is_identified_by ?identifier .
   ?identifier crm:P2_has_type spav:yatcx ;
     crm:P2_has_type $value .
   FILTER ($value != spav:yatcx)
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellationType>
-    <http://www.w3.org/2000/01/rdf-schema#label> "Nom commun typ (personne)"@fr .
-  
-  _:genid-d597a0254d6e4505915c9480b863564d-smx2ec <http://spinrdf.org/sp#text> """DELETE { 
+  _:genid-92842d7f2aa748d7b434da318bc6d356-amvzio <http://spinrdf.org/sp#text> """DELETE { 
   ?identifier crm:P2_has_type $value .
 } WHERE {
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"common_appellation\")))) AS ?identifier)
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellationType>
-    <http://www.w3.org/2000/01/rdf-schema#label> "Common appellation type (person)"@en .
+  _:genid-92842d7f2aa748d7b434da318bc6d356-c4i2 a <http://spinrdf.org/sp#Query> .
   
-  _:genid-d597a0254d6e4505915c9480b863564d-ksswi1 a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-d597a0254d6e4505915c9480b863564d-smx2ec a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellationType>
-    <http://www.w3.org/2000/01/rdf-schema#label> "Gebräuchlicher Name Typ (Person)"@de,
-      "Nome comune modello (persona)"@it;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-d597a0254d6e4505915c9480b863564d-smx2ec .
-  
-  _:genid-d597a0254d6e4505915c9480b863564d-stzo4g a <http://spinrdf.org/sp#Query> .
+  _:genid-92842d7f2aa748d7b434da318bc6d356-g1lzdq <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
+  VALUES ($value) { (spav:yadpx) (spav:yallb) (spav:yaajh) }
+}""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellationType>
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-d597a0254d6e4505915c9480b863564d-opnwsh;
-    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-d597a0254d6e4505915c9480b863564d-stzo4g;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nom commun typ (personne)"@fr, "Common appellation type (person)"@en .
+  
+  _:genid-92842d7f2aa748d7b434da318bc6d356-amvzio a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellationType>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Gebräuchlicher Name Typ (Person)"@de;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-92842d7f2aa748d7b434da318bc6d356-amvzio;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nome comune modello (persona)"@it;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-92842d7f2aa748d7b434da318bc6d356-ofe03r;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-18T13:05:37.914Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-25T08:44:35.768Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellationType> .

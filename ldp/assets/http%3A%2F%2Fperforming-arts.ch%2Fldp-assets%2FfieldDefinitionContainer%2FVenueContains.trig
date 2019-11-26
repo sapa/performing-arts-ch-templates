@@ -1,0 +1,59 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains/context> {
+  _:genid-679dd8d699fa4282a2779231949ce5f3-hrjhw <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value ?label WHERE {
+  $subject crm:P46_is_composed_of ?value .
+}""" .
+  
+  _:genid-679dd8d699fa4282a2779231949ce5f3-cjchbo <http://spinrdf.org/sp#text> """INSERT {
+  $subject crm:P46_is_composed_of $value .
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-679dd8d699fa4282a2779231949ce5f3-hrjhw;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-679dd8d699fa4282a2779231949ce5f3-cjchbo;
+    <http://www.w3.org/2000/01/rdf-schema#label> "beinhaltet"@de;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
+  
+  _:genid-679dd8d699fa4282a2779231949ce5f3-67qsi <http://spinrdf.org/sp#text> """DELETE { 
+  $subject crm:P46_is_composed_of ?value .
+} WHERE {}""" .
+  
+  _:genid-679dd8d699fa4282a2779231949ce5f3-cjchbo a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-679dd8d699fa4282a2779231949ce5f3-hrjhw a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> <http://www.metaphacts.com/ontology/fields#range>
+      <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
+  
+  _:genid-679dd8d699fa4282a2779231949ce5f3-gscd5 <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  ?value a crm:E22_Man-Made_Object ;
+  	crm:P2_has_type spav:dwmkn ;
+    rdfs:label ?label .
+  FILTER NOT EXISTS { $subject crm:P46_is_composed_of $value . }
+  FILTER(REGEX(STR(?label), \"?token\", \"i\"))
+  FILTER(CONTAINS(STR(?value), \"/t/\"))
+} LIMIT 10""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> <http://www.w3.org/2000/01/rdf-schema#label>
+      "inclus"@fr;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-679dd8d699fa4282a2779231949ce5f3-gscd5;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
+  
+  _:genid-679dd8d699fa4282a2779231949ce5f3-gscd5 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-679dd8d699fa4282a2779231949ce5f3-67qsi a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> <http://www.w3.org/2000/01/rdf-schema#label>
+      "incluso"@it;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-679dd8d699fa4282a2779231949ce5f3-67qsi;
+    <http://www.w3.org/2000/01/rdf-schema#label> "contains"@en;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "display only";
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-25T16:14:45.164Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> a <http://www.w3.org/ns/ldp#Resource> .
+}

@@ -1,6 +1,6 @@
 
-<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_predecessor_of/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_predecessor_of>
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor>
     <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167552;
     <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167553;
@@ -21,14 +21,14 @@
   ?value rdfs:label ?label .
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_predecessor_of>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor>
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
     <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:07.130Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
-      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_predecessor_of> .
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_predecessor_of>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor>
     a <http://www.w3.org/ns/ldp#Resource> .
 }

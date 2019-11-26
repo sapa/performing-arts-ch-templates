@@ -62,9 +62,9 @@
     <mp-field-visualization
         subject='[[this]]'
         fields='[[fieldDefinitions
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_successor_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_successor_of"
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_predecessor_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_predecessor_of"
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
+        predecessor="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor"
+        successor="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor"
+        website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
         ]]'
         template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
         [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
@@ -102,10 +102,10 @@
     <mp-field-visualization
         subject='[[this]]'
         fields='[[fieldDefinitions
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_current_or_former_member="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_has_current_or_former_member"
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E40_Legal_Body_has_current_or_former_member="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E40_Legal_Body_has_current_or_former_member"
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_association_member="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E39_Actor_is_association_member"
-        http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
+        members="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember"
+        association_members="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers"
+        associations="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation"
+        notes="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note"
         ]]'
         template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
         [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]

@@ -1,9 +1,18 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-77576206d9bf4586b73cdaf7aa23fbfd-e3esz .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-f83aa4325afb4ec2bde3ddb6db54c1c7-o2236;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f83aa4325afb4ec2bde3ddb6db54c1c7-mok1yo;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-f83aa4325afb4ec2bde3ddb6db54c1c7-7pdmo7 .
   
-  _:genid-77576206d9bf4586b73cdaf7aa23fbfd-av4ax a <http://spinrdf.org/sp#Query>;
+  _:genid-f83aa4325afb4ec2bde3ddb6db54c1c7-o2236 <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value WHERE {
+  $subject crm:P102_has_title $title .
+  $title crm:P2_has_type spav:yavtx ;
+    rdf:value ?value .
+}""" .
+  
+  _:genid-f83aa4325afb4ec2bde3ddb6db54c1c7-mok1yo a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """INSERT { 
   $subject crm:P102_has_title $title.
   $title a crm:E35_Title ;
@@ -13,39 +22,27 @@
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"alternative_name\", $value)))) AS $title)
 }""" .
   
+  _:genid-f83aa4325afb4ec2bde3ddb6db54c1c7-o2236 a <http://spinrdf.org/sp#Query> .
+  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
       <http://www.w3.org/2001/XMLSchema#langString>;
     <http://www.w3.org/2000/01/rdf-schema#label> "Alternativer Name (Bühne)"@de;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-77576206d9bf4586b73cdaf7aa23fbfd-wno06ae;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nome alternativo (fase)"@it, "Nom alternatif (étape)"@fr .
   
-  _:genid-77576206d9bf4586b73cdaf7aa23fbfd-wno06ae <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value WHERE {
-  $subject crm:P102_has_title $title .
-  $identifier crm:P2_has_type spav:yavtx ;
-    rdf:value ?value .
-}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Nome alternativo (fase)"@it .
-  
-  _:genid-77576206d9bf4586b73cdaf7aa23fbfd-wno06ae a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Nom alternatif (étape)"@fr, "Alternative name (venue)"@en .
-  
-  _:genid-77576206d9bf4586b73cdaf7aa23fbfd-e3esz <http://spinrdf.org/sp#text> """DELETE {
+  _:genid-f83aa4325afb4ec2bde3ddb6db54c1c7-7pdmo7 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
   $subject crm:P102_has_title $title.
   $title a crm:E35_Title ;
     crm:P2_has_type spav:yavtx ;
     rdf:value ?value .
-} WHERE {}    """;
-    a <http://spinrdf.org/sp#Query> .
+} WHERE {}    """ .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> <http://www.metaphacts.com/ontology/fields#insertPattern>
-      _:genid-77576206d9bf4586b73cdaf7aa23fbfd-av4ax;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Alternative name (venue)"@en;
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-18T12:51:31.872Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-25T15:14:04.477Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> .

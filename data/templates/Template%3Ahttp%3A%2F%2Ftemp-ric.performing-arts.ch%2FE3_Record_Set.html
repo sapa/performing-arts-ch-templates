@@ -20,11 +20,11 @@
                 subject='[[this]]'
                 fields='[[fieldDefinitions
                 identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_level="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetExtent"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Record_set_comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
+                level="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel"
+                content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription"
+                extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetExtent"
+                date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate"
+                comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
                 ]]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                 [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
@@ -58,10 +58,10 @@
                     }
                     OPTIONAL { ?node ric:is_member_of ?parent. FILTER(ISIRI(?parent)) }
                     FILTER(ISIRI(?node))
-                    FILTER(CONTAINS(STR(?node),"/r/"))
+                    FILTER(CONTAINS(STR(?node), "/r/"))
                     ?node dc:title ?label .
-                  } LIMIT 100
-                  ORDER BY ?label'
+                  } ORDER BY ?label
+                  LIMIT 100'
                collapsed="false"
                keys-opened='[[this]]'
                parentBindingName="parent"
