@@ -1,44 +1,48 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language>
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/frbr/F25_Performance_Plan>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167566;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167565;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167564;
     a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Performance Language" .
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/frbr/F25_Performance_Plan> .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167565 <http://spinrdf.org/sp#text> """SELECT ?value WHERE { 
-          ?pw frbr:R12_is_realised_in $subject.          
-         ?pw  <http://schema.org/inLanguage>  $value.
-        
+  _:genid-f17dd798bee44247961fd2ae5ef0dc27-aize3i <http://spinrdf.org/sp#text> """INSERT {
+  ?pw frbr:R12_is_realised_in $subject ;
+      <http://schema.org/inLanguage> $value.
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/w/\", MD5(STR(?value)), \"/w\")) AS ?pw)
 }""" .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167566 a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language>
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-f17dd798bee44247961fd2ae5ef0dc27-nvj8v2 .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167564 a <http://spinrdf.org/sp#Query> .
+  _:genid-f17dd798bee44247961fd2ae5ef0dc27-nvj8v2 a <http://spinrdf.org/sp#Query> .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167565 a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167566 <http://spinrdf.org/sp#text> """INSERT {?pw frbr:R12_is_realised_in $subject.          
-         ?pw  <http://schema.org/inLanguage>  $value} 
-      
-      WHERE { 
-      BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , MD5(STR(?value)), \"/w\") ) AS ?pw)   }""" .
-  
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167564 <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  _:genid-f17dd798bee44247961fd2ae5ef0dc27-2xx1dr <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
   ?value a crm:E55_Type ;
-        skos:inScheme spav:lg;
+    skos:inScheme spav:lg ;
     skos:prefLabel ?label .
   FILTER REGEX(STR(?label), \"?token\",\"i\")
-} LIMIT 10
-  """ .
+} LIMIT 10""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language>
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f17dd798bee44247961fd2ae5ef0dc27-aize3i;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Performance Language"@undefined;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-f17dd798bee44247961fd2ae5ef0dc27-2xx1dr .
+  
+  _:genid-f17dd798bee44247961fd2ae5ef0dc27-2xx1dr a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-f17dd798bee44247961fd2ae5ef0dc27-aize3i a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-f17dd798bee44247961fd2ae5ef0dc27-nvj8v2 <http://spinrdf.org/sp#text> """SELECT ?value WHERE { 
+  ?pw frbr:R12_is_realised_in $subject ;
+    <http://schema.org/inLanguage> $value.
+}""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language>
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:07.477Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-27T18:39:35.699Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language> .

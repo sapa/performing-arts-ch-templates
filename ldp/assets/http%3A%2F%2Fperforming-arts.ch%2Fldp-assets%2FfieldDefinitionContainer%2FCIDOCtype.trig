@@ -1,41 +1,40 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype>
-    a <http://www.metaphacts.com/ontology/fields#Field> .
+  _:genid-f17afa43945841688e5262497714db0d-4fdteh a <http://spinrdf.org/sp#Query> .
   
-  _:genid-2fb3ef2f1ffd4b0fa92e37e90e1de43d-v8tsexi a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype> a <http://www.metaphacts.com/ontology/fields#Field> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype>
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#minOccurs> "1" .
+  _:genid-f17afa43945841688e5262497714db0d-gfbihli <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject crm:P2_has_type $value }" .
   
-  _:genid-2fb3ef2f1ffd4b0fa92e37e90e1de43d-v8tsexi <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject crm:P2_has_type $value }" .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#anyURI> .
   
-  _:genid-2fb3ef2f1ffd4b0fa92e37e90e1de43d-4d3api a <http://spinrdf.org/sp#Query> .
+  _:genid-f17afa43945841688e5262497714db0d-l2cn6a a <http://spinrdf.org/sp#Query> .
   
-  _:genid-2fb3ef2f1ffd4b0fa92e37e90e1de43d-kthsr <http://spinrdf.org/sp#text> "INSERT { $subject crm:P2_has_type $value } WHERE {}" .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-f17afa43945841688e5262497714db0d-l2cn6a .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype>
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-2fb3ef2f1ffd4b0fa92e37e90e1de43d-4d3api;
-    <http://www.w3.org/2000/01/rdf-schema#label> "CIDOC type"@undefined;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-2fb3ef2f1ffd4b0fa92e37e90e1de43d-kthsr .
+  _:genid-f17afa43945841688e5262497714db0d-l2cn6a <http://spinrdf.org/sp#text> "DELETE { $subject crm:P2_has_type $value } WHERE {}" .
   
-  _:genid-2fb3ef2f1ffd4b0fa92e37e90e1de43d-4d3api <http://spinrdf.org/sp#text> "DELETE { $subject crm:P2_has_type $value } WHERE {}" .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-f17afa43945841688e5262497714db0d-gfbihli;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "CIDOC type"@undefined .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype>
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-2fb3ef2f1ffd4b0fa92e37e90e1de43d-v8tsexi .
+  _:genid-f17afa43945841688e5262497714db0d-4fdteh <http://spinrdf.org/sp#text> "INSERT { $subject crm:P2_has_type $value } WHERE {}" .
   
-  _:genid-2fb3ef2f1ffd4b0fa92e37e90e1de43d-kthsr a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype> <http://www.metaphacts.com/ontology/fields#domain>
+      <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f17afa43945841688e5262497714db0d-4fdteh .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype>
-    a <http://www.w3.org/ns/prov#Entity>;
+  _:genid-f17afa43945841688e5262497714db0d-gfbihli a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype> a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-23T10:06:43.664Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-27T18:37:11.737Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype>
-    a <http://www.w3.org/ns/ldp#Resource> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype> a <http://www.w3.org/ns/ldp#Resource> .
 }
