@@ -77,7 +77,7 @@
                         crm:P4_has_time-span ?timespan .
                     ?timespan crm:P82a_begin_of_the_begin ?dob .
                     BIND(CONCAT(STR(DAY(?dob)), ". ", STR(MONTH(?dob)), ". ", STR(YEAR(?dob))) as ?birthdate)
-                }'
+                } LIMIT 1'
                 template='<div>{{#each bindings}}{{#if birthdate}}{{#if birthplace}}* {{/if}}{{/if}}<span style="padding-right:0.1em;" title="{{birthdate.value}}">{{birthdate.value}}</span>{{#if birthdate}}{{#if birthplace}}, {{/if}}{{/if}}
                 <semantic-link iri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>{{/each}}</div>'>
             </semantic-query>
@@ -90,7 +90,7 @@
                         crm:P4_has_time-span ?timespan .
                     ?timespan crm:P82a_begin_of_the_begin ?dod .
                     BIND(CONCAT(STR(DAY(?dod)), ". ", STR(MONTH(?dod)), ". ", STR(YEAR(?dod))) as ?deathdate)
-                }'
+                } LIMIT 1'
                 template='<div>{{#each bindings}}{{#if deathdate}}{{#if deathplace}}† {{/if}}{{/if}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{deathdate.value}}</span>{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
                 <semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>{{/each}}</div>'>
             </semantic-query>
