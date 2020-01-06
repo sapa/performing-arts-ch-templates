@@ -3,11 +3,15 @@
         <a href={{value.value.value}}>{{value.value.value}}</a>
     {{else}}
         {{#ifCond field.xsdDatatype.value "==" "http://www.w3.org/2001/XMLSchema#anyURI"}}
-            [[!-- un-comment for debugging only {{log value}} --]]
-            {{#if value.label}}
-                <semantic-link class="{{value.binding.class.value}}" iri="{{value.value.value}}">{{value.label}}</semantic-link> 
+        [[!-- un-comment for debugging only {{log value}} --]]
+        {{#if value.binding.unidentified.value}}
+                <mp-label iri="{{value.value.value}}"></mp-label>
             {{else}}
-                <semantic-link class="{{value.binding.class.value}}" iri="{{value.value.value}}"></semantic-link>
+                {{#if value.label}}
+                    <semantic-link class="{{value.binding.class.value}}" iri="{{value.value.value}}">{{value.label}}</semantic-link> 
+                {{else}}
+                    <semantic-link class="{{value.binding.class.value}}" iri="{{value.value.value}}"></semantic-link>
+                {{/if}}
             {{/if}}
     	{{else}}
             {{#if value.label}}

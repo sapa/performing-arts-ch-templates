@@ -2,41 +2,24 @@
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation> <http://www.w3.org/2000/01/rdf-schema#label>
       "Association memberships"@en, "Mitgliedschaften in Verbänden"@de;
-    a <http://www.metaphacts.com/ontology/fields#Field> .
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-006c0d21b1fe4f82adf2f8d9f78a26f0-o6guh .
   
-  _:genid-067067113717454182751ce8a8007ba4-bg79v3 a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-067067113717454182751ce8a8007ba4-r47jiu a <http://spinrdf.org/sp#Query> .
+  _:genid-006c0d21b1fe4f82adf2f8d9f78a26f0-1cawj3h a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
-      <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "appartenenza all'associazione"@it .
+      <http://www.w3.org/2001/XMLSchema#anyURI> .
   
-  _:genid-067067113717454182751ce8a8007ba4-bg79v3 <http://spinrdf.org/sp#text> """SELECT $value ?class WHERE {
-  $subject crm:P107i_is_current_or_former_member_of $value .
-  $value crm:P2_has_type spav:vrjhq .
-  BIND(IF(CONTAINS(STR($value), \"/u/\"), \"unidentified\", \"identified\") AS ?class)
-}     """ .
+  _:genid-006c0d21b1fe4f82adf2f8d9f78a26f0-o6guh a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation> <http://www.metaphacts.com/ontology/fields#insertPattern>
-      _:genid-067067113717454182751ce8a8007ba4-59y0ay;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-067067113717454182751ce8a8007ba4-r47jiu;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E74_Group>;
-    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E40_Legal_Body> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation> <http://www.w3.org/2000/01/rdf-schema#label>
+      "appartenenza all'associazione"@it .
   
-  _:genid-067067113717454182751ce8a8007ba4-59y0ay a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-006c0d21b1fe4f82adf2f8d9f78a26f0-o6guh <http://spinrdf.org/sp#text> """INSERT {
   $subject crm:P107i_is_current_or_former_member_of $value .
 } WHERE {}""" .
   
-  _:genid-067067113717454182751ce8a8007ba4-r47jiu <http://spinrdf.org/sp#text> """DELETE {
-  $subject crm:P107i_is_current_or_former_member_of $value .
-} WHERE {}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation> <http://www.metaphacts.com/ontology/fields#selectPattern>
-      _:genid-067067113717454182751ce8a8007ba4-bg79v3 .
-  
-  _:genid-067067113717454182751ce8a8007ba4-093z1 <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  _:genid-006c0d21b1fe4f82adf2f8d9f78a26f0-cheji8 <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
   $value a crm:E40_Legal_Body ;
   	crm:P2_has_type spav:vrjhq ;
     rdfs:label $label .
@@ -45,15 +28,35 @@
 } LIMIT 10""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation> <http://www.metaphacts.com/ontology/fields#autosuggestionPattern>
-      _:genid-067067113717454182751ce8a8007ba4-093z1;
-    <http://www.w3.org/2000/01/rdf-schema#label> "affiliations à des associations "@fr .
+      _:genid-006c0d21b1fe4f82adf2f8d9f78a26f0-cheji8;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-006c0d21b1fe4f82adf2f8d9f78a26f0-1cawj3h .
   
-  _:genid-067067113717454182751ce8a8007ba4-093z1 a <http://spinrdf.org/sp#Query> .
+  _:genid-006c0d21b1fe4f82adf2f8d9f78a26f0-cheji8 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation> <http://www.metaphacts.com/ontology/fields#domain>
+      <http://www.cidoc-crm.org/cidoc-crm/E74_Group>;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E40_Legal_Body>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-006c0d21b1fe4f82adf2f8d9f78a26f0-qrtmy .
+  
+  _:genid-006c0d21b1fe4f82adf2f8d9f78a26f0-1cawj3h <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P107i_is_current_or_former_member_of $value .
+} WHERE {}""" .
+  
+  _:genid-006c0d21b1fe4f82adf2f8d9f78a26f0-qrtmy <http://spinrdf.org/sp#text> """SELECT $value ?unidentified WHERE {
+  $subject crm:P107i_is_current_or_former_member_of $value .
+  $value crm:P2_has_type spav:vrjhq .
+  BIND(IF(CONTAINS(STR($value), \"/u/\"), \"true\", \"\") AS ?unidentified)
+}     """ .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation> <http://www.w3.org/2000/01/rdf-schema#label>
+      "affiliations à des associations "@fr .
+  
+  _:genid-006c0d21b1fe4f82adf2f8d9f78a26f0-qrtmy a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation> a
       <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-18T17:49:21.928Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-06T19:09:06.142Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation> .
