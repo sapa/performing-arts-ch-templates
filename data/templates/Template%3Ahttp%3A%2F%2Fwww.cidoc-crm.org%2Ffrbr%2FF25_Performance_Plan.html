@@ -35,7 +35,7 @@
 
             <!-- theater & season -->
             <semantic-query 
-                query='SELECT ?producer ?class ?season
+                query='SELECT ?producer ?unidentified ?season
                 WHERE {
                     ?expressioncreation frbr:R17_created ?? ;
                         crm:P9_consists_of ?production .
@@ -45,9 +45,11 @@
                         ?expressioncreation crm:P10_falls_within ?season .
                         FILTER(CONTAINS(STR(?season), "/s/"))
                     }
-                    BIND(IF(CONTAINS(STR($producer), "/u/"), "unidentified", "identified") AS ?class)
+                    BIND(IF(CONTAINS(STR($producer), "/u/"), "true", "") AS ?unidentified)
                 }'
-            template='<p>{{#each bindings}}{{#if @first}}<semantic-link class="{{class.value}}" iri="{{producer.value}}"></semantic-link>{{else}}, <semantic-link class="{{class.value}}" iri="{{producer.value}}"></semantic-link>{{/if}}{{#if @last}}{{#if season}}<br><semantic-link iri="{{season.value}}"></semantic-link>{{/if}}{{/if}}{{/each}}</p>'>
+            template='<p>{{#each bindings}}{{#if @first}}{{else}}, {{/if}}
+              {{#if unidentified.value}}<mp-label iri="{{producer.value}}"></mp-label>{{else}}<semantic-link iri="{{producer.value}}"></semantic-link>{{/if}}
+              {{#if @last}}{{#if season}}<br><semantic-link iri="{{season.value}}"></semantic-link>{{/if}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- premiere -->
@@ -65,16 +67,19 @@
 
             <!-- venue -->
             <semantic-query 
-                query='SELECT ?type ?venue ?class
+                query='SELECT ?type ?venue ?unidentified
                 WHERE {
                     VALUES (?type) {
                         (spav:dwmkn) # venue
                     }
                     ?performance frbr:R25_performed ?? ;
                         crm:P8_took_place_on_or_within ?venue .
-                    BIND(IF(CONTAINS(STR($venue), "/u/"), "unidentified", "identified") AS ?class)
+                    BIND(IF(CONTAINS(STR($venue), "/u/"), "true", "") AS ?unidentified)
                 }'
-            template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{type.value}}"></mp-label></h5><semantic-link class="{{class.value}}" iri="{{venue.value}}"></semantic-link>{{else}}, <semantic-link class="{{class.value}}" iri="{{venue.value}}"></semantic-link>{{/if}}{{/each}}</div>'>
+            template='<div>{{#each bindings}}
+              {{#if @first}}<h5><mp-label iri="{{type.value}}"></mp-label></h5>{{else}}, {{/if}}
+              {{#if unidentified.value}}<mp-label iri="{{venue.value}}"></mp-label>{{else}}<semantic-link iri="{{venue.value}}"></semantic-link>{{/if}}
+              {{/each}}</div>'>
             </semantic-query>
 
         </bs-col>
