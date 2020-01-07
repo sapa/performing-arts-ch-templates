@@ -24,7 +24,8 @@
             UNION
             { ?appellation crm:P2_has_type spav:yavtx . }
         } ORDER BY ?typesort'
-        template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{else}}<br><mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
+        template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>)
+            {{else}}<br><mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
     </semantic-query>
 
     <!-- place -->
@@ -34,7 +35,8 @@
             ?? crm:P74_has_current_or_former_residence ?p .
             ?p crm:P89_falls_within ?place .
         }"
-        template='<p>{{#each bindings}}{{#if @first}}<semantic-link iri="{{place.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link iri="{{place.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</p>'>
+        template='<p>{{#each bindings}}{{#if @first}}<semantic-link iri="{{place.value}}">{{label.value}}</semantic-link>
+            {{else}}, <semantic-link iri="{{place.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</p>'>
     </semantic-query>
 
     <!-- dates -->
@@ -77,15 +79,13 @@
 
     <!-- venues -->
     <semantic-query 
-        query='SELECT ?type WHERE {
-            VALUES (?type) {
-                (spav:dwmkn) # venue
-            }
+        query='SELECT ?label WHERE {
+            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupVenue>) }
             ?? crm:P14i_performed ?activity .
             ?activity crm:P2_has_type spav:mujfv ;
                 crm:P16_used_specific_object ?venue .
             } LIMIT 1'
-        template='<h5>{{#each bindings}}<mp-label iri="{{type.value}}"></mp-label>{{/each}}</h5>'>
+        template='<h5>{{#each bindings}}<mp-label iri="{{label.value}}"></mp-label>{{/each}}</h5>'>
     </semantic-query>
     <semantic-tree
          query='SELECT DISTINCT ?node ?parent ?unidentified WHERE {
@@ -117,7 +117,13 @@
     </mp-field-visualization> 
 
     <!-- record sets -->
-    <h5>Record sets</h5>
+    <semantic-query 
+        query='SELECT ?label WHERE {
+            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf>) }
+            ?? rdau:P60806 ?record .
+            } LIMIT 1'
+        template='<h5>{{#each bindings}}<mp-label iri="{{label.value}}"></mp-label>{{/each}}</h5>'>
+    </semantic-query>
     <semantic-tree
          query='SELECT DISTINCT ?node ?parent ?label ?description WHERE {
             ?? rdau:P60806 ?record .
