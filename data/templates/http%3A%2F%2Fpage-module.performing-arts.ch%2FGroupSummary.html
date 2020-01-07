@@ -77,16 +77,18 @@
 
     <!-- venues -->
     <semantic-query 
-        query='SELECT DISTINCT ?venue WHERE {
-                    ?? crm:P14i_performed ?activity .
-                    ?activity a crm:E7_Activity ;
-                        crm:P2_has_type spav:mujfv ;
-                        crm:P16_used_specific_object ?venue .
-                  } LIMIT 1'
-        template='<h5>Venues</h5>'>
+        query='SELECT ?type WHERE {
+            VALUES (?type) {
+                (spav:dwmkn) # venue
+            }
+            ?? crm:P14i_performed ?activity .
+            ?activity crm:P2_has_type spav:mujfv ;
+                crm:P16_used_specific_object ?venue .
+            } LIMIT 1'
+        template='<h5>{{#each bindings}}<mp-label iri="{{type.value}}"></mp-label>{{/each}}</h5>'>
     </semantic-query>
     <semantic-tree
-         query='SELECT DISTINCT ?node ?parent ?class WHERE {
+         query='SELECT DISTINCT ?node ?parent ?unidentified WHERE {
             ?? crm:P14i_performed ?activity .
             ?activity a crm:E7_Activity ;
                 crm:P2_has_type spav:mujfv ;
@@ -94,9 +96,11 @@
             ?parent crm:P46_is_composed_of* ?node .
             FILTER(ISIRI(?node))
             ?node rdfs:label ?label .
-            BIND(IF(CONTAINS(STR($node), "/u/"), "unidentified", "identified") AS ?class)
+            BIND(IF(CONTAINS(STR($node), "/u/"), "true", "") AS ?unidentified)
           } ORDER BY ?label'
-          tuple-template='<semantic-link class="{{data.class.value}}" uri="{{data.node.value}}"></semantic-link>'> 
+          tuple-template='{{#if data.unidentified.value}}
+          <mp-label iri="{{data.node.value}}"></mp-label>{{else}}
+          <semantic-link iri="{{data.node.value}}"></semantic-link>{{/if}}'> 
     </semantic-tree>
 
     <mp-field-visualization
@@ -126,7 +130,7 @@
                 ?node dc:description ?description .
             }
           }'
-          tuple-template='<span><semantic-link uri="{{data.node.value}}"></semantic-link><br>{{data.description.value}}</span>'> 
+          tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link><br>{{data.description.value}}</span>'> 
     </semantic-tree>
 
 </bs-col>

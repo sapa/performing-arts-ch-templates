@@ -8,9 +8,9 @@
                 <mp-label iri="{{value.value.value}}"></mp-label>
             {{else}}
                 {{#if value.label}}
-                    <semantic-link class="{{value.binding.class.value}}" iri="{{value.value.value}}">{{value.label}}</semantic-link> 
+                    <semantic-link iri="{{value.value.value}}">{{value.label}}</semantic-link> 
                 {{else}}
-                    <semantic-link class="{{value.binding.class.value}}" iri="{{value.value.value}}"></semantic-link>
+                    <semantic-link iri="{{value.value.value}}"></semantic-link>
                 {{/if}}
             {{/if}}
     	{{else}}
