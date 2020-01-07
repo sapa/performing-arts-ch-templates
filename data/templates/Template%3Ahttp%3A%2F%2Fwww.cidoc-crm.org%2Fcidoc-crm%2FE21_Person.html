@@ -73,27 +73,35 @@
             <semantic-query 
                 query='SELECT ?birthdate ?birthplace WHERE {
                     ?? crm:P98i_was_born ?birth .
-                    ?birth crm:P7_took_place_at ?birthplace ;
-                        crm:P4_has_time-span ?timespan .
-                    ?timespan crm:P82a_begin_of_the_begin ?dob .
-                    BIND(CONCAT(STR(DAY(?dob)), ". ", STR(MONTH(?dob)), ". ", STR(YEAR(?dob))) as ?birthdate)
+                    OPTIONAL {
+                        ?birth crm:P4_has_time-span ?timespan .
+                        ?timespan crm:P82a_begin_of_the_begin ?dob .
+                        BIND(CONCAT(STR(DAY(?dob)), ".", STR(MONTH(?dob)), ".", STR(YEAR(?dob))) as ?birthdate)
+                    }
+                    OPTIONAL {
+                        ?birth crm:P7_took_place_at ?birthplace .
+                    }
                 } LIMIT 1'
-                template='<div>{{#each bindings}}{{#if birthdate}}{{#if birthplace}}* {{/if}}{{/if}}<span style="padding-right:0.1em;" title="{{birthdate.value}}">{{birthdate.value}}</span>{{#if birthdate}}{{#if birthplace}}, {{/if}}{{/if}}
-                <semantic-link iri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>{{/each}}</div>'>
+                template='<div>{{#each bindings}}{{#if birthdate}}* {{else}}{{#if birthplace}}* {{/if}}{{/if}}{{#if birthdate}}<span style="padding-right:0.1em;" title="{{birthdate.value}}">{{birthdate.value}}</span>{{/if}}{{#if birthdate}}{{#if birthplace}}, {{/if}}{{/if}}
+                {{#if birthplace}}<semantic-link iri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>{{/if}}{{/each}}</div>'>
             </semantic-query>
 
             <!-- date and place of death -->
             <semantic-query 
                 query='SELECT ?deathdate ?deathplace WHERE {
                     ?? crm:P100i_died_in ?death .
-                    ?death crm:P7_took_place_at ?deathplace ;
-                        crm:P4_has_time-span ?timespan .
-                    ?timespan crm:P82a_begin_of_the_begin ?dod .
-                    BIND(CONCAT(STR(DAY(?dod)), ". ", STR(MONTH(?dod)), ". ", STR(YEAR(?dod))) as ?deathdate)
+                    OPTIONAL {
+                        ?death crm:P4_has_time-span ?timespan .
+                        ?timespan crm:P82a_begin_of_the_begin ?dod .
+                        BIND(CONCAT(STR(DAY(?dod)), ".", STR(MONTH(?dod)), ".", STR(YEAR(?dod))) as ?deathdate)
+                    }
+                    OPTIONAL {
+                        ?death crm:P7_took_place_at ?deathplace .
+                    }
                 } LIMIT 1'
-                template='<div>{{#each bindings}}{{#if deathdate}}{{#if deathplace}}† {{/if}}{{/if}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{deathdate.value}}</span>{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
-                <semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>{{/each}}</div>'>
-            </semantic-query>
+                template='<div>{{#each bindings}}{{#if deathdate}}† {{else}}{{#if deathplace}}* {{/if}}{{/if}}{{#if deathdate}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{deathdate.value}}</span>{{/if}}{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
+                    {{#if deathplace}}<semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>{{/if}}{{/each}}</div>'>
+                </semantic-query>
 
     </bs-col>
         <bs-col sm="4">
@@ -134,7 +142,7 @@
                     ?node dc:description ?description .
                 }
               }'
-              tuple-template='<span><semantic-link uri="{{data.node.value}}"></semantic-link><br>{{data.description.value}}</span>'> 
+              tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link><br>{{data.description.value}}</span>'> 
         </semantic-tree>
 
         </bs-col>

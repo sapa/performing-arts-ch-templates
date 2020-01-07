@@ -47,9 +47,7 @@
                     }
                     BIND(IF(CONTAINS(STR($producer), "/u/"), "true", "") AS ?unidentified)
                 }'
-            template='<p>{{#each bindings}}{{#if @first}}{{else}}, {{/if}}
-              {{#if unidentified.value}}<mp-label iri="{{producer.value}}"></mp-label>{{else}}<semantic-link iri="{{producer.value}}"></semantic-link>{{/if}}
-              {{#if @last}}{{#if season}}<br><semantic-link iri="{{season.value}}"></semantic-link>{{/if}}{{/if}}{{/each}}</p>'>
+            template='<p>{{#each bindings}}{{#if @first}}{{else}}, {{/if}}{{#if unidentified.value}}<mp-label iri="{{producer.value}}"></mp-label>{{else}}<semantic-link iri="{{producer.value}}"></semantic-link>{{/if}}{{#if @last}}{{#if season}}<br><semantic-link iri="{{season.value}}"></semantic-link>{{/if}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- premiere -->
@@ -62,9 +60,7 @@
                     ?premieretype skos:inScheme spav:hl .
                     OPTIONAL { ?premiere crm:P4_has_time-span ?timespan . }
                 }'
-            template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{premieretype.value}}"></mp-label>
-              {{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{#if @last}}</h5>{{/if}}{{/each}}{{#each bindings}}
-              {{#if @first}}<mp-label iri="{{timespan.value}}"></mp-label>{{/if}}{{/each}}</p>'>
+            template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{#if @last}}</h5>{{/if}}{{/each}}{{#each bindings}}{{#if @first}}<mp-label iri="{{timespan.value}}"></mp-label>{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- venue -->
