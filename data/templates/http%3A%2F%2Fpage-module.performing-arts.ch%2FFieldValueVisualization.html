@@ -1,6 +1,6 @@
 <div>
-    {{#ifCond field.range.[0].value "==" "http://metaphacts.com/Link"}}
-        <a href={{value.value.value}}>{{value.value.value}}</a>
+    {{#ifCond field.range.[0].value "==" "http://metaphacts.com/Link"}}{{log value}}
+        <a href={{value.value.value}}>{{value.label}}</a>
     {{else}}
         {{#ifCond field.xsdDatatype.value "==" "http://www.w3.org/2001/XMLSchema#anyURI"}}
         [[!-- un-comment for debugging only {{log value}} --]]
