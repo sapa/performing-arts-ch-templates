@@ -1,9 +1,9 @@
     <semantic-query 
-    query='SELECT ?value ?label WHERE {
+    query='SELECT ?fieldlabel ?value ?label WHERE {
         ?? owl:sameAs ?value
         BIND (REPLACE(STR(?value), ".*\\/c*b*", "") as ?localname)
         BIND (STRBEFORE(STR(?value), ?localname) as ?prefix)
-
+        VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs>) }
         VALUES (?prefix ?source ?order)
         {
           ("http://www.wikidata.org/entity/" "Wikidata" 0)
@@ -20,8 +20,9 @@
         CONCAT(?source,": ",?localname) ,
         ?source) as ?label)
     } ORDER BY ASC(?order)'
-    template='<div><h5>External resources</h5>
-    <ul class="list-unstyled">{{#each bindings}}<li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
+    template='<div>{{#each bindings}}
+        {{#if @first}}<h5><mp-label iri="{{fieldlabel.value}}"></mp-label></h5><ul class="list-unstyled">{{/if}}
+        <li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
       {{/each}}
     </ul></div>'>
     </semantic-query>
