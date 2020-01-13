@@ -1,0 +1,210 @@
+<div class="page">
+  <div class='page__body'>
+    [[#if (hasPermission "forms:ldp:*")]]
+
+    <h2 style="margin-bottom: 0.8em;">To Do</h2>
+
+    <bs-tabs id='todo-tabs' default-active-key='Group Venues' unmount-on-exit=true>
+
+        <bs-tab event-key='Group Venues' title='Group Venues'>
+            <bs-col sm="4">
+                <semantic-chart type='donut' types='["pie", "donut"]'
+                      query='
+                      SELECT ?status (COUNT(?venue) AS ?venuecount)
+                      WHERE {
+                        ?group rdf:type/rdfs:subClassOf* crm:E74_Group; 
+                            crm:P14i_performed [
+                            crm:P2_has_type spav:mujfv ;
+                            crm:P16_used_specific_object ?venue ] .
+                        ?venue crm:P2_has_type spav:dwmkn .
+                        BIND(IF(CONTAINS(STR(?venue), "/u/"), "unmatched", "matched") AS ?status)
+                      } GROUP BY ?status
+                      ORDER BY ?status
+                      '
+                      sets='[{"dataSetName": "Venues", "category": "status", "value": "venuecount"}]'
+                      styles='[{
+                        "provider": "chartjs",
+                        "style": {
+                            "data": {
+                                "datasets": [
+                                    { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(220, 20, 20, 0.7)"],
+                                    "borderColor": "rgb(255, 255, 255, 1)",
+                                    "borderWidth": "4"
+                                    }
+                                ]
+                            },
+                            "options": {
+                                "layout": {
+                                    "padding": {
+                                        "top": "20"
+                                    }
+                                },
+                                "legend": {
+                                    "position": "bottom",
+                                    "labels": {
+                                        "fontSize": 14,
+                                        "padding": 20
+                                    }
+                                }
+                            }
+                        }
+                       }]'
+                    ></semantic-chart>
+          
+                    </bs-col>
+                    <bs-col sm="8">
+                      <semantic-table 
+              query='SELECT DISTINCT ?group ?grouplabel ?unmatchedvenue 
+                WHERE {
+                  ?venue crm:P2_has_type spav:dwmkn ;
+                        rdfs:label ?unmatchedvenue .
+                  FILTER (CONTAINS(STR(?venue), "/u/"))
+                  ?group rdfs:label ?grouplabel ;
+                    crm:P14i_performed [
+                            crm:P2_has_type spav:mujfv ;
+                          crm:P16_used_specific_object ?venue ]
+                } ORDER BY ASC(UCASE(STR(?grouplabel))) ASC(UCASE(STR(?unmatchedvenue))) ' 
+              column-configuration='[
+                  {"variableName": "group", "displayName": "Group"}, 
+                  {"variableName": "unmatchedvenue", "displayName": "Venue"}
+              ]'
+              number-of-displayed-rows=20
+              options='{"showFilter": false}'>
+              </semantic-table>
+              
+            </bs-col>          
+        </bs-tab>
+
+        <bs-tab event-key='Group Members' title='Group Members'>
+            <bs-col sm="4">
+                <semantic-chart type='donut' types='["pie", "donut"]'
+                      query='
+                      SELECT ?status (COUNT(?member) AS ?membercount)
+                      WHERE {
+                        ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
+                            crm:P107_has_current_or_former_member ?member.
+                        BIND(IF(CONTAINS(STR(?member), "/u/"), "unmatched", "matched") AS ?status)
+                      } GROUP BY ?status
+                      ORDER BY ?status
+                      '
+                      sets='[{"dataSetName": "Members", "category": "status", "value": "membercount"}]'
+                      styles='[{
+                        "provider": "chartjs",
+                        "style": {
+                            "data": {
+                                "datasets": [
+                                    { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(220, 20, 20, 0.7)"],
+                                    "borderColor": "rgb(255, 255, 255, 1)",
+                                    "borderWidth": "4"
+                                    }
+                                ]
+                            },
+                            "options": {
+                                "layout": {
+                                    "padding": {
+                                        "top": "20"
+                                    }
+                                },
+                                "legend": {
+                                    "position": "bottom",
+                                    "labels": {
+                                        "fontSize": 14,
+                                        "padding": 20
+                                    }
+                                }
+                            }
+                        }
+                       }]'
+                    ></semantic-chart>
+          
+                    </bs-col>
+                    <bs-col sm="8">
+                      <semantic-table 
+              query='SELECT DISTINCT ?group ?grouplabel ?memberlabel 
+                WHERE {
+                    ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
+                        crm:P107_has_current_or_former_member ?member.
+                    FILTER (CONTAINS(STR(?member), "/u/"))
+                    ?member rdfs:label ?memberlabel .
+                } ORDER BY ASC(UCASE(STR(?grouplabel))) ASC(UCASE(STR(?memberlabel))) ' 
+              column-configuration='[
+                  {"variableName": "group", "displayName": "Group"}, 
+                  {"variableName": "memberlabel", "displayName": "Member"}
+              ]'
+              number-of-displayed-rows=20
+              options='{"showFilter": false}'>
+              </semantic-table>
+              
+            </bs-col>          
+        </bs-tab>
+
+        <bs-tab event-key='Producers' title='Producers'>
+            <bs-col sm="4">
+                <semantic-chart type='donut' types='["pie", "donut"]'
+                      query='
+                      SELECT ?status (COUNT(?producer) AS ?producercount)
+                      WHERE {
+                        ?production crm:P2_has_type spav:muwgo ;
+                            crm:P14_carried_out_by ?producer .
+                        BIND(IF(CONTAINS(STR(?producer), "/u/"), "unmatched", "matched") AS ?status)
+                      } GROUP BY ?status
+                      ORDER BY ?status
+                      '
+                      sets='[{"dataSetName": "Producers", "category": "status", "value": "producercount"}]'
+                      styles='[{
+                        "provider": "chartjs",
+                        "style": {
+                            "data": {
+                                "datasets": [
+                                    { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(220, 20, 20, 0.7)"],
+                                    "borderColor": "rgb(255, 255, 255, 1)",
+                                    "borderWidth": "4"
+                                    }
+                                ]
+                            },
+                            "options": {
+                                "layout": {
+                                    "padding": {
+                                        "top": "20"
+                                    }
+                                },
+                                "legend": {
+                                    "position": "bottom",
+                                    "labels": {
+                                        "fontSize": 14,
+                                        "padding": 20
+                                    }
+                                }
+                            }
+                        }
+                       }]'
+                    ></semantic-chart>
+          
+                    </bs-col>
+                    <bs-col sm="8">
+                      <semantic-table 
+              query='SELECT DISTINCT ?plan ?producer_label 
+                WHERE {
+                    ?production crm:P2_has_type spav:muwgo ;
+                        crm:P14_carried_out_by ?producer .
+ 	                FILTER(CONTAINS(STR(?producer), "/u/"))
+                    ?producer rdfs:label ?producer_label .
+                    ?expression_creation crm:P9_consists_of ?production ;
+                        frbr:R17_created ?plan .
+                }' 
+              column-configuration='[
+                  {"variableName": "plan", "displayName": "Production"}, 
+                  {"variableName": "producer_label", "displayName": "Producer"}
+              ]'
+              number-of-displayed-rows=20
+              options='{"showFilter": false}'>
+              </semantic-table>
+              
+            </bs-col>          
+        </bs-tab>
+
+    </bs-tabs>
+
+  [[/if]]
+  </div>
+</div>
