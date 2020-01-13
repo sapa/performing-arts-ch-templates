@@ -72,32 +72,35 @@
         </bs-col>
         <bs-col sm="4">
             <semantic-query 
-                query='SELECT DISTINCT ?fieldlabel ?person ?datestring WHERE {
+                query='SELECT DISTINCT ?person ?fieldlabel ?personlabel (GROUP_CONCAT(DISTINCT ?eventstr; SEPARATOR=", ") AS ?lifedates)
+                WHERE {
                     VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlacePersons>) }
-                    ?event crm:P7_took_place_at ?? .
+                    ?event crm:P7_took_place_at ?? ;
+                        a ?eventtype .
+                    FILTER(?eventtype IN (crm:E67_Birth, crm:E69_Death))
+                    { ?person crm:P98i_was_born ?event . } UNION { ?person crm:P100i_died_in ?event . }
+                    ?person rdfs:label ?personlabel .
                     {
-                        ?event a crm:E67_Birth .
-                                        ?person crm:P98i_was_born ?event ;
-                                                rdfs:label ?personlabel .
-                                        OPTIONAL {
-                                            ?event crm:P4_has_time-span ?ts .
-                                            ?ts crm:P82a_begin_of_the_begin ?d .
-                                            BIND(CONCAT("* ", STR(DAY(?d)), ".", STR(MONTH(?d)), ".", STR(YEAR(?d))) as ?datestring)
-                                        }
-                      }
-                      UNION
-                      {
-                        ?event a crm:E69_Death .
-                                        ?person crm:P100i_died_in ?event ;
-                                                rdfs:label ?personlabel .
-                                        OPTIONAL {
-                                            ?event crm:P4_has_time-span ?ts .
-                                            ?ts crm:P82a_begin_of_the_begin ?d .
-                                            BIND(CONCAT("† ", STR(DAY(?d)), ".", STR(MONTH(?d)), ".", STR(YEAR(?d))) as ?datestring)
-                                        }
-                      }
-                    } ORDER BY ASC (?personlabel)'
-                template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{fieldlabel.value}}"></mp-label></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{person.value}}">{{person.value}}</semantic-link>{{#if datestring}} ({{datestring.value}}){{/if}}</li>{{/each}}</ul></div>'>
+                        ?event a crm:E67_Birth ;
+                            crm:P4_has_time-span ?dobts .
+                        ?dobts crm:P82a_begin_of_the_begin ?dob .
+                        BIND(CONCAT("* ", STR(DAY(?dob)), ".", STR(MONTH(?dob)), ".", STR(YEAR(?dob))) as ?eventstr)
+                    }
+                    UNION 
+                    {
+                        ?event a crm:E69_Death ;
+                            crm:P4_has_time-span ?dodts .
+                        ?dodts crm:P82a_begin_of_the_begin ?dod .
+                        BIND(CONCAT("† ", STR(DAY(?dod)), ".", STR(MONTH(?dod)), ".", STR(YEAR(?dod))) as ?eventstr)
+                            
+                    }
+                } GROUP BY ?person ?fieldlabel ?personlabel
+                ORDER BY ASC(?personlabel)'
+                template='<div>{{#each bindings}}
+                    {{#if @first}}<h5><mp-label iri="{{fieldlabel.value}}"></mp-label></h5><ul class="list-unstyled">{{/if}}
+                        <li><semantic-link iri="{{person.value}}">{{person.value}}</semantic-link>
+                        {{#if lifedates}} ({{lifedates.value}}){{/if}}</li>
+                    {{/each}}</ul></div>'>
             </semantic-query>
         </bs-col>
     </bs-row>
