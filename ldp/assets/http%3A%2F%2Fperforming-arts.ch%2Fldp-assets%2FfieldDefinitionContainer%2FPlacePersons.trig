@@ -1,0 +1,26 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlacePersons/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlacePersons> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Personen"@de, "Persons"@en;
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-418f4eeea6e04bd190b4be571a7d1779-1j3nxv <http://spinrdf.org/sp#text> "INSERT { $subject ?predicate $value} WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlacePersons> <http://www.metaphacts.com/ontology/fields#insertPattern>
+      _:genid-418f4eeea6e04bd190b4be571a7d1779-1j3nxv;
+    <http://www.w3.org/2000/01/rdf-schema#label> "persone"@it .
+  
+  _:genid-418f4eeea6e04bd190b4be571a7d1779-1j3nxv a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlacePersons> <http://www.w3.org/2000/01/rdf-schema#label>
+      "personnes"@fr;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "used labels only";
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-13T12:25:30.887Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlacePersons> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlacePersons> a <http://www.w3.org/ns/ldp#Resource> .
+}

@@ -27,8 +27,7 @@
                     FILTER(ISIRI(?node))
                     FILTER(CONTAINS(STR(?node),"/p/"))
                     ?node rdfs:label ?label .
-                  } ORDER BY ?label
-               '
+                  } ORDER BY ?label'
                collapsed="true"
                keys-opened='[[this]]'
                parentBindingName="parent"
@@ -45,28 +44,60 @@
         </bs-col>
 
 </bs-tab>
-<bs-tab event-key="2" title="Groups and Venues">
+<bs-tab event-key="2" title="Groups, Venues, Persons">
 
     <bs-row>
         <bs-col sm="4">
             <semantic-query 
-                query='SELECT ?group ?label WHERE {
-                  ?groupsite crm:P89_falls_within ?? .
-                  ?group crm:P74_has_current_or_former_residence ?groupsite ;
-                    rdfs:label ?label .
+                query='SELECT DISTINCT ?fieldlabel ?group WHERE {
+                    VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups>) }
+                    ?groupsite crm:P89_falls_within ?? .
+                    ?group crm:P74_has_current_or_former_residence ?groupsite ;
+                        rdfs:label ?label .
                 } ORDER BY lcase(?label)'
-                template='<div><h5>Groups</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{group.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+                template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{fieldlabel.value}}"></mp-label></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{group.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
         </bs-col>
         <bs-col sm="4">
             <semantic-query 
-                query='SELECT ?venue ?label WHERE {
-                  ?venuesite crm:P89_falls_within ?? .
-                  ?venue crm:P156_occupies ?venuesite ;
-                    crm:P2_has_type spav:dwmkn ;
-                    rdfs:label ?label .
+                query='SELECT DISTINCT ?fieldlabel ?venue WHERE {
+                    VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupVenue>) }
+                    ?venuesite crm:P89_falls_within ?? .
+                    ?venue crm:P156_occupies ?venuesite ;
+                        crm:P2_has_type spav:dwmkn ;
+                        rdfs:label ?label .
                 } ORDER BY lcase(?label)'
-                template='<div><h5>Venues</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{venue.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+                template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{fieldlabel.value}}"></mp-label></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{venue.value}}">{{venue.label}}</semantic-link></li>{{/each}}</ul></div>'>
+            </semantic-query>
+        </bs-col>
+        <bs-col sm="4">
+            <semantic-query 
+                query='SELECT DISTINCT ?fieldlabel ?person ?datestring WHERE {
+                    VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlacePersons>) }
+                    ?event crm:P7_took_place_at ?? .
+                    {
+                        ?event a crm:E67_Birth .
+                                        ?person crm:P98i_was_born ?event ;
+                                                rdfs:label ?personlabel .
+                                        OPTIONAL {
+                                            ?event crm:P4_has_time-span ?ts .
+                                            ?ts crm:P82a_begin_of_the_begin ?d .
+                                            BIND(CONCAT("* ", STR(DAY(?d)), ".", STR(MONTH(?d)), ".", STR(YEAR(?d))) as ?datestring)
+                                        }
+                      }
+                      UNION
+                      {
+                        ?event a crm:E69_Death .
+                                        ?person crm:P100i_died_in ?event ;
+                                                rdfs:label ?personlabel .
+                                        OPTIONAL {
+                                            ?event crm:P4_has_time-span ?ts .
+                                            ?ts crm:P82a_begin_of_the_begin ?d .
+                                            BIND(CONCAT("† ", STR(DAY(?d)), ".", STR(MONTH(?d)), ".", STR(YEAR(?d))) as ?datestring)
+                                        }
+                      }
+                    } ORDER BY ASC (?personlabel)'
+                template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{fieldlabel.value}}"></mp-label></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{person.value}}">{{person.value}}</semantic-link>{{#if datestring}} ({{datestring.value}}){{/if}}</li>{{/each}}</ul></div>'>
             </semantic-query>
         </bs-col>
     </bs-row>
