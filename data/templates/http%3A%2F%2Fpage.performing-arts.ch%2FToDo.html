@@ -78,22 +78,32 @@
         <bs-tab event-key='Group Members' title='Group Members'>
             <bs-col sm="4">
                 <semantic-chart type='donut' types='["pie", "donut"]'
-                      query='
-                      SELECT ?status (COUNT(?member) AS ?membercount)
+                      query='SELECT ?status_order ?status (COUNT(?member) AS ?membercount)
                       WHERE {
-                        ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
-                            crm:P107_has_current_or_former_member ?member.
-                        BIND(IF(CONTAINS(STR(?member), "/u/"), "unmatched", "matched") AS ?status)
-                      } GROUP BY ?status
-                      ORDER BY ?status
-                      '
+                          ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
+                              crm:P107_has_current_or_former_member ?member.
+                          ?member rdfs:label ?member_label .
+                          OPTIONAL {
+                              ?person rdfs:label ?member_label; 
+                                  a crm:E21_Person.
+                              FILTER(?person != ?member)
+                              FILTER(CONTAINS(STR(?person), "/a/"))
+                            }
+                        BIND(IF(CONTAINS(STR(?member), "/a/"), "matched", IF(BOUND(?person), "matchable?", "unmatched")) AS ?status)
+                        VALUES (?status ?status_order) {
+                          ("matched" 1)
+                          ("matchable?" 2)
+                          ("unmatched" 3)
+                        }
+                      } GROUP BY ?status_order ?status
+                      ORDER BY ?status_order'
                       sets='[{"dataSetName": "Members", "category": "status", "value": "membercount"}]'
                       styles='[{
                         "provider": "chartjs",
                         "style": {
                             "data": {
                                 "datasets": [
-                                    { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(220, 20, 20, 0.7)"],
+                                    { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(58, 54, 78, 0.5)", "rgba(220, 20, 20, 0.7)"],
                                     "borderColor": "rgb(255, 255, 255, 1)",
                                     "borderWidth": "4"
                                     }
@@ -183,25 +193,42 @@
                     </bs-col>
                     <bs-col sm="8">
                       <semantic-table 
-              query='SELECT DISTINCT ?plan ?producer_label 
-                WHERE {
-                    ?production crm:P2_has_type spav:muwgo ;
-                        crm:P14_carried_out_by ?producer .
- 	                FILTER(CONTAINS(STR(?producer), "/u/"))
-                    ?producer rdfs:label ?producer_label .
-                    ?expression_creation crm:P9_consists_of ?production ;
-                        frbr:R17_created ?plan .
-                }' 
-              column-configuration='[
-                  {"variableName": "plan", "displayName": "Production"}, 
-                  {"variableName": "producer_label", "displayName": "Producer"}
-              ]'
-              number-of-displayed-rows=20
-              options='{"showFilter": false}'>
-              </semantic-table>
+                        query='SELECT DISTINCT ?plan ?producer_label 
+                            WHERE {
+                                ?production crm:P2_has_type spav:muwgo ;
+                                    crm:P14_carried_out_by ?producer .
+                                FILTER(CONTAINS(STR(?producer), "/u/"))
+                                ?producer rdfs:label ?producer_label .
+                                ?expression_creation crm:P9_consists_of ?production ;
+                                    frbr:R17_created ?plan .
+                            }' 
+                        column-configuration='[
+                            {"variableName": "plan", "displayName": "Production"}, 
+                            {"variableName": "producer_label", "displayName": "Producer"}
+                        ]'
+                        number-of-displayed-rows=20
+                        options='{"showFilter": false}'>
+                        </semantic-table>
               
-            </bs-col>          
-        </bs-tab>
+                    <h4 style="margin-top: 2em;">Unmatched Producers Ranking</h4>
+                    <semantic-table 
+                    query='SELECT ?producer_label (COUNT(?producer) AS ?producer_count)
+                    WHERE {
+                        ?production crm:P2_has_type spav:muwgo ;
+                            crm:P14_carried_out_by ?producer .
+                        FILTER(CONTAINS(STR(?producer), "/u/"))
+                            ?producer rdfs:label ?producer_label .
+                    } GROUP BY ?producer_label
+                    ORDER BY DESC(?producer_count)' 
+                    column-configuration='[
+                        {"variableName": "producer_label", "displayName": "Producer"}, 
+                        {"variableName": "producer_count", "displayName": "Count"}
+                    ]'
+                    number-of-displayed-rows=20
+                    options='{"showFilter": false}'>
+                    </semantic-table>
+                </bs-col>          
+            </bs-tab>
 
     </bs-tabs>
 
