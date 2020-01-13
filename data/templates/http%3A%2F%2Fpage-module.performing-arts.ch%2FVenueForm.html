@@ -14,13 +14,12 @@
       fields='[[fieldDefinitions
         rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
         cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype"
+        timespan="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueTimespan"
         official_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialTitle"
         alternative_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle"
         acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym"
         contains="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains"
         location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation"
-        begin="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueBegin"
-        end="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueEnd"
         website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
         sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
       ]]'>
@@ -46,14 +45,19 @@
             <semantic-form-text-input for="subvenue_official_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
             <button name="submit" class="btn btn-default">Create Venue</button>
           </semantic-form>
-  </semantic-form-autocomplete-input>
+        </semantic-form-autocomplete-input>
         <semantic-form-tree-picker-input for="location" ></semantic-form-tree-picker-input>
-        <bs-col sm="6">
-          <semantic-form-text-input for="begin"></semantic-form-text-input>
-        </bs-col>
-        <bs-col sm="6">
-          <semantic-form-text-input for="end"></semantic-form-text-input>
-        </bs-col>
+        <semantic-form-composite-input for='timespan' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+          begin="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueBegin"
+          end="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueEnd"
+        ]]'>
+          <bs-col sm="6">
+            <semantic-form-text-input for="begin"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm="6">
+            <semantic-form-text-input for="end"></semantic-form-text-input>
+          </bs-col>        
+        </semantic-form-composite-input>
         <semantic-form-text-input for="website"></semantic-form-text-input>
         <semantic-form-text-input for="sameAs"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>
