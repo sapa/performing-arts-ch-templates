@@ -1,21 +1,25 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-09ba08c294b94429941009ac19d3e75a-venxac;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Groups"@en .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups> a <http://www.metaphacts.com/ontology/fields#Field> .
   
-  _:genid-09ba08c294b94429941009ac19d3e75a-venxac a <http://spinrdf.org/sp#Query> .
+  _:genid-5a46cab348d545baa843147a5c09273b-2dh6k <http://spinrdf.org/sp#text> "INSERT { $subject ?predicate $value} WHERE {}" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Gruppen"@de, "groupes"@fr;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Groups"@en;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-5a46cab348d545baa843147a5c09273b-2dh6k;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Gruppen"@de, "groupes"@fr .
+  
+  _:genid-5a46cab348d545baa843147a5c09273b-2dh6k a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups> <http://www.metaphacts.com/ontology/fields#range>
+      <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>;
     <http://www.w3.org/2000/01/rdf-schema#comment> "used for labels only";
-    <http://www.w3.org/2000/01/rdf-schema#label> "gruppi"@it .
-  
-  _:genid-09ba08c294b94429941009ac19d3e75a-venxac <http://spinrdf.org/sp#text> "INSERT { $subject ?predicate $value} WHERE {}" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups> a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "gruppi"@it;
+    a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-13T12:28:11.522Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-13T12:54:57.615Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups> .
