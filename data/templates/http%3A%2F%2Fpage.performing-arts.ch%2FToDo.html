@@ -348,7 +348,127 @@
                                     
                             </bs-tab>
                 </bs-col>          
-            </bs-tab>
+        </bs-tab>
+
+        <bs-tab event-key='4' title='Production Venues'>
+            <bs-col sm="4">
+                <semantic-chart type='donut' types='["pie", "donut"]'
+                      query='
+                      SELECT ?status (COUNT(?venue) AS ?venuecount)
+                      WHERE {
+                        ?performance a frbr:F31_Performance ;
+                                       crm:P8_took_place_on_or_within ?venue ;
+                                       frbr:R25_performed ?plan .
+                        BIND(IF(CONTAINS(STR(?venue), "/u/"), "unmatched", "matched") AS ?status)
+                      } GROUP BY ?status
+                      ORDER BY ?status
+                      '
+                      sets='[{"dataSetName": "Venues", "category": "status", "value": "venuecount"}]'
+                      styles='[{
+                        "provider": "chartjs",
+                        "style": {
+                            "data": {
+                                "datasets": [
+                                    { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(220, 20, 20, 0.7)"],
+                                    "borderColor": "rgb(255, 255, 255, 1)",
+                                    "borderWidth": "4"
+                                    }
+                                ]
+                            },
+                            "options": {
+                                "layout": {
+                                    "padding": {
+                                        "top": "20"
+                                    }
+                                },
+                                "legend": {
+                                    "position": "bottom",
+                                    "labels": {
+                                        "fontSize": 14,
+                                        "padding": 20
+                                    }
+                                }
+                            }
+                        }
+                       }]'
+                    ></semantic-chart>
+            </bs-col>
+            <bs-col sm="8">
+
+                <bs-tabs id='producer_venues' default-active-key='4.1' unmount-on-exit=true>
+
+                    <bs-tab event-key='4.1' title='Matched Venues'>
+
+                        <semantic-table 
+                        query='SELECT ?plan ?venue
+                        WHERE {
+                          ?performance a frbr:F31_Performance ;
+                                       crm:P8_took_place_on_or_within ?venue ;
+                                       frbr:R25_performed ?plan .
+                            FILTER(CONTAINS(STR(?venue), "/t/"))
+                        }' 
+                        column-configuration='[
+                            {"variableName": "plan", "displayName": "Production"}, 
+                            {"variableName": "venue", "displayName": "Venue"}
+                        ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": false}'>
+                        </semantic-table>
+
+                    </bs-tab>
+                    <bs-tab event-key='4.2' title='Unmatched Venues'>
+
+                        <semantic-table 
+                        query='SELECT ?plan ?venuelabel
+                        WHERE {
+                          ?performance a frbr:F31_Performance ;
+                                       crm:P8_took_place_on_or_within ?venue ;
+                                       frbr:R25_performed ?plan .
+                            FILTER(CONTAINS(STR(?venue), "/u/"))
+                            ?venue rdfs:label ?venuelabel .
+                        }' 
+                        column-configuration='[
+                            {"variableName": "plan", "displayName": "Production"}, 
+                            {"variableName": "venuelabel", "displayName": "Venue"}
+                        ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": false}'>
+                        </semantic-table>
+
+                    </bs-tab>
+                    <bs-tab event-key='4.3' title='Unmatched Venues Ranking'>
+
+                        <semantic-table 
+                        query='SELECT ?venuelabel ?group (COUNT(?venue) AS ?venuecount)
+                        WHERE {
+                          ?venue rdfs:label ?venuelabel ;
+                              a crm:E22_Man-Made_Object .
+                          FILTER(CONTAINS(STR(?venue), "/u/"))
+                          ?performance crm:P8_took_place_on_or_within ?venue ;
+                                       frbr:R25_performed ?plan .
+                          ?expressioncreation frbr:R17_created ?plan ;
+                                              crm:P10_falls_within ?directorship.
+                          ?directorship crm:P14_carried_out_by ?group .
+                          ?group rdf:type/rdfs:subClassOf* crm:E74_Group .
+                        } GROUP BY ?venuelabel ?group 
+                        ORDER BY DESC(?venuecount) ' 
+                        column-configuration='[
+                        {"variableName": "venuelabel", "displayName": "Venue"}, 
+                        {"variableName": "group", "displayName": "Group"}, 
+                        {"variableName": "venuecount", "displayName": "Count"}
+                        ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": false}'>
+                        </semantic-table>
+
+                    </bs-tab>
+                </bs-tabs>
+
+            </bs-col>
+        </bs-tab>
 
     </bs-tabs>
 
