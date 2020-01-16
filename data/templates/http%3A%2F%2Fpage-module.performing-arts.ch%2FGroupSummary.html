@@ -35,8 +35,7 @@
             ?? crm:P74_has_current_or_former_residence ?p .
             ?p crm:P89_falls_within ?place .
         }"
-        template='<p>{{#each bindings}}{{#if @first}}<semantic-link iri="{{place.value}}">{{label.value}}</semantic-link>
-            {{else}}, <semantic-link iri="{{place.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</p>'>
+        template='<p>{{#each bindings}}{{#if @first}}<semantic-link iri="{{place.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link iri="{{place.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</p>'>
     </semantic-query>
 
     <!-- dates -->

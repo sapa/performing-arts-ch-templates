@@ -4,9 +4,9 @@
 
     <h2 style="margin-bottom: 0.8em;">To Do</h2>
 
-    <bs-tabs id='todo-tabs' default-active-key='Group Venues' unmount-on-exit=true>
+    <bs-tabs id='todo-tabs' default-active-key='1' unmount-on-exit=true>
 
-        <bs-tab event-key='Group Venues' title='Group Venues'>
+        <bs-tab event-key='1' title='Group Venues'>
             <bs-col sm="4">
                 <semantic-chart type='donut' types='["pie", "donut"]'
                       query='
@@ -51,28 +51,37 @@
                        }]'
                     ></semantic-chart>
           
-                    </bs-col>
-                    <bs-col sm="8">
-                      <semantic-table 
-              query='SELECT DISTINCT ?group ?grouplabel ?unmatchedvenue 
-                WHERE {
-                  ?venue crm:P2_has_type spav:dwmkn ;
-                        rdfs:label ?unmatchedvenue .
-                  FILTER (CONTAINS(STR(?venue), "/u/"))
-                  ?group rdfs:label ?grouplabel ;
-                    crm:P14i_performed [
-                            crm:P2_has_type spav:mujfv ;
-                          crm:P16_used_specific_object ?venue ]
-                } ORDER BY ASC(UCASE(STR(?grouplabel))) ASC(UCASE(STR(?unmatchedvenue))) ' 
-              column-configuration='[
-                  {"variableName": "group", "displayName": "Group"}, 
-                  {"variableName": "unmatchedvenue", "displayName": "Venue"}
-              ]'
-              number-of-displayed-rows=20
-              options='{"showFilter": false}'>
-              </semantic-table>
-              
-            </bs-col>          
+            </bs-col>
+            <bs-col sm="8">
+
+                <bs-tabs id='group-venues' default-active-key='1.1' unmount-on-exit=true>
+
+                    <bs-tab event-key='1.1' title='Unmatched Venues'>
+
+                        <semantic-table 
+                        query='SELECT DISTINCT ?group ?grouplabel ?unmatchedvenue 
+                            WHERE {
+                            ?venue crm:P2_has_type spav:dwmkn ;
+                                    rdfs:label ?unmatchedvenue .
+                            FILTER (CONTAINS(STR(?venue), "/u/"))
+                            ?group rdfs:label ?grouplabel ;
+                                crm:P14i_performed [
+                                        crm:P2_has_type spav:mujfv ;
+                                    crm:P16_used_specific_object ?venue ]
+                            } ORDER BY ASC(UCASE(STR(?grouplabel))) ASC(UCASE(STR(?unmatchedvenue))) ' 
+                        column-configuration='[
+                            {"variableName": "group", "displayName": "Group"}, 
+                            {"variableName": "unmatchedvenue", "displayName": "Venue"}
+                        ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": false}'>
+                        </semantic-table>
+            
+                    </bs-tab>
+                </bs-tabs>
+
+            </bs-col>
         </bs-tab>
 
         <bs-tab event-key='Group Members' title='Group Members'>
@@ -82,9 +91,11 @@
                       WHERE {
                           ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
                               crm:P107_has_current_or_former_member ?member.
-                          ?member rdfs:label ?member_label .
+                          FILTER(CONTAINS(STR(?group), "/a/"))
+                          FILTER(?member != <http://data.performing-arts.ch/a/9e1a6aff-7181-4931-bb72-219947dfe1fc>) # exclude "et al."
+                          ?member rdfs:label ?memberlabel .
                           OPTIONAL {
-                              ?person rdfs:label ?member_label; 
+                              ?person rdfs:label ?memberlabel; 
                                   a crm:E21_Person.
                               FILTER(?person != ?member)
                               FILTER(CONTAINS(STR(?person), "/a/"))
@@ -127,28 +138,80 @@
                        }]'
                     ></semantic-chart>
           
-                    </bs-col>
-                    <bs-col sm="8">
-                      <semantic-table 
-              query='SELECT DISTINCT ?group ?grouplabel ?memberlabel 
-                WHERE {
-                    ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
-                        crm:P107_has_current_or_former_member ?member.
-                    FILTER (CONTAINS(STR(?member), "/u/"))
-                    ?member rdfs:label ?memberlabel .
-                } ORDER BY ASC(UCASE(STR(?grouplabel))) ASC(UCASE(STR(?memberlabel))) ' 
-              column-configuration='[
-                  {"variableName": "group", "displayName": "Group"}, 
-                  {"variableName": "memberlabel", "displayName": "Member"}
-              ]'
-              number-of-displayed-rows=20
-              options='{"showFilter": false}'>
-              </semantic-table>
+            </bs-col>
+            <bs-col sm="8">
+
+                <bs-tabs id='group-members' default-active-key='2.1' unmount-on-exit=true>
+
+                    <bs-tab event-key='2.1' title='Matched Members'>
+                        <semantic-table 
+                        query='SELECT DISTINCT ?group ?member
+                          WHERE {
+                            ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
+                                crm:P107_has_current_or_former_member ?member.
+                            FILTER(CONTAINS(STR(?group), "/a/"))
+                            FILTER(?member != <http://data.performing-arts.ch/a/9e1a6aff-7181-4931-bb72-219947dfe1fc>) # exclude "et al."
+                            FILTER(CONTAINS(STR(?member), "/a/"))
+                          }'
+                        column-configuration='[
+                            {"variableName": "group", "displayName": "Group"}, 
+                            {"variableName": "member", "displayName": "Member"}
+                        ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": false}'>
+                        </semantic-table>          
+                    </bs-tab>
+
+                    <bs-tab event-key='2.2' title='Matchable with Persons?'>
+                        <semantic-table 
+                        query='SELECT DISTINCT ?group ?person
+                        WHERE {
+                            ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
+                                crm:P107_has_current_or_former_member ?member.
+                            FILTER(CONTAINS(STR(?group), "/a/"))
+                            FILTER(CONTAINS(STR(?member), "/u/"))
+                            ?member rdfs:label ?memberlabel.
+                            ?person rdfs:label ?memberlabel ;
+                                a crm:E21_Person.
+                                FILTER(CONTAINS(STR(?person), "/a/"))
+                        }'
+                        column-configuration='[
+                            {"variableName": "group", "displayName": "Group"}, 
+                            {"variableName": "person", "displayName": "Member/Person"}
+                        ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": false}'>
+                        </semantic-table>          
+                    </bs-tab>
+
+                    <bs-tab event-key='2.3' title='Unmatched Members'>
+                        <semantic-table 
+                        query='SELECT DISTINCT ?group ?grouplabel ?memberlabel 
+                            WHERE {
+                                ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
+                                    crm:P107_has_current_or_former_member ?member.
+                                FILTER (CONTAINS(STR(?group), "/a/"))
+                                FILTER (CONTAINS(STR(?member), "/u/"))
+                                ?member rdfs:label ?memberlabel .
+                            }'
+                        column-configuration='[
+                            {"variableName": "group", "displayName": "Group"}, 
+                            {"variableName": "memberlabel", "displayName": "Member"}
+                        ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": false}'>
+                        </semantic-table>          
+                    </bs-tab>
+
+                </bs-tabsid='group-venues' default-active-key='1.1' unmount-on-exit=true>
               
             </bs-col>          
         </bs-tab>
 
-        <bs-tab event-key='Producers' title='Producers'>
+        <bs-tab event-key='2' title='Producers'>
             <bs-col sm="4">
                 <semantic-chart type='donut' types='["pie", "donut"]'
                       query='
@@ -192,41 +255,98 @@
           
                     </bs-col>
                     <bs-col sm="8">
-                      <semantic-table 
-                        query='SELECT DISTINCT ?plan ?producer_label 
-                            WHERE {
-                                ?production crm:P2_has_type spav:muwgo ;
-                                    crm:P14_carried_out_by ?producer .
-                                FILTER(CONTAINS(STR(?producer), "/u/"))
-                                ?producer rdfs:label ?producer_label .
-                                ?expression_creation crm:P9_consists_of ?production ;
-                                    frbr:R17_created ?plan .
-                            }' 
-                        column-configuration='[
-                            {"variableName": "plan", "displayName": "Production"}, 
-                            {"variableName": "producer_label", "displayName": "Producer"}
-                        ]'
-                        number-of-displayed-rows=20
-                        options='{"showFilter": false}'>
-                        </semantic-table>
-              
-                    <h4 style="margin-top: 2em;">Unmatched Producers Ranking</h4>
-                    <semantic-table 
-                    query='SELECT ?producer_label (COUNT(?producer) AS ?producer_count)
-                    WHERE {
-                        ?production crm:P2_has_type spav:muwgo ;
-                            crm:P14_carried_out_by ?producer .
-                        FILTER(CONTAINS(STR(?producer), "/u/"))
-                            ?producer rdfs:label ?producer_label .
-                    } GROUP BY ?producer_label
-                    ORDER BY DESC(?producer_count)' 
-                    column-configuration='[
-                        {"variableName": "producer_label", "displayName": "Producer"}, 
-                        {"variableName": "producer_count", "displayName": "Count"}
-                    ]'
-                    number-of-displayed-rows=20
-                    options='{"showFilter": false}'>
-                    </semantic-table>
+
+                        <bs-tabs id='producers' default-active-key='2.1' unmount-on-exit=true>
+
+                            <bs-tab event-key='2.1' title='Unmatched Producers'>
+
+                                <semantic-table 
+                                query='SELECT DISTINCT ?plan ?producer_label 
+                                    WHERE {
+                                        ?production crm:P2_has_type spav:muwgo ;
+                                            crm:P14_carried_out_by ?producer .
+                                        FILTER(CONTAINS(STR(?producer), "/u/"))
+                                        ?producer rdfs:label ?producer_label .
+                                        ?expression_creation crm:P9_consists_of ?production ;
+                                            frbr:R17_created ?plan .
+                                    }' 
+                                column-configuration='[
+                                    {"variableName": "plan", "displayName": "Production"}, 
+                                    {"variableName": "producer_label", "displayName": "Producer"}
+                                ]'
+                                number-of-displayed-rows=20
+                                no-result-template='No results found.'
+                                options='{"showFilter": false}'>
+                                </semantic-table>
+        
+                            </bs-tab>
+
+                            <bs-tab event-key='2.2' title='Ranking CH'>
+
+                                <semantic-table 
+                                query='SELECT ?producer_label (COUNT(?producer) AS ?producer_count)
+                                WHERE {
+                                    ?production crm:P2_has_type spav:muwgo ;
+                                        crm:P14_carried_out_by ?producer .
+                                    FILTER(CONTAINS(STR(?producer), "/u/"))
+                                        ?producer rdfs:label ?producer_label .
+                                    FILTER(STRSTARTS(?producer_label, "CH:"))
+                                } GROUP BY ?producer_label
+                                ORDER BY DESC(?producer_count)' 
+                                column-configuration='[
+                                    {"variableName": "producer_label", "displayName": "Producer"}, 
+                                    {"variableName": "producer_count", "displayName": "Count"}
+                                ]'
+                                number-of-displayed-rows=20
+                                options='{"showFilter": false}'>
+                                </semantic-table>
+                                    
+                            </bs-tab>
+
+                            <bs-tab event-key='2.3' title='Ranking International'>
+
+                                <semantic-table 
+                                query='SELECT ?producer_label (COUNT(?producer) AS ?producer_count)
+                                WHERE {
+                                    ?production crm:P2_has_type spav:muwgo ;
+                                        crm:P14_carried_out_by ?producer .
+                                    FILTER(CONTAINS(STR(?producer), "/u/"))
+                                        ?producer rdfs:label ?producer_label .
+                                    FILTER(!STRSTARTS(?producer_label, "CH:"))
+                                    FILTER(!STRSTARTS(?producer_label, "00:"))
+                                    } GROUP BY ?producer_label
+                                ORDER BY DESC(?producer_count)' 
+                                column-configuration='[
+                                    {"variableName": "producer_label", "displayName": "Producer"}, 
+                                    {"variableName": "producer_count", "displayName": "Count"}
+                                ]'
+                                number-of-displayed-rows=20
+                                options='{"showFilter": false}'>
+                                </semantic-table>
+                                    
+                            </bs-tab>
+
+                            <bs-tab event-key='2.4' title='Ranking 00'>
+
+                                <semantic-table 
+                                query='SELECT ?producer_label (COUNT(?producer) AS ?producer_count)
+                                WHERE {
+                                    ?production crm:P2_has_type spav:muwgo ;
+                                        crm:P14_carried_out_by ?producer .
+                                    FILTER(CONTAINS(STR(?producer), "/u/"))
+                                        ?producer rdfs:label ?producer_label .
+                                    FILTER(STRSTARTS(?producer_label, "00:"))
+                                } GROUP BY ?producer_label
+                                ORDER BY DESC(?producer_count)' 
+                                column-configuration='[
+                                    {"variableName": "producer_label", "displayName": "Producer"}, 
+                                    {"variableName": "producer_count", "displayName": "Count"}
+                                ]'
+                                number-of-displayed-rows=20
+                                options='{"showFilter": false}'>
+                                </semantic-table>
+                                    
+                            </bs-tab>
                 </bs-col>          
             </bs-tab>
 
