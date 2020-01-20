@@ -1,0 +1,95 @@
+<semantic-search 
+limit=500 
+config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?field a <http://www.metaphacts.com/ontology/fields#Field>; <http://www.metaphacts.com/ontology/fields#range> ?range ; <http://www.metaphacts.com/ontology/fields#domain> ?domain .  FILTER (?field != <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity>)}" escape=false) '{"categories": {"<http://www.cidoc-crm.org/cidoc-crm/E55_Type>": [{"kind": "hierarchy", "queryPattern": "{?subject ?__relation__ ?__value__ .}"}],"<http://www.cidoc-crm.org/cidoc-crm/E4_Period>": [{"kind": "hierarchy", "queryPattern": "{?expressioncreation ?__relation__ ?subject . ?expressioncreation <http://www.cidoc-crm.org/cidoc-crm/P10_falls_within> ?__value__ .}"}]}, "searchProfile": {"categories": [{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>", "label": "Thing"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",  "label": "Group"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>",  "label": "Season"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E7_Activity>",  "label": "Activity"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",  "label": "Person"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E55_Type>",  "label": "Type"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>",  "label": "Date"}, {"iri": "<http://www.w3.org/2000/01/rdf-schema#Class>",  "label": "Concept"}], "relations": [ ]}}"}" ']]'
+>
+
+<semantic-search-query-constant domain='<[[resolvePrefix "frbr:F25_Performance_Plan"]]>'
+    query='SELECT ?plan
+    WHERE {
+        ?genericperformance crm:P8_took_place_on_or_within ?? ;
+            a frbr:F31_Performance ;
+            frbr:R25_performed ?plan .
+        ?expressioncreation frbr:R17_created ?plan .
+        OPTIONAL {
+            ?expressioncreation crm:P10_falls_within ?season .
+            FILTER(CONTAINS(STR(?season), "/s/"))
+        }
+    } ORDER BY ASC(?season)'
+
+'></semantic-search-query-constant>
+
+<div data-flex-layout="row stretch-stretch">
+<div data-flex-self="size-1of3" style="flex: 0 0 0;">
+  <semantic-search-facet
+    open-by-default=false
+
+  ></semantic-search-facet>
+</div>
+   <semantic-search-result-holder>
+      <div data-flex-self="md-full">
+    <semantic-search-result>
+      <mp-sparql-result-counts id='search-result-count' query="SELECT distinct ?subject ?expressioncreation ?production {}"
+                               template='{{> template}}'
+                               >
+        <template id='template'>
+          {{#if hasLimit}}
+          <bs-alert bs-style="warning" class="search-results__alert pull-left">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+            <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
+          </bs-alert>
+          {{else}}
+          <bs-alert bs-style="warning" class="search-results__alert pull-left">
+            <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
+          </bs-alert>
+          {{/if}}
+        </template>
+      </mp-sparql-result-counts>
+    </semantic-search-result>
+
+        <semantic-search-result>
+          <semantic-table 
+            query='SELECT distinct ?plan ?season ?titlelabel ?stagedirection WHERE { }' 
+            id='search-result'
+            column-configuration='[
+{"variableName": "season", "displayName": "Season"}, 
+{"variableName": "titlelabel" ,"displayName": "Title","cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
+{"displayName": "Genre", "cellTemplate":"{{>genre-template-a}}"},
+{"displayName": "Stage direction", "cellTemplate": "{{>stagedirection-template-a}}"}
+]'
+number-of-displayed-rows=20
+options='{"showFilter": false}'>
+            
+            <template id='genre-template-a'> 
+              <semantic-query 
+            query='SELECT DISTINCT ?genre WHERE {      
+              ?work frbr:R12_is_realised_in <{{plan.value}}> ;
+            crm:P2_has_type ?genre . 
+                } '
+            template = '{{> genre-template-b}} '>           
+                <template id='genre-template-b'> 
+                  <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</div>
+                </template>
+              </semantic-query>   
+            </template>
+            
+            <template id='stagedirection-template-a'> 
+              <semantic-query 
+            query='SELECT DISTINCT ?stagedirection WHERE {
+              ?expressioncreation crm:P9_consists_of ?production ;
+                frbr:R17_created <{{plan.value}}> ;
+                crm:P9_consists_of ?activity .
+              ?activity crm:P2_has_type spav:mutnt ;
+                crm:P14_carried_out_by ?stagedirection .
+              } '
+            template = '{{> stagedirection-template-b}} '>           
+                <template id='stagedirection-template-b'> 
+                  <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{stagedirection.value}}"></mp-label>{{else}}, <mp-label iri="{{stagedirection.value}}"></mp-label>{{/if}}{{/each}}</div>
+                </template>
+              </semantic-query>   
+            </template>
+          </semantic-table>
+        </semantic-search-result>
+  </div>
+</semantic-search-result-holder>
+</div>
+</semantic-search>
