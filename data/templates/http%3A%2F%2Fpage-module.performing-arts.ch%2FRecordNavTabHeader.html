@@ -3,7 +3,7 @@
         <mp-resource-thumbnail no-image-uri='[[defaultImage]]' iri='[[this]]'></mp-resource-thumbnail>
     </div>
     <div class='page__header-body'>
-        <div class="page__header-draggable-title">
+        <div class="page__header-draggable-title" style="padding-left: 0;">
             <mp-draggable iri='[[this]]'>
                 <h2 data-flex-layout='row center-left'>
                     <span class="page__header-gripper"></span>
@@ -11,6 +11,8 @@
                 </h2>
             </mp-draggable>
         </div>
+
+        <div class="page__header-description">
 
         <!-- description -->
         <semantic-query 
@@ -30,9 +32,11 @@
             template="<p>{{#each bindings}}{{#if @first}}<mp-label iri='{{description.value}}'></mp-label>{{else}}, <mp-label iri='{{description.value}}'></mp-label>{{/if}}{{/each}}</p>">
         </semantic-query>
 
-        <p style="font-size: 12px;">
+        <p style="font-size: 0.8em;">
             <b>URI</b>: <i>[[this]]</i>
         </p>
+
+        </div>
 
     </div>
 </div>

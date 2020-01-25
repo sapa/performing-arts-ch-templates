@@ -1,3 +1,23 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  font-size: 1.6em;
+  font-weight: 400;
+}
+h2 {
+  margin: 0.25em 0 0.1em 0;
+}
+h5 {
+  font-size: 1em;
+  font-weight: 500;
+}
 a {
   color: #0e619e;
 }
@@ -7,6 +27,13 @@ a.unidentified {
 a:hover,
 a:focus {
   color: #158ce4;
+}
+.page__header-description {
+  padding-left: 1em;
+  margin-bottom: 1.2em;
+}
+.page__header-description p {
+  margin: 0.4em 0;
 }
 .container-fluid {
   padding-left: 24px;
@@ -19,6 +46,7 @@ a:focus {
 }
 .navbar-brand {
   float: none;
+  font-weight: 500;
 }
 .navbar-inverse .navbar-brand,
 .navbar-inverse .navbar-brand {
