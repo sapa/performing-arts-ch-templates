@@ -99,7 +99,7 @@
                         ?death crm:P7_took_place_at ?deathplace .
                     }
                 } LIMIT 1'
-                template='<div>{{#each bindings}}{{#if deathdate}}† {{else}}{{#if deathplace}}* {{/if}}{{/if}}{{#if deathdate}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{deathdate.value}}</span>{{/if}}{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
+                template='<div>{{#each bindings}}{{#if deathdate}}† {{else}}{{#if deathplace}}† {{/if}}{{/if}}{{#if deathdate}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{deathdate.value}}</span>{{/if}}{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
                     {{#if deathplace}}<semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>{{/if}}{{/each}}</div>'>
                 </semantic-query>
 

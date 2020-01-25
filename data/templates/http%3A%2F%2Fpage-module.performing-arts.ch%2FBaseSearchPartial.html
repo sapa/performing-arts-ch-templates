@@ -81,12 +81,15 @@
                   {{#ifCond title.value "==" 'Person'}}
                   			<semantic-query 
                 	query='SELECT DISTINCT ?appellation WHERE {      
-                  <{{subject.value}}> crm:P131_is_identified_by ?appellation .
-                  OPTIONAL {
-                    ?appellation crm:P2_has_type ?appellationtype .
-                    MINUS { ?appellation crm:P2_has_type spav:yatcx . }
-                  }
-                    } '
+                        <{{subject.value}}> crm:P131_is_identified_by ?appellation .
+                        OPTIONAL {
+                          ?appellation crm:P2_has_type ?appellationtype .
+                          MINUS { ?appellation crm:P2_has_type spav:yatcx . }
+                          <{{subject.value}}> rdfs:label ?label .
+                        }
+                        ?appellation rdf:value ?appellationvalue .
+                        FILTER(?label != ?appellationvalue)
+                      } '
                         template = '{{> second-template}} '>           
         								<template id='second-template'> 
          							 		<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label>{{else}}, <mp-label iri="{{appellation.value}}"></mp-label>{{/if}}{{/each}}</div>

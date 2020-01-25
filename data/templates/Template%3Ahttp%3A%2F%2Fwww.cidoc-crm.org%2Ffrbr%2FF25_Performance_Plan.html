@@ -60,7 +60,7 @@
                     ?premieretype skos:inScheme spav:hl .
                     OPTIONAL { ?premiere crm:P4_has_time-span ?timespan . }
                 }'
-            template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{#if @last}}</h5>{{/if}}{{/each}}{{#each bindings}}{{#if @first}}<mp-label iri="{{timespan.value}}"></mp-label>{{/if}}{{/each}}</p>'>
+            template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{#if @last}}</h5>{{/if}}{{/each}}{{#each bindings}}{{#if @first}}<mp-label iri="{{timespan.value}}"></mp-label>{{/if}}{{/each}}</div>'>
             </semantic-query>
 
             <!-- venue -->
