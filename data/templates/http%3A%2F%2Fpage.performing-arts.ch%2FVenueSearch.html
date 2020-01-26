@@ -93,26 +93,19 @@
           options='{"showFilter": false, "showTableHeading": false}'
           column-configuration='[
             {"displayName": "Name", "variableName": "subject"} ,
-            {"displayName": "Additional Names", "cellTemplate": "{{> additional-names}}"} ,
+            {"displayName": "Part of", "cellTemplate": "{{> part-of}}"} ,
             {"displayName": "Place", "variableName": "place"} ,
             {"displayName": "Dates", "cellTemplate": "{{> dates}}"}
           ]'>
 
-          <template id='additional-names'>                     
+          <template id='part-of'>                     
             <semantic-query 
-              query='SELECT ?value ?type ?typesort WHERE {      
-                  VALUES (?type ?typesort) { (spav:yamqk 1) (spav:yavtx 2) }
-                  <{{subject.value}}> crm:P102_has_title ?title .
-                  ?title a crm:E35_Title ; 
-                  crm:P2_has_type ?type ;
-                  rdf:value ?value .
-                  { ?title crm:P2_has_type spav:yamqk . }
-                  UNION
-                  { ?title crm:P2_has_type spav:yavtx . }
-                } ORDER BY ?typesort'
-              template = '{{> additional-names-list}} '>           
-              <template id='additional-names-list'>
-                <div>{{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}}</div>
+              query='SELECT ?parent WHERE {      
+                  ?parent crm:P46_is_composed_of  <{{subject.value}}> .
+                }'
+              template = '{{> part-of-list}} '>           
+              <template id='part-of-list'>
+                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{parent.value}}"></mp-label>{{else}}, <mp-label iri="{{parent.value}}"></mp-label>{{/if}}{{/each}}</div>
               </template>
             </semantic-query> 
           </template>
@@ -131,7 +124,7 @@
                         <{{subject.value}}> crm:P16i_was_used_for ?management .
                         ?management crm:P2_has_type spav:mujfv ;
                             crm:P4_has_time-span ?timespan .
-                        ?timespan crm:P82b_end_of_the_end ?end .    
+                        ?timespan crm:P82b_end_of_the_end ?end .
                         BIND(STR(YEAR(?end)) AS ?endyear)
                     }
                     BIND(CONCAT(COALESCE(?beginyear, "X"), "-", COALESCE(?endyear, "X")) AS ?predates)

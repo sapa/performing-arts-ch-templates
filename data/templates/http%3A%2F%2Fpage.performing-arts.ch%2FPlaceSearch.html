@@ -94,15 +94,13 @@ search-profile='{
         <semantic-table 
           query='SELECT DISTINCT ?subject ?parent
           WHERE {
-            OPTIONAL {
-              ?subject crm:P89_falls_within ?parent .
-            }
-          } ORDER BY DESC(?score)'
+            ?subject crm:P89_falls_within ?parent .
+          }'
           id="place-table" 
           options='{"showFilter": false, "showTableHeading": false}'
           column-configuration='[
             {"displayName": "Name", "variableName": "subject"} ,
-            {"displayName": "Parent", "variableName": "parent"}
+            {"displayName": "Falls within", "variableName": "parent"}
           ]'>
           
         </semantic-table> 
