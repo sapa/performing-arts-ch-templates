@@ -1,4 +1,146 @@
-<semantic-search limit=500 >
+<semantic-search
+  limit=500
+  relations='{
+    "<http://ontology.performing-arts.ch/genre>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?work frbr:R12_is_realised_in ?subject ;
+          crm:P2_has_type ?__value__ .
+      }"
+    }],
+    "<http://ontology.performing-arts.ch/premieretype>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?__value__ skos:inScheme spav:hl .
+        ?performance frbr:R25_performed ?subject ;
+          crm:P9_consists_of ?premiere .
+        ?premiere a frbr:F31_Performance ;
+          crm:P2_has_type ?__value__ .
+      }"
+    }],
+    "<http://ontology.performing-arts.ch/producer>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?expressioncreation frbr:R17_created ?subject ;
+          crm:P9_consists_of ?production . 
+        ?production crm:P2_has_type spav:muwgo ;
+          crm:P14_carried_out_by ?__value__ .
+        FILTER(CONTAINS(STR(?__value__), \"/a/\"))
+      }"
+    }],
+    "<http://ontology.performing-arts.ch/productionvenue>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?performance frbr:R25_performed ?subject ;
+          crm:P8_took_place_on_or_within ?__value__ .
+        FILTER(CONTAINS(STR(?__value__), \"/t/\"))
+      }"
+    }],
+    "<http://ontology.performing-arts.ch/productionplace>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?performance frbr:R25_performed ?subject ;
+          crm:P8_took_place_on_or_within ?venue .
+        ?venue crm:P156_occupies ?ground .
+        ?ground crm:P89_falls_within ?__value__ .
+      }"
+    }],
+    "<http://ontology.performing-arts.ch/stagedirection>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?expressioncreation frbr:R17_created ?subject ;
+          crm:P9_consists_of ?activity .
+        ?activity crm:P2_has_type spav:mutnt ;
+          crm:P14_carried_out_by ?__value__ .
+      }"
+    }],
+    "<http://ontology.performing-arts.ch/premieredate>": [{
+      "kind": "numeric-range",
+      "queryPattern": "{
+        ?performance frbr:R25_performed ?subject ;
+          crm:P9_consists_of ?premiere .
+        ?premiere a frbr:F31_Performance ;
+          crm:P4_has_time-span ?timespan .
+        ?timespan crm:P82a_begin_of_the_begin ?date .
+        BIND(YEAR(?date) AS ?literal)
+        FILTER(?literal >= ?__numericRangeBeginValue__) .
+        FILTER(?literal <= ?__numericRangeEndValue__) .
+      }"
+    }]
+  }'
+  search-profile='{
+    "categories": [
+      {
+        "iri": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "label": "Production"
+      },
+      {
+        "iri": "<http://www.w3.org/2004/02/skos/core#Concept>",
+        "label": "Concept"
+      },
+      {
+        "iri": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",
+        "label": "Actor"
+      },
+      {
+        "iri": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>",
+        "label": "Venue"
+      },
+      {
+        "iri": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",
+        "label": "Place"
+      },
+      {
+        "iri": "<http://www.w3.org/2001/XMLSchema#decimal>",
+        "label": "Year"
+      }
+      ],
+    "relations": [
+      {
+        "iri": "<http://ontology.performing-arts.ch/genre>",
+        "label": "Genre",
+        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/premieretype>",
+        "label": "Premiere",
+        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/producer>",
+        "label": "Producer",
+        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/productionvenue>",
+        "label": "Venue",
+        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/productionplace>",
+        "label": "Place",
+        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/stagedirection>",
+        "label": "Stage&nbsp;direction",
+        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/premieredate>",
+        "label": "Year",
+        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasRange": "<http://www.w3.org/2001/XMLSchema#decimal>"
+      }
+    ]
+  }'
+  >
   
   <semantic-search-query-keyword
     domain='<[[resolvePrefix "frbr:F25_Performance_Plan"]]>'
@@ -17,12 +159,11 @@
 
   <div data-flex-layout="row stretch-stretch">
     
-    <!-- <div data-flex-self="size-1of3" style="flex: 0 0 0;">
+    <div data-flex-self="size-1of3" style="flex: 0 0 0;">
       <semantic-search-facet
-        open-by-default=true
-        [[!--listen-to-context-switch=true--]]
+        open-by-default=false
       ></semantic-search-facet>
-    </div> -->
+    </div>
 
     <semantic-search-result-holder>
 
@@ -82,7 +223,7 @@
                 }'
               template = '{{> premiere-list}}'>
               <template id='premiere-list'>
-                <div>{{#each bindings}}{{#if premieretype}}{{#if @first}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{/if}}{{/each}}{{#each bindings}}{{#if @first}}{{#if premieretype}}<br />{{/if}}<mp-label iri="{{premieredate.value}}"></mp-label>{{/if}}{{/each}}</div>
+                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{premieredate.value}}"></mp-label>{{/if}}{{/each}}{{#each bindings}}{{#if premieretype}}{{#if @first}}{{#if premieredate}}<br />{{/if}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{/if}}{{/each}}</div>
               </template>
             </semantic-query> 
           </template>

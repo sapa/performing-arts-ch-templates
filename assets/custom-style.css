@@ -104,6 +104,15 @@ span.Tree--leafNode {
 div.tree-view_children span.Tree--leafNode {
   margin-left: 20px;
 }
+div.facet-relations {
+  margin-top: 0;
+}
+div.facet__category-selector-holder {
+  display: none;
+}
+div.facet__relation__values__filter {
+  display: none;
+}
 #application > div > .footer {
   background-color: #083658;
 }

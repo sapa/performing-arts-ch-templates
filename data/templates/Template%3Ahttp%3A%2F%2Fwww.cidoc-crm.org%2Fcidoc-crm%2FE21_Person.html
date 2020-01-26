@@ -76,7 +76,7 @@
                     OPTIONAL {
                         ?birth crm:P4_has_time-span ?timespan .
                         ?timespan crm:P82a_begin_of_the_begin ?dob .
-                        BIND(CONCAT(STR(DAY(?dob)), ".", STR(MONTH(?dob)), ".", STR(YEAR(?dob))) as ?birthdate)
+                        BIND(CONCAT(STR(DAY(?dob)), ".", STR(MONTH(?dob)), ".", STR(YEAR(?dob))) AS ?birthdate)
                     }
                     OPTIONAL {
                         ?birth crm:P7_took_place_at ?birthplace .
@@ -93,7 +93,7 @@
                     OPTIONAL {
                         ?death crm:P4_has_time-span ?timespan .
                         ?timespan crm:P82a_begin_of_the_begin ?dod .
-                        BIND(CONCAT(STR(DAY(?dod)), ".", STR(MONTH(?dod)), ".", STR(YEAR(?dod))) as ?deathdate)
+                        BIND(CONCAT(STR(DAY(?dod)), ".", STR(MONTH(?dod)), ".", STR(YEAR(?dod))) AS ?deathdate)
                     }
                     OPTIONAL {
                         ?death crm:P7_took_place_at ?deathplace .
