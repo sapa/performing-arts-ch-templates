@@ -190,20 +190,14 @@
 
       <semantic-search-result>
         <semantic-table 
-          query='SELECT ?subject ?venue
-          WHERE {
-            ?performance frbr:R25_performed ?subject .
-            OPTIONAL {
-              ?performance crm:P8_took_place_on_or_within ?venue .
-            }
-          }'
+          query='SELECT ?subject WHERE { }'
           id="production-table" 
           options='{"showFilter": false, "showTableHeading": false}'
           column-configuration='[
             {"displayName": "Title", "variableName": "subject"} ,
             {"displayName": "Premiere", "cellTemplate": "{{> premiere}}"} ,
             {"displayName": "Producer", "cellTemplate": "{{> producer}}"} ,
-            {"displayName": "Venue", "variableName": "venue"} ,
+            {"displayName": "Venue", "cellTemplate": "{{> venue}}"} ,
             {"displayName": "Genre", "cellTemplate": "{{> genre}}"}
           ]'>
           
@@ -224,6 +218,22 @@
               template = '{{> premiere-list}}'>
               <template id='premiere-list'>
                 <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{premieredate.value}}"></mp-label>{{/if}}{{/each}}{{#each bindings}}{{#if premieretype}}{{#if @first}}{{#if premieredate}}<br />{{/if}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{/if}}{{/each}}</div>
+              </template>
+            </semantic-query> 
+          </template>
+
+          <template id='venue'>
+            <semantic-query 
+              query='SELECT ?venue ?supervenue WHERE {
+                ?performance frbr:R25_performed <{{subject.value}}> ;
+                  crm:P8_took_place_on_or_within ?venue .
+                OPTIONAL {
+                  ?supervenue crm:P46_is_composed_of ?venue .
+                }
+              }'
+              template = '{{> venue-list}}'>
+              <template id='venue-list'>
+                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{venue.value}}"></mp-label>{{else}}, <mp-label iri="{{venue.value}}"></mp-label>{{/if}}{{#if supervenue}} (<mp-label iri="{{supervenue.value}}"></mp-label>){{/if}}{{/each}}</div>
               </template>
             </semantic-query> 
           </template>

@@ -92,20 +92,22 @@
           id="venue-table" 
           options='{"showFilter": false, "showTableHeading": false}'
           column-configuration='[
-            {"displayName": "Name", "variableName": "subject"} ,
-            {"displayName": "Part of", "cellTemplate": "{{> part-of}}"} ,
+            {"displayName": "Venue", "cellTemplate": "{{> venue}}"} ,
             {"displayName": "Place", "variableName": "place"} ,
             {"displayName": "Dates", "cellTemplate": "{{> dates}}"}
           ]'>
 
-          <template id='part-of'>                     
+          <template id='venue'>                     
             <semantic-query 
-              query='SELECT ?parent WHERE {      
-                  ?parent crm:P46_is_composed_of  <{{subject.value}}> .
-                }'
-              template = '{{> part-of-list}} '>           
-              <template id='part-of-list'>
-                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{parent.value}}"></mp-label>{{else}}, <mp-label iri="{{parent.value}}"></mp-label>{{/if}}{{/each}}</div>
+              query='SELECT ?venue ?supervenue WHERE {
+                  BIND(<{{subject.value}}> AS ?venue)
+                  OPTIONAL {
+                    ?supervenue crm:P46_is_composed_of ?venue .
+                  }
+                } LIMIT 1'
+              template = '{{> venue-list}} '>           
+              <template id='venue-list'>
+                <div>{{#each bindings}}{{#if supervenue}}<semantic-link iri="{{supervenue.value}}"></semantic-link> &rarr; {{/if}}<semantic-link iri="{{venue.value}}"></semantic-link>{{/each}}</div>
               </template>
             </semantic-query> 
           </template>

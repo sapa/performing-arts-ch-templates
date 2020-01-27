@@ -70,41 +70,61 @@ search-profile='{
 
       <div data-flex-self="md-full">
 
-      <semantic-search-result>
-        <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}"
-                                 template='{{> template}}'
-                                 >
-          <template id='template'>
-            {{#if hasLimit}}
-            <bs-alert bs-style="warning" class="search-results__alert pull-left">
-              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
-              <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
-            </bs-alert>
-            {{else}}
-            <bs-alert bs-style="warning" class="search-results__alert pull-left">
-              <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
-            </bs-alert>
-            {{/if}}
-          </template>
-        </mp-sparql-result-counts>
-      </semantic-search-result>
-
+        <semantic-search-result>
+          <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}"
+                                   template='{{> template}}'
+                                   >
+            <template id='template'>
+              {{#if hasLimit}}
+              <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
+              </bs-alert>
+              {{else}}
+              <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
+              </bs-alert>
+              {{/if}}
+            </template>
+          </mp-sparql-result-counts>
+        </semantic-search-result>
+  
       <semantic-search-result>
         <!-- TODO: make sure that only one place is found or aggregate them -->
         <semantic-table 
-          query='SELECT DISTINCT ?subject ?parent
-          WHERE {
-            ?subject crm:P89_falls_within ?parent .
-          }'
+          query='SELECT DISTINCT ?subject WHERE { }'
           id="place-table" 
           options='{"showFilter": false, "showTableHeading": false}'
           column-configuration='[
             {"displayName": "Name", "variableName": "subject"} ,
-            {"displayName": "Falls within", "variableName": "parent"}
+            {"displayName": "Falls within", "cellTemplate": "{{> parents}}"}
           ]'>
-          
+
+          <template id='parents'>                     
+            <semantic-query 
+              query='SELECT ?parent WHERE {      
+                <{{subject.value}}> crm:P89_falls_within+ ?parent .
+              }'
+              template = '{{> parents-list}} '>           
+              <template id='parents-list'>
+                <div>{{#each bindings}}&rarr; <mp-label iri="{{parent.value}}"></mp-label> {{/each}}</div>
+              </template>
+            </semantic-query> 
+          </template>
+
         </semantic-table> 
+
+        <!-- <semantic-tree 
+          id="tree"
+          query="SELECT ?node ?parent WHERE {
+            ?subject crm:P89_falls_within* ?node .
+            OPTIONAL { ?node crm:P89_falls_within ?parent. FILTER(ISIRI(?parent)) }
+            FILTER(ISIRI(?node))
+          }">
+        </semantic-tree> -->
+
       </semantic-search-result>
+      
        
       <div class="pull-right" style="display: flex; margin-top: 12px;">
 
