@@ -80,6 +80,7 @@
                     }
                     OPTIONAL {
                         ?birth crm:P7_took_place_at ?birthplace .
+                        FILTER(!CONTAINS(STR(?birthplace), "wikidata"))
                     }
                 } LIMIT 1'
                 template='<div>{{#each bindings}}{{#if birthdate}}* {{else}}{{#if birthplace}}* {{/if}}{{/if}}{{#if birthdate}}<span style="padding-right:0.1em;" title="{{birthdate.value}}">{{birthdate.value}}</span>{{/if}}{{#if birthdate}}{{#if birthplace}}, {{/if}}{{/if}}
@@ -97,6 +98,7 @@
                     }
                     OPTIONAL {
                         ?death crm:P7_took_place_at ?deathplace .
+                        FILTER(!CONTAINS(STR(?deathplace), "wikidata"))
                     }
                 } LIMIT 1'
                 template='<div>{{#each bindings}}{{#if deathdate}}† {{else}}{{#if deathplace}}† {{/if}}{{/if}}{{#if deathdate}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{deathdate.value}}</span>{{/if}}{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
