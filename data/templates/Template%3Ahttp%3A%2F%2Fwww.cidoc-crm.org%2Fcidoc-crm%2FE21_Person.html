@@ -182,7 +182,7 @@
     <bs-tab event-key='productions' title='Productions'>
     
         <semantic-table 
-          query='SELECT ?season ?plan ?genre ?function
+          query='SELECT ?season ?plan (GROUP_CONCAT(DISTINCT ?function; SEPARATOR=", ") AS ?functionslist) (GROUP_CONCAT(DISTINCT ?genre; SEPARATOR=", ") AS ?genrelist)
             WHERE {
                 ?personactivity crm:P14_carried_out_by ?? ;
                     crm:P2_has_type ?function .
@@ -212,12 +212,11 @@
                     ?work frbr:R12_is_realised_in ?plan ;
                         crm:P2_has_type ?genre .
                 }
-            } ORDER BY ASC(?season)'
+            } GROUP BY ?season ?plan
+            ORDER BY ASC(?season)'
           column-configuration='[
             {"variableName": "season", "displayName": "Season"}, 
-            {"variableName": "plan", "displayName": "Production"}, 
-            {"variableName": "genre", "displayName": "Genre"}, 
-            {"variableName": "function", "displayName": "Function"}
+            {"variableName": "plan", "displayName": "Production"}
           ]'
           number-of-displayed-rows=20
           options='{"showFilter": false}'
