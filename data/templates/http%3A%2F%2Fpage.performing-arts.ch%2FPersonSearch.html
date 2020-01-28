@@ -91,7 +91,7 @@ config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?fi
                       ?dts crm:P82a_begin_of_the_begin ?dod .
                       BIND(CONCAT("† ", STR(YEAR(?dod))) as ?deathyear)
                     }
-                    BIND(IF(BOUND(?birthyear) && BOUND(?deathyear), CONCAT(?birthyear, ", ", ?deathyear), IF(BOUND(?birthyear), ?birthyear, IF(BOUND(?deathyear), ?deathyear, "-"))) AS ?lifedates)
+                    BIND(IF(BOUND(?birthyear) && BOUND(?deathyear), CONCAT(?birthyear, ", ", ?deathyear), IF(BOUND(?birthyear), ?birthyear, IF(BOUND(?deathyear), ?deathyear, ""))) AS ?lifedates)
                   }'
                 template = '{{> live-dates-list}} '>           
                 <template id='live-dates-list'>

@@ -4,18 +4,32 @@ config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?fi
 >
 
 <semantic-search-query-constant domain='<[[resolvePrefix "frbr:F25_Performance_Plan"]]>'
-    query='SELECT DISTINCT ?plan
-      WHERE {
-        ?production crm:P14_carried_out_by ??;
-            crm:P2_has_type spav:muwgo .
-        ?expressioncreation crm:P9_consists_of ?production ;
-            frbr:R17_created ?plan .
-        ?plan rdfs:label ?titlelabel .
+    query='SELECT DISTINCT ?season ?plan
+    WHERE {
+        ?personactivity crm:P14_carried_out_by ?? .
+        {
+            # reference work
+            ?referencecreation crm:P9_consists_of ?personactivity ;
+                frbr:R17_created ?reference .
+            ?plan frbr:R14_incorporates ?reference .
+            ?expressioncreation frbr:R17_created ?plan .
+        } UNION {
+            # expression creation
+            ?expressioncreation crm:P9_consists_of ?personactivity ;
+                frbr:R17_created ?plan .
+        } UNION {
+            # performance
+            ?genericperformance crm:P9_consists_of ?personactivity ;
+                frbr:R25_performed ?plan .
+            ?expressioncreation frbr:R17_created ?plan .
+        }
+        ?plan a frbr:F25_Performance_Plan .
         OPTIONAL {
-            ?expressioncreation crm:P10_falls_within ?season .
+            ?expressioncreation a frbr:F28_Expression_Creation ;
+                crm:P10_falls_within ?season .
             FILTER(CONTAINS(STR(?season), "/s/"))
         }
-      } ORDER BY ASC(?season)''>
+    } ORDER BY ASC(?season)''>
 </semantic-search-query-constant>
 
 <div data-flex-layout="row stretch-stretch">
@@ -27,7 +41,7 @@ config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?fi
   <semantic-search-result-holder>
     <div data-flex-self="md-full">
       <semantic-search-result>
-        <mp-sparql-result-counts id='search-result-count' query="SELECT distinct ?subject ?expressioncreation ?production {}"
+        <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?plan {}"
                               template='{{> template}}'
                               >
           <template id='template'>
@@ -50,10 +64,10 @@ config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?fi
           query='SELECT ?season ?plan ?titlelabel ?stagedirection WHERE { }' 
           id='search-result'
           column-configuration='[
-            {"variableName": "season", "displayName": "Season"}, 
-            {"variableName": "titlelabel" ,"displayName": "Title","cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
+            {"displayName": "Season", "variableName": "season"}, 
+            {"displayName": "Title", "variableName": "plan"}, 
             {"displayName": "Genre", "cellTemplate":"{{>genre}}"},
-            {"displayName": "Stage direction", "cellTemplate": "{{>stagedirection}}"}
+            {"displayName": "Function", "cellTemplate": "{{>function}}"}
           ]'
           number-of-displayed-rows=20
           options='{"showFilter": false}'>
@@ -71,17 +85,29 @@ config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?fi
             </semantic-query>   
           </template>
         
-          <template id='stagedirection'> 
+          <template id='function'> 
             <semantic-query 
-              query='SELECT DISTINCT ?stagedirection WHERE {
-                ?expressioncreation frbr:R17_created <{{plan.value}}> ;
-                  crm:P9_consists_of ?activity .
-                ?activity crm:P2_has_type spav:mutnt ;
-                  crm:P14_carried_out_by ?stagedirection .
-                } '
-              template = '{{>stagedirection-list}} '>           
-              <template id='stagedirection-list'> 
-                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{stagedirection.value}}"></mp-label>{{else}}, <mp-label iri="{{stagedirection.value}}"></mp-label>{{/if}}{{/each}}</div>
+              query='SELECT DISTINCT ?function WHERE {
+                {
+                    # reference work
+                    <{{plan.value}}> frbr:R14_incorporates ?reference .
+                    ?referencecreation frbr:R17_created ?reference ;
+                        crm:P9_consists_of ?personactivity .
+                } UNION {
+                    # expression creation
+                    ?expressioncreation frbr:R17_created <{{plan.value}}>;
+                        crm:P9_consists_of ?personactivity .
+                } UNION {
+                    # performance
+                    ?genericperformance frbr:R25_performed <{{plan.value}}> ;
+                        crm:P9_consists_of ?personactivity .
+                }
+                ?personactivity crm:P14_carried_out_by ?? ;
+                    crm:P2_has_type ?function .
+                }'
+              template = '{{>function-list}} '>           
+              <template id='function-list'> 
+                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{function.value}}"></mp-label>{{else}}, <mp-label iri="{{function.value}}"></mp-label>{{/if}}{{/each}}</div>
               </template>
             </semantic-query>   
           </template>

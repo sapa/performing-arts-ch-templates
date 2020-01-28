@@ -178,52 +178,12 @@
         <bs-col sm="4">
             [[> sapaModule:ExternalResources]]
         </bs-col>
-      </bs-tab>
-    <bs-tab event-key='productions' title='Productions'>
-    
-        <semantic-table 
-          query='SELECT ?season ?plan (GROUP_CONCAT(DISTINCT ?function; SEPARATOR=", ") AS ?functionslist) (GROUP_CONCAT(DISTINCT ?genre; SEPARATOR=", ") AS ?genrelist)
-            WHERE {
-                ?personactivity crm:P14_carried_out_by ?? ;
-                    crm:P2_has_type ?function .
-                {
-                    # reference work
-                    ?referencecreation crm:P9_consists_of ?personactivity ;
-                        frbr:R17_created ?reference .
-                    ?plan frbr:R14_incorporates ?reference .
-                    ?expressioncreation frbr:R17_created ?plan .
-                } UNION {
-                    # expression creation
-                    ?expressioncreation crm:P9_consists_of ?personactivity ;
-                        frbr:R17_created ?plan .
-                } UNION {
-                    # performance
-                    ?genericperformance crm:P9_consists_of ?personactivity ;
-                        frbr:R25_performed ?plan .
-                    ?expressioncreation frbr:R17_created ?plan .
-                }
-                ?plan a frbr:F25_Performance_Plan .
-                OPTIONAL {
-                    ?expressioncreation a frbr:F28_Expression_Creation ;
-                        crm:P10_falls_within ?season .
-                    FILTER(CONTAINS(STR(?season), "/s/"))
-                }
-                OPTIONAL {
-                    ?work frbr:R12_is_realised_in ?plan ;
-                        crm:P2_has_type ?genre .
-                }
-            } GROUP BY ?season ?plan
-            ORDER BY ASC(?season)'
-          column-configuration='[
-            {"variableName": "season", "displayName": "Season"}, 
-            {"variableName": "plan", "displayName": "Production"}
-          ]'
-          number-of-displayed-rows=20
-          options='{"showFilter": false}'
-        ></semantic-table>
-
-
     </bs-tab>
+
+    <bs-tab event-key='productions' title='Productions'>
+        [[> sapaModule:PersonProductions]]
+    </bs-tab>
+    
     [[#if (hasPermission "forms:ldp:*")]] 
     <bs-tab event-key='person editing' title='Edit'>
     [[> sapaModule:PersonForm]]
