@@ -1,21 +1,87 @@
 <semantic-search 
-limit=1000 
-config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?field a <http://www.metaphacts.com/ontology/fields#Field>; <http://www.metaphacts.com/ontology/fields#range> ?range ; <http://www.metaphacts.com/ontology/fields#domain> ?domain .  FILTER (?field != <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity>)}" escape=false) '{"categories": {"<http://www.cidoc-crm.org/cidoc-crm/E55_Type>": [{"kind": "hierarchy", "queryPattern": "{?subject ?__relation__ ?__value__ .}"}],"<http://www.cidoc-crm.org/cidoc-crm/E4_Period>": [{"kind": "hierarchy", "queryPattern": "{?expressioncreation ?__relation__ ?subject . ?expressioncreation <http://www.cidoc-crm.org/cidoc-crm/P10_falls_within> ?__value__ .}"}]}, "searchProfile": {"categories": [{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>", "label": "Thing"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",  "label": "Group"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>",  "label": "Season"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E7_Activity>",  "label": "Activity"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",  "label": "Person"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E55_Type>",  "label": "Type"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>",  "label": "Date"}, {"iri": "<http://www.w3.org/2000/01/rdf-schema#Class>",  "label": "Concept"}], "relations": [ ]}}"}" ']]'
+  limit=500 
+  relations='{
+    "<http://ontology.performing-arts.ch/season>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?expressioncreation frbr:R17_created ?subject ;
+          crm:P10_falls_within ?__value__  .
+        FILTER(CONTAINS(STR(?__value__ ), \"/s/\"))
+      }"
+    }],
+    "<http://ontology.performing-arts.ch/genre>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?work frbr:R12_is_realised_in ?subject ;
+          crm:P2_has_type ?__value__ .
+      }"
+    }],
+    "<http://ontology.performing-arts.ch/stagedirection>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?expressioncreation frbr:R17_created ?subject ;
+          crm:P9_consists_of ?activity .
+        ?activity crm:P2_has_type spav:mutnt ;
+          crm:P14_carried_out_by ?__value__ .
+        FILTER(CONTAINS(STR(?__value__ ), \"/a/\"))
+      }"
+    }]
+  }'
+  search-profile='{
+    "categories": [
+      {
+        "iri": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",
+        "label": "Actor"
+      },
+      {
+        "iri": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>",
+        "label": "Period"
+      },
+      {
+        "iri": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "label": "Production"
+      },
+      {
+        "iri": "<http://www.w3.org/2004/02/skos/core#Concept>",
+        "label": "Concept"
+      }
+      ],
+    "relations": [
+      {
+        "iri": "<http://ontology.performing-arts.ch/season>",
+        "label": "Season",
+        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/genre>",
+        "label": "Genre",
+        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/stagedirection>",
+        "label": "Stage direction",
+        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
+      }
+    ]
+  }'
 >
 
-<semantic-search-query-constant domain='<[[resolvePrefix "frbr:F25_Performance_Plan"]]>'
-    query='SELECT DISTINCT ?plan
-      WHERE {
-        ?production crm:P14_carried_out_by ??;
-            crm:P2_has_type spav:muwgo .
-        ?expressioncreation crm:P9_consists_of ?production ;
-            frbr:R17_created ?plan .
-        ?plan rdfs:label ?titlelabel .
-        OPTIONAL {
-            ?expressioncreation crm:P10_falls_within ?season .
-            FILTER(CONTAINS(STR(?season), "/s/"))
-        }
-      } ORDER BY ASC(?season)''>
+<semantic-search-query-constant 
+  domain='<[[resolvePrefix "frbr:F25_Performance_Plan"]]>'
+  query='SELECT DISTINCT ?plan WHERE {
+      ?production crm:P14_carried_out_by ??;
+          crm:P2_has_type spav:muwgo .
+      ?expressioncreation crm:P9_consists_of ?production ;
+          frbr:R17_created ?plan .
+      ?plan rdfs:label ?titlelabel .
+      OPTIONAL {
+          ?expressioncreation crm:P10_falls_within ?season .
+          FILTER(CONTAINS(STR(?season), "/s/"))
+      }
+    } ORDER BY ASC(?season)'>
 </semantic-search-query-constant>
 
 <div data-flex-layout="row stretch-stretch">
@@ -47,7 +113,7 @@ config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?fi
 
       <semantic-search-result>
         <semantic-table 
-          query='SELECT ?season ?plan ?titlelabel ?stagedirection WHERE { }' 
+          query='SELECT ?plan ?season ?titlelabel ?stagedirection WHERE { }' 
           id='search-result'
           column-configuration='[
             {"variableName": "season", "displayName": "Season"}, 
