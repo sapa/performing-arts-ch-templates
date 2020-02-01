@@ -108,21 +108,10 @@
     </bs-col>
         <bs-col sm="4">
 
-            <!-- groups -->
-            <semantic-query 
-                query='SELECT ?value ?label WHERE {
-                    ?value crm:P107_has_current_or_former_member ?? ;
-                        rdfs:label ?label .
-                }'
-                template='<div><h5>Groups</h5>
-    <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{value.value}}">{{label.value}}</semantic-link></li>
-      {{/each}}
-    </ul></div>'>
-            </semantic-query>
-
         <mp-field-visualization
             subject='[[this]]'
             fields='[[fieldDefinitions
+            groups="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGroup"
             note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note"
             ]]'
             template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
