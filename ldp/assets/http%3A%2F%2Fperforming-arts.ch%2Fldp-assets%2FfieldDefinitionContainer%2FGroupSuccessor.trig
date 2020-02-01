@@ -1,10 +1,18 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-2494ced034b545549a2499bf5e357512-5hkuha;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-525100f79bde4d54bc274e4c31f11b38-1dqirc;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-525100f79bde4d54bc274e4c31f11b38-pph00z .
   
-  _:genid-2494ced034b545549a2499bf5e357512-5hkuha <http://spinrdf.org/sp#text> """SELECT ?value ?label ?unidentified WHERE {
+  _:genid-525100f79bde4d54bc274e4c31f11b38-1dqirc a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> <http://www.metaphacts.com/ontology/fields#range>
+      <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> .
+  
+  _:genid-525100f79bde4d54bc274e4c31f11b38-1dqirc <http://spinrdf.org/sp#text> "INSERT { $subject rdau:P60686 $value} WHERE {}" .
+  
+  _:genid-525100f79bde4d54bc274e4c31f11b38-pph00z <http://spinrdf.org/sp#text> """SELECT ?value ?label ?unidentified WHERE {
   { $subject rdau:P60686 ?value . }
   UNION
   { $value rdau:P60683 ?subject . }
@@ -12,21 +20,16 @@
   BIND(IF(CONTAINS(STR($value), \"/u/\"), \"true\", \"\") AS ?unidentified)
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> <http://www.metaphacts.com/ontology/fields#range>
-      <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-2494ced034b545549a2499bf5e357512-i8w4r;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> <http://www.metaphacts.com/ontology/fields#domain>
+      <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> .
   
-  _:genid-2494ced034b545549a2499bf5e357512-5hkuha a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-2494ced034b545549a2499bf5e357512-i8w4r a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "INSERT { $subject rdau:P60686 $value} WHERE {}" .
+  _:genid-525100f79bde4d54bc274e4c31f11b38-pph00z a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Successor"@undefined;
+      "Nachfolger"@de, "Successor"@en, "Successor"@it, "Successeur"@fr;
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-06T19:06:04.691Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-01T03:44:28.387Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> .
