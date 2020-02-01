@@ -37,11 +37,12 @@
 
             <!-- subjects -->
             <semantic-query 
-                query="SELECT DISTINCT ?subject
+                query="SELECT ?label ?subject
                 WHERE {
-                    ?subject rdau:P60806 ?? .
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject>) }
+                    ?? ric:R017 ?subject .
                 }"
-                template='<div><h5>Subjects</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{subject.value}}"></semantic-link></li>{{/each}}</ul></div>'>
+                template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{label.value}}"></mp-label></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{subject.value}}"></semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
 
         </bs-col>
@@ -51,17 +52,18 @@
             <h5>Record hierarchy</h5>
             <semantic-tree
                  query='SELECT DISTINCT ?node ?parent ?label WHERE {
-                    { 
-                      { ?? ric:is_member_of* ?node }
-                      UNION
-                      { ?node ric:is_member_of* ?? } 
+                    { ?? ric:is_member_of* ?node }
+                    UNION
+                    { ?node ric:is_member_of* ?? } 
+                    OPTIONAL {
+                        ?node ric:is_member_of ?parent.
+                        FILTER(ISIRI(?parent))
                     }
-                    OPTIONAL { ?node ric:is_member_of ?parent. FILTER(ISIRI(?parent)) }
                     FILTER(ISIRI(?node))
                     FILTER(CONTAINS(STR(?node), "/r/"))
                     ?node dc:title ?label .
                   } ORDER BY ?label
-                  LIMIT 100'
+                  LIMIT 50'
                collapsed="false"
                keys-opened='[[this]]'
                parentBindingName="parent"

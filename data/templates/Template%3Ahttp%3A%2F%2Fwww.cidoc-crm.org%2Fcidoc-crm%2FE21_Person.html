@@ -122,8 +122,8 @@
         <!-- record sets -->
         <semantic-query 
         query='SELECT ?label WHERE {
-            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf>) }
-            ?? rdau:P60806 ?record .
+                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf>) }
+                ?record ric:R017 ?? .
             } LIMIT 1'
         template='<h5>{{#each bindings}}<mp-label iri="{{label.value}}"></mp-label>{{/each}}</h5>'>
         </semantic-query>
@@ -131,8 +131,8 @@
         [[#if (hasPermission "forms:ldp:*")]]
         <semantic-tree
              query='SELECT DISTINCT ?node ?parent ?label ?description WHERE {
-                ?? rdau:P60806 ?record .
-                ?record ric:is_member_of* ?node .
+                ?record ric:R017 ?? ;
+                    ric:is_member_of* ?node .
                 FILTER(ISIRI(?node))
                 FILTER(CONTAINS(STR(?node), "/r/"))
                 OPTIONAL { ?node ric:is_member_of ?parent. FILTER(ISIRI(?parent)) }
@@ -144,9 +144,9 @@
         [[else]]
         <semantic-query 
             query='SELECT ?record ?description WHERE {
-                ?? rdau:P60806 ?record .
+                ?record ric:R017 ?? .
                 OPTIONAL { ?record dc:description ?description . }
-                }'
+            }'
             template='<div>{{#each bindings}}<div><semantic-link iri="{{record.value}}"></semantic-link>{{#if description}}<br/>{{description.value}}{{/if}}{{/each}}</div>'>
         </semantic-query>
         <!-- Doesn't work with combined descriptions like "P, PA"

@@ -18,6 +18,7 @@
         level="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel"
         parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent"
         description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription"
+        subject="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject"
         date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate"
         extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetExtent"
         comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
@@ -25,7 +26,7 @@
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-            <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "ric:E3_Record_Set"]]'></semantic-form-hidden-input>
+            <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "ric:E03_Record_Set"]]'></semantic-form-hidden-input>
         </div>
         <semantic-form-text-input for="identifier"></semantic-form-text-input>
         <semantic-form-text-input for="label"></semantic-form-text-input>
@@ -38,7 +39,7 @@
               parent_level="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel"
             ]]'>
             <div style="display: none;">
-                <semantic-form-hidden-input for='parent_rdf_type' default-value='[[resolvePrefix "ric:E3_Record_Set"]]'></semantic-form-hidden-input>
+                <semantic-form-hidden-input for='parent_rdf_type' default-value='[[resolvePrefix "ric:E03_Record_Set"]]'></semantic-form-hidden-input>
             </div>
             <semantic-form-text-input for="parent_identifier"></semantic-form-text-input>
             <semantic-form-text-input for="parent_label"></semantic-form-text-input>
@@ -47,6 +48,7 @@
           </semantic-form>
         </semantic-form-tree-picker-input>
         <semantic-form-text-input for="description"></semantic-form-text-input>
+        <semantic-form-autocomplete-input for="subject"></semantic-form-autocomplete-input>
         <semantic-form-text-input for="date"></semantic-form-text-input>
         <semantic-form-text-input for="extent"></semantic-form-text-input>
         <semantic-form-text-input for="comment"></semantic-form-text-input>
