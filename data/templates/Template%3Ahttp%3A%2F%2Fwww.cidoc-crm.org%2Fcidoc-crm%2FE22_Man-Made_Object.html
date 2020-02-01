@@ -78,30 +78,13 @@
                 template='{{#each bindings}}<p>{{dates.value}}</p>{{/each}}'>
             </semantic-query>
 
-            <!-- managed by -->
-            <semantic-query 
-                query="SELECT DISTINCT ?actor
-                WHERE {
-                    {
-                        ?activity crm:P16_used_specific_object ?? .
-                    }
-                    UNION
-                    {
-                        ?parent crm:P46_is_composed_of ?? .
-                        ?activity crm:P16_used_specific_object ?parent .
-                    }
-                    ?activity crm:P2_has_type spav:mujfv .
-                    ?actor crm:P14i_performed ?activity .
-                }"
-                template='<div><h5>Managed by</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{actor.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
-            </semantic-query>
-
-            <!-- part of / contains -->
+            <!-- managed by / part of / contains -->
             <mp-field-visualization
                 subject='[[this]]'
                 fields='[[fieldDefinitions
-                part_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueIsPartOf"
-                contains="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains"
+                    management="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement"
+                    part_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueIsPartOf"
+                    contains="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains"
                 ]]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                 >
@@ -113,8 +96,8 @@
             <mp-field-visualization
                 subject='[[this]]'
                 fields='[[fieldDefinitions
-                subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf"
-                note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note"
+                    subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf"
+                    note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note"
                 ]]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                 [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
