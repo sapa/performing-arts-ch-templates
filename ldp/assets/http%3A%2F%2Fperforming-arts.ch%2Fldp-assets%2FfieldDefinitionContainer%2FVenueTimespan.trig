@@ -1,61 +1,66 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueTimespan/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueTimespan> a
-      <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#comment> "hidden field";
-    <http://www.w3.org/2000/01/rdf-schema#label> "Timespan"@en;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
-  
-  _:genid-b2ac5a4b571a409b8c4cb89b194dfe8d-hiudu <http://spinrdf.org/sp#text> """INSERT {
-  $subject crm:P16i_was_used_for ?management .
-  ?management a crm:E7_Activity ;
-    crm:P2_has_type spav:mujfv ;
-    crm:P4_has_time-span ?value .
-  ?value a crm:E52_Time-Span .
-} WHERE {
-  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"management\")))) AS ?management)
-}""" .
-  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueTimespan> <http://www.metaphacts.com/ontology/fields#insertPattern>
-      _:genid-b2ac5a4b571a409b8c4cb89b194dfe8d-hiudu;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-b2ac5a4b571a409b8c4cb89b194dfe8d-p6pe9 .
+      _:genid-f9f35298c2d84645aec3dd4f7cca8d61-d1ldtm;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Zeitraum"@de .
   
-  _:genid-b2ac5a4b571a409b8c4cb89b194dfe8d-i2a63e a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-b2ac5a4b571a409b8c4cb89b194dfe8d-hiudu a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-b2ac5a4b571a409b8c4cb89b194dfe8d-i2a63e <http://spinrdf.org/sp#text> """DELETE {
-  $subject crm:P16i_was_used_for ?management .
-  ?management a crm:E7_Activity ;
-    crm:P2_has_type spav:mujfv ;
-    crm:P4_has_time-span ?value .
-  ?value a crm:E52_Time-Span .
-} WHERE {
-  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"management\")))) AS ?management)
-}""" .
-  
-  _:genid-b2ac5a4b571a409b8c4cb89b194dfe8d-p6pe9 <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  _:genid-f9f35298c2d84645aec3dd4f7cca8d61-ej2cxa <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
   $subject crm:P16i_was_used_for ?management .
   ?management a crm:E7_Activity ;
     crm:P2_has_type spav:mujfv ;
     crm:P4_has_time-span ?value . 
 }""" .
   
+  _:genid-f9f35298c2d84645aec3dd4f7cca8d61-2xud7c a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueTimespan> <http://www.w3.org/2000/01/rdf-schema#comment>
+      "hidden field";
+    <http://www.w3.org/2000/01/rdf-schema#label> "Timespan"@en .
+  
+  _:genid-f9f35298c2d84645aec3dd4f7cca8d61-ej2cxa a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-f9f35298c2d84645aec3dd4f7cca8d61-d1ldtm a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueTimespan> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#anyURI> .
+  
+  _:genid-f9f35298c2d84645aec3dd4f7cca8d61-2xud7c <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P16i_was_used_for ?management .
+  ?management a crm:E7_Activity ;
+    crm:P2_has_type spav:mujfv ;
+    crm:P4_has_time-span ?value .
+  ?value a crm:E52_Time-Span .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"management\")))) AS ?management)
+}""" .
+  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueTimespan> <http://www.metaphacts.com/ontology/fields#deletePattern>
-      _:genid-b2ac5a4b571a409b8c4cb89b194dfe8d-i2a63e;
-    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span> .
+      _:genid-f9f35298c2d84645aec3dd4f7cca8d61-2xud7c;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Periodo"@it;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
   
-  _:genid-b2ac5a4b571a409b8c4cb89b194dfe8d-p6pe9 a <http://spinrdf.org/sp#Query> .
+  _:genid-f9f35298c2d84645aec3dd4f7cca8d61-d1ldtm <http://spinrdf.org/sp#text> """INSERT {
+  $subject crm:P16i_was_used_for ?management .
+  ?management a crm:E7_Activity ;
+    crm:P2_has_type spav:mujfv ;
+    crm:P4_has_time-span ?value .
+  ?value a crm:E52_Time-Span .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"management\")))) AS ?management)
+}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueTimespan> a
-      <http://www.w3.org/ns/prov#Entity>;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueTimespan> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-f9f35298c2d84645aec3dd4f7cca8d61-ej2cxa;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Période"@fr;
+    a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-13T14:59:30.320Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-31T20:32:46.714Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueTimespan> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueTimespan> a
-      <http://www.w3.org/ns/ldp#Resource> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueTimespan> a <http://www.w3.org/ns/ldp#Resource> .
 }

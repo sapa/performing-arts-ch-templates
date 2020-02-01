@@ -1,36 +1,43 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-800a47fe392f461dbe9b8d45b53e66c4-sexcdk a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-800a47fe392f461dbe9b8d45b53e66c4-93uw3p .
+  
+  _:genid-800a47fe392f461dbe9b8d45b53e66c4-8kz1b a <http://spinrdf.org/sp#Query> .
+  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> <http://www.metaphacts.com/ontology/fields#deletePattern>
-      _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167462;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://temp-ric.performing-arts.ch/E3_Record_Set>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167461;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167460;
+      _:genid-800a47fe392f461dbe9b8d45b53e66c4-8kz1b .
+  
+  _:genid-800a47fe392f461dbe9b8d45b53e66c4-93uw3p a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Entstehungszeitraum"@de;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://temp-ric.performing-arts.ch/E3_Record_Set> .
+  
+  _:genid-800a47fe392f461dbe9b8d45b53e66c4-sexcdk <http://spinrdf.org/sp#text> "INSERT { $subject dc:date $value} WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Date"@en, "Periodo"@it;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
-    a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Entstehungszeitraum (record set)"@de,
-      "Date (record set)"@en, "période (record set)"@fr, "periodo (record set)"@it .
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-800a47fe392f461dbe9b8d45b53e66c4-sexcdk;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Période"@fr .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167460 a <http://spinrdf.org/sp#Query> .
+  _:genid-800a47fe392f461dbe9b8d45b53e66c4-8kz1b <http://spinrdf.org/sp#text> "DELETE { $subject dc:date $value} WHERE {}" .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167461 a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167462 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "DELETE { $subject dc:date $value} WHERE {}" .
-  
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167460 <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  _:genid-800a47fe392f461dbe9b8d45b53e66c4-93uw3p <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
   $subject dc:date ?value.
 }""" .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167461 <http://spinrdf.org/sp#text> "INSERT { $subject dc:date $value} WHERE {}" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> a
-      <http://www.w3.org/ns/prov#Entity>;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:04.473Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-31T23:56:14.521Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> a
-      <http://www.w3.org/ns/ldp#Resource> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate> a <http://www.w3.org/ns/ldp#Resource> .
 }

@@ -2,56 +2,53 @@
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType>
     a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-4fb607793d844957896a94c5e4858115-0zy9j .
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type> .
   
-  _:genid-4fb607793d844957896a94c5e4858115-7fsbhv <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
+  _:genid-e2548f3c53ed415c9114129633c997c7-feuim a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Miscellaneous appellation type"@en .
+  
+  _:genid-e2548f3c53ed415c9114129633c997c7-tj9zgr a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-e2548f3c53ed415c9114129633c997c7-feuim <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P2_has_type $value .
+} WHERE {}""" .
+  
+  _:genid-e2548f3c53ed415c9114129633c997c7-o8e7bt <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject crm:P2_has_type $value .
+}""" .
+  
+  _:genid-e2548f3c53ed415c9114129633c997c7-39qq3l a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType>
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-e2548f3c53ed415c9114129633c997c7-39qq3l;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-e2548f3c53ed415c9114129633c997c7-feuim;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-e2548f3c53ed415c9114129633c997c7-o8e7bt .
+  
+  _:genid-e2548f3c53ed415c9114129633c997c7-39qq3l <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
   VALUES ($value) { (spav:yadpx) (spav:yallb) (spav:yaajh) }
 }""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType>
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-4fb607793d844957896a94c5e4858115-0s2apt;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation> .
+    <http://www.w3.org/2000/01/rdf-schema#label> "Autre nom typ"@fr .
   
-  _:genid-4fb607793d844957896a94c5e4858115-aa0zl <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-e2548f3c53ed415c9114129633c997c7-tj9zgr <http://spinrdf.org/sp#text> """INSERT {
   $subject crm:P2_has_type $value .
 } WHERE {}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType>
-    <http://www.w3.org/2000/01/rdf-schema#label> "Miscellaneous appellation type (person)"@en .
-  
-  _:genid-4fb607793d844957896a94c5e4858115-0s2apt a <http://spinrdf.org/sp#Query> .
+  _:genid-e2548f3c53ed415c9114129633c997c7-o8e7bt a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType>
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-4fb607793d844957896a94c5e4858115-aa0zl;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Autre nom typ (personne)"@fr, "Weiterer Name Typ (Person)"@de,
-      "Altro nome modello (persona)"@it .
-  
-  _:genid-4fb607793d844957896a94c5e4858115-7fsbhv a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-4fb607793d844957896a94c5e4858115-aa0zl a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType>
-    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-4fb607793d844957896a94c5e4858115-7fsbhv .
-  
-  _:genid-4fb607793d844957896a94c5e4858115-0zy9j a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-4fb607793d844957896a94c5e4858115-0s2apt <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-  $subject crm:P2_has_type $value .
-}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType>
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "2" .
-  
-  _:genid-4fb607793d844957896a94c5e4858115-0zy9j <http://spinrdf.org/sp#text> """DELETE {
-  $subject crm:P2_has_type $value .
-} WHERE {}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Weiterer Name Typ"@de;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "2";
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-e2548f3c53ed415c9114129633c997c7-tj9zgr;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Altro nome modello"@it;
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-18T13:06:47.526Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-28T03:18:05.201Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType> .

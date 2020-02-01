@@ -1,30 +1,27 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel> <http://www.metaphacts.com/ontology/fields#deletePattern>
-      _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167388;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://temp-ric.performing-arts.ch/E3_Record_Set>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167387;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167386;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2004/02/skos/core#Concept>;
-    <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
-    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167385;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
-    a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Ebene (record set)"@de, "Level (record set)"@en,
-      "plaine (record set)"@fr, "livello (record set)"@it .
+  _:genid-13d943b57fbb498da2fa3aaebf5875e9-w2nkao a <http://spinrdf.org/sp#Query> .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167386 <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  _:genid-13d943b57fbb498da2fa3aaebf5875e9-bndvxf <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
   $subject dc:type ?value.
 }""" .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167385 a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel> <http://www.metaphacts.com/ontology/fields#valueSetPattern>
+      _:genid-13d943b57fbb498da2fa3aaebf5875e9-w2nkao .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167387 a <http://spinrdf.org/sp#Query> .
+  _:genid-13d943b57fbb498da2fa3aaebf5875e9-8id129 a <http://spinrdf.org/sp#Query> .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167388 <http://spinrdf.org/sp#text> "DELETE { $subject dc:type $value} WHERE {}" .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel> a <http://www.metaphacts.com/ontology/fields#Field> .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167385 <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
+  _:genid-13d943b57fbb498da2fa3aaebf5875e9-bjiorn <http://spinrdf.org/sp#text> "DELETE { $subject dc:type $value} WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-13d943b57fbb498da2fa3aaebf5875e9-bjiorn;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Plaine"@fr;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "1" .
+  
+  _:genid-13d943b57fbb498da2fa3aaebf5875e9-w2nkao <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
   VALUES ($value) {
     (spav:qekqz) 
     (spav:qegrv)
@@ -35,20 +32,31 @@
   }
 }""" .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167387 <http://spinrdf.org/sp#text> "INSERT { $subject dc:type $value} WHERE {}" .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel> <http://www.metaphacts.com/ontology/fields#domain>
+      <http://temp-ric.performing-arts.ch/E3_Record_Set>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-13d943b57fbb498da2fa3aaebf5875e9-bndvxf;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Level"@en .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167386 a <http://spinrdf.org/sp#Query> .
+  _:genid-13d943b57fbb498da2fa3aaebf5875e9-8id129 <http://spinrdf.org/sp#text> "INSERT { $subject dc:type $value} WHERE {}" .
   
-  _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167388 a <http://spinrdf.org/sp#Query> .
+  _:genid-13d943b57fbb498da2fa3aaebf5875e9-bndvxf a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel> a
-      <http://www.w3.org/ns/prov#Entity>;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel> <http://www.metaphacts.com/ontology/fields#insertPattern>
+      _:genid-13d943b57fbb498da2fa3aaebf5875e9-8id129;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Livello"@it .
+  
+  _:genid-13d943b57fbb498da2fa3aaebf5875e9-bjiorn a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel> <http://www.metaphacts.com/ontology/fields#range>
+      <http://www.w3.org/2004/02/skos/core#Concept>;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.w3.org/2000/01/rdf-schema#label> "Ebene"@de;
+    a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2019-08-20T14:36:02.480Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-31T23:56:34.653Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel> a
-      <http://www.w3.org/ns/ldp#Resource> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel> a <http://www.w3.org/ns/ldp#Resource> .
 }

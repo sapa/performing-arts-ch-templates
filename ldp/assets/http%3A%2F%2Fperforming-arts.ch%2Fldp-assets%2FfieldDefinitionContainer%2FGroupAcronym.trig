@@ -1,22 +1,26 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym/context> {
-  _:genid-c6cb919ac9bc4f5590f8a2cf78d53d86-cwcesk <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-  $subject crm:P131_is_identified_by ?identifier.
-  ?identifier a crm:E82_Actor_Appellation ;
-    crm:P2_has_type spav:yamqk ;
-    rdf:value $value .
-}""" .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym> a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Acronimo"@it, "Akronym"@de .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym> a <http://www.metaphacts.com/ontology/fields#Field> .
+  _:genid-cc8e74c1a33b49e39755cd3414cf3383-zhqjzv a <http://spinrdf.org/sp#Query> .
   
-  _:genid-c6cb919ac9bc4f5590f8a2cf78d53d86-ohocwr <http://spinrdf.org/sp#text> """DELETE {
+  _:genid-cc8e74c1a33b49e39755cd3414cf3383-ezll6c a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-cc8e74c1a33b49e39755cd3414cf3383-zhqjzv <http://spinrdf.org/sp#text> """DELETE {
   $subject crm:P131_is_identified_by ?identifier.
   ?identifier a crm:E82_Actor_Appellation ;
     crm:P2_has_type spav:yamqk ;
     rdf:value $value .
 } WHERE {}""" .
   
-  _:genid-c6cb919ac9bc4f5590f8a2cf78d53d86-391vdl <http://spinrdf.org/sp#text> """INSERT {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-cc8e74c1a33b49e39755cd3414cf3383-zhqjzv;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-cc8e74c1a33b49e39755cd3414cf3383-vdgxue;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
+  
+  _:genid-cc8e74c1a33b49e39755cd3414cf3383-ezll6c <http://spinrdf.org/sp#text> """INSERT {
   $subject crm:P131_is_identified_by ?identifier.
   ?identifier a crm:E82_Actor_Appellation ;
     crm:P2_has_type spav:yamqk ;
@@ -25,27 +29,22 @@
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"group_acronym\", $value)))) AS ?identifier)
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym> <http://www.metaphacts.com/ontology/fields#deletePattern>
-      _:genid-c6cb919ac9bc4f5590f8a2cf78d53d86-ohocwr;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Acronyme (groupe)"@fr, "Acronym (group)"@en;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c6cb919ac9bc4f5590f8a2cf78d53d86-391vdl;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-c6cb919ac9bc4f5590f8a2cf78d53d86-cwcesk;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E74_Group>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Akronym (Gruppe)"@de .
-  
-  _:genid-c6cb919ac9bc4f5590f8a2cf78d53d86-391vdl a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-c6cb919ac9bc4f5590f8a2cf78d53d86-cwcesk a <http://spinrdf.org/sp#Query> .
+  _:genid-cc8e74c1a33b49e39755cd3414cf3383-vdgxue a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Acronimo (gruppo)"@it .
+      "Acronym"@en, "Acronyme"@fr;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-cc8e74c1a33b49e39755cd3414cf3383-ezll6c .
   
-  _:genid-c6cb919ac9bc4f5590f8a2cf78d53d86-ohocwr a <http://spinrdf.org/sp#Query> .
+  _:genid-cc8e74c1a33b49e39755cd3414cf3383-vdgxue <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject crm:P131_is_identified_by ?identifier.
+  ?identifier a crm:E82_Actor_Appellation ;
+    crm:P2_has_type spav:yamqk ;
+    rdf:value $value .
+}""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym> a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-18T17:34:15.498Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-29T23:40:07.255Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym> .
