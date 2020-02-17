@@ -405,7 +405,7 @@
                           ?performance a frbr:F31_Performance ;
                                        crm:P8_took_place_on_or_within ?venue ;
                                        frbr:R25_performed ?plan .
-                            FILTER(CONTAINS(STR(?venue), "/t/"))
+                            FILTER(CONTAINS(STR(?venue), "/o/"))
                         }' 
                         column-configuration='[
                             {"variableName": "plan", "displayName": "Production"}, 
