@@ -1,11 +1,11 @@
 
 <semantic-search 
 limit=500
-config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?field a <http://www.metaphacts.com/ontology/fields#Field>;  <http://www.metaphacts.com/ontology/fields#domain> <http://internalschema/Common> . }" escape=false) '{"categories": {"<http://www.cidoc-crm.org/cidoc-crm/E53_Place>": [{"kind": "hierarchy", "queryPattern": "{?subject ?__relation__ ?__value__ .}"}],"<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>": [ { "kind": "date-range", "datatype": "http://www.w3.org/2001/XMLSchema#year" ,"format":"YYYY", "queryPattern": "{ ?event ?__relation__ ?subject ; crm:P4_has_time-span ?timespan .?timespan P82_at_some_time_within ?year ; ?year rdf:value ?__value__  . }" } ]}, "searchProfile": {"categories": [{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>", "label": "Venues"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",  "label": "Group"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",  "label": "Place"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",  "label": "Actor"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>",  "label": "Date"},{"iri": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",  "label": "Production"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",  "label": "Person"},{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E55_Type>",  "label": "Type"},{"iri": "<http://www.w3.org/2000/01/rdf-schema#Class>",  "label": "Concept"}], "relations": [ ]}}"}" ']]'
+config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?field a <http://www.metaphacts.com/ontology/fields#Field>;  <http://www.metaphacts.com/ontology/fields#domain> <http://internalschema/Common> . }" escape=false) '{"categories": {"<http://www.cidoc-crm.org/cidoc-crm/E53_Place>": [{"kind": "hierarchy", "queryPattern": "{?subject ?__relation__ ?__value__ .}"}],"<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>": [{"kind": "date-range", "datatype": "http://www.w3.org/2001/XMLSchema#year" ,"format":"YYYY", "queryPattern": "{ ?event ?__relation__ ?subject ; crm:P4_has_time-span ?timespan .?timespan P82_at_some_time_within ?year ; ?year rdf:value ?__value__  . }" } ]}, "searchProfile": {"categories": [{"iri": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>", "label": "Venues"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",  "label": "Group"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",  "label": "Place"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",  "label": "Actor"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span>",  "label": "Date"}, {"iri": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",  "label": "Production"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",  "label": "Person"}, {"iri": "<http://www.cidoc-crm.org/cidoc-crm/E55_Type>",  "label": "Type"}, {"iri": "<http://www.w3.org/2000/01/rdf-schema#Class>",  "label": "Concept"}], "relations": [ ]}}"}" ']]'
 >
   <semantic-search-query-keyword
     domain='<[[resolvePrefix "crm:E21_Person"]]>'
-    query='SELECT ?subject WHERE {
+    query='SELECT DISTINCT ?subject WHERE {
       ?subject a crm:E21_Person ;
         crm:P131_is_identified_by ?identifier .
       ?identifier rdf:value ?name.  
@@ -17,6 +17,22 @@ config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?fi
           bds:matchAllTerms "true" .
       }
     } ORDER BY DESC(?score)'
+    default-query='SELECT DISTINCT ?subject ?example WHERE {
+      VALUES(?label) {
+        ("Friedrich Dürrenmatt")
+        ("Barbara Frey")
+        ("Maurice Béjart")
+        ("Oskar Eberle")
+        ("Victoria Mazzarelli")
+        ("Mary Mens")
+      }
+      ?subject rdfs:label ?label ;
+        a crm:E21_Person.
+      FILTER(CONTAINS(STR(?subject), "/a/"))
+      ?subject crm:P131_is_identified_by ?identifier .
+        ?identifier rdf:value ?name.
+      VALUES (?example) { ("Example entries.") }
+    }'
   ></semantic-search-query-keyword>
 
   <div data-flex-layout="row stretch-stretch">
@@ -25,83 +41,89 @@ config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?fi
 
       <div data-flex-self="md-full">
 
-      <semantic-search-result>
-        <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}"
-                                 template='{{> template}}'
-                                 >
-          <template id='template'>
-            {{#if hasLimit}}
-            <bs-alert bs-style="warning" class="search-results__alert pull-left">
-              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
-              <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
-            </bs-alert>
-            {{else}}
-            <bs-alert bs-style="warning" class="search-results__alert pull-left">
-              <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
-            </bs-alert>
-            {{/if}}
-          </template>
-        </mp-sparql-result-counts>
-      </semantic-search-result>
+        <semantic-search-result>
+          <semantic-query 
+          id='preview'
+          query='SELECT ?example WHERE { } LIMIT 1'
+          template='<div style="padding: 0 12px; font-size: 14px;">{{#each bindings}}{{example.value}}{{/each}}</div>'
+        ></semantic-query>
+        </semantic-search-result>
 
-      <semantic-search-result>
-        <semantic-table 
-          query='SELECT DISTINCT ?subject ?comment
-          WHERE {
-            OPTIONAL { ?subject rdfs:comment ?comment }
-          } ORDER BY DESC(?score)'
-          id="person-table" 
-          options='{"showFilter": false, "showTableHeading": false}'
-          column-configuration='[
-            {"displayName": "Name", "variableName": "subject"} ,
-            {"displayName": "Additional Names", "cellTemplate": "{{> additional-names}}"} ,
-            {"displayName": "Live Dates", "cellTemplate": "{{> live-dates}}"} ,
-            {"displayName": "Comment", "variableName": "comment"}
-          ]'>
+        <semantic-search-result>
+          <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}" template='{{> template}}'>
+            <template id='template'>
+              {{#if hasLimit}}
+              <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
+              </bs-alert>
+              {{else}}
+              <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
+              </bs-alert>
+              {{/if}}
+            </template>
+          </mp-sparql-result-counts>
+        </semantic-search-result>
 
-          <template id='additional-names'>
-            <semantic-query 
-              query='SELECT ?appellation WHERE {
-                  <{{subject.value}}> rdfs:label ?label ;
-                    crm:P131_is_identified_by ?appellation .
-                  ?appellation crm:P2_has_type ?appellationtype ;
-                    rdf:value ?appellationvalue .
-                  MINUS { ?appellation crm:P2_has_type spav:yatcx . }
-                  FILTER(?label != ?appellationvalue)
-                }'
-              template = '{{> additional-names-list}} '>
-              <template id='additional-names-list'>
-                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label>{{else}}, <mp-label iri="{{appellation.value}}"></mp-label>{{/if}}{{/each}}</div>
-              </template>
-            </semantic-query> 
-          </template>
+        <semantic-search-result>
+          <semantic-table 
+            query='SELECT DISTINCT ?subject ?comment
+            WHERE {
+              OPTIONAL { ?subject rdfs:comment ?comment }
+            } ORDER BY DESC(?score)'
+            id="person-table" 
+            options='{"showFilter": false, "showTableHeading": false}'
+            column-configuration='[
+              {"displayName": "Name", "variableName": "subject"} ,
+              {"displayName": "Additional Names", "cellTemplate": "{{> additional-names}}"} ,
+              {"displayName": "Live Dates", "cellTemplate": "{{> live-dates}}"} ,
+              {"displayName": "Comment", "variableName": "comment"}
+            ]'>
 
-            <template id='live-dates'>                     
+            <template id='additional-names'>
               <semantic-query 
-                query='SELECT ?lifedates WHERE {
-                    OPTIONAL {
-                      <{{subject.value}}> crm:P98i_was_born ?birth .
-                      ?birth crm:P4_has_time-span ?bts .
-                      ?bts crm:P82a_begin_of_the_begin ?dob .
-                      BIND(CONCAT("* ", STR(YEAR(?dob))) as ?birthyear)
-                    }
-                    OPTIONAL {
-                      <{{subject.value}}> crm:P100i_died_in ?death .
-                      ?death crm:P4_has_time-span ?dts .
-                      ?dts crm:P82a_begin_of_the_begin ?dod .
-                      BIND(CONCAT("† ", STR(YEAR(?dod))) as ?deathyear)
-                    }
-                    BIND(IF(BOUND(?birthyear) && BOUND(?deathyear), CONCAT(?birthyear, ", ", ?deathyear), IF(BOUND(?birthyear), ?birthyear, IF(BOUND(?deathyear), ?deathyear, ""))) AS ?lifedates)
+                query='SELECT ?appellation WHERE {
+                    <{{subject.value}}> rdfs:label ?label ;
+                      crm:P131_is_identified_by ?appellation .
+                    ?appellation crm:P2_has_type ?appellationtype ;
+                      rdf:value ?appellationvalue .
+                    MINUS { ?appellation crm:P2_has_type spav:yatcx . }
+                    FILTER(?label != ?appellationvalue)
                   }'
-                template = '{{> live-dates-list}} '>           
-                <template id='live-dates-list'>
-                  <div>{{#each bindings}}{{lifedates.value}}{{/each}}</div>
+                template = '{{> additional-names-list}} '>
+                <template id='additional-names-list'>
+                  <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label>{{else}}, <mp-label iri="{{appellation.value}}"></mp-label>{{/if}}{{/each}}</div>
                 </template>
               </semantic-query> 
             </template>
-          
-        </semantic-table> 
-      </semantic-search-result>
+
+              <template id='live-dates'>                     
+                <semantic-query 
+                  query='SELECT ?lifedates WHERE {
+                      OPTIONAL {
+                        <{{subject.value}}> crm:P98i_was_born ?birth .
+                        ?birth crm:P4_has_time-span ?bts .
+                        ?bts crm:P82a_begin_of_the_begin ?dob .
+                        BIND(CONCAT("* ", STR(YEAR(?dob))) as ?birthyear)
+                      }
+                      OPTIONAL {
+                        <{{subject.value}}> crm:P100i_died_in ?death .
+                        ?death crm:P4_has_time-span ?dts .
+                        ?dts crm:P82a_begin_of_the_begin ?dod .
+                        BIND(CONCAT("† ", STR(YEAR(?dod))) as ?deathyear)
+                      }
+                      BIND(IF(BOUND(?birthyear) && BOUND(?deathyear), CONCAT(?birthyear, ", ", ?deathyear), IF(BOUND(?birthyear), ?birthyear, IF(BOUND(?deathyear), ?deathyear, ""))) AS ?lifedates)
+                    }'
+                  template = '{{> live-dates-list}} '>           
+                  <template id='live-dates-list'>
+                    <div>{{#each bindings}}{{lifedates.value}}{{/each}}</div>
+                  </template>
+                </semantic-query> 
+              </template>
+            
+          </semantic-table> 
+        </semantic-search-result>
        
       <div class="pull-right" style="display: flex; margin-top: 12px;">
 

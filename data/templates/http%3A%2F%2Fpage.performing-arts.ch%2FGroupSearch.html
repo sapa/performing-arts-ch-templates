@@ -61,6 +61,23 @@
           bds:matchAllTerms "true" .
       }
     } ORDER BY DESC(?score)'
+    default-query='SELECT DISTINCT ?subject ?example WHERE {
+      VALUES(?label) {
+        ("Schauspielhaus Zürich")
+        ("Vidy Théâtre Lausanne")
+        ("Konzert Theater Bern")
+        ("Theater Basel")
+        ("Tanzhaus Zürich")
+        ("Rimini Protokoll")
+        ("Digital Bühne Zürich")
+      }
+      ?subject rdfs:label ?label ;
+        rdf:type/rdfs:subClassOf* crm:E74_Group.
+      FILTER(CONTAINS(STR(?subject), "/a/"))
+      ?subject crm:P131_is_identified_by ?identifier .
+        ?identifier rdf:value ?name.
+      VALUES (?example) { ("Example entries.") }
+    }'
   ></semantic-search-query-keyword>
 
   <div data-flex-layout="row stretch-stretch">
@@ -75,88 +92,97 @@
 
       <div data-flex-self="md-full">
 
-      <semantic-search-result>
-        <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}"
-                                 template='{{> template}}'
-                                 >
-          <template id='template'>
-            {{#if hasLimit}}
-            <bs-alert bs-style="warning" class="search-results__alert pull-left">
-              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
-              <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
-            </bs-alert>
-            {{else}}
-            <bs-alert bs-style="warning" class="search-results__alert pull-left">
-              <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
-            </bs-alert>
-            {{/if}}
-          </template>
-        </mp-sparql-result-counts>
-      </semantic-search-result>
+        <semantic-search-result>
+          <semantic-query 
+          id='preview'
+          query='SELECT ?example WHERE { } LIMIT 1'
+          template='<div style="padding: 0 12px; font-size: 14px;">{{#each bindings}}{{example.value}}{{/each}}</div>'
+          ></semantic-query>
+        </semantic-search-result>
 
-      <semantic-search-result>
-        <!-- TODO: make sure that only one place is found or aggregate them -->
-        <semantic-table 
-          query='SELECT DISTINCT ?subject ?place
-          WHERE {
-            OPTIONAL {
-              ?subject crm:P74_has_current_or_former_residence ?p .
-              ?p crm:P89_falls_within ?place .
-            }
-          } ORDER BY DESC(?score)'
-          id="group-table" 
-          options='{"showFilter": false, "showTableHeading": false}'
-          column-configuration='[
-            {"displayName": "Name", "variableName": "subject"} ,
-            {"displayName": "Additional Names", "cellTemplate": "{{> additional-names}}"} ,
-            {"displayName": "Place", "variableName": "place"} ,
-            {"displayName": "Dates", "cellTemplate": "{{> dates}}"}
-          ]'>
+        <semantic-search-result>
+          <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}"
+                                  template='{{> template}}'
+                                  >
+            <template id='template'>
+              {{log bindings}}
+              {{#if hasLimit}}
+              <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
+              </bs-alert>
+              {{else}}
+              <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
+              </bs-alert>
+              {{/if}}
+            </template>
+          </mp-sparql-result-counts>
+        </semantic-search-result>
 
-          <template id='additional-names'>                     
-            <semantic-query 
-              query='SELECT ?appellation WHERE {      
-                  <{{subject.value}}> rdfs:label ?label ;
-                    crm:P131_is_identified_by ?appellation .
-                  ?appellation crm:P2_has_type ?appellationtype ;
-                    rdf:value ?appellationvalue .
-                  MINUS { ?appellation crm:P2_has_type spav:yanuj . }
-                  FILTER(?label != ?appellationvalue)
-                }'
-              template = '{{> additional-names-list}} '>           
-              <template id='additional-names-list'>
-                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label>{{else}}, <mp-label iri="{{appellation.value}}"></mp-label>{{/if}}{{/each}}</div>
-              </template>
-            </semantic-query> 
-          </template>
+        <semantic-search-result>
+          <!-- TODO: make sure that only one place is found or aggregate them -->
+          <semantic-table 
+            query='SELECT DISTINCT ?subject ?place
+            WHERE {
+              OPTIONAL {
+                ?subject crm:P74_has_current_or_former_residence ?p .
+                ?p crm:P89_falls_within ?place .
+              }
+            } ORDER BY DESC(?score)'
+            id="group-table" 
+            options='{"showFilter": false, "showTableHeading": false}'
+            column-configuration='[
+              {"displayName": "Name", "variableName": "subject"} ,
+              {"displayName": "Additional Names", "cellTemplate": "{{> additional-names}}"} ,
+              {"displayName": "Place", "variableName": "place"} ,
+              {"displayName": "Dates", "cellTemplate": "{{> dates}}"}
+            ]'>
 
-            <template id='dates'>                     
+            <template id='additional-names'>                     
               <semantic-query 
-                query='SELECT ?dates WHERE {
-                      OPTIONAL {
-                        <{{subject.value}}> crm:P95i_was_formed_by ?formation .
-                        ?formation a crm:E66_Formation ;
-                            crm:P4_has_time-span ?formationtime .
-                        ?formationtime rdfs:label ?formationlabel .
-                      }
-                      OPTIONAL {
-                        <{{subject.value}}> crm:P99i_was_dissolved_by ?dissolution .
-                        ?dissolution a crm:E68_Dissolution ;
-                          crm:P4_has_time-span ?dissolutiontime .
-                        ?dissolutiontime rdfs:label ?dissolutionlabel .
-                      }
-                      BIND(CONCAT(COALESCE(?formationlabel, "X"), "-", COALESCE(?dissolutionlabel, "X")) AS ?predates)
-                      BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
-                      }'
-                template = '{{> dates-list}} '>           
-                <template id='dates-list'>
-                  <div>{{#each bindings}}{{dates.value}}{{/each}}</div>
+                query='SELECT ?appellation WHERE {      
+                    <{{subject.value}}> rdfs:label ?label ;
+                      crm:P131_is_identified_by ?appellation .
+                    ?appellation crm:P2_has_type ?appellationtype ;
+                      rdf:value ?appellationvalue .
+                    MINUS { ?appellation crm:P2_has_type spav:yanuj . }
+                    FILTER(?label != ?appellationvalue)
+                  }'
+                template = '{{> additional-names-list}} '>           
+                <template id='additional-names-list'>
+                  <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label>{{else}}, <mp-label iri="{{appellation.value}}"></mp-label>{{/if}}{{/each}}</div>
                 </template>
               </semantic-query> 
             </template>
-          
-        </semantic-table> 
-      </semantic-search-result>
+
+              <template id='dates'>                     
+                <semantic-query 
+                  query='SELECT ?dates WHERE {
+                        OPTIONAL {
+                          <{{subject.value}}> crm:P95i_was_formed_by ?formation .
+                          ?formation a crm:E66_Formation ;
+                              crm:P4_has_time-span ?formationtime .
+                          ?formationtime rdfs:label ?formationlabel .
+                        }
+                        OPTIONAL {
+                          <{{subject.value}}> crm:P99i_was_dissolved_by ?dissolution .
+                          ?dissolution a crm:E68_Dissolution ;
+                            crm:P4_has_time-span ?dissolutiontime .
+                          ?dissolutiontime rdfs:label ?dissolutionlabel .
+                        }
+                        BIND(CONCAT(COALESCE(?formationlabel, "X"), "-", COALESCE(?dissolutionlabel, "X")) AS ?predates)
+                        BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
+                        }'
+                  template = '{{> dates-list}} '>           
+                  <template id='dates-list'>
+                    <div>{{#each bindings}}{{dates.value}}{{/each}}</div>
+                  </template>
+                </semantic-query> 
+              </template>
+            
+          </semantic-table> 
+       </semantic-search-result>
        
       <div class="pull-right" style="display: flex; margin-top: 12px;">
 

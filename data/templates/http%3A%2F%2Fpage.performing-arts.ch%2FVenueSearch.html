@@ -38,7 +38,7 @@
         crm:P2_has_type spav:dwmkn ;
         crm:P102_has_title ?title.
       ?title rdf:value ?name .  
-      FILTER(CONTAINS(STR(?subject), "/t/"))
+      FILTER(CONTAINS(STR(?subject), "/o/"))
       SERVICE <http://www.bigdata.com/rdf/search#search> {
         ?name bds:search ?__token__ ;
           bds:minRelevance "0.2" ;
@@ -46,7 +46,23 @@
           bds:matchAllTerms "true" .
       }
     } ORDER BY DESC(?score)'
-  ></semantic-search-query-keyword>
+    default-query='SELECT DISTINCT ?subject ?example WHERE {
+      VALUES(?label) {
+        ("Bühne A")
+        ("La Passerelle de Vidy")
+        ("Fassbühne")
+        ("Luzerner Theater")
+        ("Grand Théâtre de Genève")
+        ("Teatro di Locarno")
+      }
+      ?subject rdfs:label ?label ;
+        a crm:E22_Man-Made_Object ;
+        crm:P2_has_type spav:dwmkn.
+      
+      FILTER(CONTAINS(STR(?subject), "/o/"))
+      VALUES (?example) { ("Example entries.") }
+    }'
+    ></semantic-search-query-keyword>
 
   <div data-flex-layout="row stretch-stretch">
     
@@ -60,111 +76,119 @@
 
       <div data-flex-self="md-full">
 
-      <semantic-search-result>
-        <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}"
-                                 template='{{> template}}'
-                                 >
-          <template id='template'>
-            {{#if hasLimit}}
-            <bs-alert bs-style="warning" class="search-results__alert pull-left">
-              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
-              <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
-            </bs-alert>
-            {{else}}
-            <bs-alert bs-style="warning" class="search-results__alert pull-left">
-              <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
-            </bs-alert>
-            {{/if}}
-          </template>
-        </mp-sparql-result-counts>
-      </semantic-search-result>
+        <semantic-search-result>
+          <semantic-query 
+          id='preview'
+          query='SELECT ?example WHERE { } LIMIT 1'
+          template='<div style="padding: 0 12px; font-size: 14px;">{{#each bindings}}{{example.value}}{{/each}}</div>'
+          ></semantic-query>
+        </semantic-search-result>
 
-      <semantic-search-result>
-        <!-- TODO: make sure that only one place is found or aggregate them -->
-        <semantic-table 
-          query='SELECT DISTINCT ?subject ?place
-          WHERE {
-            OPTIONAL {
-              ?subject crm:P156_occupies ?p .
-              ?p crm:P89_falls_within ?place .
-            }
-          } ORDER BY DESC(?score)'
-          id="venue-table" 
-          options='{"showFilter": false, "showTableHeading": false}'
-          column-configuration='[
-            {"displayName": "Venue", "cellTemplate": "{{> venue}}"} ,
-            {"displayName": "Place", "variableName": "place"} ,
-            {"displayName": "Dates", "cellTemplate": "{{> dates}}"}
-          ]'>
+        <semantic-search-result>
+          <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}"
+                                  template='{{> template}}'
+                                  >
+            <template id='template'>
+              {{#if hasLimit}}
+              <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
+              </bs-alert>
+              {{else}}
+              <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
+              </bs-alert>
+              {{/if}}
+            </template>
+          </mp-sparql-result-counts>
+        </semantic-search-result>
 
-          <template id='venue'>                     
-            <semantic-query 
-              query='SELECT ?venue ?supervenue WHERE {
-                  BIND(<{{subject.value}}> AS ?venue)
-                  OPTIONAL {
-                    ?supervenue crm:P46_is_composed_of ?venue .
-                  }
-                } LIMIT 1'
-              template = '{{> venue-list}} '>           
-              <template id='venue-list'>
-                <div>{{#each bindings}}{{#if supervenue}}<semantic-link iri="{{supervenue.value}}"></semantic-link> &rarr; {{/if}}<semantic-link iri="{{venue.value}}"></semantic-link>{{/each}}</div>
-              </template>
-            </semantic-query> 
-          </template>
+        <semantic-search-result>
+          <!-- TODO: make sure that only one place is found or aggregate them -->
+          <semantic-table 
+            query='SELECT DISTINCT ?subject ?place
+            WHERE {
+              OPTIONAL {
+                ?subject crm:P156_occupies ?p .
+                ?p crm:P89_falls_within ?place .
+              }
+            } ORDER BY DESC(?score)'
+            id="venue-table" 
+            options='{"showFilter": false, "showTableHeading": false}'
+            column-configuration='[
+              {"displayName": "Venue", "cellTemplate": "{{> venue}}"} ,
+              {"displayName": "Place", "variableName": "place"} ,
+              {"displayName": "Dates", "cellTemplate": "{{> dates}}"}
+            ]'>
 
-            <template id='dates'>                     
+            <template id='venue'>                     
               <semantic-query 
-                query='SELECT ?dates WHERE {
+                query='SELECT ?venue ?supervenue WHERE {
+                    BIND(<{{subject.value}}> AS ?venue)
                     OPTIONAL {
-                      <{{subject.value}}> crm:P16i_was_used_for ?management .
-                      ?management crm:P2_has_type spav:mujfv ;
-                          crm:P4_has_time-span ?timespan .
-                      ?timespan crm:P82a_begin_of_the_begin ?begin .    
-                      BIND(STR(YEAR(?begin)) AS ?beginyear)
+                      ?supervenue crm:P46_is_composed_of ?venue .
                     }
-                    OPTIONAL {
-                        <{{subject.value}}> crm:P16i_was_used_for ?management .
-                        ?management crm:P2_has_type spav:mujfv ;
-                            crm:P4_has_time-span ?timespan .
-                        ?timespan crm:P82b_end_of_the_end ?end .
-                        BIND(STR(YEAR(?end)) AS ?endyear)
-                    }
-                    BIND(CONCAT(COALESCE(?beginyear, "X"), "-", COALESCE(?endyear, "X")) AS ?predates)
-                    BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
-                  }'
-                template = '{{> dates-list}} '>           
-                <template id='dates-list'>
-                  <div>{{#each bindings}}{{dates.value}}{{/each}}</div>
+                  } LIMIT 1'
+                template = '{{> venue-list}} '>           
+                <template id='venue-list'>
+                  <div>{{#each bindings}}{{#if supervenue}}<semantic-link iri="{{supervenue.value}}"></semantic-link> &rarr; {{/if}}<semantic-link iri="{{venue.value}}"></semantic-link>{{/each}}</div>
                 </template>
               </semantic-query> 
             </template>
-          
-        </semantic-table> 
-      </semantic-search-result>
-       
-      <div class="pull-right" style="display: flex; margin-top: 12px;">
 
-        <semantic-search-result>
-          <mp-sparql-download id='csv-result' query="SELECT ?subject ?name WHERE {  }"
-                              header="text/csv"
-                              filename="performing-arts-ch-search-result.csv"
-                              >
-            <button class="btn btn-default">Download CSV</button>
-          </mp-sparql-download>
+              <template id='dates'>                     
+                <semantic-query 
+                  query='SELECT ?dates WHERE {
+                      OPTIONAL {
+                        <{{subject.value}}> crm:P16i_was_used_for ?management .
+                        ?management crm:P2_has_type spav:mujfv ;
+                            crm:P4_has_time-span ?timespan .
+                        ?timespan crm:P82a_begin_of_the_begin ?begin .    
+                        BIND(STR(YEAR(?begin)) AS ?beginyear)
+                      }
+                      OPTIONAL {
+                          <{{subject.value}}> crm:P16i_was_used_for ?management .
+                          ?management crm:P2_has_type spav:mujfv ;
+                              crm:P4_has_time-span ?timespan .
+                          ?timespan crm:P82b_end_of_the_end ?end .
+                          BIND(STR(YEAR(?end)) AS ?endyear)
+                      }
+                      BIND(CONCAT(COALESCE(?beginyear, "X"), "-", COALESCE(?endyear, "X")) AS ?predates)
+                      BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
+                    }'
+                  template = '{{> dates-list}} '>           
+                  <template id='dates-list'>
+                    <div>{{#each bindings}}{{dates.value}}{{/each}}</div>
+                  </template>
+                </semantic-query> 
+              </template>
+            
+          </semantic-table> 
         </semantic-search-result>
-        <!--
-        <semantic-search-action-use-result-in-extended-search>
-          <button class="btn btn-default" style="margin-right:10px">Use in Search</button>
-        </semantic-search-action-use-result-in-extended-search>
         
-        <semantic-search-action-save-search-result id='save-search-result-action'>
-          <button class="btn btn-default" style="margin-right:10px">Save As Search</button>
-        </semantic-search-action-save-search-result>
-        -->
-      </div>
+        <div class="pull-right" style="display: flex; margin-top: 12px;">
 
-    </div>
-  </semantic-search-result-holder>
+          <semantic-search-result>
+            <mp-sparql-download id='csv-result' query="SELECT ?subject ?name WHERE {  }"
+                                header="text/csv"
+                                filename="performing-arts-ch-search-result.csv"
+                                >
+              <button class="btn btn-default">Download CSV</button>
+            </mp-sparql-download>
+          </semantic-search-result>
+          <!--
+          <semantic-search-action-use-result-in-extended-search>
+            <button class="btn btn-default" style="margin-right:10px">Use in Search</button>
+          </semantic-search-action-use-result-in-extended-search>
+          
+          <semantic-search-action-save-search-result id='save-search-result-action'>
+            <button class="btn btn-default" style="margin-right:10px">Save As Search</button>
+          </semantic-search-action-save-search-result>
+          -->
+        </div>
+
+      </div>
+    </semantic-search-result-holder>
 
   </div>
 
