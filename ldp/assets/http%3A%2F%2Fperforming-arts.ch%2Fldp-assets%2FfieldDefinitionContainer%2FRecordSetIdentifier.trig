@@ -1,42 +1,42 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier/context> {
+  _:genid-a99c2d45834f448abe4e8e0b0c0b9ca7-sowv9q <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject dc:identifier ?value. }" .
+  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier>
     a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Cote"@fr .
+    <http://www.w3.org/2000/01/rdf-schema#label> "Cote"@fr, "Segnatura"@it .
   
-  _:genid-707eb27a1e61475483bb970cd335b677-x0nzt <http://spinrdf.org/sp#text> "INSERT { $subject dc:identifier $value. } WHERE {}" .
-  
-  _:genid-707eb27a1e61475483bb970cd335b677-da0268 a <http://spinrdf.org/sp#Query> .
+  _:genid-a99c2d45834f448abe4e8e0b0c0b9ca7-u7bsh a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier>
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-707eb27a1e61475483bb970cd335b677-x0nzt;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Segnatura"@it;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://temp-ric.performing-arts.ch/E03_Record_Set> .
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-a99c2d45834f448abe4e8e0b0c0b9ca7-sowv9q .
   
-  _:genid-707eb27a1e61475483bb970cd335b677-x0nzt a <http://spinrdf.org/sp#Query> .
+  _:genid-a99c2d45834f448abe4e8e0b0c0b9ca7-u7bsh <http://spinrdf.org/sp#text> "DELETE { $subject dc:identifier $value. } WHERE {}" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier>
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-a99c2d45834f448abe4e8e0b0c0b9ca7-u7bsh;
     <http://www.w3.org/2000/01/rdf-schema#label> "Signatur"@de .
   
-  _:genid-707eb27a1e61475483bb970cd335b677-da0268 <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject dc:identifier ?value. }" .
+  _:genid-a99c2d45834f448abe4e8e0b0c0b9ca7-sowv9q a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier>
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record>,
+      <https://www.ica.org/standards/RiC/ontology#RecordSet>;
     <http://www.w3.org/2000/01/rdf-schema#label> "Identifier"@en .
   
-  _:genid-707eb27a1e61475483bb970cd335b677-9691uq a <http://spinrdf.org/sp#Query> .
+  _:genid-a99c2d45834f448abe4e8e0b0c0b9ca7-z2oewp <http://spinrdf.org/sp#text> "INSERT { $subject dc:identifier $value. } WHERE {}" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier>
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string> .
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-a99c2d45834f448abe4e8e0b0c0b9ca7-z2oewp;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1" .
   
-  _:genid-707eb27a1e61475483bb970cd335b677-9691uq <http://spinrdf.org/sp#text> "DELETE { $subject dc:identifier $value. } WHERE {}" .
+  _:genid-a99c2d45834f448abe4e8e0b0c0b9ca7-z2oewp a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier>
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-707eb27a1e61475483bb970cd335b677-da0268;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-707eb27a1e61475483bb970cd335b677-9691uq;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-01T22:55:59.702Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-10T21:44:06.303Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier> .

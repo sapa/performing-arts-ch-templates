@@ -1,51 +1,60 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> a
-      <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-ab00f1cebac24997a6bb1fd04d0ee1f8-leuonf;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-ab00f1cebac24997a6bb1fd04d0ee1f8-o357xj;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Sujet"@fr .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-7516a12f576d470292178eccd2079a05-ofb7 .
   
-  _:genid-ab00f1cebac24997a6bb1fd04d0ee1f8-jdzeg <http://spinrdf.org/sp#text> "INSERT { $subject ric:R017 $value} WHERE {}" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
-      <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-ab00f1cebac24997a6bb1fd04d0ee1f8-xubax8;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Contenuto"@it;
-    <http://www.metaphacts.com/ontology/fields#range> <http://temp-ric.performing-arts.ch/E08_Person> .
-  
-  _:genid-ab00f1cebac24997a6bb1fd04d0ee1f8-xubax8 a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.metaphacts.com/ontology/fields#domain>
-      <http://temp-ric.performing-arts.ch/E03_Record_Set> .
-  
-  _:genid-ab00f1cebac24997a6bb1fd04d0ee1f8-xubax8 <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
-  { $value a ric:E01_Thing . }
+  _:genid-7516a12f576d470292178eccd2079a05-ns7ra <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  { $value a rico:Concept . }
   UNION
-  { $value a ric:E08_Person . }
+  { $value rdf:type/rdfs:subClassOf* rico:Agent . }
   $value rdfs:label $label .
   FILTER(REGEX($label, \"?token\", \"i\"))
   FILTER(!CONTAINS(STR(?value), \"/u/\"))
 }""" .
   
-  _:genid-ab00f1cebac24997a6bb1fd04d0ee1f8-o357xj <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject ric:R017 ?value . }";
-    a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> a
+      <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-7516a12f576d470292178eccd2079a05-mbhj16n .
+  
+  _:genid-7516a12f576d470292178eccd2079a05-mbhj16n <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasSubject $value . } WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Sujet"@fr;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Contenuto"@it .
+  
+  _:genid-7516a12f576d470292178eccd2079a05-mbhj16n a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.w3.org/2000/01/rdf-schema#label>
       "Subject"@en;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-ab00f1cebac24997a6bb1fd04d0ee1f8-jdzeg;
-    <http://www.metaphacts.com/ontology/fields#range> <http://temp-ric.performing-arts.ch/E01_Thing>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-7516a12f576d470292178eccd2079a05-z5phr;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record>,
+      <https://www.ica.org/standards/RiC/ontology#RecordSet> .
+  
+  _:genid-7516a12f576d470292178eccd2079a05-z5phr <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:hasSubject ?value . }" .
+  
+  _:genid-7516a12f576d470292178eccd2079a05-ofb7 <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasSubject $value} WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.metaphacts.com/ontology/fields#range>
+      <https://www.ica.org/standards/RiC/ontology#Concept> .
+  
+  _:genid-7516a12f576d470292178eccd2079a05-ofb7 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.metaphacts.com/ontology/fields#autosuggestionPattern>
+      _:genid-7516a12f576d470292178eccd2079a05-ns7ra;
     <http://www.w3.org/2000/01/rdf-schema#label> "Gegenstand"@de .
   
-  _:genid-ab00f1cebac24997a6bb1fd04d0ee1f8-jdzeg a <http://spinrdf.org/sp#Query> .
+  _:genid-7516a12f576d470292178eccd2079a05-ns7ra a <http://spinrdf.org/sp#Query> .
   
-  _:genid-ab00f1cebac24997a6bb1fd04d0ee1f8-leuonf a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "DELETE { $subject ric:R017 $value} WHERE {}" .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.metaphacts.com/ontology/fields#range>
+      <https://www.ica.org/standards/RiC/ontology#Agent> .
+  
+  _:genid-7516a12f576d470292178eccd2079a05-z5phr a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> a
       <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-01T23:09:53.455Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-11T08:53:09.075Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> .

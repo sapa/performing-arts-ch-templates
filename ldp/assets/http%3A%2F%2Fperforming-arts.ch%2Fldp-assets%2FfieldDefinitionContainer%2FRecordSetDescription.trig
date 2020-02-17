@@ -1,40 +1,43 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription>
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-092fd8c63cc14549bc8e2d9554ca305c-odmke;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-49f13f5ff0b048069696a263fe55750e-naktvg;
     a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-49f13f5ff0b048069696a263fe55750e-uitrl6;
     <http://www.w3.org/2000/01/rdf-schema#label> "Inhaltsbeschreibung"@de .
   
-  _:genid-092fd8c63cc14549bc8e2d9554ca305c-p0vx5 a <http://spinrdf.org/sp#Query> .
+  _:genid-49f13f5ff0b048069696a263fe55750e-uitrl6 <http://spinrdf.org/sp#text> "INSERT { $subject dc:description $value} WHERE {}" .
+  
+  _:genid-49f13f5ff0b048069696a263fe55750e-naktvg <http://spinrdf.org/sp#text> "DELETE { $subject dc:description $value} WHERE {}" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription>
     <http://www.w3.org/2000/01/rdf-schema#label> "Content description"@en .
   
-  _:genid-092fd8c63cc14549bc8e2d9554ca305c-odmke a <http://spinrdf.org/sp#Query> .
+  _:genid-49f13f5ff0b048069696a263fe55750e-uitrl6 a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription>
-    <http://www.metaphacts.com/ontology/fields#domain> <http://temp-ric.performing-arts.ch/E03_Record_Set>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Description du contenu"@fr;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-092fd8c63cc14549bc8e2d9554ca305c-p0vx5;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-092fd8c63cc14549bc8e2d9554ca305c-fzuw9m;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Descrizione dei contenuti"@it .
-  
-  _:genid-092fd8c63cc14549bc8e2d9554ca305c-p0vx5 <http://spinrdf.org/sp#text> "DELETE { $subject dc:description $value} WHERE {}" .
-  
-  _:genid-092fd8c63cc14549bc8e2d9554ca305c-fzuw9m <http://spinrdf.org/sp#text> "INSERT { $subject dc:description $value} WHERE {}" .
-  
-  _:genid-092fd8c63cc14549bc8e2d9554ca305c-odmke <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  _:genid-49f13f5ff0b048069696a263fe55750e-70mr9b <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
   $subject dc:description ?value .
 }""" .
   
-  _:genid-092fd8c63cc14549bc8e2d9554ca305c-fzuw9m a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Description du contenu"@fr;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record>,
+      <https://www.ica.org/standards/RiC/ontology#RecordSet>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-49f13f5ff0b048069696a263fe55750e-70mr9b;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Descrizione dei contenuti"@it .
+  
+  _:genid-49f13f5ff0b048069696a263fe55750e-naktvg a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription>
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1" .
+  
+  _:genid-49f13f5ff0b048069696a263fe55750e-70mr9b a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription>
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-01T22:56:47.956Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-10T21:44:55.095Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription> .
