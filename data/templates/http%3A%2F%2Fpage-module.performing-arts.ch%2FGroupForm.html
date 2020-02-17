@@ -11,7 +11,7 @@
       form-id='groups'
        persistence='ldp'             
        fields='[[fieldDefinitions
-        CIDOC_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupTypeCIDOC"
+        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType"
         official_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupOfficialName"
         alternative_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName"
         acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym"
@@ -32,15 +32,23 @@
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
-        <semantic-form-checklist-input for="CIDOC_type" type="radio" row=true></semantic-form-checklist-input>
+        <semantic-form-checklist-input for="rdf_type" type="radio" row=true></semantic-form-checklist-input>
         <semantic-form-text-input for="official_name" languages='["en","de","fr","it"]'></semantic-form-text-input>
         <semantic-form-text-input for="alternative_name" languages='["en","de","fr","it"]'></semantic-form-text-input>
         <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
         <semantic-form-tree-picker-input for="group_type"></semantic-form-tree-picker-input>
-        <semantic-form-tree-picker-input for="residence"></semantic-form-tree-picker-input>
+        <bs-row>
+          <bs-col sm='4'>
+            <semantic-form-tree-picker-input for="residence"></semantic-form-tree-picker-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-text-input for="formation_year"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-text-input for="dissolution_year"></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
         <semantic-form-autocomplete-input for="predecessor"></semantic-form-autocomplete-input>
-        <semantic-form-text-input for="formation_year"></semantic-form-text-input>
-        <semantic-form-text-input for="dissolution_year"></semantic-form-text-input>
         <semantic-form-autocomplete-input for="controller"></semantic-form-autocomplete-input>
         <semantic-form-text-input for="website"></semantic-form-text-input>
         <semantic-form-autocomplete-input for="venues">
@@ -79,7 +87,7 @@
             record_set_parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent"
           ]]'>
             <div style="display: none;">
-                <semantic-form-hidden-input for='record_set_rdf_type' default-value='[[resolvePrefix "ric:E03_Record_Set"]]'></semantic-form-hidden-input>
+                <semantic-form-hidden-input for='record_set_rdf_type' default-value='[[resolvePrefix "rico:RecordSet"]]'></semantic-form-hidden-input>
                 
             </div>
             <semantic-form-text-input for="record_set_identifier"></semantic-form-text-input>

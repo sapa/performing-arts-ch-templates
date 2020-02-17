@@ -1,35 +1,32 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-525100f79bde4d54bc274e4c31f11b38-1dqirc;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-525100f79bde4d54bc274e4c31f11b38-pph00z .
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Group>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-bc2dae45ba094807b0d8122212397ea8-dbo6b9;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Group> .
   
-  _:genid-525100f79bde4d54bc274e4c31f11b38-1dqirc a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> <http://www.metaphacts.com/ontology/fields#range>
-      <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> .
-  
-  _:genid-525100f79bde4d54bc274e4c31f11b38-1dqirc <http://spinrdf.org/sp#text> "INSERT { $subject rdau:P60686 $value} WHERE {}" .
-  
-  _:genid-525100f79bde4d54bc274e4c31f11b38-pph00z <http://spinrdf.org/sp#text> """SELECT ?value ?label ?unidentified WHERE {
-  { $subject rdau:P60686 ?value . }
-  UNION
-  { $value rdau:P60683 ?subject . }
-  ?value rdfs:label ?label .
-  BIND(IF(CONTAINS(STR($value), \"/u/\"), \"true\", \"\") AS ?unidentified)
+  _:genid-bc2dae45ba094807b0d8122212397ea8-9mr2yo <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $value rico:isSuccessorOf ?subject.
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> <http://www.metaphacts.com/ontology/fields#domain>
-      <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#anyURI> .
   
-  _:genid-525100f79bde4d54bc274e4c31f11b38-pph00z a <http://spinrdf.org/sp#Query> .
+  _:genid-bc2dae45ba094807b0d8122212397ea8-dbo6b9 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $value rico:isSuccessorOf ?subject. } WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-bc2dae45ba094807b0d8122212397ea8-9mr2yo;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nachfolger"@de, "Successor"@en .
+  
+  _:genid-bc2dae45ba094807b0d8122212397ea8-9mr2yo a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Nachfolger"@de, "Successor"@en, "Successor"@it, "Successeur"@fr;
+      "Successeur"@fr;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "display only";
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-01T03:44:28.387Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-11T17:52:54.994Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor> .

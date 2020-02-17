@@ -19,10 +19,7 @@
             VALUES (?type ?typesort) { (spav:yamqk 1) (spav:yavtx 2) }
             ?? crm:P131_is_identified_by ?appellation .
             ?appellation a crm:E82_Actor_Appellation ; 
-            crm:P2_has_type ?type .
-            { ?appellation crm:P2_has_type spav:yamqk . }
-            UNION
-            { ?appellation crm:P2_has_type spav:yavtx . }
+                crm:P2_has_type ?type .
         } ORDER BY ?typesort'
         template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>)
             {{else}}<br><mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
@@ -121,19 +118,19 @@
     <semantic-query 
         query='SELECT ?label WHERE {
             VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf>) }
-            ?? rdau:P60806 ?record .
-            } LIMIT 1'
+            ?record rico:hasSubject ?? .
+        } LIMIT 1'
         template='<h5>{{#each bindings}}<mp-label iri="{{label.value}}"></mp-label>{{/each}}</h5>'>
     </semantic-query>
 
     [[#if (hasPermission "forms:ldp:*")]]
     <semantic-tree
          query='SELECT DISTINCT ?node ?parent ?label ?description WHERE {
-            ?? rdau:P60806 ?record .
-            ?record ric:is_member_of* ?node .
+            ?record rico:hasSubject ?? ;
+                rico:isPartOf* ?node .
             FILTER(ISIRI(?node))
             FILTER(CONTAINS(STR(?node), "/r/"))
-            OPTIONAL { ?node ric:is_member_of ?parent. FILTER(ISIRI(?parent)) }
+            OPTIONAL { ?node rico:isPartOf ?parent. FILTER(ISIRI(?parent)) }
             ?node dc:title ?label .
             OPTIONAL { ?node dc:description ?description . }
           }'
@@ -142,9 +139,9 @@
     [[else]]
     <semantic-query 
         query='SELECT ?record ?description WHERE {
-            ?? rdau:P60806 ?record .
+            ?record rico:hasSubject ?? .
             OPTIONAL { ?record dc:description ?description . }
-            }'
+        }'
         template='<div>{{#each bindings}}<div><semantic-link iri="{{record.value}}"></semantic-link>{{#if description}}<br/>{{description.value}}{{/if}}{{/each}}</div>'>
     </semantic-query>
     <!-- Doesn't work with combined descriptions like "P, PA"

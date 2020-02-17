@@ -1,77 +1,71 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-ee0ab1b993b24b09bb57aebf754679d4-pd0rx .
+  
+  _:genid-ee0ab1b993b24b09bb57aebf754679d4-rcbw4s a <http://spinrdf.org/sp#Query> .
+  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-e266fadba50e4e558ae7c2b523a64220-fyub7 .
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type> .
   
-  _:genid-e266fadba50e4e558ae7c2b523a64220-oxm8hb <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-  $value a skos:Concept ;
-    skos:inScheme spav:vr .
-} ORDER BY ?label""" .
+  _:genid-ee0ab1b993b24b09bb57aebf754679d4-0jw4wb a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Type"@en, "type"@fr .
+      "Type"@en, "type"@fr;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-ee0ab1b993b24b09bb57aebf754679d4-0jw4wb;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-ee0ab1b993b24b09bb57aebf754679d4-gbcjo;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
   
-  _:genid-e266fadba50e4e558ae7c2b523a64220-fyub7 a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-e266fadba50e4e558ae7c2b523a64220-fti90q a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
-      <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "tipo"@it .
-  
-  _:genid-e266fadba50e4e558ae7c2b523a64220-sptv8c <http://spinrdf.org/sp#text> """INSERT {
-  $subject crm:P2_has_type $value .
-} WHERE {}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.metaphacts.com/ontology/fields#treePatterns>
-      """{
-  \"type\": \"simple\",
-  \"schemePattern\": \"?item skos:inScheme spav:vr\",
-  \"relationPattern\": \"?item skos:broader ?parent\"
-}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson> .
-  
-  _:genid-e266fadba50e4e558ae7c2b523a64220-ry7spe a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.metaphacts.com/ontology/fields#domain>
-      <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
-  
-  _:genid-e266fadba50e4e558ae7c2b523a64220-ry7spe <http://spinrdf.org/sp#text> """DELETE {
-  $subject crm:P2_has_type $value .
-} WHERE {}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Typ"@de .
-  
-  _:genid-e266fadba50e4e558ae7c2b523a64220-fti90q <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-  $subject crm:P2_has_type $value .
-}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.metaphacts.com/ontology/fields#insertPattern>
-      _:genid-e266fadba50e4e558ae7c2b523a64220-sptv8c;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-e266fadba50e4e558ae7c2b523a64220-ry7spe;
-    <http://www.w3.org/2000/01/rdf-schema#comment> "This is the technical group type. It should be either Group or Legal Body." .
-  
-  _:genid-e266fadba50e4e558ae7c2b523a64220-oxm8hb a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.metaphacts.com/ontology/fields#valueSetPattern>
-      _:genid-e266fadba50e4e558ae7c2b523a64220-oxm8hb .
-  
-  _:genid-e266fadba50e4e558ae7c2b523a64220-sptv8c a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.metaphacts.com/ontology/fields#selectPattern>
-      _:genid-e266fadba50e4e558ae7c2b523a64220-fti90q .
-  
-  _:genid-e266fadba50e4e558ae7c2b523a64220-fyub7 <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  _:genid-ee0ab1b993b24b09bb57aebf754679d4-9t4ev <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
   $value a skos:Concept ;
     skos:inScheme spav:vr ;
     skos:prefLabel ?label .
   FILTER(REGEX(STR(?label), \"?token\",\"i\"))
 } LIMIT 10""" .
   
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.w3.org/2000/01/rdf-schema#label>
+      "tipo"@it;
+    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"simple\",
+  \"schemePattern\": \"?item skos:inScheme spav:vr\",
+  \"relationPattern\": \"?item skos:broader ?parent\"
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson> .
+  
+  _:genid-ee0ab1b993b24b09bb57aebf754679d4-rcbw4s <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject crm:P2_has_type $value .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.metaphacts.com/ontology/fields#domain>
+      <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
+  
+  _:genid-ee0ab1b993b24b09bb57aebf754679d4-gbcjo a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-ee0ab1b993b24b09bb57aebf754679d4-0jw4wb <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $value a skos:Concept ;
+    skos:inScheme spav:vr .
+} ORDER BY ?label""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.metaphacts.com/ontology/fields#autosuggestionPattern>
+      _:genid-ee0ab1b993b24b09bb57aebf754679d4-9t4ev .
+  
+  _:genid-ee0ab1b993b24b09bb57aebf754679d4-9t4ev a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Typ"@de;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-ee0ab1b993b24b09bb57aebf754679d4-rcbw4s .
+  
+  _:genid-ee0ab1b993b24b09bb57aebf754679d4-pd0rx a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P2_has_type $value .
+} WHERE {}""" .
+  
+  _:genid-ee0ab1b993b24b09bb57aebf754679d4-gbcjo <http://spinrdf.org/sp#text> """INSERT {
+  $subject crm:P2_has_type $value .
+} WHERE {}""" .
+  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-29T23:40:46.087Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-12T07:32:33.278Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType> .

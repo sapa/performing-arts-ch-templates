@@ -1,45 +1,48 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController/context> {
-  _:genid-b54f3ba37bf24668be5566cefd7b2ce9-pm7bd a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> a
+      <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Group> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-b54f3ba37bf24668be5566cefd7b2ce9-r1s4l .
-  
-  _:genid-b54f3ba37bf24668be5566cefd7b2ce9-r1s4l <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject ric:R041i_controlled_by ?value . }" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
-      <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
-  
-  _:genid-b54f3ba37bf24668be5566cefd7b2ce9-pm7bd <http://spinrdf.org/sp#text> "INSERT { $subject ric:R041i_controlled_by $value} WHERE {}" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> <http://www.metaphacts.com/ontology/fields#domain>
-      <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
-  
-  _:genid-b54f3ba37bf24668be5566cefd7b2ce9-r1s4l a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Responsible body"@en, "parrainage"@fr, "Trägerschaft"@de, "sponsorizzazione"@it;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-b54f3ba37bf24668be5566cefd7b2ce9-pm7bd .
-  
-  _:genid-b54f3ba37bf24668be5566cefd7b2ce9-rna6c9 <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
-  ?value rdf:type/rdfs:subClassOf* crm:E74_Group ;
+  _:genid-8ca5e499b44b45cca10e98331004a2e8-4hm52g <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  ?value rdf:type/rdfs:subClassOf* rico:Group ;
     rdfs:label ?label .
   FILTER(REGEX(STR(?label), \"?token\", \"i\"))
   FILTER(CONTAINS(STR(?value), \"/a/\"))
 } LIMIT 10""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> <http://www.metaphacts.com/ontology/fields#autosuggestionPattern>
-      _:genid-b54f3ba37bf24668be5566cefd7b2ce9-rna6c9 .
+  _:genid-8ca5e499b44b45cca10e98331004a2e8-bsxvf a <http://spinrdf.org/sp#Query> .
   
-  _:genid-b54f3ba37bf24668be5566cefd7b2ce9-rna6c9 a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> <http://www.metaphacts.com/ontology/fields#domain>
+      <https://www.ica.org/standards/RiC/ontology#Group>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-8ca5e499b44b45cca10e98331004a2e8-1ks93k;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> a <http://www.w3.org/ns/prov#Entity>;
+  _:genid-8ca5e499b44b45cca10e98331004a2e8-1ks93k a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Responsible body"@en;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-8ca5e499b44b45cca10e98331004a2e8-4hm52g;
+    <http://www.w3.org/2000/01/rdf-schema#label> "parrainage"@fr .
+  
+  _:genid-8ca5e499b44b45cca10e98331004a2e8-4hm52g a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Trägerschaft"@de, "sponsorizzazione"@it;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-8ca5e499b44b45cca10e98331004a2e8-bsxvf .
+  
+  _:genid-8ca5e499b44b45cca10e98331004a2e8-bsxvf <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:controlledBy ?value. }" .
+  
+  _:genid-8ca5e499b44b45cca10e98331004a2e8-1ks93k <http://spinrdf.org/sp#text> "INSERT { $subject rico:controlledBy $value. } WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> a
+      <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-20T07:20:35.586Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-10T21:36:19.208Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> a <http://www.w3.org/ns/ldp#Resource> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController> a
+      <http://www.w3.org/ns/ldp#Resource> .
 }

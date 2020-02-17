@@ -1,33 +1,30 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled> a
-      <http://www.metaphacts.com/ontology/fields#Field> .
+      <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Group>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "controlli"@it .
   
-  _:genid-8ca4477983614b9c8c23d99de01cea9c-bc3z5o a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled> <http://www.w3.org/2000/01/rdf-schema#label>
-      "controlli"@it;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-8ca4477983614b9c8c23d99de01cea9c-4wz2s2;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Controls"@en;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
-  
-  _:genid-8ca4477983614b9c8c23d99de01cea9c-4wz2s2 a <http://spinrdf.org/sp#Query> .
+  _:genid-ab56b43dee4e410f89c47716b5b746ca-x9nov5 a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled> <http://www.metaphacts.com/ontology/fields#domain>
-      <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
+      <https://www.ica.org/standards/RiC/ontology#Group>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Controls"@en;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-ab56b43dee4e410f89c47716b5b746ca-o2rwq .
   
-  _:genid-8ca4477983614b9c8c23d99de01cea9c-bc3z5o <http://spinrdf.org/sp#text> "SELECT ?value WHERE { ?value ric:R041i_controlled_by $subject . }" .
+  _:genid-ab56b43dee4e410f89c47716b5b746ca-o2rwq <http://spinrdf.org/sp#text> "SELECT ?value WHERE { ?value rico:controlledBy $subject . }";
+    a <http://spinrdf.org/sp#Query> .
   
-  _:genid-8ca4477983614b9c8c23d99de01cea9c-4wz2s2 <http://spinrdf.org/sp#text> "INSERT { $value ric:R041i_controlled_by $subject } WHERE {}" .
+  _:genid-ab56b43dee4e410f89c47716b5b746ca-x9nov5 <http://spinrdf.org/sp#text> "INSERT { $value rico:controlledBy $subject } WHERE {}" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled> <http://www.w3.org/2000/01/rdf-schema#label>
       "contrôles"@fr, "kontrolliert"@de;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-8ca4477983614b9c8c23d99de01cea9c-bc3z5o;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-ab56b43dee4e410f89c47716b5b746ca-x9nov5;
     <http://www.w3.org/2000/01/rdf-schema#comment> "display only";
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-20T11:40:29.108Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-10T21:37:02.591Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled> .
