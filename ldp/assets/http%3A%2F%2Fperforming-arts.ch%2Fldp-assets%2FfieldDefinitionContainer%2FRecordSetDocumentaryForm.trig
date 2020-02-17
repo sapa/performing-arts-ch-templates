@@ -1,0 +1,72 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm>
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordSetDocumentaryForm>;
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-ece6e2c5878e4c9cbd439328667e890a-3frygd <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  $value a skos:Concept ;
+    skos:inScheme spav:df ;
+    skos:prefLabel ?label .
+  FILTER(REGEX(STR(?label), \"?token\",\"i\"))
+} LIMIT 10""" .
+  
+  _:genid-ece6e2c5878e4c9cbd439328667e890a-zu2ee <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
+  $value a skos:Concept ;
+    skos:inScheme spav:df .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm>
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-ece6e2c5878e4c9cbd439328667e890a-sjmvyt .
+  
+  _:genid-ece6e2c5878e4c9cbd439328667e890a-w1yb65 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-ece6e2c5878e4c9cbd439328667e890a-zu2ee a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm>
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-ece6e2c5878e4c9cbd439328667e890a-zu2ee;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Documentary Form"@de;
+    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"simple\",
+  \"schemePattern\": \"?item skos:inScheme spav:df\",
+  \"relationPattern\": \"?item skos:broader ?parent\"
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
+  
+  _:genid-ece6e2c5878e4c9cbd439328667e890a-sjmvyt a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm>
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-ece6e2c5878e4c9cbd439328667e890a-3frygd .
+  
+  _:genid-ece6e2c5878e4c9cbd439328667e890a-3frygd a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-ece6e2c5878e4c9cbd439328667e890a-gvbf8 <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasDocumentaryFormType $value} WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm>
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record>,
+      <https://www.ica.org/standards/RiC/ontology#RecordSet> .
+  
+  _:genid-ece6e2c5878e4c9cbd439328667e890a-sjmvyt <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasDocumentaryFormType $value} WHERE {}" .
+  
+  _:genid-ece6e2c5878e4c9cbd439328667e890a-w1yb65 <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  $subject rico:hasDocumentaryFormType ?value.
+}""" .
+  
+  _:genid-ece6e2c5878e4c9cbd439328667e890a-gvbf8 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm>
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-ece6e2c5878e4c9cbd439328667e890a-w1yb65;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2004/02/skos/core#Concept>;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-ece6e2c5878e4c9cbd439328667e890a-gvbf8;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-17T13:46:18.098Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

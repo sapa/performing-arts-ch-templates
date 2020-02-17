@@ -3,48 +3,50 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> <http://www.metaphacts.com/ontology/fields#domain>
       <https://www.ica.org/standards/RiC/ontology#Agent> .
   
-  _:genid-00d274d03cff439ea9fb71046a52c85b-fnr9k a <http://spinrdf.org/sp#Query> .
+  _:genid-e5798bceadb34e2aa6069adafc8a58f9-ph5uao a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-00d274d03cff439ea9fb71046a52c85b-ljvnao .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> a <http://www.metaphacts.com/ontology/fields#Field> .
   
-  _:genid-00d274d03cff439ea9fb71046a52c85b-ljvnao a <http://spinrdf.org/sp#Query> .
+  _:genid-e5798bceadb34e2aa6069adafc8a58f9-rshl2m a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> <http://www.w3.org/2000/01/rdf-schema#label>
       "Record établi"@fr;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-00d274d03cff439ea9fb71046a52c85b-2m8d26t;
     <http://www.w3.org/2000/01/rdf-schema#label> "Record set"@de .
   
-  _:genid-00d274d03cff439ea9fb71046a52c85b-fnr9k <http://spinrdf.org/sp#text> """INSERT {
-  $value rico:hasSubject $subject.
-} WHERE {
-  FILTER(CONTAINS(STR($subject), \"just an ugly workaround for avoiding the unwanted insert\"))
-}""" .
+  _:genid-e5798bceadb34e2aa6069adafc8a58f9-2tp9zw <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  $value rico:hasSubject $subject ;
+   	rdf:type/rdfs:subClassOf* rico:RecordResource ;
+    rico:name ?label .
+  FILTER(REGEX(STR(?label), \"?token\",\"i\"))
+} LIMIT 10""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> <http://www.metaphacts.com/ontology/fields#range>
       <https://www.ica.org/standards/RiC/ontology#Record>, <https://www.ica.org/standards/RiC/ontology#RecordSet>;
     <http://www.w3.org/2000/01/rdf-schema#label> "Set di record"@it .
   
-  _:genid-00d274d03cff439ea9fb71046a52c85b-2m8d26t <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  _:genid-e5798bceadb34e2aa6069adafc8a58f9-rshl2m <http://spinrdf.org/sp#text> """INSERT {
+  $value rico:hasSubject $subject.
+} WHERE {
+  FILTER(CONTAINS(STR($subject), \"just an ugly workaround for avoiding the unwanted insert\"))
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-e5798bceadb34e2aa6069adafc8a58f9-ph5uao;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Concept>;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-e5798bceadb34e2aa6069adafc8a58f9-2tp9zw .
+  
+  _:genid-e5798bceadb34e2aa6069adafc8a58f9-2tp9zw a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-e5798bceadb34e2aa6069adafc8a58f9-ph5uao <http://spinrdf.org/sp#text> """SELECT $value WHERE {
   $value rico:hasSubject $subject .
-}""";
-    a <http://spinrdf.org/sp#Query> .
+}""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> <http://www.metaphacts.com/ontology/fields#insertPattern>
-      _:genid-00d274d03cff439ea9fb71046a52c85b-fnr9k;
-    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Concept> .
-  
-  _:genid-00d274d03cff439ea9fb71046a52c85b-ljvnao <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
-  $value rico:hasSubject $subject ;
-   	rdf:type/rdfs:subClassOf* rico:RecordResource ;
-    dc:title ?label .
-  FILTER(REGEX(STR(?label), \"?token\",\"i\"))
-} LIMIT 10""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> a <http://www.w3.org/ns/prov#Entity>;
+      _:genid-e5798bceadb34e2aa6069adafc8a58f9-rshl2m;
+    a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-12T07:35:46.251Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-17T13:29:39.043Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf> .

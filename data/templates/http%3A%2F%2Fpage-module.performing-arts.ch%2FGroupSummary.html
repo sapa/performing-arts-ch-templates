@@ -125,37 +125,25 @@
 
     [[#if (hasPermission "forms:ldp:*")]]
     <semantic-tree
-         query='SELECT DISTINCT ?node ?parent ?label ?description WHERE {
+         query='SELECT DISTINCT ?node ?parent ?label ?docform WHERE {
             ?record rico:hasSubject ?? ;
                 rico:isPartOf* ?node .
             FILTER(ISIRI(?node))
             FILTER(CONTAINS(STR(?node), "/r/"))
             OPTIONAL { ?node rico:isPartOf ?parent. FILTER(ISIRI(?parent)) }
-            ?node dc:title ?label .
-            OPTIONAL { ?node dc:description ?description . }
+            ?node rico:name ?label .
+            OPTIONAL { ?node rico:hasDocumentaryFormType ?docform . }
           }'
-          tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link><br>{{data.description.value}}</span>'> 
+          tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link>{{#if docform}}<br/><mp-label iri="{{docform.value}}"></mp-label>{{/if}}</span>'> 
     </semantic-tree>
     [[else]]
     <semantic-query 
-        query='SELECT ?record ?description WHERE {
+        query='SELECT ?record ?docform WHERE {
             ?record rico:hasSubject ?? .
-            OPTIONAL { ?record dc:description ?description . }
+            OPTIONAL { ?record rico:hasDocumentaryFormType ?docform . }
         }'
-        template='<div>{{#each bindings}}<div><semantic-link iri="{{record.value}}"></semantic-link>{{#if description}}<br/>{{description.value}}{{/if}}{{/each}}</div>'>
+        template='<div>{{#each bindings}}<div><semantic-link iri="{{record.value}}"></semantic-link>{{#if docform}}<br/><mp-label iri="{{docform.value}}"></mp-label>{{/if}}{{/each}}</div>'>
     </semantic-query>
-    <!-- Doesn't work with combined descriptions like "P, PA"
-    <semantic-query 
-        query='SELECT ?description ?vocab WHERE {
-            ?? rdau:P60806 ?record .
-            ?record dc:description ?description 
-            VALUES ( ?description ?vocab ) {
-                    ( "P" spav:dfblx )
-                    ( "PA" spav:dffop )
-                }
-            }'
-        template='<div>{{#each bindings}}<div><mp-label iri="{{vocab.value}}"></mp-label> / {{description.value}}</div>{{/each}}</div>'>
-    </semantic-query> -->
     [[/if]]
 
 </bs-col>

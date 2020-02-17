@@ -26,8 +26,8 @@
                 ?work frbr:R12_is_realised_in ?? ;
                     crm:P2_has_type ?genre .
               }
-              OPTIONAL { ?? dc:type ?recordsetlevel . }
-              BIND(IF(BOUND(?timespan), ?timespan, IF(BOUND(?genre), ?genre, IF(BOUND(?crmtype), ?crmtype, IF(BOUND(?recordsetlevel), ?recordsetlevel, ?class)))) AS ?description)
+              OPTIONAL { ?? rico:hasRecordSetType ?record_set_type . }
+              BIND(IF(BOUND(?timespan), ?timespan, IF(BOUND(?genre), ?genre, IF(BOUND(?crmtype), ?crmtype, IF(BOUND(?record_set_type), ?record_set_type, ?class)))) AS ?description)
             }"
             template="<p>{{#each bindings}}{{#if @first}}<mp-label iri='{{description.value}}'></mp-label>{{else}}, <mp-label iri='{{description.value}}'></mp-label>{{/if}}{{/each}}</p>">
         </semantic-query>

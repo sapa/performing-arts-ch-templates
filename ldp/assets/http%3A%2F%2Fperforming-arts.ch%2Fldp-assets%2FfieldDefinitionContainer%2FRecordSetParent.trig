@@ -1,59 +1,62 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent/context> {
+  _:genid-c93e7ae349934cdc842f253dad79f8f8-uvi4dm <http://spinrdf.org/sp#text> "INSERT { $subject rico:isPartOf $value} WHERE {}" .
+  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent> a
       <http://www.metaphacts.com/ontology/fields#Field> .
   
-  _:genid-dc7289767b3e46f6b15c1f2415dc9918-wxbn3j a <http://spinrdf.org/sp#Query> .
+  _:genid-c93e7ae349934cdc842f253dad79f8f8-g1fz5 <http://spinrdf.org/sp#text> "DELETE { $subject rico:isPartOf $value} WHERE {}" .
+  
+  _:genid-c93e7ae349934cdc842f253dad79f8f8-g1fp1 <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  $subject rico:isPartOf ?value .
+}""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent> <http://www.metaphacts.com/ontology/fields#treePatterns>
       """{
   \"type\": \"simple\",
   \"schemePattern\": \"?item a rico:RecordSet.\",
   \"relationPattern\": \"?item rico:isPartOf ?parent.\"
-}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-dc7289767b3e46f6b15c1f2415dc9918-8v09v;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson> .
+  
+  _:genid-c93e7ae349934cdc842f253dad79f8f8-g1fz5 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#anyURI>;
     <http://www.w3.org/2000/01/rdf-schema#label> "Supérieure"@fr;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-dc7289767b3e46f6b15c1f2415dc9918-wxbn3j;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-dc7289767b3e46f6b15c1f2415dc9918-qs8msn;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c93e7ae349934cdc842f253dad79f8f8-uvi4dm;
     <http://www.w3.org/2000/01/rdf-schema#label> "Superiore"@it;
     <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-dc7289767b3e46f6b15c1f2415dc9918-e2u9ow .
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-c93e7ae349934cdc842f253dad79f8f8-g1fz5;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordSet> .
   
-  _:genid-dc7289767b3e46f6b15c1f2415dc9918-e2u9ow a <http://spinrdf.org/sp#Query> .
+  _:genid-c93e7ae349934cdc842f253dad79f8f8-uvi4dm a <http://spinrdf.org/sp#Query> .
   
-  _:genid-dc7289767b3e46f6b15c1f2415dc9918-8v09v a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent> <http://www.metaphacts.com/ontology/fields#range>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Parent"@de;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record>,
       <https://www.ica.org/standards/RiC/ontology#RecordSet>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Parent"@de .
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-c93e7ae349934cdc842f253dad79f8f8-g1fp1 .
   
-  _:genid-dc7289767b3e46f6b15c1f2415dc9918-qs8msn a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent> <http://www.metaphacts.com/ontology/fields#domain>
-      <https://www.ica.org/standards/RiC/ontology#Record>, <https://www.ica.org/standards/RiC/ontology#RecordSet> .
-  
-  _:genid-dc7289767b3e46f6b15c1f2415dc9918-qs8msn <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
-  $subject rico:isPartOf ?value .
-}""" .
-  
-  _:genid-dc7289767b3e46f6b15c1f2415dc9918-e2u9ow <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  _:genid-c93e7ae349934cdc842f253dad79f8f8-hqe7z <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
   $value a rico:RecordSet ;
-    rdfs:label $label .
+    rico:name $label .
   FILTER(REGEX($label, \"?token\", \"i\"))
 }""" .
   
-  _:genid-dc7289767b3e46f6b15c1f2415dc9918-8v09v <http://spinrdf.org/sp#text> "INSERT { $subject rico:isPartOf $value} WHERE {}" .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent> <http://www.metaphacts.com/ontology/fields#autosuggestionPattern>
+      _:genid-c93e7ae349934cdc842f253dad79f8f8-hqe7z .
+  
+  _:genid-c93e7ae349934cdc842f253dad79f8f8-hqe7z a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent> <http://www.metaphacts.com/ontology/fields#maxOccurs>
       "1" .
   
-  _:genid-dc7289767b3e46f6b15c1f2415dc9918-wxbn3j <http://spinrdf.org/sp#text> "DELETE { $subject rico:isPartOf $value} WHERE {}" .
+  _:genid-c93e7ae349934cdc842f253dad79f8f8-g1fp1 a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent> a
       <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-10T21:44:12.581Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-17T14:50:04.193Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent> .

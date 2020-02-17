@@ -20,7 +20,8 @@
                 subject='[[this]]'
                 fields='[[fieldDefinitions
                 identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier"
-                level="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLevel"
+                type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
+                documetary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm"
                 content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription"
                 extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetExtent"
                 date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate"
@@ -61,7 +62,7 @@
                     }
                     FILTER(ISIRI(?node))
                     FILTER(CONTAINS(STR(?node), "/r/"))
-                    ?node dc:title ?label .
+                    ?node rico:name ?label .
                   } ORDER BY ?label
                   LIMIT 50'
                collapsed="false"
