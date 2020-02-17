@@ -20,7 +20,7 @@
   ?value crm:P2_has_type spav:dwmkn ;
     rdfs:label ?label .
   FILTER(REGEX(STR(?label), \"?token\", \"i\"))
-  FILTER(CONTAINS(STR(?value), \"/t/\"))
+  FILTER(CONTAINS(STR(?value), \"/o/\"))
 } LIMIT 20""";
     a <http://spinrdf.org/sp#Query> .
   

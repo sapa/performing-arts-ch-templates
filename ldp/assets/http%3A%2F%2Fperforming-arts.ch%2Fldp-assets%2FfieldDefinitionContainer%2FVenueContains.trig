@@ -34,7 +34,7 @@
     rdfs:label ?label .
   FILTER NOT EXISTS { $subject crm:P46_is_composed_of $value . }
   FILTER(REGEX(STR(?label), \"?token\", \"i\"))
-  FILTER(CONTAINS(STR(?value), \"/t/\"))
+  FILTER(CONTAINS(STR(?value), \"/o/\"))
 } LIMIT 10""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> <http://www.w3.org/2000/01/rdf-schema#label>
