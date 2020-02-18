@@ -1,12 +1,12 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/season/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/season> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/frbr/F25_Performance_Plan> .
+    <http://www.metaphacts.com/ontology/fields#domain> <http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan> .
   
   _:genid-4c670540bcbb42d9836a8a1495a2d0d4-ou6m5 a <http://spinrdf.org/sp#Query> .
   
   _:genid-4c670540bcbb42d9836a8a1495a2d0d4-j67mah <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
-   ?expressioncreation  frbr:R17_created ?subject .
+   ?expressioncreation frbroo:R17_created ?subject .
    ?expressioncreation crm:P10_falls_within ?value .
        FILTER(CONTAINS(STR(?value), \"/s/\"))
 }""" .
@@ -15,7 +15,7 @@
       <http://www.w3.org/2001/XMLSchema#anyURI> .
   
   _:genid-4c670540bcbb42d9836a8a1495a2d0d4-ou6m5 <http://spinrdf.org/sp#text> """INSERT {
- ?expressioncreation  frbr:R17_created ?subject .
+ ?expressioncreation frbroo:R17_created ?subject .
    ?expressioncreation crm:P10_falls_within ?value .
       
 } WHERE {

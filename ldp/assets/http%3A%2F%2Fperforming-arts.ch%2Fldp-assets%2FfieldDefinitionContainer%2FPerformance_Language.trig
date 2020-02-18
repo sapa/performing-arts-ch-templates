@@ -3,10 +3,10 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language>
     a <http://www.metaphacts.com/ontology/fields#Field>;
     <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type>;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/frbr/F25_Performance_Plan> .
+    <http://www.metaphacts.com/ontology/fields#domain> <http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan> .
   
   _:genid-f17dd798bee44247961fd2ae5ef0dc27-aize3i <http://spinrdf.org/sp#text> """INSERT {
-  ?pw frbr:R12_is_realised_in $subject ;
+  ?pw frbroo:R12_is_realised_in $subject ;
       <http://schema.org/inLanguage> $value.
 } WHERE {
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/w/\", MD5(STR(?value)), \"/w\")) AS ?pw)
@@ -35,7 +35,7 @@
   _:genid-f17dd798bee44247961fd2ae5ef0dc27-aize3i a <http://spinrdf.org/sp#Query> .
   
   _:genid-f17dd798bee44247961fd2ae5ef0dc27-nvj8v2 <http://spinrdf.org/sp#text> """SELECT ?value WHERE { 
-  ?pw frbr:R12_is_realised_in $subject ;
+  ?pw frbroo:R12_is_realised_in $subject ;
     <http://schema.org/inLanguage> $value.
 }""" .
   

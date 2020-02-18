@@ -3,7 +3,7 @@
     domain='<http://internalschema/Common>'
     query='SELECT DISTINCT ?subject WHERE {
   							{{
-                ?subject rdf:type frbr:F25_Performance_Plan ;
+                ?subject rdf:type frbroo:F25_Performance_Plan ;
                   rdfs:label ?name .
                 FILTER(CONTAINS(STR(?subject), "/w/"))
                 BIND (("https://png.pngtree.com/svg/20160322/4c838f318b.svg") AS ?icon)

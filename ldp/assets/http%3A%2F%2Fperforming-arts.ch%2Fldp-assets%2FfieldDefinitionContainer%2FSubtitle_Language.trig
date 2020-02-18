@@ -9,17 +9,17 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subtitle_Language>
     a <http://www.metaphacts.com/ontology/fields#Field>;
     <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type>;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/frbr/F25_Performance_Plan>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
   
   _:genid-d53f3ae89e064f0685e96cff0aa81f3b-7yca2 <http://spinrdf.org/sp#text> """SELECT ?value WHERE { 
-          ?pw frbr:R12_is_realised_in $subject.          
+          ?pw frbroo:R12_is_realised_in $subject.          
          ?pw  <http://schema.org/subtitleLanguage>  $value.
         
 }""";
     a <http://spinrdf.org/sp#Query> .
   
-  _:genid-d53f3ae89e064f0685e96cff0aa81f3b-rz0sw8 <http://spinrdf.org/sp#text> """INSERT {?pw frbr:R12_is_realised_in $subject.          
+  _:genid-d53f3ae89e064f0685e96cff0aa81f3b-rz0sw8 <http://spinrdf.org/sp#text> """INSERT {?pw frbroo:R12_is_realised_in $subject.          
          ?pw  <http://schema.org/subtitleLanguage>  $value} 
       
       WHERE { 

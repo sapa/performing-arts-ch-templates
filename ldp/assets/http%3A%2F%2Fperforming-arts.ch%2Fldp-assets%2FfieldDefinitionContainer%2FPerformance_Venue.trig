@@ -2,7 +2,7 @@
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Venue/context> {
   _:genid-02747bb7236f480eb9d6cdc405c4852b-s3g29s <http://spinrdf.org/sp#text> """SELECT ?value
 WHERE {
-  ?perform frbr:R25_performed $subject ;
+  ?perform frbroo:R25_performed $subject ;
     crm:P8_took_place_on_or_within ?value.
 }""";
     a <http://spinrdf.org/sp#Query> .
@@ -10,12 +10,12 @@ WHERE {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Venue>
     a <http://www.metaphacts.com/ontology/fields#Field>;
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-02747bb7236f480eb9d6cdc405c4852b-zsi2tn;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/frbr/F31_Performance>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://iflastandards.info/ns/fr/frbr/frbroo/F31_Performance>;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
   
   _:genid-02747bb7236f480eb9d6cdc405c4852b-zsi2tn a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """INSERT { 
-  ?perform frbr:R25_performed $subject ;
+  ?perform frbroo:R25_performed $subject ;
     crm:P8_took_place_on_or_within ?value.
 } WHERE {
   BIND(IRI(CONCAT(STR(?subject),\"/p\")) AS ?perform)

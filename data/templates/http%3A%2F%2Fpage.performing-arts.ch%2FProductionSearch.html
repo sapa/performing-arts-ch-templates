@@ -4,7 +4,7 @@
     "<http://ontology.performing-arts.ch/genre>": [{
       "kind": "resource",
       "queryPattern": "{
-        ?work frbr:R12_is_realised_in ?subject ;
+        ?work frbroo:R12_is_realised_in ?subject ;
           crm:P2_has_type ?__value__ .
       }"
     }],
@@ -12,16 +12,16 @@
       "kind": "resource",
       "queryPattern": "{
         ?__value__ skos:inScheme spav:hl .
-        ?performance frbr:R25_performed ?subject ;
+        ?performance frbroo:R25_performed ?subject ;
           crm:P9_consists_of ?premiere .
-        ?premiere a frbr:F31_Performance ;
+        ?premiere a frbroo:F31_Performance ;
           crm:P2_has_type ?__value__ .
       }"
     }],
     "<http://ontology.performing-arts.ch/producer>": [{
       "kind": "resource",
       "queryPattern": "{
-        ?expressioncreation frbr:R17_created ?subject ;
+        ?expressioncreation frbroo:R17_created ?subject ;
           crm:P9_consists_of ?production . 
         ?production crm:P2_has_type spav:muwgo ;
           crm:P14_carried_out_by ?__value__ .
@@ -31,7 +31,7 @@
     "<http://ontology.performing-arts.ch/productionvenue>": [{
       "kind": "resource",
       "queryPattern": "{
-        ?performance frbr:R25_performed ?subject ;
+        ?performance frbroo:R25_performed ?subject ;
           crm:P8_took_place_on_or_within ?__value__ .
         FILTER(CONTAINS(STR(?__value__), \"/o/\"))
       }"
@@ -39,7 +39,7 @@
     "<http://ontology.performing-arts.ch/productionplace>": [{
       "kind": "resource",
       "queryPattern": "{
-        ?performance frbr:R25_performed ?subject ;
+        ?performance frbroo:R25_performed ?subject ;
           crm:P8_took_place_on_or_within ?venue .
         ?venue crm:P156_occupies ?ground .
         ?ground crm:P89_falls_within ?__value__ .
@@ -48,7 +48,7 @@
     "<http://ontology.performing-arts.ch/stagedirection>": [{
       "kind": "resource",
       "queryPattern": "{
-        ?expressioncreation frbr:R17_created ?subject ;
+        ?expressioncreation frbroo:R17_created ?subject ;
           crm:P9_consists_of ?activity .
         ?activity crm:P2_has_type spav:mutnt ;
           crm:P14_carried_out_by ?__value__ .
@@ -57,9 +57,9 @@
     "<http://ontology.performing-arts.ch/premieredate>": [{
       "kind": "numeric-range",
       "queryPattern": "{
-        ?performance frbr:R25_performed ?subject ;
+        ?performance frbroo:R25_performed ?subject ;
           crm:P9_consists_of ?premiere .
-        ?premiere a frbr:F31_Performance ;
+        ?premiere a frbroo:F31_Performance ;
           crm:P4_has_time-span ?timespan .
         ?timespan crm:P82a_begin_of_the_begin ?date .
         BIND(YEAR(?date) AS ?literal)
@@ -71,7 +71,7 @@
   search-profile='{
     "categories": [
       {
-        "iri": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "iri": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "label": "Production"
       },
       {
@@ -99,43 +99,43 @@
       {
         "iri": "<http://ontology.performing-arts.ch/genre>",
         "label": "Genre",
-        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/premieretype>",
         "label": "Premiere",
-        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/producer>",
         "label": "Producer",
-        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/productionvenue>",
         "label": "Venue",
-        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/productionplace>",
         "label": "Place",
-        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/stagedirection>",
         "label": "Stage&nbsp;direction",
-        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/premieredate>",
         "label": "Year",
-        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.w3.org/2001/XMLSchema#decimal>"
       }
     ]
@@ -143,9 +143,9 @@
   >
   
   <semantic-search-query-keyword
-    domain='<[[resolvePrefix "frbr:F25_Performance_Plan"]]>'
+    domain='<[[resolvePrefix "frbroo:F25_Performance_Plan"]]>'
     query='SELECT ?subject WHERE {
-      ?subject a frbr:F25_Performance_Plan ;
+      ?subject a frbroo:F25_Performance_Plan ;
         rdfs:label ?title .
       FILTER(CONTAINS(STR(?subject), "/w/"))
       SERVICE <http://www.bigdata.com/rdf/search#search> {
@@ -160,7 +160,7 @@
         ("Die Physiker")
       }
       ?subject rdfs:label ?label ;
-        a frbr:F25_Performance_Plan.
+        a frbroo:F25_Performance_Plan.
       FILTER(CONTAINS(STR(?subject), "/w/"))
       VALUES (?example) { ("Example entries.") }
     }'
@@ -221,9 +221,9 @@
             <template id='premiere'>
               <semantic-query 
                 query='SELECT ?premieretype ?premieredate WHERE {
-                    ?performance frbr:R25_performed <{{subject.value}}> ;
+                    ?performance frbroo:R25_performed <{{subject.value}}> ;
                       crm:P9_consists_of ?premiere .
-                    ?premiere a frbr:F31_Performance .
+                    ?premiere a frbroo:F31_Performance .
                     OPTIONAL {
                       ?premiere crm:P2_has_type ?premieretype .
                       ?premieretype skos:inScheme spav:hl .
@@ -242,7 +242,7 @@
             <template id='venue'>
               <semantic-query 
                 query='SELECT ?venue ?supervenue WHERE {
-                  ?performance frbr:R25_performed <{{subject.value}}> ;
+                  ?performance frbroo:R25_performed <{{subject.value}}> ;
                     crm:P8_took_place_on_or_within ?venue .
                   OPTIONAL {
                     ?supervenue crm:P46_is_composed_of ?venue .
@@ -258,7 +258,7 @@
             <template id='producer'>
               <semantic-query 
                 query='SELECT ?producer WHERE {
-                  ?expressioncreation frbr:R17_created <{{subject.value}}> ;
+                  ?expressioncreation frbroo:R17_created <{{subject.value}}> ;
                     crm:P9_consists_of ?production . 
                   ?production crm:P2_has_type spav:muwgo ;
                     crm:P14_carried_out_by ?producer .
@@ -273,7 +273,7 @@
             <template id='genre'>
               <semantic-query 
                 query='SELECT DISTINCT ?genre WHERE {
-                  ?work frbr:R12_is_realised_in <{{subject.value}}> ;
+                  ?work frbroo:R12_is_realised_in <{{subject.value}}> ;
                     crm:P2_has_type ?genre .
                 }'
                 template = '{{> genre-list}}'>

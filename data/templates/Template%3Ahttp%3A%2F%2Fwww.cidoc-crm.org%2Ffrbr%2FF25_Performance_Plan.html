@@ -37,7 +37,7 @@
             <semantic-query 
                 query='SELECT ?producer ?unidentified ?season
                 WHERE {
-                    ?expressioncreation frbr:R17_created ?? ;
+                    ?expressioncreation frbroo:R17_created ?? ;
                         crm:P9_consists_of ?production .
                     ?production crm:P2_has_type spav:muwgo ;
                         crm:P14_carried_out_by ?producer .
@@ -54,7 +54,7 @@
             <semantic-query 
                 query='SELECT ?premieretype ?timespan
                 WHERE {
-                    ?performance frbr:R25_performed ?? ;
+                    ?performance frbroo:R25_performed ?? ;
                         crm:P9_consists_of ?premiere .
                     ?premiere crm:P2_has_type ?premieretype .
                     ?premieretype skos:inScheme spav:hl .
@@ -70,7 +70,7 @@
                   VALUES (?type) {
                       (spav:dwmkn) # venue
                   }
-                  ?performance frbr:R25_performed ?? ;
+                  ?performance frbroo:R25_performed ?? ;
                       crm:P8_took_place_on_or_within ?venue .
                   BIND(IF(CONTAINS(STR($venue), "/u/"), "true", "") AS ?unidentified)
               }'

@@ -4,7 +4,7 @@
     "<http://ontology.performing-arts.ch/season>": [{
       "kind": "resource",
       "queryPattern": "{
-        ?expressioncreation frbr:R17_created ?subject ;
+        ?expressioncreation frbroo:R17_created ?subject ;
           crm:P10_falls_within ?__value__  .
         FILTER(CONTAINS(STR(?__value__ ), \"/s/\"))
       }"
@@ -12,14 +12,14 @@
     "<http://ontology.performing-arts.ch/genre>": [{
       "kind": "resource",
       "queryPattern": "{
-        ?work frbr:R12_is_realised_in ?subject ;
+        ?work frbroo:R12_is_realised_in ?subject ;
           crm:P2_has_type ?__value__ .
       }"
     }],
     "<http://ontology.performing-arts.ch/stagedirection>": [{
       "kind": "resource",
       "queryPattern": "{
-        ?expressioncreation frbr:R17_created ?subject ;
+        ?expressioncreation frbroo:R17_created ?subject ;
           crm:P9_consists_of ?activity .
         ?activity crm:P2_has_type spav:mutnt ;
           crm:P14_carried_out_by ?__value__ .
@@ -38,7 +38,7 @@
         "label": "Period"
       },
       {
-        "iri": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "iri": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "label": "Production"
       },
       {
@@ -50,19 +50,19 @@
       {
         "iri": "<http://ontology.performing-arts.ch/season>",
         "label": "Season",
-        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/genre>",
         "label": "Genre",
-        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/stagedirection>",
         "label": "Stage direction",
-        "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
       }
     ]
@@ -70,12 +70,12 @@
 >
 
 <semantic-search-query-constant 
-  domain='<[[resolvePrefix "frbr:F25_Performance_Plan"]]>'
+  domain='<[[resolvePrefix "frbroo:F25_Performance_Plan"]]>'
   query='SELECT DISTINCT ?plan WHERE {
       ?production crm:P14_carried_out_by ??;
           crm:P2_has_type spav:muwgo .
       ?expressioncreation crm:P9_consists_of ?production ;
-          frbr:R17_created ?plan .
+          frbroo:R17_created ?plan .
       ?plan rdfs:label ?titlelabel .
       OPTIONAL {
           ?expressioncreation crm:P10_falls_within ?season .
@@ -127,7 +127,7 @@
           <template id='genre'> 
             <semantic-query 
               query='SELECT DISTINCT ?genre WHERE {      
-                ?work frbr:R12_is_realised_in <{{plan.value}}> ;
+                ?work frbroo:R12_is_realised_in <{{plan.value}}> ;
                   crm:P2_has_type ?genre . 
                 } '
               template = '{{>genre-list}} '>           
@@ -140,7 +140,7 @@
           <template id='stagedirection'> 
             <semantic-query 
               query='SELECT DISTINCT ?stagedirection WHERE {
-                ?expressioncreation frbr:R17_created <{{plan.value}}> ;
+                ?expressioncreation frbroo:R17_created <{{plan.value}}> ;
                   crm:P9_consists_of ?activity .
                 ?activity crm:P2_has_type spav:mutnt ;
                   crm:P14_carried_out_by ?stagedirection .

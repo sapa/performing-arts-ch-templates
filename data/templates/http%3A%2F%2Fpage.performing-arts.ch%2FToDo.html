@@ -268,7 +268,7 @@
                                         FILTER(CONTAINS(STR(?producer), "/u/"))
                                         ?producer rdfs:label ?producer_label .
                                         ?expression_creation crm:P9_consists_of ?production ;
-                                            frbr:R17_created ?plan .
+                                            frbroo:R17_created ?plan .
                                     }' 
                                 column-configuration='[
                                     {"variableName": "plan", "displayName": "Production"}, 
@@ -356,9 +356,9 @@
                       query='
                       SELECT ?status (COUNT(?venue) AS ?venuecount)
                       WHERE {
-                        ?performance a frbr:F31_Performance ;
+                        ?performance a frbroo:F31_Performance ;
                                        crm:P8_took_place_on_or_within ?venue ;
-                                       frbr:R25_performed ?plan .
+                                       frbroo:R25_performed ?plan .
                         BIND(IF(CONTAINS(STR(?venue), "/u/"), "unmatched", "matched") AS ?status)
                       } GROUP BY ?status
                       ORDER BY ?status
@@ -402,9 +402,9 @@
                         <semantic-table 
                         query='SELECT ?plan ?venue
                         WHERE {
-                          ?performance a frbr:F31_Performance ;
+                          ?performance a frbroo:F31_Performance ;
                                        crm:P8_took_place_on_or_within ?venue ;
-                                       frbr:R25_performed ?plan .
+                                       frbroo:R25_performed ?plan .
                             FILTER(CONTAINS(STR(?venue), "/o/"))
                         }' 
                         column-configuration='[
@@ -422,9 +422,9 @@
                         <semantic-table 
                         query='SELECT ?plan ?venuelabel
                         WHERE {
-                          ?performance a frbr:F31_Performance ;
+                          ?performance a frbroo:F31_Performance ;
                                        crm:P8_took_place_on_or_within ?venue ;
-                                       frbr:R25_performed ?plan .
+                                       frbroo:R25_performed ?plan .
                             FILTER(CONTAINS(STR(?venue), "/u/"))
                             ?venue rdfs:label ?venuelabel .
                         }' 
@@ -447,8 +447,8 @@
                               a crm:E22_Man-Made_Object .
                           FILTER(CONTAINS(STR(?venue), "/u/"))
                           ?performance crm:P8_took_place_on_or_within ?venue ;
-                                       frbr:R25_performed ?plan .
-                          ?expressioncreation frbr:R17_created ?plan ;
+                                       frbroo:R25_performed ?plan .
+                          ?expressioncreation frbroo:R17_created ?plan ;
                                               crm:P10_falls_within ?directorship.
                           ?directorship crm:P14_carried_out_by ?group .
                           ?group rdf:type/rdfs:subClassOf* crm:E74_Group .

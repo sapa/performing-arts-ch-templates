@@ -4,7 +4,7 @@
     "<http://ontology.performing-arts.ch/season>": [{
         "kind": "resource",
         "queryPattern": "{
-            ?expressioncreation frbr:R17_created ?plan ;
+            ?expressioncreation frbroo:R17_created ?plan ;
                 crm:P10_falls_within ?__value__  .
             FILTER(CONTAINS(STR(?__value__ ), \"/s/\"))
         }"
@@ -12,7 +12,7 @@
     "<http://ontology.performing-arts.ch/genre>": [{
         "kind": "resource",
         "queryPattern": "{
-            ?work frbr:R12_is_realised_in ?plan ;
+            ?work frbroo:R12_is_realised_in ?plan ;
                 crm:P2_has_type ?__value__ .
         }"
     }],
@@ -20,14 +20,14 @@
       "kind": "resource",
       "queryPattern": "{
         {
-            ?subject frbr:R14_incorporates ?reference .
-            ?referencecreation frbr:R17_created ?reference ;
+            ?subject frbroo:R14_incorporates ?reference .
+            ?referencecreation frbroo:R17_created ?reference ;
                 crm:P9_consists_of ?personactivity .
         } UNION {
-            ?expressioncreation frbr:R17_created ?subject;
+            ?expressioncreation frbroo:R17_created ?subject;
                 crm:P9_consists_of ?personactivity .
         } UNION {
-            ?genericperformance frbr:R25_performed ?subject ;
+            ?genericperformance frbroo:R25_performed ?subject ;
                 crm:P9_consists_of ?personactivity .
         }
         ?personactivity crm:P14_carried_out_by ?? ;
@@ -38,7 +38,7 @@
   search-profile='{
     "categories": [
         {
-            "iri": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+            "iri": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
             "label": "Production"
         },
         {
@@ -54,19 +54,19 @@
         {
             "iri": "<http://ontology.performing-arts.ch/season>",
             "label": "Season",
-            "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+            "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>"
         },
         {
             "iri": "<http://ontology.performing-arts.ch/genre>",
             "label": "Genre",
-            "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+            "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
             "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
         },
         {
             "iri": "<http://ontology.performing-arts.ch/function>",
             "label": "Function",
-            "hasDomain": "<http://www.cidoc-crm.org/frbr/F25_Performance_Plan>",
+            "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
             "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
         }
     ]
@@ -74,29 +74,29 @@
 >
       
 <semantic-search-query-constant 
-    domain='<[[resolvePrefix "frbr:F25_Performance_Plan"]]>'
+    domain='<[[resolvePrefix "frbroo:F25_Performance_Plan"]]>'
     query='SELECT DISTINCT ?plan
     WHERE {
         ?personactivity crm:P14_carried_out_by ?? .
         {
             # reference work
             ?referencecreation crm:P9_consists_of ?personactivity ;
-                frbr:R17_created ?reference .
-            ?plan frbr:R14_incorporates ?reference .
-            ?expressioncreation frbr:R17_created ?plan .
+                frbroo:R17_created ?reference .
+            ?plan frbroo:R14_incorporates ?reference .
+            ?expressioncreation frbroo:R17_created ?plan .
         } UNION {
             # expression creation
             ?expressioncreation crm:P9_consists_of ?personactivity ;
-                frbr:R17_created ?plan .
+                frbroo:R17_created ?plan .
         } UNION {
             # performance
             ?genericperformance crm:P9_consists_of ?personactivity ;
-                frbr:R25_performed ?plan .
-            ?expressioncreation frbr:R17_created ?plan .
+                frbroo:R25_performed ?plan .
+            ?expressioncreation frbroo:R17_created ?plan .
         }
-        ?plan a frbr:F25_Performance_Plan .
+        ?plan a frbroo:F25_Performance_Plan .
         OPTIONAL {
-            ?expressioncreation a frbr:F28_Expression_Creation ;
+            ?expressioncreation a frbroo:F28_Expression_Creation ;
                 crm:P10_falls_within ?season .
             FILTER(CONTAINS(STR(?season), "/s/"))
         }
@@ -147,7 +147,7 @@
           <template id='genre'> 
             <semantic-query 
               query='SELECT DISTINCT ?genre WHERE {      
-                ?work frbr:R12_is_realised_in <{{plan.value}}> ;
+                ?work frbroo:R12_is_realised_in <{{plan.value}}> ;
                   crm:P2_has_type ?genre .
                 } '
               template = '{{>genre-list}} '>           
@@ -162,16 +162,16 @@
               query='SELECT DISTINCT ?function WHERE {
                 {
                     # reference work
-                    <{{plan.value}}> frbr:R14_incorporates ?reference .
-                    ?referencecreation frbr:R17_created ?reference ;
+                    <{{plan.value}}> frbroo:R14_incorporates ?reference .
+                    ?referencecreation frbroo:R17_created ?reference ;
                         crm:P9_consists_of ?personactivity .
                 } UNION {
                     # expression creation
-                    ?expressioncreation frbr:R17_created <{{plan.value}}>;
+                    ?expressioncreation frbroo:R17_created <{{plan.value}}>;
                         crm:P9_consists_of ?personactivity .
                 } UNION {
                     # performance
-                    ?genericperformance frbr:R25_performed <{{plan.value}}> ;
+                    ?genericperformance frbroo:R25_performed <{{plan.value}}> ;
                         crm:P9_consists_of ?personactivity .
                 }
                 ?personactivity crm:P14_carried_out_by ?? ;

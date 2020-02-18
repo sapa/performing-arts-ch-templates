@@ -2,14 +2,14 @@
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/reference_work_functions/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/reference_work_functions>
     a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/frbr/F25_Performance_Plan> .
+    <http://www.metaphacts.com/ontology/fields#domain> <http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan> .
   
   _:genid-25b0a62c3b7b4847868d0c69956e58b6-za7p0d <http://spinrdf.org/sp#text> """INSERT {
   # This doesn't make sense.
-  $subject frbr:R17_created $value.
+  $subject frbroo:R17_created $value.
 } WHERE {
-  # ?subject frbr:R14_incorporates ?sce.
-  # ?ec frbr:R17_created ?sce ;
+  # ?subject frbroo:R14_incorporates ?sce.
+  # ?ec frbroo:R17_created ?sce ;
   #  crm:P9_consists_of ?activity.
   # ?activity crm:P2_has_type ?value.
   # BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(STR(?value)))) AS ?ec)
@@ -18,8 +18,8 @@
 }""" .
   
   _:genid-25b0a62c3b7b4847868d0c69956e58b6-ko9x3f <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value WHERE {
-  ?subject frbr:R14_incorporates ?sce.
-  ?ec frbr:R17_created ?sce;
+  ?subject frbroo:R14_incorporates ?sce.
+  ?ec frbroo:R17_created ?sce;
     crm:P9_consists_of ?activity.
   ?activity crm:P2_has_type ?value.
 }""" .

@@ -3,11 +3,11 @@
   _:genid-361f3dfadd9441cba42dadda5d23dd4d-2hff7f a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/frbr/F25_Performance_Plan> .
+    <http://www.metaphacts.com/ontology/fields#domain> <http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan> .
   
   _:genid-361f3dfadd9441cba42dadda5d23dd4d-qx6ycm <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
-  ?subject frbr:R14_incorporates ?sce.
-  ?ec frbr:R17_created ?sce;
+  ?subject frbroo:R14_incorporates ?sce.
+  ?ec frbroo:R17_created ?sce;
     crm:P9_consists_of $value. 
 }""" .
   
@@ -18,8 +18,8 @@
     <http://www.w3.org/2000/01/rdf-schema#label> "Activity"@en .
   
   _:genid-361f3dfadd9441cba42dadda5d23dd4d-2hff7f <http://spinrdf.org/sp#text> """INSERT {
-  ?subject frbr:R14_incorporates ?sce.
-  ?ec frbr:R17_created ?sce;
+  ?subject frbroo:R14_incorporates ?sce.
+  ?ec frbroo:R17_created ?sce;
 	crm:P9_consists_of $value. 
 } WHERE {
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(STR(?value)))) AS ?ec)
