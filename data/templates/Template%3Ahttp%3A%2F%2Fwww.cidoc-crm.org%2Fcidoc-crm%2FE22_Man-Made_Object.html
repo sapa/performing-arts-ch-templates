@@ -22,26 +22,27 @@
                 WHERE {
                     ?? crm:P102_has_title ?title .
                     ?title a crm:E35_Title ; 
-                    crm:P2_has_type spav:yanuj ;
-                    rdf:value ?value .
+                        crm:P2_has_type ?type ;
+                        rdf:value ?value .
+                    FILTER(?type IN (spav:yanuj))
                 } LIMIT 1'
             template='<p><strong>{{#each bindings}}{{value.value}}{{/each}}</strong></p>'>
             </semantic-query>
 
             <!-- alternative names -->
             <semantic-query 
-                query='SELECT DISTINCT ?value ?type ?typesort
+                query='SELECT DISTINCT ?title ?type ?typesort
                 WHERE {
-                    VALUES (?type ?typesort) { (spav:yamqk 1) (spav:yavtx 2) }
+                    VALUES (?type ?typesort) { (spav:yasis 1) (spav:yamqk 2) (spav:yavtx 3) }
                     ?? crm:P102_has_title ?title .
                     ?title a crm:E35_Title ; 
-                    crm:P2_has_type ?type ;
-                    rdf:value ?value .
-                    { ?title crm:P2_has_type spav:yamqk . }
-                    UNION
-                    { ?title crm:P2_has_type spav:yavtx . }
+                        crm:P2_has_type ?type ;
+                        rdf:value ?value .
+                    FILTER(?type IN (spav:yasis, spav:yamqk, spav:yavtx))
                 } ORDER BY ?typesort'
-                template='<p>({{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}})</p>'>
+                template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{title.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>)
+                    {{else}}<br><mp-label iri="{{title.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'
+                >
             </semantic-query>
 
             <!-- place -->

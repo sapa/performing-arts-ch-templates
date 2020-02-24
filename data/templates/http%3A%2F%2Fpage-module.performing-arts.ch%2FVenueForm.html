@@ -15,6 +15,7 @@
         rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
         cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype"
         official_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialTitle"
+        generic_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueGenericTitle"
         alternative_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle"
         acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym"
         contains="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains"
@@ -30,6 +31,7 @@
             <semantic-form-hidden-input for='cidoc_type' default-value='[[resolvePrefix "spav:dwmkn"]]'></semantic-form-hidden-input>
         </div>
         <semantic-form-text-input for="official_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
+        <semantic-form-text-input for="generic_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
         <semantic-form-text-input for="alternative_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
         <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
         <bs-row>

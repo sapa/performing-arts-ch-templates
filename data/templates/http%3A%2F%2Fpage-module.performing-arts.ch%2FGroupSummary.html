@@ -6,8 +6,9 @@
         WHERE {
             ?? crm:P131_is_identified_by ?app .
             ?app a crm:E82_Actor_Appellation ; 
-            crm:P2_has_type spav:yanuj ;
-            rdf:value ?value .
+                crm:P2_has_type ?type ;
+                rdf:value ?value .
+            FILTER(?type in (spav:yanuj))
         } LIMIT 1'
     template='<p><strong>{{#each bindings}}{{value.value}}{{/each}}</strong></p>'>
     </semantic-query>
@@ -16,7 +17,7 @@
     <semantic-query 
         query='SELECT distinct ?appellation ?type ?typesort
         WHERE {
-            VALUES (?type ?typesort) { (spav:yamqk 1) (spav:yavtx 2) }
+            VALUES (?type ?typesort) { (spav:yasis 1) (spav:yamqk 2) (spav:yavtx 3) }
             ?? crm:P131_is_identified_by ?appellation .
             ?appellation a crm:E82_Actor_Appellation ; 
                 crm:P2_has_type ?type .

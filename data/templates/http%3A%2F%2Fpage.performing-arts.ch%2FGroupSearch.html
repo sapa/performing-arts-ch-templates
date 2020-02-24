@@ -146,8 +146,9 @@
                       crm:P131_is_identified_by ?appellation .
                     ?appellation crm:P2_has_type ?appellationtype ;
                       rdf:value ?appellationvalue .
-                    MINUS { ?appellation crm:P2_has_type spav:yanuj . }
-                    FILTER(?label != ?appellationvalue)
+                      MINUS { ?appellation crm:P2_has_type spav:yanuj . }
+                      MINUS { ?appellation crm:P2_has_type spav:yasis . }
+                      FILTER(?label != ?appellationvalue)
                   }'
                 template = '{{> additional-names-list}} '>           
                 <template id='additional-names-list'>
