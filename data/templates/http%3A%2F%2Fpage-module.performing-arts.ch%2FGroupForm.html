@@ -18,6 +18,7 @@
         acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym"
         group_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType"
         residence="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorResidence"
+        genre="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre"
         predecessor="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor"
         formation_year="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupFormationYear"
         dissolution_year="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupDissolutionYear"
@@ -48,6 +49,9 @@
           </bs-col>
           <bs-col sm='2'>
             <semantic-form-text-input for="dissolution_year"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-tree-picker-input for="genre"></semantic-form-tree-picker-input>
           </bs-col>
         </bs-row>
         <semantic-form-autocomplete-input for="predecessor"></semantic-form-autocomplete-input>

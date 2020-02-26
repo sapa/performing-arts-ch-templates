@@ -58,6 +58,17 @@
         template='{{#each bindings}}<p>{{dates.value}}</p>{{/each}}'>
     </semantic-query>
 
+    <!-- genre -->
+    <semantic-query 
+        query="SELECT ?genre
+        WHERE {
+            ?pursuit crm:P14_carried_out_by ?? ;
+                a frbroo:F51_Pursuit ;
+                frbroo:R59_had_typical_subject ?genre.
+        }"
+        template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</p>'>
+    </semantic-query>
+
     <mp-field-visualization
         subject='[[this]]'
         fields='[[fieldDefinitions
