@@ -1,0 +1,62 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation>
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-d725e33b98294084930b0ec5b9cc1d42-2wryjb a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Common appellation"@en, "Nom commun"@fr .
+  
+  _:genid-d725e33b98294084930b0ec5b9cc1d42-pob3f a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Gebräuchlicher Name"@de .
+  
+  _:genid-d725e33b98294084930b0ec5b9cc1d42-2wryjb <http://spinrdf.org/sp#text> """INSERT { 
+  $subject rdfs:label $value ;
+    crm:P131_is_identified_by $identifier .
+  $identifier a crm:E82_Actor_Appellation ;
+    rdf:value $value .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"common_appellation\")))) AS $identifier)
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation>
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nome comune"@it .
+  
+  _:genid-d725e33b98294084930b0ec5b9cc1d42-pob3f <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject rdfs:label $value .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation>
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
+  
+  _:genid-d725e33b98294084930b0ec5b9cc1d42-r7qfic a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation>
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-d725e33b98294084930b0ec5b9cc1d42-r7qfic .
+  
+  _:genid-d725e33b98294084930b0ec5b9cc1d42-r7qfic <http://spinrdf.org/sp#text> """DELETE {
+  $subject rdfs:label $value ;
+    crm:P131_is_identified_by $identifier .
+  $identifier a crm:E82_Actor_Appellation ;
+    crm:P2_has_type ?type ;
+    rdf:value ?value .
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation>
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "4";
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-d725e33b98294084930b0ec5b9cc1d42-2wryjb;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-d725e33b98294084930b0ec5b9cc1d42-pob3f;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-03-02T11:26:23.815Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

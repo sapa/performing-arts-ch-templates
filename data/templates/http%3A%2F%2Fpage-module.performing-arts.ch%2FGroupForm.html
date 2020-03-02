@@ -12,8 +12,8 @@
        persistence='ldp'             
        fields='[[fieldDefinitions
         rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType"
-        official_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupOfficialName"
-        generic_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenericName"
+        common_appellation="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation"
+        common_appellation_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellationType"
         alternative_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName"
         acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym"
         group_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType"
@@ -34,11 +34,23 @@
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
-        <semantic-form-checklist-input for="rdf_type" type="radio" row=true></semantic-form-checklist-input>
-        <semantic-form-text-input for="official_name" languages='["en","de","fr","it"]'></semantic-form-text-input>
-        <semantic-form-text-input for="generic_name" languages='["en","de","fr","it"]'></semantic-form-text-input>
-        <semantic-form-text-input for="alternative_name" languages='["en","de","fr","it"]'></semantic-form-text-input>
-        <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
+        <semantic-form-checklist-input for="rdf_type" type="radio"  default-value='[[resolvePrefix "crm:E74_Group"]]' row=true></semantic-form-checklist-input>
+        <bs-row>
+          <bs-col sm='8'>
+            <semantic-form-text-input for='common_appellation' languages='["en","de","fr","it"]'></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-checklist-input type='radio' row=true for='common_appellation_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="alternative_name" languages='["en","de","fr","it"]'></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
         <semantic-form-tree-picker-input for="group_type"></semantic-form-tree-picker-input>
         <bs-row>
           <bs-col sm='4'>
@@ -94,7 +106,6 @@
           ]]'>
             <div style="display: none;">
                 <semantic-form-hidden-input for='record_set_rdf_type' default-value='[[resolvePrefix "rico:RecordSet"]]'></semantic-form-hidden-input>
-                
             </div>
             <semantic-form-text-input for="record_set_identifier"></semantic-form-text-input>
             <semantic-form-text-input for="record_set_label"></semantic-form-text-input>
