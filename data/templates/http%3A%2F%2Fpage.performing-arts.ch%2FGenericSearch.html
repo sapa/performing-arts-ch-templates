@@ -50,8 +50,7 @@
             bds:relevance ?score ; 
             bds:matchAllTerms "true" .
         }
-        BIND(STRLEN(?name) as ?length)
-        } ORDER BY DESC(?score) ?length'
+        } ORDER BY DESC(?score)'
     _default-query='SELECT DISTINCT ?subject WHERE {
 
     } '
