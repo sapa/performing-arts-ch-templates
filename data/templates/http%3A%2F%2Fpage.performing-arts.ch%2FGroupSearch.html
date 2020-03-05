@@ -76,7 +76,7 @@
       FILTER(CONTAINS(STR(?subject), "/a/"))
       ?subject crm:P131_is_identified_by ?identifier .
         ?identifier rdf:value ?name.
-      VALUES (?example) { ("Example entries.") }
+      VALUES (?example) { ("Start by looking at one of the example entries or enter your own search terms above.") }
     }'
   ></semantic-search-query-keyword>
 
@@ -121,21 +121,14 @@
         </semantic-search-result>
 
         <semantic-search-result>
-          <!-- TODO: make sure that only one place is found or aggregate them -->
           <semantic-table 
-            query='SELECT DISTINCT ?subject ?place
-            WHERE {
-              OPTIONAL {
-                ?subject crm:P74_has_current_or_former_residence ?p .
-                ?p crm:P89_falls_within ?place .
-              }
-            } ORDER BY DESC(?score)'
+            query='SELECT DISTINCT ?subject WHERE { }'
             id="group-table" 
             options='{"showFilter": false, "showTableHeading": false}'
             column-configuration='[
               {"displayName": "Name", "variableName": "subject"} ,
               {"displayName": "Additional Names", "cellTemplate": "{{> additional-names}}"} ,
-              {"displayName": "Place", "variableName": "place"} ,
+              {"displayName": "Place", "cellTemplate": "{{> places}}"},
               {"displayName": "Dates", "cellTemplate": "{{> dates}}"}
             ]'>
 
@@ -153,6 +146,21 @@
                 template = '{{> additional-names-list}} '>           
                 <template id='additional-names-list'>
                   <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label>{{else}}, <mp-label iri="{{appellation.value}}"></mp-label>{{/if}}{{/each}}</div>
+                </template>
+              </semantic-query> 
+            </template>
+
+            <template id='places'>                     
+              <semantic-query 
+                query='SELECT ?place WHERE {      
+                    OPTIONAL {
+                      <{{subject.value}}> crm:P74_has_current_or_former_residence ?p .
+                      ?p crm:P89_falls_within ?place .
+                    }
+                  }'
+                template = '{{> places-list}} '>           
+                <template id='places-list'>
+                  <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{place.value}}"></mp-label>{{else}}, <mp-label iri="{{place.value}}"></mp-label>{{/if}}{{/each}}</div>
                 </template>
               </semantic-query> 
             </template>
