@@ -50,18 +50,18 @@
                 {{#ifCond title.value "==" 'Production'}}
                   			<semantic-query 
                 query='SELECT ?producer ?timespanlabel WHERE {      
-  							?expressioncreation frbroo:R17_created <{{subject.value}}> .
-                ?expressioncreation crm:P9_consists_of ?production . 
-                ?production crm:P2_has_type spav:muwgo . 
-                ?production crm:P14_carried_out_by ?producer . 
-								?performance frbroo:R25_performed <{{subject.value}}> . 
-                ?performance crm:P9_consists_of ?premiere . 
-                ?premiere crm:P4_has_time-span ?timespan . 
-                ?timespan rdfs:label ?timespanlabel .
-                    } LIMIT 1'
+                    ?expressioncreation frbroo:R17_created <{{subject.value}}> .
+                    ?expressioncreation crm:P9_consists_of ?production . 
+                    ?production crm:P2_has_type spav:muwgo . 
+                    ?production crm:P14_carried_out_by ?producer . 
+                    ?performance frbroo:R25_performed <{{subject.value}}> . 
+                    ?performance crm:P9_consists_of ?premiere . 
+                    ?premiere crm:P4_has_time-span ?timespan . 
+                    ?timespan rdfs:label ?timespanlabel .
+                  }'
                  template = '{{> second-template}} '>           
         								<template id='second-template'> 
-         							 		<div>{{#each bindings}}<mp-label iri="{{producer.value}}"></mp-label>, {{timespanlabel.value}}{{/each}}</div>
+         							 		<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{producer.value}}"></mp-label>{{else}}, <mp-label iri="{{producer.value}}"></mp-label>{{/if}}{{#if @last}}, {{timespanlabel.value}}{{/if}}{{/each}}</div>
                     		</template>
         							</semantic-query>   
                   {{/ifCond}}
