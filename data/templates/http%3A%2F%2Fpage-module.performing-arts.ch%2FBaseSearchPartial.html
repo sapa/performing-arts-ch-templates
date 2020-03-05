@@ -37,9 +37,7 @@
 
             <semantic-search-result>
               <semantic-table 
-                query='SELECT DISTINCT ?subject ?icon ?title
-								WHERE {
-                } ORDER BY DESC(?name)' 
+                query='SELECT DISTINCT ?subject ?icon ?title WHERE { } ORDER BY DESC(?score)' 
                 id="table-result" 
                 options='{"showFilter": false, "showTableHeading": false}'
                 column-configuration='[
