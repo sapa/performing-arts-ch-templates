@@ -30,11 +30,11 @@
       <bs-col sm="6">
         <bs-row>
           <bs-col sm="6" style="text-align: center;">
-            <diV>
+            <div>
               <mp-resource-link-container class="grid-resource-link">
                 <span style="font-size: 84px;"><i class="fas fa-user"></i></span>
               </mp-resource-link-container>
-              </diV>
+              </div>
             <semantic-query query='SELECT (COUNT(?person) AS ?count) WHERE { ?person a crm:E21_Person . FILTER(CONTAINS(STR(?person), "/a/")) }' template='<div>{{#each bindings}}{{count.value}} persons{{/each}}</div>'></semantic-query>
           </bs-col>
           <bs-col sm="6" style="text-align: center;">
