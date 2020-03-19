@@ -14,6 +14,7 @@
         rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType"
         common_appellation="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation"
         common_appellation_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellationType"
+        addendum="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AppellationAddendum"
         alternative_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName"
         acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym"
         group_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType"
@@ -39,8 +40,11 @@
           <bs-col sm='6'>
             <semantic-form-text-input for='common_appellation' languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
-          <bs-col sm='6'>
+          <bs-col sm='3'>
             <semantic-form-checklist-input type='radio' row=true for='common_appellation_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='3'>
+            <semantic-form-text-input for="addendum"></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <bs-row>

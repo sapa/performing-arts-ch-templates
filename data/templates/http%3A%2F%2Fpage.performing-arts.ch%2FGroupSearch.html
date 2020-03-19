@@ -128,6 +128,7 @@
             column-configuration='[
               {"displayName": "Name", "variableName": "subject"} ,
               {"displayName": "Additional Names", "cellTemplate": "{{> additional-names}}"} ,
+              {"displayName": "Type", "cellTemplate": "{{> types}}"},
               {"displayName": "Place", "cellTemplate": "{{> places}}"},
               {"displayName": "Dates", "cellTemplate": "{{> dates}}"}
             ]'>
@@ -150,13 +151,21 @@
               </semantic-query> 
             </template>
 
+            <template id='types'>                     
+              <semantic-query 
+                query='SELECT ?type WHERE { <{{subject.value}}> crm:P2_has_type ?type . }'
+                template = '{{> types-list}} '>           
+                <template id='types-list'>
+                  <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{type.value}}"></mp-label>{{else}}, <mp-label iri="{{type.value}}"></mp-label>{{/if}}{{/each}}</div>
+                </template>
+              </semantic-query> 
+            </template>
+
             <template id='places'>                     
               <semantic-query 
                 query='SELECT ?place WHERE {      
-                    OPTIONAL {
-                      <{{subject.value}}> crm:P74_has_current_or_former_residence ?p .
-                      ?p crm:P89_falls_within ?place .
-                    }
+                    <{{subject.value}}> crm:P74_has_current_or_former_residence ?p .
+                    ?p crm:P89_falls_within ?place .
                   }'
                 template = '{{> places-list}} '>           
                 <template id='places-list'>

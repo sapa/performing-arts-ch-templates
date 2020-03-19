@@ -1,16 +1,22 @@
 <bs-col sm="4">
 
-    <!-- official name -->
+    <!-- official name + addendum -->
     <semantic-query 
-        query='SELECT ?typelabel ?value
+        query='SELECT ?officialname ?addendum
         WHERE {
             ?? crm:P131_is_identified_by ?app .
             ?app a crm:E82_Actor_Appellation ; 
-                crm:P2_has_type ?type ;
-                rdf:value ?value .
-            FILTER(?type in (spav:yanuj))
+                crm:P2_has_type spav:yanuj ;
+                rdf:value ?officialname .
+            OPTIONAL {
+                ?? crm:P131_is_identified_by [
+                    a crm:E41_Appellation ; 
+                    crm:P2_has_type spav:yaztb ;
+                    rdf:value ?addendum
+                ]
+            }
         } LIMIT 1'
-    template='<p><strong>{{#each bindings}}{{value.value}}{{/each}}</strong></p>'>
+    template='<p>{{#each bindings}}<strong>{{officialname.value}}</strong>{{#if addendum}} &lt; {{addendum.value}} &gt; {{/if}}{{/each}}</p>'>
     </semantic-query>
 
     <!-- alternative names -->

@@ -16,6 +16,7 @@
         cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype"
         common_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitle"
         common_title_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType"
+        addendum="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AppellationAddendum"
         alternative_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle"
         acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym"
         contains="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains"
@@ -34,8 +35,11 @@
           <bs-col sm='6'>
             <semantic-form-text-input for='common_title' languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
-          <bs-col sm='6'>
+          <bs-col sm='3'>
             <semantic-form-checklist-input type='radio' row=true for='common_title_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='3'>
+            <semantic-form-text-input for="addendum"></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <bs-row>

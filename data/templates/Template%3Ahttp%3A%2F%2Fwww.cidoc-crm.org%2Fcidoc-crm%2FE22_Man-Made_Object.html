@@ -18,15 +18,22 @@
 
             <!-- official name -->
             <semantic-query 
-                query='SELECT ?typelabel ?value
+                query='SELECT ?officialtitle ?addendum
                 WHERE {
                     ?? crm:P102_has_title ?title .
                     ?title a crm:E35_Title ; 
-                        crm:P2_has_type ?type ;
-                        rdf:value ?value .
-                    FILTER(?type IN (spav:yanuj))
+                        crm:P2_has_type spav:yanuj ;
+                        rdf:value ?officialtitle .
+                    OPTIONAL {
+                        ?? crm:P131_is_identified_by [
+                            a crm:E41_Appellation ; 
+                            crm:P2_has_type spav:yaztb ;
+                            rdf:value ?addvalue
+                        ]
+                        BIND(CONCAT("&lt;", ?addvalue, "&gt;") AS ?addendum)
+                    }
                 } LIMIT 1'
-            template='<p><strong>{{#each bindings}}{{value.value}}{{/each}}</strong></p>'>
+            template='<p>{{#each bindings}}<strong>{{officialtitle.value}}</strong>{{#if addendum}} {{addendum.value}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- alternative names -->
