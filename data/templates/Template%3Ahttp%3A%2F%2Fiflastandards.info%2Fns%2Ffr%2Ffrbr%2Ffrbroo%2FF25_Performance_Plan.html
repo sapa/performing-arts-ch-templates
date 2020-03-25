@@ -33,6 +33,18 @@
                 {{#if @first}}<strong>{{titlevalue.value}}</strong>{{else}}<br>{{titlevalue.value}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
+            [[#if (hasPermission "forms:ldp:*")]]
+            <semantic-query 
+                query='SELECT ?id
+                WHERE {
+                  ?? crm:P1_is_identified_by ?identifier.
+                  ?identifier a crm:E42_Identifier ;
+                  rdf:value ?id .
+                }'
+            template='<div><h5>RepID</h5>{{#each bindings}}<p>{{id.value}}</p>{{/each}}</div>'>
+            </semantic-query>
+            [[/if]]
+
             <!-- producer & season -->
             <semantic-query 
                 query='SELECT ?producer ?unidentified ?season
