@@ -12,11 +12,12 @@
                 ?? crm:P131_is_identified_by [
                     a crm:E41_Appellation ; 
                     crm:P2_has_type spav:yaztb ;
-                    rdf:value ?addendum
+                    rdf:value ?addvalue
                 ]
+                BIND(CONCAT("&lt;", ?addvalue, "&gt;") AS ?addendum)
             }
         } LIMIT 1'
-    template='<p>{{#each bindings}}<strong>{{officialname.value}}</strong>{{#if addendum}} &lt; {{addendum.value}} &gt; {{/if}}{{/each}}</p>'>
+    template='<p>{{#each bindings}}<strong>{{officialname.value}}</strong>{{#if addendum}} {{addendum.value}}{{/if}}{{/each}}</p>'>
     </semantic-query>
 
     <!-- alternative names -->
