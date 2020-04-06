@@ -133,6 +133,18 @@
     >
     </mp-field-visualization> 
 
+    [[#if (hasPermission "forms:ldp:*")]]
+    <mp-field-visualization
+        subject='[[this]]'
+        fields='[[fieldDefinitions
+        notesinternal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
+        ]]'
+        template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+        [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+    >
+    </mp-field-visualization> 
+    [[/if]]
+
     <!-- record sets -->
     <semantic-query 
         query='SELECT ?label WHERE {
