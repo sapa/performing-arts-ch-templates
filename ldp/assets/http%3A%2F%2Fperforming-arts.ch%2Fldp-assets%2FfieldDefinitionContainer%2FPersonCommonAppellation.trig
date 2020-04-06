@@ -1,16 +1,13 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
-    a <http://www.metaphacts.com/ontology/fields#Field> .
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Common appellation"@en;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-9b5157e4b3f542d38afd8795d1437291-piqys;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nom commun"@fr, "Gebräuchlicher Name"@de;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E21_Person> .
   
-  _:genid-f2bedb0c82864b4693f2a177897c0777-a660i a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f2bedb0c82864b4693f2a177897c0777-wrlmqr;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Common appellation"@en, "Nom commun"@fr,
-      "Gebräuchlicher Name"@de .
-  
-  _:genid-f2bedb0c82864b4693f2a177897c0777-wrlmqr a <http://spinrdf.org/sp#Query>;
+  _:genid-9b5157e4b3f542d38afd8795d1437291-piqys a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """INSERT { 
   $subject rdfs:label $value ;
     crm:P131_is_identified_by ?identifier .
@@ -22,13 +19,17 @@
 }""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E21_Person>;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
     <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
     <http://www.w3.org/2000/01/rdf-schema#label> "Nome comune"@it .
   
-  _:genid-f2bedb0c82864b4693f2a177897c0777-kdkpm a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """DELETE {
+  _:genid-9b5157e4b3f542d38afd8795d1437291-sac15q a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
+    <http://www.w3.org/2000/01/rdf-schema#comment> "Either one common appellation without language declaration or up to four language-specific common appellations";
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-9b5157e4b3f542d38afd8795d1437291-7i5s8q .
+  
+  _:genid-9b5157e4b3f542d38afd8795d1437291-sac15q <http://spinrdf.org/sp#text> """DELETE {
   $subject rdfs:label $value .
   $subject crm:P131_is_identified_by ?identifier.
   ?identifier a crm:E82_Actor_Appellation ;
@@ -37,11 +38,9 @@
 } WHERE {}""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-f2bedb0c82864b4693f2a177897c0777-kdkpm;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-f2bedb0c82864b4693f2a177897c0777-a660i;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "4" .
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-9b5157e4b3f542d38afd8795d1437291-sac15q .
   
-  _:genid-f2bedb0c82864b4693f2a177897c0777-a660i <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  _:genid-9b5157e4b3f542d38afd8795d1437291-7i5s8q <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
   $subject crm:P131_is_identified_by ?identifier .
   ?identifier a crm:E82_Actor_Appellation ;
     crm:P2_has_type spav:yatcx ;
@@ -49,9 +48,14 @@
 }""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "4" .
+  
+  _:genid-9b5157e4b3f542d38afd8795d1437291-7i5s8q a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
     a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-28T03:17:08.644Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-04-06T18:39:12.297Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation> .

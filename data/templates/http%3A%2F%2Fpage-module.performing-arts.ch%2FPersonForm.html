@@ -31,8 +31,14 @@
         <div style='display: none;'>
           <semantic-form-hidden-input for='rdf_type' default-values='["[[resolvePrefix "crm:E21_Person"]]", "[[resolvePrefix "rico:Person"]]"]'></semantic-form-hidden-input>
         </div>
-        <semantic-form-text-input for='common_appellation' languages='["en","de","fr","it"]'></semantic-form-text-input> 
-        <semantic-form-checklist-input type='radio' row=true for='common_appellation_type'></semantic-form-checklist-input>
+        <bs-row>
+          <bs-col sm='8'>
+            <semantic-form-text-input for='common_appellation' languages='["en","de","fr","it"]'></semantic-form-text-input> 
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-checklist-input type='radio' for='common_appellation_type'></semantic-form-checklist-input>
+          </bs-col>
+        </bs-row>
         <semantic-form-composite-input for='misc_appellation' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
           misc_appellation_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationValue"
           misc_appellation_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellationType"
@@ -46,48 +52,62 @@
             </bs-col>
           </bs-row>
         </semantic-form-composite-input>
-          <bs-row>
-            <bs-col sm='3'>
-              <semantic-form-checklist-input type='radio' row=true for='gender'></semantic-form-checklist-input>
-            </bs-col>
-            <bs-col sm='5'>
-              <semantic-form-checkbox-input for='swiss'></semantic-form-checkbox-input>
-            </bs-col>
-          </bs-row>
-        <semantic-form-composite-input for='birth' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
-          birth_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirthDate"
-          birth_place="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirthPlace"
-        ]]'>
-          <bs-row>
-            <bs-col sm='6'>
-              <semantic-form-datetime-input for='birth_date'></semantic-form-datetime-input>
-            </bs-col>
-            <bs-col sm='6'>
-                <semantic-form-tree-picker-input for='birth_place'></semantic-form-tree-picker-input>
-            </bs-col>
-          </bs-row>
-        </semantic-form-composite-input>
-
-        <semantic-form-composite-input for='death' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
-          death_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate"
-          death_place="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace"
-        ]]'>
-          <bs-row>
-            <bs-col sm='6'>
-              <semantic-form-datetime-input for='death_date'></semantic-form-datetime-input>
-            </bs-col>
-            <bs-col sm='6'>
-                <semantic-form-tree-picker-input for='death_place'></semantic-form-tree-picker-input>
-            </bs-col>
-          </bs-row>
-        </semantic-form-composite-input>
-
-        <semantic-form-text-input for='rdfs_comment'></semantic-form-text-input>
+        <bs-row>
+          <bs-col sm='3'>
+            <semantic-form-checklist-input type='radio' row=true for='gender'></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='5'>
+            <semantic-form-checkbox-input for='swiss'></semantic-form-checkbox-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-composite-input for='birth' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+            birth_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirthDate"
+            birth_place="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirthPlace"
+          ]]'>
+            <bs-row>
+              <bs-col sm='6'>
+                <semantic-form-datetime-input for='birth_date'></semantic-form-datetime-input>
+              </bs-col>
+              <bs-col sm='6'>
+                  <semantic-form-tree-picker-input for='birth_place'></semantic-form-tree-picker-input>
+              </bs-col>
+            </bs-row>
+          </semantic-form-composite-input>
+          </bs-col>
+          <bs-col sm='6'>
+            <semantic-form-composite-input for='death' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+            death_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate"
+            death_place="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace"
+          ]]'>
+            <bs-row>
+              <bs-col sm='6'>
+                <semantic-form-datetime-input for='death_date'></semantic-form-datetime-input>
+              </bs-col>
+              <bs-col sm='6'>
+                  <semantic-form-tree-picker-input for='death_place'></semantic-form-tree-picker-input>
+              </bs-col>
+            </bs-row>
+          </semantic-form-composite-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input for='rdfs_comment'></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='6'>
+            <semantic-form-text-input for='note' multiline=true></semantic-form-text-input>            
+          </bs-col>
+        </bs-row>
         <semantic-form-text-input for='same_as'></semantic-form-text-input>
-        <semantic-form-text-input for='note' multiline=true></semantic-form-text-input>
 
         [[#if create]]
-          <p>Record set can only be created later.</p>
+          <div class="semantic-form-input-decorator--with-header">
+            <div class="semantic-form-input-decorator__header">
+              Record set can only be created later.
+            </div>
+          </div>
         [[else]]
           <semantic-form-autocomplete-input for='subject_of'>
             <semantic-form new-subject-template='http://data.performing-arts.ch/r/{{UUID}}' fields='[[fieldDefinitions
