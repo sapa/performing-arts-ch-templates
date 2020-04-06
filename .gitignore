@@ -4,3 +4,4 @@ config/repositories/
 /updatecontainer.sh
 ldp/assets/http%3A%2F%2Flocalhost%3A10214%2Fcontainer%2FqueryContainer%2F*.trig
 ldp/assets/http%3A%2F%2Fwww.metaphacts.com%2Fontologies%2Fplatform%23queryContainer.trig
+fielddefinitions.xlsx
