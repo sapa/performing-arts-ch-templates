@@ -234,7 +234,7 @@
                   }'
                 template = '{{> premiere-list}}'>
                 <template id='premiere-list'>
-                  <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{premieredate.value}}"></mp-label>{{/if}}{{/each}}{{#each bindings}}{{#if premieretype}}{{#if @first}}{{#if premieredate}}<br />{{/if}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{/if}}{{/each}}</div>
+                  <div>{{#each bindings}}{{#if @first}}{{#if premieredate}}<mp-label iri="{{premieredate.value}}"></mp-label>{{/if}}{{/if}}{{/each}}{{#each bindings}}{{#if premieretype}}{{#if @first}}{{#if premieredate}}<br />{{/if}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{/if}}{{/each}}</div>
                 </template>
               </semantic-query> 
             </template>
