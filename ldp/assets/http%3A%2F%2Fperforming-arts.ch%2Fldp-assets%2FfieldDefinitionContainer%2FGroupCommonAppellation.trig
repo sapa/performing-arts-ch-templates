@@ -5,7 +5,7 @@
     a <http://www.metaphacts.com/ontology/fields#Field>;
     <http://www.w3.org/2000/01/rdf-schema#label> "Common appellation"@en;
     <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-576a0ca68dcf4085a5ad31631223ae5e-mypgfl;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Nom commun"@fr .
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nom commun"@en .
   
   _:genid-576a0ca68dcf4085a5ad31631223ae5e-mypgfl <http://spinrdf.org/sp#text> """DELETE {
   $subject rdfs:label $value ;
