@@ -15,7 +15,7 @@
 }"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Surrounding place" .
+    <http://www.w3.org/2000/01/rdf-schema#label> "_Surrounding place" .
   
   _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167456 a <http://spinrdf.org/sp#Query> .
   
