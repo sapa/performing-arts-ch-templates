@@ -21,7 +21,7 @@
         ?source) as ?label)
     } ORDER BY ASC(?order)'
     template='<div>{{#each bindings}}
-        {{#if @first}}<h5><mp-label iri="{{fieldlabel.value}}"></mp-label></h5><ul class="list-unstyled">{{/if}}
+        {{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{fieldlabel.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}
         <li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
       {{/each}}
     </ul></div>'>
