@@ -102,7 +102,7 @@
             ?activity crm:P2_has_type spav:mujfv ;
                 crm:P16_used_specific_object ?venue .
             } LIMIT 1'
-        template='<h5>{{#each bindings}}<mp-label iri="{{label.value}}"></mp-label>{{/each}}</h5>'>
+        template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
     </semantic-query>
     <semantic-tree
          query='SELECT DISTINCT ?node ?parent ?unidentified WHERE {
@@ -151,7 +151,7 @@
             VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf>) }
             ?record rico:hasSubject ?? .
         } LIMIT 1'
-        template='<h5>{{#each bindings}}<mp-label iri="{{label.value}}"></mp-label>{{/each}}</h5>'>
+        template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
     </semantic-query>
 
     [[#if (hasPermission "forms:ldp:*")]]

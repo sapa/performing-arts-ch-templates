@@ -153,7 +153,7 @@
             <template id='producer-list'>
                 <div style="margin: 1em 0em;">
                     {{#each bindings}}
-                    {{#if @first}}<h5><mp-label iri="{{label.value}}"></mp-label></h5><semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{else}}, <semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{/if}}
+                    {{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{else}}, <semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{/if}}
                     {{/each}}
                 </div>
             </template>

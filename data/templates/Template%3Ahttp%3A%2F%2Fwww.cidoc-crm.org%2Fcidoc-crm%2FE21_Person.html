@@ -125,7 +125,7 @@
                 VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf>) }
                 ?record rico:hasSubject ?? .
             } LIMIT 1'
-        template='<h5>{{#each bindings}}<mp-label iri="{{label.value}}"></mp-label>{{/each}}</h5>'>
+        template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
         </semantic-query>
         
         [[#if (hasPermission "forms:ldp:*")]]
