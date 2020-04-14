@@ -3,44 +3,12 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
     a <http://www.metaphacts.com/ontology/fields#Field>;
     <http://www.w3.org/2000/01/rdf-schema#label> "Common appellation"@en;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-9b5157e4b3f542d38afd8795d1437291-piqys;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Nom commun"@fr, "Gebräuchlicher Name"@de;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E21_Person> .
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-5c8f4253fe0c49889dde5074bd449c12-rdw1y;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Gebräuchlicher Name"@de .
   
-  _:genid-9b5157e4b3f542d38afd8795d1437291-piqys a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """INSERT { 
-  $subject rdfs:label $value ;
-    crm:P131_is_identified_by ?identifier .
-  ?identifier a crm:E82_Actor_Appellation ;
-    crm:P2_has_type spav:yatcx ;
-  	rdf:value $value .
-} WHERE {
-  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"common_appellation\")))) AS ?identifier)
-}""" .
+  _:genid-5c8f4253fe0c49889dde5074bd449c12-aqklwd a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
-    <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
-    <http://www.w3.org/2000/01/rdf-schema#label> "Nome comune"@it .
-  
-  _:genid-9b5157e4b3f542d38afd8795d1437291-sac15q a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
-    <http://www.w3.org/2000/01/rdf-schema#comment> "Either one common appellation without language declaration or up to four language-specific common appellations";
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-9b5157e4b3f542d38afd8795d1437291-7i5s8q .
-  
-  _:genid-9b5157e4b3f542d38afd8795d1437291-sac15q <http://spinrdf.org/sp#text> """DELETE {
-  $subject rdfs:label $value .
-  $subject crm:P131_is_identified_by ?identifier.
-  ?identifier a crm:E82_Actor_Appellation ;
-    crm:P2_has_type ?type ;
-    rdf:value $value .
-} WHERE {}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-9b5157e4b3f542d38afd8795d1437291-sac15q .
-  
-  _:genid-9b5157e4b3f542d38afd8795d1437291-7i5s8q <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  _:genid-5c8f4253fe0c49889dde5074bd449c12-rdw1y <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
   $subject crm:P131_is_identified_by ?identifier .
   ?identifier a crm:E82_Actor_Appellation ;
     crm:P2_has_type spav:yatcx ;
@@ -48,14 +16,43 @@
 }""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E21_Person>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nome comunemente usato"@it .
+  
+  _:genid-5c8f4253fe0c49889dde5074bd449c12-aqklwd <http://spinrdf.org/sp#text> """DELETE {
+  $subject rdfs:label $value .
+  $subject crm:P131_is_identified_by ?identifier.
+  ?identifier a crm:E82_Actor_Appellation ;
+    crm:P2_has_type ?type ;
+    rdf:value $value .
+} WHERE {}""" .
+  
+  _:genid-5c8f4253fe0c49889dde5074bd449c12-rdw1y a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-5c8f4253fe0c49889dde5074bd449c12-aqklwd;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "Either one common appellation without language declaration or up to four language-specific common appellations";
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-5c8f4253fe0c49889dde5074bd449c12-p9va2i;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nom d'usage"@fr;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "4" .
   
-  _:genid-9b5157e4b3f542d38afd8795d1437291-7i5s8q a <http://spinrdf.org/sp#Query> .
+  _:genid-5c8f4253fe0c49889dde5074bd449c12-p9va2i <http://spinrdf.org/sp#text> """INSERT { 
+  $subject rdfs:label $value ;
+    crm:P131_is_identified_by ?identifier .
+  ?identifier a crm:E82_Actor_Appellation ;
+    crm:P2_has_type spav:yatcx ;
+  	rdf:value $value .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"common_appellation\")))) AS ?identifier)
+}""";
+    a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation>
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-04-06T18:39:12.297Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-04-14T14:31:42.409Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation> .
