@@ -396,48 +396,6 @@
             <bs-col sm="8">
 
                 <bs-tabs id='producer_venues' default-active-key='4.1' unmount-on-exit=true>
-
-                    <bs-tab event-key='4.1' title='Matched Venues'>
-
-                        <semantic-table 
-                        query='SELECT ?plan ?venue
-                        WHERE {
-                          ?performance a frbroo:F31_Performance ;
-                                       crm:P8_took_place_on_or_within ?venue ;
-                                       frbroo:R25_performed ?plan .
-                            FILTER(CONTAINS(STR(?venue), "/o/"))
-                        }' 
-                        column-configuration='[
-                            {"variableName": "plan", "displayName": "Production"}, 
-                            {"variableName": "venue", "displayName": "Venue"}
-                        ]'
-                        number-of-displayed-rows=20
-                        no-result-template='No results found.'
-                        options='{"showFilter": false}'>
-                        </semantic-table>
-
-                    </bs-tab>
-                    <bs-tab event-key='4.2' title='Unmatched Venues'>
-
-                        <semantic-table 
-                        query='SELECT ?plan ?venuelabel
-                        WHERE {
-                          ?performance a frbroo:F31_Performance ;
-                                       crm:P8_took_place_on_or_within ?venue ;
-                                       frbroo:R25_performed ?plan .
-                            FILTER(CONTAINS(STR(?venue), "/u/"))
-                            ?venue rdfs:label ?venuelabel .
-                        }' 
-                        column-configuration='[
-                            {"variableName": "plan", "displayName": "Production"}, 
-                            {"variableName": "venuelabel", "displayName": "Venue"}
-                        ]'
-                        number-of-displayed-rows=20
-                        no-result-template='No results found.'
-                        options='{"showFilter": false}'>
-                        </semantic-table>
-
-                    </bs-tab>
                     <bs-tab event-key='4.3' title='Unmatched Venues Ranking'>
 
                         <semantic-table 
