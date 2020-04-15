@@ -267,8 +267,8 @@
                                             crm:P14_carried_out_by ?producer .
                                         FILTER(CONTAINS(STR(?producer), "/u/"))
                                         ?producer rdfs:label ?producer_label .
-                                        ?expression_creation crm:P9_consists_of ?production ;
-                                            frbroo:R17_created ?plan .
+                                        [ crm:P9_consists_of ?production ;
+                                            frbroo:R17_created ?plan ] .
                                     }' 
                                 column-configuration='[
                                     {"variableName": "plan", "displayName": "Production"}, 
@@ -294,11 +294,22 @@
                                 } GROUP BY ?producer_label
                                 ORDER BY DESC(?producer_count)' 
                                 column-configuration='[
-                                    {"variableName": "producer_label", "displayName": "Producer"}, 
+                                    {"displayName": "Producer", "cellTemplate":"{{>productions}}"},
                                     {"variableName": "producer_count", "displayName": "Count"}
                                 ]'
                                 number-of-displayed-rows=20
                                 options='{"showFilter": false}'>
+
+                                <template id='productions'>
+                                    <semantic-query 
+                                        query='SELECT ?producer_label ?productions WHERE { VALUES (?producer_label) { ("{{producer_label.value}}") } BIND (ENCODE_FOR_URI(?producer_label) AS ?productions) }'
+                                        template = '{{>productions-link}} '>
+                                        <template id='productions-link'>
+                                            <div>{{#each bindings}}<a href="/sparql?query=PREFIX+crm%3A+%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX+skos%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX+spav%3A+%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX+frbroo%3A+%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX+%3A+%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT+%3Fproductionplan+%3Fdate+WHERE+%7B%0A++%3Fproduction+crm%3AP14_carried_out_by+%5B+rdfs%3Alabel+%22{{productions.value}}%22+%5D+%3B%0A++++crm%3AP2_has_type+spav%3Amuwgo+.%0A++%5B+crm%3AP9_consists_of+%3Fproduction+%3B%0A++++frbroo%3AR17_created+%3Fproductionplan+%5D+.%0A++%5B+frbroo%3AR25_performed+%3Fproductionplan+%3B%0A++++crm%3AP9_consists_of+%3Fpremiere+%5D+.%0A++%3Fpremiere+crm%3AP2_has_type+%5B+skos%3AinScheme+spav%3Ahl+%5D+%3B%0A++++crm%3AP4_has_time-span+%5B+crm%3AP82a_begin_of_the_begin+%3Fdate+%5D+.%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
+                                        </template>
+                                    </semantic-query>
+                                </template>
+
                                 </semantic-table>
                                     
                             </bs-tab>
@@ -317,12 +328,23 @@
                                     } GROUP BY ?producer_label
                                 ORDER BY DESC(?producer_count)' 
                                 column-configuration='[
-                                    {"variableName": "producer_label", "displayName": "Producer"}, 
+                                    {"displayName": "Producer", "cellTemplate":"{{>productions}}"},
                                     {"variableName": "producer_count", "displayName": "Count"}
                                 ]'
                                 number-of-displayed-rows=20
                                 options='{"showFilter": false}'>
-                                </semantic-table>
+
+                                <template id='productions'>
+                                    <semantic-query 
+                                        query='SELECT ?producer_label ?productions WHERE { VALUES (?producer_label) { ("{{producer_label.value}}") } BIND (ENCODE_FOR_URI(?producer_label) AS ?productions) }'
+                                        template = '{{>productions-link}} '>
+                                        <template id='productions-link'>
+                                            <div>{{#each bindings}}<a href="/sparql?query=PREFIX+crm%3A+%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX+skos%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX+spav%3A+%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX+frbroo%3A+%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX+%3A+%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT+%3Fproductionplan+%3Fdate+WHERE+%7B%0A++%3Fproduction+crm%3AP14_carried_out_by+%5B+rdfs%3Alabel+%22{{productions.value}}%22+%5D+%3B%0A++++crm%3AP2_has_type+spav%3Amuwgo+.%0A++%5B+crm%3AP9_consists_of+%3Fproduction+%3B%0A++++frbroo%3AR17_created+%3Fproductionplan+%5D+.%0A++%5B+frbroo%3AR25_performed+%3Fproductionplan+%3B%0A++++crm%3AP9_consists_of+%3Fpremiere+%5D+.%0A++%3Fpremiere+crm%3AP2_has_type+%5B+skos%3AinScheme+spav%3Ahl+%5D+%3B%0A++++crm%3AP4_has_time-span+%5B+crm%3AP82a_begin_of_the_begin+%3Fdate+%5D+.%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
+                                        </template>
+                                    </semantic-query>
+                                </template>
+
+                            </semantic-table>
                                     
                             </bs-tab>
 
@@ -339,14 +361,23 @@
                                 } GROUP BY ?producer_label
                                 ORDER BY DESC(?producer_count)' 
                                 column-configuration='[
-                                    {"variableName": "producer_label", "displayName": "Producer"}, 
+                                    {"displayName": "Producer", "cellTemplate":"{{>productions}}"},
                                     {"variableName": "producer_count", "displayName": "Count"}
                                 ]'
                                 number-of-displayed-rows=20
                                 options='{"showFilter": false}'>
-                                </semantic-table>
+                                <template id='productions'>
+                                    <semantic-query 
+                                        query='SELECT ?producer_label ?productions WHERE { VALUES (?producer_label) { ("{{producer_label.value}}") } BIND (ENCODE_FOR_URI(?producer_label) AS ?productions) }'
+                                        template = '{{>productions-link}} '>
+                                        <template id='productions-link'>
+                                            <div>{{#each bindings}}<a href="/sparql?query=PREFIX+crm%3A+%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX+skos%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX+spav%3A+%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX+frbroo%3A+%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX+%3A+%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT+%3Fproductionplan+%3Fdate+WHERE+%7B%0A++%3Fproduction+crm%3AP14_carried_out_by+%5B+rdfs%3Alabel+%22{{productions.value}}%22+%5D+%3B%0A++++crm%3AP2_has_type+spav%3Amuwgo+.%0A++%5B+crm%3AP9_consists_of+%3Fproduction+%3B%0A++++frbroo%3AR17_created+%3Fproductionplan+%5D+.%0A++%5B+frbroo%3AR25_performed+%3Fproductionplan+%3B%0A++++crm%3AP9_consists_of+%3Fpremiere+%5D+.%0A++%3Fpremiere+crm%3AP2_has_type+%5B+skos%3AinScheme+spav%3Ahl+%5D+%3B%0A++++crm%3AP4_has_time-span+%5B+crm%3AP82a_begin_of_the_begin+%3Fdate+%5D+.%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
+                                        </template>
+                                    </semantic-query>
+                                </template>
+                            </semantic-table>
                                     
-                            </bs-tab>
+                    </bs-tab>
                 </bs-col>          
         </bs-tab>
 
