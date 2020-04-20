@@ -156,16 +156,14 @@
 
     [[#if (hasPermission "forms:ldp:*")]]
     <semantic-tree
-         query='SELECT DISTINCT ?node ?parent ?label ?docform WHERE {
+         query='SELECT DISTINCT ?node ?parent WHERE {
             ?record rico:hasSubject ?? ;
-                rico:isPartOf* ?node .
+                rico:includedIn* ?node .
             FILTER(ISIRI(?node))
             FILTER(CONTAINS(STR(?node), "/r/"))
-            OPTIONAL { ?node rico:isPartOf ?parent. FILTER(ISIRI(?parent)) }
-            ?node rico:name ?label .
-            OPTIONAL { ?node rico:hasDocumentaryFormType ?docform . }
+            OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
           }'
-          tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link>{{#if docform}}<br/><mp-label iri="{{docform.value}}"></mp-label>{{/if}}</span>'> 
+          tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
     </semantic-tree>
     [[else]]
     <semantic-query 

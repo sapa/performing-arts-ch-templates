@@ -53,11 +53,11 @@
             <h5>Record hierarchy</h5>
             <semantic-tree
                  query='SELECT DISTINCT ?node ?parent ?label WHERE {
-                    { ?? rico:isPartOf* ?node }
+                    { ?? rico:includedIn* ?node }
                     UNION
-                    { ?node rico:isPartOf* ?? } 
+                    { ?node rico:includedIn* ?? } 
                     OPTIONAL {
-                        ?node rico:isPartOf ?parent.
+                        ?node rico:includedIn ?parent.
                         FILTER(ISIRI(?parent))
                     }
                     FILTER(ISIRI(?node))
