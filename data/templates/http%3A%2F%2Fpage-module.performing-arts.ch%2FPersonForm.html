@@ -22,6 +22,7 @@
         birth="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirth"
         death="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeath"
         rdfs_comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
+        website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
         same_as="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
         note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note"
         subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf"
@@ -100,8 +101,14 @@
             <semantic-form-text-input for='note' multiline=true></semantic-form-text-input>            
           </bs-col>
         </bs-row>
-        <semantic-form-text-input for='same_as'></semantic-form-text-input>
-
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="website"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='6'>
+            <semantic-form-text-input for='same_as'></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
         [[#if create]]
           <div class="semantic-form-input-decorator--with-header">
             <div class="semantic-form-input-decorator__header">
