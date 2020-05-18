@@ -1,55 +1,55 @@
 
-<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "description"@fr;
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description> a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Description"@fr;
     <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-93b0a89e8f4d4d858db405f00f963363-dpe07h;
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-93b0a89e8f4d4d858db405f00f963363-yrb0g6 .
   
   _:genid-93b0a89e8f4d4d858db405f00f963363-0x85j <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
   $subject crm:P3_has_note $note.
-  $note crm:P2_has_type spav:eonvd ;
+  $note crm:P2_has_type spav:eoept ;
       rdf:value $value.
 }""" .
   
   _:genid-93b0a89e8f4d4d858db405f00f963363-yrb0g6 <http://spinrdf.org/sp#text> """INSERT {
   $subject crm:P3_has_note $note.
   $note a crm:E62_String ;
-    crm:P2_has_type spav:eonvd ;
+    crm:P2_has_type spav:eoept ;
     rdf:value $value.
 } WHERE {
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), ?value)))) AS ?note)
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> <http://www.metaphacts.com/ontology/fields#selectPattern>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description> <http://www.metaphacts.com/ontology/fields#selectPattern>
       _:genid-93b0a89e8f4d4d858db405f00f963363-0x85j;
-    <http://www.w3.org/2000/01/rdf-schema#label> "descrizione"@it .
+    <http://www.w3.org/2000/01/rdf-schema#label> "Descrizione"@it .
   
   _:genid-93b0a89e8f4d4d858db405f00f963363-yrb0g6 a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> <http://www.w3.org/2000/01/rdf-schema#label>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description> <http://www.w3.org/2000/01/rdf-schema#label>
       "Beschreibung"@de .
   
   _:genid-93b0a89e8f4d4d858db405f00f963363-0x85j a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
       <http://www.w3.org/2001/XMLSchema#string>;
     <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Notes"@en .
+    <http://www.w3.org/2000/01/rdf-schema#label> "Description"@en .
   
   _:genid-93b0a89e8f4d4d858db405f00f963363-dpe07h <http://spinrdf.org/sp#text> """DELETE {
   $subject crm:P3_has_note $note.
   $note a crm:E62_String ;
-      crm:P2_has_type spav:eonvd ;
+      crm:P2_has_type spav:eoept ;
       rdf:value $value.
-} WHERE {}    """;
+} WHERE {}""";
     a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> a <http://www.w3.org/ns/prov#Entity>;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description> a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
     <http://www.w3.org/ns/prov#generatedAtTime> "2020-04-23T09:46:44.594Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
-      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> .
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note> a <http://www.w3.org/ns/ldp#Resource> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description> a <http://www.w3.org/ns/ldp#Resource> .
 }

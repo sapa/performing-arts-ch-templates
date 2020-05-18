@@ -16,15 +16,17 @@
         cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype"
         common_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitle"
         common_title_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType"
-        addendum="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AppellationAddendum"
         alternative_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle"
         acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym"
+        description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description"
         contains="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains"
         location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation"
         production="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueProduction"
         destruction="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction"
+        record_sets="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf"
+        note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
+        note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
         sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
-        note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note"
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
@@ -36,11 +38,11 @@
           <bs-col sm='6'>
             <semantic-form-text-input for='common_title' languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
-          <bs-col sm='3'>
+          <bs-col sm='2'>
             <semantic-form-checklist-input type='radio' for='common_title_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
           </bs-col>
-          <bs-col sm='3'>
-            <semantic-form-text-input for="addendum"></semantic-form-text-input>
+          <bs-col sm='4'>
+            <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <bs-row>
@@ -48,7 +50,7 @@
             <semantic-form-text-input for="alternative_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
           <bs-col sm='6'>
-            <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
+            <semantic-form-text-input for="description"></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <bs-row>
@@ -76,8 +78,36 @@
             <button name="submit" class="btn btn-default">Create Venue</button>
           </semantic-form>
         </semantic-form-autocomplete-input>
+
+        <semantic-form-autocomplete-input for="record_sets">
+          <semantic-form new-subject-template="http://data.performing-arts.ch/r/{{UUID}}" fields='[[fieldDefinitions
+            record_set_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
+            record_set_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier"
+            record_set_label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLabel"
+            record_set_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
+            record_set_parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent"
+          ]]'>
+            <div style="display: none;">
+                <semantic-form-hidden-input for='record_set_rdf_type' default-value='[[resolvePrefix "rico:RecordSet"]]'></semantic-form-hidden-input>
+            </div>
+            <semantic-form-text-input for="record_set_identifier"></semantic-form-text-input>
+            <semantic-form-text-input for="record_set_label"></semantic-form-text-input>
+            <semantic-form-checklist-input type='radio' row=true for="record_set_type"></semantic-form-checklist-input>
+            <!-- TODO: automatically add correct parent? -->
+            <semantic-form-tree-picker-input for="record_set_parent" ></semantic-form-tree-picker-input>
+            <button name="submit" class="btn btn-default">Create Record Set</button>
+          </semantic-form>
+        </semantic-form-autocomplete-input>
+        
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="note_public" multiline=true></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="note_internal" multiline=true></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
         <semantic-form-text-input for="sameAs"></semantic-form-text-input>
-        <semantic-form-text-input for="note" multiline=true></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
         <button

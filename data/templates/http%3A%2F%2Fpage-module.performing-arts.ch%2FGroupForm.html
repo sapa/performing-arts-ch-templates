@@ -14,9 +14,10 @@
         rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType"
         common_appellation="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation"
         common_appellation_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellationType"
-        addendum="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AppellationAddendum"
         alternative_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName"
         acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym"
+        description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description"
+        byline="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupByline"
         group_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType"
         residence="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorResidence"
         genre="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre"
@@ -30,8 +31,8 @@
         associations="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation"
         record_sets="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf"
         sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
-        note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note"
-        noteinternal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
+        note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
+        note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
         repertories="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRepertories"
       ]]'>
       <bs-panel>
@@ -45,7 +46,7 @@
             <semantic-form-checklist-input type='radio' row=true for='common_appellation_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
           </bs-col>
           <bs-col sm='3'>
-            <semantic-form-text-input for="addendum"></semantic-form-text-input>
+            <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <bs-row>
@@ -53,10 +54,17 @@
             <semantic-form-text-input for="alternative_name" languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
           <bs-col sm='6'>
-            <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
+            <semantic-form-text-input for="byline"></semantic-form-text-input>
           </bs-col>
         </bs-row>
-        <semantic-form-tree-picker-input for="group_type"></semantic-form-tree-picker-input>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-tree-picker-input for="group_type"></semantic-form-tree-picker-input>
+          </bs-col>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="description"></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
         <bs-row>
           <bs-col sm='4'>
             <semantic-form-tree-picker-input for="residence"></semantic-form-tree-picker-input>
@@ -140,10 +148,10 @@
         </semantic-form-autocomplete-input>
         <bs-row>
           <bs-col sm="6">
-            <semantic-form-text-input for="note" multiline=true></semantic-form-text-input>
+            <semantic-form-text-input for="note_public" multiline=true></semantic-form-text-input>
           </bs-col>
           <bs-col sm="6">
-            <semantic-form-text-input for="noteinternal" multiline=true></semantic-form-text-input>
+            <semantic-form-text-input for="note_internal" multiline=true></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <semantic-form-checkbox-input for='repertories'></semantic-form-checkbox-input>

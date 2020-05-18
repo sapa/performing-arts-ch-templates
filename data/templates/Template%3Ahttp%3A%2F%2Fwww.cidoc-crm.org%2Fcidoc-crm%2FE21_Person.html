@@ -11,169 +11,187 @@
     [[#>rsp:ClipboardSidebar]]
     [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
-      <bs-tab event-key='Summary' title='Summary'>
-        <bs-col sm="4">
-            <!-- common name -->
-            <semantic-query 
-                query='SELECT ?appellation 
-                WHERE {
-                    ?? crm:P131_is_identified_by ?appellation .
-                    ?appellation a crm:E82_Actor_Appellation ; 
-                        crm:P2_has_type spav:yatcx .
-                } LIMIT 1'
-            template='<p><strong>{{#each bindings}}<mp-label iri="{{appellation.value}}"></mp-label>{{/each}}</strong></p>'>
-            </semantic-query>
+        <bs-tab event-key='Summary' title='Summary'>
 
-            <!-- alternative names -->
-            <semantic-query 
-                query='SELECT ?appellation ?type ?typesort
-                WHERE {
-                    VALUES (?type ?typesort) { (spav:yapvc 1) (spav:yadpx 2) (spav:yallb 3) (spav:yaajh 4) (spav:yavtx 5) }
-                    ?? crm:P131_is_identified_by ?appellation .
-                    ?appellation a crm:E82_Actor_Appellation ; 
-                        crm:P2_has_type ?type .
-                    FILTER ( ?type in (spav:yadpx, spav:yallb, spav:yapvc, spav:yaajh, spav:yavtx) )
-                } ORDER BY ?typesort'
-                template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{else}}<br>
-                    <mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
-            </semantic-query>
+            <bs-col sm="4">
+                <!-- common name -->
+                <semantic-query 
+                    query='SELECT ?appellation 
+                    WHERE {
+                        ?? crm:P131_is_identified_by ?appellation .
+                        ?appellation a crm:E82_Actor_Appellation ; 
+                            crm:P2_has_type spav:yatcx .
+                    } LIMIT 1'
+                template='<p><strong>{{#each bindings}}<mp-label iri="{{appellation.value}}"></mp-label>{{/each}}</strong></p>'>
+                </semantic-query>
 
-            <!-- comment -->
-            <semantic-query 
-                query='SELECT ?comment WHERE { ?? rdfs:comment ?comment. }'
-                template='<p>{{#each bindings}}{{#if @first}}{{comment.value}}{{else}}, {{comment.value}}{{/if}}{{/each}}</p>'>
-            </semantic-query>
+                <!-- alternative names -->
+                <semantic-query 
+                    query='SELECT ?appellation ?type ?typesort
+                    WHERE {
+                        VALUES (?type ?typesort) { (spav:yapvc 1) (spav:yadpx 2) (spav:yallb 3) (spav:yaajh 4) (spav:yavtx 5) }
+                        ?? crm:P131_is_identified_by ?appellation .
+                        ?appellation a crm:E82_Actor_Appellation ; 
+                            crm:P2_has_type ?type .
+                        FILTER ( ?type in (spav:yadpx, spav:yallb, spav:yapvc, spav:yaajh, spav:yavtx) )
+                    } ORDER BY ?typesort'
+                    template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{else}}<br>
+                        <mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
+                </semantic-query>
 
-            <p>
-            <!-- gender -->
-            <semantic-query 
-                query='SELECT ?gendericon WHERE {
-                    ?? crm:P107i_is_current_or_former_member_of ?group .
-                    FILTER (CONTAINS(STR(?group), "/g/gender/"))
-                    VALUES (?group ?gendericon) { 
-                        (<http://data.performing-arts.ch/g/gender/f> "♀") 
-                        (<http://data.performing-arts.ch/g/gender/m> "♂") 
-                        (<http://data.performing-arts.ch/g/gender/d> "⚥") 
-                    }
-                }'
-                template='<span>{{#each bindings}}<span style="padding-right:0.6em;">{{gendericon.value}}</span>{{/each}}</span>'>
-            </semantic-query>
+                <!-- description -->
+                <semantic-query 
+                    query='SELECT ?description WHERE { ?? crm:P3_has_note ?description. ?description crm:P2_has_type spav:eoept. } LIMIT 1'
+                    template='<p>{{#each bindings}}<mp-label iri="{{description.value}}"></mp-label>{{/each}}</p>'>
+                </semantic-query>
 
-            <!-- nationality -->
-            <semantic-query 
-                query='SELECT ?nationality WHERE {
-                    BIND(EXISTS {?? crm:P107i_is_current_or_former_member_of <http://data.performing-arts.ch/g/nation/ch>} AS ?swiss)
-                    BIND(IF(?swiss = "true"^^xsd:boolean, "CH", "") AS ?nationality)
-                }'
-                template='<span>{{#each bindings}}<span style="padding-right:0.1em;" title="{{nationality.value}}">{{nationality.value}}</span>{{/each}}</span>'>
-            </semantic-query>
-            </p>
+                <p>
+                <!-- gender -->
+                <semantic-query 
+                    query='SELECT ?gendericon WHERE {
+                        ?? crm:P107i_is_current_or_former_member_of ?group .
+                        FILTER (CONTAINS(STR(?group), "/g/gender/"))
+                        VALUES (?group ?gendericon) { 
+                            (<http://data.performing-arts.ch/g/gender/f> "♀") 
+                            (<http://data.performing-arts.ch/g/gender/m> "♂") 
+                            (<http://data.performing-arts.ch/g/gender/d> "⚥") 
+                        }
+                    }'
+                    template='<span>{{#each bindings}}<span style="padding-right:0.6em;">{{gendericon.value}}</span>{{/each}}</span>'>
+                </semantic-query>
 
-            <!-- date and place of birth -->
-            <semantic-query 
-                query='SELECT ?birthdate ?birthplace WHERE {
-                    ?? crm:P98i_was_born ?birth .
-                    OPTIONAL {
-                        ?birth crm:P4_has_time-span ?timespan .
-                        ?timespan crm:P82a_begin_of_the_begin ?dob .
-                        BIND(CONCAT(STR(DAY(?dob)), ".", STR(MONTH(?dob)), ".", STR(YEAR(?dob))) AS ?birthdate)
-                    }
-                    OPTIONAL {
-                        ?birth crm:P7_took_place_at ?birthplace .
-                        FILTER(!CONTAINS(STR(?birthplace), "wikidata"))
-                    }
-                } LIMIT 1'
-                template='<div>{{#each bindings}}{{#if birthdate}}* {{else}}{{#if birthplace}}* {{/if}}{{/if}}{{#if birthdate}}<span style="padding-right:0.1em;" title="{{birthdate.value}}">{{birthdate.value}}</span>{{/if}}{{#if birthdate}}{{#if birthplace}}, {{/if}}{{/if}}
-                {{#if birthplace}}<semantic-link iri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>{{/if}}{{/each}}</div>'>
-            </semantic-query>
+                <!-- nationality -->
+                <semantic-query 
+                    query='SELECT ?nationality WHERE {
+                        BIND(EXISTS {?? crm:P107i_is_current_or_former_member_of <http://data.performing-arts.ch/g/nation/ch>} AS ?swiss)
+                        BIND(IF(?swiss = "true"^^xsd:boolean, "CH", "") AS ?nationality)
+                    }'
+                    template='<span>{{#each bindings}}<span style="padding-right:0.1em;" title="{{nationality.value}}">{{nationality.value}}</span>{{/each}}</span>'>
+                </semantic-query>
+                </p>
 
-            <!-- date and place of death -->
-            <semantic-query 
-                query='SELECT ?deathdate ?deathplace WHERE {
-                    ?? crm:P100i_died_in ?death .
-                    OPTIONAL {
-                        ?death crm:P4_has_time-span ?timespan .
-                        ?timespan crm:P82a_begin_of_the_begin ?dod .
-                        BIND(CONCAT(STR(DAY(?dod)), ".", STR(MONTH(?dod)), ".", STR(YEAR(?dod))) AS ?deathdate)
-                    }
-                    OPTIONAL {
-                        ?death crm:P7_took_place_at ?deathplace .
-                        FILTER(!CONTAINS(STR(?deathplace), "wikidata"))
-                    }
-                } LIMIT 1'
-                template='<div>{{#each bindings}}{{#if deathdate}}† {{else}}{{#if deathplace}}† {{/if}}{{/if}}{{#if deathdate}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{deathdate.value}}</span>{{/if}}{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
-                    {{#if deathplace}}<semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>{{/if}}{{/each}}</div>'>
-            </semantic-query>
-            <mp-field-visualization
-                subject='[[this]]'
-                fields='[[fieldDefinitions
-                    website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
-                ]]'
-                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
-            >
-            </mp-field-visualization> 
-    
-    </bs-col>
-        <bs-col sm="4">
+                <!-- date and place of birth -->
+                <semantic-query 
+                    query='SELECT ?birthdate ?birthplace WHERE {
+                        ?? crm:P98i_was_born ?birth .
+                        OPTIONAL {
+                            ?birth crm:P4_has_time-span ?timespan .
+                            ?timespan crm:P82a_begin_of_the_begin ?dob .
+                            BIND(CONCAT(STR(DAY(?dob)), ".", STR(MONTH(?dob)), ".", STR(YEAR(?dob))) AS ?birthdate)
+                        }
+                        OPTIONAL {
+                            ?birth crm:P7_took_place_at ?birthplace .
+                            FILTER(!CONTAINS(STR(?birthplace), "wikidata"))
+                        }
+                    } LIMIT 1'
+                    template='<div>{{#each bindings}}{{#if birthdate}}* {{else}}{{#if birthplace}}* {{/if}}{{/if}}{{#if birthdate}}<span style="padding-right:0.1em;" title="{{birthdate.value}}">{{birthdate.value}}</span>{{/if}}{{#if birthdate}}{{#if birthplace}}, {{/if}}{{/if}}
+                    {{#if birthplace}}<semantic-link iri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>{{/if}}{{/each}}</div>'>
+                </semantic-query>
 
-        <mp-field-visualization
-            subject='[[this]]'
-            fields='[[fieldDefinitions
-            groups="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGroup"
-            note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Note"
-            ]]'
-            template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
-            [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
-        >
-        </mp-field-visualization> 
-
-        <!-- record sets -->
-        <semantic-query 
-        query='SELECT ?label WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordsBern>) }
-                ?record rico:hasSubject ?? .
-            } LIMIT 1'
-        template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
-        </semantic-query>
+                <!-- date and place of death -->
+                <semantic-query 
+                    query='SELECT ?deathdate ?deathplace WHERE {
+                        ?? crm:P100i_died_in ?death .
+                        OPTIONAL {
+                            ?death crm:P4_has_time-span ?timespan .
+                            ?timespan crm:P82a_begin_of_the_begin ?dod .
+                            BIND(CONCAT(STR(DAY(?dod)), ".", STR(MONTH(?dod)), ".", STR(YEAR(?dod))) AS ?deathdate)
+                        }
+                        OPTIONAL {
+                            ?death crm:P7_took_place_at ?deathplace .
+                            FILTER(!CONTAINS(STR(?deathplace), "wikidata"))
+                        }
+                    } LIMIT 1'
+                    template='<div>{{#each bindings}}{{#if deathdate}}† {{else}}{{#if deathplace}}† {{/if}}{{/if}}{{#if deathdate}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{deathdate.value}}</span>{{/if}}{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
+                        {{#if deathplace}}<semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>{{/if}}{{/each}}</div>'>
+                </semantic-query>
+                <mp-field-visualization
+                    subject='[[this]]'
+                    fields='[[fieldDefinitions
+                        website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
+                    ]]'
+                    template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+                >
+                </mp-field-visualization> 
         
-        [[#if (hasPermission "forms:ldp:*")]]
-        <semantic-tree
-             query='SELECT DISTINCT ?node ?parent WHERE {
-                ?record rico:hasSubject ?? ;
-                    rico:includedIn* ?node .
-                FILTER(ISIRI(?node))
-                FILTER(CONTAINS(STR(?node), "/r/"))
-                OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
-              }'
-              tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
-        </semantic-tree>
-        [[else]]
-        <semantic-query 
-            query='SELECT ?docform ?extent ?desciptivenote WHERE {
-                ?record rico:hasSubject ?? ;
-                    rico:hasDocumentaryFormType ?docform .
-                OPTIONAL { ?record rico:recordResourceExtent ?extent .}
-                OPTIONAL { ?record rico:descriptiveNote ?desciptivenote . }
-            }'
-            template='<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{docform.value}}"></mp-label>{{else}}, <mp-label iri="{{docform.value}}"></mp-label>{{/if}}{{#if @last}}{{#if desciptivenote}}, {{desciptivenote.value}}{{/if}}{{#if extent}} ({{extent.value}}){{/if}}{{else}}{{/if}}{{/each}}</div>'>
-        </semantic-query>
-        [[/if]]
-    
-        </bs-col>
-        <bs-col sm="4">
-            [[> sapaModule:ExternalResources]]
-        </bs-col>
-    </bs-tab>
+            </bs-col>
 
-    <bs-tab event-key='productions' title='Productions'>
-        [[> sapaModule:PersonProductions]]
-    </bs-tab>
-    
-    [[#if (hasPermission "forms:ldp:*")]] 
-    <bs-tab event-key='person editing' title='Edit'>
-    [[> sapaModule:PersonForm]]
-    </bs-tab>
-    [[/if]]
+            <bs-col sm="4">
+
+                <mp-field-visualization
+                    subject='[[this]]'
+                    fields='[[fieldDefinitions
+                        groups="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGroup"
+                        note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
+                    ]]'
+                    template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+                    [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+                >
+                </mp-field-visualization> 
+                
+                [[#if (hasPermission "forms:ldp:*")]]
+                <mp-field-visualization
+                    subject='[[this]]'
+                    fields='[[fieldDefinitions
+                        note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
+                    ]]'
+                    template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+                    [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+                >
+                </mp-field-visualization> 
+                [[/if]]
+
+                <!-- record sets -->
+                <semantic-query 
+                query='SELECT ?label WHERE {
+                        VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordsBern>) }
+                        ?record rico:hasSubject ?? .
+                    } LIMIT 1'
+                template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
+                </semantic-query>
+                
+                [[#if (hasPermission "forms:ldp:*")]]
+                <semantic-tree
+                    query='SELECT DISTINCT ?node ?parent WHERE {
+                        ?record rico:hasSubject ?? ;
+                            rico:includedIn* ?node .
+                        FILTER(ISIRI(?node))
+                        FILTER(CONTAINS(STR(?node), "/r/"))
+                        OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
+                    }'
+                    tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
+                </semantic-tree>
+                [[else]]
+                <semantic-query 
+                    query='SELECT ?docform ?extent ?desciptivenote WHERE {
+                        ?record rico:hasSubject ?? ;
+                            rico:hasDocumentaryFormType ?docform .
+                        OPTIONAL { ?record rico:recordResourceExtent ?extent .}
+                        OPTIONAL { ?record rico:descriptiveNote ?desciptivenote . }
+                    }'
+                    template='<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{docform.value}}"></mp-label>{{else}}, <mp-label iri="{{docform.value}}"></mp-label>{{/if}}{{#if @last}}{{#if desciptivenote}}, {{desciptivenote.value}}{{/if}}{{#if extent}} ({{extent.value}}){{/if}}{{else}}{{/if}}{{/each}}</div>'>
+                </semantic-query>
+                [[/if]]
+            
+            </bs-col>
+
+            <bs-col sm="4">
+                [[> sapaModule:ExternalResources]]
+            </bs-col>
+
+        </bs-tab>
+
+        <bs-tab event-key='productions' title='Productions'>
+            [[> sapaModule:PersonProductions]]
+        </bs-tab>
+        
+        [[#if (hasPermission "forms:ldp:*")]] 
+        <bs-tab event-key='person editing' title='Edit'>
+        [[> sapaModule:PersonForm]]
+        </bs-tab>
+        [[/if]]
+
     </bs-tabs>
+
     [[/rsp:ClipboardSidebar]]
 </div>

@@ -1,41 +1,16 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal> a <http://www.metaphacts.com/ontology/fields#Field> .
-  
-  _:genid-e28169aee414413089910db678dbc93a-qxkmtn a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-e28169aee414413089910db678dbc93a-9480j9 a <http://spinrdf.org/sp#Query> .
-  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal> <http://www.w3.org/2000/01/rdf-schema#label>
-      "description (interne)"@fr .
+      "Nota interna"@it;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-dec282bb8d9842f581dfef9b338c13a4-fr83r6 .
   
-  _:genid-e28169aee414413089910db678dbc93a-qxkmtn <http://spinrdf.org/sp#text> """DELETE {
-  $subject crm:P3_has_note $note.
-  $note a crm:E62_String ;
-      crm:P2_has_type spav:eokdx ;
-      rdf:value $value.
-} WHERE {}    """ .
+  _:genid-dec282bb8d9842f581dfef9b338c13a4-12jhns a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal> <http://www.metaphacts.com/ontology/fields#deletePattern>
-      _:genid-e28169aee414413089910db678dbc93a-qxkmtn .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal> <http://www.metaphacts.com/ontology/fields#insertPattern>
+      _:genid-dec282bb8d9842f581dfef9b338c13a4-bf401i .
   
-  _:genid-e28169aee414413089910db678dbc93a-qa60gf <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
-  $subject crm:P3_has_note $note.
-  $note crm:P2_has_type spav:eokdx ;
-      rdf:value $value.
-}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal> <http://www.metaphacts.com/ontology/fields#selectPattern>
-      _:genid-e28169aee414413089910db678dbc93a-qa60gf;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "descrizione (interno)"@it, "Notes (internal)"@en,
-      "Beschreibung (intern)"@de;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-e28169aee414413089910db678dbc93a-9480j9 .
-  
-  _:genid-e28169aee414413089910db678dbc93a-qa60gf a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-e28169aee414413089910db678dbc93a-9480j9 <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-dec282bb8d9842f581dfef9b338c13a4-bf401i <http://spinrdf.org/sp#text> """INSERT {
   $subject crm:P3_has_note $note.
   $note a crm:E62_String ;
     crm:P2_has_type spav:eokdx ;
@@ -44,9 +19,38 @@
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), ?value)))) AS ?note)
 }""" .
   
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Internal note"@en .
+  
+  _:genid-dec282bb8d9842f581dfef9b338c13a4-bf401i a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-dec282bb8d9842f581dfef9b338c13a4-12jhns <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject crm:P3_has_note $note.
+  $note crm:P2_has_type spav:eokdx ;
+      rdf:value $value.
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-dec282bb8d9842f581dfef9b338c13a4-12jhns;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Note interne"@fr;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> .
+  
+  _:genid-dec282bb8d9842f581dfef9b338c13a4-fr83r6 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Interne Anmerkung"@de .
+  
+  _:genid-dec282bb8d9842f581dfef9b338c13a4-fr83r6 <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P3_has_note $note.
+  $note a crm:E62_String ;
+      crm:P2_has_type spav:eokdx ;
+      rdf:value $value.
+} WHERE {}""" .
+  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal> a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-04-06T14:56:06.560Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-05-18T14:21:38.177Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal> .
