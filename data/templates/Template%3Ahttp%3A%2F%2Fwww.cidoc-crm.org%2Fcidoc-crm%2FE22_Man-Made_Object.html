@@ -52,6 +52,17 @@
                 >
             </semantic-query>
 
+            <!-- byline -->
+            <semantic-query 
+                query="SELECT ?byline
+                WHERE {
+                    ?? crm:P131_is_identified_by ?byline .
+                    ?byline a crm:E41_Appellation ;
+                    crm:P2_has_type spav:yauzw .
+                } LIMIT 1"
+                template='<p>{{#each bindings}}<mp-label iri="{{byline.value}}"></mp-label>{{/each}}</p>'>
+            </semantic-query>
+
             <!-- description -->
             <semantic-query 
                 query="SELECT ?description
