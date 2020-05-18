@@ -256,8 +256,7 @@
                     </bs-col>
                     <bs-col sm="8">
 
-                        <bs-tabs id='producers' default-active-key='2.1' unmount-on-exit=true>
-
+                        <bs-tabs id='producers' default-active-key='2' unmount-on-exit=true>
                             <bs-tab event-key='2.1' title='Unmatched Producers'>
 
                                 <semantic-table 
@@ -427,7 +426,7 @@
             <bs-col sm="8">
 
                 <bs-tabs id='producer_venues' default-active-key='4.1' unmount-on-exit=true>
-                    <bs-tab event-key='4.3' title='Unmatched Venues Ranking'>
+                    <bs-tab event-key='4.1' title='Unmatched Venues Ranking'>
 
                         <semantic-table 
                         query='SELECT ?venuelabel ?group (COUNT(?venue) AS ?venuecount)
