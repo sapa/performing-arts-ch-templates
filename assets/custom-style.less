@@ -10,7 +10,7 @@
 @navbar-link: hsl(0, 0%, 80%);
 @navbar-link-hover: hsl(0, 0%, 100%);
 @navbar-back: @base-color;
-// @navbar-back-hover: darken(@base-color, 30%);
+@navbar-back-hover: darken(@base-color, 4%);
 
 @font: 'Roboto';
 
@@ -69,6 +69,10 @@ a:hover, a:focus {
     font-weight: 500;
 }
 
+.navbar-inverse .dropdown-menu {
+    background-color: @navbar-back !important;
+}
+
 .navbar-inverse .navbar-brand, .navbar-inverse .navbar-brand {
     color: @navbar-link; // brand link color
 }
@@ -77,6 +81,13 @@ a:hover, a:focus {
     color: @navbar-link-hover; // brand link hover color
 }
 
+.navbar-inverse .dropdown-menu > .active > a, .navbar-inverse .dropdown-menu > .active > a:hover, .navbar-inverse .dropdown-menu > li > a:hover {
+    background-color: @navbar-back-hover !important;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    background-color: @navbar-back-hover !important;   
+}
 .navbar-inverse .navbar-nav > li > a {
     color: @navbar-link; // navigation link color
 }
