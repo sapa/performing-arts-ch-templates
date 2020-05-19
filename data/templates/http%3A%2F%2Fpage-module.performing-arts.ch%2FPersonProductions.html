@@ -1,13 +1,23 @@
 <semantic-search
   limit=500
   relations='{
-    "<http://ontology.performing-arts.ch/season>": [{
+      "<http://ontology.performing-arts.ch/season>": [{
         "kind": "resource",
         "queryPattern": "{
             ?expressioncreation frbroo:R17_created ?plan ;
                 crm:P10_falls_within ?__value__  .
             FILTER(CONTAINS(STR(?__value__ ), \"/s/\"))
         }"
+    }],
+    "<http://ontology.performing-arts.ch/producer>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?expressioncreation frbroo:R17_created ?plan ;
+          crm:P9_consists_of ?production . 
+        ?production crm:P2_has_type spav:muwgo ;
+          crm:P14_carried_out_by ?__value__ .
+        FILTER(CONTAINS(STR(?__value__ ), \"/a/\"))
+      }"
     }],
     "<http://ontology.performing-arts.ch/genre>": [{
         "kind": "resource",
@@ -46,16 +56,26 @@
             "label": "Period"
         },
         {
+          "iri": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",
+          "label": "Actor"
+        },
+        {
             "iri": "<http://www.w3.org/2004/02/skos/core#Concept>",
             "label": "Concept"
         }
     ],
     "relations": [
         {
-            "iri": "<http://ontology.performing-arts.ch/season>",
-            "label": "Season",
-            "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
-            "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>"
+          "iri": "<http://ontology.performing-arts.ch/producer>",
+          "label": "Producer",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
+        },
+        {
+          "iri": "<http://ontology.performing-arts.ch/season>",
+          "label": "Season",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>"
         },
         {
             "iri": "<http://ontology.performing-arts.ch/genre>",
@@ -75,7 +95,7 @@
       
 <semantic-search-query-constant 
     domain='<[[resolvePrefix "frbroo:F25_Performance_Plan"]]>'
-    query='SELECT DISTINCT ?plan
+    query='SELECT DISTINCT ?plan ?premieredatebegin
     WHERE {
         ?personactivity crm:P14_carried_out_by ?? .
         {
@@ -100,8 +120,14 @@
                 crm:P10_falls_within ?season .
             FILTER(CONTAINS(STR(?season), "/s/"))
         }
+        OPTIONAL {
+          ?performance frbroo:R25_performed ?plan ;
+            crm:P9_consists_of ?premiere . 
+          ?premiere crm:P4_has_time-span ?premieredate .
+          ?premieredate crm:P82a_begin_of_the_begin ?premieredatebegin .
+        }
     } GROUP BY ?plan
-    ORDER BY ASC(?season)'>
+    ORDER BY ASC(?premieredatebegin)'>
 </semantic-search-query-constant>
 
 <div data-flex-layout="row stretch-stretch">
@@ -133,16 +159,25 @@
 
       <semantic-search-result>
         <semantic-table 
-          query='SELECT DISTINCT ?plan ?season WHERE { }' 
+          query='SELECT DISTINCT ?plan ?premieredate ?premieredatebegin ?season (GROUP_CONCAT(DISTINCT ?producerlabel; SEPARATOR=", ") AS ?producers) WHERE {
+            OPTIONAL {
+              ?expressioncreation frbroo:R17_created ?plan ;
+                crm:P9_consists_of ?production . 
+              ?production crm:P2_has_type spav:muwgo ;
+                crm:P14_carried_out_by ?producer .
+              ?producer rdfs:label ?producerlabel .
+            }
+          } GROUP BY ?plan ?premieredate ?premieredatebegin ?season
+          ORDER BY ASC(?premieredatebegin)' 
           id='search-result'
           column-configuration='[
-            {"displayName": "Season", "variableName": "season"}, 
+            {"displayName": "Producer", "cellTemplate": "{{> producer}}", "variableName": "producers"} ,
+            {"displayName": "Season", "cellTemplate":"<semantic-link iri=\"{{season.value}}\"></semantic-link>", "variableName": "premieredatebegin"}, 
             {"displayName": "Title", "variableName": "plan"}, 
-            {"displayName": "Genre", "cellTemplate":"{{>genre}}"},
             {"displayName": "Function", "cellTemplate": "{{>function}}"}
           ]'
           number-of-displayed-rows=20
-          options='{"showFilter": false}'>
+          options='{"showFilter": true}'>
           
           <template id='genre'> 
             <semantic-query 
@@ -157,6 +192,21 @@
             </semantic-query>   
           </template>
         
+          <template id='producer'>
+            <semantic-query 
+              query='SELECT ?producer WHERE {
+                ?expressioncreation frbroo:R17_created <{{plan.value}}> ;
+                  crm:P9_consists_of ?production . 
+                ?production crm:P2_has_type spav:muwgo ;
+                  crm:P14_carried_out_by ?producer .
+              }'
+              template = '{{> producer-list}}'>
+              <template id='producer-list'>
+                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{producer.value}}"></mp-label>{{else}}, <mp-label iri="{{producer.value}}"></mp-label>{{/if}}{{/each}}</div>
+              </template>
+            </semantic-query> 
+          </template>
+
           <template id='function'> 
             <semantic-query 
               query='SELECT DISTINCT ?function WHERE {

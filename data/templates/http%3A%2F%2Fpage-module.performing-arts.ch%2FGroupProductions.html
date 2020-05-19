@@ -1,5 +1,5 @@
 <semantic-search 
-  limit=500 
+  limit=5000 
   relations='{
     "<http://ontology.performing-arts.ch/season>": [{
       "kind": "resource",
@@ -7,6 +7,24 @@
         ?expressioncreation frbroo:R17_created ?subject ;
           crm:P10_falls_within ?__value__  .
         FILTER(CONTAINS(STR(?__value__ ), \"/s/\"))
+      }"
+    }],
+    "<http://ontology.performing-arts.ch/premieretype>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?__value__ skos:inScheme spav:hl .
+        ?performance frbroo:R25_performed ?subject ;
+          crm:P9_consists_of ?premiere .
+        ?premiere a frbroo:F31_Performance ;
+          crm:P2_has_type ?__value__ .
+      }"
+    }],
+    "<http://ontology.performing-arts.ch/productionvenue>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?performance frbroo:R25_performed ?subject ;
+          crm:P8_took_place_on_or_within ?__value__ .
+        FILTER(CONTAINS(STR(?__value__), \"/o/\"))
       }"
     }],
     "<http://ontology.performing-arts.ch/genre>": [{
@@ -25,6 +43,19 @@
           crm:P14_carried_out_by ?__value__ .
         FILTER(CONTAINS(STR(?__value__ ), \"/a/\"))
       }"
+    }],
+    "<http://ontology.performing-arts.ch/premieredate>": [{
+      "kind": "numeric-range",
+      "queryPattern": "{
+        ?performance frbroo:R25_performed ?subject ;
+          crm:P9_consists_of ?premiere .
+        ?premiere a frbroo:F31_Performance ;
+          crm:P4_has_time-span ?timespan .
+        ?timespan crm:P82a_begin_of_the_begin ?date .
+        BIND(YEAR(?date) AS ?literal)
+        FILTER(?literal >= ?__numericRangeBeginValue__) .
+        FILTER(?literal <= ?__numericRangeEndValue__) .
+      }"
     }]
   }'
   search-profile='{
@@ -38,12 +69,20 @@
         "label": "Period"
       },
       {
+        "iri": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>",
+        "label": "Venue"
+      },
+      {
         "iri": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "label": "Production"
       },
       {
         "iri": "<http://www.w3.org/2004/02/skos/core#Concept>",
         "label": "Concept"
+      },
+      {
+        "iri": "<http://www.w3.org/2001/XMLSchema#decimal>",
+        "label": "Year"
       }
       ],
     "relations": [
@@ -52,6 +91,18 @@
         "label": "Season",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/premieretype>",
+        "label": "Premiere",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+        "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/productionvenue>",
+        "label": "Venue",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+        "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/genre>",
@@ -64,6 +115,12 @@
         "label": "Stage direction",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/premieredate>",
+        "label": "Year",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+        "hasRange": "<http://www.w3.org/2001/XMLSchema#decimal>"
       }
     ]
   }'
@@ -113,30 +170,46 @@
 
       <semantic-search-result>
         <semantic-table 
-          query='SELECT ?plan ?season ?titlelabel ?stagedirection WHERE { }' 
+          query='SELECT ?season ?plan ?titlelabel (GROUP_CONCAT(DISTINCT ?directorlabel; SEPARATOR=", ") AS ?directors) (GROUP_CONCAT(DISTINCT ?venuelabel; SEPARATOR=", ") AS ?venues) WHERE {
+            OPTIONAL {
+              ?expressioncreation frbroo:R17_created ?plan ;
+                  crm:P9_consists_of ?activity .
+                ?activity crm:P2_has_type spav:mutnt ;
+                  crm:P14_carried_out_by ?stagedirection .
+                  ?stagedirection rdfs:label ?directorlabel .
+            }
+            OPTIONAL {
+              ?performance frbroo:R25_performed ?plan ;
+                crm:P8_took_place_on_or_within ?venue .
+              ?venue rdfs:label ?venuelabel .
+            }
+        } GROUP BY ?season ?plan ?titlelabel' 
           id='search-result'
           column-configuration='[
-            {"variableName": "season", "displayName": "Season"}, 
-            {"variableName": "titlelabel" ,"displayName": "Title","cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
-            {"displayName": "Genre", "cellTemplate":"{{>genre}}"},
-            {"displayName": "Stage direction", "cellTemplate": "{{>stagedirection}}"}
+            {"displayName": "Season", "variableName": "season"}, 
+            {"displayName": "Venue", "cellTemplate": "{{> venue}}", "variableName": "venues"},
+            {"displayName": "Title", "variableName": "titlelabel", "cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
+            {"displayName": "Stage direction", "cellTemplate": "{{>stagedirection}}", "variableName": "directors"}
           ]'
           number-of-displayed-rows=20
           options='{"showFilter": false}'>
           
-          <template id='genre'> 
+          <template id='venue'>
             <semantic-query 
-              query='SELECT DISTINCT ?genre WHERE {      
-                ?work frbroo:R12_is_realised_in <{{plan.value}}> ;
-                  crm:P2_has_type ?genre . 
-                } '
-              template = '{{>genre-list}} '>           
-              <template id='genre-list'> 
-                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</div>
+              query='SELECT ?venue ?supervenue WHERE {
+                ?performance frbroo:R25_performed <{{plan.value}}> ;
+                  crm:P8_took_place_on_or_within ?venue .
+                OPTIONAL {
+                  ?supervenue crm:P46_is_composed_of ?venue .
+                }
+              }'
+              template = '{{> venue-list}}'>
+              <template id='venue-list'>
+                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{venue.value}}"></mp-label>{{else}}, <mp-label iri="{{venue.value}}"></mp-label>{{/if}}{{#if supervenue}} (<mp-label iri="{{supervenue.value}}"></mp-label>){{/if}}{{/each}}</div>
               </template>
-            </semantic-query>   
+            </semantic-query> 
           </template>
-        
+
           <template id='stagedirection'> 
             <semantic-query 
               query='SELECT DISTINCT ?stagedirection WHERE {

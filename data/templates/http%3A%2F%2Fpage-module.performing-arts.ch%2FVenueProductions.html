@@ -1,5 +1,5 @@
 <semantic-search 
-  limit=500 
+  limit=5000
   relations='{
     "<http://ontology.performing-arts.ch/season>": [{
       "kind": "resource",
@@ -7,6 +7,16 @@
         ?expressioncreation frbroo:R17_created ?subject ;
           crm:P10_falls_within ?__value__  .
         FILTER(CONTAINS(STR(?__value__ ), \"/s/\"))
+      }"
+    }],
+    "<http://ontology.performing-arts.ch/premieretype>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?__value__ skos:inScheme spav:hl .
+        ?performance frbroo:R25_performed ?subject ;
+          crm:P9_consists_of ?premiere .
+        ?premiere a frbroo:F31_Performance ;
+          crm:P2_has_type ?__value__ .
       }"
     }],
     "<http://ontology.performing-arts.ch/genre>": [{
@@ -35,6 +45,19 @@
           crm:P14_carried_out_by ?__value__ .
         FILTER(CONTAINS(STR(?__value__ ), \"/a/\"))
       }"
+    }],
+    "<http://ontology.performing-arts.ch/premieredate>": [{
+      "kind": "numeric-range",
+      "queryPattern": "{
+        ?performance frbroo:R25_performed ?subject ;
+          crm:P9_consists_of ?premiere .
+        ?premiere a frbroo:F31_Performance ;
+          crm:P4_has_time-span ?timespan .
+        ?timespan crm:P82a_begin_of_the_begin ?date .
+        BIND(YEAR(?date) AS ?literal)
+        FILTER(?literal >= ?__numericRangeBeginValue__) .
+        FILTER(?literal <= ?__numericRangeEndValue__) .
+      }"
     }]
   }'
   search-profile='{
@@ -54,6 +77,10 @@
       {
         "iri": "<http://www.w3.org/2004/02/skos/core#Concept>",
         "label": "Concept"
+      },
+      {
+        "iri": "<http://www.w3.org/2001/XMLSchema#decimal>",
+        "label": "Year"
       }
       ],
     "relations": [
@@ -62,6 +89,12 @@
         "label": "Season",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/premieretype>",
+        "label": "Premiere",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+        "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/genre>",
@@ -74,6 +107,12 @@
         "label": "Producer",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
+      },
+      {
+        "iri": "<http://ontology.performing-arts.ch/premieredate>",
+        "label": "Year",
+        "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+        "hasRange": "<http://www.w3.org/2001/XMLSchema#decimal>"
       }
     ]
   }'
@@ -133,7 +172,7 @@
               {"displayName": "Producer", "cellTemplate":"{{>producer}}"}
             ]'
             number-of-displayed-rows=20
-            options='{"showFilter": false}'>
+            options='{"showFilter": true}'>
             
             <template id='genre'> 
               <semantic-query 
