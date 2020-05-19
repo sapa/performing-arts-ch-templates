@@ -1,77 +1,76 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> a
-      <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "End"@en, "Fine"@it .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-fd8738c500434ffe8c4e331a364a2141-4vi4t4;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#askPattern> _:genid-fd8738c500434ffe8c4e331a364a2141-h5tp2d;
+    <http://www.w3.org/2000/01/rdf-schema#label> "End"@en .
   
-  _:genid-3ff6069482594016b7afe13f17267155-l8dwbv <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
-$subject crm:P13i_was_destroyed_by ?destruction .
-  ?destruction a crm:E6_Destruction ;
-	crm:P4_has_time-span ?timespan .
-  ?timespan a crm:E52_Time-Span ;
-	rdfs:label ?value ;
-	crm:P82b_end_of_the_end ?end . 
-  BIND(STR(YEAR(?end)) AS ?value)
+  _:genid-fd8738c500434ffe8c4e331a364a2141-4vi4t4 <http://spinrdf.org/sp#text> """DELETE {
+	$subject crm:P13i_was_destroyed_by ?destruction .
+	?destruction a crm:E6_Destruction ;
+		crm:P4_has_time-span ?timespan .
+	?timespan a crm:E52_Time-Span ;
+		rdfs:label $value ;
+		crm:P82b_end_of_the_end ?end . 
+} WHERE {
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> <http://www.metaphacts.com/ontology/fields#insertPattern>
-      _:genid-3ff6069482594016b7afe13f17267155-2fqna;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3ff6069482594016b7afe13f17267155-l8dwbv;
-    <http://www.w3.org/2000/01/rdf-schema#comment> "Year, e.g. 2012";
-    <http://www.metaphacts.com/ontology/fields#askPattern> _:genid-3ff6069482594016b7afe13f17267155-lm6bq5 .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Fine"@it .
   
-  _:genid-3ff6069482594016b7afe13f17267155-2fqna a <http://spinrdf.org/sp#Query> .
+  _:genid-fd8738c500434ffe8c4e331a364a2141-rdiz85 a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> <http://www.metaphacts.com/ontology/fields#minOccurs>
-      "0" .
+  _:genid-fd8738c500434ffe8c4e331a364a2141-h5tp2d <http://spinrdf.org/sp#text> "ASK { FILTER(REGEX($value, \"^([0-9]{4})?$\")) }";
+    a <http://spinrdf.org/sp#Query> .
   
-  _:genid-3ff6069482594016b7afe13f17267155-9y01qh a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> <http://www.w3.org/2000/01/rdf-schema#comment>
+      "Year, e.g. 2012";
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-fd8738c500434ffe8c4e331a364a2141-xtg5k5;
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "0" .
   
-  _:genid-3ff6069482594016b7afe13f17267155-lm6bq5 <http://spinrdf.org/sp#text> "ASK { FILTER(REGEX($value, \"^([0-9]{4})?$\")) }" .
+  _:genid-fd8738c500434ffe8c4e331a364a2141-xtg5k5 a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Fin"@fr .
+      "Fin"@fr;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Ende"@de .
   
-  _:genid-3ff6069482594016b7afe13f17267155-l8dwbv a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> <http://www.metaphacts.com/ontology/fields#domain>
-      <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Ende"@de;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-3ff6069482594016b7afe13f17267155-9y01qh .
-  
-  _:genid-3ff6069482594016b7afe13f17267155-lm6bq5 a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-3ff6069482594016b7afe13f17267155-9y01qh <http://spinrdf.org/sp#text> """DELETE {
-$subject crm:P13i_was_destroyed_by ?destruction .
-  ?destruction a crm:E6_Destruction ;
-	crm:P4_has_time-span ?timespan .
-  ?timespan a crm:E52_Time-Span ;
-	rdfs:label ?value ;
-	crm:P82b_end_of_the_end ?end . 
-} WHERE {
+  _:genid-fd8738c500434ffe8c4e331a364a2141-rdiz85 <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+	$subject crm:P13i_was_destroyed_by ?destruction .
+	?destruction a crm:E6_Destruction ;
+		crm:P4_has_time-span ?timespan .
+	?timespan a crm:E52_Time-Span ;
+		crm:P82b_end_of_the_end ?end . 
+	BIND(STR(YEAR(?end)) AS $value)
 }""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
       <http://www.w3.org/2001/XMLSchema#string> .
   
-  _:genid-3ff6069482594016b7afe13f17267155-2fqna <http://spinrdf.org/sp#text> """INSERT {
-  $subject crm:P13i_was_destroyed_by ?destruction .
-  ?destruction a crm:E6_Destruction ;
-	crm:P4_has_time-span ?timespan .
-  ?timespan a crm:E52_Time-Span ;
-	rdfs:label ?value ;
-	crm:P82b_end_of_the_end ?end .
+  _:genid-fd8738c500434ffe8c4e331a364a2141-4vi4t4 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-fd8738c500434ffe8c4e331a364a2141-rdiz85;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1" .
+  
+  _:genid-fd8738c500434ffe8c4e331a364a2141-xtg5k5 <http://spinrdf.org/sp#text> """INSERT {
+	$subject crm:P13i_was_destroyed_by ?destruction .
+	?destruction a crm:E6_Destruction ;
+		crm:P4_has_time-span ?timespan .
+	?timespan a crm:E52_Time-Span ;
+		rdfs:label $value ;
+		crm:P82b_end_of_the_end ?end .
 } WHERE {
-  BIND(IRI(CONCAT(STR(?subject), \"destruction\")) AS ?destruction)
-  BIND(IRI(CONCAT(STR(?subject), \"destruction-timespan\")) AS ?timespan)
-  BIND(STRDT(CONCAT(?value, \"-12-31\"), xsd:date) AS ?end)
+	BIND(IRI(CONCAT(STR($subject), \"/destruction\")) AS ?destruction)
+	BIND(IRI(CONCAT(STR($subject), \"/destruction-timespan\")) AS ?timespan)
+	BIND(STRDT(CONCAT($value, \"-12-31\"), xsd:date) AS ?end)
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> <http://www.metaphacts.com/ontology/fields#maxOccurs>
-      "1";
-    a <http://www.w3.org/ns/prov#Entity>;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> a
+      <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-05-19T13:16:43.268Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-05-19T13:56:13.093Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueDestruction> .
