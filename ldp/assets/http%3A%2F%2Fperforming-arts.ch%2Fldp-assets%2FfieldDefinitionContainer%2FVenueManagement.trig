@@ -1,13 +1,11 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement> a
-      <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "géré par"@fr, "gestito da"@it, "managed by"@en;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-311550e260a84ccba3d8b48d3fd3e9d2-qxynga;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-53f769c7e889435da88a87069d6eb212-7bbayk;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "géré par"@fr, "gestito da"@it .
   
-  _:genid-311550e260a84ccba3d8b48d3fd3e9d2-qxynga <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value WHERE {
+  _:genid-53f769c7e889435da88a87069d6eb212-7bbayk <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value WHERE {
   {
     ?activity crm:P16_used_specific_object ?subject .
   }
@@ -18,14 +16,16 @@
   }
   ?activity crm:P2_has_type spav:mujfv .
   ?value crm:P14i_performed ?activity .
-}""";
-    a <http://spinrdf.org/sp#Query> .
+}""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement> <http://www.w3.org/2000/01/rdf-schema#label>
-      "geführt von"@de;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
+      "managed by"@en;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
   
-  _:genid-311550e260a84ccba3d8b48d3fd3e9d2-fv4k6v <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-53f769c7e889435da88a87069d6eb212-7bbayk a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-53f769c7e889435da88a87069d6eb212-45d7xs <http://spinrdf.org/sp#text> """INSERT {
 } WHERE {	     
   $subject crm:P14i_performed ?activity .
   ?activity a crm:E7_Activity ;
@@ -35,15 +35,17 @@
 }""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement> <http://www.metaphacts.com/ontology/fields#insertPattern>
-      _:genid-311550e260a84ccba3d8b48d3fd3e9d2-fv4k6v .
+      _:genid-53f769c7e889435da88a87069d6eb212-45d7xs;
+    <http://www.w3.org/2000/01/rdf-schema#label> "geführt von"@de;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
   
-  _:genid-311550e260a84ccba3d8b48d3fd3e9d2-fv4k6v a <http://spinrdf.org/sp#Query> .
+  _:genid-53f769c7e889435da88a87069d6eb212-45d7xs a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement> <http://www.w3.org/2000/01/rdf-schema#comment>
       "display only";
     a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-01T02:21:52.427Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-05-19T13:18:37.863Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement> .

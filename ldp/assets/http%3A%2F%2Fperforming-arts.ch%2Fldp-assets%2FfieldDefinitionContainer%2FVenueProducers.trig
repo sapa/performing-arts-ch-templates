@@ -5,7 +5,7 @@
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
     <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
   
-  _:genid-7ebcc892d7fa43ed9b4cb908997c3b9d-kz6s4 <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-dfea6d016ed1470e8f45574cb544e7df-3wp72 <http://spinrdf.org/sp#text> """INSERT {
 } WHERE {	     
   $subject crm:P14i_performed ?activity .
   ?activity a crm:E7_Activity ;
@@ -15,17 +15,17 @@
 }""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueProducers> <http://www.metaphacts.com/ontology/fields#insertPattern>
-      _:genid-7ebcc892d7fa43ed9b4cb908997c3b9d-kz6s4;
+      _:genid-dfea6d016ed1470e8f45574cb544e7df-3wp72;
     <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
   
-  _:genid-7ebcc892d7fa43ed9b4cb908997c3b9d-kz6s4 a <http://spinrdf.org/sp#Query> .
+  _:genid-dfea6d016ed1470e8f45574cb544e7df-3wp72 a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueProducers> <http://www.w3.org/2000/01/rdf-schema#label>
       "Produttori"@it, "Producers"@en, "Producteurs"@fr;
     <http://www.w3.org/2000/01/rdf-schema#comment> "display only";
     a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-01T17:11:08.739Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-05-19T13:19:13.308Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueProducers> .
