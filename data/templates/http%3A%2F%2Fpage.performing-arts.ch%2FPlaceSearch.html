@@ -44,7 +44,7 @@ search-profile='{
 >
   <semantic-search-query-keyword
     domain='<[[resolvePrefix "crm:E53_Place"]]>'
-    query='SELECT ?subject WHERE {
+    query='SELECT DISTINCT ?subject WHERE {
       ?subject a crm:E53_Place ;
         rdfs:label ?label .  
       FILTER(CONTAINS(STR(?subject), "/p/"))
@@ -90,16 +90,14 @@ search-profile='{
         </semantic-search-result>
   
       <semantic-search-result>
-        <!-- TODO: make sure that only one place is found or aggregate them -->
         <semantic-table 
           query='SELECT DISTINCT ?subject WHERE { }'
           id="place-table" 
-          options='{"showFilter": false, "showTableHeading": false}'
+          options='{"showFilter": false, "showTableHeading": true, "enableSort": false}'
           column-configuration='[
             {"displayName": "Name", "variableName": "subject"} ,
             {"displayName": "Falls within", "cellTemplate": "{{> parents}}"}
           ]'>
-
           <template id='parents'>                     
             <semantic-query 
               query='SELECT ?parent WHERE {      
@@ -113,18 +111,7 @@ search-profile='{
           </template>
 
         </semantic-table> 
-
-        <!-- <semantic-tree 
-          id="tree"
-          query="SELECT ?node ?parent WHERE {
-            ?subject crm:P89_falls_within* ?node .
-            OPTIONAL { ?node crm:P89_falls_within ?parent. FILTER(ISIRI(?parent)) }
-            FILTER(ISIRI(?node))
-          }">
-        </semantic-tree> -->
-
       </semantic-search-result>
-      
        
       <div class="pull-right" style="display: flex; margin-top: 12px;">
 
@@ -136,15 +123,6 @@ search-profile='{
             <button class="btn btn-default">Download CSV</button>
           </mp-sparql-download>
         </semantic-search-result>
-        <!--
-        <semantic-search-action-use-result-in-extended-search>
-          <button class="btn btn-default" style="margin-right:10px">Use in Search</button>
-        </semantic-search-action-use-result-in-extended-search>
-        
-        <semantic-search-action-save-search-result id='save-search-result-action'>
-          <button class="btn btn-default" style="margin-right:10px">Save As Search</button>
-        </semantic-search-action-save-search-result>
-        -->
       </div>
 
     </div>

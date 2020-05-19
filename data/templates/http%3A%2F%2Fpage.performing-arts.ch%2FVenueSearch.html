@@ -106,19 +106,24 @@
         <semantic-search-result>
           <!-- TODO: make sure that only one place is found or aggregate them -->
           <semantic-table 
-            query='SELECT DISTINCT ?subject ?place
+            query='SELECT DISTINCT ?subject ?place ?begin
             WHERE {
               OPTIONAL {
                 ?subject crm:P156_occupies ?p .
                 ?p crm:P89_falls_within ?place .
               }
+              OPTIONAL {
+                ?subject crm:P108i_was_produced_by ?production.
+                ?production crm:P4_has_time-span ?productiontimespan.
+                ?productiontimespan crm:P82a_begin_of_the_begin ?begin .
+              }
             } ORDER BY DESC(?score)'
             id="venue-table" 
-            options='{"showFilter": false, "showTableHeading": false}'
+            options='{"showFilter": false, "showTableHeading": true}'
             column-configuration='[
               {"displayName": "Venue", "cellTemplate": "{{> venue}}"} ,
               {"displayName": "Place", "variableName": "place"} ,
-              {"displayName": "Dates", "cellTemplate": "{{> dates}}"}
+              {"displayName": "Dates", "cellTemplate": "{{> dates}}", "variableName": "begin"}
             ]'>
 
             <template id='venue'>                     
@@ -139,23 +144,21 @@
               <template id='dates'>                     
                 <semantic-query 
                   query='SELECT ?dates WHERE {
-                      OPTIONAL {
-                        <{{subject.value}}> crm:P16i_was_used_for ?management .
-                        ?management crm:P2_has_type spav:mujfv ;
-                            crm:P4_has_time-span ?timespan .
-                        ?timespan crm:P82a_begin_of_the_begin ?begin .    
-                        BIND(STR(YEAR(?begin)) AS ?beginyear)
-                      }
-                      OPTIONAL {
-                          <{{subject.value}}> crm:P16i_was_used_for ?management .
-                          ?management crm:P2_has_type spav:mujfv ;
-                              crm:P4_has_time-span ?timespan .
-                          ?timespan crm:P82b_end_of_the_end ?end .
-                          BIND(STR(YEAR(?end)) AS ?endyear)
-                      }
-                      BIND(CONCAT(COALESCE(?beginyear, "X"), "-", COALESCE(?endyear, "X")) AS ?predates)
-                      BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
-                    }'
+                    OPTIONAL {
+                      <{{subject.value}}> crm:P108i_was_produced_by ?production.
+                      ?production crm:P4_has_time-span ?productiontimespan.
+                      ?productiontimespan crm:P82a_begin_of_the_begin ?begin .    
+                      BIND(STR(YEAR(?begin)) AS ?beginyear)
+                    }
+                    OPTIONAL {
+                      <{{subject.value}}> crm:P13i_was_destroyed_by ?destruction.
+                      ?destruction crm:P4_has_time-span ?destructiontimespan.
+                      ?destructiontimespan crm:P82b_end_of_the_end ?end .    
+                      BIND(STR(YEAR(?end)) AS ?endyear)
+                    }
+                    BIND(CONCAT(COALESCE(?beginyear, "X"), "-", COALESCE(?endyear, "X")) AS ?predates)
+                    BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
+                  }'
                   template = '{{> dates-list}} '>           
                   <template id='dates-list'>
                     <div>{{#each bindings}}{{dates.value}}{{/each}}</div>

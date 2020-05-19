@@ -207,15 +207,33 @@
 
         <semantic-search-result>
           <semantic-table 
-            query='SELECT ?subject WHERE { }'
+            query='SELECT ?subject ?premieredatebegin (GROUP_CONCAT(DISTINCT ?producerlabel; SEPARATOR=", ") AS ?producers) (GROUP_CONCAT(DISTINCT ?venuelabel; SEPARATOR=", ") AS ?venues) WHERE { 
+              OPTIONAL {
+                ?performance frbroo:R25_performed ?subject ;
+                  crm:P9_consists_of ?premiere . 
+                ?premiere crm:P4_has_time-span ?premieredate .
+                ?premieredate crm:P82a_begin_of_the_begin ?premieredatebegin .
+              }
+              OPTIONAL {
+                ?expressioncreation frbroo:R17_created ?subject ;
+                  crm:P9_consists_of ?production . 
+                ?production crm:P2_has_type spav:muwgo ;
+                  crm:P14_carried_out_by ?producer .
+                ?producer rdfs:label ?producerlabel .
+              }
+              OPTIONAL {
+                ?performance frbroo:R25_performed ?subject ;
+                  crm:P8_took_place_on_or_within ?venue .
+                ?venue rdfs:label ?venuelabel .
+              }
+            } GROUP BY ?subject ?premieredatebegin'
             id="production-table" 
-            options='{"showFilter": false, "showTableHeading": false}'
+            options='{"showFilter": false, "showTableHeading": true, "enableSort": true}'
             column-configuration='[
               {"displayName": "Title", "variableName": "subject"} ,
-              {"displayName": "Premiere", "cellTemplate": "{{> premiere}}"} ,
-              {"displayName": "Producer", "cellTemplate": "{{> producer}}"} ,
-              {"displayName": "Venue", "cellTemplate": "{{> venue}}"} ,
-              {"displayName": "Genre", "cellTemplate": "{{> genre}}"}
+              {"displayName": "Premiere", "cellTemplate": "{{> premiere}}", "variableName": "premieredatebegin"} ,
+              {"displayName": "Producer", "cellTemplate": "{{> producer}}", "variableName": "producers"} ,
+              {"displayName": "Venue", "cellTemplate": "{{> venue}}", "variableName": "venues"}
             ]'>
             
             <template id='premiere'>

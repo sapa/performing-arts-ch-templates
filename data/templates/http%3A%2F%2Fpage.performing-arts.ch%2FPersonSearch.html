@@ -68,17 +68,26 @@ config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?fi
 
         <semantic-search-result>
           <semantic-table 
-            query='SELECT DISTINCT ?subject ?comment
+            query='SELECT DISTINCT ?subject ?dob ?description
             WHERE {
-              OPTIONAL { ?subject rdfs:comment ?comment }
+              OPTIONAL {
+                ?subject crm:P98i_was_born ?birth .
+                ?birth crm:P4_has_time-span ?bts .
+                ?bts crm:P82a_begin_of_the_begin ?dob .
+              }
+              OPTIONAL {
+                ?subject crm:P3_has_note ?note .
+                ?note crm:P2_has_type spav:eoept ;
+                  rdf:value ?description .
+              }
             } ORDER BY DESC(?score)'
             id="person-table" 
-            options='{"showFilter": false, "showTableHeading": false}'
+            options='{"showFilter": false, "showTableHeading": true}'
             column-configuration='[
               {"displayName": "Name", "variableName": "subject"} ,
               {"displayName": "Additional Names", "cellTemplate": "{{> additional-names}}"} ,
-              {"displayName": "Live Dates", "cellTemplate": "{{> live-dates}}"} ,
-              {"displayName": "Comment", "variableName": "comment"}
+              {"displayName": "Live Dates", "cellTemplate": "{{> live-dates}}", "variableName": "dob"} ,
+              {"displayName": "Description", "variableName": "description"}
             ]'>
 
             <template id='additional-names'>

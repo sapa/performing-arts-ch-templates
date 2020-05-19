@@ -122,15 +122,30 @@
 
         <semantic-search-result>
           <semantic-table 
-            query='SELECT DISTINCT ?subject WHERE { }'
+            query='SELECT DISTINCT ?subject ?formationstart (GROUP_CONCAT(DISTINCT ?appellationvalue; SEPARATOR=", ") AS ?additionalnames) WHERE {
+              OPTIONAL {
+                ?subject rdfs:label ?label ;
+                  crm:P131_is_identified_by ?appellation .
+                ?appellation crm:P2_has_type ?appellationtype ;
+                  rdf:value ?appellationvalue .
+                  MINUS { ?appellation crm:P2_has_type spav:yanuj . }
+                  MINUS { ?appellation crm:P2_has_type spav:yasis . }
+                  FILTER(?label != ?appellationvalue)
+              }
+              OPTIONAL {
+                ?subject crm:P95i_was_formed_by ?formation .
+                ?formation a crm:E66_Formation ;
+                  crm:P4_has_time-span ?formationtime .
+                ?formationtime crm:P82a_begin_of_the_begin ?formationstart .
+              }
+            } GROUP BY ?subject ?formationstart'
             id="group-table" 
-            options='{"showFilter": false, "showTableHeading": false}'
+            options='{"showFilter": false, "showTableHeading": true}'
             column-configuration='[
               {"displayName": "Name", "variableName": "subject"} ,
-              {"displayName": "Additional Names", "cellTemplate": "{{> additional-names}}"} ,
-              {"displayName": "Type", "cellTemplate": "{{> types}}"},
+              {"displayName": "Additional Names", "cellTemplate": "{{> additional-names}}", "variableName": "additionalnames"} ,
               {"displayName": "Place", "cellTemplate": "{{> places}}"},
-              {"displayName": "Dates", "cellTemplate": "{{> dates}}"}
+              {"displayName": "Dates", "cellTemplate": "{{> dates}}", "variableName": "formationstart"}
             ]'>
 
             <template id='additional-names'>                     
@@ -163,11 +178,11 @@
 
             <template id='places'>                     
               <semantic-query 
-                query='SELECT ?place WHERE {      
+                query='SELECT ?place WHERE {
                     <{{subject.value}}> crm:P74_has_current_or_former_residence ?p .
                     ?p crm:P89_falls_within ?place .
                   }'
-                template = '{{> places-list}} '>           
+                template = '{{> places-list}} '>
                 <template id='places-list'>
                   <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{place.value}}"></mp-label>{{else}}, <mp-label iri="{{place.value}}"></mp-label>{{/if}}{{/each}}</div>
                 </template>
