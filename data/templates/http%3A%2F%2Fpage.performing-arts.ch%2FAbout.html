@@ -31,37 +31,29 @@
         <bs-row>
           <bs-col sm="6" style="text-align: center;">
             <div>
-              <mp-resource-link-container class="grid-resource-link">
-                <span style="font-size: 84px;"><i class="fas fa-user"></i></span>
-              </mp-resource-link-container>
-              </div>
+              <span style="font-size: 84px;"><i class="fas fa-user"></i></span>
+            </div>
             <semantic-query query='SELECT (COUNT(?person) AS ?count) WHERE { ?person a crm:E21_Person . FILTER(CONTAINS(STR(?person), "/a/")) }' template='<div>{{#each bindings}}{{count.value}} persons{{/each}}</div>'></semantic-query>
           </bs-col>
           <bs-col sm="6" style="text-align: center;">
             <div>
-              <mp-resource-link-container class="grid-resource-link">
-                <span style="font-size: 84px;"><i class="fas fa-users"></i></span>
-              </mp-resource-link-container>
-              </div>
+              <span style="font-size: 84px;"><i class="fas fa-users"></i></span>
+            </div>
             <semantic-query query='SELECT (COUNT(?group) AS ?count) WHERE { ?group rdf:type/rdfs:subClassOf* crm:E74_Group . FILTER(CONTAINS(STR(?group), "/a/")) }' template='<div>{{#each bindings}}{{count.value}} institutions and groups{{/each}}</div>'></semantic-query>
           </bs-col>
         </bs-row>
         <bs-row style="margin-top: 4em;">
           <bs-col sm="6" style="text-align: center;">
             <diV>
-              <mp-resource-link-container class="grid-resource-link">
-                <span style="font-size: 84px;"><i class="fas fa-university"></i></span>
-              </mp-resource-link-container>
-              </diV>
-              <semantic-query query='SELECT (COUNT(?venue) AS ?count) WHERE { ?venue a crm:E22_Man-Made_Object ; crm:P2_has_type spav:dwmkn . FILTER(CONTAINS(STR(?venue), "/o/")) }' template='<div>{{#each bindings}}{{count.value}} venues{{/each}}</div>'></semantic-query>
+              <span style="font-size: 84px;"><i class="fas fa-university"></i></span>
+            </diV>
+            <semantic-query query='SELECT (COUNT(?venue) AS ?count) WHERE { ?venue a crm:E22_Man-Made_Object ; crm:P2_has_type spav:dwmkn . FILTER(CONTAINS(STR(?venue), "/o/")) }' template='<div>{{#each bindings}}{{count.value}} venues{{/each}}</div>'></semantic-query>
           </bs-col>
           <bs-col sm="6" style="text-align: center;">
             <div>
-              <mp-resource-link-container class="grid-resource-link">
-                <span style="font-size: 84px;"><i class="fas fa-theater-masks"></i></span>
-              </mp-resource-link-container>
-              </div>
-              <semantic-query query='SELECT (COUNT(?production) AS ?count) WHERE { ?production a frbroo:F25_Performance_Plan . FILTER(CONTAINS(STR(?production), "/w/")) }' template='<div>{{#each bindings}}{{count.value}}{{/each}} productions</div>'></semantic-query>
+              <span style="font-size: 84px;"><i class="fas fa-theater-masks"></i></span>
+            </div>
+            <semantic-query query='SELECT (COUNT(?production) AS ?count) WHERE { ?production a frbroo:F25_Performance_Plan . FILTER(CONTAINS(STR(?production), "/w/")) }' template='<div>{{#each bindings}}{{count.value}}{{/each}} productions</div>'></semantic-query>
           </bs-col>
         </bs-row>
         
