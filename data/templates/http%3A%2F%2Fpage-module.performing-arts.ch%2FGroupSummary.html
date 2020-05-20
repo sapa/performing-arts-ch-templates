@@ -133,12 +133,22 @@
           <semantic-link iri="{{data.node.value}}"></semantic-link>{{/if}}'> 
     </semantic-tree>
 
+    [[#if (hasPermission "forms:ldp:*")]]
+    <mp-field-visualization
+        subject='[[this]]'
+        fields='[[fieldDefinitions
+            association_members="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers"
+            associations="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation"
+        ]]'
+        template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+    >
+    </mp-field-visualization> 
+    [[/if]]
+
     <mp-field-visualization
         subject='[[this]]'
         fields='[[fieldDefinitions
             members="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember"
-            association_members="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers"
-            associations="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation"
             note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
         ]]'
         template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
