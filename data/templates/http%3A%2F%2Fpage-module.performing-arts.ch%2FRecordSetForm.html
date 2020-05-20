@@ -15,6 +15,7 @@
         rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
         identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier"
         label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLabel"
+        virtual="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetVirtual"
         type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
         parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent"
         documentary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm"
@@ -29,8 +30,15 @@
         <div style="display: none;">
             <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "rico:RecordSet"]]'></semantic-form-hidden-input>
         </div>
-        <semantic-form-text-input for="identifier"></semantic-form-text-input>
-        <semantic-form-text-input for="label"></semantic-form-text-input>
+        <bs-row>
+          <bs-col sm='8'>
+              <semantic-form-text-input for="identifier"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-checkbox-input for='virtual'></semantic-form-checkbox-input>
+          </bs-col>
+        </bs-row>
+        <semantic-form-text-input for="label"></semantic-form-text-input>        
         <semantic-form-checklist-input type='radio' row=true for="type"></semantic-form-checklist-input>
         <semantic-form-tree-picker-input for="documentary_form"></semantic-form-tree-picker-input>
         <semantic-form-tree-picker-input for="parent" >

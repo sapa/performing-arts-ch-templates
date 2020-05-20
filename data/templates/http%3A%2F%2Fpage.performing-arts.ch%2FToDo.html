@@ -458,6 +458,33 @@
             </bs-col>
         </bs-tab>
 
+        <bs-tab event-key='5' title='Virtual Record Sets'>
+
+            <semantic-table 
+                query='SELECT DISTINCT ?rr WHERE {
+                        ?rr <http://temp.performing-arts.ch/isVirtual> true ;
+                        rdf:type/rdfs:subClassOf* rico:RecordResource .
+                    }' 
+                column-configuration='[
+                    {"displayName": "Record Resource", "variableName": "rr"},
+                    {"displayName": "Subjects", "cellTemplate": "{{>subjects}}"}
+                    ]'
+                number-of-displayed-rows=20
+                no-result-template='No results found.'
+                options='{"showFilter": true}'>
+                <template id='subjects'> 
+                    <semantic-query 
+                      query='SELECT DISTINCT ?subject WHERE { <{{rr.value}}> rico:hasSubject ?subject . }'
+                      template = '{{>subject-list}} '>           
+                      <template id='subject-list'> 
+                        <div>{{#each bindings}}{{#if @first}}<semantic-link iri="{{subject.value}}"></semantic-link>{{else}}, <semantic-link iri="{{subject.value}}"></semantic-link>{{/if}}{{/each}}</div>
+                      </template>
+                    </semantic-query>   
+                  </template>
+            </semantic-table>           
+
+        </bs-tab>
+
     </bs-tabs>
 
   [[/if]]
