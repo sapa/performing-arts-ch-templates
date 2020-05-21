@@ -119,11 +119,11 @@
 >
 
 <semantic-search-query-constant domain='<[[resolvePrefix "frbroo:F25_Performance_Plan"]]>'
-    query='SELECT ?plan
-    WHERE {
+    query='SELECT ?plan ?titlelabel ?season WHERE {
         ?genericperformance crm:P8_took_place_on_or_within ?? ;
           a frbroo:F31_Performance ;
           frbroo:R25_performed ?plan .
+        ?plan rdfs:label ?titlelabel .
         ?expressioncreation frbroo:R17_created ?plan .
         OPTIONAL {
           ?expressioncreation crm:P10_falls_within ?season .
@@ -163,7 +163,7 @@
 
         <semantic-search-result>
           <semantic-table 
-            query='SELECT distinct ?plan ?season ?titlelabel ?stagedirection WHERE { }' 
+            query='SELECT DISTINCT ?plan ?season ?titlelabel ?stagedirection WHERE { }' 
             id='search-result'
             column-configuration='[
               {"displayName": "Season", "variableName": "season"}, 
