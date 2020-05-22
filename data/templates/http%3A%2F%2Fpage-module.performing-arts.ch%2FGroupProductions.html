@@ -138,7 +138,7 @@
           ?expressioncreation crm:P10_falls_within ?season .
           FILTER(CONTAINS(STR(?season), "/s/"))
       }
-    } ORDER BY ASC(?season)'>
+    }'>
 </semantic-search-query-constant>
 
 <div data-flex-layout="row stretch-stretch">
@@ -183,7 +183,8 @@
                 crm:P8_took_place_on_or_within ?venue .
               ?venue rdfs:label ?venuelabel .
             }
-        } GROUP BY ?season ?plan ?titlelabel' 
+        } GROUP BY ?season ?plan ?titlelabel
+        ORDER BY ASC(?season)' 
           id='search-result'
           column-configuration='[
             {"displayName": "Season", "variableName": "season"}, 
