@@ -72,29 +72,24 @@
         </bs-col>
         <bs-col sm="4">
             <semantic-query 
-                query='SELECT DISTINCT ?person ?fieldlabel ?personlabel (GROUP_CONCAT(DISTINCT ?eventstr; SEPARATOR=", ") AS ?lifedates)
+                query='SELECT DISTINCT ?person ?fieldlabel (GROUP_CONCAT(DISTINCT ?eventstr; SEPARATOR=", ") AS ?lifedates)
                 WHERE {
                     VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlacePersons>) }
-                    ?event crm:P7_took_place_at ?? ;
-                        a ?eventtype .
-                    FILTER(?eventtype IN (crm:E67_Birth, crm:E69_Death))
-                    { ?person crm:P98i_was_born ?event . } UNION { ?person crm:P100i_died_in ?event . }
-                    ?person rdfs:label ?personlabel .
+                    ?event crm:P7_took_place_at ?? .
                     {
-                        ?event a crm:E67_Birth ;
-                            crm:P4_has_time-span ?dobts .
-                        ?dobts crm:P82a_begin_of_the_begin ?dob .
-                        BIND(CONCAT("* ", STR(DAY(?dob)), ".", STR(MONTH(?dob)), ".", STR(YEAR(?dob))) as ?eventstr)
+                        ?event a crm:E67_Birth .
+                        ?person crm:P98i_was_born ?event .
+                        ?person rico:birthDate [ rico:normalizedDateValue ?dob ] .
+                        BIND(CONCAT("* ", SUBSTR(?dob, 0, 4)) as ?eventstr)
                     }
                     UNION 
                     {
-                        ?event a crm:E69_Death ;
-                            crm:P4_has_time-span ?dodts .
-                        ?dodts crm:P82a_begin_of_the_begin ?dod .
-                        BIND(CONCAT("† ", STR(DAY(?dod)), ".", STR(MONTH(?dod)), ".", STR(YEAR(?dod))) as ?eventstr)
-                            
+                        ?event a crm:E69_Death .
+                        ?person crm:P100i_died_in ?event .
+                        ?person rico:deathDate [ rico:normalizedDateValue ?dob ] .
+                        BIND(CONCAT("† ", SUBSTR(?dob, 0, 4)) as ?eventstr)                            
                     }
-                } GROUP BY ?person ?fieldlabel ?personlabel
+                } GROUP BY ?person ?fieldlabel
                 ORDER BY ASC(?personlabel)'
                 template='<div>{{#each bindings}}
                     {{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{fieldlabel.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}

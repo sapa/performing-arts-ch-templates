@@ -106,16 +106,14 @@
         <semantic-search-result>
           <!-- TODO: make sure that only one place is found or aggregate them -->
           <semantic-table 
-            query='SELECT DISTINCT ?subject ?place ?begin
+            query='SELECT DISTINCT ?subject ?place ?beginning
             WHERE {
               OPTIONAL {
                 ?subject crm:P156_occupies ?p .
                 ?p crm:P89_falls_within ?place .
               }
               OPTIONAL {
-                ?subject crm:P108i_was_produced_by ?production.
-                ?production crm:P4_has_time-span ?productiontimespan.
-                ?productiontimespan crm:P82a_begin_of_the_begin ?begin .
+                ?subject rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ] .
               }
             } ORDER BY DESC(?score)'
             id="venue-table" 
@@ -123,7 +121,7 @@
             column-configuration='[
               {"displayName": "Venue", "cellTemplate": "{{> venue}}"} ,
               {"displayName": "Place", "variableName": "place"} ,
-              {"displayName": "Dates", "cellTemplate": "{{> dates}}", "variableName": "begin"}
+              {"displayName": "Dates", "cellTemplate": "{{> dates}}", "variableName": "beginning"}
             ]'>
 
             <template id='venue'>                     
@@ -145,18 +143,12 @@
                 <semantic-query 
                   query='SELECT ?dates WHERE {
                     OPTIONAL {
-                      <{{subject.value}}> crm:P108i_was_produced_by ?production.
-                      ?production crm:P4_has_time-span ?productiontimespan.
-                      ?productiontimespan crm:P82a_begin_of_the_begin ?begin .    
-                      BIND(STR(YEAR(?begin)) AS ?beginyear)
+                      <{{subject.value}}> rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ] .
                     }
                     OPTIONAL {
-                      <{{subject.value}}> crm:P13i_was_destroyed_by ?destruction.
-                      ?destruction crm:P4_has_time-span ?destructiontimespan.
-                      ?destructiontimespan crm:P82b_end_of_the_end ?end .    
-                      BIND(STR(YEAR(?end)) AS ?endyear)
+                      <{{subject.value}}> rico:hasEndDate [ rico:normalizedDateValue ?end ] .
                     }
-                    BIND(CONCAT(COALESCE(?beginyear, "X"), "-", COALESCE(?endyear, "X")) AS ?predates)
+                    BIND(CONCAT(COALESCE(?beginning, "X"), "-", COALESCE(?end, "X")) AS ?predates)
                     BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
                   }'
                   template = '{{> dates-list}} '>           

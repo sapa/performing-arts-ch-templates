@@ -71,9 +71,7 @@ config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?fi
             query='SELECT DISTINCT ?subject ?dob ?description
             WHERE {
               OPTIONAL {
-                ?subject crm:P98i_was_born ?birth .
-                ?birth crm:P4_has_time-span ?bts .
-                ?bts crm:P82a_begin_of_the_begin ?dob .
+                ?subject rico:birthDate [ rico:normalizedDateValue ?dob ]
               }
               OPTIONAL {
                 ?subject crm:P3_has_note ?note .
@@ -111,16 +109,12 @@ config='[[mergeSearchConfig (searchConfigForFieldsFromQuery "SELECT ?field { ?fi
                 <semantic-query 
                   query='SELECT ?lifedates WHERE {
                       OPTIONAL {
-                        <{{subject.value}}> crm:P98i_was_born ?birth .
-                        ?birth crm:P4_has_time-span ?bts .
-                        ?bts crm:P82a_begin_of_the_begin ?dob .
-                        BIND(CONCAT("* ", STR(YEAR(?dob))) as ?birthyear)
+                        <{{subject.value}}> rico:birthDate [ rico:normalizedDateValue ?dob ] .
+                        BIND(CONCAT("* ", SUBSTR(?dob, 0, 4)) as ?birthyear)
                       }
                       OPTIONAL {
-                        <{{subject.value}}> crm:P100i_died_in ?death .
-                        ?death crm:P4_has_time-span ?dts .
-                        ?dts crm:P82a_begin_of_the_begin ?dod .
-                        BIND(CONCAT("† ", STR(YEAR(?dod))) as ?deathyear)
+                        <{{subject.value}}> rico:deathDate [ rico:normalizedDateValue ?dod ] .
+                        BIND(CONCAT("† ", SUBSTR(?dod, 0, 4)) as ?deathyear)
                       }
                       BIND(IF(BOUND(?birthyear) && BOUND(?deathyear), CONCAT(?birthyear, ", ", ?deathyear), IF(BOUND(?birthyear), ?birthyear, IF(BOUND(?deathyear), ?deathyear, ""))) AS ?lifedates)
                     }'

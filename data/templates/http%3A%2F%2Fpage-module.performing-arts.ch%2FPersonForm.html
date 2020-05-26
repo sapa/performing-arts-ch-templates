@@ -19,8 +19,10 @@
         misc_appellation="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonMiscAppellation"
         gender="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGender"
         swiss="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonSwiss"
-        birth="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirth"
-        death="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeath"
+        birth_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirthDate"
+        birth_place="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirthPlace"
+        death_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate"
+        death_place="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace"
         description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description"
         website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
         same_as="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
@@ -65,36 +67,19 @@
             <semantic-form-checkbox-input for='swiss'></semantic-form-checkbox-input>
           </bs-col>
         </bs-row>
+
         <bs-row>
-          <bs-col sm='6'>
-            <semantic-form-composite-input for='birth' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
-            birth_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirthDate"
-            birth_place="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonBirthPlace"
-          ]]'>
-            <bs-row>
-              <bs-col sm='6'>
-                <semantic-form-datetime-input for='birth_date'></semantic-form-datetime-input>
-              </bs-col>
-              <bs-col sm='6'>
-                  <semantic-form-tree-picker-input for='birth_place'></semantic-form-tree-picker-input>
-              </bs-col>
-            </bs-row>
-          </semantic-form-composite-input>
+          <bs-col sm='3'>
+            <semantic-form-text-input for='birth_date'></semantic-form-text-input>
           </bs-col>
-          <bs-col sm='6'>
-            <semantic-form-composite-input for='death' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
-            death_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathDate"
-            death_place="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace"
-          ]]'>
-            <bs-row>
-              <bs-col sm='6'>
-                <semantic-form-datetime-input for='death_date'></semantic-form-datetime-input>
-              </bs-col>
-              <bs-col sm='6'>
-                  <semantic-form-tree-picker-input for='death_place'></semantic-form-tree-picker-input>
-              </bs-col>
-            </bs-row>
-          </semantic-form-composite-input>
+          <bs-col sm='3'>
+            <semantic-form-tree-picker-input for='birth_place'></semantic-form-tree-picker-input>
+          </bs-col>
+          <bs-col sm='3'>
+            <semantic-form-text-input for='death_date'></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='3'>
+            <semantic-form-tree-picker-input for='death_place'></semantic-form-tree-picker-input>
           </bs-col>
         </bs-row>
         <bs-row>

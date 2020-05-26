@@ -88,18 +88,12 @@
                 query='SELECT ?dates
                 WHERE {
                     OPTIONAL {
-                        ?? crm:P108i_was_produced_by ?production.
-                        ?production crm:P4_has_time-span ?productiontimespan.
-                        ?productiontimespan crm:P82a_begin_of_the_begin ?begin .    
-                        BIND(STR(YEAR(?begin)) AS ?beginyear)
+                        ?? rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ]
                     }
                     OPTIONAL {
-                        ?? crm:P13i_was_destroyed_by ?destruction.
-                        ?destruction crm:P4_has_time-span ?destructiontimespan.
-                        ?destructiontimespan crm:P82b_end_of_the_end ?end .    
-                        BIND(STR(YEAR(?end)) AS ?endyear)
+                        ?? rico:hasEndDate [ rico:normalizedDateValue ?end ]
                     }
-                    BIND(CONCAT(COALESCE(?beginyear, "X"), "-", COALESCE(?endyear, "X")) AS ?predates)
+                    BIND(CONCAT(COALESCE(?beginning, "X"), "-", COALESCE(?end, "X")) AS ?predates)
                     BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
                 }'
                 template='{{#each bindings}}<p>{{dates.value}}</p>{{/each}}'>

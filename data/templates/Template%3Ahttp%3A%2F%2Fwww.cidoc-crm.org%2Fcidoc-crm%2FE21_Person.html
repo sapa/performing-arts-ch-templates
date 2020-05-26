@@ -73,13 +73,12 @@
                 <!-- date and place of birth -->
                 <semantic-query 
                     query='SELECT ?birthdate ?birthplace WHERE {
-                        ?? crm:P98i_was_born ?birth .
                         OPTIONAL {
-                            ?birth crm:P4_has_time-span ?timespan .
-                            ?timespan crm:P82a_begin_of_the_begin ?dob .
-                            BIND(CONCAT(STR(DAY(?dob)), ".", STR(MONTH(?dob)), ".", STR(YEAR(?dob))) AS ?birthdate)
+                            ?? rico:birthDate ?b .
+                            ?b rico:normalizedDateValue ?birthdate .
                         }
                         OPTIONAL {
+                            ?? crm:P98i_was_born ?birth .
                             ?birth crm:P7_took_place_at ?birthplace .
                             FILTER(!CONTAINS(STR(?birthplace), "wikidata"))
                         }
@@ -91,13 +90,12 @@
                 <!-- date and place of death -->
                 <semantic-query 
                     query='SELECT ?deathdate ?deathplace WHERE {
-                        ?? crm:P100i_died_in ?death .
                         OPTIONAL {
-                            ?death crm:P4_has_time-span ?timespan .
-                            ?timespan crm:P82a_begin_of_the_begin ?dod .
-                            BIND(CONCAT(STR(DAY(?dod)), ".", STR(MONTH(?dod)), ".", STR(YEAR(?dod))) AS ?deathdate)
+                            ?? rico:deathDate ?d .
+                            ?d rico:normalizedDateValue ?deathdate .
                         }
                         OPTIONAL {
+                            ?? crm:P100i_died_in ?death .
                             ?death crm:P7_took_place_at ?deathplace .
                             FILTER(!CONTAINS(STR(?deathplace), "wikidata"))
                         }

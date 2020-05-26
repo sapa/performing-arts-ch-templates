@@ -122,7 +122,7 @@
 
         <semantic-search-result>
           <semantic-table 
-            query='SELECT DISTINCT ?subject ?formationstart (GROUP_CONCAT(DISTINCT ?appellationvalue; SEPARATOR=", ") AS ?additionalnames) WHERE {
+            query='SELECT DISTINCT ?subject ?beginning (GROUP_CONCAT(DISTINCT ?appellationvalue; SEPARATOR=", ") AS ?additionalnames) WHERE {
               OPTIONAL {
                 ?subject rdfs:label ?label ;
                   crm:P131_is_identified_by ?appellation .
@@ -133,19 +133,16 @@
                   FILTER(?label != ?appellationvalue)
               }
               OPTIONAL {
-                ?subject crm:P95i_was_formed_by ?formation .
-                ?formation a crm:E66_Formation ;
-                  crm:P4_has_time-span ?formationtime .
-                ?formationtime crm:P82a_begin_of_the_begin ?formationstart .
+                ?subject rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ]
               }
-            } GROUP BY ?subject ?formationstart'
+            } GROUP BY ?subject ?beginning'
             id="group-table" 
             options='{"showFilter": false, "showTableHeading": true}'
             column-configuration='[
               {"displayName": "Name", "variableName": "subject"} ,
               {"displayName": "Additional Names", "cellTemplate": "{{> additional-names}}", "variableName": "additionalnames"} ,
               {"displayName": "Place", "cellTemplate": "{{> places}}"},
-              {"displayName": "Dates", "cellTemplate": "{{> dates}}", "variableName": "formationstart"}
+              {"displayName": "Dates", "cellTemplate": "{{> dates}}", "variableName": "beginning"}
             ]'>
 
             <template id='additional-names'>                     
@@ -193,18 +190,12 @@
                 <semantic-query 
                   query='SELECT ?dates WHERE {
                         OPTIONAL {
-                          <{{subject.value}}> crm:P95i_was_formed_by ?formation .
-                          ?formation a crm:E66_Formation ;
-                              crm:P4_has_time-span ?formationtime .
-                          ?formationtime rdfs:label ?formationlabel .
+                          <{{subject.value}}> rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ]
                         }
                         OPTIONAL {
-                          <{{subject.value}}> crm:P99i_was_dissolved_by ?dissolution .
-                          ?dissolution a crm:E68_Dissolution ;
-                            crm:P4_has_time-span ?dissolutiontime .
-                          ?dissolutiontime rdfs:label ?dissolutionlabel .
+                          <{{subject.value}}> rico:hasEndDate [ rico:normalizedDateValue ?end ]
                         }
-                        BIND(CONCAT(COALESCE(?formationlabel, "X"), "-", COALESCE(?dissolutionlabel, "X")) AS ?predates)
+                        BIND(CONCAT(COALESCE(?beginning, "X"), "-", COALESCE(?end, "X")) AS ?predates)
                         BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
                         }'
                   template = '{{> dates-list}} '>           
