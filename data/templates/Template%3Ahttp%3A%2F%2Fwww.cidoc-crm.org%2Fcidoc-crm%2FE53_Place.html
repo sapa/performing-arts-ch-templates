@@ -73,23 +73,25 @@
             <semantic-query 
                 query='SELECT DISTINCT ?person ?fieldlabel (GROUP_CONCAT(DISTINCT ?eventstr; SEPARATOR=", ") AS ?lifedates)
                 WHERE {
-                    VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlacePersons>) }
-                    ?event crm:P7_took_place_at ?? .
-                    {
-                        ?event a crm:E67_Birth .
-                        ?person crm:P98i_was_born ?event .
-                        ?person rico:birthDate [ rico:normalizedDateValue ?dob ] .
-                        BIND(CONCAT("* ", SUBSTR(?dob, 0, 4)) as ?eventstr)
-                    }
-                    UNION 
-                    {
-                        ?event a crm:E69_Death .
-                        ?person crm:P100i_died_in ?event .
-                        ?person rico:deathDate [ rico:normalizedDateValue ?dob ] .
-                        BIND(CONCAT("† ", SUBSTR(?dob, 0, 4)) as ?eventstr)                            
-                    }
+                    SELECT * {
+                        VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlacePersons>) }
+                        ?event crm:P7_took_place_at ?? .
+                        {
+                            ?event a crm:E67_Birth .
+                            ?person crm:P98i_was_born ?event .
+                            ?person rico:birthDate [ rico:normalizedDateValue ?dob ] .
+                            BIND(CONCAT("* ", SUBSTR(?dob, 0, 4)) as ?eventstr)
+                        }
+                        UNION 
+                        {
+                            ?event a crm:E69_Death .
+                            ?person crm:P100i_died_in ?event .
+                            ?person rico:deathDate [ rico:normalizedDateValue ?dod ] .
+                            BIND(CONCAT("† ", SUBSTR(?dod, 0, 4)) as ?eventstr)                            
+                        }
+                    } ORDER BY ASC(?eventstr)
                 } GROUP BY ?person ?fieldlabel
-                ORDER BY ASC(?personlabel)'
+                ORDER BY ASC(?eventstr)'
                 template='<div>{{#each bindings}}
                     {{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{fieldlabel.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}
                         <li><semantic-link iri="{{person.value}}">{{person.value}}</semantic-link>
