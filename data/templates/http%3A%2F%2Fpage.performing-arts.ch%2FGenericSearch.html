@@ -1,0 +1,60 @@
+[[#> sapaModule:BaseSearchPartial limit=500 showTable="true" defaultTabView="table"]]
+  <semantic-search-query-keyword
+    domain='<http://internalschema/Common>'
+    query='SELECT DISTINCT ?subject WHERE {
+  							{{
+                ?subject rdf:type frbroo:F25_Performance_Plan ;
+                  rdfs:label ?name .
+                FILTER(CONTAINS(STR(?subject), "/w/"))
+                BIND (("https://png.pngtree.com/svg/20160322/4c838f318b.svg") AS ?icon)
+                BIND (("Production") AS ?title)
+								}   
+                UNION
+                {
+                ?subject rdf:type crm:E21_Person ;
+                  crm:P131_is_identified_by ?identifier .
+                ?identifier rdf:value ?name .  
+                FILTER(CONTAINS(STR(?subject), "/a/"))
+                BIND (("https://static.thenounproject.com/png/17235-200.png") AS ?icon)
+                BIND (("Person") AS ?title)
+								}
+                UNION
+                {
+                ?subject rdf:type/rdfs:subClassOf* crm:E74_Group ;
+       				 	  crm:P131_is_identified_by ?identifier .
+      					?identifier rdf:value ?name .  
+                FILTER(CONTAINS(STR(?subject), "/a/"))
+                BIND (("https://image.flaticon.com/icons/png/512/32/32441.png") AS ?icon)
+                BIND (("Group") AS ?title)
+								}
+                UNION
+                {
+                ?subject a crm:E22_Man-Made_Object ;
+       					  crm:P2_has_type spav:dwmkn ;
+        				  rdfs:label ?name. 
+                FILTER(CONTAINS(STR(?subject), "/o/"))
+                BIND (("https://static.thenounproject.com/png/79187-200.png") AS ?icon)
+                BIND (("Venue") AS ?title)
+								}   
+                UNION
+                {
+								?subject a crm:E53_Place ; 
+                  rdfs:label ?name . 
+                FILTER(CONTAINS(STR(?subject), "/p/"))
+                BIND (("https://www.picodash.com/icon_places.svg") AS ?icon)
+                BIND (("Place") AS ?title)
+								}}
+        SERVICE <http://www.bigdata.com/rdf/search#search> {
+            ?name bds:search ?__token__ ;
+            bds:minRelevance "0.1" ;
+            bds:relevance ?score ; 
+            bds:matchAllTerms "true" .
+        }
+        } ORDER BY DESC(?score)'
+    _default-query='SELECT DISTINCT ?subject WHERE {
+
+    } '
+  >
+ </semantic-search-query-keyword>
+
+[[/sapaModule:BaseSearchPartial]]

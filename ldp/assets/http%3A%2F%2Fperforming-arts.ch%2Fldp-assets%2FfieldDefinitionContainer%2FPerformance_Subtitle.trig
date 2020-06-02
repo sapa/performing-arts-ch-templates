@@ -1,7 +1,7 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Subtitle/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Subtitle>
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/frbr/F31_Performance>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://iflastandards.info/ns/fr/frbr/frbroo/F31_Performance>;
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167515;
     <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167514;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
@@ -13,7 +13,7 @@
   _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167514 a <http://spinrdf.org/sp#Query> .
   
   _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167515 <http://spinrdf.org/sp#text> """INSERT {?perform  crm:P9_consists_of  $subject;
-                    frbr:R25_performed ?pp.
+                    frbroo:R25_performed ?pp.
   ?pp crm:P1_is_identified_by ?identifier.
    ?identifier a  crm:E41_Appellation ;
      
@@ -34,7 +34,7 @@
   
   _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167514 <http://spinrdf.org/sp#text> """SELECT ?value  WHERE {
   ?perform  crm:P9_consists_of  $subject;
-                    frbr:R25_performed ?pp.
+                    frbroo:R25_performed ?pp.
   ?pp crm:P1_is_identified_by ?identifier.
    ?identifier a  crm:E41_Appellation ;
     

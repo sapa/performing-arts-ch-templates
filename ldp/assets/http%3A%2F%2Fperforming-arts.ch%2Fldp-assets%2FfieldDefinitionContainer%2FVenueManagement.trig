@@ -1,0 +1,53 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-be27f6042efc420b8bc38476524c5534-zw10yy;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-be27f6042efc420b8bc38476524c5534-q7xu0k;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "géré par"@fr, "gestito da"@it, "managed by"@en .
+  
+  _:genid-be27f6042efc420b8bc38476524c5534-q7xu0k a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
+  
+  _:genid-be27f6042efc420b8bc38476524c5534-zw10yy a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT DISTINCT $value WHERE {
+	{
+    	?activity crm:P16_used_specific_object $subject .
+	}
+	UNION
+	{
+		?parent crm:P46_is_composed_of $subject .
+		?activity crm:P16_used_specific_object ?parent .
+	}
+	?activity crm:P2_has_type spav:mujfv .
+	$value crm:P14i_performed ?activity .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement> <http://www.w3.org/2000/01/rdf-schema#label>
+      "geführt von"@de;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
+  
+  _:genid-be27f6042efc420b8bc38476524c5534-q7xu0k <http://spinrdf.org/sp#text> """INSERT {
+	$subject crm:P14i_performed ?activity .
+	?activity a crm:E7_Activity ;
+		crm:P2_has_type spav:mujfv ;
+		crm:P16_used_specific_object ?value .  
+} WHERE {
+	BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), STR(?value))))) as ?activity)
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement> <http://www.w3.org/2000/01/rdf-schema#comment>
+      "display only";
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-05-19T13:59:09.949Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement> a
+      <http://www.w3.org/ns/ldp#Resource> .
+}

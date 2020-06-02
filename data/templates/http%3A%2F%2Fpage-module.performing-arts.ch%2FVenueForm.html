@@ -1,7 +1,7 @@
   <div data-flex-layout='row top-stretch'>
     <semantic-form 
      [[#if create]]
-        new-subject-template='http://data.performing-arts.ch/t/{{UUID}}'
+        new-subject-template='http://data.performing-arts.ch/o/{{UUID}}'
         post-action="redirect"
       [[else]]
         subject='[[this]]'
@@ -10,32 +10,111 @@
       
       browser-persistence=true
       persistence='ldp' 
-      form-id='places'
+      form-id='venues'
       fields='[[fieldDefinitions
-        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type"
-        cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_CIDOC_type"
-        official_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Official_name_(venue)"
-        alternative_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Alternative_name_(venue)"
-        acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Acronym_(venue)"
-        occupies_location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_occupies_location"
-        formation_year="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_formed_by_timespan"
-        dissolution_year="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E74_Group_was_dissolved_by_timespan"
-        website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
-        sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
+        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
+        cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype"
+        common_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitle"
+        common_title_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType"
+        alternative_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle"
+        acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym"
+        description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description"
+        byline="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Byline"
+        contains="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains"
+        location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation"
+        beginning="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueBeginning"
+        end="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueEnd"
+        record_sets="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf"
+        note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
+        note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
+        sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-            <semantic-form-hidden-input for='rdf_type' default-value='http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object'></semantic-form-hidden-input>
-            <semantic-form-hidden-input for='cidoc_type' default-value='http://vocab.performing-arts.ch/dwmkn'></semantic-form-hidden-input>
+            <semantic-form-hidden-input for='rdf_type' default-values='["[[resolvePrefix "crm:E22_Man-Made_Object"]]", "[[resolvePrefix "rico:Thing"]]"]'></semantic-form-hidden-input>
+            <semantic-form-hidden-input for='cidoc_type' default-value='[[resolvePrefix "spav:dwmkn"]]'></semantic-form-hidden-input>
         </div>
-        <semantic-form-text-input for="official_name"></semantic-form-text-input>
-        <semantic-form-text-input for="alternative_name"></semantic-form-text-input>
-        <semantic-form-text-input for="acronym"></semantic-form-text-input>
-        <semantic-form-tree-picker-input for="occupies_location" ></semantic-form-tree-picker-input>
-        <semantic-form-text-input for="formation_year"></semantic-form-text-input>
-        <semantic-form-text-input for="dissolution_year"></semantic-form-text-input>
-        <semantic-form-text-input for="website"></semantic-form-text-input>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input for='common_title' languages='["en","de","fr","it"]'></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for='common_title_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="alternative_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="byline"></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="description"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='6'>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm="6">
+            <semantic-form-tree-picker-input for="location" ></semantic-form-tree-picker-input>
+          </bs-col>
+          <bs-col sm="3">
+            <semantic-form-text-input for="beginning"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm="3">
+            <semantic-form-text-input for="end"></semantic-form-text-input>
+          </bs-col>        
+        </bs-row>
+        <semantic-form-autocomplete-input for="contains">
+          <semantic-form new-subject-template="http://data.performing-arts.ch/o/{{UUID}}" fields='[[fieldDefinitions
+            subvenue_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
+            subvenue_cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype"
+            subvenue_official_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialTitle"
+          ]]'>
+            <div style="display: none;">
+              <semantic-form-hidden-input for='subvenue_rdf_type' default-values='["[[resolvePrefix "crm:E22_Man-Made_Object"]]", "[[resolvePrefix "rico:Thing"]]"]'></semantic-form-hidden-input>
+              <semantic-form-hidden-input for='subvenue_cidoc_type' default-value='[[resolvePrefix "spav:dwmkn"]]'></semantic-form-hidden-input>
+            </div>
+            <semantic-form-text-input for="subvenue_official_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
+            <button name="submit" class="btn btn-default">Create Venue</button>
+          </semantic-form>
+        </semantic-form-autocomplete-input>
+
+        <semantic-form-autocomplete-input for="record_sets">
+          <semantic-form new-subject-template="http://data.performing-arts.ch/r/{{UUID}}" fields='[[fieldDefinitions
+            record_set_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
+            record_set_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier"
+            record_set_label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLabel"
+            record_set_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
+            record_set_parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent"
+          ]]'>
+            <div style="display: none;">
+                <semantic-form-hidden-input for='record_set_rdf_type' default-value='[[resolvePrefix "rico:RecordSet"]]'></semantic-form-hidden-input>
+            </div>
+            <semantic-form-text-input for="record_set_identifier"></semantic-form-text-input>
+            <semantic-form-text-input for="record_set_label"></semantic-form-text-input>
+            <semantic-form-checklist-input type='radio' row=true for="record_set_type"></semantic-form-checklist-input>
+            <!-- TODO: automatically add correct parent? -->
+            <semantic-form-tree-picker-input for="record_set_parent" ></semantic-form-tree-picker-input>
+            <button name="submit" class="btn btn-default">Create Record Set</button>
+          </semantic-form>
+        </semantic-form-autocomplete-input>
+
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="note_public" multiline=true></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="note_internal" multiline=true></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
         <semantic-form-text-input for="sameAs"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->

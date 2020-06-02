@@ -1,0 +1,34 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled> a
+      <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Group>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "controlli"@it .
+  
+  _:genid-ab56b43dee4e410f89c47716b5b746ca-x9nov5 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled> <http://www.metaphacts.com/ontology/fields#domain>
+      <https://www.ica.org/standards/RiC/ontology#Group>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Controls"@en;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-ab56b43dee4e410f89c47716b5b746ca-o2rwq .
+  
+  _:genid-ab56b43dee4e410f89c47716b5b746ca-o2rwq <http://spinrdf.org/sp#text> "SELECT ?value WHERE { ?value rico:controlledBy $subject . }";
+    a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-ab56b43dee4e410f89c47716b5b746ca-x9nov5 <http://spinrdf.org/sp#text> "INSERT { $value rico:controlledBy $subject } WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled> <http://www.w3.org/2000/01/rdf-schema#label>
+      "contrôles"@fr, "kontrolliert"@de;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-ab56b43dee4e410f89c47716b5b746ca-x9nov5;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "display only";
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-10T21:37:02.591Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled> a
+      <http://www.w3.org/ns/ldp#Resource> .
+}

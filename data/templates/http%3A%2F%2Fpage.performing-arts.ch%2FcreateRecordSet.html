@@ -5,8 +5,10 @@
 </ol>
 
 <div class="page">
-    <div class='page__body'>
-        <h2>New Record Set</h2>
-        [[> sapaModule:RecordSetForm create=true]]
-    </div>
+  <div class='page__body'>
+    <mp-has-permission permission='forms:ldp'>
+      <h2>New Record Set</h2>
+      [[> sapaModule:RecordSetForm create=true]]
+    </mp-has-permission>
+  </div>
 </div>

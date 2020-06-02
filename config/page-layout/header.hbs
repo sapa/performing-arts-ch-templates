@@ -2,7 +2,7 @@
 
     <bs-navbar-header>
         <bs-navbar-brand>
-            <a href="/">{{deploymentTitle}}</a>
+            <a href="/">{{deploymentTitle}} <small><sub>/ preview</sub><small></a>
         </bs-navbar-brand>
         <bs-navbar-toggle/>
     </bs-navbar-header>
@@ -49,9 +49,19 @@
                         <bs-menu-item>Ontologies</bs-menu-item>
                     </mp-resource-link-container>
                 </mp-anonymous-hidden>
+                <mp-anonymous-hidden>
+                    <mp-resource-link-container uri="http://page.performing-arts.ch/Stats">
+                        <bs-menu-item>Statistics</bs-menu-item>
+                    </mp-resource-link-container>
+                </mp-anonymous-hidden>
+                <mp-anonymous-hidden>
+                    <mp-resource-link-container uri="http://page.performing-arts.ch/ToDo">
+                        <bs-menu-item>To Do</bs-menu-item>
+                    </mp-resource-link-container>
+                </mp-anonymous-hidden>
             </bs-nav-dropdown>
 
-            <mp-has-permission permission='sparql:update'>
+            <mp-has-permission permission='forms:ldp'>
                 <bs-nav-dropdown title="Create Entities" id="bg-nested-dropdown">
                     <mp-resource-link-container uri='http://page.performing-arts.ch/createPerson'>
                         <bs-menu-item>Person</bs-menu-item>

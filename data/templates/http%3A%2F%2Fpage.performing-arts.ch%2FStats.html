@@ -1,0 +1,30 @@
+<div class="page">
+  <div class='page__body'>
+    [[#if (hasPermission "forms:ldp:*")]] 
+    <h2>Statistics</h2>
+    <h4>Recently edited items</h4>
+    <semantic-table 
+    query='SELECT ?entity ?datetimestr ?username WHERE {
+        GRAPH ?graph {
+            Platform:formContainer <http://www.w3.org/ns/ldp#contains> ?container .
+            ?container prov:generatedAtTime ?datetime ;
+              prov:wasAttributedTo ?user .
+          }
+        BIND(STRAFTER(STR(?user), "/user/") AS ?username)
+        FILTER(?username != "migration")
+        BIND(IRI(STRBEFORE(STR(?graph), "/container/context")) AS ?entity)
+        BIND(CONCAT("0", STR(MINUTES(?datetime))) AS ?minutes)
+        BIND(CONCAT(STR(DAY(?datetime)), ".", STR(MONTH(?datetime)), ".", STR(YEAR(?datetime)), ", ", STR(HOURS(?datetime)), ":", SUBSTR(?minutes, STRLEN(?minutes)-1)) as ?datetimestr)
+    } ORDER BY DESC (?datetime)
+    LIMIT 100' 
+    column-configuration='[
+        {"variableName": "entity", "displayName": "Entity"}, 
+        {"variableName": "datetimestr" ,"displayName": "Date", "cellTemplate":"{{datetimestr.value}}"}, 
+        {"variableName": "username", "displayName": "User"}
+    ]'
+    number-of-displayed-rows=20
+    options='{"showFilter": false}'>
+  </semantic-table>
+  [[/if]]
+  </div>
+</div>

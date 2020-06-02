@@ -10,7 +10,27 @@
 @navbar-link: hsl(0, 0%, 80%);
 @navbar-link-hover: hsl(0, 0%, 100%);
 @navbar-back: @base-color;
-// @navbar-back-hover: darken(@base-color, 30%);
+@navbar-back-hover: darken(@base-color, 4%);
+
+@font: 'Roboto';
+
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: @font, sans-serif;
+}
+
+body {
+    font-size: 1.6em;
+    font-weight: 400;
+}
+
+h2 {
+    margin: 0.25em 0 0.1em 0;
+}
+
+h5 {
+    font-size: 1em;
+    font-weight: 500;
+}
 
 a {
     color: @link;
@@ -22,6 +42,26 @@ a.unidentified {
 
 a:hover, a:focus {
     color: @link-hover;
+}
+
+.page__header-description {
+    padding-left: 1em;
+    margin-bottom: 1.2em;
+}
+.page__header-description p {
+    margin: 0.4em 0;
+}
+
+.component-page-toolbar__btn_edit {
+    display: none !important;
+}
+
+.component-page-toolbar__btn_show_graph {
+    display: none;
+}
+
+.component-page-toolbar__btn_show_diagram {
+    display: none !important;
 }
 
 .container-fluid {
@@ -38,6 +78,11 @@ a:hover, a:focus {
 
 .navbar-brand {
     float: none;
+    font-weight: 500;
+}
+
+.navbar-inverse .dropdown-menu {
+    background-color: @navbar-back !important;
 }
 
 .navbar-inverse .navbar-brand, .navbar-inverse .navbar-brand {
@@ -48,6 +93,13 @@ a:hover, a:focus {
     color: @navbar-link-hover; // brand link hover color
 }
 
+.navbar-inverse .dropdown-menu > .active > a, .navbar-inverse .dropdown-menu > .active > a:hover, .navbar-inverse .dropdown-menu > li > a:hover {
+    background-color: @navbar-back-hover !important;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    background-color: @navbar-back-hover !important;   
+}
 .navbar-inverse .navbar-nav > li > a {
     color: @navbar-link; // navigation link color
 }
@@ -84,12 +136,44 @@ a:hover, a:focus {
     color: black;
 }
 
+.table {
+    font-size: 1em;
+}
+
+.table > tbody + tbody {
+    border-top: 1px solid #DDD;
+}
+
+.checkbox, .control-label, .help-block, .radio, label {
+    font-size: 0.9em !important;
+}
+
+.pagination {
+    margin: 0px;
+}
+
+.btn {
+    padding: 6px 10px;
+}
+
 span.Tree--leafNode {
     margin-left: 0;
 }
 
 div.tree-view_children span.Tree--leafNode {
     margin-left: 20px;
+}
+
+div.facet-relations {
+    margin-top: 0;
+}
+
+div.facet__category-selector-holder {
+    display: none;
+}
+
+div.facet__relation__values__filter {
+    display: none;
 }
 
 #application > div > .footer {

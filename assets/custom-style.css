@@ -1,3 +1,23 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  font-size: 1.6em;
+  font-weight: 400;
+}
+h2 {
+  margin: 0.25em 0 0.1em 0;
+}
+h5 {
+  font-size: 1em;
+  font-weight: 500;
+}
 a {
   color: #0e619e;
 }
@@ -7,6 +27,22 @@ a.unidentified {
 a:hover,
 a:focus {
   color: #158ce4;
+}
+.page__header-description {
+  padding-left: 1em;
+  margin-bottom: 1.2em;
+}
+.page__header-description p {
+  margin: 0.4em 0;
+}
+.component-page-toolbar__btn_edit {
+  display: none !important;
+}
+.component-page-toolbar__btn_show_graph {
+  display: none;
+}
+.component-page-toolbar__btn_show_diagram {
+  display: none !important;
 }
 .container-fluid {
   padding-left: 24px;
@@ -19,6 +55,10 @@ a:focus {
 }
 .navbar-brand {
   float: none;
+  font-weight: 500;
+}
+.navbar-inverse .dropdown-menu {
+  background-color: #083658 !important;
 }
 .navbar-inverse .navbar-brand,
 .navbar-inverse .navbar-brand {
@@ -27,6 +67,15 @@ a:focus {
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
   color: #ffffff;
+}
+.navbar-inverse .dropdown-menu > .active > a,
+.navbar-inverse .dropdown-menu > .active > a:hover,
+.navbar-inverse .dropdown-menu > li > a:hover {
+  background-color: #062b45 !important;
+}
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+  background-color: #062b45 !important;
 }
 .navbar-inverse .navbar-nav > li > a {
   color: #cccccc;
@@ -61,11 +110,39 @@ a:focus {
 #tabs > .nav-tabs > li > a:hover {
   color: black;
 }
+.table {
+  font-size: 1em;
+}
+.table > tbody + tbody {
+  border-top: 1px solid #DDD;
+}
+.checkbox,
+.control-label,
+.help-block,
+.radio,
+label {
+  font-size: 0.9em !important;
+}
+.pagination {
+  margin: 0px;
+}
+.btn {
+  padding: 6px 10px;
+}
 span.Tree--leafNode {
   margin-left: 0;
 }
 div.tree-view_children span.Tree--leafNode {
   margin-left: 20px;
+}
+div.facet-relations {
+  margin-top: 0;
+}
+div.facet__category-selector-holder {
+  display: none;
+}
+div.facet__relation__values__filter {
+  display: none;
 }
 #application > div > .footer {
   background-color: #083658;

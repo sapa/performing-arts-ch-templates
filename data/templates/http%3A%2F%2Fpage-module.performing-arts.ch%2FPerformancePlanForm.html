@@ -12,20 +12,34 @@
       persistence='ldp' 
       form-id='places'
       fields='[[fieldDefinitions
-        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type"
-
+        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
         genre="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Genre"
-
-        comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Comment"
-        sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_sameAs"
+        comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
+        sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
+        activity="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity"
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-        <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "frbr:F25_Performance_Plan"]]'></semantic-form-hidden-input>
+        <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "frbroo:F25_Performance_Plan"]]'></semantic-form-hidden-input>
         </div>
-
         <semantic-form-tree-picker-input for="genre"></semantic-form-tree-picker-input>
+        <semantic-form-composite-input for="activity" new-subject-template="http://data.performing-arts.ch/x/{{UUID}}"
+          fields='[[fieldDefinitions
+            typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
+            Activity_Type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity_Type"
+            Carried_Out_by="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performed_By"
+          ]]'>
+        <div style="display: none;">
+          <semantic-form-hidden-input for='typeset' default-value='http://www.cidoc-crm.org/cidoc-crm/E7_Activity'></semantic-form-hidden-input>
+        </div>
+        <bs-col sm='6'>
+          <semantic-form-autocomplete-input for='Activity_Type'></semantic-form-autocomplete-input>          
+        </bs-col>
+        <bs-col sm='6'>
+          <semantic-form-autocomplete-input for='Carried_Out_by' placeholder='Search persons...'></semantic-form-autocomplete-input>
+        </bs-col>
+       </semantic-form-composite-input>
 
         <semantic-form-text-input for="comment"></semantic-form-text-input>
         <semantic-form-text-input for="sameAs"></semantic-form-text-input>

@@ -11,21 +11,18 @@
        persistence='ldp'             
        fields='[[fieldDefinitions
         Performance_Title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Title"
-        typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
+        typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_rdf_type"
         Activity="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity"
         genre ="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Genre"
         Performance_Language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language"
-        reference_Work_Function="http://www.metaphacts.com/fieldDefinition/reference_work_functions"
         venue="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Venue"
-        subtitle="http://www.metaphacts.com/fieldDefinition/Subtitle_Language"
-        
-       
+        subtitle="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subtitle_Language"
       ]]'>
       <bs-panel>
     
         <div style="display: none;">  
         
-          <semantic-form-hidden-input for='typeset'  default-values="http://www.cidoc-crm.org/frbr/F25_Performance_Plan"></semantic-form-hidden-input>
+          <semantic-form-hidden-input for='typeset' default-values="http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan"></semantic-form-hidden-input>
         </div>
         
         <semantic-form-text-input for="Performance_Title"></semantic-form-text-input>

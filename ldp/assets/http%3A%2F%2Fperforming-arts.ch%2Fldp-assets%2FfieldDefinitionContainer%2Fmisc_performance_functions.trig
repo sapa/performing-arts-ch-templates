@@ -1,7 +1,7 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/misc_performance_functions/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/misc_performance_functions>
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/frbr/F25_Performance_Plan>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>;
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167443;
     <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167444;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
@@ -10,7 +10,7 @@
     <http://www.w3.org/2000/01/rdf-schema#label> "misc. Performance Functions" .
   
   _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167443 <http://spinrdf.org/sp#text> """INSERT {
-  ?genericperformance frbr:R25_performed ?subject ;
+  ?genericperformance frbroo:R25_performed ?subject ;
     crm:P9_consists_of ?activity1 .
   ?activity1 crm:P2_has_type ?value .
 } WHERE {
@@ -19,7 +19,7 @@
 } """ .
   
   _:genid-3fd31693dbf54843bc620ddfeb40e1e0-t3167444 <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value ?actor WHERE {
-  ?genericperformance frbr:R25_performed ?subject ;
+  ?genericperformance frbroo:R25_performed ?subject ;
     crm:P9_consists_of ?activity .
   ?activity crm:P2_has_type ?value ;
       crm:P14_carried_out_by ?actor .

@@ -1,0 +1,22 @@
+ <semantic-query 
+                query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment ?bool WHERE {
+                         ?genericperformance frbroo:R25_performed ?? ;
+                            crm:P9_consists_of ?activity .
+                        ?activity crm:P2_has_type ?function ;
+                            crm:P14_carried_out_by ?actor .
+                        OPTIONAL { ?activity olo:index ?index . }
+                        OPTIONAL { ?activity rdfs:label ?activitylabel . }
+                        OPTIONAL { ?activity rdfs:comment ?activitycomment . }
+                        BIND(IF(!CONTAINS(STR($actor), "/u/"), "true","") AS ?bool)
+  											BIND([[function]]   as ?function)
+                    } ORDER BY ASC(?index)'
+         template='<div>
+                      {{#each bindings}}<div>{{#if @first}}<h5><mp-label iri="{{function.value}}"></h5><ul class="list-unstyled">{{/if}}
+                        
+                      {{#if bool.value}} 
+                     <li><semantic-link  iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>
+                      {{else}}
+                      <li><mp-label iri="{{actor.value}}"></mp-label>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>
+                      {{/if}}
+                {{/each}}{{#if @last}}</ul>{{/if}}</div>'>
+            </semantic-query>

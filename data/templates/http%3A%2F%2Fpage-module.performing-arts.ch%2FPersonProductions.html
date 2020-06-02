@@ -1,0 +1,242 @@
+<semantic-search
+  limit=500
+  relations='{
+      "<http://ontology.performing-arts.ch/season>": [{
+        "kind": "resource",
+        "queryPattern": "{
+            ?expressioncreation frbroo:R17_created ?plan ;
+                crm:P10_falls_within ?__value__  .
+            FILTER(CONTAINS(STR(?__value__ ), \"/s/\"))
+        }"
+    }],
+    "<http://ontology.performing-arts.ch/producer>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        ?expressioncreation frbroo:R17_created ?plan ;
+          crm:P9_consists_of ?production . 
+        ?production crm:P2_has_type spav:muwgo ;
+          crm:P14_carried_out_by ?__value__ .
+        FILTER(CONTAINS(STR(?__value__ ), \"/a/\"))
+      }"
+    }],
+    "<http://ontology.performing-arts.ch/genre>": [{
+        "kind": "resource",
+        "queryPattern": "{
+            ?work frbroo:R12_is_realised_in ?plan ;
+                crm:P2_has_type ?__value__ .
+        }"
+    }],
+    "<http://ontology.performing-arts.ch/function>": [{
+      "kind": "resource",
+      "queryPattern": "{
+        {
+            ?subject frbroo:R14_incorporates ?reference .
+            ?referencecreation frbroo:R17_created ?reference ;
+                crm:P9_consists_of ?personactivity .
+        } UNION {
+            ?expressioncreation frbroo:R17_created ?subject;
+                crm:P9_consists_of ?personactivity .
+        } UNION {
+            ?genericperformance frbroo:R25_performed ?subject ;
+                crm:P9_consists_of ?personactivity .
+        }
+        ?personactivity crm:P14_carried_out_by ?? ;
+            crm:P2_has_type ?__value__ .
+        }"
+    }]
+  }'
+  search-profile='{
+    "categories": [
+        {
+            "iri": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+            "label": "Production"
+        },
+        {
+            "iri": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>",
+            "label": "Period"
+        },
+        {
+          "iri": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",
+          "label": "Actor"
+        },
+        {
+            "iri": "<http://www.w3.org/2004/02/skos/core#Concept>",
+            "label": "Concept"
+        }
+    ],
+    "relations": [
+        {
+          "iri": "<http://ontology.performing-arts.ch/producer>",
+          "label": "Producer",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
+        },
+        {
+          "iri": "<http://ontology.performing-arts.ch/season>",
+          "label": "Season",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>"
+        },
+        {
+            "iri": "<http://ontology.performing-arts.ch/genre>",
+            "label": "Genre",
+            "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+            "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+        },
+        {
+            "iri": "<http://ontology.performing-arts.ch/function>",
+            "label": "Function",
+            "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+            "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+        }
+    ]
+}'
+>
+      
+<semantic-search-query-constant 
+    domain='<[[resolvePrefix "frbroo:F25_Performance_Plan"]]>'
+    query='SELECT DISTINCT ?plan ?premieredatebegin
+    WHERE {
+        ?personactivity crm:P14_carried_out_by ?? .
+        {
+            # reference work
+            ?referencecreation crm:P9_consists_of ?personactivity ;
+                frbroo:R17_created ?reference .
+            ?plan frbroo:R14_incorporates ?reference .
+            ?expressioncreation frbroo:R17_created ?plan .
+        } UNION {
+            # expression creation
+            ?expressioncreation crm:P9_consists_of ?personactivity ;
+                frbroo:R17_created ?plan .
+        } UNION {
+            # performance
+            ?genericperformance crm:P9_consists_of ?personactivity ;
+                frbroo:R25_performed ?plan .
+            ?expressioncreation frbroo:R17_created ?plan .
+        }
+        ?plan a frbroo:F25_Performance_Plan .
+        OPTIONAL {
+            ?expressioncreation a frbroo:F28_Expression_Creation ;
+                crm:P10_falls_within ?season .
+            FILTER(CONTAINS(STR(?season), "/s/"))
+        }
+        OPTIONAL {
+          ?performance frbroo:R25_performed ?plan ;
+            crm:P9_consists_of ?premiere . 
+          ?premiere crm:P4_has_time-span ?premieredate .
+          ?premieredate crm:P82a_begin_of_the_begin ?premieredatebegin .
+        }
+    } GROUP BY ?plan
+    ORDER BY ASC(?premieredatebegin)'>
+</semantic-search-query-constant>
+
+<div data-flex-layout="row stretch-stretch">
+  <div data-flex-self="size-1of3" style="flex: 0 0 0;">
+    <semantic-search-facet
+      open-by-default=false
+    ></semantic-search-facet>
+  </div>
+  <semantic-search-result-holder>
+    <div data-flex-self="md-full">
+      <semantic-search-result>
+        <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?plan {}"
+                              template='{{> template}}'
+                              >
+          <template id='template'>
+            {{#if hasLimit}}
+            <bs-alert bs-style="warning" class="search-results__alert pull-left">
+              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+              <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
+            </bs-alert>
+            {{else}}
+            <bs-alert bs-style="warning" class="search-results__alert pull-left">
+              <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
+            </bs-alert>
+            {{/if}}
+          </template>
+        </mp-sparql-result-counts>
+      </semantic-search-result>
+
+      <semantic-search-result>
+        <semantic-table 
+          query='SELECT DISTINCT ?plan ?premieredate ?premieredatebegin ?season (GROUP_CONCAT(DISTINCT ?producerlabel; SEPARATOR=", ") AS ?producers) WHERE {
+            OPTIONAL {
+              ?expressioncreation frbroo:R17_created ?plan ;
+                crm:P9_consists_of ?production . 
+              ?production crm:P2_has_type spav:muwgo ;
+                crm:P14_carried_out_by ?producer .
+              ?producer rdfs:label ?producerlabel .
+            }
+          } GROUP BY ?plan ?premieredate ?premieredatebegin ?season
+          ORDER BY ASC(?premieredatebegin)' 
+          id='search-result'
+          column-configuration='[
+            {"displayName": "Producer", "cellTemplate": "{{> producer}}", "variableName": "producers"} ,
+            {"displayName": "Season", "cellTemplate":"<semantic-link iri=\"{{season.value}}\"></semantic-link>", "variableName": "premieredatebegin"}, 
+            {"displayName": "Title", "variableName": "plan"}, 
+            {"displayName": "Function", "cellTemplate": "{{>function}}"}
+          ]'
+          number-of-displayed-rows=20
+          options='{"showFilter": true}'>
+          
+          <template id='genre'> 
+            <semantic-query 
+              query='SELECT DISTINCT ?genre WHERE {      
+                ?work frbroo:R12_is_realised_in <{{plan.value}}> ;
+                  crm:P2_has_type ?genre .
+                } '
+              template = '{{>genre-list}} '>           
+              <template id='genre-list'> 
+                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</div>
+              </template>
+            </semantic-query>   
+          </template>
+        
+          <template id='producer'>
+            <semantic-query 
+              query='SELECT ?producer WHERE {
+                ?expressioncreation frbroo:R17_created <{{plan.value}}> ;
+                  crm:P9_consists_of ?production . 
+                ?production crm:P2_has_type spav:muwgo ;
+                  crm:P14_carried_out_by ?producer .
+              }'
+              template = '{{> producer-list}}'>
+              <template id='producer-list'>
+                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{producer.value}}"></mp-label>{{else}}, <mp-label iri="{{producer.value}}"></mp-label>{{/if}}{{/each}}</div>
+              </template>
+            </semantic-query> 
+          </template>
+
+          <template id='function'> 
+            <semantic-query 
+              query='SELECT DISTINCT ?function WHERE {
+                {
+                    # reference work
+                    <{{plan.value}}> frbroo:R14_incorporates ?reference .
+                    ?referencecreation frbroo:R17_created ?reference ;
+                        crm:P9_consists_of ?personactivity .
+                } UNION {
+                    # expression creation
+                    ?expressioncreation frbroo:R17_created <{{plan.value}}>;
+                        crm:P9_consists_of ?personactivity .
+                } UNION {
+                    # performance
+                    ?genericperformance frbroo:R25_performed <{{plan.value}}> ;
+                        crm:P9_consists_of ?personactivity .
+                }
+                ?personactivity crm:P14_carried_out_by ?? ;
+                    crm:P2_has_type ?function .
+                }'
+              template = '{{>function-list}} '>           
+              <template id='function-list'> 
+                <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{function.value}}"></mp-label>{{else}}, <mp-label iri="{{function.value}}"></mp-label>{{/if}}{{/each}}</div>
+              </template>
+            </semantic-query>   
+          </template>
+
+        </semantic-table>
+      </semantic-search-result>
+    </div>
+  </semantic-search-result-holder>
+</div>
+</semantic-search>

@@ -1,0 +1,45 @@
+    <semantic-query 
+    query='SELECT ?fieldlabel ?value ?label WHERE {
+        ?? owl:sameAs ?value
+        BIND (REPLACE(STR(?value), ".*\\/c*b*", "") as ?localname)
+        BIND (STRBEFORE(STR(?value), ?localname) as ?prefix)
+        VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs>) }
+        VALUES (?prefix ?source ?order)
+        {
+          ("http://www.wikidata.org/entity/" "Wikidata" 0)
+          ("http://www.isni.org/" "ISNI" 1)
+          ("http://viaf.org/viaf/" "VIAF" 2)
+          ("http://d-nb.info/gnd/" "GND" 3)
+          ("https://catalogue.bnf.fr/ark:/12148/cb" "BnF" 4)
+          ("http://geonames.org/" "Geonames" 5)
+          ("http://classifications.data.admin.ch/municipality/" "Swiss Municipality" 6)
+          ("http://classifications.data.admin.ch/canton/" "Swiss Municipality" 7)
+          ("http://tls.theaterwissenschaft.ch/wiki/" "Theaterlexikon der Schweiz" 8)
+        }
+        BIND (IF(?order<8,
+        CONCAT(?source,": ",?localname) ,
+        ?source) as ?label)
+    } ORDER BY ASC(?order)'
+    template='<div style="margin-bottom:1.4em;">{{#each bindings}}
+        {{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{fieldlabel.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}
+        <li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
+      {{/each}}
+    </ul></div>'>
+    </semantic-query>
+
+    [[#if (hasPermission "forms:ldp:*")]] 
+    <semantic-query 
+    query='SELECT ?user ?datetime WHERE {
+      GRAPH ?g {
+        ?? rdfs:label ?label .
+        Platform:formContainer <http://www.w3.org/ns/ldp#contains> ?container .
+        ?container prov:generatedAtTime ?dt ;
+                   prov:wasAttributedTo ?user_uri .
+        BIND(STRAFTER(STR(?user_uri), "/user/") as ?user)
+        BIND(CONCAT(STR(DAY(?dt)), ".", STR(MONTH(?dt)), ".", STR(YEAR(?dt))) AS ?datetime)
+
+      }
+    } LIMIT 1'
+    template='<div><small>{{#each bindings}}{{user.value}}, {{datetime.value}}{{/each}}</small></div>'>
+    </semantic-query>
+    [[/if]]

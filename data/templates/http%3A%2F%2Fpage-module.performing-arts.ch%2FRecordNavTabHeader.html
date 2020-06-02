@@ -3,7 +3,7 @@
         <mp-resource-thumbnail no-image-uri='[[defaultImage]]' iri='[[this]]'></mp-resource-thumbnail>
     </div>
     <div class='page__header-body'>
-        <div class="page__header-draggable-title">
+        <div class="page__header-draggable-title" style="padding-left: 0;">
             <mp-draggable iri='[[this]]'>
                 <h2 data-flex-layout='row center-left'>
                     <span class="page__header-gripper"></span>
@@ -11,6 +11,8 @@
                 </h2>
             </mp-draggable>
         </div>
+
+        <div class="page__header-description">
 
         <!-- description -->
         <semantic-query 
@@ -21,18 +23,21 @@
               OPTIONAL { ?? crm:P2_has_type ?crmtype . }
               OPTIONAL { ?? crm:P4_has_time-span ?timespan . }
               OPTIONAL {
-                ?work frbr:R12_is_realised_in ?? ;
+                ?work frbroo:R12_is_realised_in ?? ;
                     crm:P2_has_type ?genre .
               }
-              OPTIONAL { ?? dc:type ?recordsetlevel . }
-              BIND(IF(BOUND(?timespan), ?timespan, IF(BOUND(?genre), ?genre, IF(BOUND(?crmtype), ?crmtype, IF(BOUND(?recordsetlevel), ?recordsetlevel, ?class)))) AS ?description)
+              OPTIONAL { ?? rico:hasRecordSetType ?record_set_type . }
+              BIND(IF(BOUND(?timespan), ?timespan, IF(BOUND(?genre), ?genre, IF(BOUND(?crmtype), ?crmtype, IF(BOUND(?record_set_type), ?record_set_type, ?class)))) AS ?description)
             }"
             template="<p>{{#each bindings}}{{#if @first}}<mp-label iri='{{description.value}}'></mp-label>{{else}}, <mp-label iri='{{description.value}}'></mp-label>{{/if}}{{/each}}</p>">
         </semantic-query>
 
-        <p style="font-size: 12px;">
-            <b>URI</b>: <i>[[this]]</i>
-        </p>
+        <!-- uri -->
+        <semantic-query 
+            query="SELECT ?uri WHERE { BIND(IF(REGEX(STR(??), '/[aoprs]/'), STR(??), 'not yet permanent') AS ?uri) } LIMIT 1"
+            template="<p style='font-size: 0.8em;'>{{#each bindings}}<b>URI</b>: <i>{{uri.value}}</i>{{/each}}</p>">
+        </semantic-query>
+        </div>
 
     </div>
 </div>

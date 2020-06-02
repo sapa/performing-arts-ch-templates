@@ -1,0 +1,47 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonSwiss/context> {
+  _:genid-9c2d9ba8863c4f64b7d1f8b1ac8f61fd-vdacjc <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P107i_is_current_or_former_member_of <http://data.performing-arts.ch/g/nation/ch>.
+} WHERE {
+  FILTER(?value = \"false\"^^xsd:boolean)
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonSwiss> a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-9c2d9ba8863c4f64b7d1f8b1ac8f61fd-4b7vx4 <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  BIND(EXISTS {?subject crm:P107i_is_current_or_former_member_of <http://data.performing-arts.ch/g/nation/ch>} AS ?value)
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonSwiss> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-9c2d9ba8863c4f64b7d1f8b1ac8f61fd-vdacjc;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-9c2d9ba8863c4f64b7d1f8b1ac8f61fd-raav0c;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E21_Person> .
+  
+  _:genid-9c2d9ba8863c4f64b7d1f8b1ac8f61fd-raav0c a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonSwiss> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#boolean>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-9c2d9ba8863c4f64b7d1f8b1ac8f61fd-4b7vx4 .
+  
+  _:genid-9c2d9ba8863c4f64b7d1f8b1ac8f61fd-raav0c <http://spinrdf.org/sp#text> """INSERT {
+  $subject crm:P107i_is_current_or_former_member_of <http://data.performing-arts.ch/g/nation/ch>.
+} WHERE {
+  FILTER(?value = \"true\"^^xsd:boolean)
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonSwiss> <http://www.w3.org/2000/01/rdf-schema#label>
+      "CH"@undefined .
+  
+  _:genid-9c2d9ba8863c4f64b7d1f8b1ac8f61fd-4b7vx4 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-9c2d9ba8863c4f64b7d1f8b1ac8f61fd-vdacjc a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonSwiss> a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-25T08:57:12.359Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonSwiss> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonSwiss> a <http://www.w3.org/ns/ldp#Resource> .
+}

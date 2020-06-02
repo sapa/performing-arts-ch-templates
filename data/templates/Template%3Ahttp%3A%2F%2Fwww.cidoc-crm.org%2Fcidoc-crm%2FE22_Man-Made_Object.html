@@ -8,7 +8,6 @@
 </ol>
 
 <div class="page">
-
     [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]]
   
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
@@ -18,30 +17,59 @@
 
             <!-- official name -->
             <semantic-query 
-                query='SELECT ?typelabel ?value
+                query='SELECT ?officialtitle ?addendum
                 WHERE {
-                    ?? crm:P1_is_identified_by ?app .
-                    ?app a crm:E41_Appellation ; 
-                    crm:P2_has_type spav:yanuj ;
-                    rdf:value ?value .
+                    ?? crm:P102_has_title ?title .
+                    ?title a crm:E35_Title ; 
+                        crm:P2_has_type spav:yanuj ;
+                        rdf:value ?officialtitle .
+                    OPTIONAL {
+                        ?? crm:P131_is_identified_by [
+                            a crm:E41_Appellation ; 
+                            crm:P2_has_type spav:yaztb ;
+                            rdf:value ?addvalue
+                        ]
+                        BIND(CONCAT("&lt;", ?addvalue, "&gt;") AS ?addendum)
+                    }
                 } LIMIT 1'
-            template='<p><strong>{{#each bindings}}{{value.value}}{{/each}}</strong></p>'>
+            template='<p>{{#each bindings}}<strong>{{officialtitle.value}}</strong>{{#if addendum}} {{addendum.value}}{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- alternative names -->
             <semantic-query 
-                query='SELECT distinct ?value ?type ?typesort
+                query='SELECT DISTINCT ?title ?type ?typesort
                 WHERE {
-                    VALUES (?type ?typesort) { (spav:yamqk 1) (spav:yavtx 2) }
-                    ?? crm:P1_is_identified_by ?appellation .
-                    ?appellation a crm:E41_Appellation ; 
-                    crm:P2_has_type ?type ;
-                    rdf:value ?value .
-                    { ?appellation crm:P2_has_type spav:yamqk . }
-                    UNION
-                    { ?appellation crm:P2_has_type spav:yavtx . }
+                    VALUES (?type ?typesort) { (spav:yasis 1) (spav:yamqk 2) (spav:yavtx 3) }
+                    ?? crm:P102_has_title ?title .
+                    ?title a crm:E35_Title ; 
+                        crm:P2_has_type ?type ;
+                        rdf:value ?value .
+                    FILTER(?type IN (spav:yasis, spav:yamqk, spav:yavtx))
                 } ORDER BY ?typesort'
-                template='<p>({{#each bindings}}{{#if @first}}{{value.value}}{{else}}, {{value.value}}{{/if}}{{/each}})</p>'>
+                template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{title.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>)
+                    {{else}}<br><mp-label iri="{{title.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'
+                >
+            </semantic-query>
+
+            <!-- byline -->
+            <semantic-query 
+                query="SELECT ?byline
+                WHERE {
+                    ?? crm:P131_is_identified_by ?byline .
+                    ?byline a crm:E41_Appellation ;
+                    crm:P2_has_type spav:yauzw .
+                } LIMIT 1"
+                template='<p>{{#each bindings}}<mp-label iri="{{byline.value}}"></mp-label>{{/each}}</p>'>
+            </semantic-query>
+
+            <!-- description -->
+            <semantic-query 
+                query="SELECT ?description
+                WHERE {
+                    ?? crm:P3_has_note ?description.
+                    ?description crm:P2_has_type spav:eoept .
+                } LIMIT 1"
+                template='<p>{{#each bindings}}<mp-label iri="{{description.value}}"></mp-label>{{/each}}</p>'>
             </semantic-query>
 
             <!-- place -->
@@ -59,100 +87,158 @@
                 query='SELECT ?dates
                 WHERE {
                     OPTIONAL {
-                        ?? crm:P95i_was_formed_by ?formation .
-                        ?formation a crm:E66_Formation ;
-                            crm:P4_has_time-span ?formationtime .
-                        ?formationtime rdfs:label ?formationlabel .
+                        ?? rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ]
                     }
                     OPTIONAL {
-                        ?? crm:P99i_was_dissolved_by ?dissolution .
-                        ?dissolution a crm:E68_Dissolution ;
-                            crm:P4_has_time-span ?dissolutiontime .
-                        ?dissolutiontime rdfs:label ?dissolutionlabel .
+                        ?? rico:hasEndDate [ rico:normalizedDateValue ?end ]
                     }
-                    BIND(CONCAT(COALESCE(?formationlabel, "X"), "-", COALESCE(?dissolutionlabel, "X")) AS ?predates)
+                    BIND(CONCAT(COALESCE(?beginning, "X"), "-", COALESCE(?end, "X")) AS ?predates)
                     BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
                 }'
                 template='{{#each bindings}}<p>{{dates.value}}</p>{{/each}}'>
             </semantic-query>
 
-            <!-- managed by -->
-            <semantic-query 
-                query="SELECT DISTINCT ?actor
-                WHERE {
-                    {
-                        ?activity crm:P16_used_specific_object ?? .
-                    }
-                    UNION
-                    {
-                        ?parent crm:P46_is_composed_of ?? .
-                        ?activity crm:P16_used_specific_object ?parent .
-                    }
-                    ?activity crm:P2_has_type spav:mujfv .
-                    ?actor crm:P14i_performed ?activity .
-                }"
-                template='<div><h5>Managed by</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{actor.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
-            </semantic-query>
-
-            <!-- is part of -->
-            <semantic-query 
-                query="SELECT ?parent
-                WHERE {
-                    ?parent crm:P46_is_composed_of ?? .
-                }"
-                template='<div><h5>Is part of</h5>{{#each bindings}}{{#if @first}}<semantic-link iri="{{parent.value}}">{{label.value}}</semantic-link>{{else}}, <semantic-link iri="{{parent.value}}">{{label.value}}</semantic-link>{{/if}}{{/each}}</div>'>
-            </semantic-query>
-
-            <!-- contains -->
+            <!-- managed by / part of / contains -->
             <mp-field-visualization
                 subject='[[this]]'
                 fields='[[fieldDefinitions
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E18_Physical_Thing_is_composed_of"
+                    contains="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains"
+                    management="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement"
+                    part_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueIsPartOf"
                 ]]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
-                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
                 >
             </mp-field-visualization> 
 
+            <semantic-chart type='donut' types='["pie", "donut"]'
+            query='SELECT ?producer (COUNT(?plan) AS ?plancount)
+            WHERE {
+                ?genericperformance crm:P8_took_place_on_or_within ?? ;
+                    a frbroo:F31_Performance ;
+                frbroo:R25_performed ?plan .
+                ?expressioncreation frbroo:R17_created ?plan ;
+                    crm:P9_consists_of ?production .
+                ?production crm:P2_has_type spav:muwgo ;
+                    crm:P14_carried_out_by ?producer .
+                FILTER(CONTAINS(STR(?producer), "/a/"))
+            } GROUP BY ?producer
+            ORDER BY DESC(?plancount)'
+            sets='[{"dataSetName": "Productions", "category": "producer", "value": "plancount"}]'
+            styles='[{
+              "provider": "chartjs",
+              "style": {
+                  "data": {
+                      "datasets": [
+                          { 
+                          "borderColor": "rgb(255, 255, 255, 1)",
+                          "borderWidth": "2"
+                          }
+                      ]
+                  },
+                  "options": {
+                      "layout": {
+                          "padding": {
+                              "top": "0"
+                          }
+                      },
+                      "legend": {
+                          "position": "none"
+                      }
+                  }
+              }
+             }]'
+          ></semantic-chart>
+
+          <semantic-query 
+            query='SELECT ?label ?producer (COUNT(?plan) AS ?plancount)
+            WHERE {
+                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueProducers>) }
+                ?genericperformance crm:P8_took_place_on_or_within ?? ;
+                    a frbroo:F31_Performance ;
+                frbroo:R25_performed ?plan .
+                ?expressioncreation frbroo:R17_created ?plan ;
+                    crm:P9_consists_of ?production .
+                ?production crm:P2_has_type spav:muwgo ;
+                    crm:P14_carried_out_by ?producer .
+                FILTER(CONTAINS(STR(?producer), "/a/"))
+            } GROUP BY ?label ?producer
+            ORDER BY DESC(?plancount)' 
+            template='{{> producer-list}}'>
+            <template id='producer-list'>
+                <div style="margin: 1em 0em;">
+                    {{#each bindings}}
+                    {{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{else}}, <semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{/if}}
+                    {{/each}}
+                </div>
+            </template>
+        </semantic-query>
+
         </bs-col>
 
         <bs-col sm="4">
             <mp-field-visualization
                 subject='[[this]]'
                 fields='[[fieldDefinitions
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subject_of"
-                http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/E1_CRM_Entity_has_note"
+                    note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
                 ]]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
-                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
             >
             </mp-field-visualization> 
+
+            [[#if (hasPermission "forms:ldp:*")]]
+            <mp-field-visualization
+                subject='[[this]]'
+                fields='[[fieldDefinitions
+                    note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
+                ]]'
+                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+            >
+            </mp-field-visualization> 
+            [[/if]]
+        
+            <!-- record sets -->
+            <semantic-query 
+                query='SELECT ?label WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordsBern>) }
+                    ?record rico:hasSubject ?? .
+                } LIMIT 1'
+                template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
+            </semantic-query>
+
+            [[#if (hasPermission "forms:ldp:*")]]
+            <semantic-tree
+                query='SELECT DISTINCT ?node ?parent WHERE {
+                    ?record rico:hasSubject ?? ;
+                        rico:includedIn* ?node .
+                    FILTER(ISIRI(?node))
+                    FILTER(CONTAINS(STR(?node), "/r/"))
+                    OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
+                }'
+                tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
+            </semantic-tree>
+            [[else]]
+            <semantic-query 
+                query='SELECT ?docform ?extent ?desciptivenote WHERE {
+                    ?record rico:hasSubject ?? ;
+                        rico:hasDocumentaryFormType ?docform .
+                    OPTIONAL { ?record rico:recordResourceExtent ?extent .}
+                    OPTIONAL { ?record rico:descriptiveNote ?desciptivenote . }
+                }'
+                template='<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{docform.value}}"></mp-label>{{else}}, <mp-label iri="{{docform.value}}"></mp-label>{{/if}}{{#if @last}}{{#if desciptivenote}}, {{desciptivenote.value}}{{/if}}{{#if extent}} ({{extent.value}}){{/if}}{{else}}{{/if}}{{/each}}</div>'>
+            </semantic-query>
+            [[/if]]
+
+
         </bs-col>
 
         <bs-col sm="4">
-            [[> sapa:ExternalResources]]
+            [[> sapaModule:ExternalResources]]
         </bs-col>
 
     </bs-tab>
     <bs-tab event-key='productions' title='Productions'>
 
-        <semantic-table 
-          query='SELECT ?plan ?season
-            WHERE {
-                ?genericperformance crm:P8_took_place_on_or_within ?? ;
-                    frbr:R25_performed ?plan .
-                OPTIONAL {
-                    ?expressioncreation crm:P10_falls_within ?season .
-                    FILTER(CONTAINS(STR(?season), "/s/"))
-                }
-            } ORDER BY ASC(?season)'
-          column-configuration='[
-            {"variableName": "season", "displayName": "Season"}, 
-            {"variableName": "plan", "displayName": "Production"}
-          ]'
-          number-of-displayed-rows=20
-          options='{"showFilter": false}'
-        ></semantic-table>
+        [[> sapaModule:VenueProductions]]
 
     </bs-tab>
 
