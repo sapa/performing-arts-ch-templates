@@ -32,10 +32,11 @@
             template="<p>{{#each bindings}}{{#if @first}}<mp-label iri='{{description.value}}'></mp-label>{{else}}, <mp-label iri='{{description.value}}'></mp-label>{{/if}}{{/each}}</p>">
         </semantic-query>
 
-        <p style="font-size: 0.8em;">
-            <b>URI</b>: <i>[[this]]</i>
-        </p>
-
+        <!-- uri -->
+        <semantic-query 
+            query="SELECT ?uri WHERE { BIND(IF(REGEX(STR(??), '/[aoprs]/'), STR(??), 'not yet permanent') AS ?uri) } LIMIT 1"
+            template="<p style='font-size: 0.8em;'>{{#each bindings}}<b>URI</b>: <i>{{uri.value}}</i>{{/each}}</p>">
+        </semantic-query>
         </div>
 
     </div>
