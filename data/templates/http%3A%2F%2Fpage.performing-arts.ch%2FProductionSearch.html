@@ -98,43 +98,43 @@
     "relations": [
       {
         "iri": "<http://ontology.performing-arts.ch/genre>",
-        "label": "Genre",
+        "label": "[[i18n "FilterGenre" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/premieretype>",
-        "label": "Premiere",
+        "label": "[[i18n "FilterPremiere" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/producer>",
-        "label": "Producer",
+        "label": "[[i18n "FilterProducer" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/productionvenue>",
-        "label": "Venue",
+        "label": "[[i18n "FilterVenue" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/productionplace>",
-        "label": "Place",
+        "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/stagedirection>",
-        "label": "Stage&nbsp;direction",
+        "label": "[[i18n "FilterStageDirection" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/premieredate>",
-        "label": "Year",
+        "label": "[[i18n "FilterYear" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.w3.org/2001/XMLSchema#decimal>"
       }
@@ -230,10 +230,10 @@
             id="production-table" 
             options='{"showFilter": false, "showTableHeading": true, "enableSort": true}'
             column-configuration='[
-              {"displayName": "Title", "variableName": "subject"} ,
-              {"displayName": "Premiere", "cellTemplate": "{{> premiere}}", "variableName": "premieredatebegin"} ,
-              {"displayName": "Producer", "cellTemplate": "{{> producer}}", "variableName": "producers"} ,
-              {"displayName": "Venue", "cellTemplate": "{{> venue}}", "variableName": "venues"}
+              {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
+              {"displayName": "[[i18n "ProductionsTablePremiere" bundle="performing-arts-ch"]]", "cellTemplate": "{{> premiere}}", "variableName": "premieredatebegin"} ,
+              {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch"]]", "cellTemplate": "{{> producer}}", "variableName": "producers"} ,
+              {"displayName": "[[i18n "ProductionsTableVenue" bundle="performing-arts-ch"]]", "cellTemplate": "{{> venue}}", "variableName": "venues"}
             ]'>
             
             <template id='premiere'>
