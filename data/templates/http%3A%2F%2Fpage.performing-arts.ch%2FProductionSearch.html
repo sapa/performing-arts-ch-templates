@@ -162,7 +162,7 @@
       ?subject rdfs:label ?label ;
         a frbroo:F25_Performance_Plan.
       FILTER(CONTAINS(STR(?subject), "/w/"))
-      VALUES (?example) { ("Start by looking at one of the example entries or enter your own search terms above.") }
+      VALUES (?example) { ("[[i18n "SearchHint" bundle="performing-arts-ch"]]") }
     }'
     ></semantic-search-query-keyword>
 
@@ -194,11 +194,11 @@
               {{#if hasLimit}}
               <bs-alert bs-style="warning" class="search-results__alert pull-left">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
-                <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
+                <span class="num-results">[[i18n "SearchLimitReached" bundle="performing-arts-ch"]]</span>
               </bs-alert>
               {{else}}
               <bs-alert bs-style="warning" class="search-results__alert pull-left">
-                <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
+                <span class="num-results" class="search-results__alert"><strong>[[i18n "SearchResults" bundle="performing-arts-ch"]]</strong></span>
               </bs-alert>
               {{/if}}
             </template>
@@ -311,7 +311,7 @@
                                 header="text/csv"
                                 filename="performing-arts-ch-search-result.csv"
                                 >
-              <button class="btn btn-default">Download CSV</button>
+              <button class="btn btn-default">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
             </mp-sparql-download>
           </semantic-search-result>
           <!--

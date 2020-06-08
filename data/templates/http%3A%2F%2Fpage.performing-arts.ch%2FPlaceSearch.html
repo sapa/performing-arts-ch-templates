@@ -23,19 +23,19 @@ relations='{
 search-profile='{
   "categories": [{
       "iri": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",
-      "label": "Place",
+      "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
       "_thumbnail": "../images/help/thenounproject/noun_1113333.svg"
     }],
   "relations": [
     {
       "iri": "<http://ontology.performing-arts.ch/within_canton>",
-      "label": "Canton",
+      "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
       "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",
       "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
     },
     {
       "iri": "<http://ontology.performing-arts.ch/within_country>",
-      "label": "Country",
+      "label": "[[i18n "FilterCountry" bundle="performing-arts-ch"]]",
       "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",
       "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
     }
@@ -78,11 +78,11 @@ search-profile='{
               {{#if hasLimit}}
               <bs-alert bs-style="warning" class="search-results__alert pull-left">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
-                <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
+                <span class="num-results">[[i18n "SearchLimitReached" bundle="performing-arts-ch"]]</span>
               </bs-alert>
               {{else}}
               <bs-alert bs-style="warning" class="search-results__alert pull-left">
-                <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
+                <span class="num-results" class="search-results__alert"><strong>[[i18n "SearchResults" bundle="performing-arts-ch"]]</strong></span>
               </bs-alert>
               {{/if}}
             </template>
@@ -95,8 +95,8 @@ search-profile='{
           id="place-table" 
           options='{"showFilter": false, "showTableHeading": true, "enableSort": false}'
           column-configuration='[
-            {"displayName": "Name", "variableName": "subject"} ,
-            {"displayName": "Falls within", "cellTemplate": "{{> parents}}"}
+            {"displayName": "[[i18n "PlacesTableName" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
+            {"displayName": "[[i18n "PlacesTableFallsWithin" bundle="performing-arts-ch"]]", "cellTemplate": "{{> parents}}"}
           ]'>
           <template id='parents'>                     
             <semantic-query 
@@ -120,7 +120,7 @@ search-profile='{
                               header="text/csv"
                               filename="performing-arts-ch-search-result.csv"
                               >
-            <button class="btn btn-default">Download CSV</button>
+            <button class="btn btn-default">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
           </mp-sparql-download>
         </semantic-search-result>
       </div>

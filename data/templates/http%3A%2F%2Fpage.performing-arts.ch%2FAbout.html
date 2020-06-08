@@ -9,7 +9,7 @@
 
 <div class="page rs-page">
   <div class='page__body'>
-    <h3 style="margin-top: 2em;">About</h3>
+    <h3 style="margin-top: 2em;">[[i18n "AboutHeadline" bundle="performing-arts-ch"]]</h3>
     <bs-row>
       <bs-col sm="6">
         <p>The <a href="https://sapa.swiss" title="Swiss Archive of the Performing Arts" target="_blank">SAPA Foundation</a> collects, documents, archives and disseminates works from the field of the performing arts (dance, theatre, performance art, etc.) produced in Switzerland, associated with Switzerland or important to it. All these documents form the Helvetica of the performing arts. Once completed, performing-arts.ch will provide information on the archival holdings of SAPA and on performing arts in Switzerland as <a href="https://en.wikipedia.org/wiki/Linked_data" title="Wikipedia: Linked Data" target="_blank">Linked Data</a>.</p>
@@ -32,13 +32,13 @@
             <div>
               <span style="font-size: 84px;"><i class="fas fa-user"></i></span>
             </div>
-            <semantic-query query='SELECT (COUNT(?person) AS ?count) WHERE { ?person a crm:E21_Person . FILTER(CONTAINS(STR(?person), "/a/")) }' template='<div>{{#each bindings}}{{count.value}} persons{{/each}}</div>'></semantic-query>
+            <semantic-query query='SELECT (COUNT(?person) AS ?count) WHERE { ?person a crm:E21_Person . FILTER(CONTAINS(STR(?person), "/a/")) }' template='<div>{{#each bindings}}{{count.value}} [[i18n "AboutCountPersons" bundle="performing-arts-ch"]]{{/each}}</div>'></semantic-query>
           </bs-col>
           <bs-col sm="6" style="text-align: center;">
             <div>
               <span style="font-size: 84px;"><i class="fas fa-users"></i></span>
             </div>
-            <semantic-query query='SELECT (COUNT(?group) AS ?count) WHERE { ?group rdf:type/rdfs:subClassOf* crm:E74_Group . FILTER(CONTAINS(STR(?group), "/a/")) }' template='<div>{{#each bindings}}{{count.value}} institutions and groups{{/each}}</div>'></semantic-query>
+            <semantic-query query='SELECT (COUNT(?group) AS ?count) WHERE { ?group rdf:type/rdfs:subClassOf* crm:E74_Group . FILTER(CONTAINS(STR(?group), "/a/")) }' template='<div>{{#each bindings}}{{count.value}} [[i18n "AboutCountGroups" bundle="performing-arts-ch"]]{{/each}}</div>'></semantic-query>
           </bs-col>
         </bs-row>
         <bs-row style="margin-top: 4em;">
@@ -46,13 +46,13 @@
             <diV>
               <span style="font-size: 84px;"><i class="fas fa-university"></i></span>
             </diV>
-            <semantic-query query='SELECT (COUNT(?venue) AS ?count) WHERE { ?venue a crm:E22_Man-Made_Object ; crm:P2_has_type spav:dwmkn . FILTER(CONTAINS(STR(?venue), "/o/")) }' template='<div>{{#each bindings}}{{count.value}} venues{{/each}}</div>'></semantic-query>
+            <semantic-query query='SELECT (COUNT(?venue) AS ?count) WHERE { ?venue a crm:E22_Man-Made_Object ; crm:P2_has_type spav:dwmkn . FILTER(CONTAINS(STR(?venue), "/o/")) }' template='<div>{{#each bindings}}{{count.value}} [[i18n "AboutCountVenues" bundle="performing-arts-ch"]]{{/each}}</div>'></semantic-query>
           </bs-col>
           <bs-col sm="6" style="text-align: center;">
             <div>
               <span style="font-size: 84px;"><i class="fas fa-theater-masks"></i></span>
             </div>
-            <semantic-query query='SELECT (COUNT(?production) AS ?count) WHERE { ?production a frbroo:F25_Performance_Plan . FILTER(CONTAINS(STR(?production), "/w/")) }' template='<div>{{#each bindings}}{{count.value}}{{/each}} productions</div>'></semantic-query>
+            <semantic-query query='SELECT (COUNT(?production) AS ?count) WHERE { ?production a frbroo:F25_Performance_Plan . FILTER(CONTAINS(STR(?production), "/w/")) }' template='<div>{{#each bindings}}{{count.value}}{{/each}} [[i18n "AboutCountProductions" bundle="performing-arts-ch"]]</div>'></semantic-query>
           </bs-col>
         </bs-row>
         

@@ -23,7 +23,7 @@
     "relations": [
       {
         "iri": "<http://ontology.performing-arts.ch/venueplace>",
-        "label": "Place",
+        "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
       }
@@ -60,7 +60,7 @@
         crm:P2_has_type spav:dwmkn.
       
       FILTER(CONTAINS(STR(?subject), "/o/"))
-      VALUES (?example) { ("Start by looking at one of the example entries or enter your own search terms above.") }
+      VALUES (?example) { ("[[i18n "SearchHint" bundle="performing-arts-ch"]]") }
     }'
     ></semantic-search-query-keyword>
 
@@ -92,11 +92,11 @@
               {{#if hasLimit}}
               <bs-alert bs-style="warning" class="search-results__alert pull-left">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
-                <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
+                <span class="num-results">[[i18n "SearchLimitReached" bundle="performing-arts-ch"]]</span>
               </bs-alert>
               {{else}}
               <bs-alert bs-style="warning" class="search-results__alert pull-left">
-                <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
+                <span class="num-results" class="search-results__alert"><strong>[[i18n "SearchResults" bundle="performing-arts-ch"]]</strong></span>
               </bs-alert>
               {{/if}}
             </template>
@@ -119,9 +119,9 @@
             id="venue-table" 
             options='{"showFilter": false, "showTableHeading": true}'
             column-configuration='[
-              {"displayName": "Venue", "cellTemplate": "{{> venue}}"} ,
-              {"displayName": "Place", "variableName": "place"} ,
-              {"displayName": "Dates", "cellTemplate": "{{> dates}}", "variableName": "beginning"}
+              {"displayName": "[[i18n "VenuesTableName" bundle="performing-arts-ch"]]", "cellTemplate": "{{> venue}}"} ,
+              {"displayName": "[[i18n "VenuesTablePlace" bundle="performing-arts-ch"]]", "variableName": "place"} ,
+              {"displayName": "[[i18n "VenuesTableDates" bundle="performing-arts-ch"]]", "cellTemplate": "{{> dates}}", "variableName": "beginning"}
             ]'>
 
             <template id='venue'>                     
@@ -168,7 +168,7 @@
                                 header="text/csv"
                                 filename="performing-arts-ch-search-result.csv"
                                 >
-              <button class="btn btn-default">Download CSV</button>
+              <button class="btn btn-default">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
             </mp-sparql-download>
           </semantic-search-result>
           <!--
