@@ -12,16 +12,16 @@
     [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
 
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
-        <bs-tab event-key='about' title='About'>
+        <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
             [[> sapaModule:GroupSummary]]
         </bs-tab>
 
-        <bs-tab event-key='productions' title='Productions'>
+        <bs-tab event-key='productions' title='[[i18n "TabProductions" bundle="performing-arts-ch"]]'>
             [[> sapaModule:GroupProductions]]
         </bs-tab>
 
         [[#if (hasPermission "forms:ldp:*")]] 
-        <bs-tab event-key='group' title='Edit'>
+        <bs-tab event-key='group' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
             [[> sapaModule:GroupForm]]
         </bs-tab>
         [[/if]]

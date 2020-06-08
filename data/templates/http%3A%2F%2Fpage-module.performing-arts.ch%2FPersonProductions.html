@@ -67,25 +67,25 @@
     "relations": [
         {
           "iri": "<http://ontology.performing-arts.ch/producer>",
-          "label": "Producer",
+          "label": "[[i18n "FilterProducer" bundle="performing-arts-ch"]]",
           "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
         },
         {
           "iri": "<http://ontology.performing-arts.ch/season>",
-          "label": "Season",
+          "label": "[[i18n "FilterSeason" bundle="performing-arts-ch"]]",
           "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>"
         },
         {
             "iri": "<http://ontology.performing-arts.ch/genre>",
-            "label": "Genre",
+            "label": "[[i18n "FilterGenre" bundle="performing-arts-ch"]]",
             "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
             "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
         },
         {
             "iri": "<http://ontology.performing-arts.ch/function>",
-            "label": "Function",
+            "label": "[[i18n "FilterFunction" bundle="performing-arts-ch"]]",
             "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
             "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
         }
@@ -139,18 +139,16 @@
   <semantic-search-result-holder>
     <div data-flex-self="md-full">
       <semantic-search-result>
-        <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?plan {}"
-                              template='{{> template}}'
-                              >
+        <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?plan {}" template='{{> template}}'>
           <template id='template'>
             {{#if hasLimit}}
             <bs-alert bs-style="warning" class="search-results__alert pull-left">
               <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
-              <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
+              [[i18n "SearchLimitReached" bundle="performing-arts-ch" escapeHTML=false]]
             </bs-alert>
             {{else}}
             <bs-alert bs-style="warning" class="search-results__alert pull-left">
-              <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
+              <span class="num-results" class="search-results__alert"><strong>[[i18n "SearchResults" bundle="performing-arts-ch"]]</strong></span>
             </bs-alert>
             {{/if}}
           </template>
@@ -171,10 +169,10 @@
           ORDER BY ASC(?premieredatebegin)' 
           id='search-result'
           column-configuration='[
-            {"displayName": "Producer", "cellTemplate": "{{> producer}}", "variableName": "producers"} ,
-            {"displayName": "Season", "cellTemplate":"<semantic-link iri=\"{{season.value}}\"></semantic-link>", "variableName": "premieredatebegin"}, 
-            {"displayName": "Title", "variableName": "plan"}, 
-            {"displayName": "Function", "cellTemplate": "{{>function}}"}
+            {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch"]]", "cellTemplate": "{{> producer}}", "variableName": "producers"} ,
+            {"displayName": "[[i18n "ProductionsTableSeason" bundle="performing-arts-ch"]]", "cellTemplate":"<semantic-link iri=\"{{season.value}}\"></semantic-link>", "variableName": "premieredatebegin"}, 
+            {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch"]]", "variableName": "plan"}, 
+            {"displayName": "[[i18n "ProductionsTableFunction" bundle="performing-arts-ch"]]", "cellTemplate": "{{>function}}"}
           ]'
           number-of-displayed-rows=20
           options='{"showFilter": true}'>

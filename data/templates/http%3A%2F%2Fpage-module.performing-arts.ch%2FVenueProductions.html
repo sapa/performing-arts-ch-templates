@@ -86,31 +86,31 @@
     "relations": [
       {
         "iri": "<http://ontology.performing-arts.ch/season>",
-        "label": "Season",
+        "label": "[[i18n "FilterSeason" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E4_Period>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/premieretype>",
-        "label": "Premiere",
+        "label": "[[i18n "FilterPremiere" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/genre>",
-        "label": "Genre",
+        "label": "[[i18n "FilterGenre" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/producer>",
-        "label": "Producer",
+        "label": "[[i18n "FilterProducer" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/premieredate>",
-        "label": "Year",
+        "label": "[[i18n "FilterYear" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
         "hasRange": "<http://www.w3.org/2001/XMLSchema#decimal>"
       }
@@ -150,11 +150,11 @@
           {{#if hasLimit}}
           <bs-alert bs-style="warning" class="search-results__alert pull-left">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
-            <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
+            [[i18n "SearchLimitReached" bundle="performing-arts-ch" escapeHTML=false]]
           </bs-alert>
           {{else}}
           <bs-alert bs-style="warning" class="search-results__alert pull-left">
-            <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
+            <span class="num-results" class="search-results__alert"><strong>[[i18n "SearchResults" bundle="performing-arts-ch"]]</strong></span>
           </bs-alert>
           {{/if}}
         </template>
@@ -166,10 +166,10 @@
             query='SELECT DISTINCT ?plan ?season ?titlelabel ?stagedirection WHERE { }' 
             id='search-result'
             column-configuration='[
-              {"displayName": "Season", "variableName": "season"}, 
-              {"displayName": "Title", "cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
-              {"displayName": "Genre", "cellTemplate":"{{>genre}}"},
-              {"displayName": "Producer", "cellTemplate":"{{>producer}}"}
+              {"displayName": "[[i18n "ProductionsTableSeason" bundle="performing-arts-ch"]]", "variableName": "season"}, 
+              {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch"]]", "cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
+              {"displayName": "[[i18n "ProductionsTableGenre" bundle="performing-arts-ch"]]", "cellTemplate":"{{>genre}}"},
+              {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch"]]", "cellTemplate":"{{>producer}}"}
             ]'
             number-of-displayed-rows=20
             options='{"showFilter": true}'>

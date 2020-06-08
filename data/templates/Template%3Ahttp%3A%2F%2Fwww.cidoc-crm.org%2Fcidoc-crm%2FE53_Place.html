@@ -11,7 +11,7 @@
   [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/places.svg"]] 
   
   <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
-    <bs-tab event-key='about' title='About'>
+    <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
         <bs-col sm="4">
             <h5>Place hierarchy</h5>
@@ -43,7 +43,7 @@
         </bs-col>
 
 </bs-tab>
-<bs-tab event-key="2" title="Groups, Venues, Persons">
+<bs-tab event-key='2' title='[[i18n "TabGroupsVenuesPersons" bundle="performing-arts-ch"]]'>
 
     <bs-row>
         <bs-col sm="4">
@@ -104,7 +104,7 @@
 </bs-tab>
 
 [[#if (hasPermission "forms:ldp:*")]] 
-<bs-tab event-key='place editing' title='Edit'>
+<bs-tab event-key='place editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
 [[> sapaModule:PlaceForm]]
 </bs-tab>
 [[/if]]

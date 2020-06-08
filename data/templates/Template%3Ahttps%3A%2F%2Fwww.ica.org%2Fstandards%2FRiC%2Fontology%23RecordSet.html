@@ -11,7 +11,7 @@
     [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]] 
   
   <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
-    <bs-tab event-key='about' title='About'>
+    <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
         <bs-col sm="4">
 
@@ -76,7 +76,7 @@
 </bs-tab>
 
 [[#if (hasPermission "forms:ldp:*")]] 
-<bs-tab event-key='record editing' title='Edit'>
+<bs-tab event-key='record editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
 [[> sapaModule:RecordSetForm]]
 </bs-tab>
 [[/if]]
