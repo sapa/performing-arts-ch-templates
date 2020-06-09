@@ -4,12 +4,11 @@
     <semantic-query 
         query='SELECT ?officialname
         WHERE {
-            ?? crm:P131_is_identified_by ?app .
-            ?app a crm:E82_Actor_Appellation ; 
-                crm:P2_has_type spav:yanuj ;
-                rdf:value ?officialname .
+            ?? crm:P131_is_identified_by ?officialname .
+            ?officialname a crm:E82_Actor_Appellation ; 
+                crm:P2_has_type spav:yanuj .
         } LIMIT 1'
-    template='<p>{{#each bindings}}<strong>{{officialname.value}}</strong>{{/each}}</p>'>
+    template='<p>{{#each bindings}}<strong><mp-label iri="{{officialname.value}}"></mp-label></strong>{{/each}}</p>'>
     </semantic-query>
 
     <!-- alternative names -->
