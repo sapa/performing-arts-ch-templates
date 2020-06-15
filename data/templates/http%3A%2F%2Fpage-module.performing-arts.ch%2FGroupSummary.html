@@ -2,26 +2,32 @@
 
     <!-- official name -->
     <semantic-query 
-        query='SELECT ?officialname
+        query='SELECT ?officialname ?lang
         WHERE {
-            ?? crm:P131_is_identified_by ?officialname .
-            ?officialname a crm:E82_Actor_Appellation ; 
-                crm:P2_has_type spav:yanuj .
-        } LIMIT 1'
-    template='<p>{{#each bindings}}<strong><mp-label iri="{{officialname.value}}"></mp-label></strong>{{/each}}</p>'>
+            ?? crm:P131_is_identified_by [
+                a crm:E82_Actor_Appellation ; 
+                crm:P2_has_type spav:yanuj ;
+                rdf:value ?officialname ]
+            BIND(LANG(?officialname) AS ?l)
+            BIND(IF(STRLEN(?l)>0, CONCAT(" (", ?l, ")"), "") AS ?lang)
+        }'
+    template='<p>{{#each bindings}}{{#if @first}}{{else}}<br>{{/if}}<strong>{{officialname.value}}</strong>{{lang.value}}{{/each}}</p>'>
     </semantic-query>
 
     <!-- alternative names -->
     <semantic-query 
-        query='SELECT distinct ?appellation ?type ?typesort
+        query='SELECT DISTINCT ?appellation ?lang ?type ?typesort
         WHERE {
             VALUES (?type ?typesort) { (spav:yasis 1) (spav:yamqk 2) (spav:yavtx 3) }
-            ?? crm:P131_is_identified_by ?appellation .
-            ?appellation a crm:E82_Actor_Appellation ; 
-                crm:P2_has_type ?type .
-        } ORDER BY ?typesort'
-        template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>)
-            {{else}}<br><mp-label iri="{{appellation.value}}"></mp-label> (<mp-label iri="{{type.value}}"></mp-label>){{/if}}{{/each}}</p>'>
+            ?? crm:P131_is_identified_by [
+                a crm:E82_Actor_Appellation ; 
+                crm:P2_has_type ?type ;
+                rdf:value ?appellation ]
+            BIND(LANG(?appellation) AS ?l)
+            BIND(IF(STRLEN(?l)>0, CONCAT(", ", ?l), "") AS ?lang)
+        } ORDER BY ?typesort ?langsort'
+        template='<p>{{#each bindings}}{{#if @first}}{{appellation.value}} (<mp-label iri="{{type.value}}"></mp-label>{{lang.value}})
+            {{else}}<br>{{appellation.value}} (<mp-label iri="{{type.value}}"></mp-label>{{lang.value}}){{/if}}{{/each}}</p>'>
     </semantic-query>
 
     <!-- byline -->
