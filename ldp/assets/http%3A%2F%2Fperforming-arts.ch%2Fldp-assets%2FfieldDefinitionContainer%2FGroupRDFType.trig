@@ -43,7 +43,7 @@
 }""" .
   
   _:genid-e7e1244553094416ad550c4e685fd8c5-nrv54j <http://spinrdf.org/sp#text> """INSERT {
-  $subject a $value .
+  $subject a $value, rico:Group .
   # TODO: find a fix
   # $subject a ?ricotype.
 } WHERE {
