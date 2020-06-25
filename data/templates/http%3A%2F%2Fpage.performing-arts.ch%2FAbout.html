@@ -13,46 +13,20 @@
     <bs-row>
       <bs-col sm="6">
         [[i18n "AboutText" bundle="performing-arts-ch" escapeHTML=false]]
-        <h4 style="margin-top: 2em;">About the data</h4>
-        <p>The default licence for all data provided is <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" title="CC0 1.0 Universal (CC0 1.0)
-          Public Domain Dedication">CC0 1.0</a> if not indicated otherwise. Textual descriptions written by our staff are licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" title="Attribution-ShareAlike 4.0 International">CC BY-SA 4.0</a> licence. Rights of third parties remain reserved.</p>
-        <p>If you plan to make use of this data, it is encouraged to get in contact with us.</p>
+        <h4 style="margin-top: 2em;">[[i18n "AboutData" bundle="performing-arts-ch"]]</h4>
+        [[i18n "AboutDataLicense" bundle="performing-arts-ch" escapeHTML=false]]
         <bs-tabs id='data-tabs' default-active-key='1' unmount-on-exit=false style="margin-top: 1.2em;">
-          <bs-tab event-key='1' title='[[i18n "AboutDataPersons" bundle="performing-arts-ch"]]'>
-            <p>Akteure der Darstellenden Künste: Autor*innen, Choreograph*innen, Regisseur*innen, Bühnen-/Kostümbildner*innen, Schauspieler*innen, Tänzer*innen, Kulturschaffende der Klein- und Performancekunst, Pädagog*innen, Kulturjournalist*innen, Fotograf*innen, Intendant*innen, Kulturmanager*innen und -vermittler*innen, Festivalorganisator*innen, Wissenschafter*innen (Theater, Tanz u.a.)</p>
-            <h5>Datenbasis</h5>
-            <ul>
-              <li>Presseartikelsammlung SAPA ab ca. 1945/ab 1970er Jahre systematische Pressebeobachtung und -auswertung (Helvetica, inkl. Liechtenstein: Personen CH, mit CH-Bezug, Berichte zu Personen in CH-Medien)</li>
-              <li>Zusatzauswertung: Künstlerkartei des Schweizerischen Bühnenkünstlerverbands SBKV</li>
-              <li>Pendent: Personen aus Repertorien</li>
-            </ul>
+          <bs-tab event-key='1' title='[[i18n "AboutDataPersonsTab" bundle="performing-arts-ch"]]'>
+            [[i18n "AboutDataPersonsText" bundle="performing-arts-ch" escapeHTML=false]]
           </bs-tab>
-          <bs-tab event-key='2' title='[[i18n "AboutDataGroups" bundle="performing-arts-ch"]]'>
-            <p>Häuser mit eigenen Ensembles, Gastspielhäuser, sektorielle Spartenhäuser des Tanzes, des Kinder-, Jugend- und Figurentheaters, Gruppen der Freien Szene und so genannte Kleinkunst, Festivals, Freilichtspiele, Festspiele, Ausbildungsstätten, Verbände, Archive, Bibliotheken, Museen, Stiftungen, Theaterverlage, etc.</p>
-            <h5>Datenbasis</h5>
-            <ul>
-              <li>Presseartikelsammlung SAPA ab ca. 1945, systematischer ab 1970er Jahre (Helvetica, inkl. Liechtenstein: nur CH, keine ausländischen)</li>
-              <li>Zusatzauswertung
-                <ul>
-                  <li>CH-Verbände (Mitglieder): Schweizerischer Bühnenverband, reso Tanznetzwerk Schweiz, TASI Teatri Associati Scena Indipendente, Assitej Schweiz, Unima Suisse, t. Theaterschaffende Schweiz, ktv, act, Corodis, Inthega, Pro Cirque, ZSV Zentralverband Schweizer Volkstheater inkl. Regionalverbände, FFSTA Fédérarion Suisse des Société Théâtrales d’Amateurs, AFTA Association Fribourgeoise du Théâtre Amateur, FFSI Federazione Filodrammatiche della Svizzera Italiana) etc.</li>
-                  <li>Plattformen: www.theater.ch (eingestellt), <a href="http://www.plateaux.ch" target="_blank">www.plateaux.ch</a>, <a href="https://www.comedien.ch" target="_blank">www.comedien.ch</a>, <a href="http://www.dansesuisse.ch" target="_blank">www.dansesuisse.ch</a> etc.</li>
-                  <li><a href="http://tls.theaterwissenschaft.ch" target="_blank">Theaterlexikon der Schweiz</a></li>
-                  <li>Szene Schweiz; eine Dokumentation des Theaterlebens in der Schweiz, hrsg. von der Schweizerischen Gesellschaft für Theaterkultur, Bern 2006/06</li>
-                </ul>
-              </li>
-              <li>Pendent: Institutionen und Gruppen aus Repertorien</li>
-            </ul>
+          <bs-tab event-key='2' title='[[i18n "AboutDataGroupsTab" bundle="performing-arts-ch"]]'>
+            [[i18n "AboutDataGroupsText" bundle="performing-arts-ch" escapeHTML=false]]
           </bs-tab>
-          <bs-tab event-key='3' title='[[i18n "AboutDataVenues" bundle="performing-arts-ch"]]'>
-            <p>Feste Spielstätten, inkl. Teilspielstätten, Festivalgelände, kontinuierlich bespielte Räume der Darstellenden Künste etc.</p>
-            <h5>Datenbasis</h5>
-            <p>Wie Institutionen und Gruppen</p>
+          <bs-tab event-key='3' title='[[i18n "AboutDataVenuesTab" bundle="performing-arts-ch"]]'>
+            [[i18n "AboutDataVenuesText" bundle="performing-arts-ch" escapeHTML=false]]
           </bs-tab>
-          <bs-tab event-key='4' title='[[i18n "AboutDataProductions" bundle="performing-arts-ch"]]'>
-            <p>Einzelperformances von ausgewählten Spielstätten, Produzenten, Festival (Repertorienakteure = repertories), erfasst sind Premieren(besetzungen), im Fall von Gastspielen und Festivals die Besetzungen der jeweiligen Gastspielaufführung</p>
-            <p>Kriterien für die Aufnahme in den Repertorienstatus: Repräsentativität verschiedener Erscheinungsformen und Regionen sowie die Kontinuität der Ablieferung von Programmquellen</p>
-            <h5>Datenbasis</h5>
-            <p>Liste Repertorienhäuser (inkl. Vorgängerorganisationen)</p>
+          <bs-tab event-key='4' title='[[i18n "AboutDataProductionsTab" bundle="performing-arts-ch"]]'>
+            [[i18n "AboutDataProductionsText" bundle="performing-arts-ch" escapeHTML=false]]
             <semantic-query 
               query='SELECT ?group ?group_label WHERE {
                 ?group <http://ontology.performing-arts.ch/is_part_of_repertories> true ;
@@ -92,7 +66,6 @@
             <semantic-query query='SELECT (COUNT(?production) AS ?count) WHERE { ?production a frbroo:F25_Performance_Plan . FILTER(CONTAINS(STR(?production), "/w/")) }' template='<div>{{#each bindings}}{{count.value}}{{/each}} [[i18n "AboutCountProductions" bundle="performing-arts-ch"]]</div>'></semantic-query>
           </bs-col>
         </bs-row>
-        </ul>
       </bs-col>
     </bs-row>
   </div>
