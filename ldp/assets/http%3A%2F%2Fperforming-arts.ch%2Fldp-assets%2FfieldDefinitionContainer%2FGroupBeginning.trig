@@ -1,38 +1,16 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning>
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-99d1656d5a4949439674563efa6de2da-8covd;
-    a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-99d1656d5a4949439674563efa6de2da-smzlyj .
-  
-  _:genid-99d1656d5a4949439674563efa6de2da-8covd <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
-  $subject rico:hasBeginningDate ?date .
-  ?date a rico:Date ;
-    rico:normalizedDateValue ?value ;
-}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning>
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning> a <http://www.metaphacts.com/ontology/fields#Field>;
     <http://www.w3.org/2000/01/rdf-schema#comment> "Year, e.g. 1965";
-    <http://www.metaphacts.com/ontology/fields#askPattern> _:genid-99d1656d5a4949439674563efa6de2da-v50jh;
+    <http://www.metaphacts.com/ontology/fields#askPattern> _:genid-aa02972a724d43f9800cfdf4246398a9-okqpm6s;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Group>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Gegründet"@de .
+    <http://www.w3.org/2000/01/rdf-schema#label> "gegründet"@de .
   
-  _:genid-99d1656d5a4949439674563efa6de2da-smzlyj a <http://spinrdf.org/sp#Query> .
+  _:genid-aa02972a724d43f9800cfdf4246398a9-58qm22 a <http://spinrdf.org/sp#Query> .
   
-  _:genid-99d1656d5a4949439674563efa6de2da-v50jh <http://spinrdf.org/sp#text> "ASK { FILTER(REGEX($value, \"^([0-9]{4})?$\")) }" .
+  _:genid-aa02972a724d43f9800cfdf4246398a9-okqpm6s <http://spinrdf.org/sp#text> "ASK { FILTER(REGEX($value, \"^([0-9]{4})?$\")) }" .
   
-  _:genid-99d1656d5a4949439674563efa6de2da-8covd a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-99d1656d5a4949439674563efa6de2da-cxcwy a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-99d1656d5a4949439674563efa6de2da-v50jh a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning>
-    <http://www.w3.org/2000/01/rdf-schema#label> "fondata"@it;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-99d1656d5a4949439674563efa6de2da-cxcwy;
-    <http://www.w3.org/2000/01/rdf-schema#label> "fondé"@fr .
-  
-  _:genid-99d1656d5a4949439674563efa6de2da-smzlyj <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-aa02972a724d43f9800cfdf4246398a9-bjh1p <http://spinrdf.org/sp#text> """INSERT {
   $subject rico:hasBeginningDate ?date .
   ?date a rico:Date ;
     rico:normalizedDateValue ?value ;
@@ -41,26 +19,45 @@
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"formation\", $value)))) AS ?date)
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning>
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string> .
+  _:genid-aa02972a724d43f9800cfdf4246398a9-okqpm6s a <http://spinrdf.org/sp#Query> .
   
-  _:genid-99d1656d5a4949439674563efa6de2da-cxcwy <http://spinrdf.org/sp#text> """DELETE {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-aa02972a724d43f9800cfdf4246398a9-58qm22;
+    <http://www.w3.org/2000/01/rdf-schema#label> "fondato/a"@it;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-aa02972a724d43f9800cfdf4246398a9-8k84us .
+  
+  _:genid-aa02972a724d43f9800cfdf4246398a9-8k84us <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject rico:hasBeginningDate ?date .
+  ?date a rico:Date ;
+    rico:normalizedDateValue ?value ;
+}""" .
+  
+  _:genid-aa02972a724d43f9800cfdf4246398a9-58qm22 <http://spinrdf.org/sp#text> """DELETE {
   $subject rico:hasBeginningDate ?date .
   ?date a rico:Date ;
     rico:normalizedDateValue ?value ;
     rico:dateStandard \"ISO 8601\" .
 } WHERE {}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning>
-    <http://www.w3.org/2000/01/rdf-schema#label> "Founded"@en;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning> <http://www.metaphacts.com/ontology/fields#insertPattern>
+      _:genid-aa02972a724d43f9800cfdf4246398a9-bjh1p;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string> .
+  
+  _:genid-aa02972a724d43f9800cfdf4246398a9-8k84us a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning> <http://www.w3.org/2000/01/rdf-schema#label>
+      "fondé-e"@fr, "founded"@en .
+  
+  _:genid-aa02972a724d43f9800cfdf4246398a9-bjh1p a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning> <http://www.metaphacts.com/ontology/fields#maxOccurs>
+      "1";
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-05-26T13:47:26.795Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-06T08:42:52.206Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning>
-    a <http://www.w3.org/ns/ldp#Resource> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning> a <http://www.w3.org/ns/ldp#Resource> .
 }

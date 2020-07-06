@@ -1,34 +1,34 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGroup/context> {
-  _:genid-577cea0c9afe410e9c3b532475622a37-tuvwam <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-  $value crm:P107_has_current_or_former_member $subject .
-}""" .
-  
-  _:genid-577cea0c9afe410e9c3b532475622a37-82f7tb <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-4a8ff7d8446c42be9786692f8d44cb70-ok2pss <http://spinrdf.org/sp#text> """INSERT {
   $value crm:P107_has_current_or_former_member $subject .
 } WHERE {}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGroup> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Gruppe"@de;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-577cea0c9afe410e9c3b532475622a37-82f7tb;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGroup> a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-4a8ff7d8446c42be9786692f8d44cb70-22qljr a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGroup> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Gruppe"@de;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-4a8ff7d8446c42be9786692f8d44cb70-ok2pss;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
     <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E39_Actor> .
   
-  _:genid-577cea0c9afe410e9c3b532475622a37-82f7tb a <http://spinrdf.org/sp#Query> .
+  _:genid-4a8ff7d8446c42be9786692f8d44cb70-22qljr <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $value crm:P107_has_current_or_former_member $subject .
+}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGroup> <http://www.metaphacts.com/ontology/fields#selectPattern>
-      _:genid-577cea0c9afe410e9c3b532475622a37-tuvwam;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "groupe"@fr .
+  _:genid-4a8ff7d8446c42be9786692f8d44cb70-ok2pss a <http://spinrdf.org/sp#Query> .
   
-  _:genid-577cea0c9afe410e9c3b532475622a37-tuvwam a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGroup> <http://www.w3.org/2000/01/rdf-schema#label>
-      "gruppo"@it, "Group"@en;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGroup> <http://www.metaphacts.com/ontology/fields#domain>
+      <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Groupe"@fr;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-4a8ff7d8446c42be9786692f8d44cb70-22qljr;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Gruppo"@it, "Group"@en;
     <http://www.w3.org/2000/01/rdf-schema#comment> "display only";
     a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-29T23:55:50.801Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-06T07:39:36.108Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGroup> .

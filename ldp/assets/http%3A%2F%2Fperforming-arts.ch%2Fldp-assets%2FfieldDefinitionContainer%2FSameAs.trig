@@ -1,6 +1,16 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs/context> {
-  _:genid-c351987a2fbf400a93e0755cb40e50de-kb9iyg <http://spinrdf.org/sp#text> """SELECT ?value ?label
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs> a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-bd9f7d7f98ea462db32d153275d9a42a-mxcaf2 <http://spinrdf.org/sp#text> """DELETE {
+  $subject owl:sameAs $value .
+} WHERE { }""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Risorse esterne"@it;
+    <http://www.metaphacts.com/ontology/fields#range> <rdfs:Class> .
+  
+  _:genid-bd9f7d7f98ea462db32d153275d9a42a-wiuxz <http://spinrdf.org/sp#text> """SELECT ?value ?label
 WHERE {
   $subject owl:sameAs ?value .
   BIND(REPLACE(STR(?value), \".*\\\\/c*b*\", \"\") as ?localname)
@@ -20,43 +30,35 @@ WHERE {
   BIND(IF(?order<8, CONCAT(?source,\": \",?localname), ?source) AS ?label)
 } ORDER BY ASC(?order)""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-c351987a2fbf400a93e0755cb40e50de-ty8kzm;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Risorse esterne"@it;
-    <http://www.metaphacts.com/ontology/fields#range> <rdfs:Class>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-c351987a2fbf400a93e0755cb40e50de-kb9iyg;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs> <http://www.metaphacts.com/ontology/fields#insertPattern>
+      _:genid-bd9f7d7f98ea462db32d153275d9a42a-c39th4;
     <http://www.w3.org/2000/01/rdf-schema#label> "Ressources externes"@fr;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c351987a2fbf400a93e0755cb40e50de-bi7v2a .
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
   
-  _:genid-c351987a2fbf400a93e0755cb40e50de-ty8kzm <http://spinrdf.org/sp#text> """DELETE {
-  $subject owl:sameAs $value .
-} WHERE { }""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs> <http://www.w3.org/2000/01/rdf-schema#label>
-      "External resources"@en .
-  
-  _:genid-c351987a2fbf400a93e0755cb40e50de-bi7v2a <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-bd9f7d7f98ea462db32d153275d9a42a-c39th4 <http://spinrdf.org/sp#text> """INSERT {
   $subject owl:sameAs $value .
 } WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-bd9f7d7f98ea462db32d153275d9a42a-wiuxz;
+    <http://www.w3.org/2000/01/rdf-schema#label> "External resources"@en .
+  
+  _:genid-bd9f7d7f98ea462db32d153275d9a42a-c39th4 a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs> <http://www.w3.org/2000/01/rdf-schema#label>
       "Externe Ressourcen"@de .
   
-  _:genid-c351987a2fbf400a93e0755cb40e50de-bi7v2a a <http://spinrdf.org/sp#Query> .
+  _:genid-bd9f7d7f98ea462db32d153275d9a42a-mxcaf2 a <http://spinrdf.org/sp#Query> .
   
-  _:genid-c351987a2fbf400a93e0755cb40e50de-kb9iyg a <http://spinrdf.org/sp#Query> .
+  _:genid-bd9f7d7f98ea462db32d153275d9a42a-wiuxz a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs> <http://www.metaphacts.com/ontology/fields#domain>
-      <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity> .
-  
-  _:genid-c351987a2fbf400a93e0755cb40e50de-ty8kzm a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs> <http://www.w3.org/2000/01/rdf-schema#comment>
-      "Expects URIs from other databases such as Wikidata, GND, etc.";
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-bd9f7d7f98ea462db32d153275d9a42a-mxcaf2;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "Expects URIs from other databases such as Wikidata, GND, etc.";
     a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-27T18:46:39.501Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-06T07:46:02.238Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs> .

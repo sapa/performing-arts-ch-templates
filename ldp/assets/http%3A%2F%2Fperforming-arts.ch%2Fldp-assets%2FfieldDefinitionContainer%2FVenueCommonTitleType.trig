@@ -1,60 +1,59 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType/context> {
-  _:genid-2090126e5a2143679f7784c568b17404-uv48ql <http://spinrdf.org/sp#text> """INSERT { 
-  $title crm:P2_has_type $value .
-} WHERE {
-  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"common_title\")))) AS $title)
-}""" .
+  _:genid-df42faa8daf04004807254027c6a0780-nq9kar a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType>
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-df42faa8daf04004807254027c6a0780-nq9kar .
+  
+  _:genid-df42faa8daf04004807254027c6a0780-jh9phjr a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType>
     a <http://www.metaphacts.com/ontology/fields#Field>;
     <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Type"@en, "type"@fr .
+    <http://www.w3.org/2000/01/rdf-schema#label> "Type"@en, "Type"@fr;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-df42faa8daf04004807254027c6a0780-6hefq;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
   
-  _:genid-2090126e5a2143679f7784c568b17404-uv48ql a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-2090126e5a2143679f7784c568b17404-jfyzn <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
-	VALUES ($value) { (spav:yanuj) (spav:yasis) }
-}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType>
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-2090126e5a2143679f7784c568b17404-ogopa .
-  
-  _:genid-2090126e5a2143679f7784c568b17404-jfyzn a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType>
-    <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
-    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-2090126e5a2143679f7784c568b17404-jfyzn;
-    <http://www.w3.org/2000/01/rdf-schema#label> "modello"@it, "Typ"@de .
-  
-  _:genid-2090126e5a2143679f7784c568b17404-0pz9ma a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType>
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
-  
-  _:genid-2090126e5a2143679f7784c568b17404-ogopa a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType>
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-2090126e5a2143679f7784c568b17404-0pz9ma .
-  
-  _:genid-2090126e5a2143679f7784c568b17404-0pz9ma <http://spinrdf.org/sp#text> """DELETE {
+  _:genid-df42faa8daf04004807254027c6a0780-6hefq <http://spinrdf.org/sp#text> """DELETE {
 	$title crm:P2_has_type ?value .
 } WHERE {
 	BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"common_title\")))) AS $title)
 }   """ .
   
-  _:genid-2090126e5a2143679f7784c568b17404-ogopa <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType>
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-df42faa8daf04004807254027c6a0780-83kgje;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Tipo"@it;
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
+    <http://www.w3.org/2000/01/rdf-schema#label> "Typ"@de;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
+  
+  _:genid-df42faa8daf04004807254027c6a0780-83kgje a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType>
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-df42faa8daf04004807254027c6a0780-jh9phjr .
+  
+  _:genid-df42faa8daf04004807254027c6a0780-jh9phjr <http://spinrdf.org/sp#text> """INSERT { 
+  $title crm:P2_has_type $value .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"common_title\")))) AS $title)
+}""" .
+  
+  _:genid-df42faa8daf04004807254027c6a0780-nq9kar <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
+	VALUES ($value) { (spav:yanuj) (spav:yasis) }
+}""" .
+  
+  _:genid-df42faa8daf04004807254027c6a0780-83kgje <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
   $subject crm:P102_has_title $title .
   $title crm:P2_has_type ?value .
   FILTER(?value IN (spav:yanuj, spav:yasis))
 }""" .
   
+  _:genid-df42faa8daf04004807254027c6a0780-6hefq a <http://spinrdf.org/sp#Query> .
+  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType>
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-2090126e5a2143679f7784c568b17404-uv48ql;
     a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-03-02T12:25:30.511Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-06T08:33:08.320Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType> .
