@@ -1,0 +1,27 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups> a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-29a0153238b844cc9f40feb3ac6eee57-qywhj;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Groups"@en .
+  
+  _:genid-29a0153238b844cc9f40feb3ac6eee57-qywhj a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Gruppen"@de, "Groupes"@fr;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "used for labels only";
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Gruppi"@it .
+  
+  _:genid-29a0153238b844cc9f40feb3ac6eee57-qywhj <http://spinrdf.org/sp#text> "INSERT { $subject ?predicate $value} WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups> a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-06T08:35:40.790Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups> a <http://www.w3.org/ns/ldp#Resource> .
+}

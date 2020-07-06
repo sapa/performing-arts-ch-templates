@@ -1,0 +1,64 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceFallsWithin/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceFallsWithin> <http://www.metaphacts.com/ontology/fields#range>
+      <http://www.cidoc-crm.org/cidoc-crm/E53_Place>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Environs"@fr;
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-8eeab23c9f3647ad9e0f52d3f031fcf1-3s7do <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject crm:P89_falls_within $value .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceFallsWithin> <http://www.metaphacts.com/ontology/fields#domain>
+      <http://www.cidoc-crm.org/cidoc-crm/E53_Place>;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-8eeab23c9f3647ad9e0f52d3f031fcf1-n4sf06 .
+  
+  _:genid-8eeab23c9f3647ad9e0f52d3f031fcf1-n4sf06 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  $value a crm:E53_Place ;
+    rdfs:label $label .
+  FILTER REGEX($label, \"?token\", \"i\")
+}""" .
+  
+  _:genid-8eeab23c9f3647ad9e0f52d3f031fcf1-ze3m7 <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P89_falls_within $value .
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceFallsWithin> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#anyURI> .
+  
+  _:genid-8eeab23c9f3647ad9e0f52d3f031fcf1-ze3m7 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-8eeab23c9f3647ad9e0f52d3f031fcf1-xxw99a <http://spinrdf.org/sp#text> """INSERT {
+  $subject crm:P89_falls_within $value .
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceFallsWithin> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-8eeab23c9f3647ad9e0f52d3f031fcf1-3s7do;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-8eeab23c9f3647ad9e0f52d3f031fcf1-ze3m7;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Umgebender Ort"@de;
+    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"simple\",
+  \"schemePattern\": \"?item a crm:E53_Place.\",
+  \"relationPattern\": \"?item crm:P89_falls_within ?parent.\"
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Surrounding place"@en;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-8eeab23c9f3647ad9e0f52d3f031fcf1-xxw99a;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Dintorni"@it .
+  
+  _:genid-8eeab23c9f3647ad9e0f52d3f031fcf1-3s7do a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-8eeab23c9f3647ad9e0f52d3f031fcf1-xxw99a a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceFallsWithin> <http://www.metaphacts.com/ontology/fields#maxOccurs>
+      "1";
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-06T07:52:30.835Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceFallsWithin> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceFallsWithin> a
+      <http://www.w3.org/ns/ldp#Resource> .
+}
