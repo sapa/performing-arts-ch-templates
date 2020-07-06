@@ -1,0 +1,65 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> a
+      <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-6470e515d57946a9b768277cd48b2e3a-ncnehw .
+  
+  _:genid-6470e515d57946a9b768277cd48b2e3a-ncnehw <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasSubject $value . } WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Sujet"@fr;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Contenuto"@it .
+  
+  _:genid-6470e515d57946a9b768277cd48b2e3a-ncnehw a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.metaphacts.com/ontology/fields#autosuggestionPattern>
+      _:genid-6470e515d57946a9b768277cd48b2e3a-uuvn .
+  
+  _:genid-6470e515d57946a9b768277cd48b2e3a-uuvn a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-6470e515d57946a9b768277cd48b2e3a-fi5s0a <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasSubject $value} WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Subject"@en;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Thing> .
+  
+  _:genid-6470e515d57946a9b768277cd48b2e3a-uuvn <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  { $value a rico:Concept . }
+  UNION
+  { $value rdf:type/rdfs:subClassOf* rico:Agent . }
+  $value rdfs:label $label .
+  FILTER(REGEX($label, \"?token\", \"i\"))
+  FILTER(!CONTAINS(STR(?value), \"/u/\"))
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.metaphacts.com/ontology/fields#domain>
+      <https://www.ica.org/standards/RiC/ontology#Record> .
+  
+  _:genid-6470e515d57946a9b768277cd48b2e3a-fi5s0a a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-6470e515d57946a9b768277cd48b2e3a-gsts0m;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordSet> .
+  
+  _:genid-6470e515d57946a9b768277cd48b2e3a-gsts0m <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:hasSubject ?value . }" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> <http://www.metaphacts.com/ontology/fields#range>
+      <https://www.ica.org/standards/RiC/ontology#Concept>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Gegenstand"@de;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-6470e515d57946a9b768277cd48b2e3a-fi5s0a;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Agent> .
+  
+  _:genid-6470e515d57946a9b768277cd48b2e3a-gsts0m a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> a
+      <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-05-18T16:05:18.281Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject> a
+      <http://www.w3.org/ns/ldp#Resource> .
+}

@@ -1,0 +1,52 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language>
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan> .
+  
+  _:genid-f17dd798bee44247961fd2ae5ef0dc27-aize3i <http://spinrdf.org/sp#text> """INSERT {
+  ?pw frbroo:R12_is_realised_in $subject ;
+      <http://schema.org/inLanguage> $value.
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/w/\", MD5(STR(?value)), \"/w\")) AS ?pw)
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language>
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-f17dd798bee44247961fd2ae5ef0dc27-nvj8v2 .
+  
+  _:genid-f17dd798bee44247961fd2ae5ef0dc27-nvj8v2 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-f17dd798bee44247961fd2ae5ef0dc27-2xx1dr <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  ?value a crm:E55_Type ;
+    skos:inScheme spav:lg ;
+    skos:prefLabel ?label .
+  FILTER REGEX(STR(?label), \"?token\",\"i\")
+} LIMIT 10""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language>
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f17dd798bee44247961fd2ae5ef0dc27-aize3i;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Performance Language"@undefined;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-f17dd798bee44247961fd2ae5ef0dc27-2xx1dr .
+  
+  _:genid-f17dd798bee44247961fd2ae5ef0dc27-2xx1dr a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-f17dd798bee44247961fd2ae5ef0dc27-aize3i a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-f17dd798bee44247961fd2ae5ef0dc27-nvj8v2 <http://spinrdf.org/sp#text> """SELECT ?value WHERE { 
+  ?pw frbroo:R12_is_realised_in $subject ;
+    <http://schema.org/inLanguage> $value.
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language>
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-27T18:39:35.699Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

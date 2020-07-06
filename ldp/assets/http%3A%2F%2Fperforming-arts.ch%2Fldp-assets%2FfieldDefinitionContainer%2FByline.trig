@@ -1,0 +1,58 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Byline/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Byline> a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-72eff0fbf0324cd7aa7ed2403b7a13a2-voqcsk a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Byline> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-72eff0fbf0324cd7aa7ed2403b7a13a2-zb2vy .
+  
+  _:genid-72eff0fbf0324cd7aa7ed2403b7a13a2-zb2vy <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  BIND(IRI(CONCAT (\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"byline\")))) AS $identifier)
+  $subject crm:P131_is_identified_by $identifier .
+  $identifier a crm:E41_Appellation ;
+    crm:P2_has_type spav:yauzw ;
+    rdf:value $value .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Byline> <http://www.metaphacts.com/ontology/fields#domain>
+      <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
+  
+  _:genid-72eff0fbf0324cd7aa7ed2403b7a13a2-j5i4c a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-72eff0fbf0324cd7aa7ed2403b7a13a2-zb2vy a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-72eff0fbf0324cd7aa7ed2403b7a13a2-j5i4c <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P131_is_identified_by $identifier .
+  $identifier a crm:E41_Appellation ;
+    crm:P2_has_type spav:yauzw ;
+    rdf:value $value .
+} WHERE {
+  BIND(IRI(CONCAT (\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"byline\")))) AS $identifier)
+} """ .
+  
+  _:genid-72eff0fbf0324cd7aa7ed2403b7a13a2-voqcsk <http://spinrdf.org/sp#text> """INSERT { 
+  $subject crm:P131_is_identified_by $identifier .
+  $identifier a crm:E41_Appellation ;
+    crm:P2_has_type spav:yauzw ;
+    rdf:value $value .
+} WHERE {
+  BIND(IRI(CONCAT (\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"byline\")))) AS $identifier)
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Byline> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Byline"@de;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-72eff0fbf0324cd7aa7ed2403b7a13a2-j5i4c;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-72eff0fbf0324cd7aa7ed2403b7a13a2-voqcsk;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-05-18T19:51:34.475Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Byline> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Byline> a <http://www.w3.org/ns/ldp#Resource> .
+}

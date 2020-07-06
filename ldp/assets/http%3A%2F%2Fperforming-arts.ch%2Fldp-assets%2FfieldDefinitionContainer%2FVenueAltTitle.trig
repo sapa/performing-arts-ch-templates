@@ -1,0 +1,54 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Alternative name"@en;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nom alternatif"@fr;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-229346dc96144537ad01e4a1a5362e24-ix5io;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-229346dc96144537ad01e4a1a5362e24-kevq9;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nome alternativo"@it .
+  
+  _:genid-229346dc96144537ad01e4a1a5362e24-ix5io a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT { 
+  $subject crm:P102_has_title $title.
+  $title a crm:E35_Title ;
+    crm:P2_has_type spav:yavtx ;
+    rdf:value $value .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"alternative_name\", $value)))) AS $title)
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> <http://www.metaphacts.com/ontology/fields#domain>
+      <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
+  
+  _:genid-229346dc96144537ad01e4a1a5362e24-c3qdj8 <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P102_has_title $title.
+  $title a crm:E35_Title ;
+    crm:P2_has_type spav:yavtx ;
+    rdf:value ?value .
+} WHERE {}    """;
+    a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-229346dc96144537ad01e4a1a5362e24-kevq9 <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value WHERE {
+  $subject crm:P102_has_title $title .
+  $title crm:P2_has_type spav:yavtx ;
+    rdf:value ?value .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Alternativer Name"@de .
+  
+  _:genid-229346dc96144537ad01e4a1a5362e24-kevq9 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-229346dc96144537ad01e4a1a5362e24-c3qdj8;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-31T20:28:12.461Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle> a <http://www.w3.org/ns/ldp#Resource> .
+}
