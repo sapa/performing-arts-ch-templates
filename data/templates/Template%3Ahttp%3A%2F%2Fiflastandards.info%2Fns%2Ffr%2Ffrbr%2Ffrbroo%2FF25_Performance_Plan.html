@@ -9,7 +9,7 @@
 <div class="page">
   [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]]
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
-      <bs-tab event-key='Summary' title='Summary'>
+      <bs-tab event-key='Summary' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
         <bs-col sm="4">
             <!-- titles -->
@@ -43,6 +43,26 @@
             template='<div><h5>RepID</h5>{{#each bindings}}<p>{{id.value}}</p>{{/each}}</div>'>
             </semantic-query>
             [[/if]]
+
+            <!-- genre -->
+            <semantic-query 
+                query='SELECT ?genre
+                WHERE {
+                    ?work frbroo:R12_is_realised_in ?? ;
+                      crm:P2_has_type ?genre .
+                }'
+            template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</p>'>
+            </semantic-query>
+
+            <!-- language -->
+            <semantic-query 
+                query='SELECT ?language
+                WHERE {
+                    ?work frbroo:R12_is_realised_in ?? ;
+                      schema:inLanguage ?language .
+                }'
+            template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{language.value}}"></mp-label>{{else}}, <mp-label iri="{{language.value}}"></mp-label>{{/if}}{{/each}}</p>'>
+            </semantic-query>
 
             <!-- producer & season -->
             <semantic-query 
@@ -213,7 +233,7 @@
       </bs-tab>
       
          [[#if (hasPermission "forms:ldp:*")]] 
-<bs-tab event-key='Edit' title='Edit'>
+  <bs-tab event-key='Edit' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
         [[> sapaModule:PerformancePlanForm]]
   </bs-tab>
 [[/if]]      

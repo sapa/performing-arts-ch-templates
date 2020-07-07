@@ -101,7 +101,7 @@
         [[#if create]]
           <div class="semantic-form-input-decorator--with-header">
             <div class="semantic-form-input-decorator__header">
-              Record set can only be created later.
+              [[i18n "PersonFormRecordLater" bundle="performing-arts-ch"]]
             </div>
           </div>
         [[else]]
@@ -123,20 +123,14 @@
               <semantic-form-checklist-input type='radio' row=true for='record_set_type'></semantic-form-checklist-input>
               <semantic-form-autocomplete-input for="record_set_subject" default-value='[[this]]'></semantic-form-autocomplete-input>
               <semantic-form-tree-picker-input for='record_set_parent' ></semantic-form-tree-picker-input>
-              <button name='submit' class='btn btn-default'>Create Record Set</button>
+              <button name='submit' class='btn btn-default'>[[i18n "FormCreateRecordSet" bundle="performing-arts-ch"]]</button>
             </semantic-form>
           </semantic-form-autocomplete-input>
         [[/if]]
 
         <semantic-form-errors></semantic-form-errors>
-        <button
-          name='submit'
-          class='btn btn-default'
-        >Save</button>
-        <button
-          name='reset'
-          class='btn btn-default'
-        >Reset</button>
+        <button name='submit' class='btn btn-default'>[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>
+        <button name='reset' class='btn btn-default'>[[i18n "FormReset" bundle="performing-arts-ch"]]</button>
       </bs-panel>
     </semantic-form>
   </div>

@@ -1,17 +1,40 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> a <http://www.metaphacts.com/ontology/fields#Field> .
+  _:genid-e12372284448496397bbd8fbd53f966c-zxvfvh <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value ?label ?unidentified WHERE {
+  $subject crm:P46_is_composed_of ?value .
+  BIND(IF(CONTAINS(STR($value), \"/u/\"), \"true\", \"\") AS ?unidentified)
+}""" .
   
-  _:genid-83a02edbe4e84989b4f1886c09524161-55uns a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-e12372284448496397bbd8fbd53f966c-boijwk .
   
-  _:genid-83a02edbe4e84989b4f1886c09524161-vdrmc a <http://spinrdf.org/sp#Query> .
+  _:genid-e12372284448496397bbd8fbd53f966c-boijwk a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-e12372284448496397bbd8fbd53f966c-csybwjw <http://spinrdf.org/sp#text> """INSERT {
+  $subject crm:P46_is_composed_of $value .
+} WHERE {}""" .
+  
+  _:genid-e12372284448496397bbd8fbd53f966c-zxvfvh a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> <http://www.w3.org/2000/01/rdf-schema#label>
       "beinhaltet"@de;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-83a02edbe4e84989b4f1886c09524161-55uns .
+    <http://www.w3.org/2000/01/rdf-schema#label> "contient"@fr;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-e12372284448496397bbd8fbd53f966c-csybwjw .
   
-  _:genid-83a02edbe4e84989b4f1886c09524161-67byyt <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  _:genid-e12372284448496397bbd8fbd53f966c-4l2xo a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> <http://www.metaphacts.com/ontology/fields#range>
+      <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
+  
+  _:genid-e12372284448496397bbd8fbd53f966c-csybwjw a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-e12372284448496397bbd8fbd53f966c-4l2xo;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "include"@it .
+  
+  _:genid-e12372284448496397bbd8fbd53f966c-boijwk <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
   ?value a crm:E22_Man-Made_Object ;
   	crm:P2_has_type spav:dwmkn ;
     rdfs:label ?label .
@@ -20,41 +43,18 @@
   FILTER(CONTAINS(STR(?value), \"/o/\"))
 } LIMIT 10""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> <http://www.metaphacts.com/ontology/fields#range>
-      <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-83a02edbe4e84989b4f1886c09524161-67byyt;
-    <http://www.w3.org/2000/01/rdf-schema#label> "inclus"@fr .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-e12372284448496397bbd8fbd53f966c-zxvfvh .
   
-  _:genid-83a02edbe4e84989b4f1886c09524161-q7s6f <http://spinrdf.org/sp#text> """INSERT {
-  $subject crm:P46_is_composed_of $value .
-} WHERE {}""" .
-  
-  _:genid-83a02edbe4e84989b4f1886c09524161-67byyt a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> <http://www.metaphacts.com/ontology/fields#domain>
-      <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
-  
-  _:genid-83a02edbe4e84989b4f1886c09524161-55uns <http://spinrdf.org/sp#text> """DELETE { 
+  _:genid-e12372284448496397bbd8fbd53f966c-4l2xo <http://spinrdf.org/sp#text> """DELETE { 
   $subject crm:P46_is_composed_of ?value .
 } WHERE {}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> <http://www.w3.org/2000/01/rdf-schema#label>
-      "include"@it;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-83a02edbe4e84989b4f1886c09524161-q7s6f;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-83a02edbe4e84989b4f1886c09524161-vdrmc .
-  
-  _:genid-83a02edbe4e84989b4f1886c09524161-vdrmc <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value ?label ?unidentified WHERE {
-  $subject crm:P46_is_composed_of ?value .
-  BIND(IF(CONTAINS(STR($value), \"/u/\"), \"true\", \"\") AS ?unidentified)
-}""" .
-  
-  _:genid-83a02edbe4e84989b4f1886c09524161-q7s6f a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> <http://www.w3.org/2000/01/rdf-schema#label>
       "contains"@en;
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-06-02T07:22:54.186Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-06T08:36:08.957Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains> .

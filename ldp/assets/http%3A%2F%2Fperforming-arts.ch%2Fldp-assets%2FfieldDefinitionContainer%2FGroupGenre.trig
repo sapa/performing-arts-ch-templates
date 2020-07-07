@@ -1,37 +1,6 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type> .
-  
-  _:genid-b85466189c9a4c058f8ef11eece8e10b-vytga <http://spinrdf.org/sp#text> """DELETE {
-  ?pursuit a frbroo:F51_Pursuit ;
-  	crm:P14_carried_out_by $subject ;
-  	frbroo:R59_had_typical_subject ?value. 
-} WHERE {}""" .
-  
-  _:genid-b85466189c9a4c058f8ef11eece8e10b-pmjyzn a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
-      <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-b85466189c9a4c058f8ef11eece8e10b-0wyrk .
-  
-  _:genid-b85466189c9a4c058f8ef11eece8e10b-0wyrk <http://spinrdf.org/sp#text> """INSERT {
-  ?pursuit a frbroo:F51_Pursuit ;
-  	crm:P14_carried_out_by $subject ;
-  	frbroo:R59_had_typical_subject ?value. 
-} WHERE {	     
-  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"genre_focus\")))) as ?pursuit)
-}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre> <http://www.metaphacts.com/ontology/fields#autosuggestionPattern>
-      _:genid-b85466189c9a4c058f8ef11eece8e10b-4z9grv .
-  
-  _:genid-b85466189c9a4c058f8ef11eece8e10b-4z9grv a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre> <http://www.metaphacts.com/ontology/fields#domain>
-      <http://www.cidoc-crm.org/cidoc-crm/E74_Group> .
-  
-  _:genid-b85466189c9a4c058f8ef11eece8e10b-4z9grv <http://spinrdf.org/sp#text> """PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+  _:genid-17bf6153a0ee48f1b7ebbff4fcb6fb53-tr07uw <http://spinrdf.org/sp#text> """PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX spav: <http://vocab.performing-arts.ch/> 
 SELECT $value $label WHERE {
   $value a skos:Concept ;
@@ -40,32 +9,61 @@ SELECT $value $label WHERE {
   FILTER(REGEX(STR(?label), \"?token\",\"i\"))
 } LIMIT 10""" .
   
-  _:genid-b85466189c9a4c058f8ef11eece8e10b-0wyrk a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-17bf6153a0ee48f1b7ebbff4fcb6fb53-mot32;
+    a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E55_Type> .
   
-  _:genid-b85466189c9a4c058f8ef11eece8e10b-vytga a <http://spinrdf.org/sp#Query> .
+  _:genid-17bf6153a0ee48f1b7ebbff4fcb6fb53-dc6pn9 a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre> <http://www.metaphacts.com/ontology/fields#treePatterns>
-      """{
-  \"type\": \"full\",
-  \"rootsQuery\": \"PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX spav: <http://vocab.performing-arts.ch/> \\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item skos:topConceptOf spav:mn ;\\n  \\tskos:prefLabel ?label.\\n  BIND(FALSE AS ?hasChildren)\\n}\\nORDER BY (?label)\",
-  \"childrenQuery\": \"PREFIX spav: <http://vocab.performing-arts.ch/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item skos:broader ?parent ;\\n        skos:prefLabel ?label.\\n  BIND(FALSE AS ?hasChildren)\\n}\\nORDER BY (?label)\",
-  \"parentsQuery\": \"PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nSELECT DISTINCT ?item ?parent ?parentLabel WHERE {\\n  ?item skos:broader ?parent.\\n  ?parent skos:prefLabel ?parentLabel.\\n}\",
-  \"searchQuery\": \"PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX spav: <http://vocab.performing-arts.ch/>\\nPREFIX bds: <http://www.bigdata.com/rdf/search#>\\nSELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {\\n  ?item skos:topConceptOf spav:mn ;\\n  \\tskos:prefLabel ?label.\\n  ?label bds:search ?__token__;\\n    bds:minRelevance \\\"0.3\\\";\\n    bds:relevance ?score;\\n    bds:matchAllTerms \\\"true\\\".\\n  BIND(FALSE AS ?hasChildren)\\n}\\nORDER BY DESC (?score) (?label)\\nLIMIT 200\"
-}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "genere"@it;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-b85466189c9a4c058f8ef11eece8e10b-vytga;
-    <http://www.w3.org/2000/01/rdf-schema#label> "genre"@fr, "Genre"@de;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-b85466189c9a4c058f8ef11eece8e10b-pmjyzn .
-  
-  _:genid-b85466189c9a4c058f8ef11eece8e10b-pmjyzn <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  _:genid-17bf6153a0ee48f1b7ebbff4fcb6fb53-mot32 <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
   ?pursuit a frbroo:F51_Pursuit ;
   	crm:P14_carried_out_by $subject ;
   	frbroo:R59_had_typical_subject ?value. 
 }""" .
   
+  _:genid-17bf6153a0ee48f1b7ebbff4fcb6fb53-v7snnk <http://spinrdf.org/sp#text> """INSERT {
+  ?pursuit a frbroo:F51_Pursuit ;
+  	crm:P14_carried_out_by $subject ;
+  	frbroo:R59_had_typical_subject ?value. 
+} WHERE {	     
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"genre_focus\")))) as ?pursuit)
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre> <http://www.metaphacts.com/ontology/fields#insertPattern>
+      _:genid-17bf6153a0ee48f1b7ebbff4fcb6fb53-v7snnk;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-17bf6153a0ee48f1b7ebbff4fcb6fb53-dc6pn9 .
+  
+  _:genid-17bf6153a0ee48f1b7ebbff4fcb6fb53-mot32 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-17bf6153a0ee48f1b7ebbff4fcb6fb53-v7snnk a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre> <http://www.metaphacts.com/ontology/fields#domain>
+      <http://www.cidoc-crm.org/cidoc-crm/E74_Group>;
+    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"full\",
+  \"rootsQuery\": \"PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX spav: <http://vocab.performing-arts.ch/> \\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item skos:topConceptOf spav:mn ;\\n  \\tskos:prefLabel ?label.\\n  BIND(FALSE AS ?hasChildren)\\n}\\nORDER BY (?label)\",
+  \"childrenQuery\": \"PREFIX spav: <http://vocab.performing-arts.ch/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item skos:broader ?parent ;\\n        skos:prefLabel ?label.\\n  BIND(FALSE AS ?hasChildren)\\n}\\nORDER BY (?label)\",
+  \"parentsQuery\": \"PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nSELECT DISTINCT ?item ?parent ?parentLabel WHERE {\\n  ?item skos:broader ?parent.\\n  ?parent skos:prefLabel ?parentLabel.\\n}\",
+  \"searchQuery\": \"PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX spav: <http://vocab.performing-arts.ch/>\\nPREFIX bds: <http://www.bigdata.com/rdf/search#>\\nSELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {\\n  ?item skos:topConceptOf spav:mn ;\\n  \\tskos:prefLabel ?label.\\n  ?label bds:search ?__token__;\\n    bds:minRelevance \\\"0.3\\\";\\n    bds:relevance ?score;\\n    bds:matchAllTerms \\\"true\\\".\\n  BIND(FALSE AS ?hasChildren)\\n}\\nORDER BY DESC (?score) (?label)\\nLIMIT 200\"
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson> .
+  
+  _:genid-17bf6153a0ee48f1b7ebbff4fcb6fb53-dc6pn9 <http://spinrdf.org/sp#text> """DELETE {
+  ?pursuit a frbroo:F51_Pursuit ;
+  	crm:P14_carried_out_by $subject ;
+  	frbroo:R59_had_typical_subject ?value. 
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Genere"@it, "Genre"@de, "Genre"@fr;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-17bf6153a0ee48f1b7ebbff4fcb6fb53-tr07uw .
+  
+  _:genid-17bf6153a0ee48f1b7ebbff4fcb6fb53-tr07uw a <http://spinrdf.org/sp#Query> .
+  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre> a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-05-20T15:36:54.740Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-06T09:17:38.594Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre> .

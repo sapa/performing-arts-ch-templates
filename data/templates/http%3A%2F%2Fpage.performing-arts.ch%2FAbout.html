@@ -9,22 +9,33 @@
 
 <div class="page rs-page">
   <div class='page__body'>
-    <h3 style="margin-top: 2em;">About</h3>
+    <h3 style="margin-top: 2em;">[[i18n "AboutHeadline" bundle="performing-arts-ch"]]</h3>
     <bs-row>
       <bs-col sm="6">
-        <p>The <a href="https://sapa.swiss" title="Swiss Archive of the Performing Arts" target="_blank">SAPA Foundation</a> collects, documents, archives and disseminates works from the field of the performing arts (dance, theatre, performance art, etc.) produced in Switzerland, associated with Switzerland or important to it. All these documents form the Helvetica of the performing arts. Once completed, performing-arts.ch will provide information on the archival holdings of SAPA and on performing arts in Switzerland as <a href="https://en.wikipedia.org/wiki/Linked_data" title="Wikipedia: Linked Data" target="_blank">Linked Data</a>.</p>
-        <p>This preview version of the database contains only a small part of our data. Primarily, it can be helpful to identify persons, groups and venues. The database also contains information about performing arts productions. However, this is not yet fully linked and thus only partially searchable. Further data and media files will be added later. Meanwhile, the archival holdings of the former Swiss Dance Collection in Lausanne and Zurich are accessible at <a href="http://catalogue.collectiondeladanse.ch/tanzarchiv/" tagret="_blank">catalogue.collectiondeladanse.ch/tanzarchiv/</a>.</p>
-        <p>A technical documentation of the data is available at <a href="https://sapa.github.io/spa-specifications/">sapa.github.io/spa-specifications/</a>.</p>
-        <p>If you have any questions or feedback, please contact <a href="mailto:birk.weiberg@sapa.swiss">birk.weiberg@sapa.swiss</a>.</p>
-        <p><a href="/">performing-arts.ch</a> is made possible by the generous support of</p>
-        <ul>
-          <li>Konferenz der kantonalen Kulturbeauftragten (KBK)</li>
-          <li><a href="http://www.ernst-goehner-stiftung.ch" target="_blank">Ernst Göhner-Stiftung</a></li>
-          <li><a href="https://www.avinastiftung.ch" target="_blank">Avina Stiftung</a></li>
-          <li><a href="https://www.ubs.com/global/en/ubs-society/foundations/culture-foundation.html" target="_blank">UBS Kulturstiftung</a></li>
-          <li><a href="https://www.binding-stiftung.ch" target="_blank">Sophie und Karl Binding-Stiftung</a></li>
-        </ul>
-
+        [[i18n "AboutText" bundle="performing-arts-ch" escapeHTML=false]]
+        <h4 style="margin-top: 2em;">[[i18n "AboutData" bundle="performing-arts-ch"]]</h4>
+        [[i18n "AboutDataLicense" bundle="performing-arts-ch" escapeHTML=false]]
+        <bs-tabs id='data-tabs' default-active-key='1' unmount-on-exit=false style="margin-top: 1.2em;">
+          <bs-tab event-key='1' title='[[i18n "AboutDataPersonsTab" bundle="performing-arts-ch"]]'>
+            [[i18n "AboutDataPersonsText" bundle="performing-arts-ch" escapeHTML=false]]
+          </bs-tab>
+          <bs-tab event-key='2' title='[[i18n "AboutDataGroupsTab" bundle="performing-arts-ch"]]'>
+            [[i18n "AboutDataGroupsText" bundle="performing-arts-ch" escapeHTML=false]]
+          </bs-tab>
+          <bs-tab event-key='3' title='[[i18n "AboutDataVenuesTab" bundle="performing-arts-ch"]]'>
+            [[i18n "AboutDataVenuesText" bundle="performing-arts-ch" escapeHTML=false]]
+          </bs-tab>
+          <bs-tab event-key='4' title='[[i18n "AboutDataProductionsTab" bundle="performing-arts-ch"]]'>
+            [[i18n "AboutDataProductionsText" bundle="performing-arts-ch" escapeHTML=false]]
+            <semantic-query 
+              query='SELECT ?group ?group_label WHERE {
+                ?group <http://ontology.performing-arts.ch/is_part_of_repertories> true ;
+                  rdfs:label ?group_label .
+              } ORDER BY ASC(?group_label)' 
+              template='<ul>{{#each bindings}}<li><semantic-link iri="{{group.value}}">{{group_label.value}}</semantic-link></li>{{/each}}</ul>'>
+            </semantic-query>
+          </bs-tab>
+        </bs-tabs>
       </bs-col>
       <bs-col sm="6">
         <bs-row>
@@ -32,13 +43,13 @@
             <div>
               <span style="font-size: 84px;"><i class="fas fa-user"></i></span>
             </div>
-            <semantic-query query='SELECT (COUNT(?person) AS ?count) WHERE { ?person a crm:E21_Person . FILTER(CONTAINS(STR(?person), "/a/")) }' template='<div>{{#each bindings}}{{count.value}} persons{{/each}}</div>'></semantic-query>
+            <semantic-query query='SELECT (COUNT(?person) AS ?count) WHERE { ?person a crm:E21_Person . FILTER(CONTAINS(STR(?person), "/a/")) }' template='<div>{{#each bindings}}{{count.value}} [[i18n "AboutCountPersons" bundle="performing-arts-ch"]]{{/each}}</div>'></semantic-query>
           </bs-col>
           <bs-col sm="6" style="text-align: center;">
             <div>
               <span style="font-size: 84px;"><i class="fas fa-users"></i></span>
             </div>
-            <semantic-query query='SELECT (COUNT(?group) AS ?count) WHERE { ?group rdf:type/rdfs:subClassOf* crm:E74_Group . FILTER(CONTAINS(STR(?group), "/a/")) }' template='<div>{{#each bindings}}{{count.value}} institutions and groups{{/each}}</div>'></semantic-query>
+            <semantic-query query='SELECT (COUNT(?group) AS ?count) WHERE { ?group rdf:type/rdfs:subClassOf* crm:E74_Group . FILTER(CONTAINS(STR(?group), "/a/")) }' template='<div>{{#each bindings}}{{count.value}} [[i18n "AboutCountGroups" bundle="performing-arts-ch"]]{{/each}}</div>'></semantic-query>
           </bs-col>
         </bs-row>
         <bs-row style="margin-top: 4em;">
@@ -46,19 +57,16 @@
             <diV>
               <span style="font-size: 84px;"><i class="fas fa-university"></i></span>
             </diV>
-            <semantic-query query='SELECT (COUNT(?venue) AS ?count) WHERE { ?venue a crm:E22_Man-Made_Object ; crm:P2_has_type spav:dwmkn . FILTER(CONTAINS(STR(?venue), "/o/")) }' template='<div>{{#each bindings}}{{count.value}} venues{{/each}}</div>'></semantic-query>
+            <semantic-query query='SELECT (COUNT(?venue) AS ?count) WHERE { ?venue a crm:E22_Man-Made_Object ; crm:P2_has_type spav:dwmkn . FILTER(CONTAINS(STR(?venue), "/o/")) }' template='<div>{{#each bindings}}{{count.value}} [[i18n "AboutCountVenues" bundle="performing-arts-ch"]]{{/each}}</div>'></semantic-query>
           </bs-col>
           <bs-col sm="6" style="text-align: center;">
             <div>
               <span style="font-size: 84px;"><i class="fas fa-theater-masks"></i></span>
             </div>
-            <semantic-query query='SELECT (COUNT(?production) AS ?count) WHERE { ?production a frbroo:F25_Performance_Plan . FILTER(CONTAINS(STR(?production), "/w/")) }' template='<div>{{#each bindings}}{{count.value}}{{/each}} productions</div>'></semantic-query>
+            <semantic-query query='SELECT (COUNT(?production) AS ?count) WHERE { ?production a frbroo:F25_Performance_Plan . FILTER(CONTAINS(STR(?production), "/w/")) }' template='<div>{{#each bindings}}{{count.value}}{{/each}} [[i18n "AboutCountProductions" bundle="performing-arts-ch"]]</div>'></semantic-query>
           </bs-col>
         </bs-row>
-        
-        </ul>
       </bs-col>
     </bs-row>
-
   </div>
 </div>

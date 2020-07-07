@@ -33,13 +33,13 @@
     "relations": [
       {
         "iri": "<http://ontology.performing-arts.ch/grouptype>",
-        "label": "Type",
+        "label": "[[i18n "FilterType" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
         "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
       },
       {
         "iri": "<http://ontology.performing-arts.ch/groupplace>",
-        "label": "Place",
+        "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
         "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
         "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
       }
@@ -76,7 +76,7 @@
       FILTER(CONTAINS(STR(?subject), "/a/"))
       ?subject crm:P131_is_identified_by ?identifier .
         ?identifier rdf:value ?name.
-      VALUES (?example) { ("Start by looking at one of the example entries or enter your own search terms above.") }
+      VALUES (?example) { ("[[i18n "SearchHint" bundle="performing-arts-ch"]]") }
     }'
   ></semantic-search-query-keyword>
 
@@ -105,15 +105,14 @@
                                   template='{{> template}}'
                                   >
             <template id='template'>
-              {{log bindings}}
               {{#if hasLimit}}
               <bs-alert bs-style="warning" class="search-results__alert pull-left">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
-                <span class="num-results">Showing {{numberOfResults}} search results </span> of {{totalNumberOfResults}} matches. <strong>Please, refine your search.</strong>
+                <span class="num-results">[[i18n "SearchLimitReached" bundle="performing-arts-ch" escapeHTML=false]]</span>
               </bs-alert>
               {{else}}
               <bs-alert bs-style="warning" class="search-results__alert pull-left">
-                <span class="num-results" class="search-results__alert"><strong>{{numberOfResults}} search results.</strong></span>
+                <span class="num-results" class="search-results__alert"><strong>[[i18n "SearchResults" bundle="performing-arts-ch"]]</strong></span>
               </bs-alert>
               {{/if}}
             </template>
@@ -139,10 +138,10 @@
             id="group-table" 
             options='{"showFilter": false, "showTableHeading": true}'
             column-configuration='[
-              {"displayName": "Name", "variableName": "subject"} ,
-              {"displayName": "Additional Names", "cellTemplate": "{{> additional-names}}", "variableName": "additionalnames"} ,
-              {"displayName": "Place", "cellTemplate": "{{> places}}"},
-              {"displayName": "Dates", "cellTemplate": "{{> dates}}", "variableName": "beginning"}
+              {"displayName": "[[i18n "GroupsTableName" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
+              {"displayName": "[[i18n "GroupsTableAdditionalNames" bundle="performing-arts-ch"]]", "cellTemplate": "{{> additional-names}}", "variableName": "additionalnames"} ,
+              {"displayName": "[[i18n "GroupsTablePlace" bundle="performing-arts-ch"]]", "cellTemplate": "{{> places}}"},
+              {"displayName": "[[i18n "GroupsTableDates" bundle="performing-arts-ch"]]", "cellTemplate": "{{> dates}}", "variableName": "beginning"}
             ]'>
 
             <template id='additional-names'>                     
@@ -215,7 +214,7 @@
                               header="text/csv"
                               filename="performing-arts-ch-search-result.csv"
                               >
-            <button class="btn btn-default">Download CSV</button>
+            <button class="btn btn-default">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
           </mp-sparql-download>
         </semantic-search-result>
         <!--

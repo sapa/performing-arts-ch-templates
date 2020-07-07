@@ -83,7 +83,7 @@
               <semantic-form-hidden-input for='subvenue_cidoc_type' default-value='[[resolvePrefix "spav:dwmkn"]]'></semantic-form-hidden-input>
             </div>
             <semantic-form-text-input for="subvenue_official_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
-            <button name="submit" class="btn btn-default">Create Venue</button>
+            <button name="submit" class="btn btn-default">[[i18n "FormCreateVenue" bundle="performing-arts-ch"]]</button>
           </semantic-form>
         </semantic-form-autocomplete-input>
 
@@ -103,7 +103,7 @@
             <semantic-form-checklist-input type='radio' row=true for="record_set_type"></semantic-form-checklist-input>
             <!-- TODO: automatically add correct parent? -->
             <semantic-form-tree-picker-input for="record_set_parent" ></semantic-form-tree-picker-input>
-            <button name="submit" class="btn btn-default">Create Record Set</button>
+            <button name="submit" class="btn btn-default">[[i18n "FormCreateRecordSet" bundle="performing-arts-ch"]]</button>
           </semantic-form>
         </semantic-form-autocomplete-input>
 
@@ -118,14 +118,8 @@
         <semantic-form-text-input for="sameAs"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
-        <button
-          name="submit"
-          class="btn btn-default"
-        >Save</button>
-        <button
-          name="reset"
-          class="btn btn-default"
-        >Reset</button>
+        <button name="submit" class="btn btn-default">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>
+        <button name="reset" class="btn btn-default">[[i18n "FormReset" bundle="performing-arts-ch"]]</button>
       </bs-panel>
     </semantic-form>
   </div>

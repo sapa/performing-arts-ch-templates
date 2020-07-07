@@ -10,7 +10,7 @@
 <div class="page rs-page">
     [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
-        <bs-tab event-key='Summary' title='Summary'>
+        <bs-tab event-key='Summary' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
             <bs-col sm="4">
                 <!-- common name -->
@@ -178,12 +178,12 @@
 
         </bs-tab>
 
-        <bs-tab event-key='productions' title='Productions'>
+        <bs-tab event-key='productions' title='[[i18n "TabProductions" bundle="performing-arts-ch"]]'>
             [[> sapaModule:PersonProductions]]
         </bs-tab>
         
         [[#if (hasPermission "forms:ldp:*")]] 
-        <bs-tab event-key='person editing' title='Edit'>
+        <bs-tab event-key='person editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
         [[> sapaModule:PersonForm]]
         </bs-tab>
         [[/if]]
