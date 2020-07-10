@@ -124,6 +124,16 @@
                     		</template>
         							</semantic-query> 
                   {{/ifCond}}
+                  
+                  {{#ifCond title.value "==" 'Concept'}}
+                  		<semantic-query 
+                        query='SELECT DISTINCT ?description WHERE { <{{subject.value}}> crm:P3_has_note ?description. ?description crm:P2_has_type spav:eoept. } LIMIT 1'
+                        template = '{{> second-template}} '>           
+        								<template id='second-template'> 
+                          <div>{{#each bindings}}<mp-label iri="{{description.value}}"></mp-label>{{/each}}</div>
+                    		</template>
+        							</semantic-query> 
+                  {{/ifCond}}
 								</template> 		
                      
               </semantic-table> 

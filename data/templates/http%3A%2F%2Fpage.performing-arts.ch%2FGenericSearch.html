@@ -35,15 +35,23 @@
                 FILTER(CONTAINS(STR(?subject), "/o/"))
                 BIND (("https://static.thenounproject.com/png/79187-200.png") AS ?icon)
                 BIND (("Venue") AS ?title)
-								}   
-                UNION
-                {
-								?subject a crm:E53_Place ; 
+              }   
+              UNION
+              {
+                ?subject a crm:E53_Place ; 
                   rdfs:label ?name . 
                 FILTER(CONTAINS(STR(?subject), "/p/"))
                 BIND (("https://www.picodash.com/icon_places.svg") AS ?icon)
                 BIND (("Place") AS ?title)
-								}}
+              }   
+              UNION
+              {
+                ?subject a rico:Concept ; 
+                  rdfs:label ?name . 
+                FILTER(CONTAINS(STR(?subject), "/c/"))
+                BIND (("/images/fcs/concepts.svg") AS ?icon)
+                BIND (("Concept") AS ?title)
+              }}
         SERVICE <http://www.bigdata.com/rdf/search#search> {
             ?name bds:search ?__token__ ;
             bds:minRelevance "0.1" ;
