@@ -1,58 +1,61 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType/context> {
-  _:genid-09247812b7bb46b6b5eb41789d7c5b68-7xgtme a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType> a <http://www.metaphacts.com/ontology/fields#Field> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType> <http://www.metaphacts.com/ontology/fields#deletePattern>
-      _:genid-09247812b7bb46b6b5eb41789d7c5b68-o2e71h;
-    a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-09247812b7bb46b6b5eb41789d7c5b68-7xgtme;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-09247812b7bb46b6b5eb41789d7c5b68-fpjw1t;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Type (RDF)"@en, "type (RDF)"@fr;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#minOccurs> "1" .
+  _:genid-bcbe04dd424f4fa7b261bdee8247e886-0so5dc <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  VALUES ($value) { (rico:Group) (rico:CorporateBody) (rico:Family) }
+}""" .
   
-  _:genid-09247812b7bb46b6b5eb41789d7c5b68-fpjw1t a <http://spinrdf.org/sp#Query> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Type (RDF)"@en, "type (RDF)"@fr;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-bcbe04dd424f4fa7b261bdee8247e886-4252h;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
   
-  _:genid-09247812b7bb46b6b5eb41789d7c5b68-7xgtme <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-  VALUES ($value) { (crm:E74_Group) (crm:E40_Legal_Body) }
+  _:genid-bcbe04dd424f4fa7b261bdee8247e886-r5y4kj a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-bcbe04dd424f4fa7b261bdee8247e886-2pdv7d a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject a $value. } WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType> <http://www.metaphacts.com/ontology/fields#minOccurs>
+      "1" .
+  
+  _:genid-bcbe04dd424f4fa7b261bdee8247e886-4252h <http://spinrdf.org/sp#text> """PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+INSERT {
+	$subject a $value, ?cidoctype .
+} WHERE {
+	BIND($value AS ?ricotype)
+	VALUES (?ricotype ?cidoctype) {
+    	( rico:Group crm:E74_Group )
+    	( rico:CorporateBody crm:E40_Legal_Body )
+    	( rico:Family crm:E74_Group )
+ 	}
 }""" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType> <http://www.w3.org/2000/01/rdf-schema#label>
       "tipo (RDF)"@it .
   
-  _:genid-09247812b7bb46b6b5eb41789d7c5b68-fpjw1t <http://spinrdf.org/sp#text> """INSERT {
-	$subject a $value, ?ricotype .
-} WHERE {
-	BIND($value AS ?cidoctype)
-	VALUES (?cidoctype ?ricotype) {
-    	( crm:E74_Group rico:Group )
-    	( crm:E40_Legal_Body rico:CorporateBody )
- 	}
-}""" .
+  _:genid-bcbe04dd424f4fa7b261bdee8247e886-4252h a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType> <http://www.metaphacts.com/ontology/fields#selectPattern>
-      _:genid-09247812b7bb46b6b5eb41789d7c5b68-yb7339;
-    <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2002/07/owl#Class> .
-  
-  _:genid-09247812b7bb46b6b5eb41789d7c5b68-yb7339 <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  _:genid-bcbe04dd424f4fa7b261bdee8247e886-r5y4kj <http://spinrdf.org/sp#text> """SELECT $value WHERE {
   $subject a $value.
-  FILTER(CONTAINS(STR($value), \"crm\"))
+  FILTER(CONTAINS(STR($value), \"RiC\"))
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Typ (RDF)"@de;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-bcbe04dd424f4fa7b261bdee8247e886-2pdv7d;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2002/07/owl#Class>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Typ (RDF)"@de;
     <http://www.w3.org/2000/01/rdf-schema#comment> "This is the technical group type. It should be either Group or Legal Body.";
     <http://www.metaphacts.com/ontology/fields#domain> <http://www.w3.org/2002/07/owl#Class> .
   
-  _:genid-09247812b7bb46b6b5eb41789d7c5b68-o2e71h a <http://spinrdf.org/sp#Query> .
+  _:genid-bcbe04dd424f4fa7b261bdee8247e886-0so5dc a <http://spinrdf.org/sp#Query> .
   
-  _:genid-09247812b7bb46b6b5eb41789d7c5b68-yb7339 a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-09247812b7bb46b6b5eb41789d7c5b68-o2e71h <http://spinrdf.org/sp#text> "DELETE { $subject a $value. } WHERE {}" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType> a <http://www.w3.org/ns/prov#Entity>;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-bcbe04dd424f4fa7b261bdee8247e886-r5y4kj;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-bcbe04dd424f4fa7b261bdee8247e886-0so5dc;
+    a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-06-30T07:28:01.350Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-10T08:39:24.777Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType> .

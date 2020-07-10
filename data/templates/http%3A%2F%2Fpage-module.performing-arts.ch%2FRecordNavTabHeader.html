@@ -19,7 +19,7 @@
             query="SELECT ?description
             WHERE {
               ?? a ?class .
-              FILTER(CONTAINS(STR(?class), 'crm'))
+              FILTER(CONTAINS(STR(?class), 'RiC') || CONTAINS(STR(?class), 'frbroo'))
               OPTIONAL { ?? crm:P2_has_type ?crmtype . }
               OPTIONAL { ?? crm:P4_has_time-span ?timespan . }
               OPTIONAL {
