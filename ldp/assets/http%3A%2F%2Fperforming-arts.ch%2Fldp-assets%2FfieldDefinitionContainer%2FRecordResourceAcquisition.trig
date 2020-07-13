@@ -1,0 +1,61 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition/context> {
+  _:genid-c0e07d7a02924a3899b8efc26391be5f-o7a7cj a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition>
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-c0e07d7a02924a3899b8efc26391be5f-u2p1jo a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition>
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
+  
+  _:genid-c0e07d7a02924a3899b8efc26391be5f-sw6zx <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  ?value skos:broader spav:etmoc .
+}""" .
+  
+  _:genid-c0e07d7a02924a3899b8efc26391be5f-u2p1jo <http://spinrdf.org/sp#text> """DELETE {
+  $subject rico:isAssociatedWithEvent ?event .
+  ?event a rico:Event ;
+    rico:hasEventType $value .
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition>
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-c0e07d7a02924a3899b8efc26391be5f-u2p1jo .
+  
+  _:genid-c0e07d7a02924a3899b8efc26391be5f-sw6zx a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition>
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-c0e07d7a02924a3899b8efc26391be5f-sw6zx;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-c0e07d7a02924a3899b8efc26391be5f-se44w .
+  
+  _:genid-c0e07d7a02924a3899b8efc26391be5f-o7a7cj <http://spinrdf.org/sp#text> """INSERT {
+  $subject rico:isAssociatedWithEvent ?event .
+  ?event a rico:Event ;
+    rico:hasEventType $value .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"acquisition_event\", STR($value))))) as ?event)
+}""" .
+  
+  _:genid-c0e07d7a02924a3899b8efc26391be5f-se44w a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject rico:isAssociatedWithEvent ?event .
+  ?event a rico:Event ;
+    rico:hasEventType $value .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition>
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c0e07d7a02924a3899b8efc26391be5f-o7a7cj;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2004/02/skos/core#Concept>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Mode of acquisition"@en;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-13T16:44:27.035Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

@@ -1,0 +1,85 @@
+<ol class="page-breadcrumb">
+    <li>
+        <mp-link title="Home" url="/">Home</mp-link>
+    </li>
+    <li class="active">
+        [[> sapaModule:RecordLabel ]]
+    </li>
+</ol>
+
+<div class="page rs-page">
+    [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]] 
+  
+  <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
+    <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
+
+        <bs-col sm="4">
+
+            <mp-field-visualization
+                subject='[[this]]'
+                fields='[[fieldDefinitions
+                    identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier"
+                ]]'
+                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+            >
+            </mp-field-visualization> 
+
+        </bs-col>
+
+        <bs-col sm="4">
+
+        </bs-col>
+
+        <bs-col sm="4">
+
+            <h5>Hierarchy</h5>
+            <semantic-tree
+                 query='SELECT DISTINCT ?node ?parent ?label WHERE {
+                    {
+                        ?? rico:hasDerivedInstantiation* ?node .
+                    } UNION { 
+                        ?node rico:hasDerivedInstantiation*/rico:hasInstantiation* ?? .
+                    }
+                    {
+                        ?parent rico:hasDerivedInstantiation ?node .
+                    } UNION {
+                        ?parent rico:hasInstantiation ?node .
+                    }
+                    FILTER(ISIRI(?parent))
+                    OPTIONAL {
+                        ?node rico:name/rico:identifier ?label .
+                    }
+                  } ORDER BY ?label
+                  LIMIT 50'
+               collapsed="false"
+               keys-opened='[[this]]'
+               parentBindingName="parent"
+               nodeBindingName="node"> 
+            </semantic-tree>
+
+            <!-- instantiations -->
+            <semantic-query 
+                query="SELECT ?label ?instantiation ?identifier 
+                WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
+                    ?? rico:hasInstantiation ?instantiation .
+                    OPTIONAL {
+                        ?instantiation rico:identifier ?identifier .
+                    }
+                } ORDER BY ASC(?identifier)"
+                template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{instantiation.value}}">{{identifier.value}}</semantic-link></li></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+        </bs-col>
+
+</bs-tab>
+
+[[#if (hasPermission "forms:ldp:*")]] 
+<bs-tab event-key='record editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+[[> sapaModule:InstantiationForm]]
+</bs-tab>
+[[/if]]
+
+</bs-tabs>  
+</div>

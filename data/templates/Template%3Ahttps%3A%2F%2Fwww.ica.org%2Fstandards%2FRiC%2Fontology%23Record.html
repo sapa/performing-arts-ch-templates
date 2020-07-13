@@ -19,26 +19,36 @@
                 query='SELECT ?name WHERE { ?? rico:name ?name . } LIMIT 1'
                 template='<p><strong>{{#each bindings}}{{name.value}}{{/each}}</strong></p>'>
             </semantic-query>
-
+            
             <mp-field-visualization
                 subject='[[this]]'
                 fields='[[fieldDefinitions
-                    identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
-                    type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
-                    virtual="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetVirtual"
-                    documetary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordDocumentaryForm"
-                    content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
-                    language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage"
-                    extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
-                    date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate"
-                    comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
-                    history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
-                    acquisition="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition"
+                identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
+                type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
+                virtual="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetVirtual"
+                documetary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordDocumentaryForm"
+                content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
+                language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage"
+                extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
+                date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate"
+                comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
+                history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
                 ]]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                 [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
             >
             </mp-field-visualization> 
+
+            <!-- date -->
+            <semantic-query 
+                query="SELECT ?label ?normalized_date
+                WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate>) }
+                    ?? rico:isAssociatedWithDate ?date .
+                    ?date rico:normalizedDateValue ?normalized_date .
+                }"
+                template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li>{{normalized_date.value}}</li>{{/each}}</ul></div>'>
+            </semantic-query>
 
         </bs-col>
 
@@ -79,13 +89,26 @@
                nodeBindingName="node"> 
             </semantic-tree>
 
+            <!-- instantiations -->
+            <semantic-query 
+                query="SELECT ?label ?instantiation ?identifier 
+                WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
+                    ?? rico:hasInstantiation ?instantiation .
+                    OPTIONAL {
+                        ?instantiation rico:identifier ?identifier .
+                    }
+                } ORDER BY ASC(?identifier)"
+                template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{instantiation.value}}">{{identifier.value}}</semantic-link></li></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
         </bs-col>
 
 </bs-tab>
 
 [[#if (hasPermission "forms:ldp:*")]] 
 <bs-tab event-key='record editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
-[[> sapaModule:RecordSetForm]]
+[[> sapaModule:RecordForm]]
 </bs-tab>
 [[/if]]
 

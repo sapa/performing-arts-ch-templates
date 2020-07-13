@@ -1,0 +1,55 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-9db2a79b452e4e6abd7d410c83b2e7d0-vhm309 <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject rico:isAssociatedWithDate ?date .
+  ?date a rico:DateRange ;
+    rico:expressedDate $value .
+}""";
+    a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-9db2a79b452e4e6abd7d410c83b2e7d0-3dovnn .
+  
+  _:genid-9db2a79b452e4e6abd7d410c83b2e7d0-3dovnn <http://spinrdf.org/sp#text> """INSERT {
+  $subject rico:isAssociatedWithDate ?date .
+  ?date a rico:DateRange ;
+    rico:expressedDate $value .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"is_associated_with_date\", $value)))) AS ?date)
+}""" .
+  
+  _:genid-9db2a79b452e4e6abd7d410c83b2e7d0-82ndc a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Entstehungszeitraum"@de .
+  
+  _:genid-9db2a79b452e4e6abd7d410c83b2e7d0-3dovnn a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Date"@en, "Periodo"@it;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-9db2a79b452e4e6abd7d410c83b2e7d0-82ndc .
+  
+  _:genid-9db2a79b452e4e6abd7d410c83b2e7d0-82ndc <http://spinrdf.org/sp#text> """DELETE {
+  $subject rico:isAssociatedWithDate ?date .
+  ?date a rico:DateRange ;
+    rico:expressedDate $value .
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-9db2a79b452e4e6abd7d410c83b2e7d0-vhm309;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Période"@fr;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-13T16:23:56.051Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}
