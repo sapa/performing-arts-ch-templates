@@ -170,12 +170,22 @@
           id='search-result'
           column-configuration='[
             {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch"]]", "cellTemplate": "{{> producer}}", "variableName": "producers"} ,
-            {"displayName": "[[i18n "ProductionsTableSeason" bundle="performing-arts-ch"]]", "cellTemplate":"<semantic-link iri=\"{{season.value}}\"></semantic-link>", "variableName": "premieredatebegin"}, 
+            {"displayName": "[[i18n "ProductionsTableSeason" bundle="performing-arts-ch"]]", "cellTemplate":"{{> season}}", "variableName": "premieredatebegin"}, 
             {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch"]]", "variableName": "plan"}, 
             {"displayName": "[[i18n "ProductionsTableFunction" bundle="performing-arts-ch"]]", "cellTemplate": "{{>function}}"}
           ]'
           number-of-displayed-rows=20
           options='{"showFilter": true}'>
+          
+          <template id='season'> 
+            <semantic-query 
+              query='SELECT DISTINCT ?season WHERE { } LIMIT 1'
+              template = '{{>season-list}} '>           
+              <template id='seaon-list'> 
+                <div>{{#each bindings}}<semantic-link iri="{{season.value}}"></semantic-link>{{/each}}</div>
+              </template>
+            </semantic-query>   
+          </template>
           
           <template id='genre'> 
             <semantic-query 
