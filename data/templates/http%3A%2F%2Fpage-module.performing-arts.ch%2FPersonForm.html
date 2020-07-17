@@ -101,27 +101,27 @@
         [[#if create]]
           <div class="semantic-form-input-decorator--with-header">
             <div class="semantic-form-input-decorator__header">
-              [[i18n "PersonFormRecordLater" bundle="performing-arts-ch"]]
+              [[i18n "GeneralFormRecordLater" bundle="performing-arts-ch"]]
             </div>
           </div>
         [[else]]
           <semantic-form-autocomplete-input for='subject_of'>
             <semantic-form new-subject-template='http://data.performing-arts.ch/r/{{UUID}}' fields='[[fieldDefinitions
               record_set_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
-              record_set_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier"
-              record_set_label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLabel"
+              record_set_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
+              record_set_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingName"
               record_set_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
-              record_set_subject="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject"
-              record_set_parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent"
+              record_set_subject="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject"
+              record_set_parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceParent"
             ]]'>
               <div style='display: none;'>
                   <semantic-form-hidden-input for='record_set_rdf_type' default-value='[[resolvePrefix "rico:RecordSet"]]'></semantic-form-hidden-input>
-                  <!-- TODO: automatically add correct parent? -->
               </div>
               <semantic-form-text-input for='record_set_identifier'></semantic-form-text-input>
-              <semantic-form-text-input for='record_set_label'></semantic-form-text-input>
+              <semantic-form-text-input for='record_set_name'></semantic-form-text-input>
               <semantic-form-checklist-input type='radio' row=true for='record_set_type'></semantic-form-checklist-input>
               <semantic-form-autocomplete-input for="record_set_subject" default-value='[[this]]'></semantic-form-autocomplete-input>
+              <!-- TODO: automatically add correct parent? -->
               <semantic-form-tree-picker-input for='record_set_parent' ></semantic-form-tree-picker-input>
               <button name='submit' class='btn btn-default'>[[i18n "FormCreateRecordSet" bundle="performing-arts-ch"]]</button>
             </semantic-form>
