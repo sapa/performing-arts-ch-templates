@@ -24,7 +24,7 @@
           }
         '
         children-query='
-          SELECT ?item ?label ?hasChildren WHERE {
+          SELECT DISTINCT ?item ?label ?hasChildren WHERE {
             ?item rico:includedIn ?parent .
             OPTIONAL { ?child rico:includedIn ?item }
             BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
