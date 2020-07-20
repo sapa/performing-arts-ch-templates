@@ -91,17 +91,35 @@
 
             <!-- instantiations -->
             <semantic-query 
-                query="SELECT ?label ?instantiation ?identifier 
-                WHERE {
+                query="SELECT ?label WHERE {
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
                     ?? rico:hasInstantiation ?instantiation .
-                    OPTIONAL {
-                        ?instantiation rico:identifier ?identifier .
-                    }
-                } ORDER BY ASC(?identifier)"
-                template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{instantiation.value}}">{{identifier.value}}</semantic-link></li></li>{{/each}}</ul></div>'>
+                } LIMIT 1"
+                template='<div>{{#each bindings}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5>{{/each}}</div>'>
             </semantic-query>
-
+            <semantic-tree
+                query='SELECT DISTINCT ?node ?parent WHERE {
+                    { BIND(?? AS ?node) }
+                    UNION 
+                    { ?? rico:hasInstantiation ?node }
+                    UNION
+                    { ?? rico:hasInstantiation [ rico:hasDerivedInstantiation* ?node ] }
+                    OPTIONAL {
+                        { ?parent rico:hasInstantiation ?node }
+                        UNION
+                        { ?parent rico:hasDerivedInstantiation ?node }
+                    }
+                }'
+                collapsed='false'
+                keys-opened='[[this]]'
+                parentBindingName='parent'
+                nodeBindingName='node'
+                tuple-template='{{> node}}'
+            > 
+            <template id='node'>
+                <span><semantic-link uri="{{node.value}}"></semantic-link></span>
+              </template>
+            </semantic-tree>
         </bs-col>
 
 </bs-tab>
