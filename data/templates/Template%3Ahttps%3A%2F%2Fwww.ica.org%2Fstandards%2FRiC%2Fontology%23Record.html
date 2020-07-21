@@ -43,7 +43,7 @@
             <semantic-query 
                 query="SELECT ?label ?normalized_date
                 WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate>) }
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>) }
                     ?? rico:isAssociatedWithDate ?date .
                     ?date rico:normalizedDateValue ?normalized_date .
                 }"
@@ -58,7 +58,7 @@
             <semantic-query 
                 query="SELECT ?label ?subject
                 WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject>) }
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject>) }
                     ?? rico:hasSubject ?subject .
                 }"
                 template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{subject.value}}"></semantic-link></li>{{/each}}</ul></div>'>
