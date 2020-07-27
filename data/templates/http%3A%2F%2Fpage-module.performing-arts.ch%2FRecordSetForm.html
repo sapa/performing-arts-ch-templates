@@ -22,6 +22,7 @@
         parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceParent"
         extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
         history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
+        source="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSource"
         acquisition="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition"
         description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
         subject="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject"
@@ -83,8 +84,8 @@
           <bs-col sm='8'>
             <semantic-form-text-input for="history" multiline=true></semantic-form-text-input>
           </bs-col>
-          <!-- TODO: received by -->
           <bs-col sm='4'>
+            <semantic-form-autocomplete-input for="source"></semantic-form-autocomplete-input>
             <semantic-form-select-input for='acquisition'></semantic-form-select-input>
           </bs-col>
         </bs-row>
