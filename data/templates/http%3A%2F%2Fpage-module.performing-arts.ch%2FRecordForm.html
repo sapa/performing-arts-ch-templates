@@ -16,6 +16,7 @@
         identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
         label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingName"
         parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent"
+        provenance="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance"
         documentary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDocumentaryForm"
         description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
         language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage"
@@ -54,6 +55,13 @@
                 <button name="submit" class="btn btn-default">[[i18n "FormCreateRecordSet" bundle="performing-arts-ch"]]</button>
               </semantic-form>    
             </semantic-form-tree-picker-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-autocomplete-input for="provenance"></semantic-form-autocomplete-input>
+          </bs-col>
+          <bs-col sm='6'>
           </bs-col>
         </bs-row>
         <bs-row>
