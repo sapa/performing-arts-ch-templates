@@ -1,0 +1,54 @@
+<ol class="page-breadcrumb">
+  <li>
+      <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+  <li class="active">
+      Archive Plan
+  </li>
+</ol>
+
+<div class="page rs-page">
+  <div class='page__body'>
+    <h3 style="margin-top: 2em; margin-bottom: 1em;">Archive Plan</h3>
+    <div style="height: 1000px">
+    <semantic-lazy-tree
+        roots-query='
+          SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+            ?item a rico:RecordSet .
+            FILTER NOT EXISTS { ?item rico:includedIn ?parent }
+            OPTIONAL { ?child rico:includedIn ?item }
+            BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
+            ?item rico:name ?name .
+            OPTIONAL { ?item rico:identifier ?identifier }
+            BIND(IF(BOUND(?identifier), CONCAT(?identifier, ": ", ?name), ?name) AS ?label)
+          }
+        '
+        children-query='
+          SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+            ?item rico:includedIn ?parent .
+            OPTIONAL { ?child rico:includedIn ?item }
+            BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
+            ?item rico:name ?name .
+            OPTIONAL { ?item rico:identifier ?identifier }
+            BIND(IF(BOUND(?identifier), CONCAT(?identifier, ": ", ?name), ?name) AS ?label)
+          } ORDER BY ASC(?label)
+        '
+        parents-query='
+          SELECT ?item ?parent WHERE {
+            ?item rico:includedIn ?parent .
+          }
+        '
+        search-query='
+          SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
+            ?item rdf:type/rdfs:subClassOf* rico:RecordResource .
+            { ?item rico:name ?label } UNION { ?item rico:identifier ?label }
+            FILTER REGEX(LCASE(?label), LCASE(?__token__), "i")
+            BIND(false AS ?hasChildren)
+          } ORDER BY DESC (?score) (?label) LIMIT 500
+        '
+        placeholder='Select or search for a name or signature ...'
+        tokenize-lucene-query='false'
+      ></semantic-lazy-tree>
+    </div>
+  </div>
+</div>

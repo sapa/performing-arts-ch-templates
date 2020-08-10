@@ -15,17 +15,27 @@
 
         <bs-col sm="4">
 
+            <semantic-query 
+                query='SELECT ?name WHERE { ?? rico:name ?name . } LIMIT 1'
+                template='<p><strong>{{#each bindings}}{{name.value}}{{/each}}</strong></p>'>
+            </semantic-query>
+
             <mp-field-visualization
                 subject='[[this]]'
                 fields='[[fieldDefinitions
-                identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier"
-                type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
-                virtual="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetVirtual"
-                documetary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm"
-                content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDescription"
-                extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetExtent"
-                date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDate"
-                comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
+                    identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
+                    type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
+                    virtual="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetVirtual"
+                    documetary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordDocumentaryForm"
+                    content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
+                    language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage"
+                    date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate"
+                    provenance="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance"
+                    source="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSource"
+                    extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
+                    comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
+                    history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
+                    acquisition="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition"
                 ]]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                 [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]

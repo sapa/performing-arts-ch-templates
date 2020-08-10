@@ -1,0 +1,88 @@
+<ol class="page-breadcrumb">
+    <li>
+        <mp-link title="Home" url="/">Home</mp-link>
+    </li>
+    <li class="active">
+        [[> sapaModule:RecordLabel ]]
+    </li>
+</ol>
+
+<div class="page">
+    [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/concepts.svg"]]
+  
+  <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
+    <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
+
+        <bs-col sm="4">
+
+            <!-- official name -->
+            <semantic-query 
+                query='SELECT ?appelation ?lang
+                WHERE {
+                    ?? crm:P131_is_identified_by [
+                        a crm:E75_Conceptual_Object_Appellation ; 
+                        rdf:value ?appelation ]
+                    BIND(LANG(?appelation) AS ?l)
+                    BIND(IF(STRLEN(?l)>0, CONCAT(" (", ?l, ")"), "") AS ?lang)
+                }'
+            template='<p>{{#each bindings}}{{#if @first}}{{else}}<br>{{/if}}<strong>{{appelation.value}}</strong>{{lang.value}}{{/each}}</p>'>
+            </semantic-query>
+
+            <!-- description -->
+            <semantic-query 
+                query='SELECT ?description WHERE { ?? crm:P3_has_note ?description. ?description crm:P2_has_type spav:eoept. } LIMIT 1'
+                template='<p>{{#each bindings}}<mp-label iri="{{description.value}}"></mp-label>{{/each}}</p>'>
+            </semantic-query>
+        </bs-col>
+
+        <bs-col sm="4">
+
+            <!-- record sets -->
+            <semantic-query 
+            query='SELECT ?label WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordsBern>) }
+                    ?record rico:hasSubject ?? .
+                } LIMIT 1'
+            template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
+            </semantic-query>
+            
+            [[#if (hasPermission "forms:ldp:*")]]
+            <semantic-tree
+                query='SELECT DISTINCT ?node ?parent WHERE {
+                    ?record rico:hasSubject ?? ;
+                        rico:includedIn* ?node .
+                    FILTER(ISIRI(?node))
+                    FILTER(CONTAINS(STR(?node), "/r/"))
+                    OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
+                }'
+                tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
+            </semantic-tree>
+            [[else]]
+            <semantic-query 
+                query='SELECT ?docform ?extent ?desciptivenote WHERE {
+                    ?record rico:hasSubject ?? ;
+                        rico:hasDocumentaryFormType ?docform .
+                    OPTIONAL { ?record rico:recordResourceExtent ?extent .}
+                    OPTIONAL { ?record rico:descriptiveNote ?desciptivenote . }
+                }'
+                template='<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{docform.value}}"></mp-label>{{else}}, <mp-label iri="{{docform.value}}"></mp-label>{{/if}}{{#if @last}}{{#if desciptivenote}}, {{desciptivenote.value}}{{/if}}{{#if extent}} ({{extent.value}}){{/if}}{{else}}{{/if}}{{/each}}</div>'>
+            </semantic-query>
+            [[/if]]
+
+        </bs-col>
+
+        <bs-col sm="4">
+            [[> sapaModule:ExternalResources]]
+        </bs-col>
+
+</bs-tab>
+
+
+[[#if (hasPermission "forms:ldp:*")]] 
+<bs-tab event-key='concept editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+[[> sapaModule:ConceptForm]]
+</bs-tab>
+[[/if]]
+
+</bs-tabs>  
+</div>

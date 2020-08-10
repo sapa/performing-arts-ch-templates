@@ -1,0 +1,71 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage/context> {
+  _:genid-9e8bf712eb08485a8eccc19ae0959301-skwck <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  ?value skos:inScheme spav:lg .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage>
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-9e8bf712eb08485a8eccc19ae0959301-i1x3dc a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-9e8bf712eb08485a8eccc19ae0959301-lqfn9b <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject rico:language $value .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage>
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-9e8bf712eb08485a8eccc19ae0959301-lqfn9b;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Language"@en;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Sprache"@de;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-9e8bf712eb08485a8eccc19ae0959301-i1x3dc .
+  
+  _:genid-9e8bf712eb08485a8eccc19ae0959301-lqfn9b a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-9e8bf712eb08485a8eccc19ae0959301-skwck a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage>
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-9e8bf712eb08485a8eccc19ae0959301-znr2wok;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-9e8bf712eb08485a8eccc19ae0959301-skwck .
+  
+  _:genid-9e8bf712eb08485a8eccc19ae0959301-i1x3dc <http://spinrdf.org/sp#text> """DELETE {
+  $subject rico:language $value .
+} WHERE {}""" .
+  
+  _:genid-9e8bf712eb08485a8eccc19ae0959301-znr2wok <http://spinrdf.org/sp#text> """INSERT {
+  $subject rico:language $value .
+} WHERE { }""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage>
+    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"simple\",
+  \"schemePattern\": \"?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:lg\",
+  \"relationPattern\": \"?item <http://www.w3.org/2004/02/skos/core#broader> ?parent\"
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson> .
+  
+  _:genid-9e8bf712eb08485a8eccc19ae0959301-6r8qs <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  ?value skos:inScheme spav:lg ;
+    rdfs:label ?label .
+  FILTER REGEX(STR(?label), \"?token\")
+} LIMIT 10""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage>
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2004/02/skos/core#Concept>;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-9e8bf712eb08485a8eccc19ae0959301-6r8qs .
+  
+  _:genid-9e8bf712eb08485a8eccc19ae0959301-znr2wok a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-9e8bf712eb08485a8eccc19ae0959301-6r8qs a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage>
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-13T16:41:31.101Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}

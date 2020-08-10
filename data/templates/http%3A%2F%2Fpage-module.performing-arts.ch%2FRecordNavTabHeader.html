@@ -19,7 +19,7 @@
             query="SELECT ?description
             WHERE {
               ?? a ?class .
-              FILTER(CONTAINS(STR(?class), 'crm'))
+              FILTER(CONTAINS(STR(?class), 'RiC') || CONTAINS(STR(?class), 'frbroo'))
               OPTIONAL { ?? crm:P2_has_type ?crmtype . }
               OPTIONAL { ?? crm:P4_has_time-span ?timespan . }
               OPTIONAL {
@@ -34,7 +34,7 @@
 
         <!-- uri -->
         <semantic-query 
-            query="SELECT ?uri WHERE { BIND(IF(REGEX(STR(??), '/[aoprs]/'), STR(??), 'not yet permanent') AS ?uri) } LIMIT 1"
+            query="SELECT ?uri WHERE { BIND(IF(REGEX(STR(??), '/[aoprsc]/'), STR(??), 'not yet permanent') AS ?uri) } LIMIT 1"
             template="<p style='font-size: 0.8em;'>{{#each bindings}}<b>URI</b>: <i>{{uri.value}}</i>{{/each}}</p>">
         </semantic-query>
         </div>

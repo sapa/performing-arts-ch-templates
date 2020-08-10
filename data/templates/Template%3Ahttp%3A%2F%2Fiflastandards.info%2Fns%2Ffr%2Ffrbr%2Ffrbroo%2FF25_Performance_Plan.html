@@ -111,6 +111,8 @@
                 {{/each}}</div>'>
             </semantic-query>
 
+
+
         </bs-col>
         <bs-col sm="4">
           
@@ -228,6 +230,20 @@
           
           <!-- performance functions - contribution -->
 				  [[> sapaModule:ShowPerformances3 function="spav:munuj"]]
+
+          <hr>
+
+          <!-- record sets -->
+          <semantic-tree
+            query='SELECT DISTINCT ?node ?parent WHERE {
+              ?record rico:hasSubject ?? ;
+                  rico:includedIn* ?node .
+              FILTER(ISIRI(?node))
+              FILTER(CONTAINS(STR(?node), "/r/"))
+              OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
+            }'
+            tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
+          </semantic-tree>
 
         </bs-col>
       </bs-tab>

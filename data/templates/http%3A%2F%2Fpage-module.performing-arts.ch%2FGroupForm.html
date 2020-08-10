@@ -29,15 +29,16 @@
         venues="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupVenue"
         members="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember"
         associations="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation"
-        record_sets="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf"
+        subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf"
         sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
+        history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AgentHistory"
         note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
         note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
         repertories="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRepertories"
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
-        <semantic-form-checklist-input for="rdf_type" type="radio"  default-value='[[resolvePrefix "crm:E74_Group"]]' row=true></semantic-form-checklist-input>
+        <semantic-form-checklist-input for="rdf_type" type="radio"  default-values='["[[resolvePrefix "crm:E74_Group"]]", "[[resolvePrefix "rico:Group"]]"]' row=true></semantic-form-checklist-input>
         <bs-row>
           <bs-col sm='6'>
             <semantic-form-text-input for='common_appellation' languages='["en","de","fr","it"]'></semantic-form-text-input>
@@ -127,25 +128,36 @@
               </semantic-form-autocomplete-input>            
           </bs-col>
         </bs-row>
-        <semantic-form-autocomplete-input for="record_sets">
-          <semantic-form new-subject-template="http://data.performing-arts.ch/r/{{UUID}}" fields='[[fieldDefinitions
+        [[#if create]]
+          <div class="semantic-form-input-decorator--with-header">
+            <div class="semantic-form-input-decorator__header">
+              [[i18n "GeneralFormRecordLater" bundle="performing-arts-ch"]]
+            </div>
+          </div>
+        [[else]]
+        <semantic-form-autocomplete-input for='subject_of'>
+          <semantic-form new-subject-template='http://data.performing-arts.ch/r/{{UUID}}' fields='[[fieldDefinitions
             record_set_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
-            record_set_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetIdentifier"
-            record_set_label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetLabel"
+            record_set_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
+            record_set_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingName"
             record_set_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
-            record_set_parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent"
+            record_set_subject="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject"
+            record_set_parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceParent"
           ]]'>
-            <div style="display: none;">
+            <div style='display: none;'>
                 <semantic-form-hidden-input for='record_set_rdf_type' default-value='[[resolvePrefix "rico:RecordSet"]]'></semantic-form-hidden-input>
             </div>
-            <semantic-form-text-input for="record_set_identifier"></semantic-form-text-input>
-            <semantic-form-text-input for="record_set_label"></semantic-form-text-input>
-            <semantic-form-checklist-input type='radio' row=true for="record_set_type"></semantic-form-checklist-input>
+            <semantic-form-text-input for='record_set_identifier'></semantic-form-text-input>
+            <semantic-form-text-input for='record_set_name'></semantic-form-text-input>
+            <semantic-form-checklist-input type='radio' row=true for='record_set_type'></semantic-form-checklist-input>
+            <semantic-form-autocomplete-input for="record_set_subject" default-value='[[this]]'></semantic-form-autocomplete-input>
             <!-- TODO: automatically add correct parent? -->
-            <semantic-form-tree-picker-input for="record_set_parent" ></semantic-form-tree-picker-input>
-            <button name="submit" class="btn btn-default">[[i18n "FormCreateRecordSet" bundle="performing-arts-ch"]]</button>
+            <semantic-form-tree-picker-input for='record_set_parent' ></semantic-form-tree-picker-input>
+            <button name='submit' class='btn btn-default'>[[i18n "FormCreateRecordSet" bundle="performing-arts-ch"]]</button>
           </semantic-form>
         </semantic-form-autocomplete-input>
+        [[/if]]
+        <semantic-form-text-input for='history' multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>            
         <bs-row>
           <bs-col sm="6">
             <semantic-form-text-input for="note_public" multiline=true></semantic-form-text-input>

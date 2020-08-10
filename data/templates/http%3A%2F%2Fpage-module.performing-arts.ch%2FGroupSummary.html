@@ -102,6 +102,11 @@
         >
     </mp-field-visualization> 
 
+    <semantic-query 
+        query='SELECT ?history WHERE { ?? rico:history ?history . }'
+        template='<div>{{#each bindings}}<div style="margin-top: 0.8em;">{{history.value}}</div>{{/each}}</div>'>
+    </semantic-query>
+
 </bs-col>
 
 <bs-col sm="4">

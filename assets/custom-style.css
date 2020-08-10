@@ -144,6 +144,9 @@ div.facet__category-selector-holder {
 div.facet__relation__values__filter {
   display: none;
 }
+div.SemanticTreeInput--inputAndButtons {
+  margin-bottom: 1em;
+}
 #application > div > .footer {
   background-color: #083658;
 }

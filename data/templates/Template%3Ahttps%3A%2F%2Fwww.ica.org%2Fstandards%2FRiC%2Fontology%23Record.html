@@ -1,0 +1,136 @@
+<ol class="page-breadcrumb">
+    <li>
+        <mp-link title="Home" url="/">Home</mp-link>
+    </li>
+    <li class="active">
+        [[> sapaModule:RecordLabel ]]
+    </li>
+</ol>
+
+<div class="page rs-page">
+    [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]] 
+  
+  <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
+    <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
+
+        <bs-col sm="4">
+
+            <semantic-query 
+                query='SELECT ?name WHERE { ?? rico:name ?name . } LIMIT 1'
+                template='<p><strong>{{#each bindings}}{{name.value}}{{/each}}</strong></p>'>
+            </semantic-query>
+            
+            <mp-field-visualization
+                subject='[[this]]'
+                fields='[[fieldDefinitions
+                identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
+                type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
+                virtual="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetVirtual"
+                documetary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordDocumentaryForm"
+                content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
+                language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage"
+                date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate"
+                provenance="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance"
+                source="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSource"
+                extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
+                comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
+                history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
+                ]]'
+                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
+            >
+            </mp-field-visualization> 
+
+            <!-- date -->
+            <semantic-query 
+                query="SELECT ?label ?normalized_date
+                WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>) }
+                    ?? rico:isAssociatedWithDate ?date .
+                    ?date rico:normalizedDateValue ?normalized_date .
+                }"
+                template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li>{{normalized_date.value}}</li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+        </bs-col>
+
+        <bs-col sm="4">
+
+            <!-- subjects -->
+            <semantic-query 
+                query="SELECT ?label ?subject
+                WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject>) }
+                    ?? rico:hasSubject ?subject .
+                }"
+                template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{subject.value}}"></semantic-link></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+        </bs-col>
+
+        <bs-col sm="4">
+
+            <h5>Record hierarchy</h5>
+            <semantic-tree
+                 query='SELECT DISTINCT ?node ?parent ?label WHERE {
+                    { ?? rico:includedIn* ?node }
+                    UNION
+                    { ?node rico:includedIn* ?? } 
+                    OPTIONAL {
+                        ?node rico:includedIn ?parent.
+                        FILTER(ISIRI(?parent))
+                    }
+                    FILTER(ISIRI(?node))
+                    FILTER(CONTAINS(STR(?node), "/r/"))
+                    ?node rico:name ?label .
+                  } ORDER BY ?label
+                  LIMIT 50'
+               collapsed="false"
+               keys-opened='[[this]]'
+               parentBindingName="parent"
+               nodeBindingName="node"> 
+            </semantic-tree>
+
+            <!-- instantiations -->
+            <semantic-query 
+                query="SELECT ?label WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
+                    ?? rico:hasInstantiation ?instantiation .
+                } LIMIT 1"
+                template='<div>{{#each bindings}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5>{{/each}}</div>'>
+            </semantic-query>
+            <semantic-tree
+                query='SELECT DISTINCT ?node ?parent WHERE {
+                    { BIND(?? AS ?node) }
+                    UNION 
+                    { ?? rico:hasInstantiation ?node }
+                    UNION
+                    { ?? rico:hasInstantiation [ rico:hasDerivedInstantiation* ?node ] }
+                    OPTIONAL {
+                        { ?parent rico:hasInstantiation ?node }
+                        UNION
+                        { ?parent rico:hasDerivedInstantiation ?node }
+                    }
+                }'
+                collapsed='false'
+                keys-opened='[[this]]'
+                parentBindingName='parent'
+                nodeBindingName='node'
+                tuple-template='{{> node}}'
+            > 
+            <template id='node'>
+                <span><semantic-link uri="{{node.value}}"></semantic-link></span>
+              </template>
+            </semantic-tree>
+        </bs-col>
+
+</bs-tab>
+
+[[#if (hasPermission "forms:ldp:*")]] 
+<bs-tab event-key='record editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+[[> sapaModule:RecordForm]]
+</bs-tab>
+[[/if]]
+
+</bs-tabs>  
+</div>
