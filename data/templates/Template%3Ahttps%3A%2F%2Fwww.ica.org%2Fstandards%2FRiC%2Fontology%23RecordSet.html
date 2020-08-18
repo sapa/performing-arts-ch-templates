@@ -1,15 +1,4 @@
-<ol class="page-breadcrumb">
-    <li>
-        <mp-link title="Home" url="/">Home</mp-link>
-    </li>
-    <li class="active">
-        [[> sapaModule:RecordLabel ]]
-    </li>
-</ol>
-
 <div class="page rs-page">
-    [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]] 
-  
   <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
     <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
@@ -97,6 +86,8 @@
 [[> sapaModule:RecordSetForm]]
 </bs-tab>
 [[/if]]
+
+[[> sapaModule:AdminTabs]]
 
 </bs-tabs>  
 </div>

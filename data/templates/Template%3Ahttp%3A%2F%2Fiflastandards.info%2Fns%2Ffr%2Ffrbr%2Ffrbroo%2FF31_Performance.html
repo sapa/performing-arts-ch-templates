@@ -1,13 +1,4 @@
-<ol class="page-breadcrumb">
-  <li>
-    <mp-link title="Home" url="/">Home</mp-link>
-  </li>
-  <li class="active">
-    [[> sapaModule:RecordLabel ]]
-  </li>
-</ol>
 <div class="page">
-    [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/actors.svg"]]
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
       <bs-tab event-key='Summary' title='Summary'>
         <div class='table-responsive'>
@@ -38,12 +29,7 @@
         </div>
       </bs-tab>
       
-         [[#if (hasPermission "forms:ldp:*")]] 
-<bs-tab event-key='Edit' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
-        [[> sapaModule:ProductionEditingTab]]
-  </bs-tab>
-[[/if]]      
-      
-      
+      [[> sapaModule:AdminTabs]]
+            
     </bs-tabs>  
 </div>

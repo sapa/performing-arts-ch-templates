@@ -1,13 +1,4 @@
-<ol class="page-breadcrumb">
-  <li>
-    <mp-link title="Home" url="/">Home</mp-link>
-  </li>
-  <li class="active">
-    [[> sapaModule:RecordLabel ]]
-  </li>
-</ol>
 <div class="page">
-  [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]]
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
       <bs-tab event-key='Summary' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
@@ -255,12 +246,13 @@
         </bs-col>
       </bs-tab>
       
-         [[#if (hasPermission "forms:ldp:*")]] 
-  <bs-tab event-key='Edit' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
-        [[> sapaModule:PerformancePlanForm]]
-  </bs-tab>
-[[/if]]      
+      [[#if (hasPermission "sparql:*:*:*")]] 
+      <bs-tab event-key='Edit' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+      [[> sapaModule:PerformancePlanForm]]
+      </bs-tab>
+      [[/if]]      
       
+      [[> sapaModule:AdminTabs]]
       
     </bs-tabs>  
 </div>

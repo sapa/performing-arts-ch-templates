@@ -35,14 +35,33 @@ a:focus {
 .page__header-description p {
   margin: 0.4em 0;
 }
-.component-page-toolbar__btn_edit {
-  display: none !important;
+.knowledgeGraphBar--expanded .knowledgeGraphBar__content {
+  min-height: 8em !important;
 }
-.component-page-toolbar__btn_show_graph {
+.knowledgeGraphBar__summary {
+  margin-top: 1em;
+  margin-left: 0.9em;
+  margin-bottom: 1.2em;
+}
+.knowledgeGraphBar__summaryTitle h1 {
+  font-size: 2em !important;
+  margin: 0 !important;
+}
+.knowledgeGraphBar__bottomRow {
+  padding-left: 0.2em !important;
+}
+.knowledgeGraphBar__graphInfos p {
+  font-size: 1em ;
+  margin: 0 0 0.2em 0 !important;
+}
+.knowledgeGraphBar__uriRow {
+  font-size: 0.8em ;
+}
+.knowledgeGraphBar__toggle {
   display: none;
 }
-.component-page-toolbar__btn_show_diagram {
-  display: none !important;
+.knowledgeGraphBar__content {
+  border-bottom-width: 0 !important;
 }
 .container-fluid {
   padding-left: 24px;
