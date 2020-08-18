@@ -46,21 +46,19 @@
 
             <!-- genre -->
             <semantic-query 
-                query='SELECT ?genre
-                WHERE {
+                query='SELECT ?genre WHERE {
                     ?work frbroo:R12_is_realised_in ?? ;
                       crm:P2_has_type ?genre .
-                }'
+                  }'
             template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- language -->
             <semantic-query 
-                query='SELECT ?language
-                WHERE {
+                query='SELECT ?language WHERE {
                     ?work frbroo:R12_is_realised_in ?? ;
                       schema:inLanguage ?language .
-                }'
+                  }'
             template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{language.value}}"></mp-label>{{else}}, <mp-label iri="{{language.value}}"></mp-label>{{/if}}{{/each}}</p>'>
             </semantic-query>
 
@@ -91,7 +89,16 @@
                     ?premieretype skos:inScheme spav:hl .
                     OPTIONAL { ?premiere crm:P4_has_time-span ?timespan . }
                 }'
-            template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{#if @last}}</h5>{{/if}}{{/each}}{{#each bindings}}{{#if @first}}{{#if timespan}}<mp-label iri="{{timespan.value}}"></mp-label>{{/if}}{{/if}}{{/each}}</div>'>
+            template='<div>
+              {{#ifCond bindings.length ">" 0}}<h5>
+                {{#each bindings}}
+                  {{#if @first}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}
+                {{/each}}
+              </h5>{{/ifCond}}
+              {{#each bindings}}
+                {{#if @first}}{{#if timespan}}<mp-label iri="{{timespan.value}}"></mp-label>{{/if}}{{/if}}
+              {{/each}}
+              </div>'>
             </semantic-query>
 
             <!-- venue -->

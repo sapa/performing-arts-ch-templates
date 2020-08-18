@@ -20,11 +20,11 @@
         CONCAT(?source,": ",?localname) ,
         ?source) as ?label)
     } ORDER BY ASC(?order)'
-    template='<div style="margin-bottom:1.4em;">{{#each bindings}}
-        {{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{fieldlabel.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}
-        <li><a target="_blank" href="{{value.value}}"> {{label.value}} </a></li>
-      {{/each}}
-    </ul></div>'>
+    template='<div style="margin-bottom:1.4em;">
+      {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.fieldlabel.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+      <ul class="list-unstyled">
+        {{#each bindings}}<li><a target="_blank" href="{{value.value}}">{{label.value}}</a></li>{{/each}}
+      </ul></div>'>
     </semantic-query>
 
     [[#if (hasPermission "forms:ldp:*")]] 
