@@ -1,0 +1,52 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-65fb355b9ed7492c842355c82b0b6bc4-5hyhwr .
+  
+  _:genid-65fb355b9ed7492c842355c82b0b6bc4-5ndsip <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $value rico:isConstituentOf $subject .
+}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
+      <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-65fb355b9ed7492c842355c82b0b6bc4-r67ih .
+  
+  _:genid-65fb355b9ed7492c842355c82b0b6bc4-5hyhwr a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-65fb355b9ed7492c842355c82b0b6bc4-r67ih a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-65fb355b9ed7492c842355c82b0b6bc4-vjbce <http://spinrdf.org/sp#text> """DELETE {
+  $value rico:isConstituentOf $subject .
+} WHERE {}""";
+    a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> <http://www.metaphacts.com/ontology/fields#selectPattern>
+      _:genid-65fb355b9ed7492c842355c82b0b6bc4-5ndsip;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-65fb355b9ed7492c842355c82b0b6bc4-vjbce;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record> .
+  
+  _:genid-65fb355b9ed7492c842355c82b0b6bc4-r67ih <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  $value a rico:RecordPart ;
+  	rdfs:label $label .
+  FILTER(REGEX($label, \"?token\", \"i\"))
+}""" .
+  
+  _:genid-65fb355b9ed7492c842355c82b0b6bc4-5ndsip a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> <http://www.w3.org/2000/01/rdf-schema#label>
+      "Record Part"@en;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordPart> .
+  
+  _:genid-65fb355b9ed7492c842355c82b0b6bc4-5hyhwr <http://spinrdf.org/sp#text> """INSERT {
+  $value rico:isConstituentOf $subject . 
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-08-24T09:52:00.155Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> a <http://www.w3.org/ns/ldp#Resource> .
+}

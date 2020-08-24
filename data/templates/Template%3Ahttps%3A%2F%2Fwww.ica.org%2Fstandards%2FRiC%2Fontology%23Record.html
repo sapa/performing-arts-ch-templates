@@ -38,7 +38,12 @@
                     ?? rico:isAssociatedWithDate ?date .
                     ?date rico:normalizedDateValue ?normalized_date .
                 }"
-                template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li>{{normalized_date.value}}</li>{{/each}}</ul></div>'>
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}
+                        <li>{{normalized_date.value}}</li>
+                    {{/each}}</ul></div>'
+                >
             </semantic-query>
 
         </bs-col>
@@ -52,7 +57,12 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject>) }
                     ?? rico:hasSubject ?subject .
                 }"
-                template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{subject.value}}"></semantic-link></li>{{/each}}</ul></div>'>
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}
+                        <li><semantic-link iri="{{subject.value}}"></semantic-link></li>
+                    {{/each}}</ul></div>'
+                >
             </semantic-query>
 
         </bs-col>
@@ -79,6 +89,22 @@
                parentBindingName="parent"
                nodeBindingName="node"> 
             </semantic-tree>
+
+            <!-- parts -->
+            <semantic-query 
+                query="SELECT ?label ?part WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart>) }
+                    ?part rico:isConstituentOf ?? .
+                }"
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">
+                        {{#each bindings}}
+                        <li><mp-label iri="{{part.value}}"></mp-label></li>
+                        {{/each}}
+                    </ul>
+                </div>'>
+            </semantic-query>
 
             <!-- instantiations -->
             <semantic-query 
