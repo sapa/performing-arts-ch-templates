@@ -14,22 +14,22 @@
                 fields='[[fieldDefinitions
                     identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
                     type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
-                    virtual="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetVirtual"
-                    documetary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordDocumentaryForm"
+                    documetary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDocumentaryForm"
                     content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
                     language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage"
-                    date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate"
+                    extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
                     provenance="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance"
                     source="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSource"
-                    extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
-                    comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
-                    history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
                     acquisition="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition"
+                    history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
+                    comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
                 ]]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                 [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
             >
             </mp-field-visualization> 
+
+            [[> sapaModule:RecordResourceDate]]
 
         </bs-col>
 
