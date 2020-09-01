@@ -41,7 +41,7 @@
             <semantic-form-text-input for='common_appellation' languages='["en","de","fr","it"]'></semantic-form-text-input> 
           </bs-col>
           <bs-col sm='4'>
-            <semantic-form-checklist-input type='radio' for='common_appellation_type'></semantic-form-checklist-input>
+            <semantic-form-checklist-input type='checkbox' for='common_appellation_type'></semantic-form-checklist-input>
           </bs-col>
         </bs-row>
         <semantic-form-composite-input for='misc_appellation' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
@@ -62,7 +62,7 @@
             <semantic-form-text-input for='description'></semantic-form-text-input>
           </bs-col>
           <bs-col sm='3'>
-            <semantic-form-checklist-input type='radio' row=true for='gender'></semantic-form-checklist-input>
+            <semantic-form-checklist-input type='checkbox' row=true for='gender'></semantic-form-checklist-input>
           </bs-col>
           <bs-col sm='3'>
             <semantic-form-checkbox-input for='swiss'></semantic-form-checkbox-input>
