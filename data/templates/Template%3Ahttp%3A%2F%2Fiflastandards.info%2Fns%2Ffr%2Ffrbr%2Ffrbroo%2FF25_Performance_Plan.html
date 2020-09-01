@@ -234,8 +234,18 @@
           <!-- record sets -->
           <semantic-tree
             query='SELECT DISTINCT ?node ?parent WHERE {
-              ?record rico:hasSubject ?? ;
-                  rico:includedIn* ?node .
+              {
+                ?record rico:hasSubject ?? ;
+                  a rico:RecordSet .
+              } UNION {
+                ?record rico:hasSubject ?? ;
+                  a rico:Record .
+              } UNION {
+                ?recordpart rico:hasSubject ?? ;
+                  a rico:RecordPart ;
+                  rico:isConstituentOf ?record .
+              }
+              ?record rico:includedIn* ?node .
               FILTER(ISIRI(?node))
               FILTER(CONTAINS(STR(?node), "/r/"))
               OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
