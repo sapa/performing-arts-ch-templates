@@ -1,10 +1,10 @@
 <div>
-    {{#ifCond field.range.[0].value "==" "http://metaphacts.com/Link"}}{{log value}}
+    {{#ifCond field.range.[0].value "==" "http://metaphacts.com/Link"}}
         <a href={{value.value.value}}>{{value.label}}</a>
     {{else}}
         {{#ifCond field.xsdDatatype.value "==" "http://www.w3.org/2001/XMLSchema#anyURI"}}
-        [[!-- un-comment for debugging only {{log value}} --]]
-        {{#if value.binding.unidentified.value}}
+            [[!-- un-comment for debugging only {{log value}} --]]
+            {{#if value.binding.unidentified.value}}
                 <mp-label iri="{{value.value.value}}"></mp-label>
             {{else}}
                 {{#if value.label}}
@@ -13,12 +13,13 @@
                     <semantic-link iri="{{value.value.value}}"></semantic-link>
                 {{/if}}
             {{/if}}
-    	{{else}}
+        {{else}}
             {{#if value.label}}
                 {{value.label}}
             {{else}}
-                <span style="white-space: pre-line">{{value.value.value}}</span>
-    			{{#if value.value.lang}}({{value.value.lang}}){{/if}}
+                <span style="white-space: pre-line">{{value.value.value}}
+                    {{#if value.value.lang}}({{value.value.lang}}){{/if}}
+                </span>
             {{/if}}
         {{/ifCond}}
     {{/ifCond}}

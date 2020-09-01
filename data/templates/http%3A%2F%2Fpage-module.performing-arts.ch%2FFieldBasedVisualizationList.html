@@ -1,58 +1,18 @@
 <div>
-  <style>
-    .collapsible-panel-trigger__collapsed:before {
-      content:"\f055 \A0 show all" !important;
-    }
-    .collapsible-panel-trigger__expanded:before {
-      /* content:"\f056 \A0 collapse" !important; */
-      display: none;
-    }
-    .collapsible-div-content {
-    	padding: 0px !important;
-    }
-  </style>
   {{#each fields as |field|}}
     {{#if field.values}}
-    [[!-- {{log field}} --]] 
-    <h5>{{#each field.label}}{{this.value}}{{/each}}</h5>
-         {{#ifCond field.values.length "<=" "10"}}
-            <ul class="list-unstyled">
-              {{#each field.values as |value|}}
-                  <li>
-                    [[!-- show include: [[> sapaModule:FieldValueVisualization]] --]]
-                    {{> sapaModule:FieldValueVisualization field=field value=value }}
-                  </li>
-              {{/each}}
-			</ul>
-         {{else}}
-           <ul class="list-unstyled">
-           {{#each field.values as |value|}}
-              {{#ifCond @index "<" "10"}}
+      <div>
+        [[!-- {{log field}} --]] 
+        <h5>{{#each field.label}}{{this.value}}{{/each}}</h5>
+        <ul class="list-unstyled">
+          {{#each field.values as |value|}}
+              <li>
+                [[!-- show include: [[> sapaModule:FieldValueVisualization]] --]]
                 {{> sapaModule:FieldValueVisualization field=field value=value }}
-              {{/ifCond}}
-                {{#ifCond @index "==" "10"}}
-                    <a>
-                    <mp-collapsible-div expanded=false>
-                        <mp-collapsible-div-trigger>
-                        <a></a>
-                        </mp-collapsible-div-trigger>
-                        <mp-collapsible-div-content>
-                            <div>
-               {{/ifCond}}
-               {{#ifCond @index ">=" "10"}}
-                            <li>
-                              [[!-- show include: [[> sapaModule:FieldValueVisualization]] --]]
-                              {{> sapaModule:FieldValueVisualization field=field value=value }}
-                            </li>
-                {{/ifCond}}
-                {{#if @last}}
-                            </div>
-                        </mp-collapsible-div-content>
-                    </mp-collapsible-div>
-                {{/if}}
-                {{/each}}
-            </ul>
-         {{/ifCond}}
+              </li>
+          {{/each}}
+        </ul>
+      </div>
     {{/if}}
   {{/each}}
 </div>
