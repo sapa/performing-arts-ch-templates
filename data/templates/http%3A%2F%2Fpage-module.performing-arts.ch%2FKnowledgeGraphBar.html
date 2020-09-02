@@ -1,81 +1,82 @@
 <div class="knowledgeGraphBar">
-    <div class='knowledgeGraphBar__thumbnail'>
-      [[#if thumbnail]]
-        <img src="[[thumbnail]]">
-      [[else]]
-        <semantic-query 
-          query='SELECT ?icon
-          WHERE {
-            ?? a ?type .
-            VALUES (?type ?icon) {
-              (frbroo:F25_Performance_Plan "../assets/icons/solid/theater-masks.svg")
-              (crm:E4_Period "../assets/icons/solid/calendar-alt.svg")
-              (crm:E22_Man-Made_Object "../assets/icons/solid/landmark.svg")
-              (crm:E21_Person "../assets/icons/solid/user.svg")
-              (crm:E74_Group "../assets/icons/solid/users.svg")
-              (crm:E40_Legal_Body "../assets/icons/solid/users.svg")
-              (crm:E53_Place "../assets/icons/solid/map-marker-alt.svg")
-              (rico:Concept "../assets/icons/solid/comment-lines.svg")
-              (rico:Record "../assets/icons/solid/file-alt.svg")
-              (rico:RecordSet "../assets/icons/solid/folder-open.svg")
-            }
-          }'
-          template='<div>{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style="height: 120px; width: 120px; max-height: 120px; max-width: 120px; padding: 20px"></mp-resource-thumbnail>{{/each}}</div>'>
-        </semantic-query>
-      [[/if]]
-    </div>
-  
-    <div class="knowledgeGraphBar__summary">
-      <div class='knowledgeGraphBar__summaryTitle'>
-        <h1>
-          <mp-popover>
-            <mp-popover-trigger placement='bottom' trigger='["hover"]'>
-              <span class='knowledgeGraphBar__summaryLabel'><mp-label iri="[[this]]"></mp-label></span>
-            </mp-popover-trigger>
-            <mp-popover-content>
-              <mp-label iri="[[this]]"></mp-label>
-            </mp-popover-content>
-          </mp-popover>
-        </h1>
-      </div>
-      <div class='knowledgeGraphBar__bottomRow'>
-          <div class='knowledgeGraphBar__graphInfos'>
-            <semantic-query 
-            query="SELECT ?description
-            WHERE {
-              ?? a ?class .
-              FILTER(CONTAINS(STR(?class), 'RiC') || CONTAINS(STR(?class), 'frbroo'))
-              OPTIONAL { ?? crm:P2_has_type ?crmtype . }
-              OPTIONAL { ?? crm:P4_has_time-span ?timespan . }
-              OPTIONAL {
-                ?work frbroo:R12_is_realised_in ?? ;
-                    crm:P2_has_type ?genre .
-              }
-              OPTIONAL { ?? rico:hasRecordSetType ?record_set_type . }
-              BIND(IF(BOUND(?timespan), ?timespan, IF(BOUND(?genre), ?genre, IF(BOUND(?crmtype), ?crmtype, IF(BOUND(?record_set_type), ?record_set_type, ?class)))) AS ?description)
-            }"
-            template="<p>{{#each bindings}}{{#if @first}}<mp-label iri='{{description.value}}'></mp-label>{{else}}, <mp-label iri='{{description.value}}'></mp-label>{{/if}}{{/each}}</p>">
-        </semantic-query>
-            <div class="knowledgeGraphBar__uriRow">
-            <b>URI</b>: <span title=[[this]]>[[this]]</span> <mp-copy-to-clipboard text="[[this]]">
-            <button class="btn btn-default knowledgeGraphBar__copyIri"></button>
-            </mp-copy-to-clipboard>
-            </div>
-          </div>
-        <mp-description iri="[[this]]" template='{{> truncate-template}}'>
-          <template id='truncate-template'>
-            <div class="knowledgeGraphBar__description">
-              <mp-text-truncate lines=2 truncate='<mp-popover title="">
-                                                  <mp-popover-trigger placement="left" trigger=["click","hover","focus"] root-close="false">
-                                                  <a>... </a>
-                                                  </mp-popover-trigger>
-                                                  <mp-popover-content>{{description}}</mp-popover-content>
-                                                  </mp-popover>'>{{description}}</mp-text-truncate>
-            </div>
-          </template>
-        </mp-description>
-      </div>
-    </div>
-
+  <div class='knowledgeGraphBar__thumbnail'>
+    [[#if thumbnail]]
+      <img src="[[thumbnail]]">
+    [[else]]
+      <semantic-query 
+        query='SELECT ?icon
+        WHERE {
+          ?? a ?type .
+          VALUES (?type ?icon) {
+            (frbroo:F25_Performance_Plan "../assets/icons/solid/theater-masks.svg")
+            (crm:E4_Period "../assets/icons/solid/calendar-alt.svg")
+            (crm:E22_Man-Made_Object "../assets/icons/solid/landmark.svg")
+            (crm:E21_Person "../assets/icons/solid/user.svg")
+            (crm:E74_Group "../assets/icons/solid/users.svg")
+            (crm:E40_Legal_Body "../assets/icons/solid/users.svg")
+            (crm:E53_Place "../assets/icons/solid/map-marker-alt.svg")
+            (rico:Concept "../assets/icons/solid/comment-lines.svg")
+            (rico:Record "../assets/icons/solid/file-alt.svg")
+            (rico:RecordSet "../assets/icons/solid/folder-open.svg")
+          }
+        }'
+        template='<div>{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style="height: 120px; width: 120px; max-height: 120px; max-width: 120px; padding: 20px"></mp-resource-thumbnail>{{/each}}</div>'>
+      </semantic-query>
+    [[/if]]
   </div>
+  
+  <div class="knowledgeGraphBar__summary">
+    <div class='knowledgeGraphBar__summaryTitle'>
+      <h1>
+        <mp-popover>
+          <mp-popover-trigger placement='bottom' trigger='["hover"]'>
+            <span class='knowledgeGraphBar__summaryLabel'><mp-label iri="[[this]]"></mp-label></span>
+          </mp-popover-trigger>
+          <mp-popover-content>
+            <mp-label iri="[[this]]"></mp-label>
+          </mp-popover-content>
+        </mp-popover>
+      </h1>
+    </div>
+    <div class='knowledgeGraphBar__bottomRow'>
+      <div class='knowledgeGraphBar__graphInfos'>
+        <semantic-query 
+          query="SELECT ?description
+          WHERE {
+            ?? a ?class .
+            FILTER(CONTAINS(STR(?class), 'RiC') || CONTAINS(STR(?class), 'frbroo'))
+            OPTIONAL { ?? crm:P2_has_type ?crmtype . }
+            OPTIONAL { ?? crm:P4_has_time-span ?timespan . }
+            OPTIONAL {
+              ?work frbroo:R12_is_realised_in ?? ;
+                  crm:P2_has_type ?genre .
+            }
+            OPTIONAL { ?? rico:hasRecordSetType ?record_set_type . }
+            BIND(IF(BOUND(?timespan), ?timespan, IF(BOUND(?genre), ?genre, IF(BOUND(?crmtype), ?crmtype, IF(BOUND(?record_set_type), ?record_set_type, ?class)))) AS ?description)
+          }"
+          template="<p>{{#each bindings}}{{#if @first}}<mp-label iri='{{description.value}}'></mp-label>{{else}}, <mp-label iri='{{description.value}}'></mp-label>{{/if}}{{/each}}</p>">
+      </semantic-query>      
+      <semantic-query 
+          query="SELECT ?uri ?button WHERE {
+            BIND(IF(REGEX(STR(??), '/[aoprsc]/'), ??, 'not yet permanent') AS ?uri) 
+            OPTIONAL { ?? <http://example.com/resource> ?null }
+            BIND(IF(REGEX(STR(??), '/[aoprsc]/'), TRUE, ?null) AS ?button) 
+          } LIMIT 1"
+          template="<div class='knowledgeGraphBar__uriRow'>{{#each bindings}}{{log this}}<b>URI</b>: <i>{{uri.value}}</i>{{#if button.value}}<mp-copy-to-clipboard text='{{uri.value}}'><button class='btn btn-default knowledgeGraphBar__copyIri'></button></mp-copy-to-clipboard>{{/if}}{{/each}}</div>">
+      </semantic-query>
+      <mp-description iri="[[this]]" template='{{> truncate-template}}'>
+        <template id='truncate-template'>
+          <div class="knowledgeGraphBar__description">
+            <mp-text-truncate lines=2 truncate='<mp-popover title="">
+                                                <mp-popover-trigger placement="left" trigger=["click","hover","focus"] root-close="false">
+                                                <a>... </a>
+                                                </mp-popover-trigger>
+                                                <mp-popover-content>{{description}}</mp-popover-content>
+                                                </mp-popover>'>{{description}}</mp-text-truncate>
+          </div>
+        </template>
+      </mp-description>
+    </div>
+  </div>
+</div>
   
