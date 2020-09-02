@@ -1,49 +1,50 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-65fb355b9ed7492c842355c82b0b6bc4-5hyhwr .
+  _:genid-08ddbbc9628e497db27774fd8b4488f7-uvp6w <http://spinrdf.org/sp#text> """INSERT {
+  $value rico:isConstituentOf $subject . 
+} WHERE {}""" .
   
-  _:genid-65fb355b9ed7492c842355c82b0b6bc4-5ndsip <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
-  $value rico:isConstituentOf $subject .
-}""" .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> a <http://www.metaphacts.com/ontology/fields#Field>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-08ddbbc9628e497db27774fd8b4488f7-uvp6w .
+  
+  _:genid-08ddbbc9628e497db27774fd8b4488f7-hf4kfo a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
-      <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-65fb355b9ed7492c842355c82b0b6bc4-r67ih .
+      <http://www.w3.org/2001/XMLSchema#anyURI> .
   
-  _:genid-65fb355b9ed7492c842355c82b0b6bc4-5hyhwr a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-65fb355b9ed7492c842355c82b0b6bc4-r67ih a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-65fb355b9ed7492c842355c82b0b6bc4-vjbce <http://spinrdf.org/sp#text> """DELETE {
+  _:genid-08ddbbc9628e497db27774fd8b4488f7-hvdxxq <http://spinrdf.org/sp#text> """DELETE {
   $value rico:isConstituentOf $subject .
 } WHERE {}""";
     a <http://spinrdf.org/sp#Query> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> <http://www.metaphacts.com/ontology/fields#selectPattern>
-      _:genid-65fb355b9ed7492c842355c82b0b6bc4-5ndsip;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-65fb355b9ed7492c842355c82b0b6bc4-vjbce;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> <http://www.metaphacts.com/ontology/fields#autosuggestionPattern>
+      _:genid-08ddbbc9628e497db27774fd8b4488f7-7db69r .
+  
+  _:genid-08ddbbc9628e497db27774fd8b4488f7-7db69r a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-08ddbbc9628e497db27774fd8b4488f7-uvp6w a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> <http://www.metaphacts.com/ontology/fields#deletePattern>
+      _:genid-08ddbbc9628e497db27774fd8b4488f7-hvdxxq;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record> .
   
-  _:genid-65fb355b9ed7492c842355c82b0b6bc4-r67ih <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  _:genid-08ddbbc9628e497db27774fd8b4488f7-hf4kfo <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $value rico:isConstituentOf $subject .
+}""" .
+  
+  _:genid-08ddbbc9628e497db27774fd8b4488f7-7db69r <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
   $value a rico:RecordPart ;
   	rdfs:label $label .
   FILTER(REGEX($label, \"?token\", \"i\"))
 }""" .
   
-  _:genid-65fb355b9ed7492c842355c82b0b6bc4-5ndsip a <http://spinrdf.org/sp#Query> .
-  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Record Part"@en;
-    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordPart> .
-  
-  _:genid-65fb355b9ed7492c842355c82b0b6bc4-5hyhwr <http://spinrdf.org/sp#text> """INSERT {
-  $value rico:isConstituentOf $subject . 
-} WHERE {}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> a <http://www.w3.org/ns/prov#Entity>;
+      "Record part"@en;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordPart>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-08ddbbc9628e497db27774fd8b4488f7-hf4kfo;
+    a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-08-24T09:52:00.155Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-08-24T18:44:21.078Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart> .
