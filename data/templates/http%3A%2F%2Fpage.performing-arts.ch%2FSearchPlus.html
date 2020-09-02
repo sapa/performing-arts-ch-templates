@@ -7,8 +7,108 @@
 <div class="page">
   <div class='page__body' style="padding-top:6em;">
 
+    <style>
+      .domainCards {
+        margin: 0 -10px;
+      }
+
+      .domainCardItem {
+        display: flex;
+        padding: 20px 10px;
+      }
+
+      .domainCard {
+        width: 100%;
+        border-radius: 3px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 10px;
+      }
+
+      .domainCard--selected {
+        border: 1px solid black;
+      }
+
+      .domainCardThumbnail {
+        line-height: 50px;
+        height: 50px;
+        width: 50px;
+        text-align: center;
+      }
+
+      .domainCardThumbnail img {
+        max-height: 100%;
+        max-width: 100%;
+        height: auto;
+        width: auto;
+      }
+
+      .domainItems {
+        margin: 10px 0;
+      }
+
+      .domainItemWrap {
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      .domainItem {
+        color: #333;
+        padding: 4px 6px;
+      }
+
+      .domainItem:hover {
+        color: #333;
+      }
+
+      .domainItem--selected {
+        border-bottom: 1px solid #ccc;
+        font-weight: bold;
+      }
+
+      .domainItemThumbnail {
+        line-height: 24px;
+        margin-right: 5px;
+        height: 24px;
+        width: 24px;
+        text-align: center;
+      }
+
+      .domainItemThumbnail img {
+        padding: 4px;
+        max-height: 100%;
+        max-width: 100%;
+        height: auto;
+        width: auto;
+      }
+
+      .domainRemove {
+        color: #333;
+        margin: 0 5px;
+      }
+
+      .clearSearch {
+        color: #333;
+      }
+
+      div.facet {
+        width: 16em;
+      }
+
+      img.facet__relation__content__category-image {
+        display: none;
+      }
+    </style>
+
     <semantic-search 
       id='mainSearch'
+      categories='{
+        "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>": [{
+          "kind": "resource",
+          "queryPattern": "{$subject ?__relation__ ?__value__ .}"
+        }]
+      }'
       relations='{
         "<http://search.performing-arts.ch/genre>": [{
           "kind": "resource",
@@ -229,25 +329,28 @@
           }
         ]
       }'
-      limit='2000'
+      limit='1000'
     >
 
       <semantic-search-query-keyword-type 
         id='keywordTypeQuery'
         query='SELECT ?subject WHERE {
           ?subject rdf:type/rdfs:subClassOf* ?__domain__ .
+          FILTER(?__domain__ IN (frbroo:F25_Performance_Plan, crm:E21_Person, crm:E74_Group, crm:E40_Legal_Body, crm:E22_Man-Made_Object, crm:E53_Place))
+          FILTER(REGEX(STR(?subject), "/[acopw]/"))
           OPTIONAL { ?subject crm:P2_has_type ?crmtype . }
           FILTER(?__domain__ != crm:E22_Man-Made_Object || ?crmtype = spav:dwmkn )
           FILTER(?__tokenPattern__)
         }'
         count-query='
-          SELECT (COUNT(*) AS ?count) WHERE {
+          SELECT (COUNT(DISTINCT ?subject) AS ?count) WHERE {
             ?subject rdf:type/rdfs:subClassOf* ?__domain__ .
+            FILTER(?__domain__ IN (frbroo:F25_Performance_Plan, crm:E21_Person, crm:E74_Group, crm:E40_Legal_Body, crm:E22_Man-Made_Object, crm:E53_Place))
+            FILTER(REGEX(STR(?subject), "/[acopw]/"))
             OPTIONAL { ?subject crm:P2_has_type ?crmtype . }
             FILTER(?__domain__ != crm:E22_Man-Made_Object || ?crmtype = spav:dwmkn )
             FILTER(?__tokenPattern__)
-          }
-        '
+          }'
         count-query-mode='queryPerCategory'
         token-pattern='
           {
@@ -255,18 +358,100 @@
           } UNION {
             ?subject crm:P131_is_identified_by [ rdf:value ?label ] .
           }
-          FILTER(REGEX(STR(?subject), "/[acopw]/"))
           SERVICE <http://www.bigdata.com/rdf/search#search> {
             ?label bds:search ?__token__ ;
             bds:minRelevance "0.1" ;
             bds:relevance ?score ; 
             bds:matchAllTerms "true" .
           }'
-      ></semantic-search-query-keyword-type>
+        template='{{> template}}'
+      >
+    
+        <template id='template'>
+          <div>
+            {{#if selectedDomain}}
+            <div class='domainItems'>
+              {{#each domains}}
+                <span class='domainItemWrap'>
+                  <span data-flex-layout='row center-left'>
+                    <mp-event-trigger
+                      type='KeywordTypeQuery.SelectDomain'
+                      targets='["{{../componentId}}"]'
+                      data='{"domainIri": "{{iri}}"}'>
+                      <a
+                        data-flex-layout='row center-left'
+                        class='domainItem {{#if selected}}domainItem--selected{{/if}}'
+                      >
+                        <span class='domainItemThumbnail'>
+                          {{#if thumbnail}}
+                            <img src='{{thumbnail}}' alt='{{label}}' />
+                          {{else}}
+                            <i class='fa fa-edit'></i>
+                          {{/if}}
+                        </span>
+                        {{label}}
+                        {{#if ../loadingCounts}}
+                          (⏳)
+                        {{else}}
+                          ({{count}})
+                        {{/if}}
+                      </a>
+                    </mp-event-trigger>
+                    {{#if selected}}
+                      <mp-event-trigger
+                        type='KeywordTypeQuery.ClearDomain'
+                        targets='["{{../componentId}}"]'
+                      >
+                        <a class='domainRemove'><i class='fa fa-times'></i></a>
+                      </mp-event-trigger>
+                    {{/if}}
+                </span>
+                </span>
+              {{/each}}
+              <mp-event-trigger
+                type='KeywordTypeQuery.ClearSearch'
+                targets='["{{componentId}}"]'
+              >
+                <a class='pull-right clearSearch'><i class='fa fa-trash'></i> Clear</a>
+              </mp-event-trigger>
+            </div>
+            {{else}}
+            <div class='domainCards'>
+              <div data-flex-layout='rows stretch-stretch'>
+                {{#each domains}}
+                {{#ifCond count "||" ../loadingCounts}}
+                <div data-flex-self='size-1of5 md-half sm-full' class='domainCardItem'>
+                  <mp-event-trigger
+                    type='KeywordTypeQuery.SelectDomain'
+                    targets='["{{../componentId}}"]'
+                    data='{"domainIri": "{{iri}}"}'>
+                    <button type=button class='btn btn-default domainCard {{#if selected}}domainCard--selected{{/if}}'>
+                      <div class='domainCardThumbnail'>
+                        {{#if thumbnail}}
+                        <img src='{{thumbnail}}' alt='{{label}}' /> 
+                        {{else}}
+                        <i class='fa fa-edit fa-lg'></i>
+                        {{/if}}
+                      </div>
+                      <h4>{{label}}</h4>
+                      {{#if count}}<div>{{count}}</div>{{/if}}
+                      {{#if ../loadingCounts}}<div>⏳</div>{{/if}}
+                    </button>
+                  </mp-event-trigger>
+                </div>
+                {{/ifCond}}
+                {{/each}}
+              </div>
+            </div>
+            {{/if}}
+          </div>
+        </template>
+
+      </semantic-search-query-keyword-type>
       
       <div data-flex-layout="row stretch-stretch">
     
-        <div data-flex-self="size-1of3" style="flex: 0 0 0;">
+        <div data-flex-self="size-1of3" style="flex: 0 0 0; margin-top: 1em;">
           <semantic-search-facet></semantic-search-facet>
         </div>
 
