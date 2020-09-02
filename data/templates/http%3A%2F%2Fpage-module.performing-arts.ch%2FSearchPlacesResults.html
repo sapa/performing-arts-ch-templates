@@ -1,0 +1,58 @@
+<semantic-search-result-holder domains-include='["http://www.cidoc-crm.org/cidoc-crm/E53_Place"]'>
+
+    <div data-flex-self="md-full">
+
+        <semantic-search-result>
+        <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}" template='{{> template}}'>
+            <template id='template'>
+            {{#if hasLimit}}
+            <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                <span class="num-results">[[i18n "SearchLimitReached" bundle="performing-arts-ch" escapeHTML=false]]</span>
+            </bs-alert>
+            {{else}}
+            <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                <span class="num-results" class="search-results__alert"><strong>[[i18n "SearchResults" bundle="performing-arts-ch"]]</strong></span>
+            </bs-alert>
+            {{/if}}
+            </template>
+        </mp-sparql-result-counts>
+        </semantic-search-result>
+
+        <semantic-search-result>
+        <semantic-table 
+            query='SELECT DISTINCT ?subject WHERE { }'
+            id="place-table" 
+            options='{"showFilter": false, "showTableHeading": true, "enableSort": false}'
+            column-configuration='[
+            {"displayName": "[[i18n "PlacesTableName" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
+            {"displayName": "[[i18n "PlacesTableFallsWithin" bundle="performing-arts-ch"]]", "cellTemplate": "{{> parents}}"}
+            ]'>
+            <template id='parents'>                     
+            <semantic-query 
+                query='SELECT ?parent WHERE {      
+                <{{subject.value}}> crm:P89_falls_within+ ?parent .
+                }'
+                template = '{{> parents-list}} '>           
+                <template id='parents-list'>
+                <div>{{#each bindings}}&rarr; <mp-label iri="{{parent.value}}"></mp-label> {{/each}}</div>
+                </template>
+            </semantic-query> 
+            </template>
+
+        </semantic-table> 
+        </semantic-search-result>
+
+        <div class="pull-right" style="display: flex; margin-top: 12px;">  
+        <semantic-search-result>
+            <mp-sparql-download id='csv-result' query="SELECT ?subject ?name WHERE {  }"
+                                header="text/csv"
+                                filename="performing-arts-ch-search-result.csv"
+                                >
+            <button class="btn btn-default">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
+            </mp-sparql-download>
+        </semantic-search-result>
+        </div>
+
+    </div>
+</semantic-search-result-holder>

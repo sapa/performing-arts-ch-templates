@@ -1,0 +1,122 @@
+<semantic-search-result-holder domains-include='["http://www.cidoc-crm.org/cidoc-crm/E74_Group", "http://www.cidoc-crm.org/cidoc-crm/E40_Legal_Body"]'>
+
+  <div data-flex-self="md-full">
+
+    <semantic-search-result>
+      <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}" template='{{> template}}'>
+        <template id='template'>
+          {{#if hasLimit}}
+          <bs-alert bs-style="warning" class="search-results__alert pull-left">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+            <span class="num-results">[[i18n "SearchLimitReached" bundle="performing-arts-ch" escapeHTML=false]]</span>
+          </bs-alert>
+          {{else}}
+          <bs-alert bs-style="warning" class="search-results__alert pull-left">
+            <span class="num-results" class="search-results__alert"><strong>[[i18n "SearchResults" bundle="performing-arts-ch"]]</strong></span>
+          </bs-alert>
+          {{/if}}
+        </template>
+      </mp-sparql-result-counts>
+    </semantic-search-result>
+
+    <semantic-search-result>
+      <semantic-table 
+        query='SELECT DISTINCT ?subject ?beginning (GROUP_CONCAT(DISTINCT ?appellationvalue; SEPARATOR=", ") AS ?additionalnames) WHERE {
+          OPTIONAL {
+            ?subject rdfs:label ?label ;
+              crm:P131_is_identified_by ?appellation .
+            ?appellation crm:P2_has_type ?appellationtype ;
+              rdf:value ?appellationvalue .
+              MINUS { ?appellation crm:P2_has_type spav:yanuj . }
+              MINUS { ?appellation crm:P2_has_type spav:yasis . }
+              FILTER(?label != ?appellationvalue)
+          }
+          OPTIONAL {
+            ?subject rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ]
+          }
+        } GROUP BY ?subject ?beginning'
+        id="group-table" 
+        options='{"showFilter": false, "showTableHeading": true}'
+        column-configuration='[
+          {"displayName": "[[i18n "GroupsTableName" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
+          {"displayName": "[[i18n "GroupsTableAdditionalNames" bundle="performing-arts-ch"]]", "cellTemplate": "{{> additional-names}}", "variableName": "additionalnames"} ,
+          {"displayName": "[[i18n "GroupsTablePlace" bundle="performing-arts-ch"]]", "cellTemplate": "{{> places}}"},
+          {"displayName": "[[i18n "GroupsTableDates" bundle="performing-arts-ch"]]", "cellTemplate": "{{> dates}}", "variableName": "beginning"}
+        ]'>
+
+        <template id='additional-names'>                     
+          <semantic-query 
+            query='SELECT ?appellation WHERE {      
+                <{{subject.value}}> rdfs:label ?label ;
+                  crm:P131_is_identified_by ?appellation .
+                ?appellation crm:P2_has_type ?appellationtype ;
+                  rdf:value ?appellationvalue .
+                  MINUS { ?appellation crm:P2_has_type spav:yanuj . }
+                  MINUS { ?appellation crm:P2_has_type spav:yasis . }
+                  FILTER(?label != ?appellationvalue)
+              }'
+            template = '{{> additional-names-list}} '>           
+            <template id='additional-names-list'>
+              <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{appellation.value}}"></mp-label>{{else}}, <mp-label iri="{{appellation.value}}"></mp-label>{{/if}}{{/each}}</div>
+            </template>
+          </semantic-query> 
+        </template>
+
+        <template id='types'>                     
+          <semantic-query 
+            query='SELECT ?type WHERE { <{{subject.value}}> crm:P2_has_type ?type . }'
+            template = '{{> types-list}} '>           
+            <template id='types-list'>
+              <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{type.value}}"></mp-label>{{else}}, <mp-label iri="{{type.value}}"></mp-label>{{/if}}{{/each}}</div>
+            </template>
+          </semantic-query> 
+        </template>
+
+        <template id='places'>                     
+          <semantic-query 
+            query='SELECT ?place WHERE {
+                <{{subject.value}}> crm:P74_has_current_or_former_residence ?p .
+                ?p crm:P89_falls_within ?place .
+              }'
+            template = '{{> places-list}} '>
+            <template id='places-list'>
+              <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{place.value}}"></mp-label>{{else}}, <mp-label iri="{{place.value}}"></mp-label>{{/if}}{{/each}}</div>
+            </template>
+          </semantic-query> 
+        </template>
+
+          <template id='dates'>                     
+            <semantic-query 
+              query='SELECT ?dates WHERE {
+                    OPTIONAL {
+                      <{{subject.value}}> rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ]
+                    }
+                    OPTIONAL {
+                      <{{subject.value}}> rico:hasEndDate [ rico:normalizedDateValue ?end ]
+                    }
+                    BIND(CONCAT(COALESCE(?beginning, "X"), "-", COALESCE(?end, "X")) AS ?predates)
+                    BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
+                    }'
+              template = '{{> dates-list}} '>           
+              <template id='dates-list'>
+                <div>{{#each bindings}}{{dates.value}}{{/each}}</div>
+              </template>
+            </semantic-query> 
+          </template>
+        
+      </semantic-table> 
+    </semantic-search-result>
+
+    <div class="pull-right" style="display: flex; margin-top: 12px;">  
+      <semantic-search-result>
+        <mp-sparql-download id='csv-result' query="SELECT ?subject ?name WHERE {  }"
+                            header="text/csv"
+                            filename="performing-arts-ch-search-result.csv"
+                            >
+          <button class="btn btn-default">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
+        </mp-sparql-download>
+      </semantic-search-result>
+    </div>
+
+  </div>
+</semantic-search-result-holder>

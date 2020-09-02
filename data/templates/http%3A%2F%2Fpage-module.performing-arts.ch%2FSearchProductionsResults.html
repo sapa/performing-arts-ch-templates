@@ -1,0 +1,133 @@
+<semantic-search-result-holder domains-include='["http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan"]'>
+
+  <div data-flex-self="md-full">
+
+    <semantic-search-result>
+      <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}" template='{{> template}}'>
+        <template id='template'>
+          {{#if hasLimit}}
+          <bs-alert bs-style="warning" class="search-results__alert pull-left">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+            <span class="num-results">[[i18n "SearchLimitReached" bundle="performing-arts-ch" escapeHTML=false]]</span>
+          </bs-alert>
+          {{else}}
+          <bs-alert bs-style="warning" class="search-results__alert pull-left">
+            <span class="num-results" class="search-results__alert"><strong>[[i18n "SearchResults" bundle="performing-arts-ch"]]</strong></span>
+          </bs-alert>
+          {{/if}}
+        </template>
+      </mp-sparql-result-counts>
+    </semantic-search-result>
+
+    <semantic-search-result>
+      <semantic-table 
+        query='SELECT ?subject ?premieredatebegin (GROUP_CONCAT(DISTINCT ?producerlabel; SEPARATOR=", ") AS ?producers) (GROUP_CONCAT(DISTINCT ?venuelabel; SEPARATOR=", ") AS ?venues) WHERE { 
+          OPTIONAL {
+            ?performance frbroo:R25_performed ?subject ;
+              crm:P9_consists_of ?premiere . 
+            ?premiere crm:P4_has_time-span ?premieredate .
+            ?premieredate crm:P82a_begin_of_the_begin ?premieredatebegin .
+          }
+          OPTIONAL {
+            ?expressioncreation frbroo:R17_created ?subject ;
+              crm:P9_consists_of ?production . 
+            ?production crm:P2_has_type spav:muwgo ;
+              crm:P14_carried_out_by ?producer .
+            ?producer rdfs:label ?producerlabel .
+          }
+          OPTIONAL {
+            ?performance frbroo:R25_performed ?subject ;
+              crm:P8_took_place_on_or_within ?venue .
+            ?venue rdfs:label ?venuelabel .
+          }
+        } GROUP BY ?subject ?premieredatebegin'
+        id="production-table" 
+        options='{"showFilter": false, "showTableHeading": true, "enableSort": true}'
+        column-configuration='[
+          {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
+          {"displayName": "[[i18n "ProductionsTablePremiere" bundle="performing-arts-ch"]]", "cellTemplate": "{{> premiere}}", "variableName": "premieredatebegin"} ,
+          {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch"]]", "cellTemplate": "{{> producer}}", "variableName": "producers"} ,
+          {"displayName": "[[i18n "ProductionsTableVenue" bundle="performing-arts-ch"]]", "cellTemplate": "{{> venue}}", "variableName": "venues"}
+        ]'>
+        
+        <template id='premiere'>
+          <semantic-query 
+            query='SELECT ?premieretype ?premieredate WHERE {
+                ?performance frbroo:R25_performed <{{subject.value}}> ;
+                  crm:P9_consists_of ?premiere .
+                ?premiere a frbroo:F31_Performance .
+                OPTIONAL {
+                  ?premiere crm:P2_has_type ?premieretype .
+                  ?premieretype skos:inScheme spav:hl .
+                }
+                OPTIONAL {
+                  ?premiere crm:P4_has_time-span ?premieredate .
+                }
+              }'
+            template = '{{> premiere-list}}'>
+            <template id='premiere-list'>
+              <div>{{#each bindings}}{{#if @first}}{{#if premieredate}}<mp-label iri="{{premieredate.value}}"></mp-label>{{/if}}{{/if}}{{/each}}{{#each bindings}}{{#if premieretype}}{{#if @first}}{{#if premieredate}}<br />{{/if}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{/if}}{{/each}}</div>
+            </template>
+          </semantic-query> 
+        </template>
+
+        <template id='venue'>
+          <semantic-query 
+            query='SELECT ?venue ?supervenue WHERE {
+              ?performance frbroo:R25_performed <{{subject.value}}> ;
+                crm:P8_took_place_on_or_within ?venue .
+              OPTIONAL {
+                ?supervenue crm:P46_is_composed_of ?venue .
+              }
+            }'
+            template = '{{> venue-list}}'>
+            <template id='venue-list'>
+              <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{venue.value}}"></mp-label>{{else}}, <mp-label iri="{{venue.value}}"></mp-label>{{/if}}{{#if supervenue}} (<mp-label iri="{{supervenue.value}}"></mp-label>){{/if}}{{/each}}</div>
+            </template>
+          </semantic-query> 
+        </template>
+
+        <template id='producer'>
+          <semantic-query 
+            query='SELECT ?producer WHERE {
+              ?expressioncreation frbroo:R17_created <{{subject.value}}> ;
+                crm:P9_consists_of ?production . 
+              ?production crm:P2_has_type spav:muwgo ;
+                crm:P14_carried_out_by ?producer .
+            }'
+            template = '{{> producer-list}}'>
+            <template id='producer-list'>
+              <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{producer.value}}"></mp-label>{{else}}, <mp-label iri="{{producer.value}}"></mp-label>{{/if}}{{/each}}</div>
+            </template>
+          </semantic-query> 
+        </template>
+
+        <template id='genre'>
+          <semantic-query 
+            query='SELECT DISTINCT ?genre WHERE {
+              ?work frbroo:R12_is_realised_in <{{subject.value}}> ;
+                crm:P2_has_type ?genre .
+            }'
+            template = '{{> genre-list}}'>
+            <template id='genre-list'>
+              <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</div>
+            </template>
+          </semantic-query> 
+        </template>
+
+      </semantic-table> 
+    </semantic-search-result>
+
+    <div class="pull-right" style="display: flex; margin-top: 12px;">  
+      <semantic-search-result>
+        <mp-sparql-download id='csv-result' query="SELECT ?subject ?name WHERE {  }"
+                            header="text/csv"
+                            filename="performing-arts-ch-search-result.csv"
+                            >
+          <button class="btn btn-default">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
+        </mp-sparql-download>
+      </semantic-search-result>
+    </div>
+
+  </div>
+</semantic-search-result-holder>
