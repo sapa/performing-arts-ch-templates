@@ -40,7 +40,7 @@
         '
         search-query='
           SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-            ?item rdf:type/rdfs:subClassOf* rico:RecordResource .
+            { ?item a rico:RecordSet } UNION { ?item a rico:Record }
             { ?item rico:name ?label } UNION { ?item rico:identifier ?label }
             FILTER REGEX(LCASE(?label), LCASE(?__token__), "i")
             BIND(false AS ?hasChildren)
