@@ -55,7 +55,7 @@
         <bs-row style="margin-top: 4em;">
           <bs-col sm="6" style="text-align: center;">
             <diV>
-              <span style="font-size: 84px;"><i class="fas fa-university"></i></span>
+              <span style="font-size: 84px;"><i class="fas fa-landmark"></i></span>
             </diV>
             <semantic-query query='SELECT (COUNT(?venue) AS ?count) WHERE { ?venue a crm:E22_Man-Made_Object ; crm:P2_has_type spav:dwmkn . FILTER(CONTAINS(STR(?venue), "/o/")) }' template='<div>{{#each bindings}}{{count.value}} [[i18n "AboutCountVenues" bundle="performing-arts-ch"]]{{/each}}</div>'></semantic-query>
           </bs-col>

@@ -8,19 +8,19 @@
           WHERE {
             ?? a ?type .
             VALUES (?type ?icon) {
-              (frbroo:F25_Performance_Plan "../images/fcs/things.svg")
-              (crm:E4_Period "../images/fcs/things.svg")
-              (crm:E22_Man-Made_Object "../images/fcs/things.svg")
-              (crm:E21_Person "../images/fcs/things.svg")
-              (crm:E74_Group "../images/fcs/actors.svg")
-              (crm:E40_Legal_Body "../images/fcs/actors.svg")
-              (crm:E53_Place "../images/fcs/places.svg")
-              (rico:Concept "../images/fcs/concepts.svg")
-              (rico:Record "../images/fcs/things.svg")
-              (rico:RecordSet "../images/fcs/things.svg")
+              (frbroo:F25_Performance_Plan "../assets/icons/solid/theater-masks.svg")
+              (crm:E4_Period "../assets/icons/solid/calendar-alt.svg")
+              (crm:E22_Man-Made_Object "../assets/icons/solid/landmark.svg")
+              (crm:E21_Person "../assets/icons/solid/user.svg")
+              (crm:E74_Group "../assets/icons/solid/users.svg")
+              (crm:E40_Legal_Body "../assets/icons/solid/users.svg")
+              (crm:E53_Place "../assets/icons/solid/map-marker-alt.svg")
+              (rico:Concept "../assets/icons/solid/comment-lines.svg")
+              (rico:Record "../assets/icons/solid/file-alt.svg")
+              (rico:RecordSet "../assets/icons/solid/folder-open.svg")
             }
           }'
-          template='<div>{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style="height: 120px; width: 120px; max-height: 120px; max-width: 120px;"></mp-resource-thumbnail>{{/each}}</div>'>
+          template='<div>{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style="height: 120px; width: 120px; max-height: 120px; max-width: 120px; padding: 20px"></mp-resource-thumbnail>{{/each}}</div>'>
         </semantic-query>
       [[/if]]
     </div>
