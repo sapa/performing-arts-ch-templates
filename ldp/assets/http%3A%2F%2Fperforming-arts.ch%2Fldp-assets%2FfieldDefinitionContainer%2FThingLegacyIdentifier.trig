@@ -1,0 +1,39 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier>
+    a <http://www.metaphacts.com/ontology/fields#Field> .
+  
+  _:genid-7d94a35695234716b6bab701e33b2857-g8wg0xk6 <http://spinrdf.org/sp#text> "INSERT { $subject spao:legacyIdentifier $value. } WHERE {}" .
+  
+  _:genid-7d94a35695234716b6bab701e33b2857-113q79 a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-7d94a35695234716b6bab701e33b2857-h5vwwe a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject spao:legacyIdentifier $value. } WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier>
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-7d94a35695234716b6bab701e33b2857-g8wg0xk6;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-7d94a35695234716b6bab701e33b2857-h5vwwe .
+  
+  _:genid-7d94a35695234716b6bab701e33b2857-g8wg0xk6 a <http://spinrdf.org/sp#Query> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Ancienne cote"@fr, "Vecchia segnatura"@it .
+  
+  _:genid-7d94a35695234716b6bab701e33b2857-113q79 <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject spao:legacyIdentifier ?value. }" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Fühere Signatur"@de;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Thing>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-7d94a35695234716b6bab701e33b2857-113q79;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Legacy identifier"@en;
+    a <http://www.w3.org/ns/prov#Entity>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-09-08T17:45:22.892Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier> .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier>
+    a <http://www.w3.org/ns/ldp#Resource> .
+}
