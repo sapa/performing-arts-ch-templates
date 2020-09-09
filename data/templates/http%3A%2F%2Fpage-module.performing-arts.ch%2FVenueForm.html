@@ -76,13 +76,21 @@
           <semantic-form new-subject-template="http://data.performing-arts.ch/o/{{UUID}}" fields='[[fieldDefinitions
             subvenue_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
             subvenue_cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype"
-            subvenue_official_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueOfficialTitle"
-          ]]'>
+            subvenue_common_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitle"
+            subvenue_common_title_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType"
+            ]]'>
             <div style="display: none;">
               <semantic-form-hidden-input for='subvenue_rdf_type' default-values='["[[resolvePrefix "crm:E22_Man-Made_Object"]]", "[[resolvePrefix "rico:Thing"]]"]'></semantic-form-hidden-input>
               <semantic-form-hidden-input for='subvenue_cidoc_type' default-value='[[resolvePrefix "spav:dwmkn"]]'></semantic-form-hidden-input>
             </div>
-            <semantic-form-text-input for="subvenue_official_title" languages='["en","de","fr","it"]'></semantic-form-text-input>
+              <bs-row>
+                <bs-col sm='8'>
+                  <semantic-form-text-input for='subvenue_common_title' languages='["en","de","fr","it"]'></semantic-form-text-input>
+                </bs-col>
+                <bs-col sm='4'>
+                  <semantic-form-checklist-input type='radio' for='subvenue_common_title_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
+                </bs-col>
+              </bs-row>
             <button name="submit" class="btn btn-default">[[i18n "FormCreateVenue" bundle="performing-arts-ch"]]</button>
           </semantic-form>
         </semantic-form-autocomplete-input>
