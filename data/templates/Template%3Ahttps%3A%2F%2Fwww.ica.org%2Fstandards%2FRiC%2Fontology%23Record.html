@@ -122,7 +122,7 @@
                 query="SELECT ?headline ?representation ?identifier ?medium WHERE {
                     VALUES (?headline) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
                     ?representation premis:represents ?? ;
-                        premis:asIdentifier [ premis:hasIdentifierValue ?identifier ]
+                        premis:hasIdentifier [ premis:hasIdentifierValue ?identifier ]
                     OPTIONAL { ?representation premis:hasMedium ?medium . }
                 } ORDER BY ASC (?identifier)"
                 template='<div>
