@@ -2,13 +2,15 @@
   <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
     <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
+        <bs-row>
+
         <bs-col sm="4">
 
             <semantic-query 
                 query='SELECT ?name WHERE { ?? rico:name ?name . } LIMIT 1'
                 template='<p><strong>{{#each bindings}}{{name.value}}{{/each}}</strong></p>'>
             </semantic-query>
-            
+
             <mp-field-visualization
                 subject='[[this]]'
                 fields='[[fieldDefinitions
@@ -33,6 +35,16 @@
         </bs-col>
 
         <bs-col sm="4">
+
+            <!-- vimeo -->
+            <semantic-query 
+                query="SELECT ?vimeo WHERE { ?? <http://temp.performing-arts.ch/Vimeo> ?vimeo . }"
+                template='<div>
+                        {{#each bindings}}
+                        <iframe src="https://player.vimeo.com/video/{{vimeo.value}}" width="400" height="300" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        {{/each}}
+                </div>'>
+            </semantic-query>
 
             <!-- subjects -->
             <semantic-query 
@@ -105,38 +117,22 @@
                 </div>'>
             </semantic-query>
 
-            <!-- instantiations -->
-            <!-- <semantic-query 
-                query="SELECT ?label WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
-                    ?? rico:hasInstantiation ?instantiation .
-                } LIMIT 1"
-                template='<div>{{#each bindings}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5>{{/each}}</div>'>
+            <!-- representations -->
+            <semantic-query 
+                query="SELECT ?headline ?representation ?identifier ?medium WHERE {
+                    VALUES (?headline) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
+                    ?representation premis:represents ?? ;
+                        premis:asIdentifier [ premis:hasIdentifierValue ?identifier ]
+                    OPTIONAL { ?representation premis:hasMedium ?medium . }
+                } ORDER BY ASC (?identifier)"
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.headline.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    {{#each bindings}}<p><semantic-link iri="{{representation.value}}">{{identifier.value}}</semantic-link>{{#if medium}} (<mp-label iri="{{medium.value}}"></mp-label>){{/if}}</p>{{/each}}
+                </div>'>
             </semantic-query>
-            <semantic-tree
-                query='SELECT DISTINCT ?node ?parent WHERE {
-                    { BIND(?? AS ?node) }
-                    UNION 
-                    { ?? rico:hasInstantiation ?node }
-                    UNION
-                    { ?? rico:hasInstantiation [ rico:hasDerivedInstantiation* ?node ] }
-                    OPTIONAL {
-                        { ?parent rico:hasInstantiation ?node }
-                        UNION
-                        { ?parent rico:hasDerivedInstantiation ?node }
-                    }
-                }'
-                collapsed='false'
-                keys-opened='[[this]]'
-                parentBindingName='parent'
-                nodeBindingName='node'
-                tuple-template='{{> node}}'
-            > 
-            <template id='node'>
-                <span><semantic-link uri="{{node.value}}"></semantic-link></span>
-              </template>
-            </semantic-tree> -->
         </bs-col>
+
+        </bs-row>
 
 </bs-tab>
 
