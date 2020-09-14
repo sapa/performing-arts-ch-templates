@@ -121,8 +121,13 @@
             <semantic-query 
                 query="SELECT ?headline ?representation ?identifier ?medium WHERE {
                     VALUES (?headline) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
-                    ?representation premis:represents ?? ;
-                        premis:hasIdentifier [ premis:hasIdentifierValue ?identifier ]
+                    {
+                        ?representation premis:represents ?? .
+                    } UNION {
+                        ?part rico:isConstituentOf ?? .
+                        ?representation premis:represents ?part .
+                    }
+                    ?representation premis:hasIdentifier [ premis:hasIdentifierValue ?identifier ]
                     OPTIONAL { ?representation premis:hasMedium ?medium . }
                 } ORDER BY ASC (?identifier)"
                 template='<div>
