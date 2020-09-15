@@ -17,6 +17,11 @@
         padding: 20px 10px;
       }
 
+      /* hide unwanted categories */
+      .domainCardItem:nth-child(6), .domainCardItem:nth-child(7) {
+        display: none;
+      }
+
       .domainCard {
         width: 100%;
         border-radius: 3px;
@@ -51,6 +56,11 @@
       .domainItemWrap {
         display: inline-block;
         margin-right: 10px;
+      }
+
+      /* hide unwanted categories */
+      .domainItemWrap:nth-child(6), .domainItemWrap:nth-child(7) {
+        display: none;
       }
 
       .domainItem {
@@ -105,8 +115,18 @@
       id='mainSearch'
       categories='{
         "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>": [{
-          "kind": "resource",
-          "queryPattern": "{$subject ?__relation__ ?__value__ .}"
+          "kind": "resource"
+        }],
+        "<http://www.w3.org/2004/02/skos/core#Concept>": [{
+          "kind": "resource"
+        }],
+        "<http://www.w3.org/2001/XMLSchema#Decimal>": [{
+          "kind": "numeric-range",
+          "queryPattern": "{
+            $subject ?__relation__ ?literal .
+            FILTER(?literal >= ?__numericRangeBeginValue__) .
+            FILTER(?literal <= ?__numericRangeEndValue__) .
+          }"
         }]
       }'
       relations='{
@@ -335,8 +355,8 @@
       <semantic-search-query-keyword-type 
         id='keywordTypeQuery'
         query='SELECT ?subject WHERE {
-          ?subject rdf:type/rdfs:subClassOf* ?__domain__ .
           FILTER(?__domain__ IN (frbroo:F25_Performance_Plan, crm:E21_Person, crm:E74_Group, crm:E40_Legal_Body, crm:E22_Man-Made_Object, crm:E53_Place))
+          ?subject rdf:type/rdfs:subClassOf* ?__domain__ .
           FILTER(REGEX(STR(?subject), "/[acopw]/"))
           OPTIONAL { ?subject crm:P2_has_type ?crmtype . }
           FILTER(?__domain__ != crm:E22_Man-Made_Object || ?crmtype = spav:dwmkn )
@@ -344,13 +364,15 @@
         }'
         count-query='
           SELECT (COUNT(DISTINCT ?subject) AS ?count) WHERE {
-            ?subject rdf:type/rdfs:subClassOf* ?__domain__ .
             FILTER(?__domain__ IN (frbroo:F25_Performance_Plan, crm:E21_Person, crm:E74_Group, crm:E40_Legal_Body, crm:E22_Man-Made_Object, crm:E53_Place))
+            ?subject rdf:type/rdfs:subClassOf* ?__domain__ .
             FILTER(REGEX(STR(?subject), "/[acopw]/"))
             OPTIONAL { ?subject crm:P2_has_type ?crmtype . }
             FILTER(?__domain__ != crm:E22_Man-Made_Object || ?crmtype = spav:dwmkn )
             FILTER(?__tokenPattern__)
           }'
+        min-search-term-length='1'
+        debounce='600'
         count-query-mode='queryPerCategory'
         token-pattern='
           {
