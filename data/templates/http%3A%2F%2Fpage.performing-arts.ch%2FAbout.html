@@ -29,7 +29,7 @@
             [[i18n "AboutDataProductionsText" bundle="performing-arts-ch" escapeHTML=false]]
             <semantic-query 
               query='SELECT ?group ?group_label WHERE {
-                ?group <http://ontology.performing-arts.ch/is_part_of_repertories> true ;
+                ?group <http://ontology.performing-arts.ch/isPartOfRepertories> true ;
                   rdfs:label ?group_label .
               } ORDER BY ASC(?group_label)' 
               template='<ul>{{#each bindings}}<li><semantic-link iri="{{group.value}}">{{group_label.value}}</semantic-link></li>{{/each}}</ul>'>
