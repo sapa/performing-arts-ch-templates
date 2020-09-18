@@ -1,13 +1,4 @@
-<ol class="page-breadcrumb">
-  <li>
-    <mp-link title="Home" url="/">Home</mp-link>
-  </li>
-  <li class="active">
-    [[> sapaModule:RecordLabel ]]
-  </li>
-</ol>
 <div class="page">
-  [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]]
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
       <bs-tab event-key='Summary' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
@@ -46,21 +37,19 @@
 
             <!-- genre -->
             <semantic-query 
-                query='SELECT ?genre
-                WHERE {
+                query='SELECT ?genre WHERE {
                     ?work frbroo:R12_is_realised_in ?? ;
                       crm:P2_has_type ?genre .
-                }'
+                  }'
             template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</p>'>
             </semantic-query>
 
             <!-- language -->
             <semantic-query 
-                query='SELECT ?language
-                WHERE {
+                query='SELECT ?language WHERE {
                     ?work frbroo:R12_is_realised_in ?? ;
                       schema:inLanguage ?language .
-                }'
+                  }'
             template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{language.value}}"></mp-label>{{else}}, <mp-label iri="{{language.value}}"></mp-label>{{/if}}{{/each}}</p>'>
             </semantic-query>
 
@@ -91,7 +80,16 @@
                     ?premieretype skos:inScheme spav:hl .
                     OPTIONAL { ?premiere crm:P4_has_time-span ?timespan . }
                 }'
-            template='<div>{{#each bindings}}{{#if @first}}<h5><mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}{{#if @last}}</h5>{{/if}}{{/each}}{{#each bindings}}{{#if @first}}{{#if timespan}}<mp-label iri="{{timespan.value}}"></mp-label>{{/if}}{{/if}}{{/each}}</div>'>
+            template='<div>
+              {{#ifCond bindings.length ">" 0}}<h5>
+                {{#each bindings}}
+                  {{#if @first}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}
+                {{/each}}
+              </h5>{{/ifCond}}
+              {{#each bindings}}
+                {{#if @first}}{{#if timespan}}<mp-label iri="{{timespan.value}}"></mp-label>{{/if}}{{/if}}
+              {{/each}}
+              </div>'>
             </semantic-query>
 
             <!-- venue -->
@@ -236,8 +234,18 @@
           <!-- record sets -->
           <semantic-tree
             query='SELECT DISTINCT ?node ?parent WHERE {
-              ?record rico:hasSubject ?? ;
-                  rico:includedIn* ?node .
+              {
+                ?record rico:hasSubject ?? ;
+                  a rico:RecordSet .
+              } UNION {
+                ?record rico:hasSubject ?? ;
+                  a rico:Record .
+              } UNION {
+                ?recordpart rico:hasSubject ?? ;
+                  a rico:RecordPart ;
+                  rico:isConstituentOf ?record .
+              }
+              ?record rico:includedIn* ?node .
               FILTER(ISIRI(?node))
               FILTER(CONTAINS(STR(?node), "/r/"))
               OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
@@ -248,12 +256,13 @@
         </bs-col>
       </bs-tab>
       
-         [[#if (hasPermission "forms:ldp:*")]] 
-  <bs-tab event-key='Edit' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
-        [[> sapaModule:PerformancePlanForm]]
-  </bs-tab>
-[[/if]]      
+      [[#if (hasPermission "sparql:*:*:*")]] 
+      <bs-tab event-key='Edit' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+      [[> sapaModule:PerformancePlanForm]]
+      </bs-tab>
+      [[/if]]      
       
+      [[> sapaModule:AdminTabs]]
       
     </bs-tabs>  
 </div>

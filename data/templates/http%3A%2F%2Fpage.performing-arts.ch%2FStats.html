@@ -16,14 +16,14 @@
         BIND(CONCAT("0", STR(MINUTES(?datetime))) AS ?minutes)
         BIND(CONCAT(STR(DAY(?datetime)), ".", STR(MONTH(?datetime)), ".", STR(YEAR(?datetime)), ", ", STR(HOURS(?datetime)), ":", SUBSTR(?minutes, STRLEN(?minutes)-1)) as ?datetimestr)
     } ORDER BY DESC (?datetime)
-    LIMIT 100' 
+    LIMIT 1000' 
     column-configuration='[
         {"variableName": "entity", "displayName": "Entity"}, 
         {"variableName": "datetimestr" ,"displayName": "Date", "cellTemplate":"{{datetimestr.value}}"}, 
         {"variableName": "username", "displayName": "User"}
     ]'
     number-of-displayed-rows=20
-    options='{"showFilter": false}'>
+    options='{"showFilter": true}'>
   </semantic-table>
   [[/if]]
   </div>

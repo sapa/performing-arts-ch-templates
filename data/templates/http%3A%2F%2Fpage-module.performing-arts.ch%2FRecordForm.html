@@ -14,13 +14,15 @@
       fields='[[fieldDefinitions
         rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
         identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
+        legacy_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier"
         label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingName"
-        parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetParent"
+        parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceParent"
         provenance="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance"
         source="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSource"
         documentary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDocumentaryForm"
         description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
         language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage"
+        part="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart"
         instantiation="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation"
         subject="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject"
         date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate"
@@ -30,11 +32,12 @@
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-            <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "rico:RecordSet"]]'></semantic-form-hidden-input>
+            <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "rico:Record"]]'></semantic-form-hidden-input>
         </div>
         <bs-row>
           <bs-col sm='2'>
-              <semantic-form-text-input for="identifier"></semantic-form-text-input>
+            <semantic-form-text-input for="identifier"></semantic-form-text-input>
+            <semantic-form-text-input for="legacy_identifier"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='5'>
             <semantic-form-text-input for="label"></semantic-form-text-input>        
@@ -91,6 +94,29 @@
             <semantic-form-tree-picker-input for="language"></semantic-form-tree-picker-input>
           </bs-col>
         </bs-row>
+
+        <semantic-form-composite-input for='part' new-subject-template='http://data.performing-arts.ch/r/{{UUID}}' fields='[[fieldDefinitions
+            part_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
+            part_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
+            part_label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingName"
+            part_subject="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject"
+          ]]'>
+          <div style="display: none;">
+            <semantic-form-hidden-input for='part_rdf_type' default-value='[[resolvePrefix "rico:RecordPart"]]'></semantic-form-hidden-input>
+          </div>
+          <bs-row>
+            <bs-col sm='4'>
+              <semantic-form-text-input for="part_identifier"></semantic-form-text-input>
+            </bs-col>
+            <bs-col sm='4'>
+              <semantic-form-text-input for="part_label"></semantic-form-text-input>
+            </bs-col>
+            <bs-col sm='4'>
+              <semantic-form-autocomplete-input for="part_subject"></semantic-form-autocomplete-input>
+            </bs-col>
+          </bs-row>
+        </semantic-form-composite-input>
+
         <semantic-form-autocomplete-input for="instantiation"></semantic-form-autocomplete-input>
         <hr>
         <semantic-form-text-input for="comment" multiline=true></semantic-form-text-input>

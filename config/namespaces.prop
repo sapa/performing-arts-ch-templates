@@ -30,3 +30,5 @@ ric-dft = https://www.ica.org/standards/RiC/vocabularies/documentaryFormTypes#
 ric-rst = https://www.ica.org/standards/RiC/vocabularies/recordSetTypes#
 frbroo = http://iflastandards.info/ns/fr/frbr/frbroo/
 schema = http://schema.org/
+prov = http://www.w3.org/ns/prov#
+spao = http://ontology.performing-arts.ch/

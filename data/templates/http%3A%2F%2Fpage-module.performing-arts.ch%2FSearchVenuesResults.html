@@ -1,0 +1,92 @@
+<semantic-search-result-holder domains-include='["http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object"]'>
+
+  <div data-flex-self="md-full">
+
+    <semantic-search-result>
+      <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}" template='{{> template}}'>
+        <template id='template'>
+          {{#if hasLimit}}
+          <bs-alert bs-style="warning" class="search-results__alert pull-left">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+            <span class="num-results">[[i18n "SearchLimitReached" bundle="performing-arts-ch" escapeHTML=false]]</span>
+          </bs-alert>
+          {{else}}
+          <bs-alert bs-style="warning" class="search-results__alert pull-left">
+            <span class="num-results" class="search-results__alert">[[i18n "SearchResults" bundle="performing-arts-ch"]]</span>
+          </bs-alert>
+          {{/if}}
+        </template>
+      </mp-sparql-result-counts>
+    </semantic-search-result>
+
+    <semantic-search-result>
+      <!-- TODO: make sure that only one place is found or aggregate them -->
+      <semantic-table 
+        query='SELECT DISTINCT ?subject ?place ?beginning
+        WHERE {
+          OPTIONAL {
+            ?subject crm:P156_occupies ?p .
+            ?p crm:P89_falls_within ?place .
+          }
+          OPTIONAL {
+            ?subject rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ] .
+          }
+        } ORDER BY DESC(?score)'
+        id="venue-table" 
+        options='{"showFilter": false, "showTableHeading": true}'
+        column-configuration='[
+          {"displayName": "[[i18n "VenuesTableName" bundle="performing-arts-ch"]]", "cellTemplate": "{{> venue}}"} ,
+          {"displayName": "[[i18n "VenuesTablePlace" bundle="performing-arts-ch"]]", "variableName": "place"} ,
+          {"displayName": "[[i18n "VenuesTableDates" bundle="performing-arts-ch"]]", "cellTemplate": "{{> dates}}", "variableName": "beginning"}
+        ]'>
+
+        <template id='venue'>                     
+          <semantic-query 
+            query='SELECT ?venue ?supervenue WHERE {
+                BIND(<{{subject.value}}> AS ?venue)
+                OPTIONAL {
+                  ?supervenue crm:P46_is_composed_of ?venue .
+                }
+              } LIMIT 1'
+            template = '{{> venue-list}} '>           
+            <template id='venue-list'>
+              <div>{{#each bindings}}{{#if supervenue}}<semantic-link iri="{{supervenue.value}}"></semantic-link> &rarr; {{/if}}<semantic-link iri="{{venue.value}}"></semantic-link>{{/each}}</div>
+            </template>
+          </semantic-query> 
+        </template>
+
+          <template id='dates'>                     
+            <semantic-query 
+              query='SELECT ?dates WHERE {
+                OPTIONAL {
+                  <{{subject.value}}> rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ] .
+                }
+                OPTIONAL {
+                  <{{subject.value}}> rico:hasEndDate [ rico:normalizedDateValue ?end ] .
+                }
+                BIND(CONCAT(COALESCE(?beginning, "X"), "-", COALESCE(?end, "X")) AS ?predates)
+                BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
+              }'
+              template = '{{> dates-list}} '>           
+              <template id='dates-list'>
+                <div>{{#each bindings}}{{dates.value}}{{/each}}</div>
+              </template>
+            </semantic-query> 
+          </template>
+        
+      </semantic-table> 
+    </semantic-search-result>
+
+    <div class="pull-right" style="display: flex; margin-top: 12px;">  
+      <semantic-search-result>
+        <mp-sparql-download id='csv-result' query="SELECT ?subject ?name WHERE {  }"
+                            header="text/csv"
+                            filename="performing-arts-ch-search-result.csv"
+                            >
+          <button class="btn btn-default">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
+        </mp-sparql-download>
+      </semantic-search-result>
+    </div>
+
+  </div>
+</semantic-search-result-holder>

@@ -1,16 +1,4 @@
-<ol class="page-breadcrumb">
-    <li>
-        <mp-link title="Home" url="/">Home</mp-link>
-    </li>
-    <li class="active">
-        [[> sapaModule:RecordLabel ]]
-    </li>
-</ol>
-
 <div class="page">
-
-  [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]] 
-  
   <bs-tabs class='page__body-navtabs' default-active-key='productions' unmount-on-exit=true>
     <bs-tab event-key='productions' title='[[i18n "TabProductions" bundle="performing-arts-ch"]]'>
 
@@ -149,7 +137,7 @@
                             </bs-alert>
                         {{else}}
                             <bs-alert bs-style="warning" class="search-results__alert pull-left">
-                                <span class="num-results" class="search-results__alert"><strong>[[i18n "SearchResults" bundle="performing-arts-ch"]]</strong></span>
+                                <span class="num-results" class="search-results__alert">[[i18n "SearchResults" bundle="performing-arts-ch"]]</span>
                             </bs-alert>
                         {{/if}}
                         </template>
@@ -207,5 +195,8 @@
         </semantic-search-result-holder>
     </div>
 </bs-tab>
+
+[[> sapaModule:AdminTabs]]
+
 </bs-tabs>  
 </div>

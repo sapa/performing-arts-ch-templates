@@ -6,85 +6,7 @@
 
     <bs-tabs id='todo-tabs' default-active-key='1' unmount-on-exit=true>
 
-        <bs-tab event-key='1' title='Group Venues'>
-            <bs-col sm="4">
-                <semantic-chart type='donut' types='["pie", "donut"]'
-                      query='
-                      SELECT ?status (COUNT(?venue) AS ?venuecount)
-                      WHERE {
-                        ?group rdf:type/rdfs:subClassOf* crm:E74_Group; 
-                            crm:P14i_performed [
-                            crm:P2_has_type spav:mujfv ;
-                            crm:P16_used_specific_object ?venue ] .
-                        ?venue crm:P2_has_type spav:dwmkn .
-                        BIND(IF(CONTAINS(STR(?venue), "/u/"), "unmatched", "matched") AS ?status)
-                      } GROUP BY ?status
-                      ORDER BY ?status
-                      '
-                      sets='[{"dataSetName": "Venues", "category": "status", "value": "venuecount"}]'
-                      styles='[{
-                        "provider": "chartjs",
-                        "style": {
-                            "data": {
-                                "datasets": [
-                                    { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(220, 20, 20, 0.7)"],
-                                    "borderColor": "rgb(255, 255, 255, 1)",
-                                    "borderWidth": "4"
-                                    }
-                                ]
-                            },
-                            "options": {
-                                "layout": {
-                                    "padding": {
-                                        "top": "20"
-                                    }
-                                },
-                                "legend": {
-                                    "position": "bottom",
-                                    "labels": {
-                                        "fontSize": 14,
-                                        "padding": 20
-                                    }
-                                }
-                            }
-                        }
-                       }]'
-                    ></semantic-chart>
-          
-            </bs-col>
-            <bs-col sm="8">
-
-                <bs-tabs id='group-venues' default-active-key='1.1' unmount-on-exit=true>
-
-                    <bs-tab event-key='1.1' title='Unmatched Venues'>
-
-                        <semantic-table 
-                        query='SELECT DISTINCT ?group ?grouplabel ?unmatchedvenue 
-                            WHERE {
-                            ?venue crm:P2_has_type spav:dwmkn ;
-                                    rdfs:label ?unmatchedvenue .
-                            FILTER (CONTAINS(STR(?venue), "/u/"))
-                            ?group rdfs:label ?grouplabel ;
-                                crm:P14i_performed [
-                                        crm:P2_has_type spav:mujfv ;
-                                    crm:P16_used_specific_object ?venue ]
-                            } ORDER BY ASC(UCASE(STR(?grouplabel))) ASC(UCASE(STR(?unmatchedvenue))) ' 
-                        column-configuration='[
-                            {"variableName": "group", "displayName": "Group"}, 
-                            {"variableName": "unmatchedvenue", "displayName": "Venue"}
-                        ]'
-                        number-of-displayed-rows=20
-                        no-result-template='No results found.'
-                        options='{"showFilter": true}'>
-                        </semantic-table>
-            
-                    </bs-tab>
-                </bs-tabs>
-
-            </bs-col>
-        </bs-tab>
-
-        <bs-tab event-key='Group Members' title='Group Members'>
+        <bs-tab event-key='1' title='Group Members'>
             <bs-col sm="4">
                 <semantic-chart type='donut' types='["pie", "donut"]'
                       query='SELECT ?status_order ?status (COUNT(?member) AS ?membercount)
@@ -256,7 +178,7 @@
                     </bs-col>
                     <bs-col sm="8">
 
-                        <bs-tabs id='producers' default-active-key='2' unmount-on-exit=true>
+                        <bs-tabs id='producers' default-active-key='2.1' unmount-on-exit=true>
                             <bs-tab event-key='2.1' title='Unmatched Producers'>
 
                                 <semantic-table 
@@ -268,7 +190,7 @@
                                         ?producer rdfs:label ?producer_label .
                                         [ crm:P9_consists_of ?production ;
                                             frbroo:R17_created ?plan ] .
-                                    }' 
+                                    } LIMIT 5000' 
                                 column-configuration='[
                                     {"variableName": "plan", "displayName": "Production"}, 
                                     {"variableName": "producer_label", "displayName": "Producer"}
@@ -304,7 +226,7 @@
                                         query='SELECT ?producer_label ?productions WHERE { VALUES (?producer_label) { ("{{producer_label.value}}") } BIND (ENCODE_FOR_URI(?producer_label) AS ?productions) }'
                                         template = '{{>productions-link}} '>
                                         <template id='productions-link'>
-                                            <div>{{#each bindings}}<a href="/sparql?query=PREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20spav%3A%20%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX%20frbroo%3A%20%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT%20DISTINCT%20%3Frepid%20%3Fproductionplan%20%3Fdate%20WHERE%20%7B%0A%20%20%3Fproduction%20crm%3AP14_carried_out_by%20%5B%20rdfs%3Alabel%20%22{{productions.value}}%22%20%5D%20%3B%0A%20%20%20%20crm%3AP2_has_type%20spav%3Amuwgo%20.%0A%20%20%5B%20crm%3AP9_consists_of%20%3Fproduction%20%3B%0A%20%20%20%20frbroo%3AR17_created%20%3Fproductionplan%20%5D%20.%0A%20%20%3Fproductionplan%20crm%3AP1_is_identified_by%20%5B%20a%20crm%3AE42_Identifier%20%3B%0A%20%20%20%20%20%20rdf%3Avalue%20%3Frepid%20%0A%20%20%5D%20.%0A%20%20%5B%20frbroo%3AR25_performed%20%3Fproductionplan%20%3B%0A%20%20%20%20crm%3AP9_consists_of%20%3Fpremiere%20%5D%20.%0A%20%20%3Fpremiere%20crm%3AP4_has_time-span%20%5B%20crm%3AP82a_begin_of_the_begin%20%3Fdate%20%5D%20.%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
+                                            <div>{{#each bindings}}<a href="/sparql?query=PREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20spav%3A%20%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX%20frbroo%3A%20%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT%20DISTINCT%20%3Frepid%20%3Fproductionplan%20%3Fdate%20WHERE%20%7B%0A%20%20%3Fproduction%20crm%3AP14_carried_out_by%20%5B%20rdfs%3Alabel%20%22{{productions.value}}%22%20%5D%20%3B%0A%20%20%20%20crm%3AP2_has_type%20spav%3Amuwgo%20.%0A%20%20%5B%20crm%3AP9_consists_of%20%3Fproduction%20%3B%0A%20%20%20%20frbroo%3AR17_created%20%3Fproductionplan%20%5D%20.%0A%20%20%3Fproductionplan%20crm%3AP1_is_identified_by%20%5B%20a%20crm%3AE42_Identifier%20%3B%0A%20%20%20%20%20%20rdf%3Avalue%20%3Frepid%20%0A%20%20%5D%20.%0A%20%20OPTIONAL%20%7B%0A%20%20%5B%20frbroo%3AR25_performed%20%3Fproductionplan%20%3B%0A%20%20%20%20crm%3AP9_consists_of%20%3Fpremiere%20%5D%20.%0A%20%20%3Fpremiere%20crm%3AP4_has_time-span%20%5B%20crm%3AP82a_begin_of_the_begin%20%3Fdate%20%5D%20.%0A%20%20%7D%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
                                         </template>
                                     </semantic-query>
                                 </template>
@@ -338,7 +260,7 @@
                                         query='SELECT ?producer_label ?productions WHERE { VALUES (?producer_label) { ("{{producer_label.value}}") } BIND (ENCODE_FOR_URI(?producer_label) AS ?productions) }'
                                         template = '{{>productions-link}} '>
                                         <template id='productions-link'>
-                                            <div>{{#each bindings}}<a href="/sparql?query=PREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20spav%3A%20%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX%20frbroo%3A%20%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT%20DISTINCT%20%3Frepid%20%3Fproductionplan%20%3Fdate%20WHERE%20%7B%0A%20%20%3Fproduction%20crm%3AP14_carried_out_by%20%5B%20rdfs%3Alabel%20%22{{productions.value}}%22%20%5D%20%3B%0A%20%20%20%20crm%3AP2_has_type%20spav%3Amuwgo%20.%0A%20%20%5B%20crm%3AP9_consists_of%20%3Fproduction%20%3B%0A%20%20%20%20frbroo%3AR17_created%20%3Fproductionplan%20%5D%20.%0A%20%20%3Fproductionplan%20crm%3AP1_is_identified_by%20%5B%20a%20crm%3AE42_Identifier%20%3B%0A%20%20%20%20%20%20rdf%3Avalue%20%3Frepid%20%0A%20%20%5D%20.%0A%20%20%5B%20frbroo%3AR25_performed%20%3Fproductionplan%20%3B%0A%20%20%20%20crm%3AP9_consists_of%20%3Fpremiere%20%5D%20.%0A%20%20%3Fpremiere%20crm%3AP4_has_time-span%20%5B%20crm%3AP82a_begin_of_the_begin%20%3Fdate%20%5D%20.%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
+                                            <div>{{#each bindings}}<a href="/sparql?query=PREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20spav%3A%20%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX%20frbroo%3A%20%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT%20DISTINCT%20%3Frepid%20%3Fproductionplan%20%3Fdate%20WHERE%20%7B%0A%20%20%3Fproduction%20crm%3AP14_carried_out_by%20%5B%20rdfs%3Alabel%20%22{{productions.value}}%22%20%5D%20%3B%0A%20%20%20%20crm%3AP2_has_type%20spav%3Amuwgo%20.%0A%20%20%5B%20crm%3AP9_consists_of%20%3Fproduction%20%3B%0A%20%20%20%20frbroo%3AR17_created%20%3Fproductionplan%20%5D%20.%0A%20%20%3Fproductionplan%20crm%3AP1_is_identified_by%20%5B%20a%20crm%3AE42_Identifier%20%3B%0A%20%20%20%20%20%20rdf%3Avalue%20%3Frepid%20%0A%20%20%5D%20.%0A%20%20OPTIONAL%20%7B%0A%20%20%5B%20frbroo%3AR25_performed%20%3Fproductionplan%20%3B%0A%20%20%20%20crm%3AP9_consists_of%20%3Fpremiere%20%5D%20.%0A%20%20%3Fpremiere%20crm%3AP4_has_time-span%20%5B%20crm%3AP82a_begin_of_the_begin%20%3Fdate%20%5D%20.%0A%20%20%7D%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
                                         </template>
                                     </semantic-query>
                                 </template>
@@ -370,7 +292,7 @@
                                         query='SELECT ?producer_label ?productions WHERE { VALUES (?producer_label) { ("{{producer_label.value}}") } BIND (ENCODE_FOR_URI(?producer_label) AS ?productions) }'
                                         template = '{{>productions-link}} '>
                                         <template id='productions-link'>
-                                            <div>{{#each bindings}}<a href="/sparql?query=PREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20spav%3A%20%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX%20frbroo%3A%20%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT%20DISTINCT%20%3Frepid%20%3Fproductionplan%20%3Fdate%20WHERE%20%7B%0A%20%20%3Fproduction%20crm%3AP14_carried_out_by%20%5B%20rdfs%3Alabel%20%22{{productions.value}}%22%20%5D%20%3B%0A%20%20%20%20crm%3AP2_has_type%20spav%3Amuwgo%20.%0A%20%20%5B%20crm%3AP9_consists_of%20%3Fproduction%20%3B%0A%20%20%20%20frbroo%3AR17_created%20%3Fproductionplan%20%5D%20.%0A%20%20%3Fproductionplan%20crm%3AP1_is_identified_by%20%5B%20a%20crm%3AE42_Identifier%20%3B%0A%20%20%20%20%20%20rdf%3Avalue%20%3Frepid%20%0A%20%20%5D%20.%0A%20%20%5B%20frbroo%3AR25_performed%20%3Fproductionplan%20%3B%0A%20%20%20%20crm%3AP9_consists_of%20%3Fpremiere%20%5D%20.%0A%20%20%3Fpremiere%20crm%3AP4_has_time-span%20%5B%20crm%3AP82a_begin_of_the_begin%20%3Fdate%20%5D%20.%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
+                                            <div>{{#each bindings}}<a href="/sparql?query=PREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20spav%3A%20%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX%20frbroo%3A%20%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT%20DISTINCT%20%3Frepid%20%3Fproductionplan%20%3Fdate%20WHERE%20%7B%0A%20%20%3Fproduction%20crm%3AP14_carried_out_by%20%5B%20rdfs%3Alabel%20%22{{productions.value}}%22%20%5D%20%3B%0A%20%20%20%20crm%3AP2_has_type%20spav%3Amuwgo%20.%0A%20%20%5B%20crm%3AP9_consists_of%20%3Fproduction%20%3B%0A%20%20%20%20frbroo%3AR17_created%20%3Fproductionplan%20%5D%20.%0A%20%20%3Fproductionplan%20crm%3AP1_is_identified_by%20%5B%20a%20crm%3AE42_Identifier%20%3B%0A%20%20%20%20%20%20rdf%3Avalue%20%3Frepid%20%0A%20%20%5D%20.%0A%20%20OPTIONAL%20%7B%0A%20%20%5B%20frbroo%3AR25_performed%20%3Fproductionplan%20%3B%0A%20%20%20%20crm%3AP9_consists_of%20%3Fpremiere%20%5D%20.%0A%20%20%3Fpremiere%20crm%3AP4_has_time-span%20%5B%20crm%3AP82a_begin_of_the_begin%20%3Fdate%20%5D%20.%0A%20%20%7D%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
                                         </template>
                                     </semantic-query>
                                 </template>

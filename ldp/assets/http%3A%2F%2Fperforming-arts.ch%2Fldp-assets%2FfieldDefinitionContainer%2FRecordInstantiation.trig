@@ -1,50 +1,43 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation/context> {
-  _:genid-19c8a28976294752870c7d19b10f305b-5gi0u a <http://spinrdf.org/sp#Query> .
+  _:genid-1c37198ef1fa4bccb2441099889c2001-ipkxp a <http://spinrdf.org/sp#Query> .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
     a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-19c8a28976294752870c7d19b10f305b-v9v4yb;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-19c8a28976294752870c7d19b10f305b-flvu7i .
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-1c37198ef1fa4bccb2441099889c2001-x2xsaw .
   
-  _:genid-19c8a28976294752870c7d19b10f305b-flvu7i <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:hasInstantiation ?value . }" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
-  
-  _:genid-19c8a28976294752870c7d19b10f305b-flvu7i a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>
-    <http://www.w3.org/2000/01/rdf-schema#label> "Instantiation"@en;
-    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Instantiation>;
-    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record> .
-  
-  _:genid-19c8a28976294752870c7d19b10f305b-v9v4yb <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasInstantiation $value} WHERE {}" .
-  
-  _:genid-19c8a28976294752870c7d19b10f305b-k7xbbt <http://spinrdf.org/sp#text> """PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
-SELECT $value $label WHERE {
-  $value a rico:Instantiation ;
+  _:genid-1c37198ef1fa4bccb2441099889c2001-ipkxp <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  $value rdf:type/rdfs:subClassOf* rico:RecordResource ;
   	rico:identifier $label .
   FILTER(REGEX($label, \"?token\", \"i\"))
-  FILTER(!CONTAINS(STR(?value), \"/u/\"))
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-19c8a28976294752870c7d19b10f305b-5gi0u .
-  
-  _:genid-19c8a28976294752870c7d19b10f305b-5gi0u <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasInstantiation $value . } WHERE {}" .
-  
-  _:genid-19c8a28976294752870c7d19b10f305b-v9v4yb a <http://spinrdf.org/sp#Query> .
+  _:genid-1c37198ef1fa4bccb2441099889c2001-uvj1wc <http://spinrdf.org/sp#text> "INSERT { $subject premis:represents $value . } WHERE {}" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-19c8a28976294752870c7d19b10f305b-k7xbbt .
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-1c37198ef1fa4bccb2441099889c2001-u6fa3l;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-1c37198ef1fa4bccb2441099889c2001-uvj1wc;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.loc.gov/premis/rdf/v1#Representation> .
   
-  _:genid-19c8a28976294752870c7d19b10f305b-k7xbbt a <http://spinrdf.org/sp#Query> .
+  _:genid-1c37198ef1fa4bccb2441099889c2001-u6fa3l <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject premis:represents ?value . }" .
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>
+    <http://www.w3.org/2000/01/rdf-schema#label> "Representation"@en .
+  
+  _:genid-1c37198ef1fa4bccb2441099889c2001-u6fa3l a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-1c37198ef1fa4bccb2441099889c2001-uvj1wc a <http://spinrdf.org/sp#Query> .
+  
+  _:genid-1c37198ef1fa4bccb2441099889c2001-x2xsaw a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject premis:represents $value} WHERE {}" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-1c37198ef1fa4bccb2441099889c2001-ipkxp;
     a <http://www.w3.org/ns/prov#Entity>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-13T12:53:28.939Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-09-14T15:54:12.405Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation> .

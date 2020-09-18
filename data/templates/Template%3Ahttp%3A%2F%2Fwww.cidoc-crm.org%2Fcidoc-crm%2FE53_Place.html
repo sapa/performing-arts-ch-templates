@@ -1,15 +1,4 @@
-<ol class="page-breadcrumb">
-    <li>
-        <mp-link title="Home" url="/">Home</mp-link>
-    </li>
-    <li class="active">
-        [[> sapaModule:RecordLabel ]]
-    </li>
-</ol>
-
 <div class="page">
-  [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/places.svg"]] 
-  
   <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
     <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
@@ -54,7 +43,11 @@
                     ?group crm:P74_has_current_or_former_residence ?groupsite ;
                         rdfs:label ?label .
                 } ORDER BY lcase(?label)'
-                template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{fieldlabel.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{group.value}}">{{label.value}}</semantic-link></li>{{/each}}</ul></div>'>
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.fieldlabel.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">
+                    {{#each bindings}}<li><semantic-link iri="{{group.value}}">{{label.value}}</semantic-link></li>{{/each}}
+                    </ul></div>'>
             </semantic-query>
         </bs-col>
         <bs-col sm="4">
@@ -66,7 +59,11 @@
                         crm:P2_has_type spav:dwmkn ;
                         rdfs:label ?label .
                 } ORDER BY lcase(?label)'
-                template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{fieldlabel.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{venue.value}}">{{venue.label}}</semantic-link></li>{{/each}}</ul></div>'>
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.fieldlabel.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">
+                    {{#each bindings}}<semantic-link iri="{{venue.value}}">{{venue.label}}</semantic-link></li>{{/each}}
+                    </ul></div>'>
             </semantic-query>
         </bs-col>
         <bs-col sm="4">
@@ -92,11 +89,14 @@
                     } ORDER BY ASC(?eventstr)
                 } GROUP BY ?person ?fieldlabel
                 ORDER BY ASC(?eventstr)'
-                template='<div>{{#each bindings}}
-                    {{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{fieldlabel.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.fieldlabel.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">
+                    {{#each bindings}}                    
                         <li><semantic-link iri="{{person.value}}">{{person.value}}</semantic-link>
                         {{#if lifedates}} ({{lifedates.value}}){{/if}}</li>
-                    {{/each}}</ul></div>'>
+                    {{/each}}
+                </ul></div>'>
             </semantic-query>
         </bs-col>
     </bs-row>
@@ -108,6 +108,8 @@
 [[> sapaModule:PlaceForm]]
 </bs-tab>
 [[/if]]
+
+[[> sapaModule:AdminTabs]]
 
 </bs-tabs>  
 </div>

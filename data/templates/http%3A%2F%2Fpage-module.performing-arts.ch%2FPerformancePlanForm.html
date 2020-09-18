@@ -16,29 +16,35 @@
         genre="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Genre"
         comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
         sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
-        activity="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity"
+        workactivity="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/WorkActivity"
+        actor="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity"
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-        <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "frbroo:F25_Performance_Plan"]]'></semantic-form-hidden-input>
+          <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "frbroo:F25_Performance_Plan"]]'></semantic-form-hidden-input>
         </div>
         <semantic-form-tree-picker-input for="genre"></semantic-form-tree-picker-input>
-        <semantic-form-composite-input for="activity" new-subject-template="http://data.performing-arts.ch/x/{{UUID}}"
+
+        <semantic-form-autocomplete-input for="actor"></semantic-form-autocomplete-input>
+
+        <semantic-form-composite-input for="workactivity" new-subject-template="http://data.performing-arts.ch/x/{{UUID}}"
           fields='[[fieldDefinitions
             typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
             Activity_Type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity_Type"
             Carried_Out_by="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performed_By"
           ]]'>
-        <div style="display: none;">
-          <semantic-form-hidden-input for='typeset' default-value='http://www.cidoc-crm.org/cidoc-crm/E7_Activity'></semantic-form-hidden-input>
-        </div>
-        <bs-col sm='6'>
-          <semantic-form-autocomplete-input for='Activity_Type'></semantic-form-autocomplete-input>          
-        </bs-col>
-        <bs-col sm='6'>
-          <semantic-form-autocomplete-input for='Carried_Out_by' placeholder='Search persons...'></semantic-form-autocomplete-input>
-        </bs-col>
+          <div style="display: none;">
+            <semantic-form-hidden-input for='typeset' default-value='http://www.cidoc-crm.org/cidoc-crm/E7_Activity'></semantic-form-hidden-input>
+          </div>
+          <bs-row>
+            <bs-col sm='6'>
+              <semantic-form-autocomplete-input for='Activity_Type'></semantic-form-autocomplete-input>          
+            </bs-col>
+            <bs-col sm='6'>
+              <semantic-form-autocomplete-input for='Carried_Out_by' placeholder='Search persons...'></semantic-form-autocomplete-input>
+            </bs-col>
+          </bs-row>
        </semantic-form-composite-input>
 
         <semantic-form-text-input for="comment"></semantic-form-text-input>

@@ -52,16 +52,39 @@ a:hover, a:focus {
     margin: 0.4em 0;
 }
 
-.component-page-toolbar__btn_edit {
-    display: none !important;
+.knowledgeGraphBar--expanded .knowledgeGraphBar__content {
+    min-height: 8em !important;
 }
 
-.component-page-toolbar__btn_show_graph {
-    display: none;
+.knowledgeGraphBar__summary {
+    margin-top: 1em;
+    margin-left: 0.9em;
+    margin-bottom: 1.2em;
+}
+.knowledgeGraphBar__summaryTitle h1 {
+    font-size: 2em !important;
+    margin: 0 !important;
 }
 
-.component-page-toolbar__btn_show_diagram {
-    display: none !important;
+.knowledgeGraphBar__bottomRow {
+    padding-left: 0.2em !important; 
+}
+
+.knowledgeGraphBar__graphInfos p {
+    font-size: 1em ;
+    margin: 0 0 0.2em 0 !important;
+}
+
+.knowledgeGraphBar__uriRow {
+    font-size: 0.8em ;    
+}
+
+.knowledgeGraphBar__toggle {
+    display: none
+}
+
+.knowledgeGraphBar__content {
+    border-bottom-width: 0 !important;
 }
 
 .container-fluid {
@@ -100,6 +123,7 @@ a:hover, a:focus {
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
     background-color: @navbar-back-hover !important;   
 }
+
 .navbar-inverse .navbar-nav > li > a {
     color: @navbar-link; // navigation link color
 }
@@ -182,6 +206,10 @@ div.SemanticTreeInput--inputAndButtons {
 
 #application > div > .footer {
     background-color: @navbar-back;
+}
+
+.ReorderableList--item-handle {
+    z-index: 1000000;
 }
 
 .footer > .footer__pixel-groove {

@@ -1,15 +1,4 @@
-<ol class="page-breadcrumb">
-    <li>
-        <mp-link title="Home" url="/">Home</mp-link>
-    </li>
-    <li class="active">
-        [[> sapaModule:RecordLabel ]]
-    </li>
-</ol>
-
 <div class="page rs-page">
-    [[> sapaModule:RecordNavTabHeader defaultImage="../images/fcs/things.svg"]] 
-  
   <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
     <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
@@ -24,23 +13,25 @@
                 subject='[[this]]'
                 fields='[[fieldDefinitions
                     identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
+                    legacy_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier"
                     type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
-                    virtual="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetVirtual"
-                    documetary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordDocumentaryForm"
+                    documetary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDocumentaryForm"
                     content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
                     language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage"
-                    date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate"
+                    extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
                     provenance="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance"
                     source="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSource"
-                    extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
-                    comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
-                    history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
+                    delivery_number="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/DeliveryNumber"
                     acquisition="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition"
+                    history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
+                    comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
                 ]]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                 [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
             >
             </mp-field-visualization> 
+
+            [[> sapaModule:RecordResourceDate]]
 
         </bs-col>
 
@@ -53,7 +44,14 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject>) }
                     ?? rico:hasSubject ?subject .
                 }"
-                template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{subject.value}}"></semantic-link></li>{{/each}}</ul></div>'>
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">
+                    {{#each bindings}}
+                        <li><semantic-link iri="{{subject.value}}"></semantic-link></li>
+                    {{/each}}
+                    </ul>
+                </div>'>
             </semantic-query>
 
         </bs-col>
@@ -90,6 +88,8 @@
 [[> sapaModule:RecordSetForm]]
 </bs-tab>
 [[/if]]
+
+[[> sapaModule:AdminTabs]]
 
 </bs-tabs>  
 </div>
