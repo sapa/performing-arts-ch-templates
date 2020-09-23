@@ -64,7 +64,7 @@
           } LIMIT 1"
           template="<div class='knowledgeGraphBar__uriRow'>{{#each bindings}}{{log this}}<b>URI</b>: <i>{{uri.value}}</i>{{#if button.value}}<mp-copy-to-clipboard text='{{uri.value}}'><button class='btn btn-default knowledgeGraphBar__copyIri'></button></mp-copy-to-clipboard>{{/if}}{{/each}}</div>">
       </semantic-query>
-      <mp-description iri="[[this]]" template='{{> truncate-template}}'>
+      <!-- <mp-description iri="[[this]]" template='{{> truncate-template}}'>
         <template id='truncate-template'>
           <div class="knowledgeGraphBar__description">
             <mp-text-truncate lines=2 truncate='<mp-popover title="">
@@ -75,7 +75,7 @@
                                                 </mp-popover>'>{{description}}</mp-text-truncate>
           </div>
         </template>
-      </mp-description>
+      </mp-description> -->
     </div>
   </div>
 </div>
