@@ -15,6 +15,7 @@
         rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
         identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
         legacy_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier"
+        scope="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ScopeID"
         label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingName"
         virtual="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetVirtual"
         provenance="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance"
@@ -35,7 +36,8 @@
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-            <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "rico:RecordSet"]]'></semantic-form-hidden-input>
+          <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "rico:RecordSet"]]'></semantic-form-hidden-input>
+          <semantic-form-hidden-input for='scope'></semantic-form-hidden-input>
         </div>
         <bs-row>
           <bs-col sm='4'>

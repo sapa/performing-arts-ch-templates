@@ -48,9 +48,21 @@
             BIND(false AS ?hasChildren)
           } ORDER BY DESC (?score) (?label) LIMIT 500
         '
+        node-data-query='
+          SELECT ?item ?rslevel {
+            ?item rico:hasRecordSetType ?rslevel .
+          }
+        '
         placeholder='Select or search for a name or signature ...'
         tokenize-lucene-query='false'
-      ></semantic-lazy-tree>
+        node-template='{{>node}}'
+        >
+        <template id='node'>
+          <span>
+            <semantic-link uri="{{iri}}">{{label}}</semantic-link>{{data.rslevel.value}}{{log data}}
+          </span>
+        </template>
+      </semantic-lazy-tree>
     </div>
   </div>
 </div>

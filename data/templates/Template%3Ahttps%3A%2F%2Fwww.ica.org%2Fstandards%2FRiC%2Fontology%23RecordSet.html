@@ -47,6 +47,24 @@
                 >    
             </semantic-query>
 
+            <!-- Scope ID -->
+            [[#if (hasPermission "forms:ldp:*")]] 
+            <semantic-query 
+            query="SELECT ?label ?scope
+                WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ScopeID>) }
+                    ?? <http://temp.performing-arts.ch/ScopeID> ?scope .
+                }"    
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}
+                        <li><a href="http://catalogue.collectiondeladanse.ch/tanzarchiv/detail.aspx?ID={{scope.value}}" target="_blank">{{scope.value}}</a></li>
+                    {{/each}}</ul>    
+                    </div>'
+                >    
+            </semantic-query>    
+            [[/if]]
+
             <!-- extent -->
             <semantic-query 
                 query="SELECT ?label ?extent
