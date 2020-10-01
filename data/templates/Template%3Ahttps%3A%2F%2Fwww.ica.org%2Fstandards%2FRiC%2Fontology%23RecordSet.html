@@ -261,23 +261,30 @@
 
             <h5>Record hierarchy</h5>
             <semantic-tree
-                 query='SELECT DISTINCT ?node ?parent ?label WHERE {
+                 query='SELECT DISTINCT ?node ?parent ?index ?identifier ?label WHERE {
                     { ?? rico:includedIn* ?node }
                     UNION
-                    { ?node rico:includedIn* ?? } 
+                    { ?node rico:includedIn ?? } 
                     OPTIONAL {
                         ?node rico:includedIn ?parent.
                         FILTER(ISIRI(?parent))
                     }
                     FILTER(ISIRI(?node))
                     FILTER(CONTAINS(STR(?node), "/r/"))
-                    ?node rico:name ?label .
-                  } ORDER BY ?label
+                    ?node rico:name ?name .
+                    OPTIONAL { ?node rico:identifier ?identifier }
+                    BIND(IF(BOUND(?identifier), CONCAT(?identifier, ": ", ?name), ?name) AS ?label)
+                    OPTIONAL { ?node olo:index ?index }
+                  } ORDER BY ASC(?index) ASC(?label)
                   LIMIT 50'
                collapsed="false"
                keys-opened='[[this]]'
                parentBindingName="parent"
-               nodeBindingName="node"> 
+               nodeBindingName="node"
+               tuple-template='{{> node}}'>
+                <template id='node'>
+                    <span><semantic-link uri="{{node.value}}">{{label.value}}</semantic-link></span>
+                </template>
             </semantic-tree>
 
         </bs-col>
