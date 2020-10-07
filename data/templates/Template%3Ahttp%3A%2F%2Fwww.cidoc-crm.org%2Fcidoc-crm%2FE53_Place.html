@@ -62,7 +62,7 @@
                 template='<div>
                     {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.fieldlabel.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
                     <ul class="list-unstyled">
-                    {{#each bindings}}<semantic-link iri="{{venue.value}}">{{venue.label}}</semantic-link></li>{{/each}}
+                    {{#each bindings}}<li><semantic-link iri="{{venue.value}}">{{venue.label}}</semantic-link></li>{{/each}}
                     </ul></div>'>
             </semantic-query>
         </bs-col>
