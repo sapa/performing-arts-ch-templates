@@ -162,6 +162,23 @@
 
             [[> sapaModule:RecordResourceDate]]
 
+            [[#if (hasPermission "forms:ldp:*")]] 
+            <semantic-query 
+            query='SELECT ?user ?datetime WHERE {
+              GRAPH ?g {
+                ?? rdfs:label ?label .
+                Platform:formContainer <http://www.w3.org/ns/ldp#contains> ?container .
+                ?container prov:generatedAtTime ?dt ;
+                           prov:wasAttributedTo ?user_uri .
+                BIND(STRAFTER(STR(?user_uri), "/user/") as ?user)
+                BIND(CONCAT(STR(DAY(?dt)), ".", STR(MONTH(?dt)), ".", STR(YEAR(?dt))) AS ?datetime)
+        
+              }
+            } LIMIT 1'
+            template='<div><small>{{#each bindings}}{{user.value}}, {{datetime.value}}{{/each}}</small></div>'>
+            </semantic-query>
+            [[/if]]
+
         </bs-col>
 
         <bs-col sm="4">
@@ -330,6 +347,33 @@
         </bs-col>
 
         </bs-row>
+
+        <bs-row>
+            <semantic-tree
+                query='SELECT DISTINCT ?node ?parent WHERE {
+                    { ?node premis:represents ?? }
+                    UNION
+                    { ?part rico:isConstituentOf ?? . ?node premis:represents ?part . }
+                    UNION
+                    { ?? <http://temp.performing-arts.ch/hasCopy> ?node }
+                    UNION
+                    { ?node <http://temp.performing-arts.ch/hasCopy> ?? } 
+                    { 
+                        ?node premis:represents ?parent . 
+                        MINUS {
+                            ?x <http://temp.performing-arts.ch/hasCopy> ?node . 
+                            ?x premis:represents ?parent .
+                        }
+                    }
+                    UNION 
+                    { ?parent <http://temp.performing-arts.ch/hasCopy> ?node . }
+
+                }'
+                provider='d3-dendrogram'
+                >
+            </semantic-tree>
+        </bs-row>
+
 
 </bs-tab>
 

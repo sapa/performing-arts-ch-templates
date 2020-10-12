@@ -2,6 +2,8 @@
   <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
     <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
+        <bs-row>
+
         <bs-col sm="4">
 
             <mp-field-visualization
@@ -14,61 +16,160 @@
             >
             </mp-field-visualization> 
 
-        </bs-col>
-
-        <bs-col sm="4">
-
-        </bs-col>
-
-        <bs-col sm="4">
-
-            <h5>Hierarchy</h5>
-            <semantic-tree
-                 query='SELECT DISTINCT ?node ?parent ?label WHERE {
-                    {
-                        ?? rico:hasDerivedInstantiation* ?node .
-                    } UNION { 
-                        ?node rico:hasDerivedInstantiation*/rico:hasInstantiation* ?? .
-                    }
-                    {
-                        ?parent rico:hasDerivedInstantiation ?node .
-                    } UNION {
-                        ?parent rico:hasInstantiation ?node .
-                    }
-                    FILTER(ISIRI(?parent))
-                    OPTIONAL {
-                        ?node rico:name/rico:identifier ?label .
-                    }
-                  } ORDER BY ?label
-                  LIMIT 50'
-               collapsed="false"
-               keys-opened='[[this]]'
-               parentBindingName="parent"
-               nodeBindingName="node"> 
-            </semantic-tree>
-
-            <!-- instantiations -->
             <semantic-query 
-                query="SELECT ?label ?instantiation ?identifier 
-                WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
-                    ?? rico:hasInstantiation ?instantiation .
-                    OPTIONAL {
-                        ?instantiation rico:identifier ?identifier .
-                    }
+                query="SELECT ?identifier WHERE { { ?? rico:identifier ?identifier } UNION  { ?? premis:hasIdentifier [ premis:hasIdentifierValue ?identifier ] } }"
+                template='<div>{{#each bindings}}<p><strong>{{identifier.value}}</strong></p>{{/each}}</div>'
+                >
+            </semantic-query>
+
+            <!-- legacy identifiers -->
+            <semantic-query 
+                query="SELECT ?label ?identifier WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier>) }
+                    ?? spao:legacyIdentifier ?identifier .
                 } ORDER BY ASC(?identifier)"
-                template='<div>{{#each bindings}}{{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><ul class="list-unstyled">{{/if}}<li><semantic-link iri="{{instantiation.value}}">{{identifier.value}}</semantic-link></li></li>{{/each}}</ul></div>'>
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}
+                        <li>{{identifier.value}}</li>
+                    {{/each}}</ul>    
+                    </div>'
+                >    
+            </semantic-query>
+
+            <!-- carrier type / medium -->
+            <semantic-query 
+                query="SELECT ?carrier_type WHERE { { ?? rico:carrierType ?carrier_type } UNION { ?? premis:hasMedium ?carrier_type } }"
+                template='<div><h5>Carrier type</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{carrier_type.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- condition -->
+            <semantic-query 
+                query="SELECT ?condition WHERE { ?? <http://temp.performing-arts.ch/condition> ?condition . }"
+                template='<div><h5>Condition</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{condition.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- ebucore standard -->
+            <semantic-query 
+                query="SELECT ?standard WHERE { ?? ebucore:hasStandard ?standard . }"
+                template='<div><h5>Standard</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{standard.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- aspect ratio -->
+            <semantic-query 
+                query="SELECT ?aspect_ratio WHERE { ?? ebucore:aspectRatio:carrierType ?aspect_ratio . }"
+                template='<div><h5>Aspect ratio</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{aspect_ratio.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- color -->
+            <semantic-query 
+                query="SELECT ?color WHERE { ?? rdau:P60558 ?color . }"
+                template='<div><h5>Color</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{color.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- comment -->
+            <semantic-query 
+                query="SELECT ?comment WHERE { ?? rdf:comment ?comment . }"
+                template='<div><h5>Comment</h5><ul class="list-unstyled">{{#each bindings}}<li>{{comment.value}}</li>{{/each}}</ul></div>'>
             </semantic-query>
 
         </bs-col>
 
-</bs-tab>
+        <bs-col sm="4">
 
-[[#if (hasPermission "forms:ldp:*")]] 
-<bs-tab event-key='record editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
-[[> sapaModule:InstantiationForm]]
+            <!-- file size -->
+            <semantic-query 
+                query="SELECT ?file_size WHERE { 
+                    ?file premis:isIncludedIn ?? ;
+                        a premis:File ;
+                        premis:size ?bytes .
+                    BIND(CONCAT(STR(FLOOR(?bytes / (1000 * 1000 * 1000) *100) / 100), ' GB') AS ?file_size)
+                 }"
+                template='<div><h5>File size</h5><ul class="list-unstyled">{{#each bindings}}<li>{{file_size.value}}</li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- video -->
+            <semantic-query 
+                query="SELECT ?order ?label (GROUP_CONCAT(?value; SEPARATOR=', ') AS ?values) WHERE {
+                    VALUES ( ?order ?label ?property ) {
+                        ( 1 'Aspect ratio' ebucore:aspectRatio )
+                        ( 2 'Width' ebucore:width )
+                        ( 3 'Height' ebucore:height )
+                        ( 4 'Framerate' ebucore:frameRate )
+                    }
+                    ?file premis:isIncludedIn ?? ;
+                        a premis:File .
+                    ?bitstream premis:isIncludedIn ?file ;
+                        a premis:Bitstream ;
+                        ?property ?value .
+                } GROUP BY ?order ?label"
+                template='<div>{{#each bindings}}<h5>{{label.value}}</h5><p>{{values.value}}</p>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- audio -->
+            <semantic-query 
+                query="SELECT ?order ?label (GROUP_CONCAT(?value; SEPARATOR=', ') AS ?values) WHERE {
+                    VALUES ( ?order ?label ?property ) {
+                        ( 1 'Channels' ebucore:channels )
+                    }
+                    ?file premis:isIncludedIn ?? ;
+                        a premis:File .
+                    ?bitstream premis:isIncludedIn ?file ;
+                        a premis:Bitstream ;
+                        ?property ?value .
+                } GROUP BY ?order ?label"
+                template='<div>{{#each bindings}}<h5>{{label.value}}</h5><p>{{values.value}}</p>{{/each}}</div>'>
+            </semantic-query>
+
+
+        </bs-col>
+
+        <bs-col sm="4">
+
+            <!-- record resource -->
+            <semantic-query 
+                query="SELECT ?record_resource ?label WHERE {
+                    { ?record_resource rico:hasInstantiation ?? } UNION { ?? premis:represents ?record_resource }
+                    ?record_resource rico:name ?name .
+                    OPTIONAL { ?record_resource rico:identifier ?identifier . }
+                    BIND(IF(BOUND(?identifier), CONCAT(?identifier, ': ', ?name), ?name ) AS ?label)
+                }"
+                template='<div><h5>Record</h5><ul class="list-unstyled">
+                    {{#each bindings}}<li><semantic-link iri="{{record_resource.value}}">{{label.value}}</semantic-link></li>{{/each}}
+                </ul></div>'>
+            </semantic-query>    
+
+        </bs-col>
+
+        </bs-row>
+
+        <bs-row>
+            <semantic-tree
+                query='SELECT DISTINCT ?node ?parent WHERE {
+                    { ?node premis:represents ?? }
+                    UNION
+                    { ?part rico:isConstituentOf ?? . ?node premis:represents ?part . }
+                    UNION
+                    { ?? <http://temp.performing-arts.ch/hasCopy> ?node }
+                    UNION
+                    { ?node <http://temp.performing-arts.ch/hasCopy> ?? } 
+                    { 
+                        ?node premis:represents ?parent . 
+                        MINUS {
+                            ?x <http://temp.performing-arts.ch/hasCopy> ?node . 
+                            ?x premis:represents ?parent .
+                        }
+                    }
+                    UNION 
+                    { ?parent <http://temp.performing-arts.ch/hasCopy> ?node . }
+
+                }'
+                provider='d3-dendrogram'
+                >
+            </semantic-tree>
+        </bs-row>
+        
 </bs-tab>
-[[/if]]
 
 [[> sapaModule:AdminTabs]]
 
