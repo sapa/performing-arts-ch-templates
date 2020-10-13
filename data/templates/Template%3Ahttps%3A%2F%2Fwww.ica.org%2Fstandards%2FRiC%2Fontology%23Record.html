@@ -319,28 +319,30 @@
                 </div>'>
             </semantic-query>
 
-            <!-- representations -->
+            <!-- instantiations -->
             <semantic-query 
-                query="SELECT DISTINCT ?headline ?representation ?identifier ?medium (GROUP_CONCAT(DISTINCT ?original_label; SEPARATOR=', ') AS ?originals) WHERE {
+                query="SELECT DISTINCT ?headline ?order ?archivalstatus ?instantiation ?identifier ?carrier WHERE {
                     VALUES (?headline) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
-                    {
-                        ?representation premis:represents ?? .
-                    } UNION {
-                        ?part rico:isConstituentOf ?? .
-                        ?representation premis:represents ?part .
-                    } UNION {
-                        ?original premis:represents ?? ;
-                            <http://temp.performing-arts.ch/hasCopy> ?representation ;
-                            rdfs:label ?original_label .
+                    VALUES (?order ?archivalstatus) {
+                        ( 1 spav:asarm )
+                        ( 2 spav:asprc )
+                        ( 3 spav:aspcp )
+                        ( 4 spav:aspcd )
+                        ( 5 spav:asdsp )
+                        ( 6 spav:asdcp )
+                        ( 7 spav:asdcd )
                     }
-                    ?representation premis:hasIdentifier [ premis:hasIdentifierValue ?identifier ]
-                    OPTIONAL { ?representation premis:hasMedium ?medium . }
-                } GROUP BY ?headline ?representation ?identifier ?medium
-                ORDER BY ASC (?identifier)"
+                    ?? rico:hasInstatiation ?instantiation .
+                    ?instantiation rico:identifier ?identifier .
+                    ?instantiation <http://temp.performing-arts.ch/archivalStatus> ?archivalstatus .
+                    OPTIONAL { ?instantiation rico:hasCarrierType ?carrier . }
+                } ORDER BY ASC (?order) (?identifier)"
                 template='<div>
                     {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.headline.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    {{#each bindings}}<p><semantic-link iri="{{representation.value}}">{{identifier.value}}</semantic-link>
-                        {{#if medium}} (<mp-label iri="{{medium.value}}"></mp-label>){{/if}}
+                    {{#each bindings}}<p>
+                        {{#if archivalstatus}}<mp-label iri="{{archivalstatus.value}}"></mp-label><br />{{/if}}
+                        <semantic-link iri="{{instantiation.value}}">{{identifier.value}}</semantic-link>
+                        {{#if carrier}} (<mp-label iri="{{carrier.value}}"></mp-label>){{/if}}
                     </p>{{/each}}
                 </div>'>
             </semantic-query>
