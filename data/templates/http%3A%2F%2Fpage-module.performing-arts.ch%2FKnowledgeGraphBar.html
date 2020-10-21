@@ -9,6 +9,7 @@
           ?? a ?type .
           VALUES (?type ?icon) {
             (frbroo:F25_Performance_Plan "../assets/icons/solid/theater-masks.svg")
+            (frbroo:F31_Performance "../assets/icons/solid/theater-masks.svg")
             (crm:E4_Period "../assets/icons/solid/calendar-alt.svg")
             (crm:E22_Man-Made_Object "../assets/icons/solid/landmark.svg")
             (crm:E21_Person "../assets/icons/solid/user.svg")
@@ -16,9 +17,9 @@
             (crm:E40_Legal_Body "../assets/icons/solid/users.svg")
             (crm:E53_Place "../assets/icons/solid/map-marker-alt.svg")
             (rico:Concept "../assets/icons/solid/comment-lines.svg")
-            (rico:RecordSet "../assets/icons/solid/folder-open.svg")
             (rico:Record "../assets/icons/solid/file-alt.svg")
-            (rico:Instantiation "../assets/icons/solid/cube.svg")
+            (rico:RecordSet "../assets/icons/solid/folder-open.svg")
+            (frbroo:F26_Recording "../assets/icons/solid/camcorder-solid.svg")
           }
         }'
         template='<div>{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style="height: 120px; width: 120px; max-height: 120px; max-width: 120px; padding: 20px"></mp-resource-thumbnail>{{/each}}</div>'>
@@ -65,18 +66,6 @@
           } LIMIT 1"
           template="<div class='knowledgeGraphBar__uriRow'>{{#each bindings}}{{log this}}<b>URI</b>: <i>{{uri.value}}</i>{{#if button.value}}<mp-copy-to-clipboard text='{{uri.value}}'><button class='btn btn-default knowledgeGraphBar__copyIri'></button></mp-copy-to-clipboard>{{/if}}{{/each}}</div>">
       </semantic-query>
-      <!-- <mp-description iri="[[this]]" template='{{> truncate-template}}'>
-        <template id='truncate-template'>
-          <div class="knowledgeGraphBar__description">
-            <mp-text-truncate lines=2 truncate='<mp-popover title="">
-                                                <mp-popover-trigger placement="left" trigger=["click","hover","focus"] root-close="false">
-                                                <a>... </a>
-                                                </mp-popover-trigger>
-                                                <mp-popover-content>{{description}}</mp-popover-content>
-                                                </mp-popover>'>{{description}}</mp-text-truncate>
-          </div>
-        </template>
-      </mp-description> -->
     </div>
   </div>
 </div>

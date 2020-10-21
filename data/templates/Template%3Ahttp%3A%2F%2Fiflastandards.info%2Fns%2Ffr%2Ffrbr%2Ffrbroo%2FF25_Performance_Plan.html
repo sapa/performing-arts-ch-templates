@@ -3,25 +3,24 @@
       <bs-tab event-key='Summary' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
         <bs-col sm="4">
-            <!-- titles -->
-            <semantic-query 
-                query='SELECT ?titlevalue ?titletype ?order
-                WHERE {
-                    ?? crm:P1_is_identified_by ?appellation .
-                    ?appellation a crm:E41_Appellation ;
-                        crm:P2_has_type ?titletype ;
-                        rdf:value ?titlevalue .
-                    VALUES (?titletype ?order) {
-                        (spav:gotlb 1)
-                        (spav:goctm 2)
-                        (spav:goctj 3)
-                        (spav:gogja 4)
-                        (spav:gowgn 5)
-                    }
-                } ORDER BY ASC(?order)'
-            template='<p>{{#each bindings}}
-                {{#if @first}}<strong>{{titlevalue.value}}</strong>{{else}}<br>{{titlevalue.value}}{{/if}}{{/each}}</p>'>
-            </semantic-query>
+          <!-- titles -->
+          <semantic-query 
+            query='SELECT ?title_value ?title_type ?order WHERE {
+              ?? crm:P102_has_title [
+                a crm:E35_Title ;
+                crm:P2_has_type ?title_type ;
+                rdf:value ?title_value 
+              ] .
+              VALUES (?title_type ?order) {
+                (spav:gotlb 1)
+                (spav:goctm 2)
+                (spav:goctj 3)
+                (spav:gogja 4)
+                (spav:gowgn 5)
+              }
+            } ORDER BY ASC(?order)'
+            template='<p>{{#each bindings}}{{#if @first}}<strong>{{title_value.value}}</strong>{{else}}<br>{{title_value.value}}{{/if}}{{/each}}</p>'>
+          </semantic-query>
 
             [[#if (hasPermission "forms:ldp:*")]]
             <semantic-query 
@@ -109,15 +108,40 @@
                 {{/each}}</div>'>
             </semantic-query>
 
+            <!-- reference functions - authorship -->
+            [[> sapaModule:ShowPerformances2 function="spav:muiuk"]]
 
+            <!-- reference functions - libretto -->
+            [[> sapaModule:ShowPerformances2 function="spav:mujmh"]]
+
+            <!-- reference functions - lyrics -->
+            [[> sapaModule:ShowPerformances2 function="spav:muvhj"]]
+            
+            <!-- reference functions - adaption -->
+            [[> sapaModule:ShowPerformances2 function="spav:mudcw"]]
+            
+            <!-- reference functions - translation -->
+            [[> sapaModule:ShowPerformances2 function="spav:muwyo"]]
+            
+            <!-- reference functions - added text -->
+            [[> sapaModule:ShowPerformances2 function="spav:mupvk"]]
+            
+            <!-- reference functions - added lyrics -->
+            [[> sapaModule:ShowPerformances2 function="spav:muzua"]]
+            
+            <!-- reference functions - screenplay -->
+            [[> sapaModule:ShowPerformances2 function="spav:mupot"]]
+            
+            <!-- reference functions - composition -->
+            [[> sapaModule:ShowPerformances2 function="spav:mufbo"]]
 
         </bs-col>
         <bs-col sm="4">
           
-           <!-- creation functions - direction -->
+          <!-- creation functions - direction -->
           [[> sapaModule:ShowPerformances function="spav:mucbq"]]
           
-           <!-- creation functions - stage direction -->
+          <!-- creation functions - stage direction -->
           [[> sapaModule:ShowPerformances function="spav:mutnt"]]
           
           <!-- creation functions - assistant stage direction -->
@@ -155,41 +179,7 @@
 
           <!-- creation functions - sound -->
 					[[> sapaModule:ShowPerformances function="spav:muxzh"]]
-
-          <hr>
           
-          <!-- reference functions - authorship -->
-					[[> sapaModule:ShowPerformances2 function="spav:muiuk"]]
-
-          <!-- reference functions - libretto -->
-					[[> sapaModule:ShowPerformances2 function="spav:mujmh"]]
-
-          <!-- reference functions - lyrics -->
-					[[> sapaModule:ShowPerformances2 function="spav:muvhj"]]
-          
-          <!-- reference functions - adaption -->
-					[[> sapaModule:ShowPerformances2 function="spav:mudcw"]]
-          
-          <!-- reference functions - translation -->
-					[[> sapaModule:ShowPerformances2 function="spav:muwyo"]]
-          
-          <!-- reference functions - added text -->
-					[[> sapaModule:ShowPerformances2 function="spav:mupvk"]]
-          
-          <!-- reference functions - added lyrics -->
-					[[> sapaModule:ShowPerformances2 function="spav:muzua"]]
-          
-          <!-- reference functions - screenplay -->
-					[[> sapaModule:ShowPerformances2 function="spav:mupot"]]
-          
-          <!-- reference functions - composition -->
-					[[> sapaModule:ShowPerformances2 function="spav:mufbo"]]
-          
-          <hr>
-
-        </bs-col>
-        <bs-col sm="4">
-
           <!-- performance functions - acting -->
 					[[> sapaModule:ShowPerformances3 function="spav:munib"]]
           
@@ -227,9 +217,10 @@
 				  [[> sapaModule:ShowPerformances3 function="spav:mumnc"]]
           
           <!-- performance functions - contribution -->
-				  [[> sapaModule:ShowPerformances3 function="spav:munuj"]]
-
-          <hr>
+          [[> sapaModule:ShowPerformances3 function="spav:munuj"]]
+        
+        </bs-col>
+        <bs-col sm="4">
 
           <!-- record sets -->
           <semantic-tree
@@ -252,6 +243,18 @@
             }'
             tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
           </semantic-tree>
+
+          <!-- recordings -->
+          <semantic-query 
+            query='SELECT ?recording WHERE {
+              ?recording frbroo:R14_incorporates ?? ;
+                a frbroo:F26_Recording .
+            }'
+            template='<div>
+              {{#ifCond bindings.length ">" 0}}<h5>Recording</h5>{{/ifCond}}
+              {{#each bindings}}{{#if @first}}<semantic-link iri="{{recording.value}}"></semantic-link>{{else}}, <semantic-link iri="{{recording.value}}"></semantic-link>{{/if}}{{/each}}</div>'>
+          </semantic-query>
+
 
         </bs-col>
       </bs-tab>

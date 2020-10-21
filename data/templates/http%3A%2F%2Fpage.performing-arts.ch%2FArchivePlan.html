@@ -59,7 +59,7 @@
         >
         <template id='node'>
           <span>
-            <semantic-link uri="{{iri}}">{{label}}</semantic-link>{{data.rslevel.value}}{{log data}}
+            <semantic-link uri="{{iri}}">{{label}}</semantic-link>{{#if data.rslevel}} (<mp-label iri="{{data.rslevel.value}}"></mp-label>){{/if}}
           </span>
         </template>
       </semantic-lazy-tree>
