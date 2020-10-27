@@ -126,7 +126,7 @@
           ?premiere crm:P4_has_time-span ?premieredate .
           ?premieredate crm:P82a_begin_of_the_begin ?premieredatebegin .
         }
-    } GROUP BY ?plan
+    } GROUP BY ?plan ?premieredatebegin
     ORDER BY ASC(?premieredatebegin)'>
 </semantic-search-query-constant>
 

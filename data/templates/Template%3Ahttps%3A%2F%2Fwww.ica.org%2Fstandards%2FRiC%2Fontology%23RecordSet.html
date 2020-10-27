@@ -109,7 +109,7 @@
             <semantic-query 
                 query="SELECT ?label ?history WHERE {
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory>) }
-                    ?? rico:descriptiveNote ?history . }"
+                    ?? rico:history ?history . }"
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
                     <div>{{#each bindings}}<p style="white-space: pre-line;">{{history.value}}</p>{{/each}}</div></div>'>
             </semantic-query>        
