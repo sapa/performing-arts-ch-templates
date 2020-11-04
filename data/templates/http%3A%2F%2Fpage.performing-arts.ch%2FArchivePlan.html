@@ -14,26 +14,21 @@
     <semantic-lazy-tree
         roots-query='
           SELECT DISTINCT ?item ?index ?label ?hasChildren WHERE {
-            ?item a rico:RecordSet .
-            FILTER NOT EXISTS { ?item rico:includedIn ?parent }
+            ?item a rico:RecordSet ;
+              rico:includedIn <http://data.performing-arts.ch/r/sapa> .
             OPTIONAL { ?child rico:includedIn ?item }
             BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
-            ?item rico:name ?name .
-            OPTIONAL { ?item rico:identifier ?identifier }
-            BIND(IF(BOUND(?identifier), CONCAT(?identifier, ": ", ?name), ?name) AS ?label)
             OPTIONAL { ?item olo:index ?index }
           } ORDER BY ASC(?index) ASC(?label)
         '
         children-query='
-          SELECT DISTINCT ?item ?index ?label ?hasChildren WHERE {
+          SELECT DISTINCT ?item ?index ?hasChildren WHERE {
             ?item rico:includedIn ?parent .
             OPTIONAL { ?child rico:includedIn ?item }
             BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
-            ?item rico:name ?name .
             OPTIONAL { ?item rico:identifier ?identifier }
-            BIND(IF(BOUND(?identifier), CONCAT(?identifier, ": ", ?name), ?name) AS ?label)
             OPTIONAL { ?item olo:index ?index }
-          } ORDER BY ASC(?index) ASC(?label)
+          } ORDER BY ASC(?index)
         '
         parents-query='
           SELECT ?item ?parent WHERE {
@@ -49,8 +44,9 @@
           } ORDER BY DESC (?score) (?label) LIMIT 500
         '
         node-data-query='
-          SELECT ?item ?rslevel {
+          SELECT ?item ?identifier ?rslevel {
             ?item rico:hasRecordSetType ?rslevel .
+            OPTIONAL { ?item rico:identifier ?identifier }
           }
         '
         placeholder='Select or search for a name or signature ...'
@@ -58,7 +54,7 @@
         >
         <template id='node'>
           <span>
-            <semantic-link uri="{{iri}}">{{label}}</semantic-link>{{#if data.rslevel}} (<mp-label iri="{{data.rslevel.value}}"></mp-label>){{/if}}
+            {{#if data.identifier}}{{data.identifier.value}}: {{/if}}<semantic-link uri="{{iri}}"></semantic-link>{{#if data.rslevel}} (<mp-label iri="{{data.rslevel.value}}"></mp-label>){{/if}}
           </span>
         </template>
       </semantic-lazy-tree>
