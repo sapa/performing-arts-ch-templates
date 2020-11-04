@@ -135,7 +135,8 @@
                             ?file premis:isIncludedIn ?? ;
                                 a premis:File ;
                                 ?property ?value .
-                        } GROUP BY ?order ?label"
+                        } GROUP BY ?order ?label
+                        ORDER BY ?order"
                         template='<div>{{#each bindings}}<h5>{{label.value}}</h5><p>{{values.value}}</p>{{/each}}</div>'>
                     </semantic-query>
 
@@ -148,7 +149,8 @@
                             ?file premis:isIncludedIn ?? ;
                                 a premis:File ;
                                 ?property ?value .
-                        } GROUP BY ?order ?label"
+                        } GROUP BY ?order ?label
+                        ORDER BY ?order"
                         template='<div>{{#each bindings}}<h5>{{label.value}}</h5><p>{{values.value}}</p>{{/each}}</div>'>
                     </semantic-query>
 
