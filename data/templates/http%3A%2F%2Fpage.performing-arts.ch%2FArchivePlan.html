@@ -13,48 +13,41 @@
     <div style="height: 1000px">
     <semantic-lazy-tree
         roots-query='
-          SELECT DISTINCT ?item ?index ?label ?hasChildren WHERE {
-            ?item a rico:RecordSet ;
-              rico:includedIn <http://data.performing-arts.ch/r/sapa> .
+          SELECT DISTINCT ?item ?index ?hasChildren WHERE {
+            VALUES (?item) { (<http://data.performing-arts.ch/r/sapa>) }
             OPTIONAL { ?child rico:includedIn ?item }
             BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
             OPTIONAL { ?item olo:index ?index }
-          } ORDER BY ASC(?index) ASC(?label)
-        '
+          } ORDER BY ASC(?index)'
         children-query='
           SELECT DISTINCT ?item ?index ?hasChildren WHERE {
             ?item rico:includedIn ?parent .
             OPTIONAL { ?child rico:includedIn ?item }
             BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
-            OPTIONAL { ?item rico:identifier ?identifier }
             OPTIONAL { ?item olo:index ?index }
-          } ORDER BY ASC(?index)
-        '
+          } ORDER BY ASC(?index)'
         parents-query='
           SELECT ?item ?parent WHERE {
             ?item rico:includedIn ?parent .
-          }
-        '
+          }'
         search-query='
           SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
             { ?item a rico:RecordSet } UNION { ?item a rico:Record }
             { ?item rico:name ?label } UNION { ?item rico:identifier ?label }
             FILTER REGEX(LCASE(?label), LCASE(?__token__), "i")
             BIND(false AS ?hasChildren)
-          } ORDER BY DESC (?score) (?label) LIMIT 500
-        '
+          } ORDER BY DESC (?score) (?label) LIMIT 500'
         node-data-query='
           SELECT ?item ?identifier ?rslevel {
             ?item rico:hasRecordSetType ?rslevel .
             OPTIONAL { ?item rico:identifier ?identifier }
-          }
-        '
+          }'
         placeholder='Select or search for a name or signature ...'
         node-template='{{>node}}'
         >
         <template id='node'>
           <span>
-            {{#if data.identifier}}{{data.identifier.value}}: {{/if}}<semantic-link uri="{{iri}}"></semantic-link>{{#if data.rslevel}} (<mp-label iri="{{data.rslevel.value}}"></mp-label>){{/if}}
+            {{#if data.identifier}}{{data.identifier.value}}: {{/if}}<semantic-link uri="{{iri}}">{{label}}</semantic-link>{{#if data.rslevel}} (<mp-label iri="{{data.rslevel.value}}"></mp-label>){{/if}}
           </span>
         </template>
       </semantic-lazy-tree>
