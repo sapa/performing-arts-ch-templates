@@ -154,6 +154,29 @@
                 </div>'>
             </semantic-query>
 
+            <!-- places -->
+            <semantic-query 
+            query="SELECT ?label ?place ?identifier
+            WHERE {
+                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePlace>) }
+                {
+                    ?? rico:isAssociatedWithPlace ?place .
+                } UNION {
+                    ?part rico:isConstituentOf ?? ;
+                        rico:isAssociatedWithPlace ?place .
+                    OPTIONAL {
+                        ?part rico:identifier ?id .
+                        BIND(CONCAT(' (', STR(?id), ')') AS ?identifier)
+                    }
+                }
+            } ORDER BY ASC(?identifier)"
+            template='<div>
+                {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                <ul class="list-unstyled">{{#each bindings}}
+                    <li><semantic-link iri="{{place.value}}"></semantic-link> {{identifier.value}}</li>
+                {{/each}}</ul></div>'
+            >
+
         </bs-col>
 
         <bs-col sm="4">
