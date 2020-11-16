@@ -1,55 +1,50 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Members"@en, "Mitglieder"@de;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-e6206090bf6c472992bb13275b69ffe3-ld7ssw;
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember> a <http://www.metaphacts.com/ontology/fields#Field>,
+      <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Mitglieder"@de, "Membri"@it, "Members"@en,
+      "Membres"@fr;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-a77d29a2ba7f4c489f2e089c9808c7f8-79ktlp;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
     <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Membres"@fr .
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-a77d29a2ba7f4c489f2e089c9808c7f8-rdcfkr;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-a77d29a2ba7f4c489f2e089c9808c7f8-7aso3;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-a77d29a2ba7f4c489f2e089c9808c7f8-4m1rp9;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-11-16T10:11:08.971Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-e6206090bf6c472992bb13275b69ffe3-ld7ssw <http://spinrdf.org/sp#text> """INSERT {
-  $subject crm:P107_has_current_or_former_member $value .
-} WHERE {}""";
-    a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-e6206090bf6c472992bb13275b69ffe3-xh15ph <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value ?label WHERE {
+  _:genid-a77d29a2ba7f4c489f2e089c9808c7f8-7aso3 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value ?label WHERE {
   ?value a crm:E21_Person ;
     crm:P131_is_identified_by [ rdf:value ?l ] .
   FILTER(CONTAINS(STR(?value), \"/a/\"))
-  FILTER(REGEX(STR(?l), \"?token\", \"i\"))
+  SERVICE <http://www.bigdata.com/rdf/search#search> {
+    ?l bds:search ?__token__ ;
+    bds:minRelevance \"0.1\" ;
+    bds:relevance ?score ; 
+    bds:matchAllTerms \"true\" .
+  }
   OPTIONAL { ?value crm:P3_has_note [ rdf:value ?note ] . }
   BIND(IF(BOUND(?note), CONCAT(?l, \" (\", ?note, \")\"), ?l) AS ?label)
 } LIMIT 10""" .
   
-  _:genid-e6206090bf6c472992bb13275b69ffe3-kzl3fg a <http://spinrdf.org/sp#Query> .
+  _:genid-a77d29a2ba7f4c489f2e089c9808c7f8-rdcfkr a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+  $subject crm:P107_has_current_or_former_member $value .
+} WHERE {}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember> <http://www.metaphacts.com/ontology/fields#domain>
-      <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-e6206090bf6c472992bb13275b69ffe3-6hxxjb;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-e6206090bf6c472992bb13275b69ffe3-kzl3fg;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-e6206090bf6c472992bb13275b69ffe3-xh15ph .
-  
-  _:genid-e6206090bf6c472992bb13275b69ffe3-xh15ph a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Membri"@it .
-  
-  _:genid-e6206090bf6c472992bb13275b69ffe3-6hxxjb a <http://spinrdf.org/sp#Query>;
+  _:genid-a77d29a2ba7f4c489f2e089c9808c7f8-79ktlp a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT $value ?unidentified WHERE {
   $subject crm:P107_has_current_or_former_member $value .
   BIND(IF(CONTAINS(STR($value), \"/u/\"), \"true\", \"\") AS ?unidentified)
 }""" .
   
-  _:genid-e6206090bf6c472992bb13275b69ffe3-kzl3fg <http://spinrdf.org/sp#text> """DELETE {
+  _:genid-a77d29a2ba7f4c489f2e089c9808c7f8-4m1rp9 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
   $subject crm:P107_has_current_or_former_member $value .
 } WHERE {}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember> a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-09-14T16:46:52.220Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-  
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember> a <http://www.w3.org/ns/ldp#Resource> .
 }
