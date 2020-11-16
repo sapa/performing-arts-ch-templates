@@ -34,7 +34,7 @@
           SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
             { ?item a rico:RecordSet } UNION { ?item a rico:Record }
             { ?item rico:name ?label } UNION { ?item rico:identifier ?label }
-            FILTER REGEX(LCASE(?label), LCASE(?__token__), "i")
+            FILTER(REGEX(STR(?label), ?__token__, "i"))
             BIND(false AS ?hasChildren)
           } ORDER BY DESC (?score) (?label) LIMIT 500'
         node-data-query='
