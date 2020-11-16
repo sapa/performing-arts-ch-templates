@@ -60,6 +60,9 @@ a:focus {
 .knowledgeGraphBar__toggle {
   display: none;
 }
+.knowledgeGraphBar__description {
+  display: none;
+}
 .knowledgeGraphBar__content {
   border-bottom-width: 0 !important;
 }
