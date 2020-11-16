@@ -15,6 +15,7 @@
         rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
         identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
         legacy_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier"
+        scope="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ScopeID"
         label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingName"
         parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceParent"
         provenance="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance"
@@ -25,6 +26,7 @@
         part="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart"
         instantiation="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation"
         subject="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject"
+        place="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePlace"
         date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate"
         extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
         comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
@@ -32,7 +34,8 @@
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-            <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "rico:Record"]]'></semantic-form-hidden-input>
+          <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "rico:Record"]]'></semantic-form-hidden-input>
+          <semantic-form-hidden-input for='scope'></semantic-form-hidden-input>
         </div>
         <bs-row>
           <bs-col sm='2'>
@@ -40,7 +43,7 @@
             <semantic-form-text-input for="legacy_identifier"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='5'>
-            <semantic-form-text-input for="label"></semantic-form-text-input>        
+            <semantic-form-text-input for="label" languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
           <bs-col sm='5'>
             <semantic-form-tree-picker-input for="parent" >
@@ -84,6 +87,7 @@
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-autocomplete-input for="subject"></semantic-form-autocomplete-input>
+            <semantic-form-tree-picker-input for="place"></semantic-form-tree-picker-input>
           </bs-col>
         </bs-row>
         <bs-row>

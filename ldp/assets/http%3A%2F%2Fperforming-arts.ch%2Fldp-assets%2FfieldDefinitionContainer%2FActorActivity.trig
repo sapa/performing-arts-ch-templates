@@ -1,34 +1,20 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity> a <http://www.metaphacts.com/ontology/fields#Field> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity> a <http://www.metaphacts.com/ontology/fields#Field>,
+      <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Acting"@en;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E21_Person>;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-6f7ef88bcf9f47bf8a3caa558ffbad08-6f3ptb;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-6f7ef88bcf9f47bf8a3caa558ffbad08-19r745;
+    <http://www.metaphacts.com/ontology/fields#orderedWith> <http://www.metaphacts.com/ontology/fields#indexProperty>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-6f7ef88bcf9f47bf8a3caa558ffbad08-4pgzf;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-11-16T09:46:00.263Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-cc7a2488667146fea81d8ea3758737a8-yej8r a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity> <http://www.metaphacts.com/ontology/fields#range>
-      <http://www.cidoc-crm.org/cidoc-crm/E21_Person>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-cc7a2488667146fea81d8ea3758737a8-25e8be;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-cc7a2488667146fea81d8ea3758737a8-49xqv7 .
-  
-  _:genid-cc7a2488667146fea81d8ea3758737a8-49xqv7 a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
-      <http://www.w3.org/2001/XMLSchema#anyURI> .
-  
-  _:genid-cc7a2488667146fea81d8ea3758737a8-25e8be a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity> <http://www.metaphacts.com/ontology/fields#orderedWith>
-      <http://www.metaphacts.com/ontology/fields#indexProperty>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Acting"@en .
-  
-  _:genid-cc7a2488667146fea81d8ea3758737a8-yej8r <http://spinrdf.org/sp#text> """SELECT $value $index WHERE {
-  ?performance frbroo:R25_performed $subject ;
-    crm:P9_consists_of ?activity .
-  ?activity crm:P2_has_type spav:munib ;
-            olo:index $index ;
-            crm:P14_carried_out_by $value.
-}""" .
-  
-  _:genid-cc7a2488667146fea81d8ea3758737a8-25e8be <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-6f7ef88bcf9f47bf8a3caa558ffbad08-19r745 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
   ?performance frbroo:R25_performed $subject ;
     a frbroo:F31_Performance ;
     crm:P9_consists_of ?activity .
@@ -41,23 +27,23 @@
       BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), STR(spav:munib), STR($index), STR(?value))))) AS ?activity)
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity> <http://www.metaphacts.com/ontology/fields#domain>
-      <http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-cc7a2488667146fea81d8ea3758737a8-yej8r .
-  
-  _:genid-cc7a2488667146fea81d8ea3758737a8-49xqv7 <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
+  _:genid-6f7ef88bcf9f47bf8a3caa558ffbad08-6f3ptb a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
   $value a crm:E21_Person ;
     rdfs:label ?label .
-    FILTER(CONTAINS(STR($value), \"/a/\"))
-  	FILTER REGEX(STR(?label), ?__token__)
+  FILTER(CONTAINS(STR($value), \"/a/\"))
+  FILTER(REGEX(STR(?label), ?__token__, \"i\"))
 } LIMIT 10""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity> a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-09-01T15:10:35.180Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  _:genid-6f7ef88bcf9f47bf8a3caa558ffbad08-4pgzf a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value $index WHERE {
+  ?performance frbroo:R25_performed $subject ;
+    crm:P9_consists_of ?activity .
+  ?activity crm:P2_has_type spav:munib ;
+            olo:index $index ;
+            crm:P14_carried_out_by $value.
+}""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity> a <http://www.w3.org/ns/ldp#Resource> .
 }

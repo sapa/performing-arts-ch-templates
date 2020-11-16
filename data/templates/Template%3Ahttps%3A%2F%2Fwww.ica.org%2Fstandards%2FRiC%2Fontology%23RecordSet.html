@@ -3,35 +3,135 @@
     <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
         <bs-col sm="4">
-
+            <!-- name -->
             <semantic-query 
                 query='SELECT ?name WHERE { ?? rico:name ?name . } LIMIT 1'
                 template='<p><strong>{{#each bindings}}{{name.value}}{{/each}}</strong></p>'>
             </semantic-query>
 
-            <mp-field-visualization
-                subject='[[this]]'
-                fields='[[fieldDefinitions
-                    identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
-                    legacy_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier"
-                    type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetType"
-                    documetary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDocumentaryForm"
-                    content_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
-                    language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage"
-                    extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
-                    provenance="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance"
-                    source="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSource"
-                    delivery_number="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/DeliveryNumber"
-                    acquisition="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition"
-                    history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
-                    comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
-                ]]'
-                template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
-                [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
-            >
-            </mp-field-visualization> 
+            <!-- level -->
+            <semantic-query 
+                query="SELECT ?level WHERE { ?? rico:hasRecordSetType ?level . }"
+                template='<div><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{level.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- identifier -->
+            <semantic-query 
+                query="SELECT ?label ?identifier WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier>) }
+                    ?? rico:identifier ?identifier . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- legacy identifier -->
+            <semantic-query 
+                query="SELECT ?label ?identifier WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier>) }
+                    ?? spao:legacyIdentifier ?identifier . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- documentary form -->
+            <semantic-query 
+                query="SELECT ?label ?documentary_form WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDocumentaryForm>) }
+                    ?? rico:hasDocumentaryFormType ?documentary_form . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{documentary_form.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- language -->
+            <semantic-query 
+                query="SELECT ?label ?language WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage>) }
+                    ?? rico:language ?language . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{language.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- content description -->
+            <semantic-query 
+                query="SELECT ?label ?content_description WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription>) }
+                    ?? rico:descriptiveNote ?content_description . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <div>{{#each bindings}}<p style="white-space: pre-line;">{{content_description.value}}</p>{{/each}}</div></div>'>
+            </semantic-query>        
+        
+            <!-- extent -->
+            <semantic-query 
+                query="SELECT ?label ?extent WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent>) }
+                    ?? rico:recordResourceExtent ?extent . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li>{{extent.value}}</li>{{/each}}</ul></div>'>
+            </semantic-query>        
+        
+            <!-- provenance -->
+            <semantic-query 
+                query="SELECT ?label ?provenance WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance>) }
+                    ?? rico:hasProvenance ?provenance . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{provenance.value}}"></semantic-link></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- source -->
+            <semantic-query 
+                query="SELECT ?label ?source WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSource>) }
+                    ?? rico:receivedBy ?source . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{source.value}}"></semantic-link></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- delivery number -->
+            <semantic-query 
+                query="SELECT ?label ?delivery_number WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/DeliveryNumber>) }
+                    ?? spao:deliveryNumber ?delivery_number . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li>{{delivery_number.value}}</li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- acquisition -->
+            <semantic-query 
+                query="SELECT ?label ?acquisition WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition>) }
+                    ?? rico:isAssociatedWithEvent [ a rico:Event ; rico:hasEventType ?acquisition ] . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{acquisition.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- history -->
+            <semantic-query 
+                query="SELECT ?label ?history WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory>) }
+                    ?? rico:history ?history . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <div>{{#each bindings}}<p style="white-space: pre-line;">{{history.value}}</p>{{/each}}</div></div>'>
+            </semantic-query>        
+
+            <!-- comment -->
+            <semantic-query 
+                query="SELECT ?label ?comment WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment>) }
+                    ?? rdfs:comment ?comment . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <div>{{#each bindings}}<p style="white-space: pre-line;">{{comment.value}}</p>{{/each}}</div></div>'>
+            </semantic-query>        
 
             [[> sapaModule:RecordResourceDate]]
+            
+            [[#if (hasPermission "forms:ldp:*")]] 
+            <!-- ScopeID -->
+            <semantic-query 
+                query='SELECT ?scope_id WHERE { ?? <http://temp.performing-arts.ch/ScopeID> ?scope_id . } LIMIT 1'
+                template='<div>{{#each bindings}}<h5>Scope</h5><a href="http://catalogue.collectiondeladanse.ch/tanzarchiv/detail.aspx?ID={{scope_id.value}}" target="_blank">{{scope_id.value}}</a>{{/each}}</div>'>
+            </semantic-query>
+            [[/if]]
 
         </bs-col>
 
@@ -41,7 +141,7 @@
             <semantic-query 
                 query="SELECT ?label ?subject
                 WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetSubject>) }
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject>) }
                     ?? rico:hasSubject ?subject .
                 }"
                 template='<div>
@@ -54,13 +154,36 @@
                 </div>'>
             </semantic-query>
 
+            <!-- places -->
+            <semantic-query 
+            query="SELECT ?label ?place ?identifier
+            WHERE {
+                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePlace>) }
+                {
+                    ?? rico:isAssociatedWithPlace ?place .
+                } UNION {
+                    ?part rico:isConstituentOf ?? ;
+                        rico:isAssociatedWithPlace ?place .
+                    OPTIONAL {
+                        ?part rico:identifier ?id .
+                        BIND(CONCAT(' (', STR(?id), ')') AS ?identifier)
+                    }
+                }
+            } ORDER BY ASC(?identifier)"
+            template='<div>
+                {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                <ul class="list-unstyled">{{#each bindings}}
+                    <li><semantic-link iri="{{place.value}}"></semantic-link> {{identifier.value}}</li>
+                {{/each}}</ul></div>'
+            >
+
         </bs-col>
 
         <bs-col sm="4">
 
             <h5>Record hierarchy</h5>
             <semantic-tree
-                 query='SELECT DISTINCT ?node ?parent ?label WHERE {
+                 query='SELECT DISTINCT ?node ?parent ?index ?identifier ?label WHERE {
                     { ?? rico:includedIn* ?node }
                     UNION
                     { ?node rico:includedIn* ?? } 
@@ -70,13 +193,20 @@
                     }
                     FILTER(ISIRI(?node))
                     FILTER(CONTAINS(STR(?node), "/r/"))
-                    ?node rico:name ?label .
-                  } ORDER BY ?label
+                    ?node rico:name ?name .
+                    OPTIONAL { ?node rico:identifier ?identifier }
+                    BIND(IF(BOUND(?identifier), CONCAT(?identifier, ": ", ?name), ?name) AS ?label)
+                    OPTIONAL { ?node olo:index ?index }
+                  } ORDER BY ASC(?index) ASC(?label)
                   LIMIT 50'
                collapsed="false"
                keys-opened='[[this]]'
                parentBindingName="parent"
-               nodeBindingName="node"> 
+               nodeBindingName="node"
+               tuple-template='{{> node}}'>
+                <template id='node'>
+                    <span><semantic-link uri="{{node.value}}">{{label.value}}</semantic-link></span>
+                </template>
             </semantic-tree>
 
         </bs-col>

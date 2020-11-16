@@ -1,0 +1,27 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonHistory/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonHistory> a <http://www.metaphacts.com/ontology/fields#Field>,
+      <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-f8e74683569a4bfc8ab8730d7d1ff59a-cxdcjj;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Notice biographie"@fr, "Biografische Angabe"@de,
+      "Biographical information"@en;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f8e74683569a4bfc8ab8730d7d1ff59a-j3jtig;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "4";
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Person>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-f8e74683569a4bfc8ab8730d7d1ff59a-nujrek;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-11-11T17:36:37.365Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-f8e74683569a4bfc8ab8730d7d1ff59a-nujrek a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:history $value } WHERE {}" .
+  
+  _:genid-f8e74683569a4bfc8ab8730d7d1ff59a-j3jtig a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:history $value } WHERE {}" .
+  
+  _:genid-f8e74683569a4bfc8ab8730d7d1ff59a-cxdcjj a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:history ?value }" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonHistory> .
+}

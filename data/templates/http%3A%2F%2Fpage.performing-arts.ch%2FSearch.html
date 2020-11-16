@@ -354,23 +354,22 @@
 
       <semantic-search-query-keyword-type 
         id='keywordTypeQuery'
-        query='SELECT ?subject WHERE {
-          FILTER(?__domain__ IN (frbroo:F25_Performance_Plan, crm:E21_Person, crm:E74_Group, crm:E40_Legal_Body, crm:E22_Man-Made_Object, crm:E53_Place))
+        query='SELECT DISTINCT ?subject WHERE {
+          FILTER(?__domain__ IN (frbroo:F25_Performance_Plan, crm:E21_Person, crm:E74_Group, crm:E22_Man-Made_Object, crm:E53_Place))
           ?subject rdf:type/rdfs:subClassOf* ?__domain__ .
-          FILTER(REGEX(STR(?subject), "/[acopw]/"))
+          FILTER(!CONTAINS(STR(?subject), "/u/") && !CONTAINS(STR(?subject), "/x/"))
+          FILTER(?__tokenPattern__)
           OPTIONAL { ?subject crm:P2_has_type ?crmtype . }
           FILTER(?__domain__ != crm:E22_Man-Made_Object || ?crmtype = spav:dwmkn )
-          FILTER(?__tokenPattern__)
         }'
-        count-query='
-          SELECT (COUNT(DISTINCT ?subject) AS ?count) WHERE {
-            FILTER(?__domain__ IN (frbroo:F25_Performance_Plan, crm:E21_Person, crm:E74_Group, crm:E40_Legal_Body, crm:E22_Man-Made_Object, crm:E53_Place))
-            ?subject rdf:type/rdfs:subClassOf* ?__domain__ .
-            FILTER(REGEX(STR(?subject), "/[acopw]/"))
-            OPTIONAL { ?subject crm:P2_has_type ?crmtype . }
-            FILTER(?__domain__ != crm:E22_Man-Made_Object || ?crmtype = spav:dwmkn )
-            FILTER(?__tokenPattern__)
-          }'
+        count-query='SELECT (COUNT(DISTINCT ?subject) AS ?count) WHERE {
+          FILTER(?__domain__ IN (frbroo:F25_Performance_Plan, crm:E21_Person, crm:E74_Group, crm:E22_Man-Made_Object, crm:E53_Place))
+          ?subject rdf:type/rdfs:subClassOf* ?__domain__ .
+          FILTER(!CONTAINS(STR(?subject), "/u/") && !CONTAINS(STR(?subject), "/x/"))
+          FILTER(?__tokenPattern__)
+          OPTIONAL { ?subject crm:P2_has_type ?crmtype . }
+          FILTER(?__domain__ != crm:E22_Man-Made_Object || ?crmtype = spav:dwmkn )
+        }'
         min-search-term-length='1'
         debounce='600'
         count-query-mode='queryPerCategory'
