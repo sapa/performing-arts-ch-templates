@@ -54,6 +54,18 @@
             {{#each bindings}}{{#if @first}}<semantic-link iri="{{source.value}}"></semantic-link>{{else}}, <semantic-link iri="{{source.value}}"></semantic-link>{{/if}}{{/each}}</div>'>
         </semantic-query>
 
+        <!-- description -->
+        <semantic-query 
+          query='SELECT ?description WHERE { 
+              ?? crm:P67_is_referred_to_by [
+                a crm:E33_Linguistic_Object ;
+                crm:P2_has_type spav:eoept ;
+                rdf:value ?description ]
+          }'
+          template='<div>{{#ifCond bindings.length ">" 0}}<h5>Description</h5>{{/ifCond}}
+            {{#each bindings}}<p style="white-space: pre-line;">{{description.value}}</p>{{/each}}</div>'>
+        </semantic-query>
+
       </bs-col>
       <bs-col sm="4">
       
