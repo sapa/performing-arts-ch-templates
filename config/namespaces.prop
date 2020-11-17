@@ -33,3 +33,4 @@ schema = http://schema.org/
 prov = http://www.w3.org/ns/prov#
 spao = http://ontology.performing-arts.ch/
 ebucore = https://www.ebu.ch/metadata/ontologies/ebucore#
+crypHashFunc = http://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/

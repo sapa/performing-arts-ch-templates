@@ -53,13 +53,29 @@
                         template='<div><h5>Composition level</h5><ul class="list-unstyled">{{#each bindings}}<li>{{composition_level.value}}</li>{{/each}}</ul></div>'>
                     </semantic-query>
 
-                    <!-- file name -->
+                    <!-- files -->
                     <semantic-query 
-                        query="SELECT ?file_name WHERE {
+                        query="SELECT ?file_name ?file_size ?md5 WHERE {
                             ?file premis:isIncludedIn ?? ;
-                                premis:originalName ?file_name .    
+                                a premis:File ;
+                                premis:originalName ?file_name .
+                            OPTIONAL {
+                                ?file premis:size ?bytes .
+                                BIND(CONCAT(STR(FLOOR(?bytes / (1000 * 1000 * 1000) *100) / 100), ' GB') AS ?file_size)
+                            }
+                            OPTIONAL {
+                                ?file premis:fixity [
+                                    a crypHashFunc:md5 ;
+                                    rdf:value ?md5
+                                ]
+                            }
                         }"
-                        template='<div><h5>File name</h5><ul class="list-unstyled">{{#each bindings}}<li>{{file_name.value}}</li>{{/each}}</ul></div>'>
+                        template='<div><h5>File</h5><ul class="list-unstyled">{{#each bindings}}
+                            <li>{{file_name.value}}
+                                {{#if file_size}}<br /><small>{{file_size.value}}</small>{{/if}}
+                                {{#if md5}}<br /><small>MD5: {{md5.value}}</small>{{/if}}
+                            </li>
+                            {{/each}}</ul></div>'>
                     </semantic-query>
 
                     <!-- file format -->
@@ -110,17 +126,6 @@
 
                 </bs-col>
                 <bs-col sm="4">
-
-                    <!-- file size -->
-                    <semantic-query 
-                        query="SELECT ?file_size WHERE { 
-                            ?file premis:isIncludedIn ?? ;
-                                a premis:File ;
-                                premis:size ?bytes .
-                            BIND(CONCAT(STR(FLOOR(?bytes / (1000 * 1000 * 1000) *100) / 100), ' GB') AS ?file_size)
-                        }"
-                        template='<div><h5>File size</h5><ul class="list-unstyled">{{#each bindings}}<li>{{file_size.value}}</li>{{/each}}</ul></div>'>
-                    </semantic-query>
 
                     <!-- video -->
                     <semantic-query 
