@@ -1,17 +1,29 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation> <http://www.metaphacts.com/ontology/fields#range>
-      <http://www.cidoc-crm.org/cidoc-crm/E53_Place>;
-    a <http://www.metaphacts.com/ontology/fields#Field> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation> a <http://www.metaphacts.com/ontology/fields#Field>,
+      <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Standort"@de, "Localisation"@fr, "Collocazione"@it,
+      "Location"@en;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-96d02d09527449bfb918358a464813f4-6rqtxi;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-96d02d09527449bfb918358a464813f4-8vbzeg;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"full\",
+  \"rootsQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item a crm:E53_Place .\\n  FILTER(NOT EXISTS { ?item crm:P89_falls_within ?parent. })\\n  FILTER(CONTAINS(STR(?item), \\\"/p/\\\"))\\n  ?item rdfs:label ?label.\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY (?label)\",
+  \"childrenQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item crm:P89_falls_within ?parent.\\n  ?item rdfs:label ?label.\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY (?label)\",
+  \"parentsQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?parent ?parentLabel WHERE {\\n  ?item crm:P89_falls_within ?parent.\\n  ?parent rdfs:label ?parentLabel.\\n}\",
+  \"searchQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>\\nSELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {\\n  SERVICE Repository:lookup {\\n    ?item lookup:token ?__token__;\\n      lookup:limit 400 ;\\n      lookup:type crm:E53_Place .\\n  }\\n  FILTER(CONTAINS(STR(?item), \\\"/p/\\\"))\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY DESC (?score) (?label)\\nLIMIT 200\"
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-96d02d09527449bfb918358a464813f4-0ksy5i;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-96d02d09527449bfb918358a464813f4-ixivbd;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E53_Place>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-11-30T09:02:07.706Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-6009b1c299ad490f8874005528b776a0-32bxo a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-6009b1c299ad490f8874005528b776a0-s97qv9 a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Standort"@de .
-  
-  _:genid-6009b1c299ad490f8874005528b776a0-32bxo <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-96d02d09527449bfb918358a464813f4-ixivbd a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
   $subject crm:P156_occupies $loc.
   $loc a crm:E53_Place ;
     crm:P89_falls_within ?value.
@@ -19,56 +31,28 @@
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"location\", STR(?value))))) AS $loc)
 }""" .
   
-  _:genid-6009b1c299ad490f8874005528b776a0-ojzogg <http://spinrdf.org/sp#text> """DELETE {
+  _:genid-96d02d09527449bfb918358a464813f4-8vbzeg a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+   SERVICE Repository:lookup {
+     ?value lookup:token ?__token__ ;
+     	lookup:type crm:E53_Place .
+   }
+}""" .
+  
+  _:genid-96d02d09527449bfb918358a464813f4-0ksy5i a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
   $subject crm:P156_occupies $loc.
   $loc a crm:E53_Place ;
     crm:P89_falls_within ?value.
 } WHERE {}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Collocazione"@it;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Location"@en;
-    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
-  \"type\": \"simple\",
-  \"schemePattern\": \"?item a crm:E53_Place.\",
-  \"relationPattern\": \"?item crm:P89_falls_within ?parent.\"
-}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
-  
-  _:genid-6009b1c299ad490f8874005528b776a0-ojzogg a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation> <http://www.metaphacts.com/ontology/fields#autosuggestionPattern>
-      _:genid-6009b1c299ad490f8874005528b776a0-vccbq3 .
-  
-  _:genid-6009b1c299ad490f8874005528b776a0-vccbq3 a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation> <http://www.metaphacts.com/ontology/fields#selectPattern>
-      _:genid-6009b1c299ad490f8874005528b776a0-s97qv9 .
-  
-  _:genid-6009b1c299ad490f8874005528b776a0-vccbq3 <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
-  $value a crm:E53_Place ;
-    rdfs:label $label .
-  FILTER REGEX($label, \"?token\", \"i\")
-}""" .
-  
-  _:genid-6009b1c299ad490f8874005528b776a0-s97qv9 <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  _:genid-96d02d09527449bfb918358a464813f4-6rqtxi a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
   $subject crm:P156_occupies $loc.
   $loc a crm:E53_Place ;
     crm:P89_falls_within ?value.
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation> <http://www.metaphacts.com/ontology/fields#insertPattern>
-      _:genid-6009b1c299ad490f8874005528b776a0-32bxo;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-6009b1c299ad490f8874005528b776a0-ojzogg;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
-    <http://www.w3.org/2000/01/rdf-schema#label> "Localisation"@fr;
-    a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-06T07:44:16.545Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-  
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueLocation> a <http://www.w3.org/ns/ldp#Resource> .
 }

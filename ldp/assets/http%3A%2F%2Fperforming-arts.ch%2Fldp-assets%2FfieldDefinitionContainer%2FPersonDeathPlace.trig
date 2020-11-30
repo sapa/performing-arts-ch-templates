@@ -1,54 +1,52 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> <http://www.metaphacts.com/ontology/fields#range>
-      <http://www.cidoc-crm.org/cidoc-crm/E53_Place>;
-    a <http://www.metaphacts.com/ontology/fields#Field> .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> a
+      <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Todesort"@de, "Lieu du décès"@fr, "Luogo del decesso"@it,
+      "Place of death"@en;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"full\",
+  \"rootsQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item a crm:E53_Place .\\n  FILTER(NOT EXISTS { ?item crm:P89_falls_within ?parent. })\\n  FILTER(CONTAINS(STR(?item), \\\"/p/\\\"))\\n  ?item rdfs:label ?label.\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY (?label)\",
+  \"childrenQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item crm:P89_falls_within ?parent.\\n  ?item rdfs:label ?label.\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY (?label)\",
+  \"parentsQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?parent ?parentLabel WHERE {\\n  ?item crm:P89_falls_within ?parent.\\n  ?parent rdfs:label ?parentLabel.\\n}\",
+  \"searchQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>\\nSELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {\\n  SERVICE Repository:lookup {\\n    ?item lookup:token ?__token__;\\n      lookup:limit 400 ;\\n      lookup:type crm:E53_Place .\\n  }\\n  FILTER(CONTAINS(STR(?item), \\\"/p/\\\"))\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY DESC (?score) (?label)\\nLIMIT 200\"
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Person>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-29b0afd2716d4db0bddb8cd56ba52f5d-m47a8o;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-29b0afd2716d4db0bddb8cd56ba52f5d-gz29o;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-29b0afd2716d4db0bddb8cd56ba52f5d-w3wmlc;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-29b0afd2716d4db0bddb8cd56ba52f5d-4h37u8;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E53_Place>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-11-30T09:05:39.620Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-fbca5631e857497da2ca20bf45b4c3de-q6yyrp a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-fbca5631e857497da2ca20bf45b4c3de-ztk3sa <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  _:genid-29b0afd2716d4db0bddb8cd56ba52f5d-4h37u8 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
   $subject crm:P100i_died_in ?death .
   ?death a crm:E69_Death ;
     crm:P7_took_place_at $value .
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Todesort"@de;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-fbca5631e857497da2ca20bf45b4c3de-ztk3sa;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-fbca5631e857497da2ca20bf45b4c3de-8etlwi .
+  _:genid-29b0afd2716d4db0bddb8cd56ba52f5d-w3wmlc a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+   SERVICE Repository:lookup {
+     ?value lookup:token ?__token__ ;
+     	lookup:type crm:E53_Place .
+   }
+}""" .
   
-  _:genid-fbca5631e857497da2ca20bf45b4c3de-3szwj <http://spinrdf.org/sp#text> """DELETE {
+  _:genid-29b0afd2716d4db0bddb8cd56ba52f5d-gz29o a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
   $subject crm:P100i_died_in ?death .
   ?death a crm:E69_Death ;
     crm:P7_took_place_at $value .
-} WHERE {}""";
-    a <http://spinrdf.org/sp#Query> .
+} WHERE {}""" .
   
-  _:genid-fbca5631e857497da2ca20bf45b4c3de-8etlwi a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> <http://www.metaphacts.com/ontology/fields#domain>
-      <https://www.ica.org/standards/RiC/ontology#Person>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Lieu du décès"@fr .
-  
-  _:genid-fbca5631e857497da2ca20bf45b4c3de-8etlwi <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
-  ?value a crm:E53_Place ;
-    rdfs:label ?label.
-  FILTER(REGEX(STR(?label), \"?token\", \"i\"))
-  FILTER(CONTAINS(STR(?value), \"/p/\"))
-} LIMIT 10""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> <http://www.metaphacts.com/ontology/fields#deletePattern>
-      _:genid-fbca5631e857497da2ca20bf45b4c3de-3szwj .
-  
-  _:genid-fbca5631e857497da2ca20bf45b4c3de-ztk3sa a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Luogo del decesso"@it, "Place of death"@en;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-fbca5631e857497da2ca20bf45b4c3de-q6yyrp;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1" .
-  
-  _:genid-fbca5631e857497da2ca20bf45b4c3de-q6yyrp <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-29b0afd2716d4db0bddb8cd56ba52f5d-m47a8o a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
   $subject crm:P100i_died_in ?death .
   ?death a crm:E69_Death ;
     crm:P7_took_place_at $value .
@@ -56,19 +54,6 @@
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"death\")))) AS ?death)
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> <http://www.metaphacts.com/ontology/fields#treePatterns>
-      """{
-  \"type\": \"simple\",
-  \"schemePattern\": \"?item a crm:E53_Place .\\nFILTER(CONTAINS(STR(?item), \\\"/p/\\\"))\",
-  \"relationPattern\": \"?item crm:P89_falls_within ?parent .\"
-}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
-    a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-05-26T12:40:23.080Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-  
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonDeathPlace> a
-      <http://www.w3.org/ns/ldp#Resource> .
 }
