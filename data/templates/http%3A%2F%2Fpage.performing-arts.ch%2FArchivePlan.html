@@ -22,7 +22,7 @@
               ?item rico:name ?l .
               BIND(LCASE(?l) AS ?label)             
             }
-          } ORDER BY ASC (?label) ?index'
+          }'
         children-query='
           SELECT DISTINCT ?item ?index ?hasChildren WHERE {
             ?item rico:includedIn ?parent .
@@ -33,7 +33,7 @@
               ?item rico:name ?l .
               BIND(LCASE(?l) AS ?label)             
             }
-          } ORDER BY ASC (?label) ?index'
+          }'
         parents-query='
           SELECT ?item ?parent WHERE {
             ?item rico:includedIn ?parent .
