@@ -275,29 +275,31 @@
 
             <h5>Record hierarchy</h5>
             <semantic-tree
-                 query='SELECT DISTINCT ?node ?parent ?index ?label WHERE {
+                 query='SELECT DISTINCT ?node ?parent ?name ?index ?identifier ?level WHERE {
                     { ?? rico:includedIn* ?node }
                     UNION
                     { ?node rico:includedIn ?? } 
+                    FILTER(ISIRI(?node))
+                    FILTER(CONTAINS(STR(?node), "/r/"))
                     OPTIONAL {
                         ?node rico:includedIn ?parent.
                         FILTER(ISIRI(?parent))
                     }
-                    FILTER(ISIRI(?node))
-                    FILTER(CONTAINS(STR(?node), "/r/"))
                     ?node rico:name ?name .
                     OPTIONAL { ?node rico:identifier ?identifier }
                     BIND(IF(BOUND(?identifier), CONCAT(?identifier, ": ", ?name), ?name) AS ?label)
+                    OPTIONAL { ?node rico:hasRecordSetType ?rslevel . }
+                    BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
                     OPTIONAL { ?node olo:index ?index }
                   } ORDER BY ASC(?index) ASC(?label)
-                  LIMIT 50'
-               collapsed="false"
+                  LIMIT 200'
+               collapsed="true"
                keys-opened='[[this]]'
-               parentBindingName="parent"
-               nodeBindingName="node"
+               parent-binding-name="parent"
+               node-binding-name="node"
                tuple-template='{{> node}}'>
                 <template id='node'>
-                    <span><semantic-link uri="{{node.value}}">{{label.value}}</semantic-link></span>
+                    <span>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link uri="{{node.value}}">{{name.value}}</semantic-link>{{#if level}} (<mp-label iri="{{level.value}}""></mp-label>){{/if}}</span>
                 </template>
             </semantic-tree>
 
