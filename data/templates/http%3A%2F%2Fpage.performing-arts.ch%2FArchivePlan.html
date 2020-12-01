@@ -51,8 +51,9 @@
             BIND(false AS ?hasChildren)
           } ORDER BY DESC (?score) (?label) LIMIT 500'
         node-data-query='
-          SELECT ?item ?identifier ?rslevel {
-            ?item rico:hasRecordSetType ?rslevel .
+          SELECT DISTINCT ?item ?identifier ?level {
+            OPTIONAL { ?item rico:hasRecordSetType ?rslevel . }
+            BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
             OPTIONAL { ?item rico:identifier ?identifier }
           }'
         placeholder='Select or search for a name or signature ...'
@@ -60,7 +61,7 @@
         >
         <template id='node'>
           <span>
-            {{#if data.identifier}}{{data.identifier.value}}: {{/if}}<semantic-link uri="{{iri}}">{{label}}</semantic-link>{{#if data.rslevel}} (<mp-label iri="{{data.rslevel.value}}"></mp-label>){{/if}}
+            {{#if data.identifier}}{{data.identifier.value}}: {{/if}}<semantic-link uri="{{iri}}">{{label}}</semantic-link>{{#if data.level}} (<mp-label iri="{{data.level.value}}"></mp-label>){{/if}}
           </span>
         </template>
       </semantic-lazy-tree>
