@@ -163,16 +163,6 @@
 
         <bs-col sm="4">
 
-            <!-- vimeo -->
-            <semantic-query 
-                query="SELECT ?vimeo WHERE { ?? <http://temp.performing-arts.ch/Vimeo> ?vimeo . }"
-                template='<div>
-                        {{#each bindings}}
-                        <iframe src="https://player.vimeo.com/video/{{vimeo.value}}" width="400" height="300" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                        {{/each}}
-                </div>'>
-            </semantic-query>
-
             <!-- documentary form -->
             <semantic-query 
                 query="SELECT ?label ?documentary_form

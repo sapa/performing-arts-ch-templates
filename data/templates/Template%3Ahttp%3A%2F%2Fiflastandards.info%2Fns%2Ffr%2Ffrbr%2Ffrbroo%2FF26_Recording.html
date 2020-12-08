@@ -69,6 +69,21 @@
       </bs-col>
       <bs-col sm="4">
       
+        <!-- vimeo -->
+        <semantic-query 
+          query="SELECT ?vimeo WHERE 
+          { 
+              ?record rico:hasSubject ?? ;
+                <http://temp.performing-arts.ch/Vimeo> ?vimeo .
+          }"
+          template='<div style="width:100%; valign: top; padding-right:20px;">
+                  {{#each bindings}}
+                  <iframe src="https://player.vimeo.com/video/{{vimeo.value}}" frameborder="0" style="width:100%; height:400px; " webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                  {{/each}}
+          </div>'>
+        </semantic-query>
+
+
         <!-- creation functions - direction -->
         [[> sapaModule:ShowPerformances function="spav:mucbq"]]
         

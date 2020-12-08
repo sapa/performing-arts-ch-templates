@@ -78,12 +78,18 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
-                    <!-- file format -->
+                    <!-- formats -->
                     <semantic-query 
-                        query="SELECT ?format WHERE {
+                        query="SELECT ?format ?order WHERE {
                             ?file premis:isIncludedIn ?? ;
-                                ebucore:hasFormat ?format .    
-                        }"
+                                ebucore:hasFormat ?format .
+                            ?format skos:inScheme ?scheme .
+                            VALUES (?scheme ?order) {
+                                (spav:cf 0)
+                                (spav:vf 1)
+                                (spav:af 2)
+                            }
+                        } ORDER BY ASC (?order)"
                         template='<div><h5>Format</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{format.value}}"></mp-label></li>{{/each}}</ul></div>'>
                     </semantic-query>
 
@@ -107,42 +113,51 @@
                     </semantic-query> -->
 
                     <!-- ebucore standard -->
-                    <!-- <semantic-query 
-                        query="SELECT ?standard WHERE { ?? ebucore:hasStandard ?standard . }"
+                    <semantic-query 
+                        query="SELECT ?standard WHERE {
+                            { ?? ebucore:hasStandard ?standard . }
+                            UNION
+                            { ?file premis:isIncludedIn ?? ; ebucore:hasStandard ?standard . }
+                        }"
                         template='<div><h5>Standard</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{standard.value}}"></mp-label></li>{{/each}}</ul></div>'>
-                    </semantic-query> -->
+                    </semantic-query>
 
                     <!-- color -->
-                    <!-- <semantic-query 
-                        query="SELECT ?color WHERE { ?? rdau:P60558 ?color . }"
+                    <semantic-query 
+                        query="SELECT ?color WHERE { 
+                            { ?? rdau:P60558 ?color . }
+                            UNION
+                            { ?file premis:isIncludedIn ?? ; rdau:P60558 ?color . } 
+                        }"
                         template='<div><h5>Color</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{color.value}}"></mp-label></li>{{/each}}</ul></div>'>
-                    </semantic-query> -->
+                    </semantic-query>
 
                     <!-- comment -->
-                    <!-- <semantic-query 
+                    <semantic-query 
                         query="SELECT ?comment WHERE { ?? rdf:comment ?comment . }"
                         template='<div><h5>Comment</h5><ul class="list-unstyled">{{#each bindings}}<li>{{comment.value}}</li>{{/each}}</ul></div>'>
-                    </semantic-query> -->
+                    </semantic-query>
 
                 </bs-col>
                 <bs-col sm="4">
 
                     <!-- video -->
                     <semantic-query 
-                        query="SELECT ?order ?label (GROUP_CONCAT(?value; SEPARATOR=', ') AS ?values) WHERE {
-                            VALUES ( ?order ?label ?property ) {
-                                ( 1 'Aspect ratio' ebucore:aspectRatio )
-                                ( 2 'Width' ebucore:width )
-                                ( 3 'Height' ebucore:height )
-                                ( 4 'Scanning format' ebucore:scanningFormat )
-                                ( 5 'Frame rate' ebucore:frameRate )
+                        query="SELECT ?order ?label ?vocab (GROUP_CONCAT(?value; SEPARATOR=', ') AS ?values) WHERE {
+                            VALUES ( ?order ?label ?property ?vocab ) {
+                                ( 1 'Aspect ratio' ebucore:aspectRatio 'true' )
+                                ( 2 'Width' ebucore:width '' )
+                                ( 3 'Height' ebucore:height '' )
+                                ( 4 'Scanning format' ebucore:scanningFormat 'true' )
+                                ( 5 'Scanning order' ebucore:scanningOrder 'true' )
+                                ( 6 'Frame rate' ebucore:frameRate '' )
                             }
                             ?file premis:isIncludedIn ?? ;
                                 a premis:File ;
                                 ?property ?value .
-                        } GROUP BY ?order ?label
+                        } GROUP BY ?order ?label ?vocab
                         ORDER BY ?order"
-                        template='<div>{{#each bindings}}<h5>{{label.value}}</h5><p>{{values.value}}</p>{{/each}}</div>'>
+                        template='<div>{{#each bindings}}<h5>{{label.value}}</h5><p>{{#if vocab.value}}<mp-label iri="{{values.value}}"></mp-label>{{else}}{{values.value}}{{/if}}</p>{{/each}}</div>'>
                     </semantic-query>
 
                     <!-- audio -->
@@ -182,23 +197,14 @@
 
                 <semantic-tree
                     query='SELECT DISTINCT ?node ?parent WHERE {
-                        { ?node rico:hasInstantiation ?? }
+                        { ?? <http://temp.performing-arts.ch/hasCopy>* ?node }
                         UNION
-                        { ?part rico:isConstituentOf ?? . ?node rico:hasInstantiation ?part . }
+                        { ?node <http://temp.performing-arts.ch/hasCopy>* ?? } 
                         UNION
-                        { ?? <http://temp.performing-arts.ch/hasCopy> ?node }
-                        UNION
-                        { ?node <http://temp.performing-arts.ch/hasCopy> ?? } 
-                        { 
-                            ?node rico:hasInstantiation ?parent . 
-                            MINUS {
-                                ?x <http://temp.performing-arts.ch/hasCopy> ?node . 
-                                ?x rico:hasInstantiation ?parent .
-                            }
-                        }
-                        UNION 
-                        { ?parent <http://temp.performing-arts.ch/hasCopy> ?node . }
-
+                        { BIND(?? AS ?node) }
+                        OPTIONAL { ?p <http://temp.performing-arts.ch/hasCopy> ?node . }
+                        OPTIONAL { ?record rico:hasInstantiation ?node . }
+                        BIND(IF(BOUND(?p), ?p, ?record) AS ?parent)
                     }'
                     provider='d3-dendrogram'
                     >
