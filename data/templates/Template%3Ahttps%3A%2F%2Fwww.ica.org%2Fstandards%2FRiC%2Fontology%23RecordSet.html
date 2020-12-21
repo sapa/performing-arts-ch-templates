@@ -35,6 +35,12 @@
                     <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
             </semantic-query>
 
+            <!-- location -->
+            <semantic-query 
+                query="SELECT ?location WHERE { ?? rico:hasLocation ?location . }"
+                template='<div><h5>Location</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{location.value}}"></semantic-link></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
             <!-- documentary form -->
             <semantic-query 
                 query="SELECT ?label ?documentary_form WHERE {

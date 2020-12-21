@@ -1,0 +1,47 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ArchivalPlaceParent/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ArchivalPlaceParent>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-766a0b549e584755bac7a10788965835-5n1a8d;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"simple\",
+  \"schemePattern\": \"?item a spao:ArchivalPlace.\",
+  \"relationPattern\": \"?item rico:containedBy ?parent.\"
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Parent"@en;
+    <http://www.metaphacts.com/ontology/fields#range> <http://ontology.performing-arts.ch/ArchivalPlace>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://ontology.performing-arts.ch/ArchivalPlace>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-766a0b549e584755bac7a10788965835-y2cv;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-766a0b549e584755bac7a10788965835-bwy5f7;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-766a0b549e584755bac7a10788965835-18ywe9;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-12-21T15:06:25.597Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-766a0b549e584755bac7a10788965835-18ywe9 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject rico:containedBy $value .
+}""" .
+  
+  _:genid-766a0b549e584755bac7a10788965835-bwy5f7 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  $value a spao:ArchivalPlace ;
+    rdfs:label $label .
+  FILTER REGEX($label, \"?token\", \"i\")
+}""" .
+  
+  _:genid-766a0b549e584755bac7a10788965835-y2cv a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+  $subject rico:containedBy $value .
+} WHERE {}""" .
+  
+  _:genid-766a0b549e584755bac7a10788965835-5n1a8d a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+  $subject rico:containedBy $value .
+} WHERE {}""" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ArchivalPlaceParent> .
+}

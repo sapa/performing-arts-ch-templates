@@ -61,6 +61,12 @@
             </semantic-query>
             [[/if]]
 
+            <!-- location -->
+            <semantic-query 
+                query="SELECT ?location WHERE { ?? rico:hasLocation ?location . }"
+                template='<div><h5>Location</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{location.value}}"></semantic-link></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
             <!-- extent -->
             <semantic-query 
                 query="SELECT ?label ?extent
@@ -159,6 +165,57 @@
             </semantic-query>
             [[/if]]
 
+            <!-- acquisition -->
+            <semantic-query 
+                query="SELECT ?label ?acquisition WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition>) }
+                    ?? rico:isAssociatedWithEvent [ a rico:Event ; rico:hasEventType ?acquisition ] . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{acquisition.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- amount -->
+            <semantic-query 
+                query='SELECT ?amount WHERE { ?? spao:recordResourceAmount ?amount . } LIMIT 1'
+                template='<div><h5>Amount</h5>{{#each bindings}}<div>{{amount.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- linear meters -->
+            <semantic-query 
+                query='SELECT ?meters WHERE { ?? spao:recordResourceLinearMeters ?meters . } LIMIT 1'
+                template='<div><h5>Linear Meters</h5>{{#each bindings}}<div>{{meters.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- weight -->
+            <semantic-query 
+                query='SELECT ?weight WHERE { ?? spao:recordResourceWeight ?weight . } LIMIT 1'
+                template='<div><h5>Weight</h5>{{#each bindings}}<div>{{weight.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- access condition -->
+            <semantic-query 
+                query='SELECT ?access_condition WHERE { ?? <http://temp.performing-arts.ch/hasAccessCondition> ?access_condition . } LIMIT 1'
+                template='<div><h5>Access condition</h5>{{#each bindings}}<div>{{access_condition.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- copyright -->
+            <semantic-query 
+                query='SELECT ?copyright WHERE { ?? <http://temp.performing-arts.ch/hasCopyright> ?copyright . } LIMIT 1'
+                template='<div><h5>Copyright</h5>{{#each bindings}}<div>{{copyright.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- credit -->
+            <semantic-query 
+                query='SELECT ?credit WHERE { ?? <http://temp.performing-arts.ch/hasCredit> ?credit . } LIMIT 1'
+                template='<div><h5>Credit</h5>{{#each bindings}}<div>{{credit.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- use rights -->
+            <semantic-query 
+                query='SELECT ?use_rights WHERE { ?? <http://temp.performing-arts.ch/hasUseRights> ?use_rights . } LIMIT 1'
+                template='<div><h5>Use right</h5>{{#each bindings}}<div>{{use_rights.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
         </bs-col>
 
         <bs-col sm="4">
@@ -235,6 +292,20 @@
                 >
             </semantic-query>
 
+            <!-- creator -->
+            <semantic-query 
+            query="SELECT ?label ?creator WHERE {
+                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreator>) }
+                ?? rico:createdBy ?creator .
+            }"
+            template='<div>
+                {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                <ul class="list-unstyled">{{#each bindings}}
+                    <li><semantic-link iri="{{creator.value}}"></semantic-link></li>
+                {{/each}}</ul></div>'
+            >
+            </semantic-query>
+
             <!-- places -->
             <semantic-query 
             query="SELECT ?label ?place ?identifier
@@ -257,8 +328,8 @@
                     <li><semantic-link iri="{{place.value}}"></semantic-link> {{identifier.value}}</li>
                 {{/each}}</ul></div>'
             >
-        </semantic-query>
-        
+            </semantic-query>
+
         </bs-col>
 
         <bs-col sm="4">
@@ -329,7 +400,7 @@
                         ( 7 spav:asdcd )
                     }
                     ?? rico:hasInstantiation ?instantiation .
-                    ?instantiation rico:identifier ?identifier .
+                    OPTIONAL { ?instantiation rico:identifier ?identifier . }
                     ?instantiation <http://temp.performing-arts.ch/archivalStatus> ?archivalstatus .
                     OPTIONAL { ?instantiation rico:hasCarrierType ?carrier . }
                 } ORDER BY ASC (?order) (?identifier)"
@@ -353,18 +424,18 @@
                     UNION
                     { ?part rico:isConstituentOf ?? . ?node premis:represents ?part . }
                     UNION
-                    { ?? <http://temp.performing-arts.ch/hasCopy> ?node }
+                    { ?? rico:hasDerivedInstantiation ?node }
                     UNION
-                    { ?node <http://temp.performing-arts.ch/hasCopy> ?? } 
+                    { ?node rico:hasDerivedInstantiation ?? } 
                     { 
                         ?node premis:represents ?parent . 
                         MINUS {
-                            ?x <http://temp.performing-arts.ch/hasCopy> ?node . 
+                            ?x rico:hasDerivedInstantiation ?node . 
                             ?x premis:represents ?parent .
                         }
                     }
                     UNION 
-                    { ?parent <http://temp.performing-arts.ch/hasCopy> ?node . }
+                    { ?parent rico:hasDerivedInstantiation ?node . }
 
                 }'
                 provider='d3-dendrogram'

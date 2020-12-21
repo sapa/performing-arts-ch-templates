@@ -28,7 +28,19 @@
                     <!-- archival status -->
                     <semantic-query 
                         query="SELECT ?archival_status WHERE { ?? <http://temp.performing-arts.ch/archivalStatus> ?archival_status . }"
-                        template='<div><h5>Archival status</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{archival_status.value}}"></mp-label></li>{{/each}}</ul></div>'>
+                        template='<div><h5>Archival status*</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{archival_status.value}}"></mp-label></li>{{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- location -->
+                    <semantic-query 
+                        query="SELECT ?location WHERE { ?? rico:hasLocation ?location . }"
+                        template='<div><h5>Location</h5><ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{location.value}}"></semantic-link></li>{{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- medium -->
+                    <semantic-query 
+                        query="SELECT ?medium WHERE { ?? <http://temp.performing-arts.ch/medium> ?medium . }"
+                        template='<div><h5>Medium*</h5><ul class="list-unstyled">{{#each bindings}}<li>{{medium.value}}</li>{{/each}}</ul></div>'>
                     </semantic-query>
 
                     <!-- carrier type / medium -->
@@ -42,6 +54,12 @@
                             }
                         }"
                         template='<div><h5>Carrier type</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{carrier_type.value}}"></mp-label></li>{{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- print type -->
+                    <semantic-query 
+                        query="SELECT ?printtype WHERE { ?? <http://temp.performing-arts.ch/hasPrintType> ?printtype . }"
+                        template='<div><h5>Print type*</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{printtype.value}}"></mp-label></li>{{/each}}</ul></div>'>
                     </semantic-query>
 
                     <!-- composition level -->
@@ -122,6 +140,12 @@
                         template='<div><h5>Standard</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{standard.value}}"></mp-label></li>{{/each}}</ul></div>'>
                     </semantic-query>
 
+                    <!-- extent -->
+                    <semantic-query 
+                        query="SELECT ?extent WHERE { ?? rico:instantiationExtent ?extent . } ORDER BY ASC (?extent)"
+                        template='<div><h5>Extent</h5><ul class="list-unstyled">{{#each bindings}}<li>{{extent.value}}</li>{{/each}}</ul></div>'>
+                    </semantic-query>
+
                     <!-- color -->
                     <semantic-query 
                         query="SELECT ?color WHERE { 
@@ -188,7 +212,14 @@
                         template='<div><h5>Record</h5><ul class="list-unstyled">
                             {{#each bindings}}<li><semantic-link iri="{{record_resource.value}}">{{label.value}}</semantic-link></li>{{/each}}
                         </ul></div>'>
-                    </semantic-query>    
+                    </semantic-query>
+
+                    <!-- location -->
+                    <semantic-query 
+                        query="SELECT ?location WHERE { ?? <http://temp.performing-arts.ch/hasLocation> ?location . }"
+                        template='<div><h5>Location*</h5>{{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{location.value}}</div>{{/each}}</div>'>
+                    </semantic-query>
+
 
                 </bs-col>
             </bs-row>
@@ -197,12 +228,12 @@
 
                 <semantic-tree
                     query='SELECT DISTINCT ?node ?parent WHERE {
-                        { ?? <http://temp.performing-arts.ch/hasCopy>* ?node }
+                        { ?? rico:hasDerivedInstantiation* ?node }
                         UNION
-                        { ?node <http://temp.performing-arts.ch/hasCopy>* ?? } 
+                        { ?node rico:hasDerivedInstantiation* ?? } 
                         UNION
                         { BIND(?? AS ?node) }
-                        OPTIONAL { ?p <http://temp.performing-arts.ch/hasCopy> ?node . }
+                        OPTIONAL { ?p rico:hasDerivedInstantiation ?node . }
                         OPTIONAL { ?record rico:hasInstantiation ?node . }
                         BIND(IF(BOUND(?p), ?p, ?record) AS ?parent)
                     }'
