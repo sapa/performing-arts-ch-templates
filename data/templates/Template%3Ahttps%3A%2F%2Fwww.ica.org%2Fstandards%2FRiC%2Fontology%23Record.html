@@ -188,31 +188,31 @@
 
             <!-- weight -->
             <semantic-query 
-                query='SELECT ?weight WHERE { ?? spao:recordResourceWeight ?weight . } LIMIT 1'
+                query='SELECT ?weight WHERE { ?? spao:recordResourceWeight ?weight . }'
                 template='<div><h5>Weight</h5>{{#each bindings}}<div>{{weight.value}}</div>{{/each}}</div>'>
-            </semantic-query>
-
-            <!-- access condition -->
-            <semantic-query 
-                query='SELECT ?access_condition WHERE { ?? <http://temp.performing-arts.ch/hasAccessCondition> ?access_condition . } LIMIT 1'
-                template='<div><h5>Access condition</h5>{{#each bindings}}<div>{{access_condition.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
             <!-- copyright -->
             <semantic-query 
-                query='SELECT ?copyright WHERE { ?? <http://temp.performing-arts.ch/hasCopyright> ?copyright . } LIMIT 1'
+                query='SELECT ?copyright WHERE { ?? schema:copyrightNotice ?copyright . }'
                 template='<div><h5>Copyright</h5>{{#each bindings}}<div>{{copyright.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
             <!-- credit -->
             <semantic-query 
-                query='SELECT ?credit WHERE { ?? <http://temp.performing-arts.ch/hasCredit> ?credit . } LIMIT 1'
+                query='SELECT ?credit WHERE { ?? <http://temp.performing-arts.ch/hasCredit> ?credit . }'
                 template='<div><h5>Credit</h5>{{#each bindings}}<div>{{credit.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- access condition -->
+            <semantic-query 
+                query='SELECT ?access_condition WHERE { ?? rico:conditionsOfAccess ?access_condition . }'
+                template='<div><h5>Access condition</h5>{{#each bindings}}<div>{{access_condition.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
             <!-- use rights -->
             <semantic-query 
-                query='SELECT ?use_rights WHERE { ?? <http://temp.performing-arts.ch/hasUseRights> ?use_rights . } LIMIT 1'
+                query='SELECT ?use_rights WHERE { ?? rico:conditionsOfUse ?use_rights . }'
                 template='<div><h5>Use right</h5>{{#each bindings}}<div>{{use_rights.value}}</div>{{/each}}</div>'>
             </semantic-query>
 

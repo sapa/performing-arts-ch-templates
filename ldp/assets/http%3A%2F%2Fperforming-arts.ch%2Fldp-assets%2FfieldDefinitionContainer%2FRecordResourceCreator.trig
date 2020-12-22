@@ -1,0 +1,39 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreator/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreator>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Urheber"@de, "Creator"@en, "Auteur"@fr,
+      "Autore"@it;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Person>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-94f723879fde4054bbc635e57b87e5fb-83w5bc;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-94f723879fde4054bbc635e57b87e5fb-wfkgt;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-94f723879fde4054bbc635e57b87e5fb-ytbjk;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-94f723879fde4054bbc635e57b87e5fb-0zpeio;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2020-12-14T19:57:10.467Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-94f723879fde4054bbc635e57b87e5fb-83w5bc a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:createdBy $value} WHERE {}" .
+  
+  _:genid-94f723879fde4054bbc635e57b87e5fb-0zpeio a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+SELECT ?value ?label WHERE {
+   SERVICE Repository:lookup {
+     ?value lookup:token ?__token__ ;
+     	lookup:type rico:Person .
+   }
+}""" .
+  
+  _:genid-94f723879fde4054bbc635e57b87e5fb-ytbjk a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:createdBy $value . } WHERE {}" .
+  
+  _:genid-94f723879fde4054bbc635e57b87e5fb-wfkgt a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:createdBy ?value . }" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreator> .
+}
