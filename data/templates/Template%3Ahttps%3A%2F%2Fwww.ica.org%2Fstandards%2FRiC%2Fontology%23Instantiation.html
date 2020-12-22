@@ -54,14 +54,6 @@
 
                 <bs-col sm="4">
 
-                    <!-- medium -->
-                    <semantic-query 
-                        query="SELECT ?medium WHERE { ?? <http://temp.performing-arts.ch/medium> ?medium . }"
-                        template='<div>
-                            <h5>Medium*</h5>
-                            <ul class="list-unstyled">{{#each bindings}}<li>{{medium.value}}</li>{{/each}}</ul></div>'>
-                    </semantic-query>
-
                     <!-- carrier type / medium -->
                     <semantic-query 
                         query="SELECT ?carrier_type WHERE {
@@ -76,6 +68,16 @@
                                 <li><mp-label iri="{{carrier_type.value}}"></mp-label></li>
                             {{/each}}</ul>
                         </div>'>
+                    </semantic-query>
+
+                    <!-- material -->
+                    <semantic-query 
+                        query="SELECT ?material WHERE { ?? crm:P45_consists_of ?material . }"
+                        template='<div>
+                            <h5>Material</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><mp-label iri="{{material.value}}"></mp-label></li>
+                            {{/each}}</ul></div>'>
                     </semantic-query>
 
                     <!-- color -->
