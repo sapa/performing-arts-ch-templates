@@ -1,0 +1,35 @@
+            <!-- identifier -->
+            <semantic-query 
+                query="SELECT ?label ?identifier WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier>) }
+                    ?? rico:identifier ?identifier . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            <!-- legacy identifier -->
+            <semantic-query 
+                query="SELECT ?label ?identifier WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier>) }
+                    ?? spao:legacyIdentifier ?identifier . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
+            </semantic-query>
+
+            [[#if (hasPermission "forms:ldp:*")]] 
+            <!-- ScopeID -->
+            <semantic-query 
+                query='SELECT ?label ?scope_url ?scope_id WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ScopeID>) }
+                    ?? owl:sameAs ?scope_url.
+                    FILTER(CONTAINS(STR(?scope_url), "http://catalogue.collectiondeladanse.ch")) .
+                    BIND(STRAFTER(STR(?scope_url), "?ID=") AS ?scope_id)
+                }'
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}
+                        <li><a href="{{scope_url.value}}" target="_blank">{{scope_id.value}}</a></li>
+                    {{/each}}</ul>    
+                    </div>'>
+            </semantic-query>
+            [[/if]]
