@@ -407,6 +407,35 @@
 
         </bs-tab>
 
+        <bs-tab event-key='6' title='Wikidata double matches'>
+
+            <semantic-table 
+                query='SELECT DISTINCT ?wikidata ?q (COUNT(?sapa) AS ?count) WHERE {
+                    ?sapa owl:sameAs ?wikidata .
+                    FILTER(CONTAINS(STR(?wikidata), "wikidata.org/entity"))
+                    BIND(SUBSTR(STR(?wikidata), 32) AS ?q)
+                } GROUP BY (?wikidata) (?q)
+                HAVING (COUNT(?sapa)>1)' 
+                column-configuration='[
+                    {"displayName": "Wikidata", "cellTemplate": "<a href=\"http://www.wikidata.org/entity/{{q.value}}\" target=\"_blank\">{{q.value}}</a>"},
+                    {"displayName": "Items", "cellTemplate": "{{>items}}"}
+                ]'
+                number-of-displayed-rows=20
+                no-result-template='No results found.'
+                options='{"showFilter": true}'>
+                <template id='items'>
+                    <semantic-query 
+                        query='SELECT DISTINCT ?item WHERE { ?item owl:sameAs <{{wikidata.value}}> . }'
+                        template = '{{>item-link}} '>
+                        <template id='item-link'>
+                            <div>{{#each bindings}}<div><semantic-link iri="{{item.value}}" target="_blank"></semantic-link></div>{{/each}}</div>
+                        </template>
+                    </semantic-query>
+                </template>
+            </semantic-table>
+
+        </bs-tab>
+
     </bs-tabs>
 
   [[/if]]
