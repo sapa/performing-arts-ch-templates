@@ -360,10 +360,60 @@
                 template='<div><h5>Processing convention</h5>{{#each bindings}}<div>{{convention.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
-            <!-- processing period -->
+            <!-- processing date -->
             <semantic-query 
-                query='SELECT ?period WHERE { ?? spao:hasProcessingPeriod ?period . }'
-                template='<div><h5>Processing period</h5>{{#each bindings}}<div>{{period.value}}</div>{{/each}}</div>'>
+                query="SELECT ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
+                WHERE {
+                    ?? spao:hasProcessingDate ?date .
+                    {
+                        {
+                            ?date rico:normalizedDateValue ?normalized_date .
+                        } UNION {
+                            ?date rico:expressedDate ?expressed_date .
+                        }
+                        BIND(IF(BOUND(?expressed_date), ?expressed_date, ?normalized_date) AS ?single_date)
+                        OPTIONAL { ?date rico:dateQualifier ?single_qualifier . }
+                        OPTIONAL { ?date rico:certainty ?single_certainty . }
+                    } UNION {
+                        ?date a rico:DateRange .
+                        OPTIONAL {
+                            ?date rico:hasBeginningDate ?b .
+                            ?b rico:normalizedDateValue ?beginning_date .
+                            OPTIONAL { ?b rico:dateQualifier ?beginning_qualifier . }
+                            OPTIONAL { ?b rico:certainty ?beginning_certainty . }
+                        }
+                        OPTIONAL {
+                            ?date rico:hasEndDate ?e .
+                            ?e rico:normalizedDateValue ?end_date .
+                            OPTIONAL { ?e rico:dateQualifier ?end_qualifier . }
+                            OPTIONAL { ?e rico:certainty ?end_certainty . }
+                        }
+                    }
+                }"
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5>Processing date</h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}
+                        <li>
+                            {{#if single_date.value}}
+                                {{#if single_qualifier.value}}<mp-label iri="{{single_qualifier.value}}"></mp-label> {{/if}}
+                                {{single_date.value}}
+                                {{#if single_certainty.value}}<span> (<mp-label iri="{{single_certainty.value}}"></mp-label>)</span>{{/if}}
+                            {{else}}
+                                {{#if beginning_date.value}}
+                                    {{#if beginning_qualifier.value}}<mp-label iri="{{beginning_qualifier.value}}"></mp-label> {{/if}}
+                                    {{beginning_date.value}}
+                                    {{#if beginning_certainty.value}}<span> (<mp-label iri="{{beginning_certainty.value}}"></mp-label>)</span>{{/if}}
+                                {{/if}}
+                                <span> - </span>
+                                {{#if end_date.value}}
+                                    {{#if end_qualifier.value}}<mp-label iri="{{end_qualifier.value}}"></mp-label> {{/if}}
+                                    {{end_date.value}}
+                                    {{#if end_certainty.value}}<span> (<mp-label iri="{{end_certainty.value}}"></mp-label>)</span>{{/if}}
+                                {{/if}}
+                            {{/if}}
+                        </li>
+                    {{/each}}</ul></div>'
+                >
             </semantic-query>
 
             [[#if (hasPermission "forms:ldp:*")]] 
