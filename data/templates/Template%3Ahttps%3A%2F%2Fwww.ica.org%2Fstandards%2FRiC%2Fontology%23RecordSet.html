@@ -239,6 +239,12 @@
                 </div>'>
             </semantic-query>
 
+            <!-- doubles -->
+            <semantic-query 
+                query='SELECT ?double WHERE { ?? <http://temp.performing-arts.ch/hasDouble> ?double . }'
+                template='<div><h5>Doubles</h5>{{#each bindings}}<div>{{double.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
             <h5>Record hierarchy</h5>
             <semantic-tree
                  query='SELECT DISTINCT ?node ?parent ?name ?index ?identifier ?level WHERE {
@@ -268,6 +274,38 @@
                     <span>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link uri="{{node.value}}">{{name.value}}</semantic-link>{{#if level}} (<mp-label iri="{{level.value}}""></mp-label>){{/if}}</span>
                 </template>
             </semantic-tree>
+
+            <!-- related material -->
+            <semantic-query 
+                query='SELECT ?related WHERE { ?? <http://temp.performing-arts.ch/isRelatedTo> ?related . }'
+                template='<div><h5>Related</h5>{{#each bindings}}<div>{{related.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- notes -->
+            <semantic-query 
+                query='SELECT ?note WHERE { ?? spao:hasNote ?note . }'
+                template='<div><h5>Note</h5>{{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{note.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
+            [[#if (hasPermission "forms:ldp:*")]] 
+            <!-- internal notes -->
+            <semantic-query 
+                query='SELECT ?note WHERE { ?? spao:hasInternalNote ?note . }'
+                template='<div><h5>Internal note</h5>{{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{note.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+            [[/if]]
+
+            <!-- processing convention -->
+            <semantic-query 
+                query='SELECT ?convention WHERE { ?? spao:hasProcessingConvention ?convention . }'
+                template='<div><h5>Processing convention</h5>{{#each bindings}}<div>{{convention.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- processing period -->
+            <semantic-query 
+                query='SELECT ?period WHERE { ?? spao:hasProcessingPeriod ?period . }'
+                template='<div><h5>Processing period</h5>{{#each bindings}}<div>{{period.value}}</div>{{/each}}</div>'>
+            </semantic-query>
 
             [[#if (hasPermission "forms:ldp:*")]] 
             <semantic-query 

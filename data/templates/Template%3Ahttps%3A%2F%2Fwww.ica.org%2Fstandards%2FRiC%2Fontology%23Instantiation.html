@@ -254,6 +254,12 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
+                    <!-- copy path -->
+                    <semantic-query 
+                        query='SELECT ?path WHERE { ?? <http://temp.performing-arts.ch/hasCopyPath> ?path . }'
+                        template='<div><h5>Copy path</h5>{{#each bindings}}<div>{{path.value}}</div>{{/each}}</div>'>
+                    </semantic-query>
+                    
                     <!-- comment -->
                     <semantic-query 
                         query="SELECT ?comment WHERE { ?? rdf:comment ?comment . }"
@@ -293,6 +299,20 @@
                                 <li><semantic-link iri="{{location.value}}"></semantic-link></li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
+
+                    <!-- notes -->
+                    <semantic-query 
+                        query='SELECT ?note WHERE { ?? spao:hasNote ?note . }'
+                        template='<div><h5>Note</h5>{{#each bindings}}<div>{{note.value}}</div>{{/each}}</div>'>
+                    </semantic-query>
+
+                    [[#if (hasPermission "forms:ldp:*")]] 
+                    <!-- internal notes -->
+                    <semantic-query 
+                        query='SELECT ?note WHERE { ?? spao:hasInternalNote ?note . }'
+                        template='<div><h5>Internal note</h5>{{#each bindings}}<div>{{note.value}}</div>{{/each}}</div>'>
+                    </semantic-query>
+                    [[/if]]
 
                 </bs-col>
 

@@ -106,9 +106,15 @@
                     template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                 >
                 </mp-field-visualization> 
+                
                 <semantic-query 
                     query='SELECT ?history WHERE { ?? rico:history ?history . }'
                     template='<div>{{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{history.value}}</div>{{/each}}</div>'>
+                </semantic-query>
+        
+                <semantic-query 
+                    query='SELECT ?bibliography WHERE { ?? <http://temp.performing-arts.ch/bibliography> ?bibliography . }'
+                    template='<div><h5>Bibliography</h5>{{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{bibliography.value}}</div>{{/each}}</div>'>
                 </semantic-query>
         
             </bs-col>
