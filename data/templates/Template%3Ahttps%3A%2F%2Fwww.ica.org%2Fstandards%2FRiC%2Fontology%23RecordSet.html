@@ -198,10 +198,34 @@
                 template='<div><h5>Copyright</h5>{{#each bindings}}<div>{{copyright.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
+            <!-- copyright declaration -->
+            <semantic-query 
+                query='SELECT ?value WHERE { ?? spao:hasCopyrightDeclaration ?value . }'
+                template='<div><h5>Copyright declaration</h5>
+                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul>
+                </div>'>
+            </semantic-query>
+
             <!-- use rights -->
             <semantic-query 
                 query='SELECT ?use_rights WHERE { ?? rico:conditionsOfUse ?use_rights . }'
                 template='<div><h5>Use right</h5>{{#each bindings}}<div>{{use_rights.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- use rights still -->
+            <semantic-query 
+                query='SELECT ?value WHERE { ?? spao:hasUsageRightsStill ?value . }'
+                template='<div><h5>Use rights still</h5>
+                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul>
+                </div>'>
+            </semantic-query>
+
+            <!-- use rights streaming -->
+            <semantic-query 
+                query='SELECT ?value WHERE { ?? spao:hasUsageRightsStreaming ?value . }'
+                template='<div><h5>Use rights streaming</h5>
+                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul>
+                </div>'>
             </semantic-query>
 
             <!-- credit -->
@@ -209,7 +233,6 @@
                 query='SELECT ?credit WHERE { ?? <http://temp.performing-arts.ch/hasCredit> ?credit . }'
                 template='<div><h5>Credit</h5>{{#each bindings}}<div>{{credit.value}}</div>{{/each}}</div>'>
             </semantic-query>
-
 
             <!-- language -->
             <semantic-query 
