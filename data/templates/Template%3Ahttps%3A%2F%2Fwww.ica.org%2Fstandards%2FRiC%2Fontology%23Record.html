@@ -72,29 +72,7 @@
                 </div>'>
             </semantic-query>
 
-            <!-- parts -->
-            <semantic-query 
-                query="SELECT ?headline ?label ?subject WHERE {
-                    VALUES (?headline) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart>) }
-                    ?part rico:isConstituentOf ?? .
-                    ?part rico:name ?name .
-                    OPTIONAL { ?part rico:identifier ?identifier }
-                    BIND(IF(BOUND(?identifier), CONCAT(?identifier, ': ', ?name), ?name) AS ?label)
-                    OPTIONAL { ?part rico:hasSubject ?subject }
-                } ORDER BY ASC (?label)"
-                template='<div>
-                    {{#ifCond bindings.length ">" 0}}
-                        <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.headline.value}}"></mp-label></semantic-context></h5>
-                    {{/ifCond}}
-                    <ul class="list-unstyled">
-                        {{#each bindings}}
-                        <li>{{label.value}}
-                            {{#if subject.value}}<p><semantic-link iri="{{subject.value}}"></semantic-link></p>{{/if}}
-                        </li>
-                        {{/each}}
-                    </ul>
-                </div>'>
-            </semantic-query>
+            [[> sapaModule:RecordParts]]
 
             <!-- creator -->
             <semantic-query 
