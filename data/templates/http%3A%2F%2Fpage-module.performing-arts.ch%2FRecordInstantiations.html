@@ -1,0 +1,38 @@
+<!-- instantiations -->
+<semantic-query 
+    query="SELECT ?headline ?order ?archivalstatus ?instantiation WHERE {
+        VALUES (?headline) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
+        VALUES (?order ?archivalstatus) {
+            ( 1 spav:asarm )
+            ( 2 spav:asprc )
+            ( 3 spav:aspcp )
+            ( 4 spav:aspcd )
+            ( 5 spav:asdsp )
+            ( 6 spav:asdcp )
+            ( 7 spav:asdcd )
+        }
+        ?? rico:hasInstantiation ?instantiation .
+        ?instantiation spao:hasArchivalStatus ?archivalstatus .
+    } ORDER BY ASC (?order)"
+    template='{{> instantiation-properties }}'>
+    <template id='instantiation-properties'>
+        {{#ifCond bindings.length ">" 0}}<hr/><h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.headline.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+        {{#each bindings}}
+        <h5><semantic-link iri="{{instantiation.value}}"></semantic-link></h5>
+        <p><mp-label iri="{{archivalstatus.value}}"></mp-label></p>
+        <semantic-query 
+            query="SELECT ?label ?identifier WHERE {
+                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier>) }
+                <{{instantiation.value}}> rico:identifier ?identifier . }"
+            template='<div>{{#ifCond bindings.length ">" 0}}
+                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
+        </semantic-query>
+        <semantic-query 
+            query="SELECT ?carrier WHERE { <{{instantiation.value}}> rico:hasCarrierType ?carrier . }"
+            template="<div><h6>Carrier</h6>{{#each bindings}}{{#if @first}}<mp-label iri='{{carrier.value}}'></mp-label>{{else}}, <mp-label iri='{{carrier.value}}'></mp-label>{{/if}}{{/each}}</div>" >
+        </semantic-query>
+        <hr />
+        {{/each}}
+    </template>
+</semantic-query>

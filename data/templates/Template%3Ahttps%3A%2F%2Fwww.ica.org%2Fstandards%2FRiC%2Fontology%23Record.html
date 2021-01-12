@@ -170,33 +170,7 @@
 
             <!-- INSTANTIATIONS -->
 
-            <!-- instantiations -->
-            <semantic-query 
-                query="SELECT DISTINCT ?headline ?order ?archivalstatus ?instantiation ?identifier ?carrier WHERE {
-                    VALUES (?headline) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
-                    VALUES (?order ?archivalstatus) {
-                        ( 1 spav:asarm )
-                        ( 2 spav:asprc )
-                        ( 3 spav:aspcp )
-                        ( 4 spav:aspcd )
-                        ( 5 spav:asdsp )
-                        ( 6 spav:asdcp )
-                        ( 7 spav:asdcd )
-                    }
-                    ?? rico:hasInstantiation ?instantiation .
-                    OPTIONAL { ?instantiation rico:identifier ?identifier . }
-                    ?instantiation spao:hasArchivalStatus ?archivalstatus .
-                    OPTIONAL { ?instantiation rico:hasCarrierType ?carrier . }
-                } ORDER BY ASC (?order) (?identifier)"
-                template='<div>
-                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.headline.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    {{#each bindings}}<p>
-                        {{#if archivalstatus}}<mp-label iri="{{archivalstatus.value}}"></mp-label><br />{{/if}}
-                        <semantic-link iri="{{instantiation.value}}">{{identifier.value}}</semantic-link>
-                        {{#if carrier}} (<mp-label iri="{{carrier.value}}"></mp-label>){{/if}}
-                    </p>{{/each}}
-                </div>'>
-            </semantic-query>
+            [[> sapaModule:RecordInstantiations]]
 
             <!-- ASSESSMENT -->
 
