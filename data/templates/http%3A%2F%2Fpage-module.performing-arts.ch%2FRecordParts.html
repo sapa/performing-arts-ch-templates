@@ -1,9 +1,10 @@
 <!-- parts -->
 <semantic-query 
-    query="SELECT ?headline ?part WHERE {
+    query="SELECT ?headline ?part ?index WHERE {
         VALUES (?headline) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart>) }
         ?part rico:isConstituentOf ?? .
-    }"
+        OPTIONAL { ?? olo:index ?index . }
+    } ORDER BY ASC (?index)"
     template='{{> part-properties }}'>
     <template id='part-properties'>
         <strong><p>Parts</p></strong>

@@ -186,11 +186,7 @@
 
             <!-- ACCESS -->
 
-            <!-- access conditions -->
-            <semantic-query 
-                query='SELECT ?access_conditions WHERE { ?? rico:conditionsOfAccess ?access_conditions . }'
-                template='<div><h5>Access conditions</h5>{{#each bindings}}<div>{{access_conditions.value}}</div>{{/each}}</div>'>
-            </semantic-query>
+            [[> sapaModule:RecordResourceAccess]]
 
             <!-- copyright -->
             <semantic-query 

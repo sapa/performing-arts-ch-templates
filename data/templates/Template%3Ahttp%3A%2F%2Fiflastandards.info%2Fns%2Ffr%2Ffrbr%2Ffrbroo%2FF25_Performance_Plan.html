@@ -135,6 +135,13 @@
             <!-- reference functions - composition -->
             [[> sapaModule:ShowPerformances2 function="spav:mufbo"]]
 
+            <!-- music titles - temp -->
+            <semantic-query
+              query='SELECT ?title WHERE { ?? <http://temp.performing-arts.ch/hasMusicTitle> ?title . } ORDER BY ASC (?title)'
+              template='<h5>music title</h5><ul class="list-unstyled">{{#each bindings}}<li>{{title.value}}</li>{{/each}}</ul>'
+            />
+            </semantic-query>
+
         </bs-col>
         <bs-col sm="4">
           

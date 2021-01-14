@@ -30,7 +30,7 @@
         </semantic-query>
         <semantic-query 
             query="SELECT ?carrier WHERE { <{{instantiation.value}}> rico:hasCarrierType ?carrier . }"
-            template="<div><h6>Carrier</h6>{{#each bindings}}{{#if @first}}<mp-label iri='{{carrier.value}}'></mp-label>{{else}}, <mp-label iri='{{carrier.value}}'></mp-label>{{/if}}{{/each}}</div>" >
+            template="<div><h6>Carrier type</h6>{{#each bindings}}{{#if @first}}<mp-label iri='{{carrier.value}}'></mp-label>{{else}}, <mp-label iri='{{carrier.value}}'></mp-label>{{/if}}{{/each}}</div>" >
         </semantic-query>
         <hr />
         {{/each}}

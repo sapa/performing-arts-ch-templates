@@ -66,6 +66,14 @@
             {{#each bindings}}<p style="white-space: pre-line;">{{description.value}}</p>{{/each}}</div>'>
         </semantic-query>
 
+        <!-- genre2 -->
+        <semantic-query
+          query='SELECT ?genre WHERE { ?? <http://temp.performing-arts.ch/genre2> ?genre . }'
+          template='<div><h5>Genre</h5>
+            <ul class="list-unstyled">{{#each bindings}}<li>{{genre.value}}</li>{{/each}}</ul>
+          </div>'>
+        </semantic-query>
+
       </bs-col>
       <bs-col sm="4">
       
