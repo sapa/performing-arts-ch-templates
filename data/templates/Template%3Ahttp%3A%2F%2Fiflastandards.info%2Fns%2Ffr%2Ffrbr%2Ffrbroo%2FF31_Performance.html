@@ -55,8 +55,7 @@
           <!-- producer & season -->
           <semantic-query 
               query='SELECT ?producer ?unidentified ?season WHERE {
-                  ?expressioncreation frbroo:R17_created ?? ;
-                      crm:P9_consists_of ?production .
+                  ?? crm:P9_consists_of ?production .
                   ?production crm:P2_has_type spav:muwgo ;
                       crm:P14_carried_out_by ?producer .
                   OPTIONAL {
