@@ -254,6 +254,14 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
+                    [[#if (hasPermission "forms:ldp:*")]] 
+                    <!-- responsible employee -->
+                    <semantic-query 
+                        query='SELECT ?employee WHERE { ?? spao:hasResponsibleEmployee ?employee . }'
+                        template='<div><h5>Responsible employee</h5><ul class="list-unstyled">{{#each bindings}}<li>{{employee.value}}</li>{{/each}}</ul></div>'>
+                    </semantic-query>
+                    [[/if]]
+        
                     <!-- processing date -->
                     <semantic-query 
                         query="SELECT ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty

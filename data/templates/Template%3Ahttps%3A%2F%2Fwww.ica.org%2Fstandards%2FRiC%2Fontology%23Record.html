@@ -324,6 +324,12 @@
                 query='SELECT ?note WHERE { ?? spao:hasInternalNote ?note . }'
                 template='<div><h5>Internal note</h5>{{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{note.value}}</div>{{/each}}</div>'>
             </semantic-query>
+
+            <!-- responsible employee -->
+            <semantic-query 
+                query='SELECT ?employee WHERE { ?? spao:hasResponsibleEmployee ?employee . }'
+                template='<div><h5>Responsible employee</h5><ul class="list-unstyled">{{#each bindings}}<li>{{employee.value}}</li>{{/each}}</ul></div>'>
+            </semantic-query>
             [[/if]]
 
             <!-- processing convention -->
