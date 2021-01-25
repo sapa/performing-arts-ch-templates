@@ -133,6 +133,19 @@
                 {{/each}}</ul></div>'>
             </semantic-query>
 
+            <!-- language -->
+            <semantic-query 
+                query="SELECT ?label ?language WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage>) }
+                    ?? rico:language ?language . }"
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}
+                        <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
+                    {{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{language.value}}"></mp-label></li>{{/each}}</ul>
+                </div>'>
+            </semantic-query>
+
             <!-- type of photographic print -->
             <semantic-query 
                 query="SELECT ?print WHERE {
@@ -240,19 +253,6 @@
             <semantic-query 
                 query='SELECT ?credit WHERE { ?? <http://temp.performing-arts.ch/hasCredit> ?credit . }'
                 template='<div><h5>Credit</h5>{{#each bindings}}<div>{{credit.value}}</div>{{/each}}</div>'>
-            </semantic-query>
-
-            <!-- language -->
-            <semantic-query 
-                query="SELECT ?label ?language WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage>) }
-                    ?? rico:language ?language . }"
-                template='<div>
-                    {{#ifCond bindings.length ">" 0}}
-                        <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
-                    {{/ifCond}}
-                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{language.value}}"></mp-label></li>{{/each}}</ul>
-                </div>'>
             </semantic-query>
 
         </bs-col>
