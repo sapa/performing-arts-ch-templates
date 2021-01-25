@@ -270,6 +270,15 @@
                 </div>'>
             </semantic-query>
 
+            <!-- packing -->
+            <semantic-query 
+                query="SELECT ?packing WHERE { ?? spao:hasPacking ?packing . }"
+                template='<div>
+                    <h5>Packing</h5>
+                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{packing.value}}"></mp-label></li>{{/each}}</ul>
+                </div>'>
+            </semantic-query>
+
             <!-- doubles -->
             <semantic-query 
                 query='SELECT ?double WHERE { ?? <http://temp.performing-arts.ch/hasDouble> ?double . }'
