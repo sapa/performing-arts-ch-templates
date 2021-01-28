@@ -33,7 +33,7 @@
               ?item rico:name ?l .
               BIND(LCASE(?l) AS ?label)             
             }
-          }'
+          } ORDER BY (?index)'
         parents-query='
           SELECT ?item ?parent WHERE {
             ?item rico:includedIn ?parent .
@@ -55,7 +55,7 @@
             OPTIONAL { ?item rico:hasRecordSetType ?rslevel . }
             BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
             OPTIONAL { ?item rico:identifier ?identifier }
-          }'
+          } ORDER BY (?identifier)'
         placeholder='Select or search for a name or signature ...'
         node-template='{{>node}}'
         >
