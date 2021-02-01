@@ -55,15 +55,43 @@
         </semantic-query>
 
         <!-- description -->
-        <semantic-query 
-          query='SELECT ?description WHERE { 
-              ?? crm:P67_is_referred_to_by [
-                a crm:E33_Linguistic_Object ;
-                crm:P2_has_type spav:eoept ;
-                rdf:value ?description ]
+        <semantic-query
+          query='SELECT ?value WHERE {
+            ?? crm:P67_is_referred_to_by ?linguistic.
+            ?linguistic crm:P2_has_type spav:eoept ;
+              rdf:value ?value .
           }'
-          template='<div>{{#ifCond bindings.length ">" 0}}<h5>Description</h5>{{/ifCond}}
-            {{#each bindings}}<p style="white-space: pre-line;">{{description.value}}</p>{{/each}}</div>'>
+          template='<div><h5>Description</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+        </semantic-query>
+        
+        <!-- note on context -->
+        <semantic-query
+          query='SELECT ?value WHERE {
+            ?? crm:P67_is_referred_to_by ?linguistic.
+            ?linguistic crm:P2_has_type spav:eonct ;
+              rdf:value ?value .
+          }'
+          template='<div><h5>Note on context</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+        </semantic-query>
+        
+        <!-- note on stage work -->
+        <semantic-query
+          query='SELECT ?value WHERE {
+            ?? crm:P67_is_referred_to_by ?linguistic.
+            ?linguistic crm:P2_has_type spav:eonsw ;
+              rdf:value ?value .
+          }'
+          template='<div><h5>Note on stage work</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+        </semantic-query>
+        
+        <!-- note on music -->
+        <semantic-query
+          query='SELECT ?value WHERE {
+            ?? crm:P67_is_referred_to_by ?linguistic.
+            ?linguistic crm:P2_has_type spav:eonms ;
+              rdf:value ?value .
+          }'
+          template='<div><h5>Note on music</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
         </semantic-query>
 
         <!-- genre2 -->
