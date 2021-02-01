@@ -309,6 +309,24 @@
                 template='<div><h5>Related</h5>{{#each bindings}}<div>{{related.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
+            <!-- see also -->
+            <semantic-query
+                query='SELECT DISTINCT ?reference WHERE { 
+                    {
+                        ?? <http://temp.performing-arts.ch/seeAlso> ?reference .
+                        MINUS { ?reference a rico:RecordPart . } 
+                    } UNION { 
+                        ?? <http://temp.performing-arts.ch/seeAlso> ?r .
+                        ?r a rico:RecordPart ;
+                            rico:isConstituentOf ?reference .
+                    }
+                }'
+                template='<div><h5>See also</h5>
+                    <ul class="list-unstyled">{{#each bindings}}
+                        <li><semantic-link iri="{{reference.value}}"></semantic-link></li>
+                    {{/each}}</ul></div>'>
+            </semantic-query>
+
             <!-- notes -->
             <semantic-query 
                 query='SELECT ?note WHERE { ?? spao:hasNote ?note . }'

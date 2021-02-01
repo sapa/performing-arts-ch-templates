@@ -436,6 +436,19 @@
                     </semantic-query>
                     [[/if]]
 
+                    <!-- see also -->
+                    <semantic-query
+                        query='SELECT DISTINCT ?reference WHERE { 
+                            { ?? <http://temp.performing-arts.ch/seeAlso> ?reference . }
+                            UNION
+                            { ?file premis:isIncludedIn ?? ; <http://temp.performing-arts.ch/seeAlso> ?reference . }
+                        }'
+                        template='<div><h5>See also</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><semantic-link iri="{{reference.value}}"></semantic-link></li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
                 </bs-col>
 
             </bs-row>
