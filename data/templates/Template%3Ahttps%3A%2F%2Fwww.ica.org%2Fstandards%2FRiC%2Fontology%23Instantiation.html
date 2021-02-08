@@ -36,8 +36,6 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
-
-
                     <!-- history -->
                     <semantic-query 
                         query="SELECT ?label ?history WHERE {
@@ -256,6 +254,16 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
+                    <!-- condition -->
+                    <semantic-query 
+                        query="SELECT ?condition WHERE { ?? spao:hasCondition ?condition . } ORDER BY ASC (?condition)"
+                        template='<div>
+                            <h5>Condition</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{condition.value}}</li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
                     [[#if (hasPermission "forms:ldp:*")]] 
                     <!-- responsible employee -->
                     <semantic-query 
@@ -268,7 +276,7 @@
                     <semantic-query 
                         query="SELECT ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
                         WHERE {
-                            ?? <http://temp.performing-arts.ch/preparationDate> ?date .
+                            ?? spao:preparationDate ?date .
                             {
                                 {
                                     ?date rico:normalizedDateValue ?normalized_date .
@@ -324,7 +332,7 @@
                     <semantic-query 
                         query="SELECT ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
                         WHERE {
-                            ?? <http://temp.performing-arts.ch/lastControl> ?date .
+                            ?? spao:lastControl ?date .
                             {
                                 {
                                     ?date rico:normalizedDateValue ?normalized_date .
@@ -439,9 +447,9 @@
                     <!-- see also -->
                     <semantic-query
                         query='SELECT DISTINCT ?reference WHERE { 
-                            { ?? <http://temp.performing-arts.ch/seeAlso> ?reference . }
+                            { ?? spao:seeAlso ?reference . }
                             UNION
-                            { ?file premis:isIncludedIn ?? ; <http://temp.performing-arts.ch/seeAlso> ?reference . }
+                            { ?file premis:isIncludedIn ?? ; spao:seeAlso ?reference . }
                         }'
                         template='<div><h5>See also</h5>
                             <ul class="list-unstyled">{{#each bindings}}

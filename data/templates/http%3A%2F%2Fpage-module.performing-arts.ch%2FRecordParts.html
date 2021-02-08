@@ -203,10 +203,10 @@
         <semantic-query
             query='SELECT DISTINCT ?reference WHERE { 
                 {
-                    <{{part.value}}> <http://temp.performing-arts.ch/seeAlso> ?reference .
+                    <{{part.value}}> spao:seeAlso ?reference .
                     MINUS { ?reference a rico:RecordPart . } 
                 } UNION { 
-                    <{{part.value}}> <http://temp.performing-arts.ch/seeAlso> ?r .
+                    <{{part.value}}> spao:seeAlso ?r .
                     ?r a rico:RecordPart ;
                         rico:isConstituentOf ?reference .
                 }

@@ -261,7 +261,7 @@
 
         <!-- see also -->
         <semantic-query
-            query='SELECT DISTINCT ?reference WHERE { ?? <http://temp.performing-arts.ch/seeAlso> ?reference . }'
+            query='SELECT DISTINCT ?reference WHERE { ?? spao:seeAlso ?reference . }'
             template='<div><h5>See also</h5>
                 <ul class="list-unstyled">{{#each bindings}}
                     <li><semantic-link iri="{{reference.value}}"></semantic-link></li>

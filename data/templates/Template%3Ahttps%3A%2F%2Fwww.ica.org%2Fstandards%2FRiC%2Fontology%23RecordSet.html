@@ -220,7 +220,7 @@
             <!-- use rights -->
             <semantic-query 
                 query='SELECT ?use_rights WHERE { ?? rico:conditionsOfUse ?use_rights . }'
-                template='<div><h5>Use rights</h5>{{#each bindings}}<div>{{use_rights.value}}</div>{{/each}}</div>'>
+                template='<div><h5>Use rights</h5>{{#each bindings}}<p style="white-space: pre-line;">{{use_rights.value}}</p>{{/each}}</div>'>
             </semantic-query>
 
             <!-- use rights still -->
@@ -241,7 +241,7 @@
 
             <!-- credit -->
             <semantic-query 
-                query='SELECT ?credit WHERE { ?? <http://temp.performing-arts.ch/hasCredit> ?credit . }'
+                query='SELECT ?credit WHERE { ?? spao:hasCredit ?credit . }'
                 template='<div><h5>Credit</h5>{{#each bindings}}<div>{{credit.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
@@ -271,7 +271,7 @@
 
             <!-- doubles -->
             <semantic-query 
-                query='SELECT ?double WHERE { ?? <http://temp.performing-arts.ch/hasDouble> ?double . }'
+                query='SELECT ?double WHERE { ?? spao:hasDouble ?double . }'
                 template='<div><h5>Doubles</h5>{{#each bindings}}<div>{{double.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
@@ -307,7 +307,7 @@
 
             <!-- related material -->
             <semantic-query 
-                query='SELECT ?related WHERE { ?? <http://temp.performing-arts.ch/isRelatedTo> ?related . }'
+                query='SELECT ?related WHERE { ?? spao:isRelatedTo ?related . }'
                 template='<div><h5>Related</h5>{{#each bindings}}<div>{{related.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
@@ -315,10 +315,10 @@
             <semantic-query
                 query='SELECT DISTINCT ?reference WHERE { 
                     {
-                        ?? <http://temp.performing-arts.ch/seeAlso> ?reference .
+                        ?? spao:seeAlso ?reference .
                         MINUS { ?reference a rico:RecordPart . } 
                     } UNION { 
-                        ?? <http://temp.performing-arts.ch/seeAlso> ?r .
+                        ?? spao:seeAlso ?r .
                         ?r a rico:RecordPart ;
                             rico:isConstituentOf ?reference .
                     }

@@ -6,7 +6,7 @@
         BIND(REPLACE(CONCAT(STR(?instantiation), "/full/!200,200/0/color.jpg"), "http://", "https://") AS ?iiif_thumb)
         BIND(REPLACE(CONCAT(STR(?instantiation), "/full/!800,800/0/color.jpg"), "http://", "https://") AS ?iiif_large)
         ?? rico:name ?label .
-        OPTIONAL { ?? <http://temp.performing-arts.ch/hasCredit> ?credit . }
+        OPTIONAL { ?? spao:hasCredit ?credit . }
         OPTIONAL { ?? schema:copyrightNotice ?copyright . }
     } GROUP BY ?iiif_thumb ?iiif_large ?label
     ORDER BY ASC(?iiif_thumb)''
