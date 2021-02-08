@@ -4,9 +4,9 @@
     template='<div><h5>Access conditions</h5>{{#each bindings}}<div>{{access_conditions.value}}</div>{{/each}}</div>'>
 </semantic-query>
 
-<!-- term of protection -->
+<!-- terms of protection -->
 <semantic-query 
-    query='SELECT ?value WHERE { ?? spao:hasTermOfProtection ?value . }'
+    query='SELECT ?value WHERE { ?? spao:hasTermsOfProtection ?value . }'
     template='<div><h5>Terms of protection</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
 </semantic-query>
 
@@ -22,8 +22,8 @@
     template='<div><h5>Physical usability</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
 </semantic-query>
 
-<!-- accessability -->
+<!-- accessibility -->
 <semantic-query 
-    query='SELECT ?value WHERE { ?? spao:hasAccessability ?value . }'
-    template='<div><h5>Accessability</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
+    query='SELECT ?value WHERE { ?? spao:hasAccessibility ?value . }'
+    template='<div><h5>Accessibility</h5><ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
 </semantic-query>
