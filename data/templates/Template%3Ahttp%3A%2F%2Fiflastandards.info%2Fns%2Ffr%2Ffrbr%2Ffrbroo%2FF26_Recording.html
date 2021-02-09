@@ -102,27 +102,6 @@
           </div>'>
         </semantic-query>
 
-      </bs-col>
-      <bs-col sm="4">
-      
-        <!-- vimeo -->
-        <semantic-query 
-          query="SELECT ?vimeo_id WHERE 
-          { 
-              ?record rico:hasSubject ?? ;
-                rico:hasInstantiation ?vimeo_url .
-              FILTER(CONTAINS(STR(?vimeo_url), 'http://vimeo.com'))
-              ?vimeo_url rico:hasCarrierType spav:ctonl .
-              BIND(STRAFTER(STR(?vimeo_url), 'vimeo.com/') AS ?vimeo_id)
-          }"
-          template='<div style="width:100%; valign: top; padding-right:20px;">
-                  {{#each bindings}}
-                  <iframe src="https://player.vimeo.com/video/{{vimeo_id.value}}" frameborder="0" style="width:100%; height:400px; " webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                  {{/each}}
-          </div>'>
-        </semantic-query>
-
-
         <!-- creation functions - direction -->
         [[> sapaModule:ShowPerformances function="spav:mucbq"]]
         
@@ -234,9 +213,6 @@
         <!-- performance functions - contribution -->
         [[> sapaModule:ShowPerformances3 function="spav:munuj"]]
 
-      </bs-col>
-      <bs-col sm="4">
-
         <!-- record sets -->
         <semantic-tree
           query='SELECT DISTINCT ?node ?parent WHERE {
@@ -267,7 +243,30 @@
                     <li><semantic-link iri="{{reference.value}}"></semantic-link></li>
                 {{/each}}</ul></div>'>
         </semantic-query>
+      
+      </bs-col>
+      <bs-col sm="6">
+      
+        <!-- vimeo -->
+        <semantic-query 
+          query="SELECT ?vimeo_id WHERE 
+          { 
+              ?record rico:hasSubject ?? ;
+                rico:hasInstantiation ?vimeo_url .
+              FILTER(CONTAINS(STR(?vimeo_url), 'http://vimeo.com'))
+              ?vimeo_url rico:hasCarrierType spav:ctonl .
+              BIND(STRAFTER(STR(?vimeo_url), 'vimeo.com/') AS ?vimeo_id)
+          }"
+          template='<div style="align: left; valign: top; padding-right:20px;">
+                  {{#each bindings}}
+                  <iframe src="https://player.vimeo.com/video/{{vimeo_id.value}}" frameborder="0" style="width:100%; height:600px; " webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                  {{/each}}
+          </div>'>
+        </semantic-query>
 
+      </bs-col>
+      <bs-col sm="2">
+          &nbsp;
       </bs-col>
     </bs-tab>
   
