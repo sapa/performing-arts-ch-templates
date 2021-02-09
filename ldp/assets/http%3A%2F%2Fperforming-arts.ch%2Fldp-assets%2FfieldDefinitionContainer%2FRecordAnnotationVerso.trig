@@ -1,0 +1,32 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordAnnotationVerso/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordAnnotationVerso>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-e31395541d7d4c59a38bc3ab179e78b4-kjz3p;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Anmerkung verso"@de, "Annotation au verso"@en;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-e31395541d7d4c59a38bc3ab179e78b4-vyxxgm;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-e31395541d7d4c59a38bc3ab179e78b4-wwcopn;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-09T10:24:16.602Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-e31395541d7d4c59a38bc3ab179e78b4-kjz3p a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+  $subject spao:hasAnnotationVerso $value . 
+} WHERE {}""" .
+  
+  _:genid-e31395541d7d4c59a38bc3ab179e78b4-wwcopn a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+  $subject spao:hasAnnotationVerso $value . 
+} WHERE {}""" .
+  
+  _:genid-e31395541d7d4c59a38bc3ab179e78b4-vyxxgm a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject spao:hasAnnotationVerso $value . 
+}""" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordAnnotationVerso> .
+}

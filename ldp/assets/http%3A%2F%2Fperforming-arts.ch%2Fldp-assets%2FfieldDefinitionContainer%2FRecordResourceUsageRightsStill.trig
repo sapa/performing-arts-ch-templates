@@ -1,0 +1,30 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStill/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStill>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nutzungsrechte Standbild"@de, "Usage rights still"@en;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-30e689ec608b4104bad7627050810306-gku60t;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-30e689ec608b4104bad7627050810306-u9ybki;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-30e689ec608b4104bad7627050810306-5wyv7;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2004/02/skos/core#Concept>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-09T17:59:12.542Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-30e689ec608b4104bad7627050810306-gku60t a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+	$subject spao:hasUsageRightsStill $value.
+	$value skos:inScheme spav:bl .
+}""" .
+  
+  _:genid-30e689ec608b4104bad7627050810306-5wyv7 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject spao:hasUsageRightsStill $value. } WHERE {}" .
+  
+  _:genid-30e689ec608b4104bad7627050810306-u9ybki a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject spao:hasUsageRightsStill $value. } WHERE {}" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStill> .
+}

@@ -1,0 +1,34 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNoteInternal/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNoteInternal>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-f20244328471480c96e5e799eb05aa72-3rvizn;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Note interne"@fr, "Nota interna "@it,
+      "Interne Anmerkung"@de, "Internal note"@en;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f20244328471480c96e5e799eb05aa72-s7lw4;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-f20244328471480c96e5e799eb05aa72-g8ce08;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-08T19:33:50.492Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-f20244328471480c96e5e799eb05aa72-g8ce08 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+	$subject spao:hasInternalNote $value.
+}""" .
+  
+  _:genid-f20244328471480c96e5e799eb05aa72-s7lw4 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+	$subject spao:hasInternalNote $value.
+} WHERE {
+}""" .
+  
+  _:genid-f20244328471480c96e5e799eb05aa72-3rvizn a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+	$subject spao:hasInternalNote $value.
+} WHERE {}""" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNoteInternal> .
+}

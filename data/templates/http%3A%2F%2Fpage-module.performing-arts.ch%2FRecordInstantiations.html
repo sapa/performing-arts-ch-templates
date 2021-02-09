@@ -21,16 +21,22 @@
         <h5><semantic-link iri="{{instantiation.value}}"></semantic-link></h5>
         <p><mp-label iri="{{archivalstatus.value}}"></mp-label></p>
         <semantic-query 
-            query="SELECT ?label ?identifier WHERE {
+            query='SELECT ?label ?identifier WHERE {
                 VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier>) }
-                <{{instantiation.value}}> rico:identifier ?identifier . }"
-            template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
-                <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
+                <{{instantiation.value}}> rico:identifier ?identifier . }'
+            template='<div>
+                {{#ifCond bindings.length ">" 0}}<h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul>
+            </div>'>
         </semantic-query>
         <semantic-query 
-            query="SELECT ?carrier WHERE { <{{instantiation.value}}> rico:hasCarrierType ?carrier . }"
-            template="<div><h6>Carrier type</h6>{{#each bindings}}{{#if @first}}<mp-label iri='{{carrier.value}}'></mp-label>{{else}}, <mp-label iri='{{carrier.value}}'></mp-label>{{/if}}{{/each}}</div>" >
+            query='SELECT ?label ?value WHERE { 
+                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCarrierType>) }
+                <{{instantiation.value}}> rico:hasCarrierType ?value . }'
+            template='<div>
+                {{#ifCond bindings.length ">" 0}}<h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                {{#each bindings}}{{#if @first}}<mp-label iri="{{value.value}}"></mp-label>{{else}}, <mp-label iri="{{value.value}}"></mp-label>{{/if}}{{/each}}
+            </div>' >
         </semantic-query>
         <hr />
         {{/each}}

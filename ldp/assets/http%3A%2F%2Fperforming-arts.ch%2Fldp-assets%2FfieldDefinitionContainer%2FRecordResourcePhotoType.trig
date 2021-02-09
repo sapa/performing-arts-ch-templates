@@ -1,0 +1,38 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePhotoType/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePhotoType>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-cd8cacf473be415486f56d2a94af8b9c-yq13lg;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-cd8cacf473be415486f56d2a94af8b9c-cfxw4;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-cd8cacf473be415486f56d2a94af8b9c-rkykrg;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Art des Abzugs"@de, "Type of print"@en,
+      "Statut de la photographie"@fr;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2004/02/skos/core#Concept>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-08T19:18:03.652Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-cd8cacf473be415486f56d2a94af8b9c-rkykrg a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+	$subject rico:hasRecordResourceState $value.
+} WHERE {
+	$value skos:inScheme spav:st .
+}""" .
+  
+  _:genid-cd8cacf473be415486f56d2a94af8b9c-yq13lg a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+	$subject rico:hasRecordResourceState $value.
+} WHERE {
+}""" .
+  
+  _:genid-cd8cacf473be415486f56d2a94af8b9c-cfxw4 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+	$subject rico:hasRecordResourceState $value.
+	$value skos:inScheme spav:st .
+}""" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePhotoType> .
+}

@@ -1,0 +1,32 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordAnnotationRecto/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordAnnotationRecto>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Anmerkung recto"@de, "Annotation au recto"@fr;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-fa6c24fbc55f46468ece22fc7ed4c27f-hh4irf;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-fa6c24fbc55f46468ece22fc7ed4c27f-3o93o3;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-fa6c24fbc55f46468ece22fc7ed4c27f-oxwic;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-09T10:23:52.450Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-fa6c24fbc55f46468ece22fc7ed4c27f-oxwic a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+  $subject spao:hasAnnotationRecto $value . 
+} WHERE {}""" .
+  
+  _:genid-fa6c24fbc55f46468ece22fc7ed4c27f-3o93o3 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+  $subject spao:hasAnnotationRecto $value . 
+} WHERE {}""" .
+  
+  _:genid-fa6c24fbc55f46468ece22fc7ed4c27f-hh4irf a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject spao:hasAnnotationRecto $value . 
+}""" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordAnnotationRecto> .
+}

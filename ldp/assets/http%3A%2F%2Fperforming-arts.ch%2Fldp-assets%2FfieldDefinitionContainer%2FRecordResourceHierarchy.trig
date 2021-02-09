@@ -1,0 +1,20 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHierarchy/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHierarchy>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Record hierarchy"@en;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-fc934902d5a54e2482d87a0a302f59ec-1416q;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "used for display only";
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-08T18:52:09.488Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-fc934902d5a54e2482d87a0a302f59ec-1416q a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:includedIn $value} WHERE {}" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHierarchy> .
+}

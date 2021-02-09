@@ -1,0 +1,33 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAmount/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAmount>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Menge"@de, "Amount"@en;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-1056eacfcd754997b88b08452a442b2d-r6b1y;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-1056eacfcd754997b88b08452a442b2d-4w7t2;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-1056eacfcd754997b88b08452a442b2d-5te7u;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-08T18:46:05.446Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-1056eacfcd754997b88b08452a442b2d-4w7t2 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+	$subject spao:recordResourceAmount $value.
+} WHERE {}""" .
+  
+  _:genid-1056eacfcd754997b88b08452a442b2d-5te7u a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+  $subject spao:recordResourceAmount $value.
+} WHERE {
+}""" .
+  
+  _:genid-1056eacfcd754997b88b08452a442b2d-r6b1y a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject spao:recordResourceAmount $value.
+}""" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAmount> .
+}
