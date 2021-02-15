@@ -3,23 +3,24 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCredit>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-588d701450504da594a278573199b0ae-g84iub;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-01f668b062144839be189eece459fa89-840b29;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-588d701450504da594a278573199b0ae-19mtep;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Quelle"@de, "Credit"@en;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-01f668b062144839be189eece459fa89-fldyo;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-01f668b062144839be189eece459fa89-4qm6us;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Source"@fr, "Quelle"@de, "Credit"@en;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-588d701450504da594a278573199b0ae-9al8m4;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-09T18:01:41.945Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T13:07:04.027Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-588d701450504da594a278573199b0ae-19mtep a <http://spinrdf.org/sp#Query>;
+  _:genid-01f668b062144839be189eece459fa89-fldyo a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "DELETE { $subject spao:hasCredit $value. } WHERE {}" .
   
-  _:genid-588d701450504da594a278573199b0ae-9al8m4 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "INSERT { $subject spao:hasCredit $value. } WHERE {}" .
-  
-  _:genid-588d701450504da594a278573199b0ae-g84iub a <http://spinrdf.org/sp#Query>;
+  _:genid-01f668b062144839be189eece459fa89-840b29 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject spao:hasCredit $value. }" .
+  
+  _:genid-01f668b062144839be189eece459fa89-4qm6us a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject spao:hasCredit $value. } WHERE {}" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCredit> .

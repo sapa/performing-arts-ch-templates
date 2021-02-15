@@ -22,18 +22,47 @@
         parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceParent"
         provenance="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance"
         source="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSource"
+        creator="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreator"
         acquisition="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition"
         delivery_number="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/DeliveryNumber"
         documentary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDocumentaryForm"
+        photo_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePhotoType"
         description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
         language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage"
         subject="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject"
         place="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePlace"
         date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate"
+        iiif="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceIIIF"
         extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
+        amount="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAmount"
+        linear_meters="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLinearMeters"
+        weight="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceWeight"
+        extent_unit="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentUnit"
+        extent_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentValue"
         history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
         cassation="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetCassation"
         comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
+        access_conditions="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingConditionsAccess"
+        terms_of_protection="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingTermsProtection"
+        permission="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingPermission"
+        physical_usability="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingPhysicalUsability"
+        accessibility="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingAccessability"
+        copyright_notice="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightNotice"
+        copyright_declaration="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightDeclaration"
+        conditions_use="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceConditionsUse"
+        usage_rights_still="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStill"
+        usage_rights_streaming="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStreaming"
+        credit="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCredit"
+        location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLocation"
+        packing="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePacking"
+        doublets="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDoublets"
+        related="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceRelated"
+        see_also="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso"
+        note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNote"
+        note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNoteInternal"
+        responsible="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceResponsible"
+        processing_convention="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingConvention"
+        processing_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingDate"
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
@@ -62,6 +91,14 @@
           </bs-col>
           <bs-col sm='4'>
             &nbsp;
+          </packing-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='4'>
+            <semantic-form-tree-picker-input for="location"></semantic-form-tree-picker-input>
+          </bs-col>
+          <bs-col sm='8'>
+            <semantic-form-checklist-input row=true for="packing"></semantic-form-checklist-input row=true>
           </bs-col>
         </bs-row>
         <bs-row>
@@ -70,6 +107,10 @@
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-text-input for="extent"></semantic-form-text-input>
+            <semantic-form-text-input for="amount"></semantic-form-text-input>
+            <semantic-form-text-input for="linear_meters"></semantic-form-text-input>
+            <semantic-form-text-input for="weight"></semantic-form-text-input>
+            <semantic-form-text-input for="doublets"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-autocomplete-input for="provenance"></semantic-form-autocomplete-input>
@@ -81,6 +122,7 @@
             <semantic-form-text-input for="cassation" multiline=true></semantic-form-text-input>
           </bs-col>
           <bs-col sm='4'>
+            <semantic-form-autocomplete-input for="creator"></semantic-form-autocomplete-input>
             <semantic-form-autocomplete-input for="source"></semantic-form-autocomplete-input>
             <semantic-form-select-input for='acquisition'></semantic-form-select-input>
             <semantic-form-text-input for="delivery_number"></semantic-form-text-input>
@@ -99,10 +141,78 @@
         <bs-row>
           <bs-col sm='6'>
             <semantic-form-tree-picker-input for="documentary_form"></semantic-form-tree-picker-input>
+            <semantic-form-select-input for='photo_type'></semantic-form-select-input>
           </bs-col>
           <bs-col sm='6'>
             <semantic-form-tree-picker-input for="language"></semantic-form-tree-picker-input>
           </bs-col>
+        </bs-row>
+        <hr>
+        <bs-row>
+          <bs-col sm='4'>
+            <semantic-form-text-input multiline=true for="access_conditions"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for='terms_of_protection'></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for='permission'></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for='physical_usability'></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for='accessibility'></semantic-form-checklist-input>
+          </bs-col>
+        </bs-row>
+        <hr>
+        <bs-row>
+          <bs-col sm='4'>
+            <semantic-form-text-input for="copyright_notice"></semantic-form-text-input>
+            <semantic-form-text-input for="credit"></semantic-form-text-input>
+          </bs-col>          
+          <bs-col sm='4'>
+            <semantic-form-text-input for="conditions_use"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for="copyright_declaration"></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for="usage_rights_still"></semantic-form-checklist-input>
+            <semantic-form-checklist-input type='radio' for="usage_rights_streaming"></semantic-form-checklist-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="related"></semantic-form-text-input>
+          </bs-col>          
+          <bs-col sm='6'>
+            <semantic-form-autocomplete-input for="see_also"></semantic-form-autocomplete-input>
+          </bs-col>          
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input multiline=true for="note"></semantic-form-text-input>
+          </bs-col>          
+          <bs-col sm='6'>
+            <semantic-form-text-input multiline=true for="note_internal"></semantic-form-text-input>
+          </bs-col>          
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input multiline=true for="processing_convention"></semantic-form-text-input>
+          </bs-col>          
+          <bs-col sm='3'>
+            <semantic-form-text-input for="processing_date"></semantic-form-text-input>
+          </bs-col>          
+          <bs-col sm='3'>
+            <semantic-form-text-input for="responsible"></semantic-form-text-input>
+          </bs-col>          
+        </bs-row>
+        <bs-row>
+          <bs-col sm='12'>
+            <semantic-form-text-input for="iiif"></semantic-form-text-input>
+          </bs-col>          
         </bs-row>
         <hr>
         <semantic-form-text-input for="comment" multiline=true></semantic-form-text-input>

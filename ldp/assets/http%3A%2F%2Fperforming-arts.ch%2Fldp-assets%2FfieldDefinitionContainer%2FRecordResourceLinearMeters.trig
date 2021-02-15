@@ -3,30 +3,31 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLinearMeters>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-9d2571d0ee4245f4aa26c049e9725c6e-tuzee;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-9d2571d0ee4245f4aa26c049e9725c6e-7zrb5e;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Linear meters"@en, "Laufmeter"@de;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-03e9fea80fa945cb95a76f6dd23ea5b5-hp5zv;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-03e9fea80fa945cb95a76f6dd23ea5b5-illzac;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-9d2571d0ee4245f4aa26c049e9725c6e-asyfcbm;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Mètre linéaire"@fr, "Linear meters"@en,
+      "Laufmeter"@de;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-03e9fea80fa945cb95a76f6dd23ea5b5-dp22f2;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-08T19:00:58.292Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T18:12:41.551Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-03e9fea80fa945cb95a76f6dd23ea5b5-dp22f2 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-	$subject spao:recordResourceLinearMeters $value.
-}""" .
-  
-  _:genid-03e9fea80fa945cb95a76f6dd23ea5b5-illzac a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """DELETE {
-	$subject spao:recordResourceLinearMeters $value.
-} WHERE {}""" .
-  
-  _:genid-03e9fea80fa945cb95a76f6dd23ea5b5-hp5zv a <http://spinrdf.org/sp#Query>;
+  _:genid-9d2571d0ee4245f4aa26c049e9725c6e-tuzee a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """INSERT {
 	$subject spao:recordResourceLinearMeters $value.
 } WHERE {
 }""" .
+  
+  _:genid-9d2571d0ee4245f4aa26c049e9725c6e-asyfcbm a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+	$subject spao:recordResourceLinearMeters $value.
+}""" .
+  
+  _:genid-9d2571d0ee4245f4aa26c049e9725c6e-7zrb5e a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+	$subject spao:recordResourceLinearMeters $value.
+} WHERE {}""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLinearMeters> .

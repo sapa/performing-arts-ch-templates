@@ -1,59 +1,36 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance/context> {
-  _:genid-1f815fed90ff405397d19fa541f6a936-5ki2ge <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
-  $subject rico:hasProvenance $value .
-}""" .
-  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance>
-    a <http://www.metaphacts.com/ontology/fields#Field> .
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-7278b7f36638407099a7d92f30c01908-jm9y9;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Provenienz"@de, "Provenance"@fr, "Provenance"@en;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-7278b7f36638407099a7d92f30c01908-0byra;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-7278b7f36638407099a7d92f30c01908-0dubr;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-7278b7f36638407099a7d92f30c01908-mzico;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Agent>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T19:02:14.982Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-1f815fed90ff405397d19fa541f6a936-zsc2bs <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+  _:genid-7278b7f36638407099a7d92f30c01908-0dubr a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasProvenance $value . } WHERE { }" .
+  
+  _:genid-7278b7f36638407099a7d92f30c01908-0byra a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasProvenance $value . } WHERE { }" .
+  
+  _:genid-7278b7f36638407099a7d92f30c01908-jm9y9 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:hasProvenance $value . }" .
+  
+  _:genid-7278b7f36638407099a7d92f30c01908-mzico a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
   ?value rdf:type/rdfs:subClassOf* rico:Agent .
   FILTER(CONTAINS(STR(?value), \"/a/\"))
   ?value rdfs:label ?label .
   FILTER(REGEX(STR(?label), \"?token\"))
 } LIMIT 10""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance>
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-1f815fed90ff405397d19fa541f6a936-bmmd2w;
-    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
-  
-  _:genid-1f815fed90ff405397d19fa541f6a936-5ki2ge a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance>
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-1f815fed90ff405397d19fa541f6a936-zsc2bs .
-  
-  _:genid-1f815fed90ff405397d19fa541f6a936-30p5ye <http://spinrdf.org/sp#text> """INSERT {
-  $subject rico:hasProvenance $value .
-} WHERE { }""" .
-  
-  _:genid-1f815fed90ff405397d19fa541f6a936-zsc2bs a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance>
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-1f815fed90ff405397d19fa541f6a936-30p5ye .
-  
-  _:genid-1f815fed90ff405397d19fa541f6a936-bmmd2w <http://spinrdf.org/sp#text> """DELETE {
-  $subject rico:hasProvenance $value .
-} WHERE {}""" .
-  
-  _:genid-1f815fed90ff405397d19fa541f6a936-30p5ye a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance>
-    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Agent>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Provenance"@en .
-  
-  _:genid-1f815fed90ff405397d19fa541f6a936-bmmd2w a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance>
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-1f815fed90ff405397d19fa541f6a936-5ki2ge;
-    a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-27T13:14:56.428Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-  
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance>
-    a <http://www.w3.org/ns/ldp#Resource> .
 }

@@ -1,0 +1,33 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentSwitch/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentSwitch>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-dd9f8c8390cb4af2815921a45f3367c7-whbpun;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "for form switch only";
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Extent Switch"@en;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-dd9f8c8390cb4af2815921a45f3367c7-jux65;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T10:00:03.534Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-dd9f8c8390cb4af2815921a45f3367c7-whbpun a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+  $subject spao:switchField $value.
+} WHERE {
+}""" .
+  
+  _:genid-dd9f8c8390cb4af2815921a45f3367c7-jux65 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value ?vocabulary ?field WHERE {
+  VALUES (?property ?vocabulary ?field ) {
+    ( rico:recordResourceExtent spav:eugen <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent> )
+    ( spao:recordResourceExtentAmount spav:eupcs <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentAmount> )
+    ( spao:recordResourceExtentLinearMeters spav:eulnm <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentLinearMeters> )
+    ( spao:recordResourceExtentWeight spav:euwgt <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentWeight> )
+  }
+  $subject ?property $value.  
+}""" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentSwitch> .
+}

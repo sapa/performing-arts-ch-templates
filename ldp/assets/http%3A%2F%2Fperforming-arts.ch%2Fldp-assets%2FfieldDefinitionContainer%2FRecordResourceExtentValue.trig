@@ -1,0 +1,33 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentValue/context> {
+  _:genid-fe457072345644f39f81598576f62a6a-xdltzc a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+	$subject rico:recordResourceExtent $value.
+} WHERE {}""" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentValue>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-fe457072345644f39f81598576f62a6a-xdltzc;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Extent Value"@en;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-fe457072345644f39f81598576f62a6a-4n1go;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-fe457072345644f39f81598576f62a6a-s62h2u;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T09:47:59.078Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-fe457072345644f39f81598576f62a6a-4n1go a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+  $subject rico:recordResourceExtent $value.
+} WHERE {
+}""" .
+  
+  _:genid-fe457072345644f39f81598576f62a6a-s62h2u a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject rico:recordResourceExtent $value.
+}""" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentValue> .
+}

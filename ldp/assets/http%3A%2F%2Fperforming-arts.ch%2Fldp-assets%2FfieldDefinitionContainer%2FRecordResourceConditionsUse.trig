@@ -3,23 +3,24 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceConditionsUse>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-07c26bacdedd4b5a884f9181396debb2-9c06p9;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Nutzungsrechte"@de, "Conditions of use"@en,
-      "Droits d’utilisation"@fr;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-07c26bacdedd4b5a884f9181396debb2-rsvp4j;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nutzungsrechte"@de, "Conditions d’utilisation"@fr,
+      "Conditions of use"@en;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-18a7b89dae524c6f8525b9601d32410a-2gqrl;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-07c26bacdedd4b5a884f9181396debb2-7um0sd;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-18a7b89dae524c6f8525b9601d32410a-dx05ng;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-18a7b89dae524c6f8525b9601d32410a-x9ocv9;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-09T17:58:16.362Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T11:15:59.009Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-07c26bacdedd4b5a884f9181396debb2-9c06p9 a <http://spinrdf.org/sp#Query>;
+  _:genid-18a7b89dae524c6f8525b9601d32410a-dx05ng a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "INSERT { $subject rico:conditionsOfUse $value. } WHERE {}" .
   
-  _:genid-07c26bacdedd4b5a884f9181396debb2-7um0sd a <http://spinrdf.org/sp#Query>;
+  _:genid-18a7b89dae524c6f8525b9601d32410a-x9ocv9 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "DELETE { $subject rico:conditionsOfUse $value. } WHERE {}" .
   
-  _:genid-07c26bacdedd4b5a884f9181396debb2-rsvp4j a <http://spinrdf.org/sp#Query>;
+  _:genid-18a7b89dae524c6f8525b9601d32410a-2gqrl a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject rico:conditionsOfUse $value. }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>

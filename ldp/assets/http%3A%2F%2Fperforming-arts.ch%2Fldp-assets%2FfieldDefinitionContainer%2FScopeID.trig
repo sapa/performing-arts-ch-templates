@@ -2,34 +2,35 @@
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ScopeID/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ScopeID> a <http://www.metaphacts.com/ontology/fields#Field>,
       <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-8c4991caa94547f683dc54ec37aa8932-cbudjn;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-8c4991caa94547f683dc54ec37aa8932-dxwn9c;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-ba1c06a1082140f7b1eeb2a4bcb8a827-qee8pw;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-ba1c06a1082140f7b1eeb2a4bcb8a827-dnk83;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-ba1c06a1082140f7b1eeb2a4bcb8a827-ytloi;
     <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2002/07/owl#Class>;
     <http://www.w3.org/2000/01/rdf-schema#label> "Scope ID"@de;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-8c4991caa94547f683dc54ec37aa8932-w2j1j7;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-01-18T08:09:21.034Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T18:49:26.332Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-ba1c06a1082140f7b1eeb2a4bcb8a827-dnk83 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """DELETE {
-  $subject owl:sameAs $value .
-} WHERE {
-} """ .
-  
-  _:genid-ba1c06a1082140f7b1eeb2a4bcb8a827-qee8pw a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-  $subject owl:sameAs $value .
-  FILTER(CONTAINS(STR(?scope_url), \"http://catalogue.collectiondeladanse.ch\")) .
-}""" .
-  
-  _:genid-ba1c06a1082140f7b1eeb2a4bcb8a827-ytloi a <http://spinrdf.org/sp#Query>;
+  _:genid-8c4991caa94547f683dc54ec37aa8932-dxwn9c a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """INSERT { 
   $subject owl:sameAs $value .
 } WHERE {
 }""" .
+  
+  _:genid-8c4991caa94547f683dc54ec37aa8932-cbudjn a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject owl:sameAs $value .
+  FILTER(CONTAINS(STR($value), \"http://catalogue.collectiondeladanse.ch\")) .
+}""" .
+  
+  _:genid-8c4991caa94547f683dc54ec37aa8932-w2j1j7 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+  $subject owl:sameAs $value .
+} WHERE {
+  FILTER(CONTAINS(STR($value), \"http://catalogue.collectiondeladanse.ch\")) .
+} """ .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ScopeID> .

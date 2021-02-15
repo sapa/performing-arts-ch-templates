@@ -1,35 +1,33 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCarrierType/context> {
+  _:genid-516edbb5f8dd42c1b285b2bfc395573a-0fja8k a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasCarrierType $value . } WHERE { }" .
+  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCarrierType>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-4ba2a0971549431bb2949b8336f67376-7m10ge;
     <http://www.metaphacts.com/ontology/fields#range> <rico:CarrierType>;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-4ba2a0971549431bb2949b8336f67376-3t4xnc;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Carrier type"@en;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-516edbb5f8dd42c1b285b2bfc395573a-pa83yv;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Carrier type"@en, "Type de support"@fr;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-516edbb5f8dd42c1b285b2bfc395573a-xil5me;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Instantiation>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-4ba2a0971549431bb2949b8336f67376-pxtlhh;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-516edbb5f8dd42c1b285b2bfc395573a-0fja8k;
     <http://www.w3.org/2000/01/rdf-schema#comment> "e.g. http://media.performing-arts.ch/iiif/image/ABC-123";
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-09T12:41:40.985Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T18:55:22.355Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-4ba2a0971549431bb2949b8336f67376-pxtlhh a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-516edbb5f8dd42c1b285b2bfc395573a-pa83yv a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
  	$subject rico:hasCarrierType $value .
-} WHERE {}""" .
+	$value a rico:CarrierType .
+}""" .
   
-  _:genid-4ba2a0971549431bb2949b8336f67376-3t4xnc a <http://spinrdf.org/sp#Query>;
+  _:genid-516edbb5f8dd42c1b285b2bfc395573a-xil5me a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """DELETE {
  	$subject rico:hasCarrierType $value .
 } WHERE {
  	$value a rico:CarrierType .
-}""" .
-  
-  _:genid-4ba2a0971549431bb2949b8336f67376-7m10ge a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
- 	$subject rico:hasCarrierType $value .
-	$value a rico:CarrierType .
 }""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>

@@ -3,31 +3,35 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingTermsProtection>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Catégorie de protection"@fr, "Terms of protection"@en,
+      "Schutzfristkategorie"@de;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Terms of protection"@en;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-abb0edf3d01144ee81fc93514307b648-fmnvyc;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c6ea4ed523584312932379126f5c4d47-dvt1w9;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-c6ea4ed523584312932379126f5c4d47-80tb18;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-c6ea4ed523584312932379126f5c4d47-lwzp0g;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-c6ea4ed523584312932379126f5c4d47-fiwhpm;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Thing>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-abb0edf3d01144ee81fc93514307b648-5zd2gs;
     <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2004/02/skos/core#Concept>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-abb0edf3d01144ee81fc93514307b648-pk24ts;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-08T19:43:26.301Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T19:07:08.162Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-abb0edf3d01144ee81fc93514307b648-5zd2gs a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-	$subject spao:hasTermOfProtection $value.
+  _:genid-c6ea4ed523584312932379126f5c4d47-lwzp0g a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject spao:hasTermsOfProtection $value . } WHERE { }" .
+  
+  _:genid-c6ea4ed523584312932379126f5c4d47-dvt1w9 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject spao:hasTermsOfProtection $value . } WHERE { }" .
+  
+  _:genid-c6ea4ed523584312932379126f5c4d47-fiwhpm a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+	VALUES ( $value ) {
+      ( spav:tpeop ) 
+      ( spav:tpunk ) 
+	}
 }""" .
   
-  _:genid-abb0edf3d01144ee81fc93514307b648-pk24ts a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """INSERT {
-	$subject spao:hasTermOfProtection $value.
-} WHERE {
-}""" .
-  
-  _:genid-abb0edf3d01144ee81fc93514307b648-fmnvyc a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """DELETE {
-	$subject spao:hasTermOfProtection $value.
-} WHERE {}""" .
+  _:genid-c6ea4ed523584312932379126f5c4d47-80tb18 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject spao:hasTermsOfProtection $value. }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingTermsProtection> .
