@@ -2,37 +2,38 @@
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordParts/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordParts> a <http://www.metaphacts.com/ontology/fields#Field>,
       <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Record parts"@en;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Record parts"@en, "Parties de document"@fr,
+      "Teildokumente"@de;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-71411d51fe6640bab0dd46cc19f24b8c-732fkj;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-71411d51fe6640bab0dd46cc19f24b8c-u4hqgg;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-71411d51fe6640bab0dd46cc19f24b8c-fm2g2k;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-71411d51fe6640bab0dd46cc19f24b8c-l2i66i;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-1d6681cc942949ad878acf03d1671f3d-hpnb8g;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-1d6681cc942949ad878acf03d1671f3d-iug9hn;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-1d6681cc942949ad878acf03d1671f3d-xpukqs;
     <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordPart>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-1d6681cc942949ad878acf03d1671f3d-wxliw;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-09T09:58:06.978Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-16T14:51:02.300Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-71411d51fe6640bab0dd46cc19f24b8c-fm2g2k a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """DELETE {
-  $value rico:isConstituentOf $subject .
+  _:genid-1d6681cc942949ad878acf03d1671f3d-iug9hn a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+  $value rico:isConstituentOf $subject . 
 } WHERE {}""" .
   
-  _:genid-71411d51fe6640bab0dd46cc19f24b8c-u4hqgg a <http://spinrdf.org/sp#Query>;
+  _:genid-1d6681cc942949ad878acf03d1671f3d-wxliw a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
   $value rico:isConstituentOf $subject .
 }""" .
   
-  _:genid-71411d51fe6640bab0dd46cc19f24b8c-l2i66i a <http://spinrdf.org/sp#Query>;
+  _:genid-1d6681cc942949ad878acf03d1671f3d-hpnb8g a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
   $value a rico:RecordPart ;
   	rdfs:label $label .
   FILTER(REGEX($label, \"?token\", \"i\"))
 }""" .
   
-  _:genid-71411d51fe6640bab0dd46cc19f24b8c-732fkj a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """INSERT {
-  $value rico:isConstituentOf $subject . 
+  _:genid-1d6681cc942949ad878acf03d1671f3d-xpukqs a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+  $value rico:isConstituentOf $subject .
 } WHERE {}""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>

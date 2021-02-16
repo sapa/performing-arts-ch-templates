@@ -4,17 +4,18 @@
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-9c323ce316ad4301880de7c7ae09027b-3yi9hc;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Derived instantiation"@en, "Instanciation dérivée"@fr;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-9c323ce316ad4301880de7c7ae09027b-iiso7;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Derived instantiation"@en, "Abgeleitete Instanziation"@de,
+      "Instanciation dérivée"@fr;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-f082abc099ca456684af21b9a5bb1bf4-yxl4nr;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-f082abc099ca456684af21b9a5bb1bf4-rcwveh;
     <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Instantiation>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-9c323ce316ad4301880de7c7ae09027b-duu2jd;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f082abc099ca456684af21b9a5bb1bf4-2dqqy;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Instantiation>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-9c323ce316ad4301880de7c7ae09027b-nx34wj;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-f082abc099ca456684af21b9a5bb1bf4-12zona;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T18:56:02.612Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-16T15:01:19.377Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-9c323ce316ad4301880de7c7ae09027b-duu2jd a <http://spinrdf.org/sp#Query>;
+  _:genid-f082abc099ca456684af21b9a5bb1bf4-rcwveh a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
   $value a rico:Instantiation ;
   	rico:identifier $label .
@@ -22,14 +23,14 @@
   FILTER(!CONTAINS(STR(?value), \"/u/\"))
 }""" .
   
-  _:genid-9c323ce316ad4301880de7c7ae09027b-nx34wj a <http://spinrdf.org/sp#Query>;
+  _:genid-f082abc099ca456684af21b9a5bb1bf4-yxl4nr a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:hasDerivedInstantiation ?value . }" .
   
-  _:genid-9c323ce316ad4301880de7c7ae09027b-iiso7 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasDerivedInstantiation $value} WHERE { }" .
-  
-  _:genid-9c323ce316ad4301880de7c7ae09027b-3yi9hc a <http://spinrdf.org/sp#Query>;
+  _:genid-f082abc099ca456684af21b9a5bb1bf4-2dqqy a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasDerivedInstantiation $value . } WHERE { }" .
+  
+  _:genid-f082abc099ca456684af21b9a5bb1bf4-12zona a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasDerivedInstantiation $value} WHERE { }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerived> .

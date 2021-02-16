@@ -4,7 +4,7 @@
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-e31395541d7d4c59a38bc3ab179e78b4-kjz3p;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Anmerkung verso"@de, "Annotation au verso"@en;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Anmerkung verso"@de, "Annotation verso"@en, "Annotation au verso"@fr;
     <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-e31395541d7d4c59a38bc3ab179e78b4-vyxxgm;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record>;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
