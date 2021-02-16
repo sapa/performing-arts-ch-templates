@@ -256,11 +256,11 @@
 
                     <!-- condition -->
                     <semantic-query 
-                        query="SELECT ?condition WHERE { ?? spao:hasCondition ?condition . } ORDER BY ASC (?condition)"
+                        query="SELECT ?value WHERE { ?? spao:hasCondition ?value . } ORDER BY ASC (?value)"
                         template='<div>
                             <h5>Condition</h5>
                             <ul class="list-unstyled">{{#each bindings}}
-                                <li>{{condition.value}}</li>
+                                <li><mp-label iri="{{value.value}}"></mp-label></li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
