@@ -156,8 +156,16 @@
                 [[#if (hasPermission "forms:ldp:*")]]
                 <semantic-tree
                     query='SELECT DISTINCT ?node ?parent WHERE {
-                        ?record rico:hasSubject ?? ;
-                            rico:includedIn* ?node .
+                        {
+                            ?record rico:hasSubject ?? ;
+                                rico:includedIn* ?node .
+                            MINUS { ?record a rico:RecordPart . }
+                        } UNION {
+                            ?recordpart rico:hasSubject ?? ;
+                                a rico:RecordPart ;
+                                rico:isConstituentOf ?record .
+                            ?record rico:includedIn* ?node .
+                        }
                         FILTER(ISIRI(?node))
                         FILTER(CONTAINS(STR(?node), "/r/"))
                         OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
@@ -166,9 +174,16 @@
                 </semantic-tree>
                 [[else]]
                 <semantic-query 
-                    query='SELECT ?docform ?extent ?desciptivenote WHERE {
-                        ?record rico:hasSubject ?? ;
-                            rico:hasDocumentaryFormType ?docform .
+                    query='SELECT DISTINCT ?docform ?extent ?desciptivenote WHERE {
+                        {
+                            ?record rico:hasSubject ?? .
+                            MINUS { ?record a rico:RecordPart . }
+                        } UNION {
+                            ?recordpart rico:hasSubject ?? ;
+                                a rico:RecordPart ;
+                                rico:isConstituentOf ?record .
+                        }
+                        ?record rico:hasDocumentaryFormType ?docform .
                         OPTIONAL { ?record rico:recordResourceExtent ?extent .}
                         OPTIONAL { ?record rico:descriptiveNote ?desciptivenote . }
                     }'
