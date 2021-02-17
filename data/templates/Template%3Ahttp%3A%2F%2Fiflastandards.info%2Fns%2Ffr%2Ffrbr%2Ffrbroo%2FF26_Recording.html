@@ -114,6 +114,9 @@
           </div>'>
         </semantic-query>
 
+        <!-- creation functions - production -->
+        [[> sapaModule:ShowPerformances function="spav:muwgo"]]
+        
         <!-- creation functions - direction -->
         [[> sapaModule:ShowPerformances function="spav:mucbq"]]
         
@@ -225,30 +228,27 @@
         <!-- performance functions - contribution -->
         [[> sapaModule:ShowPerformances3 function="spav:munuj"]]
 
-        <hr />
-
         <!-- record sets -->
-        <semantic-tree
-          query='SELECT DISTINCT ?node ?parent WHERE {
-            {
-              ?record rico:hasSubject ?? ;
-                a rico:RecordSet .
-            } UNION {
-              ?record rico:hasSubject ?? ;
-                a rico:Record .
-            } UNION {
-              ?recordpart rico:hasSubject ?? ;
-                a rico:RecordPart ;
-                rico:isConstituentOf ?record .
-            }
-            ?record rico:includedIn* ?node .
-            FILTER(ISIRI(?node))
-            FILTER(CONTAINS(STR(?node), "/r/"))
-            OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
-          }'
-          tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
-        </semantic-tree>
-
+        <semantic-query
+        query='SELECT DISTINCT ?record WHERE { 
+          {
+            ?record rico:hasSubject ?? ;
+              a rico:RecordSet .
+          } UNION {
+            ?record rico:hasSubject ?? ;
+              a rico:Record .
+          } UNION {
+            ?recordpart rico:hasSubject ?? ;
+              a rico:RecordPart ;
+              rico:isConstituentOf ?record .
+          }        
+        }'
+        template='<div><h5>Record (Set)</h5>
+            <ul class="list-unstyled">{{#each bindings}}
+                <li><semantic-link iri="{{record.value}}"></semantic-link></li>
+            {{/each}}</ul></div>'>
+        </semantic-query>
+    
         <!-- see also -->
         <semantic-query
             query='SELECT DISTINCT ?reference WHERE { ?? spao:seeAlso ?reference . }'
