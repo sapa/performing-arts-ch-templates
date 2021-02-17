@@ -49,16 +49,21 @@
 
             <!-- creator -->
             <semantic-query 
-            query="SELECT ?label ?value WHERE {
+            query='SELECT ?label ?value ?identified WHERE {
                 VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreator>) }
                 ?? rico:createdBy ?value .
-            }"
+                BIND(IF(!CONTAINS(STR(?value), "/u/"), "true", "") AS ?identified)
+            }'
             template='<div>
                 {{#ifCond bindings.length ">" 0}}
                     <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
                 {{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}
-                    <li><semantic-link iri="{{value.value}}"></semantic-link></li>
+                    {{#if identified.value}} 
+                        <li><semantic-link iri="{{value.value}}"></semantic-link></li>
+                    {{else}}
+                        <li><mp-label iri="{{value.value}}"></mp-label></li>
+                    {{/if}}
                 {{/each}}</ul></div>'>
             </semantic-query>
 
