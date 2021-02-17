@@ -64,17 +64,25 @@
 
             <!-- subjects -->
             <semantic-query 
-                query="SELECT ?label ?value WHERE {
+                query='SELECT ?label ?subject ?unidentified WHERE {
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject>) }
-                    ?? rico:hasSubject ?value .
-                }"
+                    ?? rico:hasSubject ?subject .
+                    BIND(IF(!CONTAINS(STR(?subject), "/u/"), "true","") AS ?unidentified)
+                }'
                 template='<div>
                     {{#ifCond bindings.length ">" 0}}
                         <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
                     {{/ifCond}}
-                    <ul class="list-unstyled">{{#each bindings}}
-                        <li><semantic-link iri="{{value.value}}"></semantic-link></li>
-                    {{/each}}</ul></div>'>
+                    <ul class="list-unstyled">
+                    {{#each bindings}}
+                        {{#if unidentified.value}} 
+                            <li><mp-label iri="{{subject.value}}"></mp-label></li>
+                        {{else}}
+                            <li><semantic-link iri="{{subject.value}}"></semantic-link></li>
+                        {{/if}}
+                    {{/each}}
+                    </ul>
+                </div>'>
             </semantic-query>
 
             <!-- places -->

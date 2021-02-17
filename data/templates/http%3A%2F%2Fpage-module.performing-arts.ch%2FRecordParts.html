@@ -28,12 +28,25 @@
                 <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
         </semantic-query>
         <semantic-query 
-            query="SELECT ?label ?subject WHERE {
+            query='SELECT ?label ?subject ?unidentified WHERE {
                 VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject>) }
-                <{{part.value}}> rico:hasSubject ?subject . }"
-            template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
-                <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{subject.value}}"></semantic-link></li>{{/each}}</ul></div>'>
+                <{{part.value}}> rico:hasSubject ?subject .
+                BIND(IF(!CONTAINS(STR(?subject), "/u/"), "true","") AS ?unidentified)
+            }'
+            template='<div>
+                {{#ifCond bindings.length ">" 0}}
+                    <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>
+                {{/ifCond}}
+                <ul class="list-unstyled">
+                {{#each bindings}}
+                    {{#if unidentified.value}} 
+                        <li><mp-label iri="{{subject.value}}"></mp-label></li>
+                    {{else}}
+                        <li><semantic-link iri="{{subject.value}}"></semantic-link></li>
+                    {{/if}}
+                {{/each}}
+                </ul>
+            </div>'>
         </semantic-query>
         <semantic-query 
             query="SELECT ?label ?content_description WHERE {
