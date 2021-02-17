@@ -37,6 +37,17 @@
           template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{language.value}}"></mp-label>{{else}}, <mp-label iri="{{language.value}}"></mp-label>{{/if}}{{/each}}</p>'>
         </semantic-query>
 
+        <!-- date -->
+        <semantic-query 
+          query='SELECT ?value WHERE {
+            ?expressioncreation frbroo:R17_created ?? ;
+              crm:P4_has_time-span ?value .
+            }'
+          template='<div><h5>Date</h5><ul class="list-unstyled">
+            {{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}
+            </ul></div>'>
+          </semantic-query>
+
         <!-- documents -->
         <semantic-query 
           query='SELECT ?source WHERE { 
