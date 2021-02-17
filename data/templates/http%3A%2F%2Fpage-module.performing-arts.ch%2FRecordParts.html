@@ -28,10 +28,10 @@
                 <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
         </semantic-query>
         <semantic-query 
-            query='SELECT ?label ?subject ?unidentified WHERE {
+            query='SELECT ?label ?subject ?identified WHERE {
                 VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject>) }
                 <{{part.value}}> rico:hasSubject ?subject .
-                BIND(IF(!CONTAINS(STR(?subject), "/u/"), "true","") AS ?unidentified)
+                BIND(IF(!CONTAINS(STR(?subject), "/u/"), "true","") AS ?identified)
             }'
             template='<div>
                 {{#ifCond bindings.length ">" 0}}
@@ -39,10 +39,10 @@
                 {{/ifCond}}
                 <ul class="list-unstyled">
                 {{#each bindings}}
-                    {{#if unidentified.value}} 
-                        <li><mp-label iri="{{subject.value}}"></mp-label></li>
-                    {{else}}
+                    {{#if identified.value}} 
                         <li><semantic-link iri="{{subject.value}}"></semantic-link></li>
+                    {{else}}
+                        <li><mp-label iri="{{subject.value}}"></mp-label></li>
                     {{/if}}
                 {{/each}}
                 </ul>
