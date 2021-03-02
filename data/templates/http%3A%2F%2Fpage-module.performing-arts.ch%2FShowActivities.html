@@ -4,6 +4,13 @@
             ?expressioncreation frbroo:R17_created ?? ;
                 crm:P9_consists_of ?activity .
         } UNION {
+            ?? frbroo:R14_incorporates ?reference .
+            ?expressioncreation frbroo:R17_created ?reference ;
+                crm:P9_consists_of ?activity .
+        } UNION {
+            ?genericperformance frbroo:R25_performed ?? ;
+            crm:P9_consists_of ?activity . 
+        } UNION {
             ?? crm:P9_consists_of ?activity .
         }
         ?activity crm:P2_has_type ?function ;
