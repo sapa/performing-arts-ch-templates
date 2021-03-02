@@ -178,7 +178,7 @@
             <!-- music titles - temp -->
             <semantic-query
               query='SELECT ?title WHERE { ?? <http://temp.performing-arts.ch/hasMusicTitle> ?title . } ORDER BY ASC (?title)'
-              template='<h5>music title</h5><ul class="list-unstyled">{{#each bindings}}<li>{{title.value}}</li>{{/each}}</ul>'
+              template='<h5>Music title</h5><ul class="list-unstyled">{{#each bindings}}<li>{{title.value}}</li>{{/each}}</ul>'
             />
             </semantic-query>
 
@@ -299,15 +299,38 @@
 
           <!-- recordings -->
           <semantic-query 
-            query='SELECT ?recording WHERE {
-              ?recording frbroo:R14_incorporates ?? ;
-                a frbroo:F26_Recording .
+            query='SELECT DISTINCT ?recording ?date WHERE {
+              {
+                ?recording frbroo:R14_incorporates ?? ;
+                  a frbroo:F26_Recording .
+                OPTIONAL {
+                  ?expressioncreation frbroo:R17_created ?recording ;
+                    crm:P4_has_time-span [
+                      a crm:E52_Time-Span ;
+                        rdfs:label ?date 
+                  ]
+                }
+              } UNION {
+                ?performance frbroo:R25_performed ?? ;
+                  a frbroo:F31_Performance ;
+                  crm:P9_consists_of ?recorded_performance .
+                ?recorded_performance a frbroo:F31_Performance .
+                ?recording crm:P70_documents ?recorded_performance ;
+                  a frbroo:F26_Recording .
+                OPTIONAL {
+                  ?recorded_performance crm:P4_has_time-span [
+                    a crm:E52_Time-Span ;
+                      rdfs:label ?date 
+                  ]
+                }
+              }
             }'
             template='<div>
               {{#ifCond bindings.length ">" 0}}<h5>Recording</h5>{{/ifCond}}
-              {{#each bindings}}{{#if @first}}<semantic-link iri="{{recording.value}}"></semantic-link>{{else}}, <semantic-link iri="{{recording.value}}"></semantic-link>{{/if}}{{/each}}</div>'>
+              {{#each bindings}}<ul class="list-unstyled">
+                <li><semantic-link iri="{{recording.value}}"></semantic-link>{{#if date}} ({{date.value}}){{/if}}</li>
+              </ul>{{/each}}</div>'>
           </semantic-query>
-
 
         </bs-col>
       </bs-tab>
