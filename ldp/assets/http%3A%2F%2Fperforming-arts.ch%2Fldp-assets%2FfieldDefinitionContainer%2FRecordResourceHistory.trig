@@ -7,7 +7,7 @@
   
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory>
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Record set history"@en, "Archivierungsgeschichte"@de, "Historique du record set / de l’unité documentaire"@fr;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Record set history"@en, "Archivierungsgeschichte"@de, "Historique de l’unité de description"@fr;
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-203c4a89b4114d6293028cd7ae5eff1c-ai5aoo .
   
   _:genid-203c4a89b4114d6293028cd7ae5eff1c-ai5aoo <http://spinrdf.org/sp#text> "INSERT { $subject rico:history $value} WHERE {}" .
