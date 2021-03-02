@@ -40,7 +40,12 @@
                     <semantic-query 
                         query="SELECT ?label ?history WHERE {
                             VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory>) }
-                            ?? rico:history ?history . }"
+                            {
+                                ?? rico:history ?history .
+                            } UNION {
+                                ?file premis:isIncludedIn ?? ;
+                                    rico:history ?history .
+                            }}"
                         template='<div>
                             {{#ifCond bindings.length ">" 0}}
                                 <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
@@ -120,9 +125,13 @@
                                 ( 5 'Scanning order' ebucore:scanningOrder 'true' )
                                 ( 6 'Frame rate' ebucore:frameRate '' )
                             }
-                            ?file premis:isIncludedIn ?? ;
-                                a premis:File ;
-                                ?property ?value .
+                            {
+                                ?? ?property ?value .
+                            } UNION {
+                                ?file premis:isIncludedIn ?? ;
+                                    a premis:File ;
+                                    ?property ?value .
+                            }
                         } GROUP BY ?order ?label ?vocab
                         ORDER BY ?order"
                         template='<div>{{#each bindings}}
@@ -136,10 +145,15 @@
                         query="SELECT ?order ?label (GROUP_CONCAT(?value; SEPARATOR=', ') AS ?values) WHERE {
                             VALUES ( ?order ?label ?property ) {
                                 ( 1 'Sampling rate' ebucore:samplingRate )
+                                ( 2 'Channels' ebucore:channels )
                             }
-                            ?file premis:isIncludedIn ?? ;
-                                a premis:File ;
-                                ?property ?value .
+                            {
+                                ?? ?property ?value .
+                            } UNION {
+                                ?file premis:isIncludedIn ?? ;
+                                    a premis:File ;
+                                    ?property ?value .
+                            }
                         } GROUP BY ?order ?label
                         ORDER BY ?order"
                         template='<div>{{#each bindings}}
@@ -259,6 +273,23 @@
                         query="SELECT ?value WHERE { ?? spao:hasCondition ?value . } ORDER BY ASC (?value)"
                         template='<div>
                             <h5>Condition</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><mp-label iri="{{value.value}}"></mp-label></li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- video damage -->
+                    <semantic-query 
+                        query='SELECT ?value WHERE {
+                            {
+                                ?? spao:hasVideoDamage ?value .
+                            } UNION {
+                                ?file premis:isIncludedIn ?? ;
+                                    spao:hasVideoDamage ?value .
+                            }
+                        }'
+                        template='<div>
+                            <h5>Video damage</h5>
                             <ul class="list-unstyled">{{#each bindings}}
                                 <li><mp-label iri="{{value.value}}"></mp-label></li>
                             {{/each}}</ul></div>'>
@@ -399,6 +430,10 @@
                                 <li>{{comment.value}}</li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
+
+                    <!-- ACCESS -->
+
+                    [[> sapaModule:RecordResourceAccess]]
 
                 </bs-col>
 
