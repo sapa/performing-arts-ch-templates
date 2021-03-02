@@ -1,0 +1,31 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier/context> {
+  _:genid-66c40068810f4f189c0a408071bc7fdb-wrorn9 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:dateQualifier $value . } WHERE { }" .
+  
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-66c40068810f4f189c0a408071bc7fdb-tpkzf;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-66c40068810f4f189c0a408071bc7fdb-mnba4q;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-66c40068810f4f189c0a408071bc7fdb-p7qkek;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-66c40068810f4f189c0a408071bc7fdb-wrorn9;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Date qualifier"@en;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-02T10:22:58.807Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-66c40068810f4f189c0a408071bc7fdb-mnba4q a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:dateQualifier $value . } WHERE {}" .
+  
+  _:genid-66c40068810f4f189c0a408071bc7fdb-p7qkek a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject rico:dateQualifier $value . }" .
+  
+  _:genid-66c40068810f4f189c0a408071bc7fdb-tpkzf a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $value skos:inScheme spav:dq . }" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier> .
+}

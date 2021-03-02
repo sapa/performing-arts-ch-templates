@@ -103,7 +103,53 @@
         </bs-row>
         <bs-row>
           <bs-col sm='4'>
-            <semantic-form-text-input for="date"></semantic-form-text-input>
+            <semantic-form-switch for='date' switch-on-field='date_type'>
+              <semantic-form-switch-case label='Single Date'>
+                <semantic-form-composite-input for='date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                  date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                  date_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                  date_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                  date_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                ]]'>
+                  <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                  <semantic-form-text-input for="date_value"></semantic-form-text-input>
+                  <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input row=true>
+                  <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input row=true>
+                </semantic-form-composite-input>
+              </semantic-form-switch-case>
+              <semantic-form-switch-case label='Date Range'>
+                <semantic-form-composite-input for='date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                  date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                  date_beginning="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateBeginning"
+                  date_end="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateEnd"
+                ]]'>
+                  <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:DateRange"]]'></semantic-form-hidden-input>
+                  <semantic-form-composite-input for='date_beginning' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                    date_beginning_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                    date_beginning_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                    date_beginning_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                    date_beginning_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                  ]]'>
+                    <semantic-form-hidden-input for="date_beginning_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                    <semantic-form-text-input for="date_beginning_value"></semantic-form-text-input>
+                    <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input row=true>
+                    <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input row=true>
+                  </semantic-form-composite-input>   
+
+                  <semantic-form-composite-input for='date_end' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                    date_end_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                    date_end_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                    date_end_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                    date_end_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                  ]]'>
+                    <semantic-form-hidden-input for="date_end_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                    <semantic-form-text-input for="date_end_value"></semantic-form-text-input>
+                    <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input row=true>
+                    <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input row=true>
+                  </semantic-form-composite-input>
+                </semantic-form-composite-input>
+              </semantic-form-switch-case>
+            </semantic-form-switch>
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-text-input for="extent"></semantic-form-text-input>

@@ -1,15 +1,11 @@
 <!-- date -->
 <semantic-query 
-    query="SELECT ?label ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
+    query="SELECT DISTINCT ?label ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
     WHERE {
         VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>) }
         ?? rico:isAssociatedWithDate ?date .
         {
-            {
-                ?date rico:normalizedDateValue ?normalized_date .
-            } UNION {
-                ?date rico:expressedDate ?expressed_date .
-            }
+            ?date rico:normalizedDateValue ?expressed_date .
             BIND(IF(BOUND(?expressed_date), ?expressed_date, ?normalized_date) AS ?single_date)
             OPTIONAL { ?date rico:dateQualifier ?single_qualifier . }
             OPTIONAL { ?date rico:certainty ?single_certainty . }
