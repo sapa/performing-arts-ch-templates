@@ -52,9 +52,16 @@
         <semantic-query 
           query='SELECT ?source WHERE { 
             OPTIONAL {
-              ?? crm:P70_documents ?performance . 
-              ?performance frbroo:R25_performed ?plan .
-              ?plan a frbroo:F25_Performance_Plan .  
+              {
+                ?? crm:P70_documents ?performance . 
+                ?performance frbroo:R25_performed ?plan .
+                ?plan a frbroo:F25_Performance_Plan .  
+              } UNION {
+                ?? crm:P70_documents ?recorded_performance.
+                ?performance crm:P9_consists_of ?recorded_performance ;
+                  frbroo:R25_performed ?plan.
+                ?plan rdf:type frbroo:F25_Performance_Plan.  
+              }
             }
             OPTIONAL {
               ?? crm:P70_documents ?performance .
