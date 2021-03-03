@@ -73,22 +73,37 @@
 
             <!-- subjects -->
             <semantic-query 
-                query='SELECT ?label ?subject ?identified WHERE {
+                query='SELECT ?label ?subject ?identified ?order ?type ?icon WHERE {
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject>) }
                     ?? rico:hasSubject ?subject .
-                    BIND(IF(!CONTAINS(STR(?subject), "/u/"), "true","") AS ?identified)
-                }'
+                    BIND(IF(!CONTAINS(STR(?subject), "/u/"), "true", "") AS ?identified)
+                    OPTIONAL {
+                        VALUES ( ?order ?type ?icon ) {
+                            ( 1 frbroo:F25_Performance_Plan "../assets/icons/solid/theater-masks.svg" ) 
+                            ( 2 frbroo:F31_Performance "../assets/icons/solid/theater-masks.svg" ) 
+                            ( 3 frbroo:F26_Recording "../assets/icons/solid/camcorder-solid.svg" ) 
+                            ( 4 rico:CorporateBody "../assets/icons/solid/users.svg" ) 
+                            ( 5 rico:Person "../assets/icons/solid/user.svg" ) 
+                            ( 6 rico:Place "../assets/icons/solid/map-marker-alt.svg" ) 
+                        }
+                        ?subject a ?type .
+                    }
+                } ORDER BY ?order'
                 template='<div>
                     {{#ifCond bindings.length ">" 0}}
                         <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
                     {{/ifCond}}
                     <ul class="list-unstyled">
                     {{#each bindings}}
-                        {{#if identified.value}} 
-                            <li><semantic-link iri="{{subject.value}}"></semantic-link></li>
-                        {{else}}
-                            <li><mp-label iri="{{subject.value}}"></mp-label></li>
-                        {{/if}}
+                        <li>
+                            {{#if icon}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style="height: 1.4em; width: 1.4em; padding-right:0.5em;"></mp-resource-thumbnail>{{/if}}
+                            {{#if identified.value}} 
+                                <semantic-link iri="{{subject.value}}"></semantic-link>
+                            {{else}}
+                                <mp-label iri="{{subject.value}}"></mp-label>
+                            {{/if}}
+                            
+                        </li>
                     {{/each}}
                     </ul>
                 </div>'>
