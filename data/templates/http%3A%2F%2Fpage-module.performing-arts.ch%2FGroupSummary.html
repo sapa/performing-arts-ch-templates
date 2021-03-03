@@ -178,13 +178,11 @@
     <!-- record sets -->
     <semantic-query 
         query='SELECT ?label WHERE {
-            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordsBern>) }
+            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Records>) }
             ?record rico:hasSubject ?? .
         } LIMIT 1'
         template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
     </semantic-query>
-
-    [[#if (hasPermission "forms:ldp:*")]]
     <semantic-tree
         query='SELECT DISTINCT ?node ?parent WHERE {
             {
@@ -203,24 +201,6 @@
         }'
         tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
     </semantic-tree>
-    [[else]]
-    <semantic-query 
-        query='SELECT DISTINCT ?docform ?extent ?desciptivenote WHERE {
-            {
-                ?record rico:hasSubject ?? .
-                MINUS { ?record a rico:RecordPart . }
-            } UNION {
-                ?recordpart rico:hasSubject ?? ;
-                    a rico:RecordPart ;
-                    rico:isConstituentOf ?record .
-            }
-            ?record rico:hasDocumentaryFormType ?docform .
-            OPTIONAL { ?record rico:recordResourceExtent ?extent .}
-            OPTIONAL { ?record rico:descriptiveNote ?desciptivenote . }
-        }'
-        template='<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{docform.value}}"></mp-label>{{else}}, <mp-label iri="{{docform.value}}"></mp-label>{{/if}}{{#if @last}}{{#if desciptivenote}}, {{desciptivenote.value}}{{/if}}{{#if extent}} ({{extent.value}}){{/if}}{{else}}{{/if}}{{/each}}</div>'>
-    </semantic-query>
-    [[/if]]
 
 </bs-col>
 

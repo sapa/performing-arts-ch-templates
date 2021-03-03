@@ -1,0 +1,29 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Records/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Records> a <http://www.metaphacts.com/ontology/fields#Field>,
+      <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.w3.org/2000/01/rdf-schema#label> "Archivbestände"@de, "Archival holdings"@en,
+      "Archivio collezioni"@it, "Fonds d’archives"@fr;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordSet>,
+      <https://www.ica.org/standards/RiC/ontology#Record>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-d42876b251fa4ad0ad495488ea0a2221-fnx9x4;
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-d42876b251fa4ad0ad495488ea0a2221-585fyc;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-d42876b251fa4ad0ad495488ea0a2221-mfi2cj;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T07:48:08.701Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-d42876b251fa4ad0ad495488ea0a2221-mfi2cj a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:name $value} WHERE {}" .
+  
+  _:genid-d42876b251fa4ad0ad495488ea0a2221-585fyc a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject rico:name $value . }" .
+  
+  _:genid-d42876b251fa4ad0ad495488ea0a2221-fnx9x4 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:name $value} WHERE {}" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Records> .
+}
