@@ -150,6 +150,15 @@
                   </semantic-form-composite-input>
                 </semantic-form-composite-input>
               </semantic-form-switch-case>
+              <semantic-form-switch-case label='No Date'>
+                <semantic-form-composite-input for='date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                  date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                  date_no_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateNoValue"
+                ]]'>
+                  <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:Date"]]'></semantic-form-hidden-input>
+                  <semantic-form-hidden-input for="date_no_value" default-value='s.d.'></semantic-form-text-input>
+                </semantic-form-composite-input>
+              </semantic-form-switch-case>
             </semantic-form-switch>
           </bs-col>
           <bs-col sm='4'>
