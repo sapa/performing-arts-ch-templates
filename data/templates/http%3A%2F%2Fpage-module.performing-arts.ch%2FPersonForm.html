@@ -29,6 +29,7 @@
         note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
         note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
         history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonHistory"
+        bibliography="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AgentBibliography"
         subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf"
       ]]'>
       <bs-panel>
@@ -83,7 +84,14 @@
             <semantic-form-tree-picker-input for='death_place'></semantic-form-tree-picker-input>
           </bs-col>
         </bs-row>
-        <semantic-form-text-input for='history' multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>            
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input for='history' multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='6'>
+            <semantic-form-text-input for='bibliography' multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
         <bs-row>
           <bs-col sm='6'>
             <semantic-form-text-input for='note_public' multiline=true></semantic-form-text-input>            

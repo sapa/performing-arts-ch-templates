@@ -113,8 +113,14 @@
                 </semantic-query>
         
                 <semantic-query 
-                    query='SELECT ?bibliography WHERE { ?? <http://temp.performing-arts.ch/bibliography> ?bibliography . }'
-                    template='<div><h5>Bibliography</h5>{{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{bibliography.value}}</div>{{/each}}</div>'>
+                    query='SELECT ?label ?value WHERE {
+                        VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AgentBibliography>) }
+                        ?? spao:hasBibliography ?value . }'
+                    template='<div>
+                        {{#ifCond bindings.length ">" 0}}
+                            <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
+                        {{/ifCond}}
+                        {{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
                 </semantic-query>
         
             </bs-col>

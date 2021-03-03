@@ -32,6 +32,7 @@
         subject_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SubjectOf"
         sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
         history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupHistory"
+        bibliography="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AgentBibliography"
         note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
         note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
         repertories="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRepertories"
@@ -157,7 +158,14 @@
           </semantic-form>
         </semantic-form-autocomplete-input>
         [[/if]]
-        <semantic-form-text-input for='history' multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>            
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input for='history' multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='6'>
+            <semantic-form-text-input for='bibliography' multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
         <bs-row>
           <bs-col sm="6">
             <semantic-form-text-input for="note_public" multiline=true></semantic-form-text-input>
