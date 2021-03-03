@@ -151,6 +151,9 @@
         <!-- creation functions - stage design -->
         [[> sapaModule:ShowActivities function="spav:mulga"]]
 
+        <!-- creation functions - set design -->
+        [[> sapaModule:ShowActivities function="spav:muqjb"]]
+
         <!-- creation functions - light -->
         [[> sapaModule:ShowActivities function="spav:murni"]]
 
@@ -237,7 +240,7 @@
 
         <!-- record sets -->
         <semantic-query
-        query='SELECT DISTINCT ?record WHERE { 
+        query='SELECT DISTINCT ?record ?identifier WHERE { 
           {
             ?record rico:hasSubject ?? ;
               a rico:RecordSet .
@@ -248,11 +251,14 @@
             ?recordpart rico:hasSubject ?? ;
               a rico:RecordPart ;
               rico:isConstituentOf ?record .
-          }        
+          }
+          OPTIONAL {
+            ?record rico:identifier ?identifier .
+          }
         }'
         template='<div><h5>Record (Set)</h5>
             <ul class="list-unstyled">{{#each bindings}}
-                <li><semantic-link iri="{{record.value}}"></semantic-link></li>
+                <li>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link iri="{{record.value}}"></semantic-link></li>
             {{/each}}</ul></div>'>
         </semantic-query>
     
