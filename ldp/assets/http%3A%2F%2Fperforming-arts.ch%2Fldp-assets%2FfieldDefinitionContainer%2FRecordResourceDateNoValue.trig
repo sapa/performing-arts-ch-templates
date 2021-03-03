@@ -4,23 +4,39 @@
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "No date"@en;
+    <http://www.w3.org/2000/01/rdf-schema#label> "No date type"@en;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3e5dfc60a0724d05bcc64a5cf103b1b2-1pjbwm;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3e5dfc60a0724d05bcc64a5cf103b1b2-7a9s56;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-3e5dfc60a0724d05bcc64a5cf103b1b2-sre36v;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-2cc6f89f2dd74e30b2b51727cb46b6b9-tz6z;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-2cc6f89f2dd74e30b2b51727cb46b6b9-n5o0b9;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-2cc6f89f2dd74e30b2b51727cb46b6b9-k9up1a;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T14:05:42.813Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T15:24:47.627Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-3e5dfc60a0724d05bcc64a5cf103b1b2-7a9s56 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject rico:expressedDate $value . }" .
+  _:genid-2cc6f89f2dd74e30b2b51727cb46b6b9-n5o0b9 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+  $subject rico:expressedDate ?label .
+} WHERE {
+  BIND( $value AS ?vocab ) 
+  VALUES ( ?vocab ?label ) {
+    ( spav:ndsd \"s.d.\" )
+    ( spav:ndna \"N/A\" )
+  }
+}""" .
   
-  _:genid-3e5dfc60a0724d05bcc64a5cf103b1b2-sre36v a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "DELETE { $subject rico:expressedDate $value . } WHERE {}" .
+  _:genid-2cc6f89f2dd74e30b2b51727cb46b6b9-k9up1a a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject rico:expressedDate ?label. 
+  VALUES ( ?vocab ?label ) {
+    ( spav:ndsd \"s.d.\" )
+    ( spav:ndna \"N/A\" )
+  }
+  BIND( ?vocab AS $value) 
+}""" .
   
-  _:genid-3e5dfc60a0724d05bcc64a5cf103b1b2-1pjbwm a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "INSERT { $subject rico:expressedDate $value . } WHERE { }" .
+  _:genid-2cc6f89f2dd74e30b2b51727cb46b6b9-tz6z a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  VALUES ( $value ) { ( spav:ndsd ) ( spav:ndna )}
+}""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateNoValue> .

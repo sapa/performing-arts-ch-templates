@@ -155,8 +155,8 @@
                   date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
                   date_no_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateNoValue"
                 ]]'>
-                  <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:Date"]]'></semantic-form-hidden-input>
-                  <semantic-form-hidden-input for="date_no_value" default-value='s.d.'></semantic-form-text-input>
+                  <semantic-form-hidden-input for='date_type' default-value='[[resolvePrefix "rico:Date"]]'></semantic-form-hidden-input>
+                  <semantic-form-checklist-input for='date_no_value' type='radio' row=true default-value='[[resolvePrefix "spav:ndsd"]]'></semantic-form-checklist-input>
                 </semantic-form-composite-input>
               </semantic-form-switch-case>
             </semantic-form-switch>
