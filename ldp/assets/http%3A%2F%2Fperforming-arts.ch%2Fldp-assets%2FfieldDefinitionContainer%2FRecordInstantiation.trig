@@ -5,30 +5,30 @@
       <http://www.w3.org/ns/ldp#Resource>;
     <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
     <http://www.w3.org/2000/01/rdf-schema#label> "Instanziierung"@de, "Instantiation"@en,
-      "Instanciation"@fr;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-31c043389b16494aac8b9981c37e31f0-c5tyn4;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-31c043389b16494aac8b9981c37e31f0-idmzx;
+      "Instanciation"@fr, "Istanziazione"@it;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-31c043389b16494aac8b9981c37e31f0-dx82ss;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-97dbc433b51145909928769fec1c95b5-c1052i;
     <http://www.metaphacts.com/ontology/fields#domain> <http://www.loc.gov/premis/rdf/v1#Representation>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-31c043389b16494aac8b9981c37e31f0-540moe;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-97dbc433b51145909928769fec1c95b5-igs37l;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-97dbc433b51145909928769fec1c95b5-cltw1;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-97dbc433b51145909928769fec1c95b5-b8kya;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T18:57:33.633Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:37:28.066Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-31c043389b16494aac8b9981c37e31f0-c5tyn4 a <http://spinrdf.org/sp#Query>;
+  _:genid-97dbc433b51145909928769fec1c95b5-b8kya a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject premis:represents $value . } WHERE { }" .
+  
+  _:genid-97dbc433b51145909928769fec1c95b5-igs37l a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject premis:represents $value} WHERE { }" .
+  
+  _:genid-97dbc433b51145909928769fec1c95b5-cltw1 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
   $value rdf:type/rdfs:subClassOf* rico:RecordResource ;
   	rico:identifier $label .
   FILTER(REGEX($label, \"?token\", \"i\"))
 }""" .
   
-  _:genid-31c043389b16494aac8b9981c37e31f0-dx82ss a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "INSERT { $subject premis:represents $value . } WHERE { }" .
-  
-  _:genid-31c043389b16494aac8b9981c37e31f0-540moe a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "DELETE { $subject premis:represents $value} WHERE { }" .
-  
-  _:genid-31c043389b16494aac8b9981c37e31f0-idmzx a <http://spinrdf.org/sp#Query>;
+  _:genid-97dbc433b51145909928769fec1c95b5-c1052i a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject premis:represents ?value . }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>

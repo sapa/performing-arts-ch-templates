@@ -4,14 +4,14 @@
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Date de la description"@fr, "Bearbeitungsdatum"@de,
-      "Processing date"@en;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-6d5ed758841448a8afa532bc9249f6ac-vbdnam;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Data del trattamento"@it, "Date de la description"@fr,
+      "Bearbeitungsdatum"@de, "Processing date"@en;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-a99ded5f59ed4084ac537539b7684a7a-y8r69r;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T18:36:19.469Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:42:08.951Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-6d5ed758841448a8afa532bc9249f6ac-vbdnam a <http://spinrdf.org/sp#Query>;
+  _:genid-a99ded5f59ed4084ac537539b7684a7a-y8r69r a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """INSERT {
   	# TODO
   	$subject spao:hasProcessingDate $value.

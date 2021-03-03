@@ -2,24 +2,24 @@
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupHistory/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupHistory> a <http://www.metaphacts.com/ontology/fields#Field>,
       <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-e224458b9ba24fc2850f788408d82c98-pxz4y;
     <http://www.w3.org/2000/01/rdf-schema#label> "Administrative Geschichte"@de, "Histoire administrative"@fr,
-      "Administrative history"@en;
+      "Administrative history"@en, "Storia amministrativa"@it;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Group>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-7097bcf34b8244afb9d06bc31c5769de-kvn7us;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "4";
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-e224458b9ba24fc2850f788408d82c98-qx7vof;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-7097bcf34b8244afb9d06bc31c5769de-tls02d;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-e224458b9ba24fc2850f788408d82c98-rqvcj6;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-7097bcf34b8244afb9d06bc31c5769de-mya18j;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-11-11T17:38:56.037Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:30:22.163Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-e224458b9ba24fc2850f788408d82c98-qx7vof a <http://spinrdf.org/sp#Query>;
+  _:genid-7097bcf34b8244afb9d06bc31c5769de-mya18j a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "DELETE { $subject rico:history $value } WHERE {}" .
   
-  _:genid-e224458b9ba24fc2850f788408d82c98-pxz4y a <http://spinrdf.org/sp#Query>;
+  _:genid-7097bcf34b8244afb9d06bc31c5769de-kvn7us a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "INSERT { $subject rico:history $value } WHERE {}" .
   
-  _:genid-e224458b9ba24fc2850f788408d82c98-rqvcj6 a <http://spinrdf.org/sp#Query>;
+  _:genid-7097bcf34b8244afb9d06bc31c5769de-tls02d a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:history ?value }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>

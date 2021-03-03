@@ -1,31 +1,40 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDocumentaryForm/context> {
-  _:genid-ef3b7928dfc9440c814f3e12867e340f-tc8b9 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasDocumentaryFormType $value} WHERE { }" .
-  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDocumentaryForm>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-ef3b7928dfc9440c814f3e12867e340f-kvbga;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-73c7ad5f44724f40a6ad1c15cf49d718-e7rn0v;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-73c7ad5f44724f40a6ad1c15cf49d718-ibog18;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Forma documentaria"@it, "Forme documentaire"@fr,
+      "Documentary form"@en, "Archivalienart"@de;
     <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordResourceDocumentaryForm>,
       <http://www.w3.org/2004/02/skos/core#Concept>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-ef3b7928dfc9440c814f3e12867e340f-63r75j;
     <http://www.metaphacts.com/ontology/fields#treePatterns> """{
   \"type\": \"simple\",
   \"schemePattern\": \"?item skos:inScheme spav:df\",
   \"relationPattern\": \"?item skos:broader ?parent\"
 }"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-ef3b7928dfc9440c814f3e12867e340f-lcg95;
-    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-ef3b7928dfc9440c814f3e12867e340f-y7z6f5;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-ef3b7928dfc9440c814f3e12867e340f-tc8b9;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Forme documentaire"@fr, "Documentary form"@en,
-      "Archivalienart"@de;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-73c7ad5f44724f40a6ad1c15cf49d718-d5ga9j;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-73c7ad5f44724f40a6ad1c15cf49d718-6yvmm5;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-73c7ad5f44724f40a6ad1c15cf49d718-7un4uum;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-17T18:44:22.931Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:36:10.178Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-ef3b7928dfc9440c814f3e12867e340f-lcg95 a <http://spinrdf.org/sp#Query>;
+  _:genid-73c7ad5f44724f40a6ad1c15cf49d718-d5ga9j a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT ?value ?label WHERE { $subject rico:hasDocumentaryFormType ?value . }" .
+  
+  _:genid-73c7ad5f44724f40a6ad1c15cf49d718-7un4uum a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasDocumentaryFormType $value . } WHERE { }" .
+  
+  _:genid-73c7ad5f44724f40a6ad1c15cf49d718-ibog18 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
+  $value a skos:Concept ;
+    skos:inScheme spav:df .
+}""" .
+  
+  _:genid-73c7ad5f44724f40a6ad1c15cf49d718-6yvmm5 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
   $value a skos:Concept ;
     skos:inScheme spav:df ;
@@ -33,17 +42,8 @@
   FILTER(REGEX(STR(?label), \"?token\",\"i\"))
 } LIMIT 10""" .
   
-  _:genid-ef3b7928dfc9440c814f3e12867e340f-kvbga a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "SELECT ?value ?label WHERE { $subject rico:hasDocumentaryFormType ?value . }" .
-  
-  _:genid-ef3b7928dfc9440c814f3e12867e340f-63r75j a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasDocumentaryFormType $value . } WHERE { }" .
-  
-  _:genid-ef3b7928dfc9440c814f3e12867e340f-y7z6f5 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
-  $value a skos:Concept ;
-    skos:inScheme spav:df .
-}""" .
+  _:genid-73c7ad5f44724f40a6ad1c15cf49d718-e7rn0v a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasDocumentaryFormType $value} WHERE { }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDocumentaryForm> .

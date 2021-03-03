@@ -2,18 +2,19 @@
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso> a <http://www.metaphacts.com/ontology/fields#Field>,
       <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-b71ef04048ce435f9d3deca6a49b1912-i4rxqb;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-b71ef04048ce435f9d3deca6a49b1912-dbo89;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-b71ef04048ce435f9d3deca6a49b1912-egv3my;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Siehe auch"@de, "Voir aussi"@fr, "See also"@en;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Vedi anche"@it, "Siehe auch"@de, "Voir aussi"@fr,
+      "See also"@en;
     <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Thing>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-518b2a27c9854fb3896bd8dd85bd0714-0yi4d5;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-518b2a27c9854fb3896bd8dd85bd0714-1i8s2i;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Thing>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-b71ef04048ce435f9d3deca6a49b1912-z3y57;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-518b2a27c9854fb3896bd8dd85bd0714-dzn1dg;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-518b2a27c9854fb3896bd8dd85bd0714-0tk36t;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T18:22:27.100Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:48:19.326Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-b71ef04048ce435f9d3deca6a49b1912-z3y57 a <http://spinrdf.org/sp#Query>;
+  _:genid-518b2a27c9854fb3896bd8dd85bd0714-1i8s2i a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
   { $value a rico:Concept . }
   UNION
@@ -27,13 +28,13 @@
   FILTER(!CONTAINS(STR(?value), \"/u/\"))
 }""" .
   
-  _:genid-b71ef04048ce435f9d3deca6a49b1912-egv3my a <http://spinrdf.org/sp#Query>;
+  _:genid-518b2a27c9854fb3896bd8dd85bd0714-dzn1dg a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject spao:seeAlso $value. }" .
   
-  _:genid-b71ef04048ce435f9d3deca6a49b1912-dbo89 a <http://spinrdf.org/sp#Query>;
+  _:genid-518b2a27c9854fb3896bd8dd85bd0714-0yi4d5 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "INSERT { $subject spao:seeAlso $value. } WHERE {}" .
   
-  _:genid-b71ef04048ce435f9d3deca6a49b1912-i4rxqb a <http://spinrdf.org/sp#Query>;
+  _:genid-518b2a27c9854fb3896bd8dd85bd0714-0tk36t a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "DELETE { $subject spao:seeAlso $value. } WHERE {}" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>

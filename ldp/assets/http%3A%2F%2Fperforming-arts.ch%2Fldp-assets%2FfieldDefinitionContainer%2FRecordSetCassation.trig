@@ -3,24 +3,25 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetCassation>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-ba465eef63b445c9ac15cf5434951d68-2dausc;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-ba465eef63b445c9ac15cf5434951d68-62v8c;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
-    <http://www.w3.org/2000/01/rdf-schema#label> "Elimination"@fr, "Cassation"@en, "Kassation"@de;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Eliminazione"@it, "Elimination"@fr,
+      "Cassation"@en, "Kassation"@de;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-ba465eef63b445c9ac15cf5434951d68-e01tbu;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-eeff7dc2418846e992a7dff026b7a32d-jb80m;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-eeff7dc2418846e992a7dff026b7a32d-8qweo3;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-eeff7dc2418846e992a7dff026b7a32d-ql9jpa;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T19:03:30.876Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:32:26.530Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-ba465eef63b445c9ac15cf5434951d68-e01tbu a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "INSERT { $subject spao:cassation $value . } WHERE { }" .
-  
-  _:genid-ba465eef63b445c9ac15cf5434951d68-62v8c a <http://spinrdf.org/sp#Query>;
+  _:genid-eeff7dc2418846e992a7dff026b7a32d-8qweo3 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "DELETE { $subject spao:cassation $value . } WHERE {}" .
   
-  _:genid-ba465eef63b445c9ac15cf5434951d68-2dausc a <http://spinrdf.org/sp#Query>;
+  _:genid-eeff7dc2418846e992a7dff026b7a32d-jb80m a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject spao:cassation ?value . }" .
+  
+  _:genid-eeff7dc2418846e992a7dff026b7a32d-ql9jpa a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject spao:cassation $value . } WHERE { }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetCassation> .

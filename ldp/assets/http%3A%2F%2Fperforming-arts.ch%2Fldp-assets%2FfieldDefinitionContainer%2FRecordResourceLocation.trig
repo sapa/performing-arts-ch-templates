@@ -3,14 +3,14 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLocation>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Standort"@de, "Localisation"@fr, "Location"@en;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-bafd62071974472a9272de3d8030649e-3gj54i;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Standort"@de, "Collocazione "@it, "Localisation"@fr,
+      "Location"@en;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-bafd62071974472a9272de3d8030649e-8cxxxm;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-958a66e3bbd54a15b0bb98a005680f99-0yuzn;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-bafd62071974472a9272de3d8030649e-wkj11i;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-bafd62071974472a9272de3d8030649e-3b3hov;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-958a66e3bbd54a15b0bb98a005680f99-yij3e4;
     <http://www.metaphacts.com/ontology/fields#range> <http://ontology.performing-arts.ch/ArchivalPlace>;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-958a66e3bbd54a15b0bb98a005680f99-ylmrte;
     <http://www.metaphacts.com/ontology/fields#treePatterns> """{
   \"type\": \"full\",
   \"rootsQuery\": \"PREFIX spao: <http://ontology.performing-arts.ch/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item a spao:ArchivalPlace .\\n  FILTER(NOT EXISTS { ?item rico:containedBy ?parent. })\\n  ?item rdfs:label ?label.\\n  OPTIONAL { ?child rico:containedBy ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY (?label)\",
@@ -18,16 +18,14 @@
   \"parentsQuery\": \"PREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?parent ?parentLabel WHERE {\\n  ?item rico:containedBy ?parent.\\n  ?parent rdfs:label ?parentLabel.\\n}\",
   \"searchQuery\": \"PREFIX spao: <http://ontology.performing-arts.ch/>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>\\nSELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {\\n  SERVICE Repository:lookup {\\n    ?item lookup:token ?__token__;\\n      lookup:type spao:ArchivalPlace ;\\n      lookup:limit 400 .\\n  }\\n  OPTIONAL { ?child rico:containedBy ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY DESC (?score) (?label)\\nLIMIT 200\"
 }"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-958a66e3bbd54a15b0bb98a005680f99-wsugep;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T13:19:25.984Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:39:44.813Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-bafd62071974472a9272de3d8030649e-8cxxxm a <http://spinrdf.org/sp#Query>;
+  _:genid-958a66e3bbd54a15b0bb98a005680f99-0yuzn a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasLocation $value. } WHERE { }" .
   
-  _:genid-bafd62071974472a9272de3d8030649e-3gj54i a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject rico:hasLocation $value. }" .
-  
-  _:genid-bafd62071974472a9272de3d8030649e-wkj11i a <http://spinrdf.org/sp#Query>;
+  _:genid-958a66e3bbd54a15b0bb98a005680f99-ylmrte a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """PREFIX spao: <http://ontology.performing-arts.ch/>
 PREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#>
 PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
@@ -38,7 +36,10 @@ SELECT DISTINCT ?value ?label WHERE {
    }
 }""" .
   
-  _:genid-bafd62071974472a9272de3d8030649e-3b3hov a <http://spinrdf.org/sp#Query>;
+  _:genid-958a66e3bbd54a15b0bb98a005680f99-wsugep a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject rico:hasLocation $value. }" .
+  
+  _:genid-958a66e3bbd54a15b0bb98a005680f99-yij3e4 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasLocation $value. } WHERE { }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
