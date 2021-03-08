@@ -223,11 +223,15 @@
 
                     <!-- extent -->
                     <semantic-query 
-                        query="SELECT ?extent WHERE { ?? rico:instantiationExtent ?extent . } ORDER BY ASC (?extent)"
+                        query="SELECT ?value WHERE {
+                            ?? rico:hasExtent [
+                                rico:quantity ?value 
+                            ]
+                        } ORDER BY ASC (?value)"
                         template='<div>
                             <h5>Extent</h5>
                             <ul class="list-unstyled">{{#each bindings}}
-                                <li>{{extent.value}}</li>
+                                <li>{{value.value}}</li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
 

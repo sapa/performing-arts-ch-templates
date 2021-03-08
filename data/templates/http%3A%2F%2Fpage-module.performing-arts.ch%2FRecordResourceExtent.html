@@ -1,16 +1,34 @@
+<!-- depricated -->
 <semantic-query 
-query='SELECT ?field ?order (GROUP_CONCAT(?value; SEPARATOR=", ") AS ?values) WHERE {
-        VALUES (?order ?field ?property) {
-            ( 0 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent> rico:recordResourceExtent )
-            ( 1 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAmount> spao:recordResourceAmount )
-            ( 2 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceWeight> spao:recordResourceWeight )
-            ( 3 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLinearMeters> spao:recordResourceLinearMeters )
-        }
-        ?? ?property ?value . 
-    } GROUP BY ?field ?order
-    ORDER BY ASC (?order)'
+query='SELECT ?field (GROUP_CONCAT(?value; SEPARATOR=", ") AS ?values) WHERE {
+        VALUES ( ?field ) { ( <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent> ) }
+        ?? rico:recordResourceExtent ?value . 
+    } GROUP BY ?field'
 template='{{#each bindings}}
         <h5><semantic-context repository="assets"><mp-label iri="{{field.value}}"></mp-label></semantic-context></h5>
+        <p>{{values.value}}</p>
+    {{/each}}'>
+</semantic-query>
+
+<semantic-query 
+query='SELECT ?order ?unit (GROUP_CONCAT(?value; SEPARATOR=", ") AS ?values) WHERE {
+        VALUES ( ?order ?unit ) {
+            ( 0 spav:eugen )
+            ( 1 spav:eupcs )
+            ( 2 spav:eulnm )
+            ( 3 spav:euwgt )
+            ( 4 spav:eubox )
+            ( 5 spav:euenv )
+        }
+        ?? rico:hasExtent [
+            a rico:RecordResourceExtent ;
+            spao:hasUnitOfMeasurement ?unit ;
+            rico:quantity ?value 
+        ]
+    } GROUP BY ?order ?unit
+    ORDER BY ASC (?order)'
+template='{{#each bindings}}
+        <h5 style="text-transform: capitalize;"><mp-label iri="{{unit.value}}"></mp-label></h5>
         <p>{{values.value}}</p>
     {{/each}}'>
 </semantic-query>

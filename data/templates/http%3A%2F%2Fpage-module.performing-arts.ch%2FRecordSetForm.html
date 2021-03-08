@@ -34,11 +34,10 @@
         date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate"
         iiif="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceIIIF"
         extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
+        extent_depricated="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentDepricated"
         amount="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAmount"
         linear_meters="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLinearMeters"
         weight="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceWeight"
-        extent_unit="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentUnit"
-        extent_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentValue"
         history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
         cassation="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetCassation"
         comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
@@ -162,10 +161,14 @@
             </semantic-form-switch>
           </bs-col>
           <bs-col sm='4'>
-            <semantic-form-text-input for="extent"></semantic-form-text-input>
-            <semantic-form-text-input for="amount"></semantic-form-text-input>
-            <semantic-form-text-input for="linear_meters"></semantic-form-text-input>
-            <semantic-form-text-input for="weight"></semantic-form-text-input>
+            <semantic-form-text-input for="extent_depricated"></semantic-form-text-input>
+            <semantic-form-composite-input for='extent' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+              extent_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentValue"
+              extent_unit="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentUnit"
+            ]]'>
+                <semantic-form-text-input for='extent_value'></semantic-form-text-input>
+                <semantic-form-select-input for='extent_unit'></semantic-form-select-input>
+            </semantic-form-composite-input>
             <semantic-form-text-input for="doublets"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='4'>
