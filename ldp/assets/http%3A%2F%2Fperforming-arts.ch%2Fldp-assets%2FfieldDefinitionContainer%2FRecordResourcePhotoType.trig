@@ -3,41 +3,36 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePhotoType>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-445fcb9f31b94f1b9db3430d5e1cfc70-kcugri;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-445fcb9f31b94f1b9db3430d5e1cfc70-w3oc17;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-50362d7f492844b79009a600fd5ff27e-hpdr7b;
     <http://www.w3.org/2000/01/rdf-schema#label> "Tipo di copia"@it, "Art des Abzugs"@de,
       "Type of print"@en, "Statut de la photographie"@fr;
-    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-445fcb9f31b94f1b9db3430d5e1cfc70-6rr8go;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-445fcb9f31b94f1b9db3430d5e1cfc70-f4oxqi;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-50362d7f492844b79009a600fd5ff27e-gm5t2;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-50362d7f492844b79009a600fd5ff27e-1vfuvq;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-50362d7f492844b79009a600fd5ff27e-s7a3i;
     <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2004/02/skos/core#Concept>;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:50:14.522Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-09T09:33:14.672Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-445fcb9f31b94f1b9db3430d5e1cfc70-f4oxqi a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """DELETE {
-	$subject rico:hasRecordResourceState $value.
-} WHERE {
-	$value skos:inScheme spav:st .
-}""" .
-  
-  _:genid-445fcb9f31b94f1b9db3430d5e1cfc70-w3oc17 a <http://spinrdf.org/sp#Query>;
+  _:genid-50362d7f492844b79009a600fd5ff27e-gm5t2 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-	$subject rico:hasRecordResourceState $value.
+	$subject rico:hasRecordState $value.
 	$value skos:inScheme spav:st .
 }""" .
   
-  _:genid-445fcb9f31b94f1b9db3430d5e1cfc70-6rr8go a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """INSERT {
-	$subject rico:hasRecordResourceState $value.
+  _:genid-50362d7f492844b79009a600fd5ff27e-s7a3i a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+	$subject rico:hasRecordState $value.
 } WHERE {
+	$value skos:inScheme spav:st .
 }""" .
   
-  _:genid-445fcb9f31b94f1b9db3430d5e1cfc70-kcugri a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
-  ?value skos:inScheme spav:st .
-}""" .
+  _:genid-50362d7f492844b79009a600fd5ff27e-1vfuvq a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasRecordState $value . } WHERE { }" .
+  
+  _:genid-50362d7f492844b79009a600fd5ff27e-hpdr7b a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT ?value WHERE { ?value skos:inScheme spav:st . }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePhotoType> .
