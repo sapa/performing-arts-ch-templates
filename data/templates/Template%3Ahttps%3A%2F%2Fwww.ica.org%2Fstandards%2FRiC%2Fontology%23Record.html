@@ -193,7 +193,7 @@
             <!-- documentary form -->
             <semantic-query 
                 query="SELECT ?label ?documentary_form WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDocumentaryForm>) }
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordDocumentaryForm>) }
                     ?? rico:hasDocumentaryFormType ?documentary_form . }"
                 template='<div>
                     {{#ifCond bindings.length ">" 0}}

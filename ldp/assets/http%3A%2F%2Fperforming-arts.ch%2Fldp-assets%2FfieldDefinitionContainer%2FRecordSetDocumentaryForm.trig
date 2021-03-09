@@ -1,0 +1,50 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-76a61ef1912e4459b44405bf10633c13-vci0z;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-76a61ef1912e4459b44405bf10633c13-b6xrzb;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-76a61ef1912e4459b44405bf10633c13-2tjjny;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Forma documentaria"@it, "Forme documentaire"@fr,
+      "Documentary form"@en, "Archivalienart"@de;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-76a61ef1912e4459b44405bf10633c13-crwp9f;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordResourceDocumentaryForm>;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-76a61ef1912e4459b44405bf10633c13-9pacg;
+    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"simple\",
+  \"schemePattern\": \"?item skos:inScheme spav:df\",
+  \"relationPattern\": \"?item skos:broader ?parent\"
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordSet>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-09T10:04:41.475Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-76a61ef1912e4459b44405bf10633c13-crwp9f a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $value a rico:RecordResourceDocumentaryForm ;
+    skos:inScheme spav:df .
+}""" .
+  
+  _:genid-76a61ef1912e4459b44405bf10633c13-9pacg a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+SELECT $value $label WHERE {
+  $value a rico:RecordResourceDocumentaryForm ;
+    skos:inScheme spav:df ;
+    rico:name ?label .
+  FILTER(REGEX(STR(?label), \"?token\",\"i\"))
+} LIMIT 10""" .
+  
+  _:genid-76a61ef1912e4459b44405bf10633c13-b6xrzb a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasOrHadAllMembersWithDocumentaryFormType $value . } WHERE { }" .
+  
+  _:genid-76a61ef1912e4459b44405bf10633c13-vci0z a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasOrHadAllMembersWithDocumentaryFormType $value . } WHERE { }" .
+  
+  _:genid-76a61ef1912e4459b44405bf10633c13-2tjjny a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject rico:hasOrHadAllMembersWithDocumentaryFormType $value . }" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm> .
+}

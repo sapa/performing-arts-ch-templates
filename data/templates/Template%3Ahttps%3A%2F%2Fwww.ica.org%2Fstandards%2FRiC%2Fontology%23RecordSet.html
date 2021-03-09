@@ -179,8 +179,8 @@
             <!-- documentary form -->
             <semantic-query 
                 query="SELECT ?label ?documentary_form WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDocumentaryForm>) }
-                    ?? rico:hasDocumentaryFormType ?documentary_form . }"
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm>) }
+                    ?? rico:hasOrHadAllMembersWithDocumentaryFormType ?documentary_form . }"
                 template='<div>
                     {{#ifCond bindings.length ">" 0}}
                         <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
