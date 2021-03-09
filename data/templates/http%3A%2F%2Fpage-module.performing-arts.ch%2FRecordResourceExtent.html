@@ -13,16 +13,16 @@ template='{{#each bindings}}
 <semantic-query 
 query='SELECT ?order ?unit (GROUP_CONCAT(?value; SEPARATOR=", ") AS ?values) WHERE {
         VALUES ( ?order ?unit ) {
-            ( 0 spav:eugen )
-            ( 1 spav:eupcs )
-            ( 2 spav:eulnm )
-            ( 3 spav:euwgt )
-            ( 4 spav:eubox )
-            ( 5 spav:euenv )
+            ( 0 spav:umpcs )
+            ( 1 spav:umlnm )
+            ( 2 spav:umcm )
+            ( 3 spav:umkg )
+            ( 4 spav:umbox )
+            ( 5 spav:umenv )
         }
         ?? rico:hasExtent [
             a rico:RecordResourceExtent ;
-            spao:hasUnitOfMeasurement ?unit ;
+            rico:hasUnitOfMeasurement ?unit ;
             rico:quantity ?value 
         ]
     } GROUP BY ?order ?unit
