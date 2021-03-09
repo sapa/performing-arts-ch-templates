@@ -134,7 +134,7 @@
             <semantic-query 
                 query="SELECT ?label ?language WHERE {
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage>) }
-                    ?? rico:language ?language . }"
+                    ?? rico:hasOrHadLanguage ?language . }"
                 template='<div>
                     {{#ifCond bindings.length ">" 0}}
                         <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
