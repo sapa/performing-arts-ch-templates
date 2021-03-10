@@ -4,43 +4,39 @@
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-288fbdcfaecb4217bf45f76b35e89674-47wpmr;
     <http://www.w3.org/2000/01/rdf-schema#label> "Subject"@en, "Gegenstand"@de, "Sujet"@fr,
       "Contenuto"@it;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-3c48c8334e1045db8c8e6310258d0a7f-t9bij;
     <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Thing>,
       <https://www.ica.org/standards/RiC/ontology#Concept>, <https://www.ica.org/standards/RiC/ontology#Agent>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-3c48c8334e1045db8c8e6310258d0a7f-hkjdc;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-3c48c8334e1045db8c8e6310258d0a7f-tvssnr;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-3c48c8334e1045db8c8e6310258d0a7f-zx4rge;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-288fbdcfaecb4217bf45f76b35e89674-jie53;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-288fbdcfaecb4217bf45f76b35e89674-l6y0b;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-288fbdcfaecb4217bf45f76b35e89674-dhuvca;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T18:24:51.212Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-10T20:21:15.063Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-3c48c8334e1045db8c8e6310258d0a7f-t9bij a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasSubject $value} WHERE {}" .
-  
-  _:genid-3c48c8334e1045db8c8e6310258d0a7f-zx4rge a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:hasSubject ?value . }" .
-  
-  _:genid-3c48c8334e1045db8c8e6310258d0a7f-hkjdc a <http://spinrdf.org/sp#Query>;
+  _:genid-288fbdcfaecb4217bf45f76b35e89674-l6y0b a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasSubject $value . } WHERE {}" .
   
-  _:genid-3c48c8334e1045db8c8e6310258d0a7f-tvssnr a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
-PREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#>
-SELECT ?value ?label WHERE {
+  _:genid-288fbdcfaecb4217bf45f76b35e89674-47wpmr a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasSubject $value} WHERE {}" .
+  
+  _:genid-288fbdcfaecb4217bf45f76b35e89674-dhuvca a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value ?label WHERE {
   SERVICE Repository:lookup {
-    ?value lookup:token ?__token__ .
-  	FILTER(!CONTAINS(STR(?value), \"/u/\"))
-  	{ $value a rico:Concept . }
-	UNION
-  	{ $value rdf:type/rdfs:subClassOf* rico:Agent . }
-	UNION
-  	{ $value a rico:RecordSet . }
-	UNION
-  	{ $value a rico:Record . }
+    $value lookup:token ?__token__ .
+  	FILTER(!CONTAINS(STR($value), \"/u/\"))
   }
+  { $value a rico:Concept . }
+  UNION
+  { $value rdf:type/rdfs:subClassOf* rico:Agent . }
+  UNION
+  { $value a rico:Thing . }
 }""" .
+  
+  _:genid-288fbdcfaecb4217bf45f76b35e89674-jie53 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject rico:hasSubject $value . }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject> .
