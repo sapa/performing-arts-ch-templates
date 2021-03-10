@@ -51,6 +51,17 @@
                             {{/each}}</div></div>'>
                     </semantic-query>        
 
+                    <!-- representation type -->
+                    <semantic-query 
+                        query='SELECT ?representation_type WHERE { ?? rico:hasRepresentationType ?representation_type . }'
+                        template='<div>
+                            <h5>Pepresentation type</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><mp-label iri="{{representation_type.value}}"></mp-label></li>
+                            {{/each}}</ul>
+                        </div>'>
+                    </semantic-query>
+
                     <!-- carrier type / medium -->
                     <semantic-query 
                         query='SELECT ?carrier_type WHERE { ?? rico:hasCarrierType ?carrier_type . }'
