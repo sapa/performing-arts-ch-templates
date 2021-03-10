@@ -1,0 +1,27 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProtectionDuration/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProtectionDuration>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c8d4f20339c545688417f54824204f7d-ghf3a;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-c8d4f20339c545688417f54824204f7d-xbhwj;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Protection duration"@en, "Schutzdauer"@de;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-c8d4f20339c545688417f54824204f7d-jrb3t;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-10T13:07:06.894Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-c8d4f20339c545688417f54824204f7d-jrb3t a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject spao:hasProtectionDuration $value. }" .
+  
+  _:genid-c8d4f20339c545688417f54824204f7d-ghf3a a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject spao:hasProtectionDuration $value. } WHERE { }" .
+  
+  _:genid-c8d4f20339c545688417f54824204f7d-xbhwj a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject spao:hasProtectionDuration $value. } WHERE {}" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProtectionDuration> .
+}

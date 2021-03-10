@@ -40,6 +40,7 @@
         comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
         access_conditions="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingConditionsAccess"
         terms_of_protection="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingTermsProtection"
+        protection_duration="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProtectionDuration"
         permission="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingPermission"
         physical_usability="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingPhysicalUsability"
         accessibility="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingAccessability"
@@ -206,6 +207,7 @@
         <bs-row>
           <bs-col sm='4'>
             <semantic-form-text-input multiline=true for="access_conditions"></semantic-form-text-input>
+            <semantic-form-text-input for="protection_duration"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='2'>
             <semantic-form-checklist-input type='radio' for='terms_of_protection'></semantic-form-checklist-input>

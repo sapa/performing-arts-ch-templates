@@ -229,6 +229,15 @@
                     {{#each bindings}}<div>{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
+            <!-- protection duration -->
+            <semantic-query 
+                query='SELECT ?label ?value WHERE {
+                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProtectionDuration>) }
+                    ?? spao:hasProtectionDuration ?value . }'
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    {{#each bindings}}<div>{{value.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
             <!-- use rights still -->
             <semantic-query 
                 query='SELECT ?label ?value WHERE {
