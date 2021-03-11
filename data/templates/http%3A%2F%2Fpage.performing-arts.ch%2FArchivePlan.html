@@ -15,7 +15,7 @@
         roots-query='
           SELECT DISTINCT ?item ?index ?hasChildren WHERE {
             VALUES (?item) { (<http://data.performing-arts.ch/r/sapa>) }
-            OPTIONAL { ?child rico:includedIn ?item }
+            OPTIONAL { ?child rico:isOrWasIncludedIn ?item }
             BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
             OPTIONAL { ?item olo:index ?index }
             OPTIONAL {
@@ -25,8 +25,8 @@
           }'
         children-query='
           SELECT DISTINCT ?item ?index ?hasChildren WHERE {
-            ?item rico:includedIn ?parent .
-            OPTIONAL { ?child rico:includedIn ?item }
+            ?item rico:isOrWasIncludedIn ?parent .
+            OPTIONAL { ?child rico:isOrWasIncludedIn ?item }
             BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
             OPTIONAL { ?item olo:index ?index }
             OPTIONAL {
@@ -36,7 +36,7 @@
           } ORDER BY (?index)'
         parents-query='
           SELECT ?item ?parent WHERE {
-            ?item rico:includedIn ?parent .
+            ?item rico:isOrWasIncludedIn ?parent .
           }'
         search-query='
           SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {

@@ -287,12 +287,12 @@
               } UNION {
                 ?recordpart rico:hasSubject ?? ;
                   a rico:RecordPart ;
-                  rico:isConstituentOf ?record .
+                  rico:isOrWasConstituentOf ?record .
               }
-              ?record rico:includedIn* ?node .
+              ?record rico:isOrWasIncludedIn* ?node .
               FILTER(ISIRI(?node))
               FILTER(CONTAINS(STR(?node), "/r/"))
-              OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
+              OPTIONAL { ?node rico:isOrWasIncludedIn ?parent. FILTER(ISIRI(?parent)) }
             }'
             tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
           </semantic-tree>

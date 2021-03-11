@@ -2,7 +2,7 @@
 <semantic-query 
     query="SELECT ?headline ?part ?index WHERE {
         VALUES (?headline) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart>) }
-        ?part rico:isConstituentOf ?? .
+        ?part rico:isOrWasConstituentOf ?? .
         OPTIONAL { ?? olo:index ?index . }
     } ORDER BY ASC (?index)"
     template='{{> part-properties }}'>
@@ -236,7 +236,7 @@
         <semantic-query 
             query="SELECT ?label ?value WHERE {
                 VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLocation>) }
-                <{{part.value}}> rico:hasLocation ?value . }"
+                <{{part.value}}> rico:hasOrHadLocation ?value . }"
             template='<div>{{#ifCond bindings.length ">" 0}}
                 <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{value.value}}"></semantic-link></li>{{/each}}</ul></div>'>
@@ -251,7 +251,7 @@
                 } UNION { 
                     <{{part.value}}> spao:seeAlso ?r .
                     ?r a rico:RecordPart ;
-                        rico:isConstituentOf ?value .
+                        rico:isOrWasConstituentOf ?value .
                 }
             }'
             template='<div>{{#ifCond bindings.length ">" 0}}

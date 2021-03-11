@@ -10,7 +10,7 @@
                 </bs-col>
                 <bs-col sm="4">
                     <semantic-query 
-                        query='SELECT ?record WHERE { ?record rico:hasLocation ?? . }'
+                        query='SELECT ?record WHERE { ?record rico:hasOrHadLocation ?? . }'
                         template='<div><h5>Records</h5><ul class="list-unstyled">{{#each bindings}}
                             <li><semantic-link uri="{{record.value}}">{{record.value}}</semantic-link></li>
                         {{/each}}</ul></div>'>

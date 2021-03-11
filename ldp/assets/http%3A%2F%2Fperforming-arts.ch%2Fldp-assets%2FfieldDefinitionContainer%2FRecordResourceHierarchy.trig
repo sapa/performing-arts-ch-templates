@@ -14,7 +14,7 @@
     <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:43:14.570Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   _:genid-4612adbd4ec74781876aefac34873cd4-6c0tz a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "INSERT { $subject rico:includedIn $value} WHERE { }" .
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:isOrWasIncludedIn $value} WHERE { }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHierarchy> .

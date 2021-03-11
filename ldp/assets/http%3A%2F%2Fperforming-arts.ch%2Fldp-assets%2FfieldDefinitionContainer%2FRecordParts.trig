@@ -16,12 +16,12 @@
   
   _:genid-cf65c7c4e5c74fd1b76019bcb3d7e526-2d1729 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """INSERT {
-  $value rico:isConstituentOf $subject . 
+  $value rico:isOrWasConstituentOf $subject . 
 } WHERE {}""" .
   
   _:genid-cf65c7c4e5c74fd1b76019bcb3d7e526-z3scvh a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """DELETE {
-  $value rico:isConstituentOf $subject .
+  $value rico:isOrWasConstituentOf $subject .
 } WHERE {}""" .
   
   _:genid-cf65c7c4e5c74fd1b76019bcb3d7e526-hzi1sq a <http://spinrdf.org/sp#Query>;
@@ -33,7 +33,7 @@
   
   _:genid-cf65c7c4e5c74fd1b76019bcb3d7e526-91gdca a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
-  $value rico:isConstituentOf $subject .
+  $value rico:isOrWasConstituentOf $subject .
 }""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>

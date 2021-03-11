@@ -197,10 +197,10 @@
             <semantic-tree
                 query='SELECT DISTINCT ?node ?parent WHERE {
                     ?record rico:hasSubject ?? ;
-                        rico:includedIn* ?node .
+                        rico:isOrWasIncludedIn* ?node .
                     FILTER(ISIRI(?node))
                     FILTER(CONTAINS(STR(?node), "/r/"))
-                    OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
+                    OPTIONAL { ?node rico:isOrWasIncludedIn ?parent. FILTER(ISIRI(?parent)) }
                 }'
                 tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
             </semantic-tree>

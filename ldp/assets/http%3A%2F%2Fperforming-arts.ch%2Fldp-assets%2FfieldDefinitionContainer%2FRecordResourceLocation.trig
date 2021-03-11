@@ -23,7 +23,7 @@
     <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:39:44.813Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
   _:genid-958a66e3bbd54a15b0bb98a005680f99-0yuzn a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasLocation $value. } WHERE { }" .
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasOrHadLocation $value. } WHERE { }" .
   
   _:genid-958a66e3bbd54a15b0bb98a005680f99-ylmrte a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """PREFIX spao: <http://ontology.performing-arts.ch/>
@@ -37,10 +37,10 @@ SELECT DISTINCT ?value ?label WHERE {
 }""" .
   
   _:genid-958a66e3bbd54a15b0bb98a005680f99-wsugep a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject rico:hasLocation $value. }" .
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject rico:hasOrHadLocation $value. }" .
   
   _:genid-958a66e3bbd54a15b0bb98a005680f99-yij3e4 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasLocation $value. } WHERE { }" .
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasOrHadLocation $value. } WHERE { }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLocation> .

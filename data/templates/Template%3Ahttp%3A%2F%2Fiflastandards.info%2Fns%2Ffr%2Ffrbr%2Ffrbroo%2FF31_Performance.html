@@ -271,7 +271,7 @@
           } UNION {
             ?recordpart rico:hasSubject ?? ;
               a rico:RecordPart ;
-              rico:isConstituentOf ?recordresource .
+              rico:isOrWasConstituentOf ?recordresource .
           } UNION {
             ?recording crm:P70_documents ?? .
             ?recordresource rico:hasSubject ?recording ;
@@ -280,12 +280,12 @@
             ?recording crm:P70_documents ?? .
             ?recordpart rico:hasSubject ?recording ;
               a rico:RecordPart ;
-              rico:isConstituentOf ?recordresource .
+              rico:isOrWasConstituentOf ?recordresource .
           }
-          ?recordresource rico:includedIn* ?node .
+          ?recordresource rico:isOrWasIncludedIn* ?node .
           FILTER(ISIRI(?node))
           FILTER(CONTAINS(STR(?node), "/r/"))
-          OPTIONAL { ?node rico:includedIn ?parent. FILTER(ISIRI(?parent)) }
+          OPTIONAL { ?node rico:isOrWasIncludedIn ?parent. FILTER(ISIRI(?parent)) }
         }'
         tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
       </semantic-tree>
