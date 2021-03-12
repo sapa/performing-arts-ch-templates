@@ -13,6 +13,8 @@
             OPTIONAL { ?date rico:certainty ?single_certainty . }
         } UNION {
             ?date a rico:DateRange .
+            MINUS { ?date rico:expressedDate ?expressed_date . }
+            MINUS { ?date rico:normalizedDateValue ?expressed_date . }
             OPTIONAL {
                 ?date rico:hasBeginningDate ?b .
                 ?b rico:normalizedDateValue ?beginning_date .
