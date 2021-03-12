@@ -154,18 +154,18 @@
                 <semantic-query 
                 query='SELECT ?label WHERE {
                         VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Records>) }
-                        ?record rico:hasSubject ?? .
+                        ?record rico:hasOrHadSubject ?? .
                     } LIMIT 1'
                 template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
                 </semantic-query>
                 <semantic-tree
                     query='SELECT DISTINCT ?node ?parent WHERE {
                         {
-                            ?record rico:hasSubject ?? ;
+                            ?record rico:hasOrHadSubject ?? ;
                                 rico:isOrWasIncludedIn* ?node .
                             MINUS { ?record a rico:RecordPart . }
                         } UNION {
-                            ?recordpart rico:hasSubject ?? ;
+                            ?recordpart rico:hasOrHadSubject ?? ;
                                 a rico:RecordPart ;
                                 rico:isOrWasConstituentOf ?record .
                             ?record rico:isOrWasIncludedIn* ?node .

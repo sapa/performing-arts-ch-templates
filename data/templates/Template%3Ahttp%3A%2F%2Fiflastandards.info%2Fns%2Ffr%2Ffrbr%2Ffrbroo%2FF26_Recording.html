@@ -242,13 +242,13 @@
         <semantic-query
         query='SELECT DISTINCT ?record ?identifier WHERE { 
           {
-            ?record rico:hasSubject ?? ;
+            ?record rico:hasOrHadSubject ?? ;
               a rico:RecordSet .
           } UNION {
-            ?record rico:hasSubject ?? ;
+            ?record rico:hasOrHadSubject ?? ;
               a rico:Record .
           } UNION {
-            ?recordpart rico:hasSubject ?? ;
+            ?recordpart rico:hasOrHadSubject ?? ;
               a rico:RecordPart ;
               rico:isOrWasConstituentOf ?record .
           }
@@ -278,7 +278,7 @@
         <semantic-query 
           query="SELECT ?vimeo_id WHERE 
           { 
-              ?record rico:hasSubject ?? ;
+              ?record rico:hasOrHadSubject ?? ;
                 rico:hasInstantiation ?vimeo_url .
               FILTER(CONTAINS(STR(?vimeo_url), 'http://vimeo.com'))
               ?vimeo_url rico:hasCarrierType spav:ctonl .

@@ -30,7 +30,7 @@
         <semantic-query 
             query='SELECT ?label ?subject ?identified WHERE {
                 VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject>) }
-                <{{part.value}}> rico:hasSubject ?subject .
+                <{{part.value}}> rico:hasOrHadSubject ?subject .
                 BIND(IF(!CONTAINS(STR(?subject), "/u/"), "true","") AS ?identified)
             }'
             template='<div>

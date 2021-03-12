@@ -75,7 +75,7 @@
             <semantic-query 
                 query='SELECT ?label ?subject ?identified ?order ?type ?icon WHERE {
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject>) }
-                    ?? rico:hasSubject ?subject .
+                    ?? rico:hasOrHadSubject ?subject .
                     BIND(IF(!CONTAINS(STR(?subject), "/u/"), "true", "") AS ?identified)
                     OPTIONAL {
                         VALUES ( ?order ?type ?icon ) {

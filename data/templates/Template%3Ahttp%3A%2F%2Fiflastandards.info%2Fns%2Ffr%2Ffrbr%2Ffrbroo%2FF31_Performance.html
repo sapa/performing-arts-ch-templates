@@ -266,19 +266,19 @@
       <semantic-tree
         query='SELECT DISTINCT ?node ?parent WHERE {
           {
-            ?recordresource rico:hasSubject ?? ;
+            ?recordresource rico:hasOrHadSubject ?? ;
               rdf:type/rdfs:subClassOf* rico:RecordResource .
           } UNION {
-            ?recordpart rico:hasSubject ?? ;
+            ?recordpart rico:hasOrHadSubject ?? ;
               a rico:RecordPart ;
               rico:isOrWasConstituentOf ?recordresource .
           } UNION {
             ?recording crm:P70_documents ?? .
-            ?recordresource rico:hasSubject ?recording ;
+            ?recordresource rico:hasOrHadSubject ?recording ;
               rdf:type/rdfs:subClassOf* rico:RecordResource .
           } UNION {
             ?recording crm:P70_documents ?? .
-            ?recordpart rico:hasSubject ?recording ;
+            ?recordpart rico:hasOrHadSubject ?recording ;
               a rico:RecordPart ;
               rico:isOrWasConstituentOf ?recordresource .
           }

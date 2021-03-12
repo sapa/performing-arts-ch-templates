@@ -279,13 +279,13 @@
           <semantic-tree
             query='SELECT DISTINCT ?node ?parent WHERE {
               {
-                ?record rico:hasSubject ?? ;
+                ?record rico:hasOrHadSubject ?? ;
                   a rico:RecordSet .
               } UNION {
-                ?record rico:hasSubject ?? ;
+                ?record rico:hasOrHadSubject ?? ;
                   a rico:Record .
               } UNION {
-                ?recordpart rico:hasSubject ?? ;
+                ?recordpart rico:hasOrHadSubject ?? ;
                   a rico:RecordPart ;
                   rico:isOrWasConstituentOf ?record .
               }

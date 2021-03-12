@@ -396,7 +396,7 @@
                 options='{"showFilter": true}'>
                 <template id='subjects'> 
                     <semantic-query 
-                      query='SELECT DISTINCT ?subject WHERE { <{{rr.value}}> rico:hasSubject ?subject . }'
+                      query='SELECT DISTINCT ?subject WHERE { <{{rr.value}}> rico:hasOrHadSubject ?subject . }'
                       template = '{{>subject-list}} '>           
                       <template id='subject-list'> 
                         <div>{{#each bindings}}{{#if @first}}<semantic-link iri="{{subject.value}}"></semantic-link>{{else}}, <semantic-link iri="{{subject.value}}"></semantic-link>{{/if}}{{/each}}</div>
