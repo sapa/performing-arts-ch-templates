@@ -24,19 +24,6 @@
                 </div>'>
             </semantic-query>
 
-            <!-- source -->
-            <semantic-query 
-                query="SELECT ?label ?source WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSource>) }
-                    ?? rico:receivedBy ?source . }"
-                template='<div>
-                    {{#ifCond bindings.length ">" 0}}
-                        <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
-                    {{/ifCond}}
-                    <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{source.value}}"></semantic-link></li>{{/each}}</ul>
-                </div>'>
-            </semantic-query>
-
             <!-- acquisition -->
             <semantic-query 
                 query="SELECT ?label ?acquisition WHERE {
