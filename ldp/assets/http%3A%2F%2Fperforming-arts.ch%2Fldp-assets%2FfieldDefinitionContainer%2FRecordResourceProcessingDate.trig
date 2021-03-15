@@ -4,19 +4,23 @@
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-4744bc0f71a447ce8a6aefa1926edb60-ni9crm;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
     <http://www.w3.org/2000/01/rdf-schema#label> "Data del trattamento"@it, "Date de la description"@fr,
       "Bearbeitungsdatum"@de, "Processing date"@en;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-a99ded5f59ed4084ac537539b7684a7a-y8r69r;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-4744bc0f71a447ce8a6aefa1926edb60-aq0v5d;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-4744bc0f71a447ce8a6aefa1926edb60-sufnb;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:42:08.951Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-15T09:45:46.949Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-a99ded5f59ed4084ac537539b7684a7a-y8r69r a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """INSERT {
-  	# TODO
-  	$subject spao:hasProcessingDate $value.
-} WHERE {
-}""" .
+  _:genid-4744bc0f71a447ce8a6aefa1926edb60-ni9crm a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject spao:hasProcessingDate $value . } WHERE {}" .
+  
+  _:genid-4744bc0f71a447ce8a6aefa1926edb60-sufnb a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject spao:hasProcessingDate $value . }" .
+  
+  _:genid-4744bc0f71a447ce8a6aefa1926edb60-aq0v5d a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject spao:hasProcessingDate $value . } WHERE { }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingDate> .
