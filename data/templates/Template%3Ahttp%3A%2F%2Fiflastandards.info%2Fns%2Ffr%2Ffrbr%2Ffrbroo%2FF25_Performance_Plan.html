@@ -298,6 +298,7 @@
           </semantic-tree>
 
           <!-- recordings -->
+          [[#if (hasPermission "forms:ldp:*")]] 
           <semantic-query 
             query='SELECT DISTINCT ?recording ?date WHERE {
               {
@@ -331,6 +332,48 @@
                 <li><semantic-link iri="{{recording.value}}"></semantic-link>{{#if date}} ({{date.value}}){{/if}}</li>
               </ul>{{/each}}</div>'>
           </semantic-query>
+          [[else]]
+          <semantic-query 
+            query='SELECT DISTINCT ?record ?date WHERE {
+              {
+                ?recording frbroo:R14_incorporates ?? ;
+                  a frbroo:F26_Recording .
+                OPTIONAL {
+                  ?expressioncreation frbroo:R17_created ?recording ;
+                    crm:P4_has_time-span [
+                      a crm:E52_Time-Span ;
+                        rdfs:label ?date 
+                  ]
+                }
+              } UNION {
+                ?performance frbroo:R25_performed ?? ;
+                  a frbroo:F31_Performance ;
+                  crm:P9_consists_of ?recorded_performance .
+                ?recorded_performance a frbroo:F31_Performance .
+                ?recording crm:P70_documents ?recorded_performance ;
+                  a frbroo:F26_Recording .
+                OPTIONAL {
+                  ?recorded_performance crm:P4_has_time-span [
+                    a crm:E52_Time-Span ;
+                      rdfs:label ?date 
+                  ]
+                }
+              }
+              {
+                ?record rico:hasOrHadSubject ?recording .
+              } UNION {
+                ?record_part rico:hasOrHadSubject ?recording ;
+                  rico:isOrWasConstituentOf ?record .
+              }
+              ?record a rico:Record .
+            }'
+            template='<div>
+              {{#ifCond bindings.length ">" 0}}<h5>Recording</h5>{{/ifCond}}
+              {{#each bindings}}<ul class="list-unstyled">
+                <li><semantic-link iri="{{record.value}}"></semantic-link>{{#if date}} ({{date.value}}){{/if}}</li>
+              </ul>{{/each}}</div>'>
+          </semantic-query>
+          [[/if]]
 
         </bs-col>
       </bs-tab>

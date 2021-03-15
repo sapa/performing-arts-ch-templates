@@ -530,7 +530,7 @@
 </bs-tab>
 
 [[#if (ask "ASK {?? rico:hasOrHadSubject [ a frbroo:F26_Recording  ] . }")]]
-    <bs-tab event-key='recording' title='Recording'>
+    <bs-tab event-key='video' title='Video'>
     <semantic-query 
         query='SELECT ?recording WHERE {
             ?? rico:hasOrHadSubject ?recording .
@@ -538,11 +538,9 @@
         }'
         template='{{> recordings }}'>
         <template id='recordings'>
-            <h4>Recordings</h4>
             {{#each bindings}}
                 <bs-row>
                     <bs-col sm="4">
-
                         <!-- titles -->
                         <semantic-query 
                           query='SELECT ?title_value ?title_type ?order WHERE {
@@ -798,11 +796,7 @@
                               ?vimeo_url rico:hasCarrierType spav:fvonl .
                               BIND(STRAFTER(STR(?vimeo_url), 'vimeo.com/') AS ?vimeo_id)
                           }"
-                          template='<div style="align: left; valign: top; padding-right:20px;">
-                                  {{#each bindings}}
-                                  <iframe src="https://player.vimeo.com/video/{{vimeo_id.value}}" frameborder="0" style="width:100%; height:600px; " webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                                  {{/each}}
-                          </div>'>
+                          template='{{#each bindings}}<iframe src="https://player.vimeo.com/video/{{vimeo_id.value}}" frameborder="0" style="width:100%; height:600px;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>{{/each}}'>
                         </semantic-query>
                     
                       </bs-col>
