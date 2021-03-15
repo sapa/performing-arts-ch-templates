@@ -281,7 +281,7 @@
               ?record rico:hasOrHadSubject ?? ;
                 rico:hasInstantiation ?vimeo_url .
               FILTER(CONTAINS(STR(?vimeo_url), 'http://vimeo.com'))
-              ?vimeo_url rico:hasCarrierType spav:ctonl .
+              ?vimeo_url rico:hasCarrierType spav:fvonl .
               BIND(STRAFTER(STR(?vimeo_url), 'vimeo.com/') AS ?vimeo_id)
           }"
           template='<div style="align: left; valign: top; padding-right:20px;">
