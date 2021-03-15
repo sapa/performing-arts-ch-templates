@@ -19,16 +19,46 @@
         label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingName"
         index="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceIndex"
         parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceParent"
+        creator="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreator"
         provenance="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance"
+        acquisition="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition"
+        delivery_number="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/DeliveryNumber"
+        history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory"
         documentary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordDocumentaryForm"
         description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
+        annotation_recto="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordAnnotationRecto"
+        annotation_verso="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordAnnotationVerso"
         language="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage"
-        part="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart"
-        instantiation="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation"
+        photo_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePhotoType"
+        part="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordParts"
         subject="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject"
         place="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePlace"
         date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate"
         extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent"
+        extent_depricated="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentDepricated"
+        access_conditions="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingConditionsAccess"
+        terms_of_protection="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingTermsProtection"
+        protection_duration="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProtectionDuration"
+        permission="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingPermission"
+        physical_usability="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingPhysicalUsability"
+        accessibility="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingAccessability"
+        copyright_notice="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightNotice"
+        copyright_declaration="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightDeclaration"
+        conditions_use="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceConditionsUse"
+        usage_rights_still="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStill"
+        usage_rights_streaming="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStreaming"
+        credit="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCredit"
+        location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLocation"
+        packing="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePacking"
+        doublets="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDoublets"
+        related="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceRelated"
+        see_also="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso"
+        note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNote"
+        note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNoteInternal"
+        processing_convention="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingConvention"
+        processing_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingDate"
+        responsible="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceResponsible"
+        iiif="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceIIIF"
         comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
       ]]'>
       <bs-panel>
@@ -66,24 +96,100 @@
           </bs-col>
         </bs-row>
         <bs-row>
-          <bs-col sm='6'>
-            <semantic-form-autocomplete-input for="provenance"></semantic-form-autocomplete-input>
+          <bs-col sm='4'>
+            <semantic-form-tree-picker-input for="location"></semantic-form-tree-picker-input>
           </bs-col>
-          <bs-col sm='6'>
+          <bs-col sm='8'>
+            <semantic-form-checklist-input row=true for="packing"></semantic-form-checklist-input row=true>
           </bs-col>
         </bs-row>
         <bs-row>
           <bs-col sm='6'>
-            <semantic-form-text-input for="date"></semantic-form-text-input>
+            <semantic-form-autocomplete-input for="creator"></semantic-form-autocomplete-input>
+            <semantic-form-autocomplete-input for="provenance"></semantic-form-autocomplete-input>
+            <semantic-form-select-input for='acquisition'></semantic-form-select-input>
+            <semantic-form-text-input for="delivery_number"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='6'>
-            <semantic-form-text-input for="extent"></semantic-form-text-input>
+            <semantic-form-text-input for="history" multiline=true></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-switch for='date' switch-on-field='date_type'>
+              <semantic-form-switch-case label='Single Date'>
+                <semantic-form-composite-input for='date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                  date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                  date_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                  date_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                  date_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                ]]'>
+                  <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                  <semantic-form-text-input for="date_value"></semantic-form-text-input>
+                  <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input row=true>
+                  <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input row=true>
+                </semantic-form-composite-input>
+              </semantic-form-switch-case>
+              <semantic-form-switch-case label='Date Range'>
+                <semantic-form-composite-input for='date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                  date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                  date_beginning="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateBeginning"
+                  date_end="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateEnd"
+                ]]'>
+                  <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:DateRange"]]'></semantic-form-hidden-input>
+                  <semantic-form-composite-input for='date_beginning' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                    date_beginning_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                    date_beginning_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                    date_beginning_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                    date_beginning_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                  ]]'>
+                    <semantic-form-hidden-input for="date_beginning_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                    <semantic-form-text-input for="date_beginning_value"></semantic-form-text-input>
+                    <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input row=true>
+                    <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input row=true>
+                  </semantic-form-composite-input>   
+
+                  <semantic-form-composite-input for='date_end' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                    date_end_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                    date_end_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                    date_end_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                    date_end_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                  ]]'>
+                    <semantic-form-hidden-input for="date_end_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                    <semantic-form-text-input for="date_end_value"></semantic-form-text-input>
+                    <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input row=true>
+                    <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input row=true>
+                  </semantic-form-composite-input>
+                </semantic-form-composite-input>
+              </semantic-form-switch-case>
+              <semantic-form-switch-case label='No Date'>
+                <semantic-form-composite-input for='date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                  date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                  date_no_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateNoValue"
+                ]]'>
+                  <semantic-form-hidden-input for='date_type' default-value='[[resolvePrefix "rico:Date"]]'></semantic-form-hidden-input>
+                  <semantic-form-checklist-input for='date_no_value' type='radio' row=true default-value='[[resolvePrefix "spav:ndsd"]]'></semantic-form-checklist-input>
+                </semantic-form-composite-input>
+              </semantic-form-switch-case>
+            </semantic-form-switch>
+          </bs-col>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="extent_depricated"></semantic-form-text-input>
+            <semantic-form-composite-input for='extent' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+              extent_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentValue"
+              extent_unit="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentUnit"
+            ]]'>
+                <semantic-form-text-input for='extent_value'></semantic-form-text-input>
+                <semantic-form-select-input for='extent_unit'></semantic-form-select-input>
+            </semantic-form-composite-input>
           </bs-col>
         </bs-row>
         <hr>
         <bs-row>
           <bs-col sm='8'>
             <semantic-form-text-input for="description" multiline=true></semantic-form-text-input>
+            <semantic-form-text-input for="annotation_recto" multiline=true></semantic-form-text-input>
+            <semantic-form-text-input for="annotation_verso" multiline=true></semantic-form-text-input>
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-autocomplete-input for="subject"></semantic-form-autocomplete-input>
@@ -93,41 +199,328 @@
         <bs-row>
           <bs-col sm='6'>
             <semantic-form-tree-picker-input for="documentary_form"></semantic-form-tree-picker-input>
+            <semantic-form-select-input for='photo_type'></semantic-form-select-input>
           </bs-col>
           <bs-col sm='6'>
             <semantic-form-tree-picker-input for="language"></semantic-form-tree-picker-input>
           </bs-col>
         </bs-row>
-
-        <semantic-form-composite-input for='part' new-subject-template='http://data.performing-arts.ch/r/{{UUID}}' fields='[[fieldDefinitions
-            part_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
-            part_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
-            part_label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingName"
-            part_subject="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject"
-          ]]'>
-          <div style="display: none;">
-            <semantic-form-hidden-input for='part_rdf_type' default-value='[[resolvePrefix "rico:RecordPart"]]'></semantic-form-hidden-input>
-          </div>
-          <bs-row>
-            <bs-col sm='4'>
-              <semantic-form-text-input for="part_identifier"></semantic-form-text-input>
-            </bs-col>
-            <bs-col sm='4'>
-              <semantic-form-text-input for="part_label"></semantic-form-text-input>
-            </bs-col>
-            <bs-col sm='4'>
-              <semantic-form-autocomplete-input for="part_subject"></semantic-form-autocomplete-input>
-            </bs-col>
-          </bs-row>
-        </semantic-form-composite-input>
-
-        <semantic-form-autocomplete-input for="instantiation"></semantic-form-autocomplete-input>
         <hr>
-        <semantic-form-text-input for="comment" multiline=true></semantic-form-text-input>
+        <bs-row>
+          <bs-col sm='4'>
+            <semantic-form-text-input multiline=true for="access_conditions"></semantic-form-text-input>
+            <semantic-form-text-input for="protection_duration"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for='terms_of_protection'></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for='permission'></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for='physical_usability'></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for='accessibility'></semantic-form-checklist-input>
+          </bs-col>
+        </bs-row>
+        <hr>
+        <bs-row>
+          <bs-col sm='4'>
+            <semantic-form-text-input for="copyright_notice"></semantic-form-text-input>
+            <semantic-form-text-input for="credit"></semantic-form-text-input>
+          </bs-col>          
+          <bs-col sm='4'>
+            <semantic-form-text-input for="conditions_use"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for="copyright_declaration"></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-checklist-input type='radio' for="usage_rights_still"></semantic-form-checklist-input>
+            <semantic-form-checklist-input type='radio' for="usage_rights_streaming"></semantic-form-checklist-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="related"></semantic-form-text-input>
+          </bs-col>          
+          <bs-col sm='6'>
+            <semantic-form-autocomplete-input for="see_also"></semantic-form-autocomplete-input>
+          </bs-col>          
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input multiline=true for="note"></semantic-form-text-input>
+          </bs-col>          
+          <bs-col sm='6'>
+            <semantic-form-text-input multiline=true for="note_internal"></semantic-form-text-input>
+          </bs-col>          
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-text-input multiline=true for="processing_convention"></semantic-form-text-input>
+          </bs-col>          
+          <bs-col sm='6'>
+            <semantic-form-switch for='processing_date' switch-on-field='date_type'>
+              <semantic-form-switch-case label='Single Date'>
+                <semantic-form-composite-input for='processing_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                  date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                  date_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                  date_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                  date_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                ]]'>
+                  <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                  <semantic-form-text-input for="date_value"></semantic-form-text-input>
+                  <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input row=true>
+                  <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input row=true>
+                </semantic-form-composite-input>
+              </semantic-form-switch-case>
+              <semantic-form-switch-case label='Date Range'>
+                <semantic-form-composite-input for='processing_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                  date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                  date_beginning="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateBeginning"
+                  date_end="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateEnd"
+                ]]'>
+                  <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:DateRange"]]'></semantic-form-hidden-input>
+                  <semantic-form-composite-input for='date_beginning' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                    date_beginning_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                    date_beginning_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                    date_beginning_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                    date_beginning_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                  ]]'>
+                    <semantic-form-hidden-input for="date_beginning_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                    <semantic-form-text-input for="date_beginning_value"></semantic-form-text-input>
+                    <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input row=true>
+                    <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input row=true>
+                  </semantic-form-composite-input>   
+
+                  <semantic-form-composite-input for='date_end' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                    date_end_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                    date_end_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                    date_end_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                    date_end_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                  ]]'>
+                    <semantic-form-hidden-input for="date_end_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                    <semantic-form-text-input for="date_end_value"></semantic-form-text-input>
+                    <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input row=true>
+                    <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input row=true>
+                  </semantic-form-composite-input>
+                </semantic-form-composite-input>
+              </semantic-form-switch-case>
+              <semantic-form-switch-case label='No Date'>
+                <semantic-form-composite-input for='processing_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                  date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                  date_no_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateNoValue"
+                ]]'>
+                  <semantic-form-hidden-input for='date_type' default-value='[[resolvePrefix "rico:Date"]]'></semantic-form-hidden-input>
+                  <semantic-form-checklist-input for='date_no_value' type='radio' row=true default-value='[[resolvePrefix "spav:ndsd"]]'></semantic-form-checklist-input>
+                </semantic-form-composite-input>
+              </semantic-form-switch-case>
+            </semantic-form-switch>
+            <semantic-form-text-input for="responsible"></semantic-form-text-input>
+          </bs-col>          
+        </bs-row>
+        <bs-row>
+          <bs-col sm='12'>
+            <semantic-form-text-input for="iiif"></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='12'>
+            <semantic-form-composite-input for='part' new-subject-template='http://data.performing-arts.ch/r/{{UUID}}' fields='[[fieldDefinitions
+              part_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
+              part_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
+              part_legacy_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier"
+              part_label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingName"
+              part_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate"
+              part_subject="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject"
+              part_documentary_form="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordDocumentaryForm"
+              part_description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription"
+              part_note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNote"
+              part_note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNoteInternal"
+              part_processing_convention="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingConvention"
+              part_responsible="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceResponsible"
+              part_processing_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingDate"
+              part_copyright_declaration="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightDeclaration"
+              part_usage_rights_still="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStill"
+              part_usage_rights_streaming="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStreaming"
+              part_location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLocation"
+              part_see_also="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso"
+              ]]'>
+              <div style='display: none;'>
+                <semantic-form-hidden-input for='part_rdf_type' default-value='[[resolvePrefix "rico:RecordPart"]]'></semantic-form-hidden-input>
+              </div>
+              <bs-row>
+                <bs-col sm='4'>
+                  <semantic-form-text-input for='part_identifier'></semantic-form-text-input>
+                  <semantic-form-text-input for='part_legacy_identifier'></semantic-form-text-input>
+                </bs-col>
+                <bs-col sm='4'>
+                  <semantic-form-text-input for='part_label'></semantic-form-text-input>
+                  <semantic-form-autocomplete-input for='part_subject'></semantic-form-autocomplete-input>
+                </bs-col>
+                <bs-col sm='4'>
+                  <semantic-form-tree-picker-input for="part_documentary_form"></semantic-form-tree-picker-input>
+                  <semantic-form-autocomplete-input for="part_see_also"></semantic-form-autocomplete-input>
+                </bs-col>
+              </bs-row>
+              <bs-row>
+                <bs-col sm='6'>
+                  <semantic-form-switch for='part_date' switch-on-field='date_type'>
+                    <semantic-form-switch-case label='Single Date'>
+                      <semantic-form-composite-input for='part_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                        date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                        date_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                        date_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                        date_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                      ]]'>
+                        <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                        <semantic-form-text-input for="date_value"></semantic-form-text-input>
+                        <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input row=true>
+                        <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input row=true>
+                      </semantic-form-composite-input>
+                    </semantic-form-switch-case>
+                    <semantic-form-switch-case label='Date Range'>
+                      <semantic-form-composite-input for='part_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                        date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                        date_beginning="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateBeginning"
+                        date_end="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateEnd"
+                      ]]'>
+                        <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:DateRange"]]'></semantic-form-hidden-input>
+                        <semantic-form-composite-input for='date_beginning' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                          date_beginning_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                          date_beginning_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                          date_beginning_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                          date_beginning_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                        ]]'>
+                          <semantic-form-hidden-input for="date_beginning_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                          <semantic-form-text-input for="date_beginning_value"></semantic-form-text-input>
+                          <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input row=true>
+                          <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input row=true>
+                        </semantic-form-composite-input>   
+      
+                        <semantic-form-composite-input for='date_end' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                          date_end_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                          date_end_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                          date_end_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                          date_end_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                        ]]'>
+                          <semantic-form-hidden-input for="date_end_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                          <semantic-form-text-input for="date_end_value"></semantic-form-text-input>
+                          <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input row=true>
+                          <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input row=true>
+                        </semantic-form-composite-input>
+                      </semantic-form-composite-input>
+                    </semantic-form-switch-case>
+                    <semantic-form-switch-case label='No Date'>
+                      <semantic-form-composite-input for='part_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                        date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                        date_no_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateNoValue"
+                      ]]'>
+                        <semantic-form-hidden-input for='date_type' default-value='[[resolvePrefix "rico:Date"]]'></semantic-form-hidden-input>
+                        <semantic-form-checklist-input for='date_no_value' type='radio' row=true default-value='[[resolvePrefix "spav:ndsd"]]'></semantic-form-checklist-input>
+                      </semantic-form-composite-input>
+                    </semantic-form-switch-case>
+                  </semantic-form-switch>                  
+                </bs-col>
+                <bs-col sm='6'></bs-col>
+              </bs-row>
+              <bs-row>
+                <bs-col sm='6'>
+                  <semantic-form-text-input multiline=true for="part_processing_convention"></semantic-form-text-input>
+                  <semantic-form-text-input for="part_responsible"></semantic-form-text-input>
+                  <semantic-form-tree-picker-input for="part_location"></semantic-form-tree-picker-input>
+                </bs-col>
+                <bs-col sm='6'>                  
+                  <semantic-form-switch for='part_processing_date' switch-on-field='date_type'>
+                    <semantic-form-switch-case label='Single Date'>
+                      <semantic-form-composite-input for='part_processing_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                        date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                        date_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                        date_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                        date_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                      ]]'>
+                        <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                        <semantic-form-text-input for="date_value"></semantic-form-text-input>
+                        <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input row=true>
+                        <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input row=true>
+                      </semantic-form-composite-input>
+                    </semantic-form-switch-case>
+                    <semantic-form-switch-case label='Date Range'>
+                      <semantic-form-composite-input for='part_processing_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                        date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                        date_beginning="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateBeginning"
+                        date_end="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateEnd"
+                      ]]'>
+                        <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:DateRange"]]'></semantic-form-hidden-input>
+                        <semantic-form-composite-input for='date_beginning' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                          date_beginning_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                          date_beginning_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                          date_beginning_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                          date_beginning_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                        ]]'>
+                          <semantic-form-hidden-input for="date_beginning_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                          <semantic-form-text-input for="date_beginning_value"></semantic-form-text-input>
+                          <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input row=true>
+                          <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input row=true>
+                        </semantic-form-composite-input>   
+      
+                        <semantic-form-composite-input for='date_end' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                          date_end_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                          date_end_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
+                          date_end_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
+                          date_end_certainty="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateCertainty"
+                        ]]'>
+                          <semantic-form-hidden-input for="date_end_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
+                          <semantic-form-text-input for="date_end_value"></semantic-form-text-input>
+                          <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input row=true>
+                          <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input row=true>
+                        </semantic-form-composite-input>
+                      </semantic-form-composite-input>
+                    </semantic-form-switch-case>
+                    <semantic-form-switch-case label='No Date'>
+                      <semantic-form-composite-input for='part_processing_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                        date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
+                        date_no_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateNoValue"
+                      ]]'>
+                        <semantic-form-hidden-input for='date_type' default-value='[[resolvePrefix "rico:Date"]]'></semantic-form-hidden-input>
+                        <semantic-form-checklist-input for='date_no_value' type='radio' row=true default-value='[[resolvePrefix "spav:ndsd"]]'></semantic-form-checklist-input>
+                      </semantic-form-composite-input>
+                    </semantic-form-switch-case>
+                  </semantic-form-switch>                </bs-col>
+              </bs-row>
+              <bs-row>
+                <bs-col sm='4'>
+                  <semantic-form-text-input for='part_description' multiline=true></semantic-form-text-input>
+                </bs-col>
+                <bs-col sm='4'>
+                  <semantic-form-text-input for='part_note' multiline=true></semantic-form-text-input>
+                </bs-col>
+                <bs-col sm='4'>
+                  <semantic-form-text-input for='part_note_internal' multiline=true></semantic-form-text-input>
+                </bs-col>
+              </bs-row>
+              <bs-row>
+                <bs-col sm='4'>
+                  <semantic-form-checklist-input type='radio' for="part_copyright_declaration"></semantic-form-checklist-input>
+                </bs-col>
+                <bs-col sm='4'>
+                  <semantic-form-checklist-input type='radio' for="part_usage_rights_still"></semantic-form-checklist-input>
+                </bs-col>
+                <bs-col sm='4'>
+                  <semantic-form-checklist-input type='radio' for="part_usage_rights_streaming"></semantic-form-checklist-input>
+                </bs-col>
+              </bs-row>
+            </semantic-form-composite-input>
+          </bs-col>
+        </bs-row>
+        <hr>
+        <semantic-form-text-input for='comment' multiline=true></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
-        <button name="submit" class="btn btn-default">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>
-        <button name="reset" class="btn btn-default">[[i18n "FormReset" bundle="performing-arts-ch"]]</button>
+        <button name='submit' class='btn btn-default'>[[i18n 'FormSubmit' bundle='performing-arts-ch']]</button>
+        <button name='reset' class='btn btn-default'>[[i18n 'FormReset' bundle='performing-arts-ch']]</button>
       </bs-panel>
     </semantic-form>
   </div>
