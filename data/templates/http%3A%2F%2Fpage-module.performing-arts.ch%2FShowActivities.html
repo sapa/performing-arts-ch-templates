@@ -1,9 +1,15 @@
 <semantic-query 
     query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment ?bool WHERE {
         {
+            ?expressioncreation frbroo:R17_created ?? ;
+                crm:P9_consists_of ?activity .
+        } UNION {
             ?? frbroo:R14_incorporates ?reference .
             ?expressioncreation frbroo:R17_created ?reference ;
                 crm:P9_consists_of ?activity .
+        } UNION {
+            ?genericperformance frbroo:R25_performed ?? ;
+            crm:P9_consists_of ?activity . 
         } UNION {
             ?? crm:P9_consists_of ?activity .
         }
@@ -19,11 +25,12 @@
         {{#ifCond bindings.length ">" 0}}<h5><mp-label iri="{{bindings.0.function.value}}"></mp-label></h5>{{/ifCond}}
         <ul class="list-unstyled">
         {{#each bindings}}
-            {{#if bool.value}} 
-                <li><semantic-link iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>
-            {{else}}
-                <li><mp-label iri="{{actor.value}}"></mp-label>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>
-            {{/if}}
+        {{#if bool.value}} 
+        <li><semantic-link iri="{{actor.value}}"></semantic-link>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>
+        {{else}}
+        <li><mp-label iri="{{actor.value}}"></mp-label>{{#if activitylabel}} ({{activitylabel.value}}){{/if}}{{#if activitycomment}} [{{activitycomment.value}}]{{/if}}</li>
+        {{/if}}
         {{/each}}
         </ul></div>'>
 </semantic-query>
+

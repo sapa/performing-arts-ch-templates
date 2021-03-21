@@ -1,0 +1,57 @@
+<div class="page rs-page">
+    <bs-tabs class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
+        <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
+            <bs-row>
+                <bs-col sm="4">
+                    <semantic-query 
+                        query='SELECT ?label WHERE { ?? rdfs:label ?label . }'
+                        template='<div>{{#each bindings}}<p><strong>{{label.value}}</strong></p>{{/each}}</p>'>
+                    </semantic-query>
+                </bs-col>
+                <bs-col sm="4">
+                    <semantic-query 
+                        query='SELECT ?record WHERE { ?record rico:hasOrHadLocation ?? . } LIMIT 200'
+                        template='<div><h5>Records</h5><ul class="list-unstyled">{{#each bindings}}
+                            <li><semantic-link uri="{{record.value}}">{{record.value}}</semantic-link></li>
+                        {{/each}}</ul></div>'>
+                    </semantic-query>
+                </bs-col>
+                <bs-col sm="4">
+                    <h5>Hierarchy</h5>
+                    <semantic-tree
+                         query='SELECT DISTINCT ?node ?parent ?label WHERE {
+                            { ?? rico:containedBy* ?node }
+                            UNION
+                            { ?node rico:containedBy ?? } 
+                            FILTER(ISIRI(?node))
+                            FILTER(CONTAINS(STR(?node), "/p/"))
+                            OPTIONAL {
+                                ?node rico:containedBy ?parent.
+                                FILTER(ISIRI(?parent))
+                            }
+                            ?node rdfs:label ?label .
+                          } ORDER BY ASC(?label)
+                          LIMIT 200'
+                       collapsed="true"
+                       keys-opened='[[this]]'
+                       parent-binding-name="parent"
+                       node-binding-name="node"
+                       tuple-template='{{> node}}'>
+                        <template id='node'>
+                            <span><semantic-link uri="{{node.value}}">{{name.value}}</semantic-link></span>
+                        </template>
+                    </semantic-tree>
+                </bs-col>
+            </bs-row>            
+        </bs-tab>
+  
+        [[#if (hasPermission "forms:ldp:*")]] 
+        <bs-tab event-key='archival place editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+        [[> sapaModule:ArchivalPlaceForm]]
+        </bs-tab>
+        [[/if]]
+        
+        [[> sapaModule:AdminTabs]]
+
+    </bs-tabs>  
+</div>

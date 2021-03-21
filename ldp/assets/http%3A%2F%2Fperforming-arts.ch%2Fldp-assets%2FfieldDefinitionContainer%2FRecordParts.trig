@@ -1,0 +1,45 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordParts/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordParts> a <http://www.metaphacts.com/ontology/fields#Field>,
+      <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Record parts"@en, "Parties de document"@fr,
+      "Parti del documento"@it, "Teildokumente"@de;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-821e444f6b034f24a8a4810acabfd5cf-ghwln8;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-821e444f6b034f24a8a4810acabfd5cf-ccfimv;
+    <http://www.metaphacts.com/ontology/fields#orderedWith> <http://www.metaphacts.com/ontology/fields#indexProperty>;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Record>;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-821e444f6b034f24a8a4810acabfd5cf-b2rr7;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordPart>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-821e444f6b034f24a8a4810acabfd5cf-vzx0mh;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-15T10:09:03.158Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-821e444f6b034f24a8a4810acabfd5cf-ghwln8 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+	$value rico:isOrWasConstituentOf $subject ;
+		olo:index $index .
+} WHERE {}""" .
+  
+  _:genid-821e444f6b034f24a8a4810acabfd5cf-ccfimv a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT { 
+	$value rico:isOrWasConstituentOf $subject ;
+		olo:index $index
+} WHERE {}""" .
+  
+  _:genid-821e444f6b034f24a8a4810acabfd5cf-vzx0mh a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value $index WHERE {
+	$value rico:isOrWasConstituentOf $subject .
+	OPTIONAL { $value olo:index $index . }
+}""" .
+  
+  _:genid-821e444f6b034f24a8a4810acabfd5cf-b2rr7 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+	$value a rico:RecordPart ;
+		rdfs:label $label .
+	FILTER(REGEX($label, \"?token\", \"i\"))
+}""" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordParts> .
+}

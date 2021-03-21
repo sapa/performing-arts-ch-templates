@@ -1,26 +1,25 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/DeliveryNumber/context> {
-  _:genid-1cb7fe104ae14dc18aa36ecbc95daad6-d4ts5f a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "INSERT { $subject spao:deliveryNumber $value. } WHERE {}" .
-  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/DeliveryNumber> a <http://www.metaphacts.com/ontology/fields#Field>,
       <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-1cb7fe104ae14dc18aa36ecbc95daad6-jt1b4p;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-1cb7fe104ae14dc18aa36ecbc95daad6-0m8knd;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Numero di consegna"@it, "Ablieferungsnummer"@de,
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-f085c2d90396493f88d89c59e9ff6937-8o0u5;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f085c2d90396493f88d89c59e9ff6937-9uvtap;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-f085c2d90396493f88d89c59e9ff6937-3xu7sp;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Ablieferungsnummer"@de, "Numero di versamento"@it,
       "Numéro de versement"@fr, "Delivery number"@en;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-1cb7fe104ae14dc18aa36ecbc95daad6-d4ts5f;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-11-11T18:04:38.459Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:35:23.380Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-1cb7fe104ae14dc18aa36ecbc95daad6-jt1b4p a <http://spinrdf.org/sp#Query>;
+  _:genid-f085c2d90396493f88d89c59e9ff6937-8o0u5 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "DELETE { $subject spao:deliveryNumber $value. } WHERE {}" .
   
-  _:genid-1cb7fe104ae14dc18aa36ecbc95daad6-0m8knd a <http://spinrdf.org/sp#Query>;
+  _:genid-f085c2d90396493f88d89c59e9ff6937-3xu7sp a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject spao:deliveryNumber ?value. }" .
+  
+  _:genid-f085c2d90396493f88d89c59e9ff6937-9uvtap a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject spao:deliveryNumber $value. } WHERE {}" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/DeliveryNumber> .

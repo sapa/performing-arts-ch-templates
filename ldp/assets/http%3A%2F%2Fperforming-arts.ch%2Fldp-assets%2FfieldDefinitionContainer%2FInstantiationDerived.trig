@@ -1,54 +1,37 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerived/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerived>
-    a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-f750d7155509449496d7371fb10e20c0-awqa8r .
-  
-  _:genid-f750d7155509449496d7371fb10e20c0-awqa8r a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerived>
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI> .
-  
-  _:genid-f750d7155509449496d7371fb10e20c0-g8jcfl <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasDerivedInstantiation $value . } WHERE {}" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerived>
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-f750d7155509449496d7371fb10e20c0-g8jcfl .
-  
-  _:genid-f750d7155509449496d7371fb10e20c0-2htx0k a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerived>
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-f750d7155509449496d7371fb10e20c0-i4w91n .
-  
-  _:genid-f750d7155509449496d7371fb10e20c0-2htx0k <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasDerivedInstantiation $value} WHERE {}" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerived>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-e91c5563ffd942ffa63ed25e0452e1f3-iv7mr;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-e91c5563ffd942ffa63ed25e0452e1f3-36obxx;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Derived instantiation"@en, "Abgeleitete Instanziation"@de,
+      "Istanziazione derivata"@it, "Instanciation dérivée"@fr;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-e91c5563ffd942ffa63ed25e0452e1f3-5nsikk;
     <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Instantiation>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Derived instantiation"@en .
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Instantiation>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-e91c5563ffd942ffa63ed25e0452e1f3-3keqa2a;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:35:48.274Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-f750d7155509449496d7371fb10e20c0-g8jcfl a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerived>
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-f750d7155509449496d7371fb10e20c0-2htx0k;
-    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Instantiation> .
-  
-  _:genid-f750d7155509449496d7371fb10e20c0-awqa8r <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
+  _:genid-e91c5563ffd942ffa63ed25e0452e1f3-36obxx a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value $label WHERE {
   $value a rico:Instantiation ;
   	rico:identifier $label .
   FILTER(REGEX($label, \"?token\", \"i\"))
   FILTER(!CONTAINS(STR(?value), \"/u/\"))
 }""" .
   
-  _:genid-f750d7155509449496d7371fb10e20c0-i4w91n a <http://spinrdf.org/sp#Query>;
+  _:genid-e91c5563ffd942ffa63ed25e0452e1f3-5nsikk a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasDerivedInstantiation $value . } WHERE { }" .
+  
+  _:genid-e91c5563ffd942ffa63ed25e0452e1f3-iv7mr a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:hasDerivedInstantiation ?value . }" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerived>
-    a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-07-13T16:34:15.109Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  _:genid-e91c5563ffd942ffa63ed25e0452e1f3-3keqa2a a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasDerivedInstantiation $value} WHERE { }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerived> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerived>
-    a <http://www.w3.org/ns/ldp#Resource> .
 }

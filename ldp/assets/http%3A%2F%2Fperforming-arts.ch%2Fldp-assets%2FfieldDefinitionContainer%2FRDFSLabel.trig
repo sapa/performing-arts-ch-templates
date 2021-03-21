@@ -1,0 +1,32 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSLabel/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSLabel> a <http://www.metaphacts.com/ontology/fields#Field>,
+      <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-88cb674c863b474cae3527103a8d3987-ryvgfu;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.w3.org/2002/07/owl#Class>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-88cb674c863b474cae3527103a8d3987-wdq99q;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "A short comment that helps to identify the entity.";
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-88cb674c863b474cae3527103a8d3987-udvb8;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Label"@en;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-01-18T08:08:31.342Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-88cb674c863b474cae3527103a8d3987-udvb8 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+  $subject rdfs:label $value
+} WHERE {}""" .
+  
+  _:genid-88cb674c863b474cae3527103a8d3987-ryvgfu a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject rdfs:label ?value.
+}""" .
+  
+  _:genid-88cb674c863b474cae3527103a8d3987-wdq99q a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+  $subject rdfs:label $value
+} WHERE {}""" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSLabel> .
+}

@@ -1,443 +1,443 @@
 <div class="page">
-    <div class='page__body'>
-      [[#if (hasPermission "forms:ldp:*")]]
-  
-      <h2 style="margin-bottom: 0.8em;">To Do</h2>
-  
-      <bs-tabs id='todo-tabs' default-active-key='1' unmount-on-exit=true>
-  
-          <bs-tab event-key='1' title='Group Members'>
-              <bs-col sm="4">
-                  <semantic-chart type='donut' types='["pie", "donut"]'
-                        query='SELECT ?status_order ?status (COUNT(?member) AS ?membercount)
-                        WHERE {
+  <div class='page__body'>
+    [[#if (hasPermission "forms:ldp:*")]]
+
+    <h2 style="margin-bottom: 0.8em;">To Do</h2>
+
+    <bs-tabs id='todo-tabs' default-active-key='1' unmount-on-exit=true>
+
+        <bs-tab event-key='1' title='Group Members'>
+            <bs-col sm="4">
+                <semantic-chart type='donut' types='["pie", "donut"]'
+                      query='SELECT ?status_order ?status (COUNT(?member) AS ?membercount)
+                      WHERE {
+                          ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
+                              crm:P107_has_current_or_former_member ?member.
+                          FILTER(CONTAINS(STR(?group), "/a/"))
+                          FILTER(?member != <http://data.performing-arts.ch/a/9e1a6aff-7181-4931-bb72-219947dfe1fc>) # exclude "et al."
+                          ?member rdfs:label ?memberlabel .
+                          OPTIONAL {
+                              ?person rdfs:label ?memberlabel; 
+                                  a crm:E21_Person.
+                              FILTER(?person != ?member)
+                              FILTER(CONTAINS(STR(?person), "/a/"))
+                            }
+                        BIND(IF(CONTAINS(STR(?member), "/a/"), "matched", IF(BOUND(?person), "matchable?", "unmatched")) AS ?status)
+                        VALUES (?status ?status_order) {
+                          ("matched" 1)
+                          ("matchable?" 2)
+                          ("unmatched" 3)
+                        }
+                      } GROUP BY ?status_order ?status
+                      ORDER BY ?status_order'
+                      sets='[{"dataSetName": "Members", "category": "status", "value": "membercount"}]'
+                      styles='[{
+                        "provider": "chartjs",
+                        "style": {
+                            "data": {
+                                "datasets": [
+                                    { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(58, 54, 78, 0.5)", "rgba(220, 20, 20, 0.7)"],
+                                    "borderColor": "rgb(255, 255, 255, 1)",
+                                    "borderWidth": "4"
+                                    }
+                                ]
+                            },
+                            "options": {
+                                "layout": {
+                                    "padding": {
+                                        "top": "20"
+                                    }
+                                },
+                                "legend": {
+                                    "position": "bottom",
+                                    "labels": {
+                                        "fontSize": 14,
+                                        "padding": 20
+                                    }
+                                }
+                            }
+                        }
+                       }]'
+                    ></semantic-chart>
+          
+            </bs-col>
+            <bs-col sm="8">
+
+                <bs-tabs id='group-members' default-active-key='2.1' unmount-on-exit=true>
+
+                    <bs-tab event-key='2.1' title='Matched Members'>
+                        <semantic-table 
+                        query='SELECT DISTINCT ?group ?member
+                          WHERE {
                             ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
                                 crm:P107_has_current_or_former_member ?member.
                             FILTER(CONTAINS(STR(?group), "/a/"))
                             FILTER(?member != <http://data.performing-arts.ch/a/9e1a6aff-7181-4931-bb72-219947dfe1fc>) # exclude "et al."
-                            ?member rdfs:label ?memberlabel .
-                            OPTIONAL {
-                                ?person rdfs:label ?memberlabel; 
-                                    a crm:E21_Person.
-                                FILTER(?person != ?member)
-                                FILTER(CONTAINS(STR(?person), "/a/"))
-                              }
-                          BIND(IF(CONTAINS(STR(?member), "/a/"), "matched", IF(BOUND(?person), "matchable?", "unmatched")) AS ?status)
-                          VALUES (?status ?status_order) {
-                            ("matched" 1)
-                            ("matchable?" 2)
-                            ("unmatched" 3)
-                          }
-                        } GROUP BY ?status_order ?status
-                        ORDER BY ?status_order'
-                        sets='[{"dataSetName": "Members", "category": "status", "value": "membercount"}]'
-                        styles='[{
-                          "provider": "chartjs",
-                          "style": {
-                              "data": {
-                                  "datasets": [
-                                      { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(58, 54, 78, 0.5)", "rgba(220, 20, 20, 0.7)"],
-                                      "borderColor": "rgb(255, 255, 255, 1)",
-                                      "borderWidth": "4"
-                                      }
-                                  ]
-                              },
-                              "options": {
-                                  "layout": {
-                                      "padding": {
-                                          "top": "20"
-                                      }
-                                  },
-                                  "legend": {
-                                      "position": "bottom",
-                                      "labels": {
-                                          "fontSize": 14,
-                                          "padding": 20
-                                      }
-                                  }
-                              }
-                          }
-                         }]'
-                      ></semantic-chart>
-            
-              </bs-col>
-              <bs-col sm="8">
-  
-                  <bs-tabs id='group-members' default-active-key='2.1' unmount-on-exit=true>
-  
-                      <bs-tab event-key='2.1' title='Matched Members'>
-                          <semantic-table 
-                          query='SELECT DISTINCT ?group ?member
-                            WHERE {
-                              ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
-                                  crm:P107_has_current_or_former_member ?member.
-                              FILTER(CONTAINS(STR(?group), "/a/"))
-                              FILTER(?member != <http://data.performing-arts.ch/a/9e1a6aff-7181-4931-bb72-219947dfe1fc>) # exclude "et al."
-                              FILTER(CONTAINS(STR(?member), "/a/"))
-                            }'
-                          column-configuration='[
-                              {"variableName": "group", "displayName": "Group"}, 
-                              {"variableName": "member", "displayName": "Member"}
-                          ]'
-                          number-of-displayed-rows=20
-                          no-result-template='No results found.'
-                          options='{"showFilter": true}'>
-                          </semantic-table>          
-                      </bs-tab>
-  
-                      <bs-tab event-key='2.2' title='Matchable with Persons?'>
-                          <semantic-table 
-                          query='SELECT DISTINCT ?group ?person
-                          WHERE {
-                              ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
-                                  crm:P107_has_current_or_former_member ?member.
-                              FILTER(CONTAINS(STR(?group), "/a/"))
-                              FILTER(CONTAINS(STR(?member), "/u/"))
-                              ?member rdfs:label ?memberlabel.
-                              ?person rdfs:label ?memberlabel ;
-                                  a crm:E21_Person.
-                                  FILTER(CONTAINS(STR(?person), "/a/"))
+                            FILTER(CONTAINS(STR(?member), "/a/"))
                           }'
-                          column-configuration='[
-                              {"variableName": "group", "displayName": "Group"}, 
-                              {"variableName": "person", "displayName": "Member/Person"}
-                          ]'
-                          number-of-displayed-rows=20
-                          no-result-template='No results found.'
-                          options='{"showFilter": false}'>
-                          </semantic-table>          
-                      </bs-tab>
-  
-                      <bs-tab event-key='2.3' title='Unmatched Members'>
-                          <semantic-table 
-                          query='SELECT DISTINCT ?group ?grouplabel ?memberlabel 
-                              WHERE {
-                                  ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
-                                      crm:P107_has_current_or_former_member ?member.
-                                  FILTER (CONTAINS(STR(?group), "/a/"))
-                                  FILTER (CONTAINS(STR(?member), "/u/"))
-                                  ?member rdfs:label ?memberlabel .
-                              }'
-                          column-configuration='[
-                              {"variableName": "group", "displayName": "Group"}, 
-                              {"variableName": "memberlabel", "displayName": "Member"}
-                          ]'
-                          number-of-displayed-rows=20
-                          no-result-template='No results found.'
-                          options='{"showFilter": true}'>
-                          </semantic-table>          
-                      </bs-tab>
-  
-                  </bs-tabsid='group-venues' default-active-key='1.1' unmount-on-exit=true>
-                
-              </bs-col>          
-          </bs-tab>
-  
-          <bs-tab event-key='2' title='Producers'>
-              <bs-col sm="4">
-                  <semantic-chart type='donut' types='["pie", "donut"]'
-                        query='
-                        SELECT ?status (COUNT(?producer) AS ?producercount)
+                        column-configuration='[
+                            {"variableName": "group", "displayName": "Group"}, 
+                            {"variableName": "member", "displayName": "Member"}
+                        ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": true}'>
+                        </semantic-table>          
+                    </bs-tab>
+
+                    <bs-tab event-key='2.2' title='Matchable with Persons?'>
+                        <semantic-table 
+                        query='SELECT DISTINCT ?group ?person
                         WHERE {
-                          ?production crm:P2_has_type spav:muwgo ;
-                              crm:P14_carried_out_by ?producer .
-                          BIND(IF(CONTAINS(STR(?producer), "/u/"), "unmatched", "matched") AS ?status)
-                        } GROUP BY ?status
-                        ORDER BY ?status
-                        '
-                        sets='[{"dataSetName": "Producers", "category": "status", "value": "producercount"}]'
-                        styles='[{
-                          "provider": "chartjs",
-                          "style": {
-                              "data": {
-                                  "datasets": [
-                                      { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(220, 20, 20, 0.7)"],
-                                      "borderColor": "rgb(255, 255, 255, 1)",
-                                      "borderWidth": "4"
-                                      }
-                                  ]
-                              },
-                              "options": {
-                                  "layout": {
-                                      "padding": {
-                                          "top": "20"
-                                      }
-                                  },
-                                  "legend": {
-                                      "position": "bottom",
-                                      "labels": {
-                                          "fontSize": 14,
-                                          "padding": 20
-                                      }
-                                  }
-                              }
-                          }
-                         }]'
-                      ></semantic-chart>
-            
-                      </bs-col>
-                      <bs-col sm="8">
-  
-                          <bs-tabs id='producers' default-active-key='2.1' unmount-on-exit=true>
-                              <bs-tab event-key='2.1' title='Unmatched Producers'>
-  
-                                  <semantic-table 
-                                  query='SELECT DISTINCT ?plan ?producer_label 
-                                      WHERE {
-                                          ?production crm:P2_has_type spav:muwgo ;
-                                              crm:P14_carried_out_by ?producer .
-                                          FILTER(CONTAINS(STR(?producer), "/u/"))
-                                          ?producer rdfs:label ?producer_label .
-                                          [ crm:P9_consists_of ?production ;
-                                              frbroo:R17_created ?plan ] .
-                                      } LIMIT 5000' 
-                                  column-configuration='[
-                                      {"variableName": "plan", "displayName": "Production"}, 
-                                      {"variableName": "producer_label", "displayName": "Producer"}
-                                  ]'
-                                  number-of-displayed-rows=20
-                                  no-result-template='No results found.'
-                                  options='{"showFilter": true}'>
-                                  </semantic-table>
+                            ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
+                                crm:P107_has_current_or_former_member ?member.
+                            FILTER(CONTAINS(STR(?group), "/a/"))
+                            FILTER(CONTAINS(STR(?member), "/u/"))
+                            ?member rdfs:label ?memberlabel.
+                            ?person rdfs:label ?memberlabel ;
+                                a crm:E21_Person.
+                                FILTER(CONTAINS(STR(?person), "/a/"))
+                        }'
+                        column-configuration='[
+                            {"variableName": "group", "displayName": "Group"}, 
+                            {"variableName": "person", "displayName": "Member/Person"}
+                        ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": false}'>
+                        </semantic-table>          
+                    </bs-tab>
+
+                    <bs-tab event-key='2.3' title='Unmatched Members'>
+                        <semantic-table 
+                        query='SELECT DISTINCT ?group ?grouplabel ?memberlabel 
+                            WHERE {
+                                ?group rdf:type/rdfs:subClassOf* crm:E74_Group ;
+                                    crm:P107_has_current_or_former_member ?member.
+                                FILTER (CONTAINS(STR(?group), "/a/"))
+                                FILTER (CONTAINS(STR(?member), "/u/"))
+                                ?member rdfs:label ?memberlabel .
+                            }'
+                        column-configuration='[
+                            {"variableName": "group", "displayName": "Group"}, 
+                            {"variableName": "memberlabel", "displayName": "Member"}
+                        ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": true}'>
+                        </semantic-table>          
+                    </bs-tab>
+
+                </bs-tabsid='group-venues' default-active-key='1.1' unmount-on-exit=true>
+              
+            </bs-col>          
+        </bs-tab>
+
+        <bs-tab event-key='2' title='Producers'>
+            <bs-col sm="4">
+                <semantic-chart type='donut' types='["pie", "donut"]'
+                      query='
+                      SELECT ?status (COUNT(?producer) AS ?producercount)
+                      WHERE {
+                        ?production crm:P2_has_type spav:muwgo ;
+                            crm:P14_carried_out_by ?producer .
+                        BIND(IF(CONTAINS(STR(?producer), "/u/"), "unmatched", "matched") AS ?status)
+                      } GROUP BY ?status
+                      ORDER BY ?status
+                      '
+                      sets='[{"dataSetName": "Producers", "category": "status", "value": "producercount"}]'
+                      styles='[{
+                        "provider": "chartjs",
+                        "style": {
+                            "data": {
+                                "datasets": [
+                                    { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(220, 20, 20, 0.7)"],
+                                    "borderColor": "rgb(255, 255, 255, 1)",
+                                    "borderWidth": "4"
+                                    }
+                                ]
+                            },
+                            "options": {
+                                "layout": {
+                                    "padding": {
+                                        "top": "20"
+                                    }
+                                },
+                                "legend": {
+                                    "position": "bottom",
+                                    "labels": {
+                                        "fontSize": 14,
+                                        "padding": 20
+                                    }
+                                }
+                            }
+                        }
+                       }]'
+                    ></semantic-chart>
           
-                              </bs-tab>
-  
-                              <bs-tab event-key='2.2' title='Ranking CH'>
-  
-                                  <semantic-table 
-                                  query='SELECT ?producer_label (COUNT(?producer) AS ?producer_count)
-                                  WHERE {
-                                      ?production crm:P2_has_type spav:muwgo ;
-                                          crm:P14_carried_out_by ?producer .
-                                      FILTER(CONTAINS(STR(?producer), "/u/"))
-                                          ?producer rdfs:label ?producer_label .
-                                      FILTER(STRSTARTS(?producer_label, "CH:"))
-                                  } GROUP BY ?producer_label
-                                  ORDER BY DESC(?producer_count)' 
-                                  column-configuration='[
-                                      {"displayName": "Producer", "cellTemplate":"{{>productions}}"},
-                                      {"variableName": "producer_count", "displayName": "Count"}
-                                  ]'
-                                  number-of-displayed-rows=20
-                                  options='{"showFilter": true}'>
-  
-                                  <template id='productions'>
-                                      <semantic-query 
-                                          query='SELECT ?producer_label ?productions WHERE { VALUES (?producer_label) { ("{{producer_label.value}}") } BIND (ENCODE_FOR_URI(?producer_label) AS ?productions) }'
-                                          template = '{{>productions-link}} '>
-                                          <template id='productions-link'>
-                                              <div>{{#each bindings}}<a href="/sparql?query=PREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20spav%3A%20%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX%20frbroo%3A%20%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT%20DISTINCT%20%3Frepid%20%3Fproductionplan%20%3Fdate%20WHERE%20%7B%0A%20%20%3Fproduction%20crm%3AP14_carried_out_by%20%5B%20rdfs%3Alabel%20%22{{productions.value}}%22%20%5D%20%3B%0A%20%20%20%20crm%3AP2_has_type%20spav%3Amuwgo%20.%0A%20%20%5B%20crm%3AP9_consists_of%20%3Fproduction%20%3B%0A%20%20%20%20frbroo%3AR17_created%20%3Fproductionplan%20%5D%20.%0A%20%20%3Fproductionplan%20crm%3AP1_is_identified_by%20%5B%20a%20crm%3AE42_Identifier%20%3B%0A%20%20%20%20%20%20rdf%3Avalue%20%3Frepid%20%0A%20%20%5D%20.%0A%20%20OPTIONAL%20%7B%0A%20%20%5B%20frbroo%3AR25_performed%20%3Fproductionplan%20%3B%0A%20%20%20%20crm%3AP9_consists_of%20%3Fpremiere%20%5D%20.%0A%20%20%3Fpremiere%20crm%3AP4_has_time-span%20%5B%20crm%3AP82a_begin_of_the_begin%20%3Fdate%20%5D%20.%0A%20%20%7D%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
-                                          </template>
-                                      </semantic-query>
-                                  </template>
-  
-                                  </semantic-table>
-                                      
-                              </bs-tab>
-  
-                              <bs-tab event-key='2.3' title='Ranking International'>
-  
-                                  <semantic-table 
-                                  query='SELECT ?producer_label (COUNT(?producer) AS ?producer_count)
-                                  WHERE {
-                                      ?production crm:P2_has_type spav:muwgo ;
-                                          crm:P14_carried_out_by ?producer .
-                                      FILTER(CONTAINS(STR(?producer), "/u/"))
-                                          ?producer rdfs:label ?producer_label .
-                                      FILTER(!STRSTARTS(?producer_label, "CH:"))
-                                      FILTER(!STRSTARTS(?producer_label, "00:"))
-                                      } GROUP BY ?producer_label
-                                  ORDER BY DESC(?producer_count)' 
-                                  column-configuration='[
-                                      {"displayName": "Producer", "cellTemplate":"{{>productions}}"},
-                                      {"variableName": "producer_count", "displayName": "Count"}
-                                  ]'
-                                  number-of-displayed-rows=20
-                                  options='{"showFilter": true}'>
-  
-                                  <template id='productions'>
-                                      <semantic-query 
-                                          query='SELECT ?producer_label ?productions WHERE { VALUES (?producer_label) { ("{{producer_label.value}}") } BIND (ENCODE_FOR_URI(?producer_label) AS ?productions) }'
-                                          template = '{{>productions-link}} '>
-                                          <template id='productions-link'>
-                                              <div>{{#each bindings}}<a href="/sparql?query=PREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20spav%3A%20%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX%20frbroo%3A%20%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT%20DISTINCT%20%3Frepid%20%3Fproductionplan%20%3Fdate%20WHERE%20%7B%0A%20%20%3Fproduction%20crm%3AP14_carried_out_by%20%5B%20rdfs%3Alabel%20%22{{productions.value}}%22%20%5D%20%3B%0A%20%20%20%20crm%3AP2_has_type%20spav%3Amuwgo%20.%0A%20%20%5B%20crm%3AP9_consists_of%20%3Fproduction%20%3B%0A%20%20%20%20frbroo%3AR17_created%20%3Fproductionplan%20%5D%20.%0A%20%20%3Fproductionplan%20crm%3AP1_is_identified_by%20%5B%20a%20crm%3AE42_Identifier%20%3B%0A%20%20%20%20%20%20rdf%3Avalue%20%3Frepid%20%0A%20%20%5D%20.%0A%20%20OPTIONAL%20%7B%0A%20%20%5B%20frbroo%3AR25_performed%20%3Fproductionplan%20%3B%0A%20%20%20%20crm%3AP9_consists_of%20%3Fpremiere%20%5D%20.%0A%20%20%3Fpremiere%20crm%3AP4_has_time-span%20%5B%20crm%3AP82a_begin_of_the_begin%20%3Fdate%20%5D%20.%0A%20%20%7D%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
-                                          </template>
-                                      </semantic-query>
-                                  </template>
-  
-                              </semantic-table>
-                                      
-                              </bs-tab>
-  
-                              <bs-tab event-key='2.4' title='Ranking 00'>
-  
-                                  <semantic-table 
-                                  query='SELECT ?producer_label (COUNT(?producer) AS ?producer_count)
-                                  WHERE {
-                                      ?production crm:P2_has_type spav:muwgo ;
-                                          crm:P14_carried_out_by ?producer .
-                                      FILTER(CONTAINS(STR(?producer), "/u/"))
-                                          ?producer rdfs:label ?producer_label .
-                                      FILTER(STRSTARTS(?producer_label, "00:"))
-                                  } GROUP BY ?producer_label
-                                  ORDER BY DESC(?producer_count)' 
-                                  column-configuration='[
-                                      {"displayName": "Producer", "cellTemplate":"{{>productions}}"},
-                                      {"variableName": "producer_count", "displayName": "Count"}
-                                  ]'
-                                  number-of-displayed-rows=20
-                                  options='{"showFilter": true}'>
-                                  <template id='productions'>
-                                      <semantic-query 
-                                          query='SELECT ?producer_label ?productions WHERE { VALUES (?producer_label) { ("{{producer_label.value}}") } BIND (ENCODE_FOR_URI(?producer_label) AS ?productions) }'
-                                          template = '{{>productions-link}} '>
-                                          <template id='productions-link'>
-                                              <div>{{#each bindings}}<a href="/sparql?query=PREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20spav%3A%20%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX%20frbroo%3A%20%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT%20DISTINCT%20%3Frepid%20%3Fproductionplan%20%3Fdate%20WHERE%20%7B%0A%20%20%3Fproduction%20crm%3AP14_carried_out_by%20%5B%20rdfs%3Alabel%20%22{{productions.value}}%22%20%5D%20%3B%0A%20%20%20%20crm%3AP2_has_type%20spav%3Amuwgo%20.%0A%20%20%5B%20crm%3AP9_consists_of%20%3Fproduction%20%3B%0A%20%20%20%20frbroo%3AR17_created%20%3Fproductionplan%20%5D%20.%0A%20%20%3Fproductionplan%20crm%3AP1_is_identified_by%20%5B%20a%20crm%3AE42_Identifier%20%3B%0A%20%20%20%20%20%20rdf%3Avalue%20%3Frepid%20%0A%20%20%5D%20.%0A%20%20OPTIONAL%20%7B%0A%20%20%5B%20frbroo%3AR25_performed%20%3Fproductionplan%20%3B%0A%20%20%20%20crm%3AP9_consists_of%20%3Fpremiere%20%5D%20.%0A%20%20%3Fpremiere%20crm%3AP4_has_time-span%20%5B%20crm%3AP82a_begin_of_the_begin%20%3Fdate%20%5D%20.%0A%20%20%7D%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
-                                          </template>
-                                      </semantic-query>
-                                  </template>
-                              </semantic-table>
-                                      
-                      </bs-tab>
-                  </bs-col>          
-          </bs-tab>
-  
-          <bs-tab event-key='4' title='Production Venues'>
-              <bs-col sm="4">
-                  <semantic-chart type='donut' types='["pie", "donut"]'
-                        query='
-                        SELECT ?status (COUNT(?venue) AS ?venuecount)
+                    </bs-col>
+                    <bs-col sm="8">
+
+                        <bs-tabs id='producers' default-active-key='2.1' unmount-on-exit=true>
+                            <bs-tab event-key='2.1' title='Unmatched Producers'>
+
+                                <semantic-table 
+                                query='SELECT DISTINCT ?plan ?producer_label 
+                                    WHERE {
+                                        ?production crm:P2_has_type spav:muwgo ;
+                                            crm:P14_carried_out_by ?producer .
+                                        FILTER(CONTAINS(STR(?producer), "/u/"))
+                                        ?producer rdfs:label ?producer_label .
+                                        [ crm:P9_consists_of ?production ;
+                                            frbroo:R17_created ?plan ] .
+                                    } LIMIT 5000' 
+                                column-configuration='[
+                                    {"variableName": "plan", "displayName": "Production"}, 
+                                    {"variableName": "producer_label", "displayName": "Producer"}
+                                ]'
+                                number-of-displayed-rows=20
+                                no-result-template='No results found.'
+                                options='{"showFilter": true}'>
+                                </semantic-table>
+        
+                            </bs-tab>
+
+                            <bs-tab event-key='2.2' title='Ranking CH'>
+
+                                <semantic-table 
+                                query='SELECT ?producer_label (COUNT(?producer) AS ?producer_count)
+                                WHERE {
+                                    ?production crm:P2_has_type spav:muwgo ;
+                                        crm:P14_carried_out_by ?producer .
+                                    FILTER(CONTAINS(STR(?producer), "/u/"))
+                                        ?producer rdfs:label ?producer_label .
+                                    FILTER(STRSTARTS(?producer_label, "CH:"))
+                                } GROUP BY ?producer_label
+                                ORDER BY DESC(?producer_count)' 
+                                column-configuration='[
+                                    {"displayName": "Producer", "cellTemplate":"{{>productions}}"},
+                                    {"variableName": "producer_count", "displayName": "Count"}
+                                ]'
+                                number-of-displayed-rows=20
+                                options='{"showFilter": true}'>
+
+                                <template id='productions'>
+                                    <semantic-query 
+                                        query='SELECT ?producer_label ?productions WHERE { VALUES (?producer_label) { ("{{producer_label.value}}") } BIND (ENCODE_FOR_URI(?producer_label) AS ?productions) }'
+                                        template = '{{>productions-link}} '>
+                                        <template id='productions-link'>
+                                            <div>{{#each bindings}}<a href="/sparql?query=PREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20spav%3A%20%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX%20frbroo%3A%20%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT%20DISTINCT%20%3Frepid%20%3Fproductionplan%20%3Fdate%20WHERE%20%7B%0A%20%20%3Fproduction%20crm%3AP14_carried_out_by%20%5B%20rdfs%3Alabel%20%22{{productions.value}}%22%20%5D%20%3B%0A%20%20%20%20crm%3AP2_has_type%20spav%3Amuwgo%20.%0A%20%20%5B%20crm%3AP9_consists_of%20%3Fproduction%20%3B%0A%20%20%20%20frbroo%3AR17_created%20%3Fproductionplan%20%5D%20.%0A%20%20%3Fproductionplan%20crm%3AP1_is_identified_by%20%5B%20a%20crm%3AE42_Identifier%20%3B%0A%20%20%20%20%20%20rdf%3Avalue%20%3Frepid%20%0A%20%20%5D%20.%0A%20%20OPTIONAL%20%7B%0A%20%20%5B%20frbroo%3AR25_performed%20%3Fproductionplan%20%3B%0A%20%20%20%20crm%3AP9_consists_of%20%3Fpremiere%20%5D%20.%0A%20%20%3Fpremiere%20crm%3AP4_has_time-span%20%5B%20crm%3AP82a_begin_of_the_begin%20%3Fdate%20%5D%20.%0A%20%20%7D%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
+                                        </template>
+                                    </semantic-query>
+                                </template>
+
+                                </semantic-table>
+                                    
+                            </bs-tab>
+
+                            <bs-tab event-key='2.3' title='Ranking International'>
+
+                                <semantic-table 
+                                query='SELECT ?producer_label (COUNT(?producer) AS ?producer_count)
+                                WHERE {
+                                    ?production crm:P2_has_type spav:muwgo ;
+                                        crm:P14_carried_out_by ?producer .
+                                    FILTER(CONTAINS(STR(?producer), "/u/"))
+                                        ?producer rdfs:label ?producer_label .
+                                    FILTER(!STRSTARTS(?producer_label, "CH:"))
+                                    FILTER(!STRSTARTS(?producer_label, "00:"))
+                                    } GROUP BY ?producer_label
+                                ORDER BY DESC(?producer_count)' 
+                                column-configuration='[
+                                    {"displayName": "Producer", "cellTemplate":"{{>productions}}"},
+                                    {"variableName": "producer_count", "displayName": "Count"}
+                                ]'
+                                number-of-displayed-rows=20
+                                options='{"showFilter": true}'>
+
+                                <template id='productions'>
+                                    <semantic-query 
+                                        query='SELECT ?producer_label ?productions WHERE { VALUES (?producer_label) { ("{{producer_label.value}}") } BIND (ENCODE_FOR_URI(?producer_label) AS ?productions) }'
+                                        template = '{{>productions-link}} '>
+                                        <template id='productions-link'>
+                                            <div>{{#each bindings}}<a href="/sparql?query=PREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20spav%3A%20%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX%20frbroo%3A%20%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT%20DISTINCT%20%3Frepid%20%3Fproductionplan%20%3Fdate%20WHERE%20%7B%0A%20%20%3Fproduction%20crm%3AP14_carried_out_by%20%5B%20rdfs%3Alabel%20%22{{productions.value}}%22%20%5D%20%3B%0A%20%20%20%20crm%3AP2_has_type%20spav%3Amuwgo%20.%0A%20%20%5B%20crm%3AP9_consists_of%20%3Fproduction%20%3B%0A%20%20%20%20frbroo%3AR17_created%20%3Fproductionplan%20%5D%20.%0A%20%20%3Fproductionplan%20crm%3AP1_is_identified_by%20%5B%20a%20crm%3AE42_Identifier%20%3B%0A%20%20%20%20%20%20rdf%3Avalue%20%3Frepid%20%0A%20%20%5D%20.%0A%20%20OPTIONAL%20%7B%0A%20%20%5B%20frbroo%3AR25_performed%20%3Fproductionplan%20%3B%0A%20%20%20%20crm%3AP9_consists_of%20%3Fpremiere%20%5D%20.%0A%20%20%3Fpremiere%20crm%3AP4_has_time-span%20%5B%20crm%3AP82a_begin_of_the_begin%20%3Fdate%20%5D%20.%0A%20%20%7D%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
+                                        </template>
+                                    </semantic-query>
+                                </template>
+
+                            </semantic-table>
+                                    
+                            </bs-tab>
+
+                            <bs-tab event-key='2.4' title='Ranking 00'>
+
+                                <semantic-table 
+                                query='SELECT ?producer_label (COUNT(?producer) AS ?producer_count)
+                                WHERE {
+                                    ?production crm:P2_has_type spav:muwgo ;
+                                        crm:P14_carried_out_by ?producer .
+                                    FILTER(CONTAINS(STR(?producer), "/u/"))
+                                        ?producer rdfs:label ?producer_label .
+                                    FILTER(STRSTARTS(?producer_label, "00:"))
+                                } GROUP BY ?producer_label
+                                ORDER BY DESC(?producer_count)' 
+                                column-configuration='[
+                                    {"displayName": "Producer", "cellTemplate":"{{>productions}}"},
+                                    {"variableName": "producer_count", "displayName": "Count"}
+                                ]'
+                                number-of-displayed-rows=20
+                                options='{"showFilter": true}'>
+                                <template id='productions'>
+                                    <semantic-query 
+                                        query='SELECT ?producer_label ?productions WHERE { VALUES (?producer_label) { ("{{producer_label.value}}") } BIND (ENCODE_FOR_URI(?producer_label) AS ?productions) }'
+                                        template = '{{>productions-link}} '>
+                                        <template id='productions-link'>
+                                            <div>{{#each bindings}}<a href="/sparql?query=PREFIX%20crm%3A%20%3Chttp%3A%2F%2Fwww.cidoc-crm.org%2Fcidoc-crm%2F%3E%0APREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0APREFIX%20rdf%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20spav%3A%20%3Chttp%3A%2F%2Fvocab.performing-arts.ch%2F%3E%0APREFIX%20frbroo%3A%20%3Chttp%3A%2F%2Fiflastandards.info%2Fns%2Ffr%2Ffrbr%2Ffrbroo%2F%3E%0APREFIX%20%3A%20%3Chttp%3A%2F%2Fwww.metaphacts.com%2Fresource%2F%3E%0A%0ASELECT%20DISTINCT%20%3Frepid%20%3Fproductionplan%20%3Fdate%20WHERE%20%7B%0A%20%20%3Fproduction%20crm%3AP14_carried_out_by%20%5B%20rdfs%3Alabel%20%22{{productions.value}}%22%20%5D%20%3B%0A%20%20%20%20crm%3AP2_has_type%20spav%3Amuwgo%20.%0A%20%20%5B%20crm%3AP9_consists_of%20%3Fproduction%20%3B%0A%20%20%20%20frbroo%3AR17_created%20%3Fproductionplan%20%5D%20.%0A%20%20%3Fproductionplan%20crm%3AP1_is_identified_by%20%5B%20a%20crm%3AE42_Identifier%20%3B%0A%20%20%20%20%20%20rdf%3Avalue%20%3Frepid%20%0A%20%20%5D%20.%0A%20%20OPTIONAL%20%7B%0A%20%20%5B%20frbroo%3AR25_performed%20%3Fproductionplan%20%3B%0A%20%20%20%20crm%3AP9_consists_of%20%3Fpremiere%20%5D%20.%0A%20%20%3Fpremiere%20crm%3AP4_has_time-span%20%5B%20crm%3AP82a_begin_of_the_begin%20%3Fdate%20%5D%20.%0A%20%20%7D%0A%7D" target="_blank">{{producer_label.value}}</a>{{/each}}</div>
+                                        </template>
+                                    </semantic-query>
+                                </template>
+                            </semantic-table>
+                                    
+                    </bs-tab>
+                </bs-col>          
+        </bs-tab>
+
+        <bs-tab event-key='4' title='Production Venues'>
+            <bs-col sm="4">
+                <semantic-chart type='donut' types='["pie", "donut"]'
+                      query='
+                      SELECT ?status (COUNT(?venue) AS ?venuecount)
+                      WHERE {
+                        ?performance a frbroo:F31_Performance ;
+                                       crm:P8_took_place_on_or_within ?venue ;
+                                       frbroo:R25_performed ?plan .
+                        BIND(IF(CONTAINS(STR(?venue), "/u/"), "unmatched", "matched") AS ?status)
+                      } GROUP BY ?status
+                      ORDER BY ?status
+                      '
+                      sets='[{"dataSetName": "Venues", "category": "status", "value": "venuecount"}]'
+                      styles='[{
+                        "provider": "chartjs",
+                        "style": {
+                            "data": {
+                                "datasets": [
+                                    { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(220, 20, 20, 0.7)"],
+                                    "borderColor": "rgb(255, 255, 255, 1)",
+                                    "borderWidth": "4"
+                                    }
+                                ]
+                            },
+                            "options": {
+                                "layout": {
+                                    "padding": {
+                                        "top": "20"
+                                    }
+                                },
+                                "legend": {
+                                    "position": "bottom",
+                                    "labels": {
+                                        "fontSize": 14,
+                                        "padding": 20
+                                    }
+                                }
+                            }
+                        }
+                       }]'
+                    ></semantic-chart>
+            </bs-col>
+            <bs-col sm="8">
+
+                <bs-tabs id='producer_venues' default-active-key='4.1' unmount-on-exit=true>
+                    <bs-tab event-key='4.1' title='Unmatched Venues Ranking'>
+
+                        <semantic-table 
+                        query='SELECT ?venuelabel ?group (COUNT(?venue) AS ?venuecount)
                         WHERE {
-                          ?performance a frbroo:F31_Performance ;
-                                         crm:P8_took_place_on_or_within ?venue ;
-                                         frbroo:R25_performed ?plan .
-                          BIND(IF(CONTAINS(STR(?venue), "/u/"), "unmatched", "matched") AS ?status)
-                        } GROUP BY ?status
-                        ORDER BY ?status
-                        '
-                        sets='[{"dataSetName": "Venues", "category": "status", "value": "venuecount"}]'
-                        styles='[{
-                          "provider": "chartjs",
-                          "style": {
-                              "data": {
-                                  "datasets": [
-                                      { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(220, 20, 20, 0.7)"],
-                                      "borderColor": "rgb(255, 255, 255, 1)",
-                                      "borderWidth": "4"
-                                      }
-                                  ]
-                              },
-                              "options": {
-                                  "layout": {
-                                      "padding": {
-                                          "top": "20"
-                                      }
-                                  },
-                                  "legend": {
-                                      "position": "bottom",
-                                      "labels": {
-                                          "fontSize": 14,
-                                          "padding": 20
-                                      }
-                                  }
-                              }
-                          }
-                         }]'
-                      ></semantic-chart>
-              </bs-col>
-              <bs-col sm="8">
-  
-                  <bs-tabs id='producer_venues' default-active-key='4.1' unmount-on-exit=true>
-                      <bs-tab event-key='4.1' title='Unmatched Venues Ranking'>
-  
-                          <semantic-table 
-                          query='SELECT ?venuelabel ?group (COUNT(?venue) AS ?venuecount)
-                          WHERE {
-                            ?venue rdfs:label ?venuelabel ;
-                                a crm:E22_Man-Made_Object .
-                            FILTER(CONTAINS(STR(?venue), "/u/"))
-                            ?performance crm:P8_took_place_on_or_within ?venue ;
-                                         frbroo:R25_performed ?plan .
-                            ?expressioncreation frbroo:R17_created ?plan ;
-                                                crm:P10_falls_within ?directorship.
-                            ?directorship crm:P14_carried_out_by ?group .
-                            ?group rdf:type/rdfs:subClassOf* crm:E74_Group .
-                          } GROUP BY ?venuelabel ?group 
-                          ORDER BY DESC(?venuecount) ' 
-                          column-configuration='[
-                          {"variableName": "venuelabel", "displayName": "Venue"}, 
-                          {"variableName": "group", "displayName": "Group"}, 
-                          {"variableName": "venuecount", "displayName": "Count"}
-                          ]'
-                          number-of-displayed-rows=20
-                          no-result-template='No results found.'
-                          options='{"showFilter": true}'>
-                          </semantic-table>
-  
-                      </bs-tab>
-                  </bs-tabs>
-  
-              </bs-col>
-          </bs-tab>
-  
-          <bs-tab event-key='5' title='Virtual Record Sets'>
-  
-              <semantic-table 
-                  query='SELECT DISTINCT ?rr WHERE {
-                          ?rr <http://temp.performing-arts.ch/isVirtual> true ;
-                          rdf:type/rdfs:subClassOf* rico:RecordResource .
-                      }' 
-                  column-configuration='[
-                      {"displayName": "Record Resource", "variableName": "rr"},
-                      {"displayName": "Subjects", "cellTemplate": "{{>subjects}}"}
-                      ]'
-                  number-of-displayed-rows=20
-                  no-result-template='No results found.'
-                  options='{"showFilter": true}'>
-                  <template id='subjects'> 
-                      <semantic-query 
-                        query='SELECT DISTINCT ?subject WHERE { <{{rr.value}}> rico:hasSubject ?subject . }'
-                        template = '{{>subject-list}} '>           
-                        <template id='subject-list'> 
-                          <div>{{#each bindings}}{{#if @first}}<semantic-link iri="{{subject.value}}"></semantic-link>{{else}}, <semantic-link iri="{{subject.value}}"></semantic-link>{{/if}}{{/each}}</div>
-                        </template>
-                      </semantic-query>   
-                    </template>
-              </semantic-table>           
-  
-          </bs-tab>
-  
-          <bs-tab event-key='6' title='Wikidata double matches'>
-  
-              <semantic-table 
-                  query='SELECT DISTINCT ?wikidata ?q (COUNT(?sapa) AS ?count) WHERE {
-                      ?sapa owl:sameAs ?wikidata .
-                      FILTER(CONTAINS(STR(?wikidata), "wikidata.org/entity"))
-                      BIND(SUBSTR(STR(?wikidata), 32) AS ?q)
-                  } GROUP BY (?wikidata) (?q)
-                  HAVING (COUNT(?sapa)>1)' 
-                  column-configuration='[
-                      {"displayName": "Wikidata", "cellTemplate": "<a href=\"http://www.wikidata.org/entity/{{q.value}}\" target=\"_blank\">{{q.value}}</a>"},
-                      {"displayName": "Items", "cellTemplate": "{{>items}}"}
-                  ]'
-                  number-of-displayed-rows=20
-                  no-result-template='No results found.'
-                  options='{"showFilter": true}'>
-                  <template id='items'>
-                      <semantic-query 
-                          query='SELECT DISTINCT ?item WHERE { ?item owl:sameAs <{{wikidata.value}}> . }'
-                          template = '{{>item-link}} '>
-                          <template id='item-link'>
-                              <div>{{#each bindings}}<div><semantic-link iri="{{item.value}}" target="_blank"></semantic-link></div>{{/each}}</div>
-                          </template>
-                      </semantic-query>
+                          ?venue rdfs:label ?venuelabel ;
+                              a crm:E22_Man-Made_Object .
+                          FILTER(CONTAINS(STR(?venue), "/u/"))
+                          ?performance crm:P8_took_place_on_or_within ?venue ;
+                                       frbroo:R25_performed ?plan .
+                          ?expressioncreation frbroo:R17_created ?plan ;
+                                              crm:P10_falls_within ?directorship.
+                          ?directorship crm:P14_carried_out_by ?group .
+                          ?group rdf:type/rdfs:subClassOf* crm:E74_Group .
+                        } GROUP BY ?venuelabel ?group 
+                        ORDER BY DESC(?venuecount) ' 
+                        column-configuration='[
+                        {"variableName": "venuelabel", "displayName": "Venue"}, 
+                        {"variableName": "group", "displayName": "Group"}, 
+                        {"variableName": "venuecount", "displayName": "Count"}
+                        ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": true}'>
+                        </semantic-table>
+
+                    </bs-tab>
+                </bs-tabs>
+
+            </bs-col>
+        </bs-tab>
+
+        <bs-tab event-key='5' title='Virtual Record Sets'>
+
+            <semantic-table 
+                query='SELECT DISTINCT ?rr WHERE {
+                        ?rr <http://temp.performing-arts.ch/isVirtual> true ;
+                        rdf:type/rdfs:subClassOf* rico:RecordResource .
+                    }' 
+                column-configuration='[
+                    {"displayName": "Record Resource", "variableName": "rr"},
+                    {"displayName": "Subjects", "cellTemplate": "{{>subjects}}"}
+                    ]'
+                number-of-displayed-rows=20
+                no-result-template='No results found.'
+                options='{"showFilter": true}'>
+                <template id='subjects'> 
+                    <semantic-query 
+                      query='SELECT DISTINCT ?subject WHERE { <{{rr.value}}> rico:hasOrHadSubject ?subject . }'
+                      template = '{{>subject-list}} '>           
+                      <template id='subject-list'> 
+                        <div>{{#each bindings}}{{#if @first}}<semantic-link iri="{{subject.value}}"></semantic-link>{{else}}, <semantic-link iri="{{subject.value}}"></semantic-link>{{/if}}{{/each}}</div>
+                      </template>
+                    </semantic-query>   
                   </template>
-              </semantic-table>
-  
-          </bs-tab>
-  
-      </bs-tabs>
-  
-    [[/if]]
-    </div>
+            </semantic-table>           
+
+        </bs-tab>
+
+        <bs-tab event-key='6' title='Wikidata double matches'>
+
+            <semantic-table 
+                query='SELECT DISTINCT ?wikidata ?q (COUNT(?sapa) AS ?count) WHERE {
+                    ?sapa owl:sameAs ?wikidata .
+                    FILTER(CONTAINS(STR(?wikidata), "wikidata.org/entity"))
+                    BIND(SUBSTR(STR(?wikidata), 32) AS ?q)
+                } GROUP BY (?wikidata) (?q)
+                HAVING (COUNT(?sapa)>1)' 
+                column-configuration='[
+                    {"displayName": "Wikidata", "cellTemplate": "<a href=\"http://www.wikidata.org/entity/{{q.value}}\" target=\"_blank\">{{q.value}}</a>"},
+                    {"displayName": "Items", "cellTemplate": "{{>items}}"}
+                ]'
+                number-of-displayed-rows=20
+                no-result-template='No results found.'
+                options='{"showFilter": true}'>
+                <template id='items'>
+                    <semantic-query 
+                        query='SELECT DISTINCT ?item WHERE { ?item owl:sameAs <{{wikidata.value}}> . }'
+                        template = '{{>item-link}} '>
+                        <template id='item-link'>
+                            <div>{{#each bindings}}<div><semantic-link iri="{{item.value}}" target="_blank"></semantic-link></div>{{/each}}</div>
+                        </template>
+                    </semantic-query>
+                </template>
+            </semantic-table>
+
+        </bs-tab>
+
+    </bs-tabs>
+
+  [[/if]]
   </div>
+</div>

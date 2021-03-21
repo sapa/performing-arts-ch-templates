@@ -1,0 +1,23 @@
+<!-- images -->
+<semantic-query
+    query='SELECT ?iiif_thumb ?iiif_large ?label (GROUP_CONCAT(DISTINCT ?credit; SEPARATOR="\n") AS ?credits) (GROUP_CONCAT(DISTINCT ?copyright; SEPARATOR="\n") AS ?copyrights) WHERE {
+        ?? rico:hasInstantiation ?instantiation .
+        ?instantiation rico:hasCarrierType spav:fvtif .
+        BIND(REPLACE(CONCAT(STR(?instantiation), "/full/!200,200/0/color.jpg"), "http://", "https://") AS ?iiif_thumb)
+        BIND(REPLACE(CONCAT(STR(?instantiation), "/full/!800,800/0/color.jpg"), "http://", "https://") AS ?iiif_large)
+        ?? rico:name ?label .
+        OPTIONAL { ?? spao:hasCredit ?credit . }
+        OPTIONAL { ?? schema:copyrightNotice ?copyright . }
+    } GROUP BY ?iiif_thumb ?iiif_large ?label
+    ORDER BY ASC(?iiif_thumb)''
+    template='<div>
+        {{#each bindings}}<div style="display: inline;"><mp-overlay-dialog title="{{label.value}}" type="modal" bs-size="large">
+            <mp-overlay-dialog-trigger><img style="cursor: pointer; padding: 0 16px 24px 0" src="{{iiif_thumb.value}}" /></mp-overlay-dialog-trigger>
+            <mp-overlay-dialog-content>
+                <img src="{{iiif_large.value}}" title="{{label.value}}" />
+                {{#if credits}}<p style="white-space: pre-line; padding-top: 10px;">{{credits.value}}</p>{{/if}}
+                {{#if copyrights}}<p style="white-space: pre-line; padding-top: 10px;">{{copyrights.value}}</p>{{/if}}
+            </mp-overlay-dialog-content>
+            </mp-overlay-dialog></div>{{/each}}
+    </div>'>
+</semantic-query>

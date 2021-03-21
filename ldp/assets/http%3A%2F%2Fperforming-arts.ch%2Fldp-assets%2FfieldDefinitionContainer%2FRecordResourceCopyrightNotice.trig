@@ -1,0 +1,28 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightNotice/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightNotice>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Copyright notice"@en, "Nota sul diritto d’autore"@it,
+      "Mention du droit d’auteur"@fr, "Urheberrechtshinweise"@de;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-58bdc9e56cc240c49f4b3e008ed83cb1-j2gf73;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-58bdc9e56cc240c49f4b3e008ed83cb1-828zb;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-58bdc9e56cc240c49f4b3e008ed83cb1-0km8hc;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:34:26.986Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-58bdc9e56cc240c49f4b3e008ed83cb1-828zb a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject schema:copyrightNotice $value. }" .
+  
+  _:genid-58bdc9e56cc240c49f4b3e008ed83cb1-0km8hc a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject schema:copyrightNotice $value. } WHERE { }" .
+  
+  _:genid-58bdc9e56cc240c49f4b3e008ed83cb1-j2gf73 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject schema:copyrightNotice $value. } WHERE {}" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightNotice> .
+}

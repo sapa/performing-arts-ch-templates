@@ -20,6 +20,7 @@
             (rico:Record "../assets/icons/solid/file-alt.svg")
             (rico:RecordSet "../assets/icons/solid/folder-open.svg")
             (frbroo:F26_Recording "../assets/icons/solid/camcorder-solid.svg")
+            (spao:ArchivalPlace "../assets/icons/solid/archive.svg")
           }
         }'
         template='<div>{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style="height: 120px; width: 120px; max-height: 120px; max-width: 120px; padding: 20px"></mp-resource-thumbnail>{{/each}}</div>'>
@@ -60,9 +61,12 @@
       </semantic-query>      
       <semantic-query 
           query="SELECT ?uri ?button WHERE {
-            BIND(IF(REGEX(STR(??), '/[aoprsc]/'), ??, 'not yet permanent') AS ?uri) 
-            OPTIONAL { ?? <http://example.com/resource> ?null }
-            BIND(IF(REGEX(STR(??), '/[aoprsc]/'), TRUE, ?null) AS ?button) 
+            GRAPH ?graph {
+              ?? a ?type .
+              OPTIONAL { ?? <http://example.com/resource> ?null }
+            }
+            BIND(IF(CONTAINS(STR(?graph), '/temp-context'), 'not yet permanent', ??) AS ?uri) 
+            BIND(IF(CONTAINS(STR(?graph), '/temp-context'), ?null, 'true'^^xsd:boolean) AS ?button)
           } LIMIT 1"
           template="<div class='knowledgeGraphBar__uriRow'>{{#each bindings}}{{log this}}<b>URI</b>: <i>{{uri.value}}</i>{{#if button.value}}<mp-copy-to-clipboard text='{{uri.value}}'><button class='btn btn-default knowledgeGraphBar__copyIri'></button></mp-copy-to-clipboard>{{/if}}{{/each}}</div>">
       </semantic-query>

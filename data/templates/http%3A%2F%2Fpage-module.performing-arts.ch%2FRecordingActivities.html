@@ -1,10 +1,17 @@
 <semantic-query 
     query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment ?bool WHERE {
         {
-            ?expressioncreation frbroo:R17_created ?? ;
+            ?expressioncreation frbroo:R17_created [[recording]] ;
                 crm:P9_consists_of ?activity .
         } UNION {
-            ?? crm:P9_consists_of ?activity .
+            [[recording]] frbroo:R14_incorporates ?reference .
+            ?expressioncreation frbroo:R17_created ?reference ;
+                crm:P9_consists_of ?activity .
+        } UNION {
+            ?genericperformance frbroo:R25_performed [[recording]] ;
+            crm:P9_consists_of ?activity . 
+        } UNION {
+            [[recording]] crm:P9_consists_of ?activity .
         }
         ?activity crm:P2_has_type ?function ;
             crm:P14_carried_out_by ?actor .

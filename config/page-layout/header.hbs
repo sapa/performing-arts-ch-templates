@@ -2,7 +2,7 @@
 
     <bs-navbar-header>
         <bs-navbar-brand>
-            <a href="/">{{deploymentTitle}} <small><sub>/ preview</sub><small></a>
+            <a href="/">{{deploymentTitle}}</a>
         </bs-navbar-brand>
         <bs-navbar-toggle/>
     </bs-navbar-header>
@@ -55,13 +55,23 @@
                     </mp-resource-link-container>
                 </mp-anonymous-hidden>
                 <mp-anonymous-hidden>
-                    <mp-resource-link-container uri="http://page.performing-arts.ch/Stats">
-                        <bs-menu-item>Statistics</bs-menu-item>
+                    <mp-resource-link-container uri="http://page.performing-arts.ch/ArchivalLocations">
+                        <bs-menu-item>Archival Locations</bs-menu-item>
+                    </mp-resource-link-container>
+                </mp-anonymous-hidden>
+                <mp-anonymous-hidden>
+                    <mp-resource-link-container uri="http://page.performing-arts.ch/Log">
+                        <bs-menu-item>Log</bs-menu-item>
                     </mp-resource-link-container>
                 </mp-anonymous-hidden>
                 <mp-anonymous-hidden>
                     <mp-resource-link-container uri="http://page.performing-arts.ch/ToDo">
                         <bs-menu-item>To Do</bs-menu-item>
+                    </mp-resource-link-container>
+                </mp-anonymous-hidden>
+                <mp-anonymous-hidden>
+                    <mp-resource-link-container uri="http://page.performing-arts.ch/SampleForm">
+                        <bs-menu-item>Musterformular</bs-menu-item>
                     </mp-resource-link-container>
                 </mp-anonymous-hidden>
             </bs-nav-dropdown>
@@ -88,6 +98,9 @@
                     </mp-resource-link-container>
                     <mp-resource-link-container uri='http://page.performing-arts.ch/createPlace'>
                         <bs-menu-item>Place</bs-menu-item>
+                    </mp-resource-link-container>
+                    <mp-resource-link-container uri='http://page.performing-arts.ch/createArchivalPlace'>
+                        <bs-menu-item>Archival Location</bs-menu-item>
                     </mp-resource-link-container>
                 </bs-nav-dropdown>
             </mp-has-permission>

@@ -1,0 +1,34 @@
+<!-- depricated -->
+<semantic-query 
+query='SELECT ?field (GROUP_CONCAT(?value; SEPARATOR=", ") AS ?values) WHERE {
+        VALUES ( ?field ) { ( <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent> ) }
+        ?? rico:recordResourceExtent ?value . 
+    } GROUP BY ?field'
+template='{{#each bindings}}
+        <h5><semantic-context repository="assets"><mp-label iri="{{field.value}}"></mp-label></semantic-context></h5>
+        <p>{{values.value}}</p>
+    {{/each}}'>
+</semantic-query>
+
+<semantic-query 
+query='SELECT ?order ?unit (GROUP_CONCAT(?value; SEPARATOR=", ") AS ?values) WHERE {
+        VALUES ( ?order ?unit ) {
+            ( 0 spav:umpcs )
+            ( 1 spav:umlnm )
+            ( 2 spav:umcm )
+            ( 3 spav:umkg )
+            ( 4 spav:umbox )
+            ( 5 spav:umenv )
+        }
+        ?? rico:hasExtent [
+            a rico:RecordResourceExtent ;
+            rico:hasUnitOfMeasurement ?unit ;
+            rico:quantity ?value 
+        ]
+    } GROUP BY ?order ?unit
+    ORDER BY ASC (?order)'
+template='{{#each bindings}}
+        <h5 style="text-transform: capitalize;"><mp-label iri="{{unit.value}}"></mp-label></h5>
+        <p>{{values.value}}</p>
+    {{/each}}'>
+</semantic-query>

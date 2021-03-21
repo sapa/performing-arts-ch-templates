@@ -6,28 +6,31 @@
     <http://www.w3.org/2000/01/rdf-schema#label> "Importance matérielle"@fr, "Extent"@en,
       "Umfang"@de, "Volume"@it;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-e6fdd7455ad7447c8ad312fc569777bf-7257d;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-e6fdd7455ad7447c8ad312fc569777bf-8h8e3e;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-e6fdd7455ad7447c8ad312fc569777bf-n9505o;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c29bd8c0bd1442d5a02126baab9c70e2-qst0kkj;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#RecordResourceExtent>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-c29bd8c0bd1442d5a02126baab9c70e2-bx9q8;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-c29bd8c0bd1442d5a02126baab9c70e2-0gvyhe;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-11-11T18:05:50.420Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-08T20:18:25.059Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-e6fdd7455ad7447c8ad312fc569777bf-n9505o a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """INSERT {
-  $subject rico:recordResourceExtent $value.
-} WHERE {
-}""" .
-  
-  _:genid-e6fdd7455ad7447c8ad312fc569777bf-8h8e3e a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """DELETE {
-	$subject rico:recordResourceExtent $value.
-} WHERE {}""" .
-  
-  _:genid-e6fdd7455ad7447c8ad312fc569777bf-7257d a <http://spinrdf.org/sp#Query>;
+  _:genid-c29bd8c0bd1442d5a02126baab9c70e2-0gvyhe a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-  $subject rico:recordResourceExtent $value.
+  $subject rico:hasExtent $value.
+  $value a rico:RecordResourceExtent .
 }""" .
+  
+  _:genid-c29bd8c0bd1442d5a02126baab9c70e2-qst0kkj a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+  $subject rico:hasExtent $value. 
+  $value a rico:RecordResourceExtent .
+} WHERE { }""" .
+  
+  _:genid-c29bd8c0bd1442d5a02126baab9c70e2-bx9q8 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+  $subject rico:hasExtent $value.
+  $value a rico:RecordResourceExtent .
+} WHERE {}""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent> .

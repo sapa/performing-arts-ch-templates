@@ -1,0 +1,57 @@
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+  <li class="active">
+    Archival Locations
+  </li>
+</ol>
+
+<div class="page rs-page">
+  <div class='page__body'>
+    <h3 style="margin-top: 2em; margin-bottom: 1em;">Archival Locations</h3>
+    <div style="height: 1000px">
+    <semantic-lazy-tree
+        roots-query='
+        SELECT DISTINCT ?item ?hasChildren WHERE {
+          ?item a spao:ArchivalPlace .
+            MINUS { ?item rico:containedBy ?parent .}
+          OPTIONAL { ?child rico:containedBy ?item }
+          BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
+        }'
+        children-query='
+          SELECT DISTINCT ?item ?hasChildren WHERE {
+            ?item rico:containedBy ?parent .
+            OPTIONAL { ?child rico:containedBy ?item }
+            BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
+          }'
+        parents-query='
+          SELECT ?item ?parent WHERE {
+            ?item rico:containedBy ?parent .
+          }'
+        search-query='
+          SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
+            ?item a spao:ArchivalPlace ;
+              rdfs:label ?label .
+            SERVICE <http://www.bigdata.com/rdf/search#search> {
+              ?label bds:search ?__token__ ;
+              bds:minRelevance "0.1" ;
+              bds:relevance ?score ; 
+              bds:matchAllTerms "true" .
+            }
+            BIND(false AS ?hasChildren)
+          } ORDER BY DESC (?score) (?label) LIMIT 500'
+        node-data-query='
+          SELECT DISTINCT ?item { }'
+        placeholder='Select or search for a name ...'
+        node-template='{{>node}}'
+        >
+        <template id='node'>
+          <span>
+            <semantic-link uri="{{iri}}">{{label}}</semantic-link>
+          </span>
+        </template>
+      </semantic-lazy-tree>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreator/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreator>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-941b489004b0468fb070df41cdc6e705-9yjr5i;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Urheber"@de, "Creator"@en, "Auteur"@fr,
+      "Autore"@it;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Person>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-941b489004b0468fb070df41cdc6e705-gzhzdz;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-941b489004b0468fb070df41cdc6e705-bscicr;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-941b489004b0468fb070df41cdc6e705-1ieib;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-15T10:12:33.404Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-941b489004b0468fb070df41cdc6e705-bscicr a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:hasCreator ?value . }" .
+  
+  _:genid-941b489004b0468fb070df41cdc6e705-9yjr5i a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
+   SERVICE Repository:lookup {
+     ?value lookup:token ?__token__ ;
+     	lookup:type rico:Person .
+   }
+}""" .
+  
+  _:genid-941b489004b0468fb070df41cdc6e705-gzhzdz a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasCreator $value} WHERE {}" .
+  
+  _:genid-941b489004b0468fb070df41cdc6e705-1ieib a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasCreator $value . } WHERE {}" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreator> .
+}

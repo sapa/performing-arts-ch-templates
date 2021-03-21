@@ -28,6 +28,9 @@ a:hover,
 a:focus {
   color: #158ce4;
 }
+.page-holder {
+  padding-bottom: 4em ;
+}
 .page__header-description {
   padding-left: 1em;
   margin-bottom: 1.2em;

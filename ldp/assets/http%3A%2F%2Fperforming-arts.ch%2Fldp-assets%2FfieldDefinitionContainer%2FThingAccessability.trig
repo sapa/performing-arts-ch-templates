@@ -1,0 +1,37 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingAccessability/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingAccessability>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-37ed1572ba37474680ba96fea223a42f-6bdc7q;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Zugänglichkeit"@de, "Accessibility"@en,
+      "Accessibilité"@fr, "Accessibilità"@it;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-37ed1572ba37474680ba96fea223a42f-ofgzns;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-37ed1572ba37474680ba96fea223a42f-47smuc;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-37ed1572ba37474680ba96fea223a42f-s7y80c;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T10:29:55.455Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-37ed1572ba37474680ba96fea223a42f-6bdc7q a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject spao:hasAccessibility $value. } WHERE { }" .
+  
+  _:genid-37ed1572ba37474680ba96fea223a42f-ofgzns a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject spao:hasAccessibility $value. } WHERE { }" .
+  
+  _:genid-37ed1572ba37474680ba96fea223a42f-s7y80c a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+    VALUES ( $value ) {
+      ( spav:acpbc )
+      ( spav:acstf )
+	}
+}""" .
+  
+  _:genid-37ed1572ba37474680ba96fea223a42f-47smuc a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject spao:hasAccessibility $value. }" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingAccessability> .
+}
