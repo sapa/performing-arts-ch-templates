@@ -159,7 +159,7 @@
                 template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
                 </semantic-query>
                 <semantic-tree
-                    query='SELECT DISTINCT ?node ?parent WHERE {
+                    query='SELECT DISTINCT ?node ?parent ?identifier ?level WHERE {
                         {
                             ?record rico:hasOrHadSubject ?? ;
                                 rico:isOrWasIncludedIn* ?node .
@@ -173,8 +173,16 @@
                         FILTER(ISIRI(?node))
                         FILTER(CONTAINS(STR(?node), "/r/"))
                         OPTIONAL { ?node rico:isOrWasIncludedIn ?parent. FILTER(ISIRI(?parent)) }
+                        OPTIONAL { ?node rico:identifier ?identifier }
+                        OPTIONAL { ?node rico:hasRecordSetType ?rslevel . }
+                        BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
                     }'
-                    tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
+                    tuple-template='{{>node}}'> 
+                    <template id='node'>
+                        <span>
+                          {{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link uri="{{node.value}}">{{label}}</semantic-link>{{#if level}} (<mp-label iri="{{level.value}}"></mp-label>){{/if}}
+                        </span>
+                      </template>
                 </semantic-tree>
             
             </bs-col>
