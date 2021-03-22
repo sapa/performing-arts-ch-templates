@@ -1,0 +1,105 @@
+<div class="page">
+  <div class='page__body' style="padding-top:6em;">
+
+<semantic-search limit=500 >
+
+  <semantic-search-query-keyword
+    domain='<[[resolvePrefix "rico:Instantiation"]]>'
+    query='SELECT ?subject WHERE {
+      ?instantiation a rico:Instantiation ;
+        rico:hasCarrierType spav:fvtif .
+      ?subject rico:hasInstantiation ?instantiation ;
+          rico:name ?name .
+      SERVICE <http://www.bigdata.com/rdf/search#search> {
+        ?name bds:search ?__token__ ;
+          bds:minRelevance "0.2" ;
+          bds:relevance ?score ; 
+          bds:matchAllTerms "true" .
+      }
+    } ORDER BY DESC(?score)'
+    default-query='SELECT DISTINCT ?subject WHERE {
+      ?instantiation a rico:Instantiation ;
+        rico:hasCarrierType spav:fvtif .
+      ?subject rico:hasInstantiation ?instantiation .
+    } LIMIT 100'
+    ></semantic-search-query-keyword>
+
+  <div data-flex-layout="row top-left">
+    
+    <semantic-search-result-holder>
+      <div data-flex-self="md-full">
+        <semantic-search-result>
+          <semantic-query 
+          id='preview'
+          query='SELECT ?example WHERE { } LIMIT 1'
+          template='<div style="padding: 0 12px; font-size: 14px;">{{#each bindings}}{{example.value}}{{/each}}</div>'
+          ></semantic-query>
+        </semantic-search-result>
+
+
+        <semantic-search-result>
+          <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}"
+                                  template='{{> template}}'
+                                  >
+            <template id='template'>
+
+              <bs-row>
+
+              {{#if hasLimit}}
+              <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
+                <span class="num-results">[[i18n "SearchLimitReached" bundle="performing-arts-ch" escapeHTML=false]]</span>
+              </bs-alert>
+              {{else}}
+              <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                <span class="num-results" class="search-results__alert">[[i18n "SearchResults" bundle="performing-arts-ch"]]</span>
+              </bs-alert>
+              {{/if}}
+
+              </bs-row>
+
+            </template>
+          </mp-sparql-result-counts>
+        </semantic-search-result>
+
+        <bs-row>
+
+        <semantic-search-result>
+            <semantic-table 
+            query='SELECT DISTINCT ?subject ?name_cleaned ?iiif_thumb WHERE {
+                    ?subject rico:name ?name .
+                    BIND(REPLACE(?name, "[\\[\\]]", "") AS ?name_cleaned)
+                    BIND(REPLACE(CONCAT(STR(?instantiation), "/full/!160,160/0/color.jpg"), "http://", "https://") AS ?iiif_thumb)
+                } ORDER BY DESC(?score)'
+            id='media-table'
+            options='{"showFilter": false}'
+            number-of-displayed-rows=24
+            tuple-template='
+                <div style="padding:10px;">
+                  <div class="text-center panel panel-default" style="border: none; margin-right: 20px; font-size: 12px; height: 200px; width: 160px;">
+                      <div class="panel-body" style="width: 180px; height: 180px; padding: 10px;">
+                        <semantic-link title="{{name_cleaned.value}}" class="grid-resource-link" uri="{{subject.value}}">
+                          <img src="{{iiif_thumb.value}}" style="margin: 0 auto;" class="img-rounded">
+                        </semantic-link>
+                      </div>
+                      <div class="panel-footer" style="width: 180px; padding: 10px; position: relative; border: none;">
+                      <semantic-link title="{{name_cleaned.value}}" class="grid-resource-link" uri="{{subject.value}}">
+                          {{name_cleaned.value}}
+                      </semantic-link>
+                      </div>
+                  </div>
+                </div>
+            '>
+            </semantic-table> 
+        </semantic-search-result>
+
+        </bs-row>
+
+      </div>
+    </semantic-search-result-holder>
+
+  </div>
+
+</semantic-search>
+</div>
+</div>
