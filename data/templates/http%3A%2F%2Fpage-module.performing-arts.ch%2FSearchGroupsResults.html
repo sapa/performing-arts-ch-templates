@@ -21,7 +21,7 @@
 
     <semantic-search-result>
       <semantic-table 
-        query='SELECT DISTINCT ?subject ?beginning (GROUP_CONCAT(DISTINCT ?appellationvalue; SEPARATOR=", ") AS ?additionalnames) WHERE {
+        query='SELECT DISTINCT ?subject (GROUP_CONCAT(DISTINCT ?beginning; SEPARATOR=", ") AS ?beginnings) WHERE {
           OPTIONAL {
             ?subject rdfs:label ?label ;
               crm:P131_is_identified_by ?appellation .
@@ -34,14 +34,14 @@
           OPTIONAL {
             ?subject rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ]
           }
-        } GROUP BY ?subject ?beginning'
-        id="group-table" 
+        } GROUP BY ?subject'
+        id='group-table'
         options='{"showFilter": false, "showTableHeading": true}'
         column-configuration='[
           {"displayName": "[[i18n "GroupsTableName" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
-          {"displayName": "[[i18n "GroupsTableAdditionalNames" bundle="performing-arts-ch"]]", "cellTemplate": "{{> additional-names}}", "variableName": "additionalnames"} ,
+          {"displayName": "[[i18n "GroupsTableAdditionalNames" bundle="performing-arts-ch"]]", "cellTemplate": "{{> additional-names}}"} ,
           {"displayName": "[[i18n "GroupsTablePlace" bundle="performing-arts-ch"]]", "cellTemplate": "{{> places}}"},
-          {"displayName": "[[i18n "GroupsTableDates" bundle="performing-arts-ch"]]", "cellTemplate": "{{> dates}}", "variableName": "beginning"}
+          {"displayName": "[[i18n "GroupsTableDates" bundle="performing-arts-ch"]]", "cellTemplate": "{{> dates}}", "variableName": "beginnings"}
         ]'>
 
         <template id='additional-names'>                     

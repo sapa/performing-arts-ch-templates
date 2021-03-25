@@ -148,6 +148,9 @@ a:focus {
 label {
   font-size: 0.9em !important;
 }
+.DataTable--table-grid-layout {
+  margin-bottom: 30px;
+}
 .pagination {
   margin: 0px;
 }
