@@ -6,12 +6,12 @@
       <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}" template='{{> template}}'>
         <template id='template'>
           {{#if hasLimit}}
-          <bs-alert bs-style="warning" class="search-results__alert pull-left">
+          <bs-alert variant="warning" class="search-results__alert pull-left">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
             <span class="num-results">[[i18n "SearchLimitReached" bundle="performing-arts-ch" escapeHTML=false]]</span>
           </bs-alert>
           {{else}}
-          <bs-alert bs-style="warning" class="search-results__alert pull-left">
+          <bs-alert variant="warning" class="search-results__alert pull-left">
             <span class="num-results" class="search-results__alert">[[i18n "SearchResults" bundle="performing-arts-ch"]]</span>
           </bs-alert>
           {{/if}}
@@ -113,7 +113,7 @@
                             header="text/csv"
                             filename="performing-arts-ch-search-result.csv"
                             >
-          <button class="btn btn-default">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
+          <button class="btn btn-secondary">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
         </mp-sparql-download>
       </semantic-search-result>
     </div>

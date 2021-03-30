@@ -5,39 +5,40 @@
       <http://www.w3.org/ns/ldp#Resource>;
     <http://www.w3.org/2000/01/rdf-schema#label> "Luogo"@it, "Lieu"@fr, "Ort"@de, "Place"@en;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-a6cd21a390c04e16a8c5b10f447c7b2e-udfgwfp;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-a6cd21a390c04e16a8c5b10f447c7b2e-q1mp9i;
     <http://www.metaphacts.com/ontology/fields#treePatterns> """{
   \"type\": \"full\",
   \"rootsQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item a rico:Place .\\n  FILTER(NOT EXISTS { ?item crm:P89_falls_within ?parent. })\\n  FILTER(CONTAINS(STR(?item), \\\"/p/\\\"))\\n  ?item rdfs:label ?label.\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY (?label)\",
   \"childrenQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item crm:P89_falls_within ?parent.\\n  ?item rdfs:label ?label.\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY (?label)\",
   \"parentsQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?parent ?parentLabel WHERE {\\n  ?item crm:P89_falls_within ?parent.\\n  ?parent rdfs:label ?parentLabel.\\n}\",
-  \"searchQuery\": \"PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>\\nSELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {\\n  SERVICE Repository:lookup {\\n    ?item lookup:token ?__token__;\\n      lookup:limit 400 ;\\n      lookup:type rico:Place .\\n  }\\n  FILTER(CONTAINS(STR(?item), \\\"/p/\\\"))\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY DESC (?score) (?label)\\nLIMIT 200\"
+  \"searchQuery\": \"PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>\\nSELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {\\n  SERVICE Repository:lookup {\\n    ?item lookup:token ?__token__;\\n\\t  lookup:name ?label ;\\n      lookup:score ?score ;\\n      lookup:limit 400 ;\\n      lookup:type rico:Place .\\n  }\\n  FILTER(CONTAINS(STR(?item), \\\"/p/\\\"))\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY DESC (?score) (?label)\\nLIMIT 200\"
 }"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-4c989c598d4c4ffe9d9aec71ff5cb3ff-3ly3z3;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-4c989c598d4c4ffe9d9aec71ff5cb3ff-njqb1;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-4c989c598d4c4ffe9d9aec71ff5cb3ff-zwh6w;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-a6cd21a390c04e16a8c5b10f447c7b2e-w7sjy;
     <http://www.metaphacts.com/ontology/fields#range> <https://www.ica.org/standards/RiC/ontology#Place>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-4c989c598d4c4ffe9d9aec71ff5cb3ff-31og2e;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-a6cd21a390c04e16a8c5b10f447c7b2e-rxosr6;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-11-30T09:10:21.649Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-30T11:01:59.936Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-4c989c598d4c4ffe9d9aec71ff5cb3ff-3ly3z3 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "INSERT { $subject rico:isAssociatedWithPlace $value . } WHERE {}" .
-  
-  _:genid-4c989c598d4c4ffe9d9aec71ff5cb3ff-zwh6w a <http://spinrdf.org/sp#Query>;
+  _:genid-a6cd21a390c04e16a8c5b10f447c7b2e-q1mp9i a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
 PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
 SELECT ?value ?label WHERE {
    SERVICE Repository:lookup {
      ?value lookup:token ?__token__ ;
+	    lookup:name ?label ;
      	lookup:type rico:Place .
    }
 }""" .
   
-  _:genid-4c989c598d4c4ffe9d9aec71ff5cb3ff-31og2e a <http://spinrdf.org/sp#Query>;
+  _:genid-a6cd21a390c04e16a8c5b10f447c7b2e-rxosr6 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "DELETE { $subject rico:isAssociatedWithPlace $value} WHERE {}" .
   
-  _:genid-4c989c598d4c4ffe9d9aec71ff5cb3ff-njqb1 a <http://spinrdf.org/sp#Query>;
+  _:genid-a6cd21a390c04e16a8c5b10f447c7b2e-udfgwfp a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:isAssociatedWithPlace $value . } WHERE {}" .
+  
+  _:genid-a6cd21a390c04e16a8c5b10f447c7b2e-w7sjy a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:isAssociatedWithPlace ?value . }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>

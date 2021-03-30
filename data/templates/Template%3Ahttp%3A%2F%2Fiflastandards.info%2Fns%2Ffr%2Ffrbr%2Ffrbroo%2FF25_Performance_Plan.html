@@ -2,6 +2,8 @@
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
       <bs-tab event-key='Summary' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
+        <bs-row>
+
         <bs-col sm="4">
           <!-- titles -->
           <semantic-query 
@@ -376,6 +378,8 @@
           [[/if]]
 
         </bs-col>
+        </bs-row>
+        
       </bs-tab>
       
       [[#if (hasPermission "sparql:*:*:*")]] 

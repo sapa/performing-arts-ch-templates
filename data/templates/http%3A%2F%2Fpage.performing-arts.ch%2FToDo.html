@@ -7,6 +7,8 @@
     <bs-tabs id='todo-tabs' default-active-key='1' unmount-on-exit=true>
 
         <bs-tab event-key='1' title='Group Members'>
+            <bs-row>
+
             <bs-col sm="4">
                 <semantic-chart type='donut' types='["pie", "donut"]'
                       query='SELECT ?status_order ?status (COUNT(?member) AS ?membercount)
@@ -130,10 +132,14 @@
 
                 </bs-tabsid='group-venues' default-active-key='1.1' unmount-on-exit=true>
               
-            </bs-col>          
+            </bs-col>
+
+            </bs-row>        
         </bs-tab>
 
         <bs-tab event-key='2' title='Producers'>
+            <bs-row>
+
             <bs-col sm="4">
                 <semantic-chart type='donut' types='["pie", "donut"]'
                       query='
@@ -299,10 +305,12 @@
                             </semantic-table>
                                     
                     </bs-tab>
-                </bs-col>          
+                </bs-col> 
+            </bs-row>         
         </bs-tab>
 
         <bs-tab event-key='4' title='Production Venues'>
+            <bs-row>
             <bs-col sm="4">
                 <semantic-chart type='donut' types='["pie", "donut"]'
                       query='
@@ -378,6 +386,7 @@
                 </bs-tabs>
 
             </bs-col>
+            </bs-row>
         </bs-tab>
 
         <bs-tab event-key='5' title='Virtual Record Sets'>
