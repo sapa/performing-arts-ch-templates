@@ -377,6 +377,30 @@
           </semantic-query>
           [[/if]]
 
+        <!-- record sets -->
+        <semantic-query
+        query='SELECT DISTINCT ?record ?identifier WHERE { 
+          {
+            ?record rico:hasOrHadSubject ?? ;
+              a rico:RecordSet .
+          } UNION {
+            ?record rico:hasOrHadSubject ?? ;
+              a rico:Record .
+          } UNION {
+            ?recordpart rico:hasOrHadSubject ?? ;
+              a rico:RecordPart ;
+              rico:isOrWasConstituentOf ?record .
+          }
+          OPTIONAL {
+            ?record rico:identifier ?identifier .
+          }
+        }'
+        template='<div><h5>Record (Set)</h5>
+            <ul class="list-unstyled">{{#each bindings}}
+                <li>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link iri="{{record.value}}"></semantic-link></li>
+            {{/each}}</ul></div>'>
+        </semantic-query>          
+
         </bs-col>
         </bs-row>
         
