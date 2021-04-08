@@ -457,7 +457,7 @@
             <semantic-query 
             query='SELECT ?user ?datetime WHERE {
               GRAPH ?g {
-                ?? rdfs:label ?label .
+                ?? rico:name ?label .
                 Platform:formContainer <http://www.w3.org/ns/ldp#contains> ?container .
                 ?container prov:generatedAtTime ?dt ;
                            prov:wasAttributedTo ?user_uri .
