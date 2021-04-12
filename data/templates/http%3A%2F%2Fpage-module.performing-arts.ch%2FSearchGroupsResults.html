@@ -21,16 +21,7 @@
 
     <semantic-search-result>
       <semantic-table 
-        query='SELECT DISTINCT ?subject (GROUP_CONCAT(DISTINCT ?beginning; SEPARATOR=", ") AS ?beginnings) WHERE {
-          OPTIONAL {
-            ?subject rdfs:label ?label ;
-              crm:P131_is_identified_by ?appellation .
-            ?appellation crm:P2_has_type ?appellationtype ;
-              rdf:value ?appellationvalue .
-              MINUS { ?appellation crm:P2_has_type spav:yanuj . }
-              MINUS { ?appellation crm:P2_has_type spav:yasis . }
-              FILTER(?label != ?appellationvalue)
-          }
+        query='SELECT ?subject (GROUP_CONCAT(DISTINCT ?beginning; SEPARATOR=", ") AS ?beginnings) WHERE {
           OPTIONAL {
             ?subject rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ]
           }
@@ -75,8 +66,7 @@
         <template id='places'>                     
           <semantic-query 
             query='SELECT ?place WHERE {
-                <{{subject.value}}> crm:P74_has_current_or_former_residence ?p .
-                ?p crm:P89_falls_within ?place .
+                <{{subject.value}}> crm:P74_has_current_or_former_residence [ crm:P89_falls_within ?place ]
               }'
             template = '{{> places-list}} '>
             <template id='places-list'>

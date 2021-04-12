@@ -20,13 +20,11 @@
     </semantic-search-result>
 
     <semantic-search-result>
-      <!-- TODO: make sure that only one place is found or aggregate them -->
       <semantic-table 
-        query='SELECT DISTINCT ?subject ?place ?beginning
+        query='SELECT ?subject ?place ?beginning
         WHERE {
           OPTIONAL {
-            ?subject crm:P156_occupies ?p .
-            ?p crm:P89_falls_within ?place .
+            ?subject crm:P156_occupies [ crm:P89_falls_within ?place ] .
           }
           OPTIONAL {
             ?subject rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ] .

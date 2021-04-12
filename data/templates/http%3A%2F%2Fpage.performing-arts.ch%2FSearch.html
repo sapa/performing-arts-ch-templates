@@ -142,18 +142,20 @@
           "queryPattern": "{
             ?__value__ skos:inScheme spav:hl .
             ?performance frbroo:R25_performed ?subject ;
-              crm:P9_consists_of ?premiere .
-            ?premiere a frbroo:F31_Performance ;
-              crm:P2_has_type ?__value__ .
+              crm:P9_consists_of [
+                a frbroo:F31_Performance ;
+                crm:P2_has_type ?__value__ 
+              ]
           }"
         }],
         "<http://search.performing-arts.ch/producer>": [{
           "kind": "resource",
           "queryPattern": "{
             ?expressioncreation frbroo:R17_created ?subject ;
-              crm:P9_consists_of ?production . 
-            ?production crm:P2_has_type spav:muwgo ;
-              crm:P14_carried_out_by ?__value__ .
+              crm:P9_consists_of [
+                crm:P2_has_type spav:muwgo ;
+                crm:P14_carried_out_by ?__value__ 
+              ]
             FILTER(CONTAINS(STR(?__value__), \"/a/\"))
           }"
         }],
@@ -169,28 +171,33 @@
           "kind": "resource",
           "queryPattern": "{
             ?performance frbroo:R25_performed ?subject ;
-              crm:P8_took_place_on_or_within ?venue .
-            ?venue crm:P156_occupies ?ground .
-            ?ground crm:P89_falls_within ?__value__ .
+              crm:P8_took_place_on_or_within [
+                crm:P156_occupies [
+                  crm:P89_falls_within ?__value__ 
+                ]
+              ]
           }"
         }],
         "<http://search.performing-arts.ch/stagedirection>": [{
           "kind": "resource",
           "queryPattern": "{
             ?expressioncreation frbroo:R17_created ?subject ;
-              crm:P9_consists_of ?activity .
-            ?activity crm:P2_has_type spav:mutnt ;
-              crm:P14_carried_out_by ?__value__ .
+              crm:P9_consists_of [
+                crm:P2_has_type spav:mutnt ;
+                crm:P14_carried_out_by ?__value__ 
+              ]
           }"
         }],
         "<http://search.performing-arts.ch/premieredate>": [{
           "kind": "numeric-range",
           "queryPattern": "{
             ?performance frbroo:R25_performed ?subject ;
-              crm:P9_consists_of ?premiere .
-            ?premiere a frbroo:F31_Performance ;
-              crm:P4_has_time-span ?timespan .
-            ?timespan crm:P82a_begin_of_the_begin ?date .
+              crm:P9_consists_of [
+                a frbroo:F31_Performance ;
+                crm:P4_has_time-span [
+                  crm:P82a_begin_of_the_begin ?date 
+                ]
+              ]
             BIND(YEAR(?date) AS ?literal)
             FILTER(?literal >= ?__numericRangeBeginValue__) .
             FILTER(?literal <= ?__numericRangeEndValue__) .
@@ -205,15 +212,13 @@
         "<http://search.performing-arts.ch/groupplace>": [{
           "kind": "resource",
           "queryPattern": "{
-            ?subject crm:P74_has_current_or_former_residence ?ground .
-            ?ground crm:P89_falls_within ?__value__ .
+            ?subject crm:P74_has_current_or_former_residence [ crm:P89_falls_within ?__value__ ]
           }"
         }],
         "<http://search.performing-arts.ch/venueplace>": [{
           "kind": "resource",
           "queryPattern": "{
-            ?subject crm:P156_occupies ?p .
-            ?p crm:P89_falls_within ?__value__ .
+            ?subject crm:P156_occupies [ crm:P89_falls_within ?__value__ ]
           }"
         }],
         "<http://search.performing-arts.ch/withincanton>": [{
@@ -349,7 +354,7 @@
           }
         ]
       }'
-      limit='1000'
+      limit='500'
     >
 
       <semantic-search-query-keyword-type 

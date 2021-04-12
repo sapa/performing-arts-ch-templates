@@ -25,14 +25,12 @@
             id="place-table" 
             options='{"showFilter": false, "showTableHeading": true, "enableSort": true}'
             column-configuration='[
-            {"displayName": "[[i18n "PlacesTableName" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
-            {"displayName": "[[i18n "PlacesTableFallsWithin" bundle="performing-arts-ch"]]", "cellTemplate": "{{> parents}}"}
+                {"displayName": "[[i18n "PlacesTableName" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
+                {"displayName": "[[i18n "PlacesTableFallsWithin" bundle="performing-arts-ch"]]", "cellTemplate": "{{> parents}}"}
             ]'>
             <template id='parents'>                     
             <semantic-query 
-                query='SELECT ?parent WHERE {      
-                <{{subject.value}}> crm:P89_falls_within+ ?parent .
-                }'
+                query='SELECT ?parent WHERE { <{{subject.value}}> crm:P89_falls_within+ ?parent . }'
                 template = '{{> parents-list}} '>           
                 <template id='parents-list'>
                 <div>{{#each bindings}}&rarr; <mp-label iri="{{parent.value}}"></mp-label> {{/each}}</div>

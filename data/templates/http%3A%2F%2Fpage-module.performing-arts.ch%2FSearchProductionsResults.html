@@ -21,35 +21,25 @@
 
     <semantic-search-result>
       <semantic-table 
-        query='SELECT ?subject ?premieredatebegin (GROUP_CONCAT(DISTINCT ?producerlabel; SEPARATOR=", ") AS ?producers) (GROUP_CONCAT(DISTINCT ?venuelabel; SEPARATOR=", ") AS ?venues) WHERE { 
+        query='SELECT ?subject ?premieredatebegin WHERE { 
           OPTIONAL {
             ?performance frbroo:R25_performed ?subject ;
-              crm:P9_consists_of ?premiere . 
-            ?premiere crm:P4_has_time-span ?premieredate .
-            ?premieredate crm:P82a_begin_of_the_begin ?premieredatebegin .
+              crm:P9_consists_of [
+                crm:P4_has_time-span [
+                  crm:P82a_begin_of_the_begin ?premieredatebegin
+                ]
+              ]
           }
-          OPTIONAL {
-            ?expressioncreation frbroo:R17_created ?subject ;
-              crm:P9_consists_of ?production . 
-            ?production crm:P2_has_type spav:muwgo ;
-              crm:P14_carried_out_by ?producer .
-            ?producer rdfs:label ?producerlabel .
-          }
-          OPTIONAL {
-            ?performance frbroo:R25_performed ?subject ;
-              crm:P8_took_place_on_or_within ?venue .
-            ?venue rdfs:label ?venuelabel .
-          }
-        } GROUP BY ?subject ?premieredatebegin'
+        }'
         id="production-table" 
         options='{"showFilter": false, "showTableHeading": true, "enableSort": true}'
         column-configuration='[
           {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
           {"displayName": "[[i18n "ProductionsTablePremiere" bundle="performing-arts-ch"]]", "cellTemplate": "{{> premiere}}", "variableName": "premieredatebegin"} ,
           {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch"]]", "cellTemplate": "{{> producer}}"} ,
-          {"displayName": "[[i18n "ProductionsTableVenue" bundle="performing-arts-ch"]]", "cellTemplate": "{{> venue}}", "variableName": "venues"}
+          {"displayName": "[[i18n "ProductionsTableVenue" bundle="performing-arts-ch"]]", "cellTemplate": "{{> venue}}"}
         ]'>
-        
+
         <template id='premiere'>
           <semantic-query 
             query='SELECT ?premieretype ?premieredate WHERE {
@@ -91,9 +81,10 @@
           <semantic-query 
             query='SELECT ?producer WHERE {
               ?expressioncreation frbroo:R17_created <{{subject.value}}> ;
-                crm:P9_consists_of ?production . 
-              ?production crm:P2_has_type spav:muwgo ;
-                crm:P14_carried_out_by ?producer .
+                crm:P9_consists_of [
+                  crm:P2_has_type spav:muwgo ;
+                  crm:P14_carried_out_by ?producer 
+                ]
             }'
             template = '{{> producer-list}}'>
             <template id='producer-list'>

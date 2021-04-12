@@ -21,15 +21,16 @@
 
     <semantic-search-result>
       <semantic-table 
-        query='SELECT DISTINCT ?subject ?dob ?description
+        query='SELECT ?subject ?dob ?description
         WHERE {
           OPTIONAL {
             ?subject rico:birthDate [ rico:normalizedDateValue ?dob ]
           }
           OPTIONAL {
-            ?subject crm:P3_has_note ?note .
-            ?note crm:P2_has_type spav:eoept ;
-              rdf:value ?description .
+            ?subject crm:P3_has_note [
+              crm:P2_has_type spav:eoept ;
+              rdf:value ?description 
+            ]
           }
         } ORDER BY DESC(?score)'
         id="person-table" 
@@ -58,25 +59,25 @@
           </semantic-query> 
         </template>
 
-          <template id='live-dates'>                     
-            <semantic-query 
-              query='SELECT ?lifedates WHERE {
-                  OPTIONAL {
-                    <{{subject.value}}> rico:birthDate [ rico:normalizedDateValue ?dob ] .
-                    BIND(CONCAT("* ", SUBSTR(?dob, 0, 4)) as ?birthyear)
-                  }
-                  OPTIONAL {
-                    <{{subject.value}}> rico:deathDate [ rico:normalizedDateValue ?dod ] .
-                    BIND(CONCAT("† ", SUBSTR(?dod, 0, 4)) as ?deathyear)
-                  }
-                  BIND(IF(BOUND(?birthyear) && BOUND(?deathyear), CONCAT(?birthyear, ", ", ?deathyear), IF(BOUND(?birthyear), ?birthyear, IF(BOUND(?deathyear), ?deathyear, ""))) AS ?lifedates)
-                }'
-              template = '{{> live-dates-list}} '>           
-              <template id='live-dates-list'>
-                <div>{{#each bindings}}{{lifedates.value}}{{/each}}</div>
-              </template>
-            </semantic-query> 
-          </template>
+        <template id='live-dates'>                     
+          <semantic-query 
+            query='SELECT ?lifedates WHERE {
+                OPTIONAL {
+                  <{{subject.value}}> rico:birthDate [ rico:normalizedDateValue ?dob ] .
+                  BIND(CONCAT("* ", SUBSTR(?dob, 0, 4)) as ?birthyear)
+                }
+                OPTIONAL {
+                  <{{subject.value}}> rico:deathDate [ rico:normalizedDateValue ?dod ] .
+                  BIND(CONCAT("† ", SUBSTR(?dod, 0, 4)) as ?deathyear)
+                }
+                BIND(IF(BOUND(?birthyear) && BOUND(?deathyear), CONCAT(?birthyear, ", ", ?deathyear), IF(BOUND(?birthyear), ?birthyear, IF(BOUND(?deathyear), ?deathyear, ""))) AS ?lifedates)
+              }'
+            template = '{{> live-dates-list}} '>           
+            <template id='live-dates-list'>
+              <div>{{#each bindings}}{{lifedates.value}}{{/each}}</div>
+            </template>
+          </semantic-query> 
+        </template>
         
       </semantic-table> 
     </semantic-search-result>
