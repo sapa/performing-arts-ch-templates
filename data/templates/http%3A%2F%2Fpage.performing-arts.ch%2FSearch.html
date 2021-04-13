@@ -178,6 +178,15 @@
               ]
           }"
         }],
+        "<http://search.performing-arts.ch/productioncanton>": [{
+          "kind": "resource",
+          "queryPattern": "{
+            ?performance frbroo:R25_performed ?subject .
+            ?performance crm:P8_took_place_on_or_within [ crm:P156_occupies [ <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within>+ ?__value__ ] ] .
+            ?__value__ owl:sameAs ?external .
+            FILTER(CONTAINS(STR(?external), \"http://classifications.data.admin.ch/canton/\"))  
+          }"
+        }],
         "<http://search.performing-arts.ch/stagedirection>": [{
           "kind": "resource",
           "queryPattern": "{
@@ -213,6 +222,48 @@
           "kind": "resource",
           "queryPattern": "{
             ?subject crm:P74_has_current_or_former_residence [ crm:P89_falls_within ?__value__ ]
+          }"
+        }],
+        "<http://search.performing-arts.ch/groupgenre>": [{
+          "kind": "resource",
+          "queryPattern": "{
+            ?pursuit crm:P14_carried_out_by ?subject ; 
+              a frbroo:F51_Pursuit ;
+              frbroo:R59_had_typical_subject ?__value__ . 
+          }"
+        }],
+        "<http://search.performing-arts.ch/groupcanton>": [{
+          "kind": "resource",
+          "queryPattern": "{
+            VALUES ( ?__value__ ) {
+              ( <http://data.performing-arts.ch/p/05794870-5f45-4990-9da4-62d2affacaf4> )
+              ( <http://data.performing-arts.ch/p/03664b52-c221-44e5-9991-06af074e3ce3> )
+              ( <http://data.performing-arts.ch/p/1ef0c0c3-c5a0-423f-b566-a95da5da2be0> )
+              ( <http://data.performing-arts.ch/p/13a91523-1514-4e71-afc8-1be1af5de5d3> )
+              ( <http://data.performing-arts.ch/p/4c681cbb-ccf2-4a8b-bfbe-00a8477a17c3> )
+              ( <http://data.performing-arts.ch/p/2667885f-01a4-4650-b9e2-693fb08bf9f6> )
+              ( <http://data.performing-arts.ch/p/ccbb1eb0-a5b6-481d-85c7-5b1e5739ccec> )
+              ( <http://data.performing-arts.ch/p/bfc65e92-0aff-44ac-b586-0114c80d36ce> )
+              ( <http://data.performing-arts.ch/p/47fcbbe3-32da-40ba-877a-2c05178a8c76> )
+              ( <http://data.performing-arts.ch/p/de089fe9-0386-4509-91bb-ed126c2e8109> )
+              ( <http://data.performing-arts.ch/p/47317a52-17d6-40e3-bf20-b0118ea6d30f> )
+              ( <http://data.performing-arts.ch/p/38b6c19b-b5bd-4e66-bff8-e3cf052b5719> )
+              ( <http://data.performing-arts.ch/p/d7f00f2b-1bdd-40a7-a1fb-2870e673a124> )
+              ( <http://data.performing-arts.ch/p/8c18f99d-5365-4b58-9d56-957036489d69> )
+              ( <http://data.performing-arts.ch/p/aeddae37-1cdb-4a61-978c-29da0d321812> )
+              ( <http://data.performing-arts.ch/p/b2ade863-9893-444f-b9e2-074a85e42aaf> )
+              ( <http://data.performing-arts.ch/p/d79811e6-f38f-4f50-9f63-5492fcacd4c2> )
+              ( <http://data.performing-arts.ch/p/572ca546-4bdc-4fd4-b50c-58b4d69785da> )
+              ( <http://data.performing-arts.ch/p/681e480f-9a78-44e8-97ec-b4bfb5549082> )
+              ( <http://data.performing-arts.ch/p/62a11327-abe3-4321-9fd8-a733154dda08> )
+              ( <http://data.performing-arts.ch/p/5efb6699-e885-4d27-885a-23c3574da5c4> )
+              ( <http://data.performing-arts.ch/p/e6dee1a9-58b7-4f02-8c70-da4b46ccc856> )
+              ( <http://data.performing-arts.ch/p/9e907f1a-5d5b-43b9-b8d6-a73cfd9e160a> )
+              ( <http://data.performing-arts.ch/p/62b805f4-1bd5-4b93-90ed-6b7e265a88c9> )
+              ( <http://data.performing-arts.ch/p/a643ece2-05f3-4d4c-89c7-20f0a49e9874> )
+              ( <http://data.performing-arts.ch/p/572d895c-1291-48d3-a502-95894f873ef2> )
+            }
+            $subject crm:P74_has_current_or_former_residence [ <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within>+ ?__value__  ]
           }"
         }],
         "<http://search.performing-arts.ch/venueplace>": [{
@@ -311,6 +362,12 @@
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
           },
           {
+            "iri": "<http://search.performing-arts.ch/productioncanton>",
+            "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
+            "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+            "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+          },
+          {
             "iri": "<http://search.performing-arts.ch/stagedirection>",
             "label": "[[i18n "FilterStageDirection" bundle="performing-arts-ch"]]",
             "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
@@ -327,6 +384,18 @@
             "label": "[[i18n "FilterType" bundle="performing-arts-ch"]]",
             "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
             "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+          },
+          {
+            "iri": "<http://search.performing-arts.ch/groupgenre>",
+            "label": "[[i18n "FilterGenre" bundle="performing-arts-ch"]]",
+            "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
+            "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+          },
+          {
+            "iri": "<http://search.performing-arts.ch/groupcanton>",
+            "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
+            "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
+            "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
           },
           {
             "iri": "<http://search.performing-arts.ch/groupplace>",
