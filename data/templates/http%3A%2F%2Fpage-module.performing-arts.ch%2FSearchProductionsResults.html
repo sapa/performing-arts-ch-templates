@@ -37,7 +37,8 @@
           {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
           {"displayName": "[[i18n "ProductionsTablePremiere" bundle="performing-arts-ch"]]", "cellTemplate": "{{> premiere}}", "variableName": "premieredatebegin"} ,
           {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch"]]", "cellTemplate": "{{> producer}}"} ,
-          {"displayName": "[[i18n "ProductionsTableVenue" bundle="performing-arts-ch"]]", "cellTemplate": "{{> venue}}"}
+          {"displayName": "[[i18n "ProductionsTableVenue" bundle="performing-arts-ch"]]", "cellTemplate": "{{> venue}}"} ,
+          {"displayName": "", "cellTemplate": "{{> recording}}"}
         ]'>
 
         <template id='premiere'>
@@ -61,22 +62,6 @@
           </semantic-query> 
         </template>
 
-        <template id='venue'>
-          <semantic-query 
-            query='SELECT ?venue ?supervenue WHERE {
-              ?performance frbroo:R25_performed <{{subject.value}}> ;
-                crm:P8_took_place_on_or_within ?venue .
-              OPTIONAL {
-                ?supervenue crm:P46_is_composed_of ?venue .
-              }
-            }'
-            template = '{{> venue-list}}'>
-            <template id='venue-list'>
-              <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{venue.value}}"></mp-label>{{else}}, <mp-label iri="{{venue.value}}"></mp-label>{{/if}}{{#if supervenue}} (<mp-label iri="{{supervenue.value}}"></mp-label>){{/if}}{{/each}}</div>
-            </template>
-          </semantic-query> 
-        </template>
-
         <template id='producer'>
           <semantic-query 
             query='SELECT ?producer WHERE {
@@ -90,6 +75,41 @@
             <template id='producer-list'>
               <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{producer.value}}"></mp-label>{{else}}, <mp-label iri="{{producer.value}}"></mp-label>{{/if}}{{/each}}</div>
             </template>
+          </semantic-query> 
+        </template>
+
+        <template id='venue'>
+          <semantic-query 
+            query='SELECT ?venue ?supervenue WHERE {
+              ?performance frbroo:R25_performed <{{subject.value}}> ;
+                crm:P8_took_place_on_or_within ?venue .
+              OPTIONAL {
+                ?supervenue crm:P46_is_composed_of ?venue .
+              }  
+            }'  
+            template = '{{> venue-list}}'>
+            <template id='venue-list'>
+              <div>{{#each bindings}}{{#if @first}}<mp-label iri="{{venue.value}}"></mp-label>{{else}}, <mp-label iri="{{venue.value}}"></mp-label>{{/if}}{{#if supervenue}} (<mp-label iri="{{supervenue.value}}"></mp-label>){{/if}}{{/each}}</div>
+            </template>  
+          </semantic-query>   
+        </template>  
+
+        <template id='recording'>
+          <semantic-query 
+            query='SELECT ?recording WHERE {
+              {
+                ?recording frbroo:R14_incorporates <{{subject.value}}> ;
+                  a frbroo:F26_Recording .
+              } UNION {
+                ?performance frbroo:R25_performed <{{subject.value}}> ;
+                  a frbroo:F31_Performance ;
+                  crm:P9_consists_of ?recorded_performance .
+                ?recorded_performance a frbroo:F31_Performance .
+                ?recording crm:P70_documents ?recorded_performance ;
+                  a frbroo:F26_Recording .
+              }
+            } LIMIT 1'
+            template = '<div>{{#each bindings}}<img src="../assets/icons/solid/camcorder-solid.svg" style="height: 1.4em; width: 1.4em; padding-right:0.5em;" />{{/each}}</div>'>
           </semantic-query> 
         </template>
 
