@@ -240,6 +240,14 @@
             FILTER(CONTAINS(STR(?external), \"http://classifications.data.admin.ch/canton/\"))
           }"
         }],
+        "<http://search.performing-arts.ch/venuecanton>": [{
+          "kind": "resource",
+          "queryPattern": "{
+            ?subject crm:P156_occupies [ <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within>+ ?__value__ ] .
+            ?__value__ owl:sameAs ?external .
+            FILTER(CONTAINS(STR(?external), \"http://classifications.data.admin.ch/canton/\"))
+          }"
+        }],
         "<http://search.performing-arts.ch/venueplace>": [{
           "kind": "resource",
           "queryPattern": "{
@@ -330,14 +338,14 @@
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>"
           },
           {
-            "iri": "<http://search.performing-arts.ch/productionplace>",
-            "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
+            "iri": "<http://search.performing-arts.ch/productioncanton>",
+            "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
             "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
           },
           {
-            "iri": "<http://search.performing-arts.ch/productioncanton>",
-            "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
+            "iri": "<http://search.performing-arts.ch/productionplace>",
+            "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
             "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
           },
@@ -375,6 +383,12 @@
             "iri": "<http://search.performing-arts.ch/groupplace>",
             "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
             "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
+            "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+          },
+          {
+            "iri": "<http://search.performing-arts.ch/venuecanton>",
+            "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
+            "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>",
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
           },
           {
