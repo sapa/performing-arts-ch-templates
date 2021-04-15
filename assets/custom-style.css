@@ -180,6 +180,9 @@ div.facet__relation__values__filter {
 div.SemanticTreeInput--inputAndButtons {
   margin-bottom: 1em;
 }
+.text-item {
+  margin-bottom: 1rem;
+}
 #application > div > .footer {
   background-color: #083658;
 }
