@@ -131,12 +131,12 @@
                     <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?plan {}" template='{{> template}}' >
                         <template id='template'>
                         {{#if hasLimit}}
-                            <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                            <bs-alert variant="warning" class="search-results__alert pull-left">
                                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
                                 [[i18n "SearchLimitReached" bundle="performing-arts-ch" escapeHTML=false]]
                             </bs-alert>
                         {{else}}
-                            <bs-alert bs-style="warning" class="search-results__alert pull-left">
+                            <bs-alert variant="warning" class="search-results__alert pull-left">
                                 <span class="num-results" class="search-results__alert">[[i18n "SearchResults" bundle="performing-arts-ch"]]</span>
                             </bs-alert>
                         {{/if}}

@@ -6,12 +6,12 @@
       <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}" template='{{> template}}'>
         <template id='template'>
           {{#if hasLimit}}
-          <bs-alert bs-style="warning" class="search-results__alert pull-left">
+          <bs-alert variant="warning" class="search-results__alert pull-left">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;
             <span class="num-results">[[i18n "SearchLimitReached" bundle="performing-arts-ch" escapeHTML=false]]</span>
           </bs-alert>
           {{else}}
-          <bs-alert bs-style="warning" class="search-results__alert pull-left">
+          <bs-alert variant="warning" class="search-results__alert pull-left">
             <span class="num-results" class="search-results__alert">[[i18n "SearchResults" bundle="performing-arts-ch"]]</span>
           </bs-alert>
           {{/if}}
@@ -21,16 +21,7 @@
 
     <semantic-search-result>
       <semantic-table 
-        query='SELECT DISTINCT ?subject (GROUP_CONCAT(DISTINCT ?beginning; SEPARATOR=", ") AS ?beginnings) WHERE {
-          OPTIONAL {
-            ?subject rdfs:label ?label ;
-              crm:P131_is_identified_by ?appellation .
-            ?appellation crm:P2_has_type ?appellationtype ;
-              rdf:value ?appellationvalue .
-              MINUS { ?appellation crm:P2_has_type spav:yanuj . }
-              MINUS { ?appellation crm:P2_has_type spav:yasis . }
-              FILTER(?label != ?appellationvalue)
-          }
+        query='SELECT ?subject (GROUP_CONCAT(DISTINCT ?beginning; SEPARATOR=", ") AS ?beginnings) WHERE {
           OPTIONAL {
             ?subject rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ]
           }
@@ -75,8 +66,7 @@
         <template id='places'>                     
           <semantic-query 
             query='SELECT ?place WHERE {
-                <{{subject.value}}> crm:P74_has_current_or_former_residence ?p .
-                ?p crm:P89_falls_within ?place .
+                <{{subject.value}}> crm:P74_has_current_or_former_residence [ crm:P89_falls_within ?place ]
               }'
             template = '{{> places-list}} '>
             <template id='places-list'>
@@ -113,7 +103,7 @@
                             header="text/csv"
                             filename="performing-arts-ch-search-result.csv"
                             >
-          <button class="btn btn-default">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
+          <button class="btn btn-secondary">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
         </mp-sparql-download>
       </semantic-search-result>
     </div>

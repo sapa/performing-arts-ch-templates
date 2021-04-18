@@ -19,7 +19,7 @@ body, h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-    font-size: 1.6em;
+    font-size: 1.1em;
     font-weight: 400;
 }
 
@@ -65,8 +65,10 @@ a:hover, a:focus {
     margin-left: 0.9em;
     margin-bottom: 1.2em;
 }
+
 .knowledgeGraphBar__summaryTitle h1 {
-    font-size: 2em !important;
+    font-size: 1.8em !important;
+    line-height: 1.1em !important;
     margin: 0 !important;
 }
 
@@ -95,6 +97,20 @@ a:hover, a:focus {
     border-bottom-width: 0 !important;
 }
 
+.domainCard h4 {
+    font-size: 1.3em;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+}
+
+.domainItems a.domainItem, .domainItems a.domainRemove, .domainItems a.clearSearch {
+    color: black;
+}
+
+.domainItems a.domainItem:hover, .domainItems a.domainRemove:hover, .domainItems a.clearSearch:hover {
+    color: black;
+}
+
 .container-fluid {
     padding-left: 24px; // brand distance left
 }
@@ -103,61 +119,45 @@ a:hover, a:focus {
     font-weight: normal;
 }
 
-.navbar-inverse  {
-    background-color: @navbar-back; // navigation background
+.bg-primary  {
+    background-color: @navbar-back !important; // navigation background
 }
 
-.navbar-brand {
-    float: none;
-    font-weight: 500;
-}
-
-.navbar-inverse .dropdown-menu {
+.bg-primary .dropdown-menu {
     background-color: @navbar-back !important;
 }
 
-.navbar-inverse .navbar-brand, .navbar-inverse .navbar-brand {
-    color: @navbar-link; // brand link color
-}
-
-.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
-    color: @navbar-link-hover; // brand link hover color
-}
-
-.navbar-inverse .dropdown-menu > .active > a, .navbar-inverse .dropdown-menu > .active > a:hover, .navbar-inverse .dropdown-menu > li > a:hover {
-    background-color: @navbar-back-hover !important;
-}
-
-.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-    background-color: @navbar-back-hover !important;   
-}
-
-.navbar-inverse .navbar-nav > li > a {
-    color: @navbar-link; // navigation link color
-}
-
-.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-    color: @navbar-link-hover; // navigation link hover color
-}
-
-.dropdown-menu {
-    background-color: @navbar-back;
-}
-
-.dropdown > .dropdown-menu > li > a {
+.bg-primary .navbar-brand, .navbar-dark .navbar-nav .nav-link {
     color: @navbar-link;
 }
 
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-    background-color: @navbar-back;
+.bg-primary .dropdown-menu .dropdown-item.active, .bg-primary .dropdown-menu .dropdown-item:focus, .bg-primary .dropdown-menu .dropdown-item:hover {
+    color: @navbar-link-hover;
+    background-color: @navbar-back-hover !important;
 }
 
-#record-tabs > .nav-tabs > li > a, #tabs > .nav-tabs > li > a, .page__body-navtabs > .nav-tabs > li > a, .open-sidebar__tabs > .nav-tabs > li > a {
-    color: black;
+.bg-primary .navbar-brand:hover, .bg-primary .navbar-brand:focus {
+    color: @navbar-link-hover;
 }
 
-#tabs > .nav-tabs > li > a:hover {
-    color: @link-hover;
+.bg-primary .dropdown-menu > .active > a, .bg-primary .dropdown-menu > .active > a:hover, .bg-primary .dropdown-menu > li > a:hover {
+    background-color: @navbar-back-hover !important;
+}
+
+.bg-primary .navbar-nav > li > a:hover, .bg-primary .navbar-nav > li > a:focus {
+    background-color: @navbar-back-hover !important;   
+}
+
+.bg-primary .navbar-nav > li > a {
+    color: @navbar-link; // navigation link color
+}
+
+.bg-primary .navbar-nav > li > a:hover, .bg-primary .navbar-nav > li > a:focus {
+    color: @navbar-link-hover; // navigation link hover color
+}
+
+.nav-tabs > .nav-link, #tabs > .nav-tabs > li > a, .page__body-navtabs > .nav-tabs > li > a, .open-sidebar__tabs > .nav-tabs > li > a {
+    color: black !important;
 }
 
 .nav > li > a:hover, .nav > li > a:focus {
@@ -214,6 +214,10 @@ div.facet__relation__values__filter {
 
 div.SemanticTreeInput--inputAndButtons {
     margin-bottom: 1em;
+}
+
+.text-item {
+    margin-bottom: 1rem;
 }
 
 #application > div > .footer {

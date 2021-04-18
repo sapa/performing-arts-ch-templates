@@ -41,7 +41,7 @@
                     {{#ifCond bindings.length ">" 0}}
                         <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
                     {{/ifCond}}
-                    <div>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>
+                    <div>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>
                 </div>'>
             </semantic-query>
 
@@ -208,7 +208,7 @@
                     {{#ifCond bindings.length ">" 0}}
                         <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
                     {{/ifCond}}
-                    <div>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>
+                    <div>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>
                 </div>'>
             </semantic-query>
 
@@ -221,7 +221,7 @@
                     {{#ifCond bindings.length ">" 0}}
                         <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
                     {{/ifCond}}
-                    <div>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>
+                    <div>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>
                 </div>'>
             </semantic-query>
 
@@ -250,7 +250,7 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment>) }
                     ?? rdfs:comment ?comment . }"
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    <div>{{#each bindings}}<p style="white-space: pre-line;">{{comment.value}}</p>{{/each}}</div></div>'>
+                    <div>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{comment.value}}</p>{{/each}}</div></div>'>
             </semantic-query>
 
             <!-- ACCESS -->
@@ -263,7 +263,7 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightNotice>) }
                     ?? schema:copyrightNotice ?value . }'
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    {{#each bindings}}<div>{{value.value}}</div>{{/each}}</div>'>
+                    {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
             <!-- copyright declaration -->
@@ -272,7 +272,7 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightDeclaration>) }
                     ?? spao:hasCopyrightDeclaration ?value . }'
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    {{#each bindings}}<div><mp-label iri="{{value.value}}"></mp-label></div>{{/each}}</div>'>
+                    {{#each bindings}}<div class="text-item"><mp-label iri="{{value.value}}"></mp-label></div>{{/each}}</div>'>
             </semantic-query>
 
             <!-- use rights -->
@@ -281,7 +281,7 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceConditionsUse>) }
                     ?? rico:conditionsOfUse ?value . }'
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    {{#each bindings}}<div>{{value.value}}</div>{{/each}}</div>'>
+                    {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
             <!-- protection duration -->
@@ -290,7 +290,7 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProtectionDuration>) }
                     ?? spao:hasProtectionDuration ?value . }'
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    {{#each bindings}}<div>{{value.value}}</div>{{/each}}</div>'>
+                    {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
             <!-- use rights still -->
@@ -317,7 +317,7 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCredit>) }
                     ?? spao:hasCredit ?value . }'
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    {{#each bindings}}<div>{{value.value}}</div>{{/each}}</div>'>
+                    {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
         </bs-col>
@@ -350,7 +350,7 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDoublets>) }
                     ?? spao:hasDoublets ?value . }'
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    {{#each bindings}}<div>{{value.value}}</div>{{/each}}</div>'>
+                    {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
             <semantic-query 
@@ -368,13 +368,11 @@
                         ?node rico:isOrWasIncludedIn ?parent.
                         FILTER(ISIRI(?parent))
                     }
-                    ?node rico:name ?name .
                     OPTIONAL { ?node rico:identifier ?identifier }
-                    BIND(IF(BOUND(?identifier), CONCAT(?identifier, ": ", ?name), ?name) AS ?label)
                     OPTIONAL { ?node rico:hasRecordSetType ?rslevel . }
                     BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
                     OPTIONAL { ?node olo:index ?index }
-                  } ORDER BY ASC(?index) ASC(?label)
+                  } ORDER BY ASC(?index) ASC(?identifier)
                   LIMIT 200'
                collapsed="true"
                keys-opened='[[this]]'
@@ -382,7 +380,7 @@
                node-binding-name="node"
                tuple-template='{{> node}}'>
                 <template id='node'>
-                    <span>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link uri="{{node.value}}">{{name.value}}</semantic-link>{{#if level}} (<mp-label iri="{{level.value}}""></mp-label>){{/if}}</span>
+                    <span>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link uri="{{node.value}}"></semantic-link>{{#if level}} (<mp-label iri="{{level.value}}""></mp-label>){{/if}}</span>
                 </template>
             </semantic-tree>
 
@@ -392,7 +390,7 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceRelated>) }
                     ?? spao:isRelatedTo ?value . }'
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    {{#each bindings}}<div>{{value.value}}</div>{{/each}}</div>'>
+                    {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
             <!-- see also -->
@@ -418,7 +416,7 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNote>) }
                     ?? spao:hasNote ?value . }'
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    {{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
+                    {{#each bindings}}<div class="text-item" style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
             [[#if (hasPermission "forms:ldp:*")]] 
@@ -428,7 +426,7 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNoteInternal>) }
                     ?? spao:hasNoteInternal ?value . }'
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    {{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
+                    {{#each bindings}}<div class="text-item" style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
             <!-- responsible employee -->
@@ -447,7 +445,7 @@
                     VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingConvention>) }
                     ?? spao:hasProcessingConvention ?value . }'
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                    {{#each bindings}}<div>{{value.value}}</div>{{/each}}</div>'>
+                    {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
             <!-- processing date -->
@@ -511,7 +509,7 @@
             <semantic-query 
             query='SELECT ?user ?datetime WHERE {
               GRAPH ?g {
-                ?? rdfs:label ?label .
+                ?? rico:name ?label .
                 Platform:formContainer <http://www.w3.org/ns/ldp#contains> ?container .
                 ?container prov:generatedAtTime ?dt ;
                            prov:wasAttributedTo ?user_uri .
@@ -559,18 +557,17 @@
                           } ORDER BY ASC(?order)'
                           template='<p>{{#each bindings}}{{#if @first}}<strong>{{title_value.value}}</strong>{{else}}<br>{{title_value.value}}{{/if}}{{/each}}</p>'>
                         </semantic-query>
-                    
-                        <!-- duration -->
+                                        
+                        <!-- genre -->
                         <semantic-query 
-                          query='SELECT ?duration WHERE { <{{recording.value}}> schema:duration ?duration . }'
-                          template='<div>{{#ifCond bindings.length ">" 0}}<h5>Duration</h5>{{/ifCond}}
-                              {{#each bindings}}{{#if @first}}{{duration.value}}{{else}}<br />{{duration.value}}{{/if}}{{/each}}</div>'>
+                          query='SELECT ?genre WHERE { <{{recording.value}}> crm:P2_has_type ?genre . }'
+                          template='<p class="text-item">{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</p>'>
                         </semantic-query>
-                    
+
                         <!-- language -->
                         <semantic-query 
                           query='SELECT ?language WHERE { ?work frbroo:R12_is_realised_in <{{recording.value}}> ; schema:inLanguage ?language . }'
-                          template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{language.value}}"></mp-label>{{else}}, <mp-label iri="{{language.value}}"></mp-label>{{/if}}{{/each}}</p>'>
+                          template='<p class="text-item">{{#each bindings}}{{#if @first}}<mp-label iri="{{language.value}}"></mp-label>{{else}}, <mp-label iri="{{language.value}}"></mp-label>{{/if}}{{/each}}</p>'>
                         </semantic-query>
                     
                         <!-- date -->
@@ -605,7 +602,7 @@
                             }
                             BIND(IF(BOUND(?plan), ?plan, ?performance) AS ?source)
                           }'
-                          template='<div>{{#ifCond bindings.length ">" 0}}<h5>Documents</h5>{{/ifCond}}
+                          template='<div class="text-item">{{#ifCond bindings.length ">" 0}}<h5>Documents</h5>{{/ifCond}}
                             {{#each bindings}}{{#if @first}}<semantic-link iri="{{source.value}}"></semantic-link>{{else}}, <semantic-link iri="{{source.value}}"></semantic-link>{{/if}}{{/each}}</div>'>
                         </semantic-query>
                     
@@ -616,9 +613,16 @@
                             ?linguistic crm:P2_has_type spav:eoept ;
                               rdf:value ?value .
                           }'
-                          template='<div><h5>Description</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+                          template='<div><h5>Description</h5>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
                         </semantic-query>
                         
+                        <!-- duration -->
+                        <semantic-query 
+                          query='SELECT ?duration WHERE { <{{recording.value}}> schema:duration ?duration . }'
+                          template='<div class="text-item">{{#ifCond bindings.length ">" 0}}<h5>Duration</h5>{{/ifCond}}
+                              {{#each bindings}}{{#if @first}}{{duration.value}}{{else}}<br />{{duration.value}}{{/if}}{{/each}}</div>'>
+                        </semantic-query>
+
                         <!-- note on context -->
                         <semantic-query
                           query='SELECT ?value WHERE {
@@ -626,7 +630,7 @@
                             ?linguistic crm:P2_has_type spav:eonct ;
                               rdf:value ?value .
                           }'
-                          template='<div><h5>Note on context</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+                          template='<div><h5>Note on context</h5>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
                         </semantic-query>
                         
                         <!-- note on stage work -->
@@ -636,7 +640,7 @@
                             ?linguistic crm:P2_has_type spav:eonsw ;
                               rdf:value ?value .
                           }'
-                          template='<div><h5>Note on stage work</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+                          template='<div><h5>Note on stage work</h5>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
                         </semantic-query>
                         
                         <!-- note on music -->
@@ -646,7 +650,7 @@
                             ?linguistic crm:P2_has_type spav:eonms ;
                               rdf:value ?value .
                           }'
-                          template='<div><h5>Note on music</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+                          template='<div><h5>Note on music</h5>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
                         </semantic-query>
                     
                         <!-- genre2 -->

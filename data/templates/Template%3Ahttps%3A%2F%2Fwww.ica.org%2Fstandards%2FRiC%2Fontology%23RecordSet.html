@@ -314,13 +314,11 @@
                         ?node rico:isOrWasIncludedIn ?parent.
                         FILTER(ISIRI(?parent))
                     }
-                    ?node rico:name ?name .
                     OPTIONAL { ?node rico:identifier ?identifier }
-                    BIND(IF(BOUND(?identifier), CONCAT(?identifier, ": ", ?name), ?name) AS ?label)
                     OPTIONAL { ?node rico:hasRecordSetType ?rslevel . }
                     BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
                     OPTIONAL { ?node olo:index ?index }
-                  } ORDER BY ASC(?index) ASC(?label)
+                  } ORDER BY ASC(?index) ASC(?identifier)
                   LIMIT 200'
                collapsed="true"
                keys-opened='[[this]]'
@@ -328,7 +326,7 @@
                node-binding-name="node"
                tuple-template='{{> node}}'>
                 <template id='node'>
-                    <span>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link uri="{{node.value}}">{{name.value}}</semantic-link>{{#if level}} (<mp-label iri="{{level.value}}""></mp-label>){{/if}}</span>
+                    <span>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link uri="{{node.value}}"></semantic-link>{{#if level}} (<mp-label iri="{{level.value}}""></mp-label>){{/if}}</span>
                 </template>
             </semantic-tree>
 
@@ -457,7 +455,7 @@
             <semantic-query 
             query='SELECT ?user ?datetime WHERE {
               GRAPH ?g {
-                ?? rdfs:label ?label .
+                ?? rico:name ?label .
                 Platform:formContainer <http://www.w3.org/ns/ldp#contains> ?container .
                 ?container prov:generatedAtTime ?dt ;
                            prov:wasAttributedTo ?user_uri .

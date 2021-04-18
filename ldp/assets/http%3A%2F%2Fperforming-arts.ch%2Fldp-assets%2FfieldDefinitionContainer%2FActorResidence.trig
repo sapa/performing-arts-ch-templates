@@ -1,54 +1,55 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorResidence/context> {
+  _:genid-eff849e174f04703beed74d039332f37-cbzfk a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value $label WHERE {
+  $subject crm:P74_has_current_or_former_residence $res .
+  $res crm:P89_falls_within ?value .
+}""" .
+  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorResidence> a <http://www.metaphacts.com/ontology/fields#Field>,
       <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
     <http://www.w3.org/2000/01/rdf-schema#label> "Résidence actuelle ou ancienne"@fr,
       "Aktueller oder ehemaliger Sitz"@de, "Current or former residence"@en, "Residenza attuale o precedente"@it;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-eff849e174f04703beed74d039332f37-8ph3l;
     <http://www.metaphacts.com/ontology/fields#treePatterns> """{
   \"type\": \"full\",
   \"rootsQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item a crm:E53_Place .\\n  FILTER(NOT EXISTS { ?item crm:P89_falls_within ?parent. })\\n  FILTER(CONTAINS(STR(?item), \\\"/p/\\\"))\\n  ?item rdfs:label ?label.\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY (?label)\",
   \"childrenQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?label ?hasChildren WHERE {\\n  ?item crm:P89_falls_within ?parent.\\n  ?item rdfs:label ?label.\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY (?label)\",
   \"parentsQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\\nPREFIX rico: <https://www.ica.org/standards/RiC/ontology#>\\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\\nSELECT DISTINCT ?item ?parent ?parentLabel WHERE {\\n  ?item crm:P89_falls_within ?parent.\\n  ?parent rdfs:label ?parentLabel.\\n}\",
-  \"searchQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>\\nSELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {\\n  SERVICE Repository:lookup {\\n    ?item lookup:token ?__token__;\\n      lookup:limit 400 ;\\n      lookup:type crm:E53_Place .\\n  }\\n  FILTER(CONTAINS(STR(?item), \\\"/p/\\\"))\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY DESC (?score) (?label)\\nLIMIT 200\"
+  \"searchQuery\": \"PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>\\nPREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#>\\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\\nPREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>\\nSELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {\\n  SERVICE Repository:lookup {\\n    ?item lookup:token ?__token__;\\n      lookup:name ?label ;\\n      lookup:limit 400 ;\\n      lookup:type crm:E53_Place .\\n  }\\n  FILTER(CONTAINS(STR(?item), \\\"/p/\\\"))\\n  OPTIONAL { ?child crm:P89_falls_within ?item. }\\n  BIND(BOUND(?child) AS ?hasChildren)\\n}\\nORDER BY DESC (?score) (?label)\\nLIMIT 200\"
 }"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-c2534df29fc9413a9896f80c877e6bec-6ken3;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-c2534df29fc9413a9896f80c877e6bec-t4h3om;
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E39_Actor>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c2534df29fc9413a9896f80c877e6bec-38nsb7;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-eff849e174f04703beed74d039332f37-s9ylni;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-eff849e174f04703beed74d039332f37-cbzfk;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-eff849e174f04703beed74d039332f37-b8adqa;
     <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E53_Place>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-c2534df29fc9413a9896f80c877e6bec-f6kub;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-11-30T09:07:19.977Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-30T10:47:11.630Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-c2534df29fc9413a9896f80c877e6bec-38nsb7 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """INSERT {
-  $subject crm:P74_has_current_or_former_residence $res .
-  ?res a crm:E53_Place ;
-    crm:P89_falls_within ?value .
-} WHERE {
-  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), STR(?value))))) as ?res)
-}""" .
-  
-  _:genid-c2534df29fc9413a9896f80c877e6bec-6ken3 a <http://spinrdf.org/sp#Query>;
+  _:genid-eff849e174f04703beed74d039332f37-b8adqa a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
    SERVICE Repository:lookup {
      ?value lookup:token ?__token__ ;
+	    lookup:name ?label ;
      	lookup:type crm:E53_Place .
    }
 }""" .
   
-  _:genid-c2534df29fc9413a9896f80c877e6bec-f6kub a <http://spinrdf.org/sp#Query>;
+  _:genid-eff849e174f04703beed74d039332f37-s9ylni a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """DELETE {
   $subject crm:P74_has_current_or_former_residence $res .
   ?res a crm:E53_Place ;
     crm:P89_falls_within ?value .
 } WHERE {}""" .
   
-  _:genid-c2534df29fc9413a9896f80c877e6bec-t4h3om a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """SELECT ?value $label WHERE {
+  _:genid-eff849e174f04703beed74d039332f37-8ph3l a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
   $subject crm:P74_has_current_or_former_residence $res .
-  $res crm:P89_falls_within ?value .
+  ?res a crm:E53_Place ;
+    crm:P89_falls_within ?value .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), STR(?value))))) as ?res)
 }""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>

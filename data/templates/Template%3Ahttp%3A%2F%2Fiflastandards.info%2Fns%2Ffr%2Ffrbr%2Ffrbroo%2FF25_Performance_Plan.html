@@ -2,6 +2,8 @@
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
       <bs-tab event-key='Summary' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
 
+        <bs-row>
+
         <bs-col sm="4">
           <!-- titles -->
           <semantic-query 
@@ -375,7 +377,33 @@
           </semantic-query>
           [[/if]]
 
+        <!-- record sets -->
+        <semantic-query
+        query='SELECT DISTINCT ?record ?identifier WHERE { 
+          {
+            ?record rico:hasOrHadSubject ?? ;
+              a rico:RecordSet .
+          } UNION {
+            ?record rico:hasOrHadSubject ?? ;
+              a rico:Record .
+          } UNION {
+            ?recordpart rico:hasOrHadSubject ?? ;
+              a rico:RecordPart ;
+              rico:isOrWasConstituentOf ?record .
+          }
+          OPTIONAL {
+            ?record rico:identifier ?identifier .
+          }
+        }'
+        template='<div><h5>Record (Set)</h5>
+            <ul class="list-unstyled">{{#each bindings}}
+                <li>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link iri="{{record.value}}"></semantic-link></li>
+            {{/each}}</ul></div>'>
+        </semantic-query>          
+
         </bs-col>
+        </bs-row>
+        
       </bs-tab>
       
       [[#if (hasPermission "sparql:*:*:*")]] 

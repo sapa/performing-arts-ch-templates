@@ -142,18 +142,20 @@
           "queryPattern": "{
             ?__value__ skos:inScheme spav:hl .
             ?performance frbroo:R25_performed ?subject ;
-              crm:P9_consists_of ?premiere .
-            ?premiere a frbroo:F31_Performance ;
-              crm:P2_has_type ?__value__ .
+              crm:P9_consists_of [
+                a frbroo:F31_Performance ;
+                crm:P2_has_type ?__value__ 
+              ]
           }"
         }],
         "<http://search.performing-arts.ch/producer>": [{
           "kind": "resource",
           "queryPattern": "{
             ?expressioncreation frbroo:R17_created ?subject ;
-              crm:P9_consists_of ?production . 
-            ?production crm:P2_has_type spav:muwgo ;
-              crm:P14_carried_out_by ?__value__ .
+              crm:P9_consists_of [
+                crm:P2_has_type spav:muwgo ;
+                crm:P14_carried_out_by ?__value__ 
+              ]
             FILTER(CONTAINS(STR(?__value__), \"/a/\"))
           }"
         }],
@@ -169,28 +171,42 @@
           "kind": "resource",
           "queryPattern": "{
             ?performance frbroo:R25_performed ?subject ;
-              crm:P8_took_place_on_or_within ?venue .
-            ?venue crm:P156_occupies ?ground .
-            ?ground crm:P89_falls_within ?__value__ .
+              crm:P8_took_place_on_or_within [
+                crm:P156_occupies [
+                  crm:P89_falls_within ?__value__ 
+                ]
+              ]
+          }"
+        }],
+        "<http://search.performing-arts.ch/productioncanton>": [{
+          "kind": "resource",
+          "queryPattern": "{
+            ?performance frbroo:R25_performed ?subject .
+            ?performance crm:P8_took_place_on_or_within [ crm:P156_occupies [ <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within>+ ?__value__ ] ] .
+            ?__value__ owl:sameAs ?external .
+            FILTER(CONTAINS(STR(?external), \"http://classifications.data.admin.ch/canton/\"))  
           }"
         }],
         "<http://search.performing-arts.ch/stagedirection>": [{
           "kind": "resource",
           "queryPattern": "{
             ?expressioncreation frbroo:R17_created ?subject ;
-              crm:P9_consists_of ?activity .
-            ?activity crm:P2_has_type spav:mutnt ;
-              crm:P14_carried_out_by ?__value__ .
+              crm:P9_consists_of [
+                crm:P2_has_type spav:mutnt ;
+                crm:P14_carried_out_by ?__value__ 
+              ]
           }"
         }],
         "<http://search.performing-arts.ch/premieredate>": [{
           "kind": "numeric-range",
           "queryPattern": "{
             ?performance frbroo:R25_performed ?subject ;
-              crm:P9_consists_of ?premiere .
-            ?premiere a frbroo:F31_Performance ;
-              crm:P4_has_time-span ?timespan .
-            ?timespan crm:P82a_begin_of_the_begin ?date .
+              crm:P9_consists_of [
+                a frbroo:F31_Performance ;
+                crm:P4_has_time-span [
+                  crm:P82a_begin_of_the_begin ?date 
+                ]
+              ]
             BIND(YEAR(?date) AS ?literal)
             FILTER(?literal >= ?__numericRangeBeginValue__) .
             FILTER(?literal <= ?__numericRangeEndValue__) .
@@ -205,15 +221,37 @@
         "<http://search.performing-arts.ch/groupplace>": [{
           "kind": "resource",
           "queryPattern": "{
-            ?subject crm:P74_has_current_or_former_residence ?ground .
-            ?ground crm:P89_falls_within ?__value__ .
+            ?subject crm:P74_has_current_or_former_residence [ crm:P89_falls_within ?__value__ ]
+          }"
+        }],
+        "<http://search.performing-arts.ch/groupgenre>": [{
+          "kind": "resource",
+          "queryPattern": "{
+            ?pursuit crm:P14_carried_out_by ?subject ; 
+              a frbroo:F51_Pursuit ;
+              frbroo:R59_had_typical_subject ?__value__ . 
+          }"
+        }],
+        "<http://search.performing-arts.ch/groupcanton>": [{
+          "kind": "resource",
+          "queryPattern": "{
+            $subject crm:P74_has_current_or_former_residence [ <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within>+ ?__value__  ] .
+            ?__value__ owl:sameAs ?external .
+            FILTER(CONTAINS(STR(?external), \"http://classifications.data.admin.ch/canton/\"))
+          }"
+        }],
+        "<http://search.performing-arts.ch/venuecanton>": [{
+          "kind": "resource",
+          "queryPattern": "{
+            ?subject crm:P156_occupies [ <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within>+ ?__value__ ] .
+            ?__value__ owl:sameAs ?external .
+            FILTER(CONTAINS(STR(?external), \"http://classifications.data.admin.ch/canton/\"))
           }"
         }],
         "<http://search.performing-arts.ch/venueplace>": [{
           "kind": "resource",
           "queryPattern": "{
-            ?subject crm:P156_occupies ?p .
-            ?p crm:P89_falls_within ?__value__ .
+            ?subject crm:P156_occupies [ crm:P89_falls_within ?__value__ ]
           }"
         }],
         "<http://search.performing-arts.ch/withincanton>": [{
@@ -300,6 +338,12 @@
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>"
           },
           {
+            "iri": "<http://search.performing-arts.ch/productioncanton>",
+            "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
+            "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+            "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+          },
+          {
             "iri": "<http://search.performing-arts.ch/productionplace>",
             "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
             "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
@@ -324,9 +368,27 @@
             "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
           },
           {
+            "iri": "<http://search.performing-arts.ch/groupgenre>",
+            "label": "[[i18n "FilterGenre" bundle="performing-arts-ch"]]",
+            "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
+            "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+          },
+          {
+            "iri": "<http://search.performing-arts.ch/groupcanton>",
+            "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
+            "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
+            "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+          },
+          {
             "iri": "<http://search.performing-arts.ch/groupplace>",
             "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
             "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
+            "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+          },
+          {
+            "iri": "<http://search.performing-arts.ch/venuecanton>",
+            "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
+            "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>",
             "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
           },
           {
@@ -349,7 +411,7 @@
           }
         ]
       }'
-      limit='1000'
+      limit='500'
     >
 
       <semantic-search-query-keyword-type 
@@ -370,9 +432,10 @@
           OPTIONAL { ?subject crm:P2_has_type ?crmtype . }
           FILTER(?__domain__ != crm:E22_Man-Made_Object || ?crmtype = spav:dwmkn )
         }'
+        count-query-mode='queryPerCategory'
+        placeholder='[[i18n "SearchPrompt" bundle="performing-arts-ch" escapeHTML=false]]'
         min-search-term-length='1'
         debounce='600'
-        count-query-mode='queryPerCategory'
         token-pattern='
           {
             ?subject rdfs:label ?label .
@@ -446,7 +509,7 @@
                     type='KeywordTypeQuery.SelectDomain'
                     targets='["{{../componentId}}"]'
                     data='{"domainIri": "{{iri}}"}'>
-                    <button type=button class='btn btn-default domainCard {{#if selected}}domainCard--selected{{/if}}'>
+                    <button type=button class='btn btn-secondary domainCard {{#if selected}}domainCard--selected{{/if}}'>
                       <div class='domainCardThumbnail'>
                         {{#if thumbnail}}
                         <img src='{{thumbnail}}' alt='{{label}}' /> 
