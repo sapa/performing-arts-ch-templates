@@ -21,7 +21,7 @@
 
     <semantic-search-result>
       <semantic-table 
-        query='SELECT ?subject ?dob ?description
+        query='SELECT DISTINCT ?subject ?dob ?description
         WHERE {
           OPTIONAL {
             ?subject rico:birthDate [ rico:normalizedDateValue ?dob ]
