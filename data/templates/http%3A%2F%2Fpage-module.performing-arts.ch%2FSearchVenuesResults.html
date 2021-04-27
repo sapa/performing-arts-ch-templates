@@ -21,8 +21,7 @@
 
     <semantic-search-result>
       <semantic-table 
-        query='SELECT ?subject ?place ?beginning
-        WHERE {
+        query='SELECT DISTINCT ?subject ?place ?beginning WHERE {
           OPTIONAL {
             ?subject crm:P156_occupies [ crm:P89_falls_within ?place ] .
           }

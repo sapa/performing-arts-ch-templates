@@ -441,6 +441,8 @@
             ?subject rdfs:label ?label .
           } UNION {
             ?subject crm:P131_is_identified_by [ rdf:value ?label ] .
+          } UNION {
+            ?subject crm:P102_has_title [ rdf:value ?label ] .
           }
           SERVICE <http://www.bigdata.com/rdf/search#search> {
             ?label bds:search ?__token__ ;
