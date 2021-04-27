@@ -21,7 +21,7 @@
 
     <semantic-search-result>
       <semantic-table 
-        query='SELECT ?subject ?premieredatebegin WHERE { 
+        query='SELECT DISTINCT ?subject ?premieredatebegin WHERE { 
           OPTIONAL {
             ?performance frbroo:R25_performed ?subject ;
               crm:P9_consists_of [
