@@ -416,7 +416,47 @@
 
         </bs-tab>
 
-        <bs-tab event-key='6' title='Wikidata double matches'>
+        <bs-tab event-key='6' title='Legacy Dates'>
+
+            <semantic-table
+                query='SELECT DISTINCT ?record ?date ?pattern WHERE {
+                    ?record spao:legacyDate ?date .
+                    BIND(REPLACE(?date, "[\\(\\)\\?]", "") AS ?cleandate)
+                    BIND(REPLACE(?cleandate, "\\d{4}", "YYYY" ) AS ?pattern)
+                  }'
+                options='{
+                    "enableGrouping": true,
+                    "groupingOptions": {"groupedBy": ["pattern"]}
+                }'
+                column-configuration='[
+                    {"variableName": "date", "displayName": "Date"},
+                    {
+                        "variableName": "record",
+                        "displayName": "Record",
+                        "aggregation": "count",
+                        "aggregationCellTemplate": "Count: {{value}}"
+                    },
+                    {"variableName": "pattern", "displayName": "Pattern"}
+                ]'
+            ></semantic-table>
+
+        </bs-tab>
+
+        <bs-tab event-key='7' title='Legacy Extends'>
+
+            <semantic-table 
+                query='SELECT DISTINCT ?record ?extent WHERE { ?record rico:recordResourceExtent ?extent . }' 
+                column-configuration='[
+                    {"displayName": "Record Resource", "variableName": "record"},
+                    {"displayName": "Extent", "variableName": "extent"}
+                    ]'
+                number-of-displayed-rows=20
+                no-result-template='No results found.'>
+            </semantic-table>           
+
+        </bs-tab>
+
+        <bs-tab event-key='8' title='Wikidata Double Matches'>
 
             <semantic-table 
                 query='SELECT DISTINCT ?wikidata ?q (COUNT(?sapa) AS ?count) WHERE {
