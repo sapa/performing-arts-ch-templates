@@ -800,6 +800,12 @@
             
         </bs-tab>
 
+        [[#if (hasPermission "forms:ldp:*")]] 
+        <bs-tab event-key='instantiaton editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+        [[> sapaModule:InstantiationForm]]
+        </bs-tab>
+        [[/if]]
+
         [[> sapaModule:AdminTabs]]
 
     </bs-tabs>  

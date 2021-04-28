@@ -48,7 +48,7 @@
         usage_rights_still="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStill"
         usage_rights_streaming="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStreaming"
         credit="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCredit"
-        location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLocation"
+        location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLocation"
         packing="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePacking"
         doublets="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDoublets"
         related="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceRelated"
@@ -100,7 +100,7 @@
             <semantic-form-tree-picker-input for="location"></semantic-form-tree-picker-input>
           </bs-col>
           <bs-col sm='8'>
-            <semantic-form-checklist-input row=true for="packing"></semantic-form-checklist-input row=true>
+            <semantic-form-checklist-input row=true for="packing"></semantic-form-checklist-input>
           </bs-col>
         </bs-row>
         <bs-row>
@@ -126,8 +126,8 @@
                 ]]'>
                   <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
                   <semantic-form-text-input for="date_value"></semantic-form-text-input>
-                  <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input row=true>
-                  <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input row=true>
+                  <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input>
+                  <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input>
                 </semantic-form-composite-input>
               </semantic-form-switch-case>
               <semantic-form-switch-case label='Date Range'>
@@ -145,8 +145,8 @@
                   ]]'>
                     <semantic-form-hidden-input for="date_beginning_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
                     <semantic-form-text-input for="date_beginning_value"></semantic-form-text-input>
-                    <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input row=true>
-                    <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input row=true>
+                    <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input>
+                    <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input>
                   </semantic-form-composite-input>   
 
                   <semantic-form-composite-input for='date_end' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
@@ -157,8 +157,8 @@
                   ]]'>
                     <semantic-form-hidden-input for="date_end_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
                     <semantic-form-text-input for="date_end_value"></semantic-form-text-input>
-                    <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input row=true>
-                    <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input row=true>
+                    <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input>
+                    <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input>
                   </semantic-form-composite-input>
                 </semantic-form-composite-input>
               </semantic-form-switch-case>
@@ -179,8 +179,10 @@
               extent_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentValue"
               extent_unit="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentUnit"
             ]]'>
-                <semantic-form-text-input for='extent_value'></semantic-form-text-input>
-                <semantic-form-select-input for='extent_unit'></semantic-form-select-input>
+              <bs-row>
+                <bs-col sm='4'><semantic-form-text-input for='extent_value'></semantic-form-text-input></bs-col>
+                <bs-col sm='8'><semantic-form-select-input for='extent_unit'></semantic-form-select-input></bs-col>
+              </bs-row>
             </semantic-form-composite-input>
           </bs-col>
         </bs-row>
@@ -272,8 +274,8 @@
                 ]]'>
                   <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
                   <semantic-form-text-input for="date_value"></semantic-form-text-input>
-                  <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input row=true>
-                  <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input row=true>
+                  <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input>
+                  <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input>
                 </semantic-form-composite-input>
               </semantic-form-switch-case>
               <semantic-form-switch-case label='Date Range'>
@@ -291,8 +293,8 @@
                   ]]'>
                     <semantic-form-hidden-input for="date_beginning_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
                     <semantic-form-text-input for="date_beginning_value"></semantic-form-text-input>
-                    <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input row=true>
-                    <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input row=true>
+                    <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input>
+                    <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input>
                   </semantic-form-composite-input>   
 
                   <semantic-form-composite-input for='date_end' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
@@ -303,8 +305,8 @@
                   ]]'>
                     <semantic-form-hidden-input for="date_end_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
                     <semantic-form-text-input for="date_end_value"></semantic-form-text-input>
-                    <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input row=true>
-                    <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input row=true>
+                    <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input>
+                    <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input>
                   </semantic-form-composite-input>
                 </semantic-form-composite-input>
               </semantic-form-switch-case>
@@ -345,7 +347,7 @@
               part_copyright_declaration="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightDeclaration"
               part_usage_rights_still="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStill"
               part_usage_rights_streaming="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStreaming"
-              part_location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLocation"
+              part_location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLocation"
               part_see_also="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso"
               ]]'>
               <div style='display: none;'>
@@ -377,8 +379,8 @@
                       ]]'>
                         <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
                         <semantic-form-text-input for="date_value"></semantic-form-text-input>
-                        <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input row=true>
-                        <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input row=true>
+                        <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input>
+                        <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input>
                       </semantic-form-composite-input>
                     </semantic-form-switch-case>
                     <semantic-form-switch-case label='Date Range'>
@@ -396,8 +398,8 @@
                         ]]'>
                           <semantic-form-hidden-input for="date_beginning_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
                           <semantic-form-text-input for="date_beginning_value"></semantic-form-text-input>
-                          <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input row=true>
-                          <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input row=true>
+                          <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input>
+                          <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input>
                         </semantic-form-composite-input>   
       
                         <semantic-form-composite-input for='date_end' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
@@ -408,8 +410,8 @@
                         ]]'>
                           <semantic-form-hidden-input for="date_end_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
                           <semantic-form-text-input for="date_end_value"></semantic-form-text-input>
-                          <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input row=true>
-                          <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input row=true>
+                          <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input>
+                          <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input>
                         </semantic-form-composite-input>
                       </semantic-form-composite-input>
                     </semantic-form-switch-case>
@@ -443,8 +445,8 @@
                       ]]'>
                         <semantic-form-hidden-input for="date_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
                         <semantic-form-text-input for="date_value"></semantic-form-text-input>
-                        <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input row=true>
-                        <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input row=true>
+                        <semantic-form-checklist-input row=true for="date_qualifier"></semantic-form-checklist-input>
+                        <semantic-form-checklist-input row=true for="date_certainty"></semantic-form-checklist-input>
                       </semantic-form-composite-input>
                     </semantic-form-switch-case>
                     <semantic-form-switch-case label='Date Range'>
@@ -462,8 +464,8 @@
                         ]]'>
                           <semantic-form-hidden-input for="date_beginning_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
                           <semantic-form-text-input for="date_beginning_value"></semantic-form-text-input>
-                          <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input row=true>
-                          <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input row=true>
+                          <semantic-form-checklist-input row=true for="date_beginning_qualifier"></semantic-form-checklist-input>
+                          <semantic-form-checklist-input row=true for="date_beginning_certainty"></semantic-form-checklist-input>
                         </semantic-form-composite-input>   
       
                         <semantic-form-composite-input for='date_end' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
@@ -474,8 +476,8 @@
                         ]]'>
                           <semantic-form-hidden-input for="date_end_type" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
                           <semantic-form-text-input for="date_end_value"></semantic-form-text-input>
-                          <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input row=true>
-                          <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input row=true>
+                          <semantic-form-checklist-input row=true for="date_end_qualifier"></semantic-form-checklist-input>
+                          <semantic-form-checklist-input row=true for="date_end_certainty"></semantic-form-checklist-input>
                         </semantic-form-composite-input>
                       </semantic-form-composite-input>
                     </semantic-form-switch-case>
@@ -488,7 +490,8 @@
                         <semantic-form-checklist-input for='date_no_value' type='radio' row=true default-value='[[resolvePrefix "spav:ndsd"]]'></semantic-form-checklist-input>
                       </semantic-form-composite-input>
                     </semantic-form-switch-case>
-                  </semantic-form-switch>                </bs-col>
+                  </semantic-form-switch>
+                </bs-col>
               </bs-row>
               <bs-row>
                 <bs-col sm='4'>

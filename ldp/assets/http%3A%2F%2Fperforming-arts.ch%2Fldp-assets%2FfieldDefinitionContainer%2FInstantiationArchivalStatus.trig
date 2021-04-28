@@ -1,0 +1,32 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationArchivalStatus/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationArchivalStatus>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-0077663aad7b4fb79bb32ae89f489584-5yf3rq;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-0077663aad7b4fb79bb32ae89f489584-0ka5yk;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-0077663aad7b4fb79bb32ae89f489584-7h5wag;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Archival status"@en;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-0077663aad7b4fb79bb32ae89f489584-3qy79f;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Instantiation>;
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2004/02/skos/core#Concept>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-04-27T16:59:17.986Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-0077663aad7b4fb79bb32ae89f489584-7h5wag a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $value skos:inScheme spav:as . }" .
+  
+  _:genid-0077663aad7b4fb79bb32ae89f489584-0ka5yk a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject spao:hasArchivalStatus $value . } WHERE {}" .
+  
+  _:genid-0077663aad7b4fb79bb32ae89f489584-5yf3rq a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject spao:hasArchivalStatus $value . }" .
+  
+  _:genid-0077663aad7b4fb79bb32ae89f489584-3qy79f a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject spao:hasArchivalStatus $value . } WHERE { }" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationArchivalStatus> .
+}

@@ -1,10 +1,9 @@
 
-<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCarrierType/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCarrierType>
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationMaterial/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationMaterial>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Tipo di supporto"@it, "Carrier type"@en,
-      "Type de support"@fr, "Trägertyp"@de;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Material"@en;
     <http://www.metaphacts.com/ontology/fields#range> <rico:CarrierType>;
     <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-cc8f13c9df8d4be6ae70cfb724da1b07-rw0ire;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
@@ -12,12 +11,11 @@
     <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-cc8f13c9df8d4be6ae70cfb724da1b07-xprfkk;
     <http://www.metaphacts.com/ontology/fields#treePatterns> """{
   \"type\": \"simple\",
-  \"schemePattern\": \"?item skos:inScheme spav:fv .\",
+  \"schemePattern\": \"?item skos:inScheme spav:zj .\",
   \"relationPattern\": \"?item skos:broader ?parent\"
 }"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
     <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-cc8f13c9df8d4be6ae70cfb724da1b07-adwnl;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Instantiation>;
-    <http://www.w3.org/2000/01/rdf-schema#comment> "e.g. http://media.performing-arts.ch/iiif/image/ABC-123";
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
     <http://www.w3.org/ns/prov#generatedAtTime> "2021-04-27T16:17:43.380Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
@@ -26,17 +24,17 @@
   
   _:genid-cc8f13c9df8d4be6ae70cfb724da1b07-adwnl a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """DELETE {
- 	$subject rico:hasCarrierType $value .
+ 	$subject crm:P45_consists_of $value .
 } WHERE {
  	$value a rico:CarrierType .
 }""" .
   
   _:genid-cc8f13c9df8d4be6ae70cfb724da1b07-rw0ire a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT $value WHERE {
- 	$subject rico:hasCarrierType $value .
+ 	$subject crm:P45_consists_of $value .
 	$value a rico:CarrierType .
 }""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
-      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCarrierType> .
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationMaterial> .
 }

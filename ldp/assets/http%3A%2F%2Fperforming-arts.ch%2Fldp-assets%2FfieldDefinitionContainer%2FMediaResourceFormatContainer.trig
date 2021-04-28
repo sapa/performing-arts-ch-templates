@@ -1,0 +1,46 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceFormatContainer/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceFormatContainer>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#treePatterns> """{
+  \"type\": \"simple\",
+  \"schemePattern\": \"?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:cf \",
+  \"relationPattern\": \"?item skos:broader ?parent\"
+}"""^^<http://www.metaphacts.com/ontologies/platform#syntheticJson>;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource>;
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#range> <http://www.w3.org/2004/02/skos/core#Concept>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-e0d6de683f9e4338ae9d8956c471fb81-30hoa7;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Container format"@en;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-e0d6de683f9e4338ae9d8956c471fb81-v4xcd;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-e0d6de683f9e4338ae9d8956c471fb81-jhitff;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-e0d6de683f9e4338ae9d8956c471fb81-ysxemi;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-04-28T07:33:31.331Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-e0d6de683f9e4338ae9d8956c471fb81-v4xcd a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject ebucore:hasFormat $value . } WHERE { }" .
+  
+  _:genid-e0d6de683f9e4338ae9d8956c471fb81-30hoa7 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject ebucore:hasFormat $value .
+  $value skos:inScheme spav:cf .
+}""" .
+  
+  _:genid-e0d6de683f9e4338ae9d8956c471fb81-jhitff a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+  $subject ebucore:hasFormat $value . 
+} WHERE {
+  $subject ebucore:hasFormat $value .
+  $value skos:inScheme spav:cf .
+}""" .
+  
+  _:genid-e0d6de683f9e4338ae9d8956c471fb81-ysxemi a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $value skos:inScheme spav:cf . }" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceFormatContainer> .
+}

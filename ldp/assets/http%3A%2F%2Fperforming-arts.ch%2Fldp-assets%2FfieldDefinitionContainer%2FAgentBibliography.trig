@@ -3,24 +3,25 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AgentBibliography>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-81102b894960440d9b61b609b0b834b3-h8yl5;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-e6b47971b4bd46c5bde038af36a5c0bf-944zw;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "4";
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Person>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-81102b894960440d9b61b609b0b834b3-6mrxg;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Bibliography"@en, "Bibliografie"@de;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-81102b894960440d9b61b609b0b834b3-tzc6c;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Bibliography"@en, "Bibliografie"@de,
+      "Bibliographie"@fr;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-e6b47971b4bd46c5bde038af36a5c0bf-zt4vvh;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-e6b47971b4bd46c5bde038af36a5c0bf-13ay5;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T17:04:36.506Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-04-27T17:38:40.452Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-81102b894960440d9b61b609b0b834b3-tzc6c a <http://spinrdf.org/sp#Query>;
+  _:genid-e6b47971b4bd46c5bde038af36a5c0bf-zt4vvh a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "DELETE { $subject spao:hasBibliography $value . } WHERE { }" .
   
-  _:genid-81102b894960440d9b61b609b0b834b3-h8yl5 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject spao:hasBibliography ?value . }" .
-  
-  _:genid-81102b894960440d9b61b609b0b834b3-6mrxg a <http://spinrdf.org/sp#Query>;
+  _:genid-e6b47971b4bd46c5bde038af36a5c0bf-13ay5 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "INSERT { $subject spao:hasBibliography $value . } WHERE { }" .
+  
+  _:genid-e6b47971b4bd46c5bde038af36a5c0bf-944zw a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject spao:hasBibliography ?value . }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AgentBibliography> .
