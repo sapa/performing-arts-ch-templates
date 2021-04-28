@@ -25,14 +25,6 @@
         material="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationMaterial"
         extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationExtent"
         physical_characteristics="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationPhysicalCharacteristics"
-        color="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceColor"
-        standard="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceStandard"
-        aspect_ratio="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceAspectRatio"
-        video_damage="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceVideoDamage"
-        channels="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceChannels"
-        duration="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SchemaDuration"
-        scannig_format="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceScanningFormat"
-        scannig_order="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceScanningOrder"
         file="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RepresentationFile"
         see_also="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso"
         note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNote"
@@ -73,54 +65,20 @@
         <bs-row>
           <bs-col sm='4'>
             <semantic-form-tree-picker-input for="material"></semantic-form-tree-picker-input>
-            <semantic-form-text-input for="physical_characteristics" multiline=true></semantic-form-text-input>
-          </bs-col>
-          <bs-col sm='4'>
+        </bs-col>
+        <bs-col sm='4'>
             <semantic-form-composite-input for='extent' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
                 extent_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentValue"
                 extent_unit="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentUnit"
-              ]]'>
+                ]]'>
                 <bs-row>
-                  <bs-col sm='4'><semantic-form-text-input for='extent_value'></semantic-form-text-input></bs-col>
-                  <bs-col sm='8'><semantic-form-select-input for='extent_unit'></semantic-form-select-input></bs-col>
+                    <bs-col sm='4'><semantic-form-text-input for='extent_value'></semantic-form-text-input></bs-col>
+                    <bs-col sm='8'><semantic-form-select-input for='extent_unit'></semantic-form-select-input></bs-col>
                 </bs-row>
             </semantic-form-composite-input>
-          </bs-col>
-          <bs-col sm='4'>
-            <semantic-form-text-input for="duration"></semantic-form-text-input>
-          </bs-col>
-        </bs-row>
-        <bs-row>
-          <bs-col sm='2'>
-            <semantic-form-select-input for="color"></semantic-form-select-input>
-            <semantic-form-checklist-input type='radio' row=false for='standard'></semantic-form-checklist-input>
-          </bs-col>
-          <bs-col sm='2'>
-            <semantic-form-select-input for="aspect_ratio"></semantic-form-select-input>
-          </bs-col>
-          <bs-col sm='2'>
-            <semantic-form-checklist-input type='radio' row=false for='scannig_format'></semantic-form-checklist-input>
-            <semantic-form-checklist-input type='radio' row=false for='scannig_order'></semantic-form-checklist-input>
-          </bs-col>
-          <bs-col sm='2'>
-            <semantic-form-text-input for="channels"></semantic-form-text-input>
-          </bs-col>
-          <bs-col sm='4'>
-            <semantic-form-tree-picker-input for="video_damage"></semantic-form-tree-picker-input>
-          </bs-col>
-        </bs-row>
-        <bs-row>
-          <bs-col sm='1'>
-          </bs-col>
-          <bs-col sm='1'>
-          </bs-col>
-          <bs-col sm='2'>
-          </bs-col>
-          <bs-col sm='2'>
-          </bs-col>
-          <bs-col sm='2'>
-          </bs-col>
-          <bs-col sm='4'>
+            </bs-col>
+            <bs-col sm='4'>
+              <semantic-form-text-input for="physical_characteristics" multiline=true></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <hr />

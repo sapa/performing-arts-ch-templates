@@ -800,12 +800,18 @@
             
         </bs-tab>
 
-        [[#if (hasPermission "forms:ldp:*")]] 
-        <bs-tab event-key='instantiaton editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
-        [[> sapaModule:InstantiationForm]]
+        [[#if (ask "ASK { ?? a ebucore:MediaResource . }")]]
+        <bs-tab event-key='analog editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+            [[> sapaModule:InstantiationFormAnalog]]
         </bs-tab>
         [[/if]]
-
+        
+        [[#if (ask "ASK { ?? a premis:Representation . }")]]
+        <bs-tab event-key='digital editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+            [[> sapaModule:InstantiationFormDigital]]
+        </bs-tab>
+        [[/if]]
+        
         [[> sapaModule:AdminTabs]]
 
     </bs-tabs>  

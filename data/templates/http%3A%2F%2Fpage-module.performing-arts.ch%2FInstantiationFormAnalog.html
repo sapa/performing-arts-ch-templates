@@ -1,0 +1,132 @@
+  <div data-flex-layout='row top-stretch'>
+    <semantic-form 
+     [[#if create]]
+        new-subject-template='http://data.performing-arts.ch/o/{{UUID}}'
+        post-action="redirect"
+      [[else]]
+        subject='[[this]]'
+        post-action="reload"
+     [[/if]]
+      
+      browser-persistence=true
+      persistence='ldp' 
+      form-id='instantiaton'
+      fields='[[fieldDefinitions
+        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
+        record="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationRecord"
+        identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier"
+        legacy_identifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier"
+        archival_status="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationArchivalStatus"
+        representation_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationRepresentationType"
+        carrier_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCarrierType"
+        history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationHistory"
+        integrity="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationIntegrity"
+        condition="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCondition"
+        material="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationMaterial"
+        extent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationExtent"
+        physical_characteristics="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationPhysicalCharacteristics"
+        color="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceColor"
+        standard="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceStandard"
+        aspect_ratio="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceAspectRatio"
+        video_damage="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceVideoDamage"
+        channels="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceChannels"
+        duration="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SchemaDuration"
+        scannig_format="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceScanningFormat"
+        scannig_order="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceScanningOrder"
+        file="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RepresentationFile"
+        see_also="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso"
+        note="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNote"
+      ]]'>
+              <!-- http://ontology.performing-arts.ch/lastControl -->
+      <bs-panel>
+        <semantic-form-recover-notification></semantic-form-recover-notification>
+        <div style="display: none;">
+          <!-- TODO: Not all Instantiations are ebucore:MediaResource ! -->
+          <semantic-form-hidden-input for='rdf_type' default-values='["[[resolvePrefix "rico:Instantiation"]]", "[[resolvePrefix "ebucore:MediaResource"]]"]'></semantic-form-hidden-input>
+        </div>
+        <bs-row>
+          <bs-col sm='4'>
+            <semantic-form-text-input for="identifier"></semantic-form-text-input>
+            <semantic-form-text-input for="legacy_identifier"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-select-input for="representation_type"></semantic-form-select-input>
+            <semantic-form-tree-picker-input for="carrier_type"></semantic-form-tree-picker-input>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-select-input for="archival_status"></semantic-form-select-input>
+            <semantic-form-autocomplete-input for='record'></semantic-form-autocomplete-input>
+          </bs-col>
+        </bs-row>
+        <hr />
+        <bs-row>
+          <bs-col sm='4'>
+            <semantic-form-text-input for="history" multiline=true></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-text-input for="integrity" multiline=true></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-select-input for="condition"></semantic-form-select-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='4'>
+            <semantic-form-tree-picker-input for="material"></semantic-form-tree-picker-input>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-composite-input for='extent' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+            extent_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentValue"
+            extent_unit="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentUnit"
+            ]]'>
+            <bs-row>
+              <bs-col sm='4'><semantic-form-text-input for='extent_value'></semantic-form-text-input></bs-col>
+              <bs-col sm='8'><semantic-form-select-input for='extent_unit'></semantic-form-select-input></bs-col>
+            </bs-row>
+          </semantic-form-composite-input>
+        </bs-col>
+        <bs-col sm='4'>
+            <semantic-form-text-input for="physical_characteristics" multiline=true></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='2'>
+            <semantic-form-text-input for="duration"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-select-input for="color"></semantic-form-select-input>
+            <semantic-form-checklist-input type='radio' row=false for='standard'></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-select-input for="aspect_ratio"></semantic-form-select-input>
+            <semantic-form-checklist-input type='radio' row=false for='scannig_format'></semantic-form-checklist-input>
+            <semantic-form-checklist-input type='radio' row=false for='scannig_order'></semantic-form-checklist-input>
+          </bs-col>
+          <bs-col sm='2'>
+            <semantic-form-text-input for="channels"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-tree-picker-input for="video_damage"></semantic-form-tree-picker-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='1'>
+          </bs-col>
+          <bs-col sm='1'>
+          </bs-col>
+          <bs-col sm='2'>
+          </bs-col>
+          <bs-col sm='2'>
+          </bs-col>
+          <bs-col sm='2'>
+          </bs-col>
+          <bs-col sm='4'>
+          </bs-col>
+        </bs-row>
+        <semantic-form-errors></semantic-form-errors>
+        <!-- save and reset button for form -->
+        <button name="submit" class="btn btn-secondary">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>
+        <button name="reset" class="btn btn-secondary">[[i18n "FormReset" bundle="performing-arts-ch"]]</button>
+      </bs-panel>
+    </semantic-form>
+  </div>
