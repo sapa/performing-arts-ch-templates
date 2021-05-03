@@ -172,7 +172,8 @@
             {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch"]]", "cellTemplate": "{{> producer}}", "variableName": "producers"} ,
             {"displayName": "[[i18n "ProductionsTableSeason" bundle="performing-arts-ch"]]", "cellTemplate":"{{> season}}", "variableName": "premieredatebegin"}, 
             {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch"]]", "variableName": "plan"}, 
-            {"displayName": "[[i18n "ProductionsTableFunction" bundle="performing-arts-ch"]]", "cellTemplate": "{{>function}}"}
+            {"displayName": "[[i18n "ProductionsTableFunction" bundle="performing-arts-ch"]]", "cellTemplate": "{{>function}}"},
+            {"displayName": "", "cellTemplate": "{{> recording}}"}
           ]'
           number-of-displayed-rows=20
           options='{"showFilter": true}'>
@@ -241,6 +242,25 @@
               </template>
             </semantic-query>   
           </template>
+
+          <template id='recording'>
+            <semantic-query 
+              query='SELECT ?recording WHERE {
+                {
+                  ?recording frbroo:R14_incorporates <{{plan.value}}> ;
+                    a frbroo:F26_Recording .
+                } UNION {
+                  ?performance frbroo:R25_performed <{{plan.value}}> ;
+                    a frbroo:F31_Performance ;
+                    crm:P9_consists_of ?recorded_performance .
+                  ?recorded_performance a frbroo:F31_Performance .
+                  ?recording crm:P70_documents ?recorded_performance ;
+                    a frbroo:F26_Recording .
+                }
+              } LIMIT 1'
+              template = '<div>{{#each bindings}}<img src="../assets/icons/solid/camcorder-solid.svg" style="height: 1.4em; width: 1.4em; padding-right:0.5em;" />{{/each}}</div>'>
+            </semantic-query> 
+          </template>  
 
         </semantic-table>
       </semantic-search-result>
