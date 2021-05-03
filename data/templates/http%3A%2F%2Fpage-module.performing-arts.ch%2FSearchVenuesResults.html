@@ -39,7 +39,7 @@
 
         <template id='venue'>                     
           <semantic-query 
-            query='SELECT ?venue ?supervenue WHERE {
+            query='SELECT DISTINCT ?venue ?supervenue WHERE {
                 BIND(<{{subject.value}}> AS ?venue)
                 OPTIONAL {
                   ?supervenue crm:P46_is_composed_of ?venue .
