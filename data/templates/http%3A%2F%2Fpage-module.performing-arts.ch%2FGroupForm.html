@@ -82,16 +82,18 @@
           </bs-col>
         </bs-row>
         <bs-row>
-          <bs-col sm='3'>
-            <semantic-form-autocomplete-input for="associations"></semantic-form-autocomplete-input>
-          </bs-col>
-          <bs-col sm='3'>
+          <bs-col sm='4'>
             <semantic-form-autocomplete-input for="predecessor"></semantic-form-autocomplete-input>
           </bs-col>
-          <bs-col sm='3'>
+          <bs-col sm='4'>
             <semantic-form-autocomplete-input for="controller"></semantic-form-autocomplete-input>
           </bs-col>
-          <bs-col sm='3'>
+          <bs-col sm='4'>
+            <semantic-form-autocomplete-input for="associations"></semantic-form-autocomplete-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
             <semantic-form-autocomplete-input for="members">
               <semantic-form new-subject-template="http://data.performing-arts.ch/a/{{UUID}}" fields='[[fieldDefinitions
                   member_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
@@ -105,8 +107,6 @@
                 </semantic-form>
               </semantic-form-autocomplete-input>            
           </bs-col>
-        </bs-row>
-        <bs-row>
           <bs-col sm='6'>            
             <semantic-form-autocomplete-input for="venues">
               <semantic-form new-subject-template="http://data.performing-arts.ch/o/{{UUID}}" fields='[[fieldDefinitions
@@ -123,14 +123,14 @@
               </semantic-form>            
             </semantic-form-autocomplete-input>            
           </bs-col>
-          <bs-col sm='6'>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='12'>
+            <semantic-form-text-input for='history' multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <bs-row>
-          <bs-col sm='6'>
-            <semantic-form-text-input for='history' multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>
-          </bs-col>
-          <bs-col sm='6'>
+          <bs-col sm='12'>
             <semantic-form-text-input for='bibliography' multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
         </bs-row>
