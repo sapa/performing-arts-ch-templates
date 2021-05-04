@@ -14,18 +14,6 @@
                         >
                     </semantic-query>
 
-                    <!-- legacy identifier -->
-                    <semantic-query 
-                        query="SELECT ?label ?identifier WHERE {
-                            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier>) }
-                            ?? spao:legacyIdentifier ?identifier . }"
-                        template='<div>
-                            {{#ifCond bindings.length ">" 0}}
-                                <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
-                            {{/ifCond}}
-                            <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
-                    </semantic-query>
-
                     <!-- archival status -->
                     <semantic-query 
                         query="SELECT ?archival_status WHERE { ?? spao:hasArchivalStatus ?archival_status . }"
@@ -35,21 +23,6 @@
                                 <li><mp-label iri="{{archival_status.value}}"></mp-label></li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
-
-                    <!-- history -->
-                    <semantic-query 
-                        query="SELECT ?label ?history WHERE {
-                                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory>) }
-                                ?? rico:history ?history .
-                            }"
-                        template='<div>
-                            {{#ifCond bindings.length ">" 0}}
-                                <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
-                            {{/ifCond}}
-                            <div>{{#each bindings}}
-                                <p style="white-space: pre-line;">{{history.value}}</p>
-                            {{/each}}</div></div>'>
-                    </semantic-query>        
 
                     <!-- representation type -->
                     <semantic-query 
@@ -72,6 +45,21 @@
                             {{/each}}</ul>
                         </div>'>
                     </semantic-query>
+
+                    <!-- history -->
+                    <semantic-query 
+                        query="SELECT ?label ?history WHERE {
+                                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory>) }
+                                ?? rico:history ?history .
+                            }"
+                        template='<div>
+                            {{#ifCond bindings.length ">" 0}}
+                                <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
+                            {{/ifCond}}
+                            <div>{{#each bindings}}
+                                <p style="white-space: pre-line;">{{history.value}}</p>
+                            {{/each}}</div></div>'>
+                    </semantic-query>        
 
                     <!-- integrity -->
                     <semantic-query 
@@ -496,60 +484,14 @@
 
                             <!-- last control -->
                             <semantic-query 
-                                query="SELECT ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
-                                WHERE {
-                                    <{{file.value}}> spao:lastControl ?date .
-                                    {
-                                        {
-                                            ?date rico:normalizedDateValue ?normalized_date .
-                                        } UNION {
-                                            ?date rico:expressedDate ?expressed_date .
-                                        }
-                                        BIND(IF(BOUND(?expressed_date), ?expressed_date, ?normalized_date) AS ?single_date)
-                                        OPTIONAL { ?date rico:dateQualifier ?single_qualifier . }
-                                        OPTIONAL { ?date rico:certainty ?single_certainty . }
-                                    } UNION {
-                                        ?date a rico:DateRange .
-                                        OPTIONAL {
-                                            ?date rico:hasBeginningDate ?b .
-                                            ?b rico:normalizedDateValue ?beginning_date .
-                                            OPTIONAL { ?b rico:dateQualifier ?beginning_qualifier . }
-                                            OPTIONAL { ?b rico:certainty ?beginning_certainty . }
-                                        }
-                                        OPTIONAL {
-                                            ?date rico:hasEndDate ?e .
-                                            ?e rico:normalizedDateValue ?end_date .
-                                            OPTIONAL { ?e rico:dateQualifier ?end_qualifier . }
-                                            OPTIONAL { ?e rico:certainty ?end_certainty . }
-                                        }
-                                    }
-                                }"
+                                query="SELECT ?date WHERE { <{{file.value}}> spao:lastControl [ rico:normalizedDateValue ?date ] }"
                                 template='<div>
                                     {{#ifCond bindings.length ">" 0}}<h5>Last control</h5>{{/ifCond}}
                                     <ul class="list-unstyled">{{#each bindings}}
-                                        <li>
-                                            {{#if single_date.value}}
-                                                {{#if single_qualifier.value}}<mp-label iri="{{single_qualifier.value}}"></mp-label> {{/if}}
-                                                {{single_date.value}}
-                                                {{#if single_certainty.value}}<span> (<mp-label iri="{{single_certainty.value}}"></mp-label>)</span>{{/if}}
-                                            {{else}}
-                                                {{#if beginning_date.value}}
-                                                    {{#if beginning_qualifier.value}}<mp-label iri="{{beginning_qualifier.value}}"></mp-label> {{/if}}
-                                                    {{beginning_date.value}}
-                                                    {{#if beginning_certainty.value}}<span> (<mp-label iri="{{beginning_certainty.value}}"></mp-label>)</span>{{/if}}
-                                                {{/if}}
-                                                <span> - </span>
-                                                {{#if end_date.value}}
-                                                    {{#if end_qualifier.value}}<mp-label iri="{{end_qualifier.value}}"></mp-label> {{/if}}
-                                                    {{end_date.value}}
-                                                    {{#if end_certainty.value}}<span> (<mp-label iri="{{end_certainty.value}}"></mp-label>)</span>{{/if}}
-                                                {{/if}}
-                                            {{/if}}
-                                        </li>
-                                    {{/each}}</ul></div>'
-                                >
+                                        <li>{{date.value}}</li>
+                                    {{/each}}</ul></div>'>
                             </semantic-query>
-
+    
                             <!-- see also -->
                             <semantic-query
                                 query='SELECT DISTINCT ?reference WHERE { <{{file.value}}> spao:seeAlso ?reference . }'
@@ -631,56 +573,11 @@
 
                     <!-- last control -->
                     <semantic-query 
-                        query="SELECT ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
-                        WHERE {
-                            ?? spao:lastControl ?date .
-                            {
-                                {
-                                    ?date rico:normalizedDateValue ?normalized_date .
-                                } UNION {
-                                    ?date rico:expressedDate ?expressed_date .
-                                }
-                                BIND(IF(BOUND(?expressed_date), ?expressed_date, ?normalized_date) AS ?single_date)
-                                OPTIONAL { ?date rico:dateQualifier ?single_qualifier . }
-                                OPTIONAL { ?date rico:certainty ?single_certainty . }
-                            } UNION {
-                                ?date a rico:DateRange .
-                                OPTIONAL {
-                                    ?date rico:hasBeginningDate ?b .
-                                    ?b rico:normalizedDateValue ?beginning_date .
-                                    OPTIONAL { ?b rico:dateQualifier ?beginning_qualifier . }
-                                    OPTIONAL { ?b rico:certainty ?beginning_certainty . }
-                                }
-                                OPTIONAL {
-                                    ?date rico:hasEndDate ?e .
-                                    ?e rico:normalizedDateValue ?end_date .
-                                    OPTIONAL { ?e rico:dateQualifier ?end_qualifier . }
-                                    OPTIONAL { ?e rico:certainty ?end_certainty . }
-                                }
-                            }
-                        }"
+                        query="SELECT ?date WHERE { ?? spao:lastControl [ rico:normalizedDateValue ?date ] }"
                         template='<div>
                             {{#ifCond bindings.length ">" 0}}<h5>Last control</h5>{{/ifCond}}
                             <ul class="list-unstyled">{{#each bindings}}
-                                <li>
-                                    {{#if single_date.value}}
-                                        {{#if single_qualifier.value}}<mp-label iri="{{single_qualifier.value}}"></mp-label> {{/if}}
-                                        {{single_date.value}}
-                                        {{#if single_certainty.value}}<span> (<mp-label iri="{{single_certainty.value}}"></mp-label>)</span>{{/if}}
-                                    {{else}}
-                                        {{#if beginning_date.value}}
-                                            {{#if beginning_qualifier.value}}<mp-label iri="{{beginning_qualifier.value}}"></mp-label> {{/if}}
-                                            {{beginning_date.value}}
-                                            {{#if beginning_certainty.value}}<span> (<mp-label iri="{{beginning_certainty.value}}"></mp-label>)</span>{{/if}}
-                                        {{/if}}
-                                        <span> - </span>
-                                        {{#if end_date.value}}
-                                            {{#if end_qualifier.value}}<mp-label iri="{{end_qualifier.value}}"></mp-label> {{/if}}
-                                            {{end_date.value}}
-                                            {{#if end_certainty.value}}<span> (<mp-label iri="{{end_certainty.value}}"></mp-label>)</span>{{/if}}
-                                        {{/if}}
-                                    {{/if}}
-                                </li>
+                                <li>{{date.value}}</li>
                             {{/each}}</ul></div>'
                         >
                     </semantic-query>
@@ -691,16 +588,6 @@
                         template='<div><h5>Copy path</h5>{{#each bindings}}<div>{{path.value}}</div>{{/each}}</div>'>
                     </semantic-query>
                     
-                    <!-- comment -->
-                    <semantic-query 
-                        query="SELECT ?comment WHERE { ?? rdf:comment ?comment . }"
-                        template='<div>
-                            <h5>Comment</h5>
-                            <ul class="list-unstyled">{{#each bindings}}
-                                <li>{{comment.value}}</li>
-                            {{/each}}</ul></div>'>
-                    </semantic-query>
-
                     <!-- ACCESS -->
 
                     [[> sapaModule:RecordResourceAccess]]
@@ -750,14 +637,6 @@
                         template='<div><h5>Note</h5>{{#each bindings}}<div>{{note.value}}</div>{{/each}}</div>'>
                     </semantic-query>
 
-                    [[#if (hasPermission "forms:ldp:*")]] 
-                    <!-- internal notes -->
-                    <semantic-query 
-                        query='SELECT ?note WHERE { ?? spao:hasInternalNote ?note . }'
-                        template='<div><h5>Internal note</h5>{{#each bindings}}<div>{{note.value}}</div>{{/each}}</div>'>
-                    </semantic-query>
-                    [[/if]]
-
                     <!-- protection duration -->
                     <semantic-query 
                         query='SELECT ?label ?value WHERE {
@@ -802,7 +681,7 @@
 
         [[#if (ask "ASK { ?? a ebucore:MediaResource . }")]]
         <bs-tab event-key='analog editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
-            [[> sapaModule:InstantiationFormAnalog]]
+            [[> sapaModule:InstantiationFormPhysical]]
         </bs-tab>
         [[/if]]
         
