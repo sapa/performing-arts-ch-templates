@@ -28,6 +28,12 @@ a:hover,
 a:focus {
   color: #158ce4;
 }
+.form-section {
+  font-weight: 700;
+}
+.semantic-form-input-decorator__label {
+  font-weight: 500 !important;
+}
 .page-holder {
   padding-bottom: 4em ;
 }

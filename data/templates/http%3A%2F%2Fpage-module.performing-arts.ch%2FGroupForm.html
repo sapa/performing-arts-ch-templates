@@ -38,7 +38,8 @@
       ]]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
-        <semantic-form-checklist-input for="rdf_type" type="radio"  default-values='["[[resolvePrefix "crm:E74_Group"]]", "[[resolvePrefix "rico:Group"]]"]' row=true></semantic-form-checklist-input>
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionIdentification" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
+        <bs-row><bs-col sm='12'><semantic-form-checklist-input for="rdf_type" type="radio"  default-values='["[[resolvePrefix "crm:E74_Group"]]", "[[resolvePrefix "rico:Group"]]"]' row=true></semantic-form-checklist-input></bs-col></bs-row>
         <bs-row>
           <bs-col sm='6'>
             <semantic-form-text-input for='common_appellation' languages='["en","de","fr","it"]'></semantic-form-text-input>
@@ -59,12 +60,13 @@
           </bs-col>
         </bs-row> 
         <hr />
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionDescription" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='3'>
-            <semantic-form-tree-picker-input for="group_type"></semantic-form-tree-picker-input>
+            <semantic-form-tree-picker-input for="genre"></semantic-form-tree-picker-input>
           </bs-col>
           <bs-col sm='3'>
-            <semantic-form-tree-picker-input for="genre"></semantic-form-tree-picker-input>
+            <semantic-form-tree-picker-input for="group_type"></semantic-form-tree-picker-input>
           </bs-col>
           <bs-col sm='6'>
             <semantic-form-text-input for="description"></semantic-form-text-input>
@@ -135,6 +137,7 @@
           </bs-col>
         </bs-row>
         <hr />
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionAddInfo" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='6'>
             <semantic-form-text-input for="website"></semantic-form-text-input>
@@ -144,6 +147,7 @@
           </bs-col>
         </bs-row>
         <hr />
+        <bs-row><bs-col sm='12'><div class='form-section'>[[i18n "FormSectionNotes" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm="5">
             <semantic-form-text-input for="note_public" multiline=true></semantic-form-text-input>

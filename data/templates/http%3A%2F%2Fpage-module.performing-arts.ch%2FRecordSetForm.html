@@ -68,6 +68,7 @@
           <semantic-form-hidden-input for='scope'></semantic-form-hidden-input>
           <semantic-form-hidden-input for='index'></semantic-form-hidden-input>
         </div>
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionIdentification" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='4'>
             <semantic-form-text-input for="identifier"></semantic-form-text-input>
@@ -82,26 +83,9 @@
         </bs-row>
         <bs-row>
           <bs-col sm='4'>
-            <semantic-form-select-input for="type"></semantic-form-select-input>
+            <semantic-form-text-input for="delivery_number"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='4'>
-            <semantic-form-tree-picker-input for="parent"></semantic-form-tree-picker-input>
-          </bs-col>
-          <bs-col sm='4'>
-            &nbsp;
-          </packing-col>
-        </bs-row>
-        <bs-row>
-          <bs-col sm='4'>
-            <semantic-form-tree-picker-input for="location"></semantic-form-tree-picker-input>
-          </bs-col>
-          <bs-col sm='8'>
-            <semantic-form-checklist-input row=true for="packing"></semantic-form-checklist-input>
-          </bs-col>
-        </bs-row>
-        <bs-row>
-          <bs-col sm='4'>
-            <semantic-form-text-input for="date_legacy"></semantic-form-text-input>
             <semantic-form-switch for='date' switch-on-field='date_type'>
               <semantic-form-switch-case label='Single Date'>
                 <semantic-form-composite-input for='date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
@@ -160,7 +144,28 @@
             </semantic-form-switch>
           </bs-col>
           <bs-col sm='4'>
-            <semantic-form-text-input for="extent_depricated"></semantic-form-text-input>
+            <semantic-form-text-input for="date_legacy"></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
+        <hr />
+        <bs-row>
+          <bs-col sm='4'>
+            <semantic-form-select-input for="type"></semantic-form-select-input>
+          </bs-col>
+          <bs-col sm='8'>
+            <semantic-form-tree-picker-input for="parent"></semantic-form-tree-picker-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='4'>
+            <semantic-form-tree-picker-input for="location"></semantic-form-tree-picker-input>
+          </bs-col>
+          <bs-col sm='8'>
+            <semantic-form-checklist-input row=true for="packing"></semantic-form-checklist-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='4'>
             <semantic-form-composite-input for='extent' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
               extent_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentValue"
               extent_unit="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentUnit"
@@ -168,24 +173,35 @@
                 <semantic-form-text-input for='extent_value'></semantic-form-text-input>
                 <semantic-form-select-input for='extent_unit'></semantic-form-select-input>
             </semantic-form-composite-input>
-            <semantic-form-text-input for="doublets"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='4'>
-            <semantic-form-autocomplete-input for="provenance"></semantic-form-autocomplete-input>
+            <semantic-form-text-input for="extent_depricated"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-text-input for="doublets"></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
+        <hr />
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionContext" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
+        <bs-row>
+          <bs-col sm='8'>
+            <semantic-form-text-input for="history" multiline=true></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-select-input for='acquisition'></semantic-form-select-input>
+            <semantic-form-autocomplete-input for="creator"></semantic-form-autocomplete-input>
           </bs-col>
         </bs-row>
         <bs-row>
           <bs-col sm='8'>
-            <semantic-form-text-input for="history" multiline=true></semantic-form-text-input>
             <semantic-form-text-input for="cassation" multiline=true></semantic-form-text-input>
           </bs-col>
           <bs-col sm='4'>
-            <semantic-form-autocomplete-input for="creator"></semantic-form-autocomplete-input>
-            <semantic-form-select-input for='acquisition'></semantic-form-select-input>
-            <semantic-form-text-input for="delivery_number"></semantic-form-text-input>
+            <semantic-form-autocomplete-input for="provenance"></semantic-form-autocomplete-input>            
           </bs-col>
         </bs-row>
-        <hr>
+        <hr />
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionContent" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='8'>
             <semantic-form-text-input for="description" multiline=true></semantic-form-text-input>
@@ -203,7 +219,8 @@
             <semantic-form-tree-picker-input for="language"></semantic-form-tree-picker-input>
           </bs-col>
         </bs-row>
-        <hr>
+        <hr />
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionAccess" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='4'>
             <semantic-form-text-input multiline=true for="access_conditions"></semantic-form-text-input>
@@ -222,7 +239,8 @@
             <semantic-form-checklist-input type='radio' for='accessibility'></semantic-form-checklist-input>
           </bs-col>
         </bs-row>
-        <hr>
+        <hr />
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionRights" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='4'>
             <semantic-form-text-input for="copyright_notice"></semantic-form-text-input>
@@ -239,6 +257,8 @@
             <semantic-form-checklist-input type='radio' for="usage_rights_streaming"></semantic-form-checklist-input>
           </bs-col>
         </bs-row>
+        <hr />
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionAddSources" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='6'>
             <semantic-form-text-input for="related"></semantic-form-text-input>
@@ -247,6 +267,8 @@
             <semantic-form-autocomplete-input for="see_also"></semantic-form-autocomplete-input>
           </bs-col>          
         </bs-row>
+        <hr />
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionNotes" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='6'>
             <semantic-form-text-input multiline=true for="note"></semantic-form-text-input>
@@ -255,11 +277,13 @@
             <semantic-form-text-input multiline=true for="note_internal"></semantic-form-text-input>
           </bs-col>          
         </bs-row>
+        <hr />
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionControlDescription" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
-          <bs-col sm='6'>
+          <bs-col sm='4'>
             <semantic-form-text-input multiline=true for="processing_convention"></semantic-form-text-input>
           </bs-col>          
-          <bs-col sm='6'>
+          <bs-col sm='4'>
             <semantic-form-switch for='processing_date' switch-on-field='date_type'>
               <semantic-form-switch-case label='Single Date'>
                 <semantic-form-composite-input for='processing_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
@@ -316,16 +340,17 @@
                 </semantic-form-composite-input>
               </semantic-form-switch-case>
             </semantic-form-switch>
+          </bs-col>          
+          <bs-col sm='4'>
             <semantic-form-text-input for="responsible"></semantic-form-text-input>
           </bs-col>          
         </bs-row>
-        <bs-row>
-          <bs-col sm='12'>
-            <semantic-form-text-input for="iiif"></semantic-form-text-input>
-          </bs-col>          
-        </bs-row>
-        <hr>
-        <semantic-form-text-input for="comment" multiline=true></semantic-form-text-input>
+        <hr />
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionSupplement" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
+        <bs-row><bs-col sm='12'>
+          <semantic-form-text-input for="comment" multiline=true></semantic-form-text-input>
+        </bs-col></bs-row>
+        <hr />
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
         <button name="submit" class="btn btn-secondary">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>
