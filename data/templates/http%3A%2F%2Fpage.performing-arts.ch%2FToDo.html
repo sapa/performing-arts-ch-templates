@@ -221,7 +221,7 @@
                                 } GROUP BY ?producer_label
                                 ORDER BY DESC(?producer_count)' 
                                 column-configuration='[
-                                    {"displayName": "Producer", "cellTemplate":"{{>productions}}"},
+                                    {"variableName": "producer_label", "displayName": "Producer", "cellTemplate":"{{>productions}}"},
                                     {"variableName": "producer_count", "displayName": "Count"}
                                 ]'
                                 number-of-displayed-rows=20
@@ -255,7 +255,7 @@
                                     } GROUP BY ?producer_label
                                 ORDER BY DESC(?producer_count)' 
                                 column-configuration='[
-                                    {"displayName": "Producer", "cellTemplate":"{{>productions}}"},
+                                    {"variableName": "producer_label", "displayName": "Producer", "cellTemplate":"{{>productions}}"},
                                     {"variableName": "producer_count", "displayName": "Count"}
                                 ]'
                                 number-of-displayed-rows=20
@@ -288,7 +288,7 @@
                                 } GROUP BY ?producer_label
                                 ORDER BY DESC(?producer_count)' 
                                 column-configuration='[
-                                    {"displayName": "Producer", "cellTemplate":"{{>productions}}"},
+                                    {"variableName": "producer_label", "displayName": "Producer", "cellTemplate":"{{>productions}}"},
                                     {"variableName": "producer_count", "displayName": "Count"}
                                 ]'
                                 number-of-displayed-rows=20
@@ -466,12 +466,12 @@
                 } GROUP BY (?wikidata) (?q)
                 HAVING (COUNT(?sapa)>1)' 
                 column-configuration='[
-                    {"displayName": "Wikidata", "cellTemplate": "<a href=\"http://www.wikidata.org/entity/{{q.value}}\" target=\"_blank\">{{q.value}}</a>"},
+                    {"variableName": "wikidata", "displayName": "Wikidata", "cellTemplate": "<a href=\"http://www.wikidata.org/entity/{{q.value}}\" target=\"_blank\">{{q.value}}</a>"},
                     {"displayName": "Items", "cellTemplate": "{{>items}}"}
                 ]'
                 number-of-displayed-rows=20
                 no-result-template='No results found.'
-                options='{"showFilter": true}'>
+                options='{"showFilter": false}'>
                 <template id='items'>
                     <semantic-query 
                         query='SELECT DISTINCT ?item WHERE { ?item owl:sameAs <{{wikidata.value}}> . }'
