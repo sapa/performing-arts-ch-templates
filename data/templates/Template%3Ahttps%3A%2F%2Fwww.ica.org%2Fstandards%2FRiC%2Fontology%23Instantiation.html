@@ -693,14 +693,14 @@
         </bs-tab>
 
         [[#if (ask "ASK { ?? a ebucore:MediaResource . }")]]
-        <bs-tab event-key='analog editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+        <bs-tab event-key='editing physical' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
             [[> sapaModule:InstantiationFormPhysical]]
         </bs-tab>
         [[/if]]
         
         [[#if (ask "ASK { ?? a premis:Representation . }")]]
-        <bs-tab event-key='digital editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
-            [[> sapaModule:InstantiationFormDigital]]
+        <bs-tab event-key='editing virtual' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+            [[> sapaModule:InstantiationFormVirtual]]
         </bs-tab>
         [[/if]]
         
