@@ -45,7 +45,7 @@
             <semantic-form-text-input for='common_appellation' languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
           <bs-col sm='3'>
-            <semantic-form-checklist-input type='radio' row=false for='common_appellation_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
+            <semantic-form-checklist-input type='radio' row=true for='common_appellation_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
           </bs-col>
           <bs-col sm='3'>
             <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
@@ -149,13 +149,13 @@
         <hr />
         <bs-row><bs-col sm='12'><div class='form-section'>[[i18n "FormSectionNotes" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
-          <bs-col sm="5">
+          <bs-col sm="6">
             <semantic-form-text-input for="note_public" multiline=true></semantic-form-text-input>
           </bs-col>
           <bs-col sm="5">
             <semantic-form-text-input for="note_internal" multiline=true></semantic-form-text-input>
           </bs-col>
-          <bs-col sm="2">
+          <bs-col sm="1">
             <semantic-form-checkbox-input for='repertories'></semantic-form-checkbox-input>
           </bs-col>
         </bs-row>

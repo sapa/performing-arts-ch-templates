@@ -34,14 +34,15 @@
             <semantic-form-hidden-input for='rdf_type' default-values='["[[resolvePrefix "crm:E22_Man-Made_Object"]]", "[[resolvePrefix "rico:Thing"]]"]'></semantic-form-hidden-input>
             <semantic-form-hidden-input for='cidoc_type' default-value='[[resolvePrefix "spav:dwmkn"]]'></semantic-form-hidden-input>
         </div>
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionIdentification" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='6'>
             <semantic-form-text-input for='common_title' languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
-          <bs-col sm='2'>
-            <semantic-form-checklist-input type='radio' for='common_title_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
+          <bs-col sm='3'>
+            <semantic-form-checklist-input type='radio' row=true for='common_title_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
           </bs-col>
-          <bs-col sm='4'>
+          <bs-col sm='3'>
             <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
         </bs-row>
@@ -53,16 +54,11 @@
             <semantic-form-text-input for="byline"></semantic-form-text-input>
           </bs-col>
         </bs-row>
+        <hr />
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionDescription" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='6'>
             <semantic-form-text-input for="description"></semantic-form-text-input>
-          </bs-col>
-          <bs-col sm='6'>
-          </bs-col>
-        </bs-row>
-        <bs-row>
-          <bs-col sm="6">
-            <semantic-form-tree-picker-input for="location" ></semantic-form-tree-picker-input>
           </bs-col>
           <bs-col sm="3">
             <semantic-form-text-input for="beginning"></semantic-form-text-input>
@@ -71,28 +67,37 @@
             <semantic-form-text-input for="end"></semantic-form-text-input>
           </bs-col>        
         </bs-row>
-        <semantic-form-autocomplete-input for="contains">
-          <semantic-form new-subject-template="http://data.performing-arts.ch/o/{{UUID}}" fields='[[fieldDefinitions
-            subvenue_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
-            subvenue_cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype"
-            subvenue_common_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitle"
-            subvenue_common_title_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType"
-            ]]'>
-            <div style="display: none;">
-              <semantic-form-hidden-input for='subvenue_rdf_type' default-values='["[[resolvePrefix "crm:E22_Man-Made_Object"]]", "[[resolvePrefix "rico:Thing"]]"]'></semantic-form-hidden-input>
-              <semantic-form-hidden-input for='subvenue_cidoc_type' default-value='[[resolvePrefix "spav:dwmkn"]]'></semantic-form-hidden-input>
-            </div>
-              <bs-row>
-                <bs-col sm='8'>
-                  <semantic-form-text-input for='subvenue_common_title' languages='["en","de","fr","it"]'></semantic-form-text-input>
-                </bs-col>
-                <bs-col sm='4'>
-                  <semantic-form-checklist-input type='radio' for='subvenue_common_title_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
-                </bs-col>
-              </bs-row>
-            <button name="submit" class="btn btn-secondary">[[i18n "FormCreateVenue" bundle="performing-arts-ch"]]</button>
-          </semantic-form>
-        </semantic-form-autocomplete-input>
+        <bs-row>
+          <bs-col sm="6">
+            <semantic-form-tree-picker-input for="location" ></semantic-form-tree-picker-input>
+          </bs-col>
+          <bs-col sm="6">
+            <semantic-form-autocomplete-input for="contains">
+              <semantic-form new-subject-template="http://data.performing-arts.ch/o/{{UUID}}" fields='[[fieldDefinitions
+                subvenue_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
+                subvenue_cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype"
+                subvenue_common_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitle"
+                subvenue_common_title_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitleType"
+                ]]'>
+                <div style="display: none;">
+                  <semantic-form-hidden-input for='subvenue_rdf_type' default-values='["[[resolvePrefix "crm:E22_Man-Made_Object"]]", "[[resolvePrefix "rico:Thing"]]"]'></semantic-form-hidden-input>
+                  <semantic-form-hidden-input for='subvenue_cidoc_type' default-value='[[resolvePrefix "spav:dwmkn"]]'></semantic-form-hidden-input>
+                </div>
+                  <bs-row>
+                    <bs-col sm='8'>
+                      <semantic-form-text-input for='subvenue_common_title' languages='["en","de","fr","it"]'></semantic-form-text-input>
+                    </bs-col>
+                    <bs-col sm='4'>
+                      <semantic-form-checklist-input type='radio' for='subvenue_common_title_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
+                    </bs-col>
+                  </bs-row>
+                <button name="submit" class="btn btn-secondary">[[i18n "FormCreateVenue" bundle="performing-arts-ch"]]</button>
+              </semantic-form>
+            </semantic-form-autocomplete-input>
+          </bs-col>
+        </bs-row>
+        <hr />
+        <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionAddInfo" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='6'>
             <semantic-form-text-input for="note_public" multiline=true></semantic-form-text-input>
