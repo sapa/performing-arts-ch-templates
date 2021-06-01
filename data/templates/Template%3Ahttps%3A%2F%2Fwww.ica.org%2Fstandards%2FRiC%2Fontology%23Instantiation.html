@@ -165,6 +165,7 @@
 
                     <!-- ACCESS -->
 
+                    <!-- TODO: This should be moved to the records. -->
                     [[> sapaModule:RecordResourceAccess]]
 
                     <!-- protection duration -->
@@ -174,12 +175,6 @@
                             ?? spao:hasProtectionDuration ?value . }'
                         template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
                             <ul class="list-unstyled">{{#each bindings}}<li>{{value.value}}</li>{{/each}}</ul></div>'>
-                    </semantic-query>
-
-                    <!-- notes -->
-                    <semantic-query 
-                        query='SELECT ?note WHERE { ?? spao:hasNote ?note . }'
-                        template='<div><h5>Note</h5><ul class="list-unstyled">{{#each bindings}}<li>{{note.value}}</li>{{/each}}</ul></div>'>
                     </semantic-query>
 
                     <!-- see also -->
@@ -259,14 +254,16 @@
 
                 <bs-col sm="4">
 
-                    <!-- material -->
+                    <!-- carrier type / medium -->
+                    <!-- TODO: Do we really need to repeat this here? -->
                     <semantic-query 
-                        query="SELECT ?material WHERE { ?? crm:P45_consists_of ?material . }"
+                        query='SELECT ?carrier_type WHERE { ?? rico:hasCarrierType ?carrier_type . }'
                         template='<div>
-                            <h5>Material</h5>
+                            <h5>Carrier type</h5>
                             <ul class="list-unstyled">{{#each bindings}}
-                                <li><mp-label iri="{{material.value}}"></mp-label></li>
-                            {{/each}}</ul></div>'>
+                                <li><mp-label iri="{{carrier_type.value}}"></mp-label></li>
+                            {{/each}}</ul>
+                        </div>'>
                     </semantic-query>
 
                     <!-- formats -->
@@ -288,16 +285,50 @@
                         </div>'>
                     </semantic-query>
 
-                    <!-- width x height -->
+                    <!-- material -->
                     <semantic-query 
-                        query="SELECT ?width ?height WHERE {
-                            ?? ebucore:width ?width ;
-                                ebucore:height ?height .
-                        }"
+                        query="SELECT ?material WHERE { ?? crm:P45_consists_of ?material . }"
                         template='<div>
-                            <h5>Width x height</h5>
+                            <h5>Material</h5>
                             <ul class="list-unstyled">{{#each bindings}}
-                                <li>{{width.value}} x {{height.value}}</li>
+                                <li><mp-label iri="{{material.value}}"></mp-label></li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- duration -->
+                    <!-- TODO: Do we really need to repeat this here? -->
+                    <semantic-query 
+                        query="SELECT ?duration WHERE { ?? ebucore:duration ?duration . }"
+                        template='<div>
+                            <h5>Duration</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{duration.value}}</li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- notes -->
+                    <semantic-query 
+                        query='SELECT ?note WHERE { ?? spao:hasNote ?note . }'
+                        template='<div><h5>Note</h5><ul class="list-unstyled">{{#each bindings}}<li>{{note.value}}</li>{{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- width -->
+                    <semantic-query 
+                        query="SELECT ?width WHERE { ?? ebucore:width ?width . }"
+                        template='<div>
+                            <h5>Width</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{width.value}}</li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- height -->
+                    <semantic-query 
+                        query="SELECT ?height WHERE { ?? ebucore:height ?height . }"
+                        template='<div>
+                            <h5>Height</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{height.value}}</li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
@@ -396,8 +427,6 @@
                             
                             <bs-panel header="{{file_name.value}}" collapsible="true">
 
-                            <!-- container -->
-
                             <!-- md5 -->
                             <semantic-query 
                                 query="SELECT ?md5 WHERE {
@@ -476,16 +505,23 @@
                                 </div>'>
                             </semantic-query>
 
-                            <!-- width x height -->
+                            <!-- width -->
                             <semantic-query 
-                                query="SELECT ?width ?height WHERE {
-                                    <{{file.value}}> ebucore:width ?width ;
-                                        ebucore:height ?height .
-                                }"
+                                query="SELECT ?width WHERE { <{{file.value}}> ebucore:width ?width . }"
                                 template='<div>
-                                    <h5>Width x height</h5>
+                                    <h5>Width</h5>
                                     <ul class="list-unstyled">{{#each bindings}}
-                                        <li>{{width.value}} x {{height.value}}</li>
+                                        <li>{{width.value}}</li>
+                                    {{/each}}</ul></div>'>
+                            </semantic-query>
+
+                            <!-- height -->
+                            <semantic-query 
+                                query="SELECT ?height WHERE { <{{file.value}}> ebucore:height ?height . }"
+                                template='<div>
+                                    <h5>Height</h5>
+                                    <ul class="list-unstyled">{{#each bindings}}
+                                        <li>{{height.value}}</li>
                                     {{/each}}</ul></div>'>
                             </semantic-query>
 
