@@ -28,8 +28,12 @@ a:hover,
 a:focus {
   color: #158ce4;
 }
-.form-section {
-  font-weight: 700;
+div.semantic-form hr {
+  border: 1px solid black;
+}
+div.form-section {
+  font-weight: bold;
+  font-size: 1.2em;
 }
 .semantic-form-input-decorator__label {
   font-weight: 500 !important;
