@@ -59,6 +59,7 @@
         processing_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingDate"
         responsible="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceResponsible"
         iiif="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceIIIF"
+        vimeo="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceVimeo"
         comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
       ]]'>
       <bs-panel>
@@ -362,8 +363,11 @@
           </bs-col>          
         </bs-row>
         <bs-row>
-          <bs-col sm='12'>
+          <bs-col sm='6'>
             <semantic-form-text-input for="iiif"></semantic-form-text-input>
+          </bs-col>
+          <bs-col sm='6'>
+            <semantic-form-text-input for="vimeo"></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <hr>
@@ -388,6 +392,7 @@
               part_usage_rights_streaming="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStreaming"
               part_location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLocation"
               part_see_also="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso"
+              part_vimeo="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceVimeo"
               ]]'>
               <div style='display: none;'>
                 <semantic-form-hidden-input for='part_rdf_type' default-value='[[resolvePrefix "rico:RecordPart"]]'></semantic-form-hidden-input>
@@ -491,6 +496,7 @@
                   <semantic-form-autocomplete-input for="part_see_also"></semantic-form-autocomplete-input>
                 </bs-col>
                 <bs-col sm='6'>
+                  <semantic-form-text-input for="part_vimeo"></semantic-form-text-input>
                 </bs-col>
               </bs-row>
               <hr />
