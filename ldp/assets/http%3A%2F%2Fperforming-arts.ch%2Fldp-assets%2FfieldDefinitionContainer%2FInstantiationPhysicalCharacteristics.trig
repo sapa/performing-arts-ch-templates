@@ -1,25 +1,25 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationPhysicalCharacteristics/context> {
-  _:genid-853d8ec10f734c4887d5f8892081eda4-rw7q01 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "INSERT { $subject rico:physicalCharacteristics $value} WHERE {}" .
-  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationPhysicalCharacteristics>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Physical characteristics"@en;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Physical characteristics"@en, "Caractéristiques physiques"@fr;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-853d8ec10f734c4887d5f8892081eda4-gk5drt;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Instantiation>;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-853d8ec10f734c4887d5f8892081eda4-rw7q01;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-853d8ec10f734c4887d5f8892081eda4-3golp8;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-9c988de4315e4d9abb7710428b07ed72-85txgs;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-9c988de4315e4d9abb7710428b07ed72-58ll5i;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-9c988de4315e4d9abb7710428b07ed72-2ff5qh;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-04-27T17:47:16.791Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-06-02T10:13:18.337Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-853d8ec10f734c4887d5f8892081eda4-3golp8 a <http://spinrdf.org/sp#Query>;
+  _:genid-9c988de4315e4d9abb7710428b07ed72-2ff5qh a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:physicalCharacteristics $value} WHERE {}" .
+  
+  _:genid-9c988de4315e4d9abb7710428b07ed72-58ll5i a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:physicalCharacteristics ?value . }" .
   
-  _:genid-853d8ec10f734c4887d5f8892081eda4-gk5drt a <http://spinrdf.org/sp#Query>;
+  _:genid-9c988de4315e4d9abb7710428b07ed72-85txgs a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "DELETE { $subject rico:physicalCharacteristics $value} WHERE {}" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>

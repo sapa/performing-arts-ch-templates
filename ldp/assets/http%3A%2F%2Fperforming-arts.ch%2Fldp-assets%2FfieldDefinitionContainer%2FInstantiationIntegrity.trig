@@ -3,24 +3,24 @@
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationIntegrity>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-a89a70fab673464e93fbc5f267bbe9b5-svxz6f;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Integrity"@en;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Integrity"@en, "Intégrité"@fr;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-058d9338edb84c0f96a53b40d40a64a1-48t6i;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-058d9338edb84c0f96a53b40d40a64a1-r3xic;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Instantiation>;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-a89a70fab673464e93fbc5f267bbe9b5-t8ov;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-a89a70fab673464e93fbc5f267bbe9b5-b4q9hf;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-058d9338edb84c0f96a53b40d40a64a1-2qmk99;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-04-27T17:04:52.621Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-06-02T10:11:02.638Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-a89a70fab673464e93fbc5f267bbe9b5-b4q9hf a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:integrity ?value . }" .
-  
-  _:genid-a89a70fab673464e93fbc5f267bbe9b5-svxz6f a <http://spinrdf.org/sp#Query>;
+  _:genid-058d9338edb84c0f96a53b40d40a64a1-2qmk99 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "INSERT { $subject rico:integrity $value} WHERE {}" .
   
-  _:genid-a89a70fab673464e93fbc5f267bbe9b5-t8ov a <http://spinrdf.org/sp#Query>;
+  _:genid-058d9338edb84c0f96a53b40d40a64a1-r3xic a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> "DELETE { $subject rico:integrity $value} WHERE {}" .
+  
+  _:genid-058d9338edb84c0f96a53b40d40a64a1-48t6i a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject rico:integrity ?value . }" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationIntegrity> .
