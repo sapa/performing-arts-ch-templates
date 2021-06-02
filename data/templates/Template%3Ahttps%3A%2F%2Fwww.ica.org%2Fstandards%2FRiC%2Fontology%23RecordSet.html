@@ -364,7 +364,8 @@
                         ?? spao:seeAlso ?value .
                         MINUS { ?value a rico:RecordPart . } 
                         MINUS { ?value a rico:Instantiation . } 
-                    } UNION { 
+                        MINUS { ?value a premis:File . } 
+                        } UNION { 
                         ?? spao:seeAlso ?r .
                         ?r a rico:RecordPart ;
                             rico:isOrWasConstituentOf ?value .
