@@ -242,6 +242,7 @@
                 <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{value.value}}"></semantic-link></li>{{/each}}</ul></div>'>
         </semantic-query>
         <!-- see also -->
+        [[#if (hasPermission "forms:ldp:*")]]
         <semantic-query
             query='SELECT DISTINCT ?label ?value WHERE { 
                 VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso>) }
@@ -260,6 +261,27 @@
                     <li><semantic-link iri="{{value.value}}"></semantic-link></li>
                 {{/each}}</ul></div>'>
         </semantic-query>
+        [[else]]
+        <semantic-query
+            query='SELECT DISTINCT ?label ?value WHERE { 
+                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso>) }
+                {
+                    <{{part.value}}> spao:seeAlso ?value .
+                    MINUS { ?value a rico:RecordPart . } 
+                    MINUS { ?value a rico:Instantiations . } 
+                } UNION { 
+                    <{{part.value}}> spao:seeAlso ?r .
+                    ?r a rico:RecordPart ;
+                        rico:isOrWasConstituentOf ?value .
+                }
+            }'
+            template='<div>{{#ifCond bindings.length ">" 0}}
+                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <ul class="list-unstyled">{{#each bindings}}
+                    <li><semantic-link iri="{{value.value}}"></semantic-link></li>
+                {{/each}}</ul></div>'>
+        </semantic-query>
+        [[/if]]
         <hr />
         {{/each}}
     </template>
