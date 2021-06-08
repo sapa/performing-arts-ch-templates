@@ -485,6 +485,161 @@
 
         </bs-tab>
 
+        <bs-tab event-key='9' title='Images without Subject'>
+
+            <bs-row>
+                <bs-col sm="4">
+                    <semantic-chart type='donut' types='["pie", "donut"]'
+                        query='SELECT ?status (COUNT(?record) AS ?recordcount) WHERE {
+                                ?record a rico:Record ;
+                                    rico:hasInstantiation ?instantiation .
+                                ?instantiation spao:hasArchivalStatus spav:asarm ;
+                                    rico:hasCarrierType ?carrier .
+                                FILTER EXISTS { spav:fvese skos:narrower* ?carrier . }
+                                OPTIONAL { ?record rico:hasOrHadSubject ?subject . }
+                                BIND(IF(BOUND(?subject), "with subject", "without subject") AS ?status)
+                            } GROUP BY ?status
+                            ORDER BY ?status'
+                          sets='[{"dataSetName": "Images", "category": "status", "value": "recordcount"}]'
+                          styles='[{
+                            "provider": "chartjs",
+                            "style": {
+                                "data": {
+                                    "datasets": [
+                                        { "backgroundColor": ["rgba(18, 64, 98, 0.7)", "rgba(220, 20, 20, 0.7)"],
+                                        "borderColor": "rgb(255, 255, 255, 1)",
+                                        "borderWidth": "4"
+                                        }
+                                    ]
+                                },
+                                "options": {
+                                    "layout": {
+                                        "padding": {
+                                            "top": "20"
+                                        }
+                                    },
+                                    "legend": {
+                                        "position": "bottom",
+                                        "labels": {
+                                            "fontSize": 14,
+                                            "padding": 20
+                                        }
+                                    }
+                                }
+                            }
+                           }]'
+                        ></semantic-chart>
+                    </bs-col>
+                    <bs-col sm="8">
+        
+                        <semantic-table 
+                        query='SELECT ?record ?iiif ?has_iiif WHERE {
+                                ?record a rico:Record ;
+                                    rico:hasInstantiation ?instantiation .
+                                ?instantiation spao:hasArchivalStatus spav:asarm ;
+                                            rico:hasCarrierType ?carrier .
+                                FILTER EXISTS { spav:fvese skos:narrower* ?carrier . }
+                                FILTER NOT EXISTS { ?record rico:hasOrHadSubject ?subject . }
+                                OPTIONAL {
+                                    ?record rico:hasInstantiation ?iiif .
+                                    FILTER(CONTAINS(STR(?iiif), "http://media.performing-arts.ch/iiif"))
+                                }
+                                BIND(IF(BOUND(?iiif), "IIIF", "") AS ?has_iiif)
+                            }' 
+                        column-configuration='[
+                            {"variableName": "record", "displayName": "Record"}, 
+                            {"variableName": "has_iiif", "displayName": "IIIF"}
+                        ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": true}'>
+                        </semantic-table>
+
+        
+                    </bs-col>
+                </bs-row>            
+
+        </bs-tab>
+
+        <bs-tab event-key='10' title='Video Copies without Sources'>
+
+            <bs-row>
+                <bs-col sm="4">
+
+                    <semantic-query 
+                    query='SELECT ?count ?icon WHERE {
+                        {
+                            SELECT (COUNT(?instantiation) AS ?count) WHERE {
+                                {
+                                    SELECT ?record (COUNT(DISTINCT ?instantiation) AS ?instantiations) {
+                                    ?record rico:hasInstantiation ?instantiation .
+                                    {
+                                        ?instantiation a ebucore:MediaResource . 
+                                    } UNION { 
+                                        ?file premis:isIncludedIn ?instantiation ;
+                                            a ebucore:MediaResource .
+                                    }
+                                    } GROUP BY (?record)
+                                    HAVING (?instantiations > 1)
+                                }
+                                ?record rico:hasInstantiation ?instantiation .
+                                MINUS { ?original rico:hasDerivedInstantiation ?instantiation . }
+                                FILTER NOT EXISTS { ?instantiation spao:hasArchivalStatus spav:asarm . }
+                                FILTER(!CONTAINS(STR(?instantiation), "/iiif"))
+                                ?instantiation rico:identifier ?identifier .
+                                FILTER(CONTAINS(?identifier, "SKD") || CONTAINS(?identifier, "SKB") || CONTAINS(?identifier, "DIG-NK") || CONTAINS(?identifier, "DIGK-NK"))
+                                OPTIONAL {
+                                    ?instantiation rico:history ?history . 
+                                    FILTER(!CONTAINS(LCASE(?history), "kein archivmaster"))
+                                }                                        
+                            }
+                        }
+                        BIND(IF(?count = 0, "🥳", "😱") AS ?icon)
+                    }' 
+                    template='<div style="padding: 6em;">{{#each bindings}}<h1>{{count.value}} missing … {{icon.value}}</h1>{{/each}}</div>'>
+                  </semantic-query>
+                    
+                </bs-col>
+                <bs-col sm="8">
+    
+                    <semantic-table 
+                    query='SELECT ?instantiation WHERE {
+                        {
+                            SELECT ?record (COUNT(DISTINCT ?instantiation) AS ?instantiations) {
+                            ?record rico:hasInstantiation ?instantiation .
+                            {
+                                ?instantiation a ebucore:MediaResource . 
+                            } UNION { 
+                                ?file premis:isIncludedIn ?instantiation ;
+                                    a ebucore:MediaResource .
+                            }
+                            } GROUP BY (?record)
+                            HAVING (?instantiations > 1)
+                        }
+                        ?record rico:hasInstantiation ?instantiation .
+                        MINUS { ?original rico:hasDerivedInstantiation ?instantiation . }
+                        FILTER NOT EXISTS { ?instantiation spao:hasArchivalStatus spav:asarm . }
+                        FILTER(!CONTAINS(STR(?instantiation), "/iiif"))
+                        ?instantiation rico:identifier ?identifier .
+                        FILTER(CONTAINS(?identifier, "SKD") || CONTAINS(?identifier, "SKB") || CONTAINS(?identifier, "DIG-NK") || CONTAINS(?identifier, "DIGK-NK"))
+                        OPTIONAL {
+                            ?instantiation rico:history ?history . 
+                            FILTER(!CONTAINS(LCASE(?history), "kein archivmaster"))
+                        }
+                        } ORDER BY ASC(?identifier)' 
+                    column-configuration='[
+                        {"variableName": "instantiation", "displayName": "Instantiation"}
+                    ]'
+                    number-of-displayed-rows=20
+                    no-result-template='No results found.'
+                    options='{"showFilter": true}'>
+                    </semantic-table>
+
+                </bs-col>
+            </bs-row>            
+
+        </bs-tab>
+
     </bs-tabs>
 
   [[/if]]
