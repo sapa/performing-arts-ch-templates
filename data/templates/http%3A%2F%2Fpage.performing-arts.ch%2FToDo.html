@@ -490,7 +490,7 @@
             <bs-row>
                 <bs-col sm="4">
                     <semantic-chart type='donut' types='["pie", "donut"]'
-                        query='SELECT ?status (COUNT(?record) AS ?recordcount) WHERE {
+                        query='SELECT ?status (COUNT(DISTINCT ?record) AS ?recordcount) WHERE {
                                 ?record a rico:Record ;
                                     rico:hasInstantiation ?instantiation .
                                 ?instantiation spao:hasArchivalStatus spav:asarm ;
@@ -533,7 +533,7 @@
                     <bs-col sm="8">
         
                         <semantic-table 
-                        query='SELECT ?record ?iiif ?has_iiif WHERE {
+                        query='SELECT DISTINCT ?record ?iiif ?has_iiif WHERE {
                                 ?record a rico:Record ;
                                     rico:hasInstantiation ?instantiation .
                                 ?instantiation spao:hasArchivalStatus spav:asarm ;
@@ -569,7 +569,7 @@
                     <semantic-query 
                     query='SELECT ?count ?icon WHERE {
                         {
-                            SELECT (COUNT(?instantiation) AS ?count) WHERE {
+                            SELECT (COUNT(DISTINCT ?instantiation) AS ?count) WHERE {
                                 {
                                     SELECT ?record (COUNT(DISTINCT ?instantiation) AS ?instantiations) {
                                     ?record rico:hasInstantiation ?instantiation .
@@ -603,7 +603,7 @@
                 <bs-col sm="8">
     
                     <semantic-table 
-                    query='SELECT ?instantiation WHERE {
+                    query='SELECT DISTINCT ?instantiation WHERE {
                         {
                             SELECT ?record (COUNT(DISTINCT ?instantiation) AS ?instantiations) {
                             ?record rico:hasInstantiation ?instantiation .
