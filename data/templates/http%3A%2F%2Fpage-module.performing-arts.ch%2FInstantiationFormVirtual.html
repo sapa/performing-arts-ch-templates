@@ -25,7 +25,7 @@
         location="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLocation"
         file="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RepresentationFile"
         responsible="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceResponsible"
-        processing_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingDate"
+        preparation_date="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationPreparationDate"
         accessibility="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingAccessability"
         permission="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingPermission"
         physical_usability="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingPhysicalUsability"
@@ -72,9 +72,9 @@
             <semantic-form-text-input for="responsible"></semantic-form-text-input>
           </bs-col>          
           <bs-col sm='6'>
-            <semantic-form-switch for='processing_date' switch-on-field='date_type'>
+            <semantic-form-switch for='preparation_date' switch-on-field='date_type'>
               <semantic-form-switch-case label='Single Date'>
-                <semantic-form-composite-input for='processing_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                <semantic-form-composite-input for='preparation_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
                   date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
                   date_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue"
                   date_qualifier="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateQualifier"
@@ -87,7 +87,7 @@
                 </semantic-form-composite-input>
               </semantic-form-switch-case>
               <semantic-form-switch-case label='Date Range'>
-                <semantic-form-composite-input for='processing_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                <semantic-form-composite-input for='preparation_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
                   date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
                   date_beginning="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateBeginning"
                   date_end="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateEnd"
@@ -119,7 +119,7 @@
                 </semantic-form-composite-input>
               </semantic-form-switch-case>
               <semantic-form-switch-case label='No Date'>
-                <semantic-form-composite-input for='processing_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
+                <semantic-form-composite-input for='preparation_date' new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[[fieldDefinitions
                   date_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateType"
                   date_no_value="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateNoValue"
                 ]]'>

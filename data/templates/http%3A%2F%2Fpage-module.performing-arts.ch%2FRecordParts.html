@@ -98,11 +98,8 @@
                 VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingDate>) }
                 <{{part.value}}> spao:hasProcessingDate ?date .
                 {
-                    {
-                        ?date rico:normalizedDateValue ?normalized_date .
-                    } UNION {
-                        ?date rico:expressedDate ?expressed_date .
-                    }
+                    OPTIONAL { ?date rico:normalizedDateValue ?normalized_date. }
+                    OPTIONAL { ?date rico:expressedDate ?expressed_date. }
                     BIND(IF(BOUND(?expressed_date), ?expressed_date, ?normalized_date) AS ?single_date)
                     OPTIONAL { ?date rico:dateQualifier ?single_qualifier . }
                     OPTIONAL { ?date rico:certainty ?single_certainty . }
@@ -185,11 +182,8 @@
                 VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>) }
                 <{{part.value}}> rico:isAssociatedWithDate ?date .
                 {
-                    {
-                        ?date rico:normalizedDateValue ?normalized_date .
-                    } UNION {
-                        ?date rico:expressedDate ?expressed_date .
-                    }
+                    OPTIONAL { ?date rico:normalizedDateValue ?normalized_date. }
+                    OPTIONAL { ?date rico:expressedDate ?expressed_date. }
                     BIND(IF(BOUND(?expressed_date), ?expressed_date, ?normalized_date) AS ?single_date)
                     OPTIONAL { ?date rico:dateQualifier ?single_qualifier . }
                     OPTIONAL { ?date rico:certainty ?single_certainty . }
