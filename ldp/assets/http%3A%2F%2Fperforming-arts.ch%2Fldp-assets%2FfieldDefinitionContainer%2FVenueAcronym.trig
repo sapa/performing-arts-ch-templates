@@ -1,25 +1,34 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym/context> {
-  _:genid-4f15b21bcb3743749284d118a9e794c9-kv69s <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value WHERE {
-  $subject crm:P102_has_title $title .
-  $title crm:P2_has_type spav:yamqk ;
-    rdf:value ?value .
-}""" .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym> a <http://www.metaphacts.com/ontology/fields#Field>,
+      <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Akronym"@de, "Acronyme"@fr, "Acronym"@en,
+      "Acronimo"@it;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-7775692e161e43a4b023ac893377f023-s87ew;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-7775692e161e43a4b023ac893377f023-nzlenr;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString>;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-7775692e161e43a4b023ac893377f023-la6j6n;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-06-21T06:45:24.759Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym> a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Acronimo"@it .
-  
-  _:genid-4f15b21bcb3743749284d118a9e794c9-4u87oa <http://spinrdf.org/sp#text> """DELETE {
+  _:genid-7775692e161e43a4b023ac893377f023-s87ew a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
   $subject crm:P102_has_title $title.
   $title a crm:E35_Title ;
     crm:P2_has_type spav:yamqk ;
     rdf:value $value .
 } WHERE {}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Akronym"@de .
+  _:genid-7775692e161e43a4b023ac893377f023-la6j6n a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value WHERE {
+  $subject crm:P102_has_title $title .
+  $title crm:P2_has_type spav:yamqk ;
+    rdf:value ?value .
+}""" .
   
-  _:genid-4f15b21bcb3743749284d118a9e794c9-k3efw <http://spinrdf.org/sp#text> """INSERT {
+  _:genid-7775692e161e43a4b023ac893377f023-nzlenr a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
   $subject crm:P102_has_title $title.
   $title a crm:E35_Title ;
     crm:P2_has_type spav:yamqk ;
@@ -28,29 +37,6 @@
   BIND (IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"acronym\", $value)))) AS $title)
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym> <http://www.metaphacts.com/ontology/fields#insertPattern>
-      _:genid-4f15b21bcb3743749284d118a9e794c9-k3efw;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-4f15b21bcb3743749284d118a9e794c9-kv69s .
-  
-  _:genid-4f15b21bcb3743749284d118a9e794c9-k3efw a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym> <http://www.metaphacts.com/ontology/fields#domain>
-      <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object> .
-  
-  _:genid-4f15b21bcb3743749284d118a9e794c9-4u87oa a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-4f15b21bcb3743749284d118a9e794c9-kv69s a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym> <http://www.metaphacts.com/ontology/fields#deletePattern>
-      _:genid-4f15b21bcb3743749284d118a9e794c9-4u87oa;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Acronym"@en, "Acronyme"@fr;
-    a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-01-31T20:28:46.267Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-  
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym> a <http://www.w3.org/ns/ldp#Resource> .
 }

@@ -1,24 +1,21 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenericName/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenericName> a
-      <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-d5f3c59161ce476e987427a7285d28b1-a8q5uv .
-  
-  _:genid-d5f3c59161ce476e987427a7285d28b1-7qd9n <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-  $subject rdfs:label $value .
-}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenericName> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Generische Bezeichnung"@de, "Nom générique"@fr .
-  
-  _:genid-d5f3c59161ce476e987427a7285d28b1-a8q5uv a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenericName> <http://www.metaphacts.com/ontology/fields#xsdDatatype>
-      <http://www.w3.org/2001/XMLSchema#langString>;
+      <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Generische Bezeichnung"@de, "Genric name"@en,
+      "Nome generico"@it, "Nom générique"@fr;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-77da1974d5164018aff93db6e8494151-enhttq;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "4";
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-77da1974d5164018aff93db6e8494151-inleam;
     <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E74_Group>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Genric name"@en .
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-77da1974d5164018aff93db6e8494151-auo0b;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-06-21T06:43:21.124Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-d5f3c59161ce476e987427a7285d28b1-a8q5uv <http://spinrdf.org/sp#text> """INSERT { 
+  _:genid-77da1974d5164018aff93db6e8494151-enhttq a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT { 
   $subject rdfs:label $value ;
     crm:P131_is_identified_by $identifier .
   $identifier a crm:E82_Actor_Appellation ;
@@ -28,33 +25,20 @@
   BIND(IRI(CONCAT (\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"group_official_name\")))) AS $identifier)
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenericName> <http://www.metaphacts.com/ontology/fields#selectPattern>
-      _:genid-d5f3c59161ce476e987427a7285d28b1-7qd9n .
+  _:genid-77da1974d5164018aff93db6e8494151-inleam a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject rdfs:label $value .
+}""" .
   
-  _:genid-d5f3c59161ce476e987427a7285d28b1-yadorq <http://spinrdf.org/sp#text> """DELETE {
+  _:genid-77da1974d5164018aff93db6e8494151-auo0b a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
   $subject rdfs:label $value ;
     crm:P131_is_identified_by $identifier .
   $identifier a crm:E82_Actor_Appellation ;
     crm:P2_has_type spav:yasis ;
     rdf:value ?value .
-} WHERE {}""";
-    a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenericName> <http://www.metaphacts.com/ontology/fields#maxOccurs>
-      "4";
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-d5f3c59161ce476e987427a7285d28b1-yadorq .
-  
-  _:genid-d5f3c59161ce476e987427a7285d28b1-7qd9n a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenericName> <http://www.w3.org/2000/01/rdf-schema#label>
-      "Nome generico"@it;
-    a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2020-02-24T09:13:05.720Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+} WHERE {}""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenericName> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenericName> a
-      <http://www.w3.org/ns/ldp#Resource> .
 }
