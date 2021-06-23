@@ -11,7 +11,7 @@
   <div class='page__body'>
     <h3 style="margin-top: 2em; margin-bottom: 1em;">Archive Plan</h3>
     <div style="height: 1000px">
-    <semantic-lazy-tree
+    <semantic-lazy-tree escape-lucene-syntax='false'
         roots-query='
           SELECT DISTINCT ?item ?index ?hasChildren WHERE {
             VALUES (?item) { (<http://data.performing-arts.ch/r/sapa>) }
@@ -49,6 +49,9 @@
               bds:matchAllTerms "true" .
             }
             BIND(false AS ?hasChildren)
+            FILTER(LANG(?label) = "" || LANGMATCHES(LANG(?label), ?__userPreferredLanguage__))
+            BIND(REPLACE(STR(?__token__), "\\*", "") AS ?clean_token) 
+            FILTER(CONTAINS(LCASE(STR(?label)), LCASE(?clean_token)))
           } ORDER BY DESC (?score) (?label) LIMIT 500'
         node-data-query='
           SELECT DISTINCT ?item ?identifier ?level {

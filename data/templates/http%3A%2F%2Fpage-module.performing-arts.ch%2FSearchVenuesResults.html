@@ -23,10 +23,10 @@
       <semantic-table 
         query='SELECT DISTINCT ?subject ?place ?beginning WHERE {
           OPTIONAL {
-            ?subject crm:P156_occupies [ crm:P89_falls_within ?place ] .
+            ?subject crm:P156_occupies/crm:P89_falls_within ?place .
           }
           OPTIONAL {
-            ?subject rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ] .
+            ?subject rico:hasBeginningDate/rico:normalizedDateValue ?beginning .
           }
         } ORDER BY DESC(?score)'
         id="venue-table" 
@@ -56,10 +56,10 @@
             <semantic-query 
               query='SELECT ?dates WHERE {
                 OPTIONAL {
-                  <{{subject.value}}> rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ] .
+                  <{{subject.value}}> rico:hasBeginningDate/rico:normalizedDateValue ?beginning .
                 }
                 OPTIONAL {
-                  <{{subject.value}}> rico:hasEndDate [ rico:normalizedDateValue ?end ] .
+                  <{{subject.value}}> rico:hasEndDate/rico:normalizedDateValue ?end .
                 }
                 BIND(CONCAT(COALESCE(?beginning, "X"), "-", COALESCE(?end, "X")) AS ?predates)
                 BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)
