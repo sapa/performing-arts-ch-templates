@@ -49,7 +49,7 @@
               bds:matchAllTerms "true" .
             }
             BIND(false AS ?hasChildren)
-            FILTER(LANG(?label) = "" || LANGMATCHES(LANG(?label), ?__userPreferredLanguage__))
+            FILTER((LANGMATCHES(LANG(?label), "")) || (LANGMATCHES(LANG(?label), ?__userPreferredLanguage__)))
             BIND(REPLACE(STR(?__token__), "\\*", "") AS ?clean_token) 
             FILTER(CONTAINS(LCASE(STR(?label)), LCASE(?clean_token)))
           } ORDER BY DESC (?score) (?label) LIMIT 500'

@@ -2,27 +2,19 @@
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupVenue/context> {
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupVenue> a <http://www.metaphacts.com/ontology/fields#Field>,
       <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-8a9a4b19bb5a4e8fa8598866b1031a38-b8m63;
     <http://www.w3.org/2000/01/rdf-schema#label> "Spielstätten"@de, "Luoghi di rappresentazione"@it,
       "Venues"@en, "Lieux de représentation"@fr;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-8a9a4b19bb5a4e8fa8598866b1031a38-cd761n;
-    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-8a9a4b19bb5a4e8fa8598866b1031a38-9mxa3k;
     <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E74_Group>;
     <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-8a9a4b19bb5a4e8fa8598866b1031a38-32zxcn;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-355da311281746cbbc37627956d24401-hq2y1p;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-355da311281746cbbc37627956d24401-45ef4x;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-355da311281746cbbc37627956d24401-bzuaew;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-355da311281746cbbc37627956d24401-d1iax9;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/ademar>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-06-19T17:51:37.004Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-06-23T14:24:51.733Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-8a9a4b19bb5a4e8fa8598866b1031a38-b8m63 a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
-  $subject crm:P14i_performed ?activity .
-  ?activity a crm:E7_Activity ;
-    crm:P2_has_type spav:mujfv ;
-    crm:P16_used_specific_object ?value .
-}""" .
-  
-  _:genid-8a9a4b19bb5a4e8fa8598866b1031a38-cd761n a <http://spinrdf.org/sp#Query>;
+  _:genid-355da311281746cbbc37627956d24401-bzuaew a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """DELETE {
   $subject crm:P14i_performed ?activity .
   ?activity a crm:E7_Activity ;
@@ -30,7 +22,7 @@
     crm:P16_used_specific_object ?value .  
 } WHERE {}""" .
   
-  _:genid-8a9a4b19bb5a4e8fa8598866b1031a38-32zxcn a <http://spinrdf.org/sp#Query>;
+  _:genid-355da311281746cbbc37627956d24401-d1iax9 a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """INSERT {
   $subject crm:P14i_performed ?activity .
   ?activity a crm:E7_Activity ;
@@ -40,7 +32,15 @@
   BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), STR(?value))))) as ?activity)
 }""" .
   
-  _:genid-8a9a4b19bb5a4e8fa8598866b1031a38-9mxa3k a <http://spinrdf.org/sp#Query>;
+  _:genid-355da311281746cbbc37627956d24401-45ef4x a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT ?value WHERE {
+  $subject crm:P14i_performed ?activity .
+  ?activity a crm:E7_Activity ;
+    crm:P2_has_type spav:mujfv ;
+    crm:P16_used_specific_object ?value .
+}""" .
+  
+  _:genid-355da311281746cbbc37627956d24401-hq2y1p a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT ?value ?label WHERE {
   ?value a crm:E22_Man-Made_Object ;
     crm:P2_has_type spav:dwmkn ;
@@ -55,12 +55,52 @@
   OPTIONAL {
    	?parent crm:P46_is_composed_of ?value ;
             rdfs:label ?parent_label .
-	FILTER(LANG(?parent_label) = \"\" || LANGMATCHES(LANG(?parent_label), ?__userPreferredLanguage__))
+    FILTER((LANGMATCHES(LANG(?parent_label), \"\")) || (LANGMATCHES(LANG(?parent_label), ?__userPreferredLanguage__)))
   }
-  BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, \")\"), ?venue_label) AS ?label)  
-  FILTER(LANG(?venue_label) = \"\" || LANGMATCHES(LANG(?venue_label), ?__userPreferredLanguage__))
-  BIND(REPLACE(STR(?token), \"\\\\*\", \"\") AS ?clean_token) .
-  FILTER(CONTAINS(LCASE(STR(?venue_label)), LCASE(?clean_token)))
+  OPTIONAL {
+    ?value crm:P156_occupies/crm:P89_falls_within/rdfs:label ?place_label .
+    FILTER((LANGMATCHES(LANG(?place_label), ?__userPreferredLanguage__)))
+  }
+
+  BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOUND(?place_label), CONCAT(\", \", ?place_label), \"\"), \")\"), IF(BOUND(?place_label), CONCAT(?venue_label, \" (\", ?place_label, \")\"), ?venue_label)) AS ?label)
+  FILTER((LANGMATCHES(LANG(?venue_label), \"\")) || (LANGMATCHES(LANG(?venue_label), ?__userPreferredLanguage__)))
+  BIND(LCASE(REPLACE(REPLACE(str(?token),\"\\\\*\", \"\"), \"\\\\\\\\\", \"\")) as ?lower_token)
+  BIND(LCASE(?venue_label) AS ?venue_label_lower)
+  
+  BIND(
+    REPLACE(
+      REPLACE(
+      	REPLACE(
+          REPLACE(
+            REPLACE(
+              REPLACE(
+                REPLACE(
+      			  str(?lower_token),\"á\",\"a\"),
+                            \"é\",\"e\")
+                        ,\"í\",\"i\"),
+                    \"ó\",\"o\"),
+                \"ú\",\"u\"),
+          \"ü\",\"u\"),
+      \"ö\",\"o\") as ?clean_token)
+      
+  BIND(
+   REPLACE(
+    REPLACE(
+     REPLACE(
+      REPLACE(
+       REPLACE(
+        REPLACE(
+         REPLACE(
+          str(?venue_label_lower),\"á\",\"a\"),
+	      					\"é\",\"e\")
+			    	  ,\"í\",\"i\"),
+			      \"ó\",\"o\"),
+		      \"ú\",\"u\"),
+	      \"ü\",\"u\"),
+    \"ö\",\"o\")
+   as ?venue_label_clean) .
+
+  FILTER(contains(STR(?venue_label_clean),?clean_token))
 } LIMIT 20""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
