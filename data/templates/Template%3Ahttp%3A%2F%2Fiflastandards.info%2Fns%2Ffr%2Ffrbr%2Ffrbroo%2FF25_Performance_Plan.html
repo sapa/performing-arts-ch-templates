@@ -81,7 +81,7 @@
                     ?premieretype skos:inScheme spav:hl .
                     OPTIONAL { ?premiere crm:P4_has_time-span ?timespan . }
                 }'
-            template='<div>
+            template='<div class="text-item">
               {{#ifCond bindings.length ">" 0}}<h5>
                 {{#each bindings}}
                   {{#if @first}}<mp-label iri="{{premieretype.value}}"></mp-label>{{else}}, <mp-label iri="{{premieretype.value}}"></mp-label>{{/if}}
@@ -104,7 +104,7 @@
                       crm:P8_took_place_on_or_within ?venue .
                   BIND(IF(CONTAINS(STR($venue), "/u/"), "true", "") AS ?unidentified)
               }'
-              template='<div>{{#each bindings}}
+              template='<div class="text-item">{{#each bindings}}
                 {{#if @first}}<h5><mp-label iri="{{type.value}}"></mp-label></h5>{{else}}, {{/if}}
                 {{#if unidentified.value}}<mp-label iri="{{venue.value}}"></mp-label>{{else}}<semantic-link iri="{{venue.value}}"></semantic-link>{{/if}}
                 {{/each}}</div>'>
@@ -117,7 +117,7 @@
                 ?linguistic crm:P2_has_type spav:eoept ;
                   rdf:value ?value .
               }'
-              template='<div><h5>Description</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+              template='<div><h5>Description</h5>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
             </semantic-query>
             
             <!-- note on context -->
@@ -127,7 +127,7 @@
                 ?linguistic crm:P2_has_type spav:eonct ;
                   rdf:value ?value .
               }'
-              template='<div><h5>Note on context</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+              template='<div><h5>Note on context</h5>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
             </semantic-query>
             
             <!-- note on stage work -->
@@ -137,7 +137,7 @@
                 ?linguistic crm:P2_has_type spav:eonsw ;
                   rdf:value ?value .
               }'
-              template='<div><h5>Note on stage work</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+              template='<div><h5>Note on stage work</h5>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
             </semantic-query>
             
             <!-- note on music -->
@@ -147,7 +147,7 @@
                 ?linguistic crm:P2_has_type spav:eonms ;
                   rdf:value ?value .
               }'
-              template='<div><h5>Note on music</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+              template='<div><h5>Note on music</h5>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
             </semantic-query>
             
             <!-- reference functions - authorship -->
