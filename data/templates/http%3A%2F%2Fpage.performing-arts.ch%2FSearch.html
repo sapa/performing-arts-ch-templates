@@ -203,6 +203,7 @@
                                 crm:P9_consists_of ?spav .
             ?spav crm:P2_has_type spav:mutnt ;
                   crm:P14_carried_out_by ?__value__ .
+            FILTER(CONTAINS(STR(?__value__), \"/a/\"))
           }"
         }],
         "<http://search.performing-arts.ch/premieredate>": [{
@@ -267,7 +268,7 @@
             [[#> fallsWithinQuery include="FILTER NOT EXISTS { ?__value__ <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within> ?otherplace .}"]] $subject [[/fallsWithinQuery]] 
           }"
         }], 
-        "<http://search.performing-arts.ch/has_recoding>": [{
+        "<http://search.performing-arts.ch/has_recording>": [{
           "kind": "resource",
           "queryPattern": "{
             ?subject ^frbroo:R25_performed/crm:P9_consists_of/^crm:P70_documents/a ?__value__.
@@ -366,7 +367,7 @@
             "hasRange": "<http://www.w3.org/2001/XMLSchema#Decimal>"
           },
           {
-            "iri": "<http://search.performing-arts.ch/has_recoding>",
+            "iri": "<http://search.performing-arts.ch/has_recording>",
             "label": "[[i18n "FilterHasRecording" bundle="performing-arts-ch"]]",
             "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
             "hasRange": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>"
@@ -555,9 +556,9 @@
 
           <semantic-search-facet 
                    value-relations='{
-                            "<http://search.performing-arts.ch/has_recoding>": {
+                            "<http://search.performing-arts.ch/has_recording>": {
                               "kind": "resource",
-                              "valuesQuery": "select ?value (\"Has recording\" as ?label) (COUNT(DISTINCT ?subject) AS ?count) { ?subject ^frbroo:R25_performed/crm:P9_consists_of/^crm:P70_documents/a ?value.} GROUP BY ?value ",
+                              "valuesQuery": "select ?value (\"Yes\" as ?label) (COUNT(DISTINCT ?subject) AS ?count) { ?subject ^frbroo:R25_performed/crm:P9_consists_of/^crm:P70_documents/a ?value.} GROUP BY ?value ",
                           		"tupleTemplate": "<span> <mp-highlight highlight=\"{{highlight}}\"> {{label.value}} </mp-highlight> <img src=\"../assets/icons/solid/camcorder-solid.svg\" style=\"height: 1.4em; width: 1.4em; padding-right:0.5em;\" /> ({{count.value}})</span>"
                             }
                           }'></semantic-search-facet>
