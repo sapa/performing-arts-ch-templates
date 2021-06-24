@@ -314,8 +314,7 @@
             <bs-col sm="4">
                 <semantic-chart type='donut' types='["pie", "donut"]'
                       query='
-                      SELECT ?status (COUNT(?venue) AS ?venuecount)
-                      WHERE {
+                      SELECT ?status (COUNT(?venue) AS ?venuecount) WHERE {
                         ?performance a frbroo:F31_Performance ;
                                        crm:P8_took_place_on_or_within ?venue ;
                                        frbroo:R25_performed ?plan .
@@ -355,140 +354,195 @@
             </bs-col>
             <bs-col sm="8">
 
-                <bs-tabs id='producer_venues' default-active-key='4.1' unmount-on-exit=true>
-                    <bs-tab event-key='4.1' title='Unmatched Venues Ranking'>
-
-                        <semantic-table 
-                        query='SELECT ?venuelabel ?group (COUNT(?venue) AS ?venuecount)
-                        WHERE {
-                          ?venue rdfs:label ?venuelabel ;
-                              a crm:E22_Man-Made_Object .
-                          FILTER(CONTAINS(STR(?venue), "/u/"))
-                          ?performance crm:P8_took_place_on_or_within ?venue ;
-                                       frbroo:R25_performed ?plan .
-                          ?expressioncreation frbroo:R17_created ?plan ;
-                                              crm:P10_falls_within ?directorship.
-                          ?directorship crm:P14_carried_out_by ?group .
-                          ?group rdf:type/rdfs:subClassOf* crm:E74_Group .
-                        } GROUP BY ?venuelabel ?group 
-                        ORDER BY DESC(?venuecount) ' 
-                        column-configuration='[
-                        {"variableName": "venuelabel", "displayName": "Venue"}, 
-                        {"variableName": "group", "displayName": "Group"}, 
-                        {"variableName": "venuecount", "displayName": "Count"}
-                        ]'
-                        number-of-displayed-rows=20
-                        no-result-template='No results found.'
-                        options='{"showFilter": true}'>
-                        </semantic-table>
-
-                    </bs-tab>
-                </bs-tabs>
+                <semantic-table 
+                    query='SELECT ?venuelabel ?group (COUNT(?venue) AS ?venuecount) WHERE {
+                        ?performance a frbroo:F31_Performance ;
+                            crm:P8_took_place_on_or_within ?venue .
+                        FILTER(CONTAINS(STR(?venue), "/u/"))
+                        ?venue a crm:E22_Man-Made_Object ;
+                            rdfs:label ?venuelabel .
+                        ?performance frbroo:R25_performed ?plan .
+                        ?expressioncreation frbroo:R17_created ?plan ;
+                            crm:P10_falls_within ?directorship.
+                        ?directorship crm:P14_carried_out_by ?group .
+                        ?group rdf:type/rdfs:subClassOf* crm:E74_Group .
+                    } GROUP BY ?venuelabel ?group
+                    ORDER BY DESC(?venuecount)' 
+                    column-configuration='[
+                    {"variableName": "venuelabel", "displayName": "Venue"}, 
+                    {"variableName": "group", "displayName": "Group"}, 
+                    {"variableName": "venuecount", "displayName": "Count"}
+                    ]'
+                    number-of-displayed-rows=20
+                    no-result-template='No results found.'
+                    options='{"showFilter": true}'>
+                </semantic-table>
 
             </bs-col>
             </bs-row>
         </bs-tab>
 
-        <bs-tab event-key='5' title='Virtual Record Sets'>
+        <bs-tab event-key='5' title='Record Sets'>
 
-            <semantic-table 
-                query='SELECT DISTINCT ?rr WHERE {
-                        ?rr <http://temp.performing-arts.ch/isVirtual> true ;
-                        rdf:type/rdfs:subClassOf* rico:RecordResource .
-                    }' 
-                column-configuration='[
-                    {"displayName": "Record Resource", "variableName": "rr"},
-                    {"displayName": "Subjects", "cellTemplate": "{{>subjects}}"}
-                    ]'
-                number-of-displayed-rows=20
-                no-result-template='No results found.'
-                options='{"showFilter": true}'>
-                <template id='subjects'> 
+            <bs-row>
+                <bs-col sm="3">
                     <semantic-query 
-                      query='SELECT DISTINCT ?subject WHERE { <{{rr.value}}> rico:hasOrHadSubject ?subject . }'
-                      template = '{{>subject-list}} '>           
-                      <template id='subject-list'> 
-                        <div>{{#each bindings}}{{#if @first}}<semantic-link iri="{{subject.value}}"></semantic-link>{{else}}, <semantic-link iri="{{subject.value}}"></semantic-link>{{/if}}{{/each}}</div>
-                      </template>
-                    </semantic-query>   
-                  </template>
-            </semantic-table>           
-
-        </bs-tab>
-
-        <bs-tab event-key='6' title='Legacy Dates'>
-
-            <semantic-table
-                query='SELECT DISTINCT ?record ?date ?pattern WHERE {
-                    ?record spao:legacyDate ?date .
-                    BIND(REPLACE(?date, "[\\(\\)\\?]", "") AS ?cleandate)
-                    BIND(REPLACE(?cleandate, "\\d{4}", "YYYY" ) AS ?pattern)
-                  }'
-                options='{
-                    "enableGrouping": true,
-                    "groupingOptions": {"groupedBy": ["pattern"]}
-                }'
-                column-configuration='[
-                    {"variableName": "date", "displayName": "Date"},
-                    {
-                        "variableName": "record",
-                        "displayName": "Record",
-                        "aggregation": "count",
-                        "aggregationCellTemplate": "Count: {{value}}"
-                    },
-                    {"variableName": "pattern", "displayName": "Pattern"}
-                ]'
-            ></semantic-table>
-
-        </bs-tab>
-
-        <bs-tab event-key='7' title='Legacy Extends'>
-
-            <semantic-table 
-                query='SELECT DISTINCT ?record ?extent WHERE { ?record rico:recordResourceExtent ?extent . }' 
-                column-configuration='[
-                    {"displayName": "Record Resource", "variableName": "record"},
-                    {"displayName": "Extent", "variableName": "extent"}
-                    ]'
-                number-of-displayed-rows=20
-                no-result-template='No results found.'>
-            </semantic-table>           
-
-        </bs-tab>
-
-        <bs-tab event-key='8' title='Wikidata Double Matches'>
-
-            <semantic-table 
-                query='SELECT DISTINCT ?wikidata ?q (COUNT(?sapa) AS ?count) WHERE {
-                    ?sapa owl:sameAs ?wikidata .
-                    FILTER(CONTAINS(STR(?wikidata), "wikidata.org/entity"))
-                    BIND(SUBSTR(STR(?wikidata), 32) AS ?q)
-                } GROUP BY (?wikidata) (?q)
-                HAVING (COUNT(?sapa)>1)' 
-                column-configuration='[
-                    {"variableName": "wikidata", "displayName": "Wikidata", "cellTemplate": "<a href=\"http://www.wikidata.org/entity/{{q.value}}\" target=\"_blank\">{{q.value}}</a>"},
-                    {"displayName": "Items", "cellTemplate": "{{>items}}"}
-                ]'
-                number-of-displayed-rows=20
-                no-result-template='No results found.'
-                options='{"showFilter": false}'>
-                <template id='items'>
-                    <semantic-query 
-                        query='SELECT DISTINCT ?item WHERE { ?item owl:sameAs <{{wikidata.value}}> . }'
-                        template = '{{>item-link}} '>
-                        <template id='item-link'>
-                            <div>{{#each bindings}}<div><semantic-link iri="{{item.value}}" target="_blank"></semantic-link></div>{{/each}}</div>
+                        query='SELECT (COUNT(DISTINCT ?record) AS ?count) WHERE {
+                            ?record <http://temp.performing-arts.ch/isVirtual> true ;
+                            rdf:type/rdfs:subClassOf* rico:RecordResource .
+                        }' 
+                        template='<h5 style="padding: 1.5em 1em;">{{#each bindings}}{{count.value}} virtual record sets{{/each}}</h5>'>
+                </bs-col>
+                <bs-col sm="9">
+                    <semantic-table 
+                        query='SELECT DISTINCT ?rr WHERE {
+                                ?rr <http://temp.performing-arts.ch/isVirtual> true ;
+                                rdf:type/rdfs:subClassOf* rico:RecordResource .
+                            }' 
+                        column-configuration='[
+                            {"displayName": "Record Resource", "variableName": "rr"},
+                            {"displayName": "Subjects", "cellTemplate": "{{>subjects}}"}
+                            ]'
+                        number-of-displayed-rows=20
+                        no-result-template='No results found.'
+                        options='{"showFilter": true}'>
+                        <template id='subjects'> 
+                            <semantic-query 
+                            query='SELECT DISTINCT ?subject WHERE { <{{rr.value}}> rico:hasOrHadSubject ?subject . }'
+                            template = '{{>subject-list}} '>           
+                            <template id='subject-list'> 
+                                <div>{{#each bindings}}{{#if @first}}<semantic-link iri="{{subject.value}}"></semantic-link>{{else}}, <semantic-link iri="{{subject.value}}"></semantic-link>{{/if}}{{/each}}</div>
+                            </template>
+                            </semantic-query>   
                         </template>
-                    </semantic-query>
-                </template>
-            </semantic-table>
+                    </semantic-table>           
+                </bs-col>
+            </bs-row>
 
         </bs-tab>
 
-        <bs-tab event-key='9' title='Images without Subject'>
+        <bs-tab event-key='6' title='Dates'>
+
+            <bs-row>
+                <bs-col sm="3">
+                    <semantic-query 
+                        query='SELECT (COUNT(DISTINCT ?record) AS ?count) WHERE {
+                            ?record spao:legacyDate ?date .
+                            BIND(REPLACE(?date, "[\\(\\)\\?]", "") AS ?cleandate)
+                            BIND(REPLACE(?cleandate, "\\d{4}", "YYYY" ) AS ?pattern)
+                        }' 
+                        template='<h5 style="padding: 1.5em 1em;">{{#each bindings}}{{count.value}} entries with legacy dates{{/each}}</h5>'>
+                </bs-col>
+                <bs-col sm="9">
+                    <semantic-table
+                        query='SELECT DISTINCT ?record ?date ?pattern WHERE {
+                            ?record spao:legacyDate ?date .
+                            BIND(REPLACE(?date, "[\\(\\)\\?]", "") AS ?cleandate)
+                            BIND(REPLACE(?cleandate, "\\d{4}", "YYYY" ) AS ?pattern)
+                        }'
+                        options='{
+                            "enableGrouping": true,
+                            "groupingOptions": {"groupedBy": ["pattern"]}
+                        }'
+                        column-configuration='[
+                            {"variableName": "date", "displayName": "Date"},
+                            {
+                                "variableName": "record",
+                                "displayName": "Record",
+                                "aggregation": "count",
+                                "aggregationCellTemplate": "Count: {{value}}"
+                            },
+                            {"variableName": "pattern", "displayName": "Pattern"}
+                        ]'
+                    ></semantic-table>
+                </bs-col>
+            </bs-row>
+
+        </bs-tab>
+
+        <bs-tab event-key='7' title='Extends'>
+
+            <bs-row>
+                <bs-col sm="3">
+                    <semantic-query 
+                        query='SELECT (COUNT(DISTINCT ?record) AS ?count) WHERE { ?record rico:recordResourceExtent ?extent . }' 
+                        template='<h5 style="padding: 1.5em 1em;">{{#each bindings}}{{count.value}} entries with legacy extents{{/each}}</h5>'>
+                </bs-col>
+                <bs-col sm="9">
+                    <semantic-table 
+                    query='SELECT DISTINCT ?record ?extent WHERE { ?record rico:recordResourceExtent ?extent . }' 
+                    column-configuration='[
+                        {"displayName": "Record Resource", "variableName": "record"},
+                        {"displayName": "Extent", "variableName": "extent"}
+                        ]'
+                    number-of-displayed-rows=20
+                    no-result-template='No results found.'>
+                    </semantic-table>           
+                </bs-col>
+            </bs-row>
+
+        </bs-tab>
+
+        <bs-tab event-key='8' title='Wikidata'>
 
             <bs-row>
                 <bs-col sm="4">
+                    <h5 style="padding: 0.4em 1em;">Multiple entries that point to the same Wikidata entry.</h5>
+                </bs-col>
+                <bs-col sm="8">
+                    <semantic-table 
+                    query='SELECT DISTINCT ?wikidata ?q (COUNT(?sapa) AS ?count) WHERE {
+                        ?sapa owl:sameAs ?wikidata .
+                        FILTER(CONTAINS(STR(?wikidata), "wikidata.org/entity"))
+                        BIND(SUBSTR(STR(?wikidata), 32) AS ?q)
+                    } GROUP BY (?wikidata) (?q)
+                    HAVING (COUNT(?sapa)>1)' 
+                    column-configuration='[
+                        {"variableName": "wikidata", "displayName": "Wikidata", "cellTemplate": "<a href=\"http://www.wikidata.org/entity/{{q.value}}\" target=\"_blank\">{{q.value}}</a>"},
+                        {"displayName": "Items", "cellTemplate": "{{>items}}"},
+                        {"displayName": "Editors", "cellTemplate": "{{>editors}}"}
+                    ]'
+                    number-of-displayed-rows=20
+                    no-result-template='No results found.'
+                    options='{"showFilter": false}'>
+                    <template id='items'>
+                        <semantic-query 
+                            query='SELECT DISTINCT ?item WHERE { ?item owl:sameAs <{{wikidata.value}}> . } ORDER BY ASC (?item)'
+                            template = '{{>item-link}} '>
+                            <template id='item-link'>
+                                <div>{{#each bindings}}<div><semantic-link iri="{{item.value}}" target="_blank"></semantic-link></div>{{/each}}</div>
+                            </template>
+                        </semantic-query>
+                    </template>
+                    <template id='editors'>
+                        <semantic-query 
+                            query='SELECT ?item ?editor WHERE {
+                                GRAPH ?graph {
+                                  ?item owl:sameAs <{{wikidata.value}}> . 
+                                  Platform:formContainer <http://www.w3.org/ns/ldp#contains> ?container .
+                                  ?container prov:wasAttributedTo ?user .
+                                }
+                                BIND(STRAFTER(STR(?user), "/user/") AS ?editor)
+                              } ORDER BY ASC (?item)'
+                            template = '{{>item-link}} '>
+                            <template id='item-link'>
+                                <div>{{#each bindings}}<div>{{editor.value}}</div>{{/each}}</div>
+                            </template>
+                        </semantic-query>
+                    </template>
+                    </semantic-table>
+                </bs-col>
+            </bs-row>
+
+        </bs-tab>
+
+        <bs-tab event-key='9' title='Images'>
+
+            <bs-row>
+                <bs-col sm="4">
+
+                    <h5 style="padding: 0.4em 1em;">Images without subject</h5>
+        
                     <semantic-chart type='donut' types='["pie", "donut"]'
                         query='SELECT ?status (COUNT(DISTINCT ?record) AS ?recordcount) WHERE {
                                 ?record a rico:Record ;
@@ -554,20 +608,19 @@
                         no-result-template='No results found.'
                         options='{"showFilter": true}'>
                         </semantic-table>
-
         
                     </bs-col>
                 </bs-row>            
 
         </bs-tab>
 
-        <bs-tab event-key='10' title='Video Copies without Sources'>
+        <bs-tab event-key='10' title='Videos'>
 
             <bs-row>
                 <bs-col sm="4">
 
                     <semantic-query 
-                    query='SELECT ?count ?icon WHERE {
+                        query='SELECT ?count ?icon WHERE {
                         {
                             SELECT (COUNT(DISTINCT ?instantiation) AS ?count) WHERE {
                                 {
@@ -596,12 +649,12 @@
                         }
                         BIND(IF(?count = 0, "🥳", "😱") AS ?icon)
                     }' 
-                    template='<div style="padding: 6em;">{{#each bindings}}<h1>{{count.value}} missing … {{icon.value}}</h1>{{/each}}</div>'>
+                    template='<div style="padding: 6em;">{{#each bindings}}<h1>{{count.value}} video copies without source … {{icon.value}}</h1>{{/each}}</div>'>
                   </semantic-query>
                     
                 </bs-col>
                 <bs-col sm="8">
-    
+
                     <semantic-table 
                     query='SELECT DISTINCT ?instantiation WHERE {
                         {
@@ -633,6 +686,36 @@
                     number-of-displayed-rows=20
                     no-result-template='No results found.'
                     options='{"showFilter": true}'>
+                    </semantic-table>
+
+                </bs-col>
+            </bs-row>            
+
+        </bs-tab>
+
+        <bs-tab event-key='11' title='Places'>
+
+            <bs-row>
+                <bs-col sm="4">
+                    <h5 style="padding: 0.4em 1em;">Places without labels in all 4 languages</h5>
+                </bs-col>
+                <bs-col sm="8">
+
+                    <semantic-table 
+                    query='SELECT ?place (COUNT(?place_label) as ?labels) WHERE {
+                        ?place a crm:E53_Place .
+                        FILTER(CONTAINS(STR(?place), "/p/"))
+                        ?place rdfs:label ?place_label .
+                        BIND(LANG(?place_label) AS ?lang)
+                        FILTER(?lang IN ("en", "de", "fr", "it"))
+                    } GROUP BY (?place)
+                    HAVING (?labels < 4)' 
+                    column-configuration='[
+                        {"variableName": "place", "displayName": "Place"}
+                    ]'
+                    number-of-displayed-rows=20
+                    no-result-template='No results found.'
+                    options='{"showFilter": false}'>
                     </semantic-table>
 
                 </bs-col>
