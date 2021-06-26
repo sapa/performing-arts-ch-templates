@@ -23,7 +23,7 @@
       <semantic-table 
         query='SELECT ?subject (GROUP_CONCAT(DISTINCT ?beginning; SEPARATOR=", ") AS ?beginnings) WHERE {
           OPTIONAL {
-            ?subject rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ]
+            ?subject rico:hasBeginningDate/rico:normalizedDateValue ?beginning 
           }
         } GROUP BY ?subject'
         id='group-table'
@@ -66,7 +66,7 @@
         <template id='places'>                     
           <semantic-query 
             query='SELECT ?place WHERE {
-                <{{subject.value}}> crm:P74_has_current_or_former_residence [ crm:P89_falls_within ?place ]
+                <{{subject.value}}> crm:P74_has_current_or_former_residence/crm:P89_falls_within ?place 
               }'
             template = '{{> places-list}} '>
             <template id='places-list'>
@@ -79,10 +79,10 @@
             <semantic-query 
               query='SELECT ?dates WHERE {
                     OPTIONAL {
-                      <{{subject.value}}> rico:hasBeginningDate [ rico:normalizedDateValue ?beginning ]
+                      <{{subject.value}}> rico:hasBeginningDate/rico:normalizedDateValue ?beginning 
                     }
                     OPTIONAL {
-                      <{{subject.value}}> rico:hasEndDate [ rico:normalizedDateValue ?end ]
+                      <{{subject.value}}> rico:hasEndDate/rico:normalizedDateValue ?end 
                     }
                     BIND(CONCAT(COALESCE(?beginning, "X"), "-", COALESCE(?end, "X")) AS ?predates)
                     BIND(REPLACE(REPLACE(?predates, "X-X", ""), "X", "") AS ?dates)

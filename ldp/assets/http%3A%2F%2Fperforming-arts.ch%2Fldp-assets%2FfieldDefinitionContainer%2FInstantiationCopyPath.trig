@@ -1,0 +1,27 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCopyPath/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCopyPath>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-19f58ca9da984da18543841dd235985c-xhrepc;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Copy path"@en;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#Instantiation>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-19f58ca9da984da18543841dd235985c-k0u9sw;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-19f58ca9da984da18543841dd235985c-u8c4bh;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-05-04T11:23:12.486Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-19f58ca9da984da18543841dd235985c-k0u9sw a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject <http://temp.performing-arts.ch/hasCopyPath> $value} WHERE {}" .
+  
+  _:genid-19f58ca9da984da18543841dd235985c-u8c4bh a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT ?value WHERE { $subject <http://temp.performing-arts.ch/hasCopyPath> ?value . }" .
+  
+  _:genid-19f58ca9da984da18543841dd235985c-xhrepc a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject <http://temp.performing-arts.ch/hasCopyPath> $value} WHERE {}" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCopyPath> .
+}

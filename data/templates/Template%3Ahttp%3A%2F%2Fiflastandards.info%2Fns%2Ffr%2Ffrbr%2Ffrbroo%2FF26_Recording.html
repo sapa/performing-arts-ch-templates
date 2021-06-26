@@ -272,6 +272,7 @@
         </semantic-query>
     
         <!-- see also -->
+        [[#if (hasPermission "forms:ldp:*")]]
         <semantic-query
             query='SELECT DISTINCT ?reference WHERE { ?? spao:seeAlso ?reference . }'
             template='<div><h5>See also</h5>
@@ -279,6 +280,18 @@
                     <li><semantic-link iri="{{reference.value}}"></semantic-link></li>
                 {{/each}}</ul></div>'>
         </semantic-query>
+        [[else]]
+        <semantic-query
+            query='SELECT DISTINCT ?reference WHERE {
+              ?? spao:seeAlso ?reference . 
+              MINUS { ?reference a rico:Instantiation . } 
+            }'
+            template='<div><h5>See also</h5>
+                <ul class="list-unstyled">{{#each bindings}}
+                    <li><semantic-link iri="{{reference.value}}"></semantic-link></li>
+                {{/each}}</ul></div>'>
+        </semantic-query>
+        [[/if]]
       
       </bs-col>
       <bs-col sm="6">

@@ -9,36 +9,60 @@
     <http://www.w3.org/2000/01/rdf-schema#label> "Subject"@en, "Gegenstand"@de, "Sujet"@fr,
       "Contenuto"@it;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-090132d9f665418c8838cd430a15cfd7-rl30wp;
     <http://www.metaphacts.com/ontology/fields#range> <http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>,
       <https://www.ica.org/standards/RiC/ontology#Thing>, <http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>,
       <https://www.ica.org/standards/RiC/ontology#Concept>, <https://www.ica.org/standards/RiC/ontology#Agent>;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-c279dbf6cfd146ccbc8d012248ad2f4d-2wwzsm;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c279dbf6cfd146ccbc8d012248ad2f4d-m97ej2;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-090132d9f665418c8838cd430a15cfd7-wfbvef;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-090132d9f665418c8838cd430a15cfd7-p1cb2;
+    <http://www.metaphacts.com/ontology/fields#autosuggestionPattern> _:genid-090132d9f665418c8838cd430a15cfd7-chdgi;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-05-03T17:45:29.006Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-06-25T20:41:12.526Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-c279dbf6cfd146ccbc8d012248ad2f4d-tnpwtq a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """SELECT DISTINCT ?value ?label WHERE {
-  VALUES (?type ?type_label) {
-    (rico:Person \" (Person)\")
-    (rico:Group \" (Group)\")
-    (rico:CorporateBody \" (Group)\")
-    (rico:Family \" (Group)\")
-    (frbroo:F26_Recording \" (Recording)\")
-    (frbroo:F25_Performance_Plan \" (Production)\")
-    (crm:E22_Man-Made_Object \" (Venue)\")
+  _:genid-090132d9f665418c8838cd430a15cfd7-wfbvef a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "SELECT $value WHERE { $subject rico:hasOrHadSubject $value . }" .
+  
+  _:genid-090132d9f665418c8838cd430a15cfd7-rl30wp a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "INSERT { $subject rico:hasOrHadSubject $value . } WHERE {}" .
+  
+  _:genid-090132d9f665418c8838cd430a15cfd7-p1cb2 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "DELETE { $subject rico:hasOrHadSubject $value} WHERE {}" .
+  
+  _:genid-090132d9f665418c8838cd430a15cfd7-chdgi a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT DISTINCT $value ?label WHERE {
+  BIND(?__userPreferredLanguage__ AS ?lang)
+  #type
+  VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) {
+    (rico:Person \"person\" \"Person\" \"personne\" \"persona\")
+    (rico:Group \"group\" \"Gruppe\" \"groupe\" \"gruppo\")
+    (rico:CorporateBody \"group\" \"Gruppe\" \"groupe\" \"gruppo\")
+    (rico:Family \"group\" \"Gruppe\" \"groupe\" \"gruppo\")
+    (frbroo:F26_Recording \"recording\" \"Aufnahme\" \"enregistrement\" \"registrazione\")
+    (frbroo:F25_Performance_Plan \"production\" \"Produktion\" \"production\" \"produzion\")
+    (crm:E22_Man-Made_Object \"venue\" \"Spielstätte\" \"lieu de représentation\" \"teatro\")
   }
+  BIND(
+    IF(?lang = \"de\", ?type_label_de, 
+      IF(?lang = \"fr\", ?type_label_fr, 
+        IF(?lang = \"it\", ?type_label_it, ?type_label_en)
+      )
+    ) AS ?type_label)
   SERVICE Repository:lookup {
-    ?value lookup:token \"?token\" ;
-           rdf:type ?type .
-    BIND(SUBSTR(STR(?value), 32, 1) AS ?type_indicator)
-    FILTER(?type_indicator != \"x\")
-    FILTER(?type_indicator != \"u\")
-    OPTIONAL { ?subject crm:P2_has_type ?crmtype . }
-    FILTER(?type != crm:E22_Man-Made_Object || ?crmtype = spav:dwmkn )
+    $value lookup:token \"?token\" ;
+           lookup:name ?item_label
   }
-  $value rdfs:label ?item_label .
-  BIND(CONCAT(?item_label, ?type_label) AS ?label)
+  $value rdf:type ?type .
+  BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator)
+  FILTER(?type_indicator != \"x\")
+  FILTER(?type_indicator != \"u\")
+  OPTIONAL { $value crm:P2_has_type ?crmtype. }
+  FILTER((?type != crm:E22_Man-Made_Object) || (?crmtype = spav:dwmkn))
+  OPTIONAL {
+    $value crm:P74_has_current_or_former_residence/crm:P89_falls_within/rdfs:label ?place_label .
+    BIND(LANG(?place_label) AS ?place_label_lang)
+  }
+  FILTER(!BOUND(?place_label_lang) || ?place_label_lang = ?lang)
+  BIND(CONCAT(?item_label, \" (\", ?type_label, IF(BOUND(?place_label), CONCAT(\", \", ?place_label), \"\"), \")\") AS ?label)
 }""" .
   
   _:genid-c279dbf6cfd146ccbc8d012248ad2f4d-v4l3k a <http://spinrdf.org/sp#Query>;

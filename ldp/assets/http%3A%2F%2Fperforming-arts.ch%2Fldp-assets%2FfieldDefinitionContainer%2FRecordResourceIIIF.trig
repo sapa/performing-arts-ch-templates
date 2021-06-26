@@ -1,46 +1,48 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceIIIF/context> {
-  _:genid-c9874dd8eaa641ecb612fe3e45bd3d97-ev1xdl a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """INSERT {
- 	$subject rico:hasInstantiation $value .
-	$value rico:hasCarrierType spav:cttif .
-} WHERE {
-}""" .
-  
   <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceIIIF>
     a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
       <http://www.w3.org/ns/ldp#Resource>;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-c9874dd8eaa641ecb612fe3e45bd3d97-z21seq;
     <http://www.metaphacts.com/ontology/fields#range> <rdfs:Class>;
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
     <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#anyURI>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-339f2672bec14cd3b2deda757d3af5d2-tx4frj;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-339f2672bec14cd3b2deda757d3af5d2-dj4d0r;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-339f2672bec14cd3b2deda757d3af5d2-8y2mel;
     <http://www.w3.org/2000/01/rdf-schema#label> "IIIF"@fr;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-c9874dd8eaa641ecb612fe3e45bd3d97-ev1xdl;
-    <http://www.w3.org/2000/01/rdf-schema#comment> "e.g. http://media.performing-arts.ch/iiif/image/ABC-123";
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-c9874dd8eaa641ecb612fe3e45bd3d97-gj51bz;
-    <http://www.metaphacts.com/ontology/fields#askPattern> _:genid-c9874dd8eaa641ecb612fe3e45bd3d97-247cmw;
+    <http://www.metaphacts.com/ontology/fields#askPattern> _:genid-339f2672bec14cd3b2deda757d3af5d2-8ovhla;
+    <http://www.w3.org/2000/01/rdf-schema#comment> "e.g. https://media.performing-arts.ch/iiif/3/image%2F123-ABC";
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-02-08T19:10:42.254Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-06-21T07:45:01.582Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-c9874dd8eaa641ecb612fe3e45bd3d97-247cmw a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """ASK {
-	FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif/image\"))
-}""" .
-  
-  _:genid-c9874dd8eaa641ecb612fe3e45bd3d97-gj51bz a <http://spinrdf.org/sp#Query>;
+  _:genid-339f2672bec14cd3b2deda757d3af5d2-8y2mel a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT $value WHERE {
 	$subject rico:hasInstantiation $value .
-	$value rico:hasCarrierType spav:cttif .
-	FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif/image\"))
+	FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif\"))
 }""" .
   
-  _:genid-c9874dd8eaa641ecb612fe3e45bd3d97-z21seq a <http://spinrdf.org/sp#Query>;
+  _:genid-339f2672bec14cd3b2deda757d3af5d2-8ovhla a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """ASK {
+  FILTER(REGEX(STR($value), \"http(s)*://media\\\\.performing-arts\\\\.ch/iiif/3/(image|document)%2F[\\\\d\\\\w-_]+\"))
+}""" .
+  
+  _:genid-339f2672bec14cd3b2deda757d3af5d2-dj4d0r a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """DELETE {
 	$subject rico:hasInstantiation $value .
+	$value rico:hasCarrierType spav:cttif ;
+      rico:hasRepresentationType spav:rtvs .      
 } WHERE {
  	$subject rico:hasInstantiation $value .
  	$value rico:hasCarrierType spav:cttif .
- 	FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif/image\"))
+ 	FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif\"))
+}""" .
+  
+  _:genid-339f2672bec14cd3b2deda757d3af5d2-tx4frj a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+ 	$subject rico:hasInstantiation $value .
+	$value rico:hasCarrierType spav:cttif ;
+      rico:hasRepresentationType spav:rtvs .
+} WHERE {
 }""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>

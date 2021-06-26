@@ -7,6 +7,14 @@
                         query='SELECT ?label WHERE { ?? rdfs:label ?label . }'
                         template='<div>{{#each bindings}}<p><strong>{{label.value}}</strong></p>{{/each}}</p>'>
                     </semantic-query>
+                    <!-- packing -->
+                    <semantic-query 
+                        query="SELECT ?label ?value WHERE {
+                            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePacking>) }
+                            ?? spao:hasPacking ?value . }"
+                        template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                            <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
+                    </semantic-query>
                 </bs-col>
                 <bs-col sm="4">
                     <semantic-query 

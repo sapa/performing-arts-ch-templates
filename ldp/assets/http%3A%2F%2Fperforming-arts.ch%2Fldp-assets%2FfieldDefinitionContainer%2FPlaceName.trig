@@ -1,60 +1,42 @@
 
 <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceName/context> {
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceName>
-    a <http://www.metaphacts.com/ontology/fields#Field>;
-    <http://www.w3.org/2000/01/rdf-schema#label> "Nome (luogo)"@it;
-    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-67fe6f330cad404db9a03dede55a9812-nqfy9m;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-67fe6f330cad404db9a03dede55a9812-3xf40u .
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceName> a <http://www.metaphacts.com/ontology/fields#Field>,
+      <http://www.w3.org/ns/prov#Entity>, <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-5d899af162634d5cbb4380ca7b470167-rsluh4;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Nom"@fr, "Name"@en, "Name"@de, "Nome"@it;
+    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E53_Place>;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "4";
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-5d899af162634d5cbb4380ca7b470167-x5kuqr;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString>;
+    <http://www.metaphacts.com/ontology/fields#minOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-5d899af162634d5cbb4380ca7b470167-f6qry5;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-06-18T07:21:50.656Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-67fe6f330cad404db9a03dede55a9812-20hoc <http://spinrdf.org/sp#text> """INSERT { 
+  _:genid-5d899af162634d5cbb4380ca7b470167-rsluh4 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT { 
   $subject rdfs:label $value ;
     crm:P87_is_identified_by ?identifier .
-  $identifier a crm:E48_Place_Name ;
+  ?identifier a crm:E48_Place_Name ;
     rdf:value $value .
 } WHERE {
   BIND(IRI(CONCAT(STR($subject), \"/a\")) as ?identifier)
 }""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceName>
-    <http://www.metaphacts.com/ontology/fields#domain> <http://www.cidoc-crm.org/cidoc-crm/E53_Place> .
-  
-  _:genid-67fe6f330cad404db9a03dede55a9812-3xf40u <http://spinrdf.org/sp#text> """SELECT ?value
-WHERE {
-  $subject crm:P87_is_identified_by $identifier .
-  $identifier rdf:value ?value .
-}""" .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceName>
-    <http://www.w3.org/2000/01/rdf-schema#label> "Name (place)"@en;
-    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#langString>;
-    <http://www.metaphacts.com/ontology/fields#minOccurs> "1" .
-  
-  _:genid-67fe6f330cad404db9a03dede55a9812-3xf40u a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-67fe6f330cad404db9a03dede55a9812-nqfy9m <http://spinrdf.org/sp#text> """DELETE {
+  _:genid-5d899af162634d5cbb4380ca7b470167-f6qry5 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
   $subject rdfs:label $value ;
     crm:P87_is_identified_by ?identifier .
-  $identifier a crm:E48_Place_Name ;
+  ?identifier a crm:E48_Place_Name ;
     rdf:value $value .
 } WHERE {}""" .
   
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceName>
-    <http://www.w3.org/2000/01/rdf-schema#label> "Name (Ort)"@de, "Nom (lieu)"@fr;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-67fe6f330cad404db9a03dede55a9812-20hoc;
-    <http://www.metaphacts.com/ontology/fields#maxOccurs> "4" .
-  
-  _:genid-67fe6f330cad404db9a03dede55a9812-nqfy9m a <http://spinrdf.org/sp#Query> .
-  
-  _:genid-67fe6f330cad404db9a03dede55a9812-20hoc a <http://spinrdf.org/sp#Query> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceName>
-    a <http://www.w3.org/ns/prov#Entity>;
-    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/admin>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2019-11-12T16:23:46.120Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  _:genid-5d899af162634d5cbb4380ca7b470167-x5kuqr a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject crm:P87_is_identified_by ?identifier .
+  ?identifier rdf:value $value .
+}""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
       <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceName> .
-  
-  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceName>
-    a <http://www.w3.org/ns/ldp#Resource> .
 }

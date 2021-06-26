@@ -14,18 +14,6 @@
                         >
                     </semantic-query>
 
-                    <!-- legacy identifier -->
-                    <semantic-query 
-                        query="SELECT ?label ?identifier WHERE {
-                            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier>) }
-                            ?? spao:legacyIdentifier ?identifier . }"
-                        template='<div>
-                            {{#ifCond bindings.length ">" 0}}
-                                <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
-                            {{/ifCond}}
-                            <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
-                    </semantic-query>
-
                     <!-- archival status -->
                     <semantic-query 
                         query="SELECT ?archival_status WHERE { ?? spao:hasArchivalStatus ?archival_status . }"
@@ -35,21 +23,6 @@
                                 <li><mp-label iri="{{archival_status.value}}"></mp-label></li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
-
-                    <!-- history -->
-                    <semantic-query 
-                        query="SELECT ?label ?history WHERE {
-                                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory>) }
-                                ?? rico:history ?history .
-                            }"
-                        template='<div>
-                            {{#ifCond bindings.length ">" 0}}
-                                <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
-                            {{/ifCond}}
-                            <div>{{#each bindings}}
-                                <p style="white-space: pre-line;">{{history.value}}</p>
-                            {{/each}}</div></div>'>
-                    </semantic-query>        
 
                     <!-- representation type -->
                     <semantic-query 
@@ -73,37 +46,23 @@
                         </div>'>
                     </semantic-query>
 
-                    <!-- integrity -->
+                    <!-- physical characteristics -->
                     <semantic-query 
-                        query="SELECT ?integrity WHERE { ?? rico:integrity ?integrity . } ORDER BY ASC (?integrity)"
+                        query="SELECT ?physical WHERE { ?? rico:physicalCharacteristics ?physical . } ORDER BY ASC (?physical)"
                         template='<div>
-                            <h5>Integrity</h5>
+                            <h5>Physical Characteristics</h5>
                             <ul class="list-unstyled">{{#each bindings}}
-                                <li>{{integrity.value}}</li>
+                                <li>{{physical.value}}</li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
-                    <!-- condition -->
+                    <!-- duration -->
                     <semantic-query 
-                        query="SELECT ?value WHERE { ?? spao:hasCondition ?value . } ORDER BY ASC (?value)"
+                        query="SELECT ?duration WHERE { ?? ebucore:duration ?duration . }"
                         template='<div>
-                            <h5>Condition</h5>
+                            <h5>Duration</h5>
                             <ul class="list-unstyled">{{#each bindings}}
-                                <li><mp-label iri="{{value.value}}"></mp-label></li>
-                            {{/each}}</ul></div>'>
-                    </semantic-query>
-
-                </bs-col>
-
-                <bs-col sm="4">
-
-                    <!-- material -->
-                    <semantic-query 
-                        query="SELECT ?material WHERE { ?? crm:P45_consists_of ?material . }"
-                        template='<div>
-                            <h5>Material</h5>
-                            <ul class="list-unstyled">{{#each bindings}}
-                                <li><mp-label iri="{{material.value}}"></mp-label></li>
+                                <li>{{duration.value}}</li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
@@ -123,24 +82,185 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
-                    <!-- duration -->
+                    <!-- location -->
                     <semantic-query 
-                        query="SELECT ?duration WHERE { ?? ebucore:duration ?duration . }"
+                        query="SELECT ?location WHERE { ?? rico:hasOrHadLocation ?location . }"
                         template='<div>
-                            <h5>Duration</h5>
+                            <h5>Location</h5>
                             <ul class="list-unstyled">{{#each bindings}}
-                                <li>{{duration.value}}</li>
+                                <li><semantic-link iri="{{location.value}}"></semantic-link></li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
-                    <!-- physical characteristics -->
+                    <!-- packing -->
                     <semantic-query 
-                        query="SELECT ?physical WHERE { ?? rico:physicalCharacteristics ?physical . } ORDER BY ASC (?physical)"
+                        query="SELECT ?label ?value WHERE {
+                            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePacking>) }
+                            ?? spao:hasPacking ?value . }"
+                        template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                            <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- copy path -->
+                    <semantic-query 
+                        query='SELECT ?path WHERE { ?? <http://temp.performing-arts.ch/hasCopyPath> ?path . }'
+                        template='<div><h5>Copy path</h5><ul class="list-unstyled">{{#each bindings}}<li>{{path.value}}</li>{{/each}}</ul></div>'>
+                    </semantic-query>
+                    
+                    <!-- condition -->
+                    <semantic-query 
+                        query="SELECT ?value WHERE { ?? spao:hasCondition ?value . } ORDER BY ASC (?value)"
                         template='<div>
-                            <h5>Physical Characteristics</h5>
+                            <h5>Condition</h5>
                             <ul class="list-unstyled">{{#each bindings}}
-                                <li>{{physical.value}}</li>
+                                <li><mp-label iri="{{value.value}}"></mp-label></li>
                             {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- video damage -->
+                    <semantic-query 
+                        query='SELECT ?value WHERE { ?? spao:hasVideoDamage ?value . }'
+                        template='<div>
+                            <h5>Video damage</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><mp-label iri="{{value.value}}"></mp-label></li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- integrity -->
+                    <semantic-query 
+                        query="SELECT ?integrity WHERE { ?? rico:integrity ?integrity . } ORDER BY ASC (?integrity)"
+                        template='<div>
+                            <h5>Integrity</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{integrity.value}}</li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- history -->
+                    <semantic-query 
+                        query="SELECT ?label ?history WHERE {
+                                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory>) }
+                                ?? rico:history ?history .
+                            }"
+                        template='<div>
+                            {{#ifCond bindings.length ">" 0}}
+                                <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
+                            {{/ifCond}}
+                            <div>{{#each bindings}}
+                                <p style="white-space: pre-line;">{{history.value}}</p>
+                            {{/each}}</div></div>'>
+                    </semantic-query>        
+
+                    <!-- last control -->
+                    <semantic-query 
+                        query="SELECT ?date WHERE { ?? spao:lastControl [ rico:normalizedDateValue ?date ] }"
+                        template='<div>
+                            {{#ifCond bindings.length ">" 0}}<h5>Last control</h5>{{/ifCond}}
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{date.value}}</li>
+                            {{/each}}</ul></div>'
+                        >
+                    </semantic-query>
+
+                    <!-- ACCESS -->
+
+                    <!-- TODO: This should be moved to the records. -->
+                    [[> sapaModule:RecordResourceAccess]]
+
+                    <!-- protection duration -->
+                    <semantic-query 
+                        query='SELECT ?label ?value WHERE {
+                            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProtectionDuration>) }
+                            ?? spao:hasProtectionDuration ?value . }'
+                        template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                            <ul class="list-unstyled">{{#each bindings}}<li>{{value.value}}</li>{{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- see also -->
+                    <semantic-query
+                        query='SELECT DISTINCT ?reference WHERE { ?? spao:seeAlso ?reference . }'
+                        template='<div><h5>See also</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><semantic-link iri="{{reference.value}}"></semantic-link></li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- preparation date -->
+                    <semantic-query 
+                        query="SELECT ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
+                        WHERE {
+                            ?? spao:preparationDate ?date .
+                            {
+                                OPTIONAL { ?date rico:normalizedDateValue ?normalized_date. }
+                                OPTIONAL { ?date rico:expressedDate ?expressed_date. }
+                                BIND(IF(BOUND(?expressed_date), ?expressed_date, ?normalized_date) AS ?single_date)
+                                OPTIONAL { ?date rico:dateQualifier ?single_qualifier . }
+                                OPTIONAL { ?date rico:certainty ?single_certainty . }
+                            } UNION {
+                                ?date a rico:DateRange .
+                                OPTIONAL {
+                                    ?date rico:hasBeginningDate ?b .
+                                    ?b rico:normalizedDateValue ?beginning_date .
+                                    OPTIONAL { ?b rico:dateQualifier ?beginning_qualifier . }
+                                    OPTIONAL { ?b rico:certainty ?beginning_certainty . }
+                                }
+                                OPTIONAL {
+                                    ?date rico:hasEndDate ?e .
+                                    ?e rico:normalizedDateValue ?end_date .
+                                    OPTIONAL { ?e rico:dateQualifier ?end_qualifier . }
+                                    OPTIONAL { ?e rico:certainty ?end_certainty . }
+                                }
+                            }
+                        }"
+                        template='<div>
+                            {{#ifCond bindings.length ">" 0}}<h5>Preparation date</h5>{{/ifCond}}
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>
+                                    {{#if single_date.value}}
+                                        {{#if single_qualifier.value}}<mp-label iri="{{single_qualifier.value}}"></mp-label> {{/if}}
+                                        {{single_date.value}}
+                                        {{#if single_certainty.value}}<span> (<mp-label iri="{{single_certainty.value}}"></mp-label>)</span>{{/if}}
+                                    {{else}}
+                                        {{#if beginning_date.value}}
+                                            {{#if beginning_qualifier.value}}<mp-label iri="{{beginning_qualifier.value}}"></mp-label> {{/if}}
+                                            {{beginning_date.value}}
+                                            {{#if beginning_certainty.value}}<span> (<mp-label iri="{{beginning_certainty.value}}"></mp-label>)</span>{{/if}}
+                                        {{/if}}
+                                        <span> - </span>
+                                        {{#if end_date.value}}
+                                            {{#if end_qualifier.value}}<mp-label iri="{{end_qualifier.value}}"></mp-label> {{/if}}
+                                            {{end_date.value}}
+                                            {{#if end_certainty.value}}<span> (<mp-label iri="{{end_certainty.value}}"></mp-label>)</span>{{/if}}
+                                        {{/if}}
+                                    {{/if}}
+                                </li>
+                            {{/each}}</ul></div>'
+                        >
+                    </semantic-query>
+
+                    [[#if (hasPermission "forms:ldp:*")]] 
+                    <!-- responsible employee -->
+                    <semantic-query 
+                        query='SELECT ?employee WHERE { ?? spao:hasResponsibleEmployee ?employee . }'
+                        template='<div><h5>Responsible employee</h5><ul class="list-unstyled">{{#each bindings}}<li>{{employee.value}}</li>{{/each}}</ul></div>'>
+                    </semantic-query>
+                    [[/if]]
+
+                </bs-col>
+
+                <bs-col sm="4">
+
+                    <!-- carrier type / medium -->
+                    <!-- TODO: Do we really need to repeat this here? -->
+                    <semantic-query 
+                        query='SELECT ?carrier_type WHERE { ?? rico:hasCarrierType ?carrier_type . }'
+                        template='<div>
+                            <h5>Carrier type</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><mp-label iri="{{carrier_type.value}}"></mp-label></li>
+                            {{/each}}</ul>
+                        </div>'>
                     </semantic-query>
 
                     <!-- formats -->
@@ -162,13 +282,70 @@
                         </div>'>
                     </semantic-query>
 
-                    <!-- color -->
+                    <!-- material -->
                     <semantic-query 
-                        query='SELECT ?color WHERE { ?? rdau:P60558 ?color . }'
+                        query="SELECT ?material WHERE { ?? crm:P45_consists_of ?material . }"
                         template='<div>
-                            <h5>Color</h5>
+                            <h5>Material</h5>
                             <ul class="list-unstyled">{{#each bindings}}
-                                <li><mp-label iri="{{color.value}}"></mp-label></li>
+                                <li><mp-label iri="{{material.value}}"></mp-label></li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- duration -->
+                    <!-- TODO: Do we really need to repeat this here? -->
+                    <semantic-query 
+                        query="SELECT ?duration WHERE { ?? ebucore:duration ?duration . }"
+                        template='<div>
+                            <h5>Duration</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{duration.value}}</li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- notes -->
+                    <semantic-query 
+                        query='SELECT ?note WHERE { ?? spao:hasNote ?note . }'
+                        template='<div><h5>Note</h5><ul class="list-unstyled">{{#each bindings}}<li>{{note.value}}</li>{{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- width -->
+                    <semantic-query 
+                        query="SELECT ?width WHERE { ?? ebucore:width ?width . }"
+                        template='<div>
+                            <h5>Width</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{width.value}}</li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- height -->
+                    <semantic-query 
+                        query="SELECT ?height WHERE { ?? ebucore:height ?height . }"
+                        template='<div>
+                            <h5>Height</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{height.value}}</li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- aspect ratio -->
+                    <semantic-query 
+                        query="SELECT ?aspect_ratio WHERE { ?? ebucore:aspectRatio ?aspect_ratio . }"
+                        template='<div>
+                            <h5>Aspect ratio</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><mp-label iri="{{aspect_ratio.value}}"></mp-label></li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- frame rate -->
+                    <semantic-query 
+                        query="SELECT ?frame_rate WHERE { ?? ebucore:frameRate ?frame_rate .  }"
+                        template='<div>
+                            <h5>Frame rate</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{frame_rate.value}}</li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
@@ -182,36 +359,39 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
-                    <!-- width x height -->
+                    <!-- color -->
                     <semantic-query 
-                        query="SELECT ?width ?height WHERE {
-                            ?? ebucore:width ?width ;
-                                ebucore:height ?height .
-                        }"
+                        query='SELECT ?color WHERE { ?? rdau:P60558 ?color . }'
                         template='<div>
-                            <h5>Width x height</h5>
+                            <h5>Color</h5>
                             <ul class="list-unstyled">{{#each bindings}}
-                                <li>{{width.value}} x {{height.value}}</li>
+                                <li><mp-label iri="{{color.value}}"></mp-label></li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
-                    <!-- aspect ratio -->
+                    <!-- scanning format -->
                     <semantic-query 
-                        query="SELECT ?aspect_ratio WHERE {
-                            ?? ebucore:aspectRatio ?aspect_ratio .
-                        }"
+                        query='SELECT ?scanning_format WHERE { ?? ebucore:scanningFormat ?scanning_format . }'
                         template='<div>
-                            <h5>Aspect ratio</h5>
+                            <h5>Scanning format</h5>
                             <ul class="list-unstyled">{{#each bindings}}
-                                <li><mp-label iri="{{aspect_ratio.value}}"></mp-label></li>
+                                <li><mp-label iri="{{scanning_format.value}}"></mp-label></li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- scanning order -->
+                    <semantic-query 
+                        query='SELECT ?scanning_order WHERE { ?? ebucore:scanningOrder ?scanning_order . }'
+                        template='<div>
+                            <h5>Scanning order</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><mp-label iri="{{scanning_order.value}}"></mp-label></li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
                     <!-- channels -->
                     <semantic-query 
-                        query="SELECT ?channels WHERE {
-                            ?? ebucore:channels ?channels .
-                        }"
+                        query="SELECT ?channels WHERE { ?? ebucore:channels ?channels .  }"
                         template='<div>
                             <h5>Channels</h5>
                             <ul class="list-unstyled">{{#each bindings}}
@@ -221,23 +401,11 @@
 
                     <!-- sampling rate -->
                     <semantic-query 
-                        query="SELECT ?sampling_rate WHERE {
-                            ?? ebucore:samplingRate ?sampling_rate .
-                        }"
+                        query="SELECT ?sampling_rate WHERE { ?? ebucore:samplingRate ?sampling_rate . }"
                         template='<div>
                             <h5>Sampling rate</h5>
                             <ul class="list-unstyled">{{#each bindings}}
                                 <li>{{sampling_rate.value}}</li>
-                            {{/each}}</ul></div>'>
-                    </semantic-query>
-
-                    <!-- video damage -->
-                    <semantic-query 
-                        query='SELECT ?value WHERE { ?? spao:hasVideoDamage ?value . }'
-                        template='<div>
-                            <h5>Video damage</h5>
-                            <ul class="list-unstyled">{{#each bindings}}
-                                <li><mp-label iri="{{value.value}}"></mp-label></li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
@@ -256,7 +424,20 @@
                             
                             <bs-panel header="{{file_name.value}}" collapsible="true">
 
-                            <!-- container -->
+                            <!-- md5 -->
+                            <semantic-query 
+                                query="SELECT ?md5 WHERE {
+                                    <{{file.value}}> premis:fixity [
+                                        a crypHashFunc:md5 ;
+                                        rdf:value ?md5
+                                    ]
+                                }"
+                                template='<div>
+                                    <h5>MD5</h5>
+                                    <ul class="list-unstyled">{{#each bindings}}
+                                        <li>{{md5.value}}</li>
+                                    {{/each}}</ul></div>'>
+                            </semantic-query>
 
                             <!-- format -->
                             <semantic-query 
@@ -269,6 +450,15 @@
                                     <ul class="list-unstyled">{{#each bindings}}
                                         <li><mp-label iri="{{format.value}}"></mp-label></li>
                                     {{/each}}</ul>
+                                </div>'>
+                            </semantic-query>
+
+                            <!-- composition level -->
+                            <semantic-query 
+                                query="SELECT ?composition_level WHERE { <{{file.value}}> premis:compositionLevel ?composition_level . }"
+                                template='<div>
+                                    <h5>Composition level</h5>
+                                    <ul class="list-unstyled">{{#each bindings}}<li>{{composition_level.value}}</li>{{/each}}</ul>
                                 </div>'>
                             </semantic-query>
 
@@ -286,37 +476,9 @@
                                 </div>'>
                             </semantic-query>
 
-                            <!-- md5 -->
-                            <semantic-query 
-                                query="SELECT ?md5 WHERE {
-                                    <{{file.value}}> premis:fixity [
-                                        a crypHashFunc:md5 ;
-                                        rdf:value ?md5
-                                    ]
-                                }"
-                                template='<div>
-                                    <h5>MD5</h5>
-                                    <ul class="list-unstyled">{{#each bindings}}
-                                        <li>{{md5.value}}</li>
-                                    {{/each}}</ul></div>'>
-                            </semantic-query>
-
-                            <!-- composition level -->
-                            <semantic-query 
-                                query="SELECT ?composition_level WHERE {
-                                    <{{file.value}}> premis:compositionLevel ?composition_level . 
-                                }"
-                                template='<div>
-                                    <h5>Composition level</h5>
-                                    <ul class="list-unstyled">{{#each bindings}}<li>{{composition_level.value}}</li>{{/each}}</ul>
-                                </div>'>
-                            </semantic-query>
-
                             <!-- duration -->
                             <semantic-query 
-                                query="SELECT ?duration WHERE {
-                                    <{{file.value}}> ebucore:duration ?duration . 
-                                }"
+                                query="SELECT ?duration WHERE { <{{file.value}}> ebucore:duration ?duration .  }"
                                 template='<div>
                                     <h5>Duration</h5>
                                     <ul class="list-unstyled">{{#each bindings}}
@@ -340,24 +502,29 @@
                                 </div>'>
                             </semantic-query>
 
-                            <!-- width x height -->
+                            <!-- width -->
                             <semantic-query 
-                                query="SELECT ?width ?height WHERE {
-                                    <{{file.value}}> ebucore:width ?width ;
-                                        ebucore:height ?height .
-                                }"
+                                query="SELECT ?width WHERE { <{{file.value}}> ebucore:width ?width . }"
                                 template='<div>
-                                    <h5>Width x height</h5>
+                                    <h5>Width</h5>
                                     <ul class="list-unstyled">{{#each bindings}}
-                                        <li>{{width.value}} x {{height.value}}</li>
+                                        <li>{{width.value}}</li>
+                                    {{/each}}</ul></div>'>
+                            </semantic-query>
+
+                            <!-- height -->
+                            <semantic-query 
+                                query="SELECT ?height WHERE { <{{file.value}}> ebucore:height ?height . }"
+                                template='<div>
+                                    <h5>Height</h5>
+                                    <ul class="list-unstyled">{{#each bindings}}
+                                        <li>{{height.value}}</li>
                                     {{/each}}</ul></div>'>
                             </semantic-query>
 
                             <!-- aspect ratio -->
                             <semantic-query 
-                                query="SELECT ?aspect_ratio WHERE {
-                                    <{{file.value}}> ebucore:aspectRatio ?aspect_ratio .
-                                }"
+                                query="SELECT ?aspect_ratio WHERE { <{{file.value}}> ebucore:aspectRatio ?aspect_ratio . }"
                                 template='<div>
                                     <h5>Aspect ratio</h5>
                                     <ul class="list-unstyled">{{#each bindings}}
@@ -367,23 +534,11 @@
 
                             <!-- frame rate -->
                             <semantic-query 
-                                query="SELECT ?frame_rate WHERE {
-                                    <{{file.value}}> ebucore:frameRate ?frame_rate .
-                                }"
+                                query="SELECT ?frame_rate WHERE { <{{file.value}}> ebucore:frameRate ?frame_rate . }"
                                 template='<div>
                                     <h5>Frame rate</h5>
                                     <ul class="list-unstyled">{{#each bindings}}
                                         <li>{{frame_rate.value}}</li>
-                                    {{/each}}</ul></div>'>
-                            </semantic-query>
-
-                            <!-- color -->
-                            <semantic-query 
-                                query='SELECT ?color WHERE { <{{file.value}}> rdau:P60558 ?color . }'
-                                template='<div>
-                                    <h5>Color</h5>
-                                    <ul class="list-unstyled">{{#each bindings}}
-                                        <li><mp-label iri="{{color.value}}"></mp-label></li>
                                     {{/each}}</ul></div>'>
                             </semantic-query>
 
@@ -394,6 +549,16 @@
                                     <h5>Standard</h5>
                                     <ul class="list-unstyled">{{#each bindings}}
                                         <li><mp-label iri="{{standard.value}}"></mp-label></li>
+                                    {{/each}}</ul></div>'>
+                            </semantic-query>
+
+                            <!-- color -->
+                            <semantic-query 
+                                query='SELECT ?color WHERE { <{{file.value}}> rdau:P60558 ?color . }'
+                                template='<div>
+                                    <h5>Color</h5>
+                                    <ul class="list-unstyled">{{#each bindings}}
+                                        <li><mp-label iri="{{color.value}}"></mp-label></li>
                                     {{/each}}</ul></div>'>
                             </semantic-query>
 
@@ -435,9 +600,7 @@
 
                             <!-- channels -->
                             <semantic-query 
-                                query="SELECT ?channels WHERE {
-                                    <{{file.value}}> ebucore:channels ?channels .
-                                }"
+                                query="SELECT ?channels WHERE { <{{file.value}}> ebucore:channels ?channels . }"
                                 template='<div>
                                     <h5>Channels</h5>
                                     <ul class="list-unstyled">{{#each bindings}}
@@ -447,9 +610,7 @@
                         
                             <!-- sampling rate -->
                             <semantic-query 
-                                query="SELECT ?sampling_rate WHERE {
-                                    <{{file.value}}> ebucore:samplingRate ?sampling_rate .
-                                }"
+                                query="SELECT ?sampling_rate WHERE {  <{{file.value}}> ebucore:samplingRate ?sampling_rate . }"
                                 template='<div>
                                     <h5>Sampling rate</h5>
                                     <ul class="list-unstyled">{{#each bindings}}
@@ -496,60 +657,14 @@
 
                             <!-- last control -->
                             <semantic-query 
-                                query="SELECT ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
-                                WHERE {
-                                    <{{file.value}}> spao:lastControl ?date .
-                                    {
-                                        {
-                                            ?date rico:normalizedDateValue ?normalized_date .
-                                        } UNION {
-                                            ?date rico:expressedDate ?expressed_date .
-                                        }
-                                        BIND(IF(BOUND(?expressed_date), ?expressed_date, ?normalized_date) AS ?single_date)
-                                        OPTIONAL { ?date rico:dateQualifier ?single_qualifier . }
-                                        OPTIONAL { ?date rico:certainty ?single_certainty . }
-                                    } UNION {
-                                        ?date a rico:DateRange .
-                                        OPTIONAL {
-                                            ?date rico:hasBeginningDate ?b .
-                                            ?b rico:normalizedDateValue ?beginning_date .
-                                            OPTIONAL { ?b rico:dateQualifier ?beginning_qualifier . }
-                                            OPTIONAL { ?b rico:certainty ?beginning_certainty . }
-                                        }
-                                        OPTIONAL {
-                                            ?date rico:hasEndDate ?e .
-                                            ?e rico:normalizedDateValue ?end_date .
-                                            OPTIONAL { ?e rico:dateQualifier ?end_qualifier . }
-                                            OPTIONAL { ?e rico:certainty ?end_certainty . }
-                                        }
-                                    }
-                                }"
+                                query="SELECT ?date WHERE { <{{file.value}}> spao:lastControl [ rico:normalizedDateValue ?date ] }"
                                 template='<div>
                                     {{#ifCond bindings.length ">" 0}}<h5>Last control</h5>{{/ifCond}}
                                     <ul class="list-unstyled">{{#each bindings}}
-                                        <li>
-                                            {{#if single_date.value}}
-                                                {{#if single_qualifier.value}}<mp-label iri="{{single_qualifier.value}}"></mp-label> {{/if}}
-                                                {{single_date.value}}
-                                                {{#if single_certainty.value}}<span> (<mp-label iri="{{single_certainty.value}}"></mp-label>)</span>{{/if}}
-                                            {{else}}
-                                                {{#if beginning_date.value}}
-                                                    {{#if beginning_qualifier.value}}<mp-label iri="{{beginning_qualifier.value}}"></mp-label> {{/if}}
-                                                    {{beginning_date.value}}
-                                                    {{#if beginning_certainty.value}}<span> (<mp-label iri="{{beginning_certainty.value}}"></mp-label>)</span>{{/if}}
-                                                {{/if}}
-                                                <span> - </span>
-                                                {{#if end_date.value}}
-                                                    {{#if end_qualifier.value}}<mp-label iri="{{end_qualifier.value}}"></mp-label> {{/if}}
-                                                    {{end_date.value}}
-                                                    {{#if end_certainty.value}}<span> (<mp-label iri="{{end_certainty.value}}"></mp-label>)</span>{{/if}}
-                                                {{/if}}
-                                            {{/if}}
-                                        </li>
-                                    {{/each}}</ul></div>'
-                                >
+                                        <li>{{date.value}}</li>
+                                    {{/each}}</ul></div>'>
                             </semantic-query>
-
+    
                             <!-- see also -->
                             <semantic-query
                                 query='SELECT DISTINCT ?reference WHERE { <{{file.value}}> spao:seeAlso ?reference . }'
@@ -564,146 +679,6 @@
                             {{/each}}
                         </template>
                     </semantic-query>
-
-                    [[#if (hasPermission "forms:ldp:*")]] 
-                    <!-- responsible employee -->
-                    <semantic-query 
-                        query='SELECT ?employee WHERE { ?? spao:hasResponsibleEmployee ?employee . }'
-                        template='<div><h5>Responsible employee</h5><ul class="list-unstyled">{{#each bindings}}<li>{{employee.value}}</li>{{/each}}</ul></div>'>
-                    </semantic-query>
-                    [[/if]]
-        
-                    <!-- preparation date -->
-                    <semantic-query 
-                        query="SELECT ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
-                        WHERE {
-                            ?? spao:preparationDate ?date .
-                            {
-                                {
-                                    ?date rico:normalizedDateValue ?normalized_date .
-                                } UNION {
-                                    ?date rico:expressedDate ?expressed_date .
-                                }
-                                BIND(IF(BOUND(?expressed_date), ?expressed_date, ?normalized_date) AS ?single_date)
-                                OPTIONAL { ?date rico:dateQualifier ?single_qualifier . }
-                                OPTIONAL { ?date rico:certainty ?single_certainty . }
-                            } UNION {
-                                ?date a rico:DateRange .
-                                OPTIONAL {
-                                    ?date rico:hasBeginningDate ?b .
-                                    ?b rico:normalizedDateValue ?beginning_date .
-                                    OPTIONAL { ?b rico:dateQualifier ?beginning_qualifier . }
-                                    OPTIONAL { ?b rico:certainty ?beginning_certainty . }
-                                }
-                                OPTIONAL {
-                                    ?date rico:hasEndDate ?e .
-                                    ?e rico:normalizedDateValue ?end_date .
-                                    OPTIONAL { ?e rico:dateQualifier ?end_qualifier . }
-                                    OPTIONAL { ?e rico:certainty ?end_certainty . }
-                                }
-                            }
-                        }"
-                        template='<div>
-                            {{#ifCond bindings.length ">" 0}}<h5>Preparation date</h5>{{/ifCond}}
-                            <ul class="list-unstyled">{{#each bindings}}
-                                <li>
-                                    {{#if single_date.value}}
-                                        {{#if single_qualifier.value}}<mp-label iri="{{single_qualifier.value}}"></mp-label> {{/if}}
-                                        {{single_date.value}}
-                                        {{#if single_certainty.value}}<span> (<mp-label iri="{{single_certainty.value}}"></mp-label>)</span>{{/if}}
-                                    {{else}}
-                                        {{#if beginning_date.value}}
-                                            {{#if beginning_qualifier.value}}<mp-label iri="{{beginning_qualifier.value}}"></mp-label> {{/if}}
-                                            {{beginning_date.value}}
-                                            {{#if beginning_certainty.value}}<span> (<mp-label iri="{{beginning_certainty.value}}"></mp-label>)</span>{{/if}}
-                                        {{/if}}
-                                        <span> - </span>
-                                        {{#if end_date.value}}
-                                            {{#if end_qualifier.value}}<mp-label iri="{{end_qualifier.value}}"></mp-label> {{/if}}
-                                            {{end_date.value}}
-                                            {{#if end_certainty.value}}<span> (<mp-label iri="{{end_certainty.value}}"></mp-label>)</span>{{/if}}
-                                        {{/if}}
-                                    {{/if}}
-                                </li>
-                            {{/each}}</ul></div>'
-                        >
-                    </semantic-query>
-
-                    <!-- last control -->
-                    <semantic-query 
-                        query="SELECT ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
-                        WHERE {
-                            ?? spao:lastControl ?date .
-                            {
-                                {
-                                    ?date rico:normalizedDateValue ?normalized_date .
-                                } UNION {
-                                    ?date rico:expressedDate ?expressed_date .
-                                }
-                                BIND(IF(BOUND(?expressed_date), ?expressed_date, ?normalized_date) AS ?single_date)
-                                OPTIONAL { ?date rico:dateQualifier ?single_qualifier . }
-                                OPTIONAL { ?date rico:certainty ?single_certainty . }
-                            } UNION {
-                                ?date a rico:DateRange .
-                                OPTIONAL {
-                                    ?date rico:hasBeginningDate ?b .
-                                    ?b rico:normalizedDateValue ?beginning_date .
-                                    OPTIONAL { ?b rico:dateQualifier ?beginning_qualifier . }
-                                    OPTIONAL { ?b rico:certainty ?beginning_certainty . }
-                                }
-                                OPTIONAL {
-                                    ?date rico:hasEndDate ?e .
-                                    ?e rico:normalizedDateValue ?end_date .
-                                    OPTIONAL { ?e rico:dateQualifier ?end_qualifier . }
-                                    OPTIONAL { ?e rico:certainty ?end_certainty . }
-                                }
-                            }
-                        }"
-                        template='<div>
-                            {{#ifCond bindings.length ">" 0}}<h5>Last control</h5>{{/ifCond}}
-                            <ul class="list-unstyled">{{#each bindings}}
-                                <li>
-                                    {{#if single_date.value}}
-                                        {{#if single_qualifier.value}}<mp-label iri="{{single_qualifier.value}}"></mp-label> {{/if}}
-                                        {{single_date.value}}
-                                        {{#if single_certainty.value}}<span> (<mp-label iri="{{single_certainty.value}}"></mp-label>)</span>{{/if}}
-                                    {{else}}
-                                        {{#if beginning_date.value}}
-                                            {{#if beginning_qualifier.value}}<mp-label iri="{{beginning_qualifier.value}}"></mp-label> {{/if}}
-                                            {{beginning_date.value}}
-                                            {{#if beginning_certainty.value}}<span> (<mp-label iri="{{beginning_certainty.value}}"></mp-label>)</span>{{/if}}
-                                        {{/if}}
-                                        <span> - </span>
-                                        {{#if end_date.value}}
-                                            {{#if end_qualifier.value}}<mp-label iri="{{end_qualifier.value}}"></mp-label> {{/if}}
-                                            {{end_date.value}}
-                                            {{#if end_certainty.value}}<span> (<mp-label iri="{{end_certainty.value}}"></mp-label>)</span>{{/if}}
-                                        {{/if}}
-                                    {{/if}}
-                                </li>
-                            {{/each}}</ul></div>'
-                        >
-                    </semantic-query>
-
-                    <!-- copy path -->
-                    <semantic-query 
-                        query='SELECT ?path WHERE { ?? <http://temp.performing-arts.ch/hasCopyPath> ?path . }'
-                        template='<div><h5>Copy path</h5>{{#each bindings}}<div>{{path.value}}</div>{{/each}}</div>'>
-                    </semantic-query>
-                    
-                    <!-- comment -->
-                    <semantic-query 
-                        query="SELECT ?comment WHERE { ?? rdf:comment ?comment . }"
-                        template='<div>
-                            <h5>Comment</h5>
-                            <ul class="list-unstyled">{{#each bindings}}
-                                <li>{{comment.value}}</li>
-                            {{/each}}</ul></div>'>
-                    </semantic-query>
-
-                    <!-- ACCESS -->
-
-                    [[> sapaModule:RecordResourceAccess]]
 
                 </bs-col>
 
@@ -723,57 +698,6 @@
                                 <li><semantic-link iri="{{record_resource.value}}">{{label.value}}</semantic-link></li>
                             {{/each}}</ul>
                         </div>'>
-                    </semantic-query>
-
-                    <!-- location -->
-                    <semantic-query 
-                        query="SELECT ?location WHERE { ?? rico:hasOrHadLocation ?location . }"
-                        template='<div>
-                            <h5>Location</h5>
-                            <ul class="list-unstyled">{{#each bindings}}
-                                <li><semantic-link iri="{{location.value}}"></semantic-link></li>
-                            {{/each}}</ul></div>'>
-                    </semantic-query>
-
-                    <!-- packing -->
-                    <semantic-query 
-                        query="SELECT ?label ?value WHERE {
-                            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePacking>) }
-                            ?? spao:hasPacking ?value . }"
-                        template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                            <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
-                    </semantic-query>
-
-                    <!-- notes -->
-                    <semantic-query 
-                        query='SELECT ?note WHERE { ?? spao:hasNote ?note . }'
-                        template='<div><h5>Note</h5>{{#each bindings}}<div>{{note.value}}</div>{{/each}}</div>'>
-                    </semantic-query>
-
-                    [[#if (hasPermission "forms:ldp:*")]] 
-                    <!-- internal notes -->
-                    <semantic-query 
-                        query='SELECT ?note WHERE { ?? spao:hasInternalNote ?note . }'
-                        template='<div><h5>Internal note</h5>{{#each bindings}}<div>{{note.value}}</div>{{/each}}</div>'>
-                    </semantic-query>
-                    [[/if]]
-
-                    <!-- protection duration -->
-                    <semantic-query 
-                        query='SELECT ?label ?value WHERE {
-                            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProtectionDuration>) }
-                            ?? spao:hasProtectionDuration ?value . }'
-                        template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
-                            {{#each bindings}}<div>{{value.value}}</div>{{/each}}</div>'>
-                    </semantic-query>
-
-                    <!-- see also -->
-                    <semantic-query
-                        query='SELECT DISTINCT ?reference WHERE { ?? spao:seeAlso ?reference . }'
-                        template='<div><h5>See also</h5>
-                            <ul class="list-unstyled">{{#each bindings}}
-                                <li><semantic-link iri="{{reference.value}}"></semantic-link></li>
-                            {{/each}}</ul></div>'>
                     </semantic-query>
 
                 </bs-col>
@@ -796,10 +720,23 @@
                     provider='d3-dendrogram'
                     >
                 </semantic-tree>
+
             </bs-row>
             
         </bs-tab>
 
+        [[#if (ask "ASK { ?? a ebucore:MediaResource . }")]]
+        <bs-tab event-key='editing physical' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+            [[> sapaModule:InstantiationFormPhysical]]
+        </bs-tab>
+        [[/if]]
+        
+        [[#if (ask "ASK { ?? a premis:Representation . }")]]
+        <bs-tab event-key='editing virtual' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+            [[> sapaModule:InstantiationFormVirtual]]
+        </bs-tab>
+        [[/if]]
+        
         [[> sapaModule:AdminTabs]]
 
     </bs-tabs>  

@@ -110,19 +110,52 @@
                 </mp-field-visualization> 
                 
                 <semantic-query 
-                    query='SELECT ?history WHERE { ?? rico:history ?history . }'
-                    template='<div>{{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{history.value}}</div>{{/each}}</div>'>
+                    query='SELECT ?history ?rank WHERE {
+                        {
+                            ?? rico:history ?history . 
+                            FILTER(LANGMATCHES(LANG(?history), ?__userPreferredLanguage__))
+                            BIND(0 AS ?rank)
+                        } UNION {
+                            ?? rico:history ?history . 
+                            BIND(LANG(?history) AS ?lang)
+                            VALUES ( ?lang ?rank ) {
+                                ( "en" 1 )
+                                ( "de" 2 )
+                                ( "fr" 3 )
+                                ( "it" 4 )
+                                ( "" 5)
+                            }
+                        }                    
+                      } ORDER BY ASC ( ?rank )
+                      LIMIT 1'
+                    template='<div>{{#each bindings}}<div class="text-item" style="margin-top: 0.8em; white-space: pre-line;">{{history.value}}</div>{{/each}}</div>'>
                 </semantic-query>
         
                 <semantic-query 
-                    query='SELECT ?label ?value WHERE {
+                    query='SELECT ?label ?value ?rank WHERE {
                         VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AgentBibliography>) }
-                        ?? spao:hasBibliography ?value . }'
+                        {
+                            ?? spao:hasBibliography ?value .
+                            FILTER(LANGMATCHES(LANG(?value), ?__userPreferredLanguage__))
+                            BIND(0 AS ?rank)
+                        } UNION {
+                            ?? spao:hasBibliography ?value .
+                            BIND(LANG(?value) AS ?lang)
+                            VALUES ( ?lang ?rank ) {
+                                ( "en" 1 )
+                                ( "de" 2 )
+                                ( "fr" 3 )
+                                ( "it" 4 )
+                                ( "" 5)
+                            }
+                        }                        
+                    } ORDER BY ASC ( ?rank )
+                    LIMIT 1'
                     template='<div>
                         {{#ifCond bindings.length ">" 0}}
                             <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
                         {{/ifCond}}
-                        {{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
+                        {{#each bindings}}<div class="text-item" style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
                 </semantic-query>
         
             </bs-col>

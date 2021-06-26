@@ -169,7 +169,8 @@
               {"displayName": "[[i18n "ProductionsTableSeason" bundle="performing-arts-ch"]]", "variableName": "season"}, 
               {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch"]]", "cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
               {"displayName": "[[i18n "ProductionsTableGenre" bundle="performing-arts-ch"]]", "cellTemplate":"{{>genre}}"},
-              {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch"]]", "cellTemplate":"{{>producer}}"}
+              {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch"]]", "cellTemplate":"{{>producer}}"},
+              {"displayName": "", "cellTemplate": "{{> recording}}"}
             ]'
             number-of-displayed-rows=20
             options='{"showFilter": true}'>
@@ -217,6 +218,25 @@
                 </template>
               </semantic-query>   
             </template>
+
+            <template id='recording'>
+              <semantic-query 
+                query='SELECT ?recording WHERE {
+                  {
+                    ?recording frbroo:R14_incorporates <{{plan.value}}> ;
+                      a frbroo:F26_Recording .
+                  } UNION {
+                    ?performance frbroo:R25_performed <{{plan.value}}> ;
+                      a frbroo:F31_Performance ;
+                      crm:P9_consists_of ?recorded_performance .
+                    ?recorded_performance a frbroo:F31_Performance .
+                    ?recording crm:P70_documents ?recorded_performance ;
+                      a frbroo:F26_Recording .
+                  }
+                } LIMIT 1'
+                template = '<div>{{#each bindings}}<img src="../assets/icons/solid/camcorder-solid.svg" style="height: 1.4em; width: 1.4em; padding-right:0.5em;" />{{/each}}</div>'>
+              </semantic-query> 
+            </template>  
 
           </semantic-table>
         </semantic-search-result>

@@ -21,14 +21,10 @@
 
     <semantic-search-result>
       <semantic-table 
-        query='SELECT ?subject ?premieredatebegin WHERE { 
+        query='SELECT DISTINCT ?subject ?premieredatebegin WHERE { 
           OPTIONAL {
             ?performance frbroo:R25_performed ?subject ;
-              crm:P9_consists_of [
-                crm:P4_has_time-span [
-                  crm:P82a_begin_of_the_begin ?premieredatebegin
-                ]
-              ]
+              crm:P9_consists_of/crm:P4_has_time-span/crm:P82a_begin_of_the_begin ?premieredatebegin
           }
         }'
         id="production-table" 

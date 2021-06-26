@@ -6,15 +6,21 @@
     <http://www.metaphacts.com/ontology/fields#domain> <https://www.ica.org/standards/RiC/ontology#RecordResource>;
     <http://www.w3.org/2000/01/rdf-schema#label> "No date type"@en;
     <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
-    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-2cc6f89f2dd74e30b2b51727cb46b6b9-tz6z;
-    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-2cc6f89f2dd74e30b2b51727cb46b6b9-n5o0b9;
-    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-2cc6f89f2dd74e30b2b51727cb46b6b9-k9up1a;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-0daa63f096fa4a64ba3bbbb11f251379-c5m7ob;
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-0daa63f096fa4a64ba3bbbb11f251379-kqravq;
+    <http://www.metaphacts.com/ontology/fields#valueSetPattern> _:genid-0daa63f096fa4a64ba3bbbb11f251379-qsle6m;
     <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
-    <http://www.w3.org/ns/prov#generatedAtTime> "2021-03-03T15:24:47.627Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-06-15T11:34:17.046Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
   
-  _:genid-2cc6f89f2dd74e30b2b51727cb46b6b9-n5o0b9 a <http://spinrdf.org/sp#Query>;
+  _:genid-0daa63f096fa4a64ba3bbbb11f251379-qsle6m a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  VALUES ( $value ) { ( spav:ndsd ) ( spav:ndna )}
+}""" .
+  
+  _:genid-0daa63f096fa4a64ba3bbbb11f251379-kqravq a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """INSERT {
-  $subject rico:expressedDate ?label .
+  $subject rico:expressedDate ?label ;
+      rico:normalizedDateValue ?label .
 } WHERE {
   BIND( $value AS ?vocab ) 
   VALUES ( ?vocab ?label ) {
@@ -23,7 +29,7 @@
   }
 }""" .
   
-  _:genid-2cc6f89f2dd74e30b2b51727cb46b6b9-k9up1a a <http://spinrdf.org/sp#Query>;
+  _:genid-0daa63f096fa4a64ba3bbbb11f251379-c5m7ob a <http://spinrdf.org/sp#Query>;
     <http://spinrdf.org/sp#text> """SELECT $value WHERE {
   $subject rico:expressedDate ?label. 
   VALUES ( ?vocab ?label ) {
@@ -31,11 +37,6 @@
     ( spav:ndna \"N/A\" )
   }
   BIND( ?vocab AS $value) 
-}""" .
-  
-  _:genid-2cc6f89f2dd74e30b2b51727cb46b6b9-tz6z a <http://spinrdf.org/sp#Query>;
-    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
-  VALUES ( $value ) { ( spav:ndsd ) ( spav:ndna )}
 }""" .
   
   <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>

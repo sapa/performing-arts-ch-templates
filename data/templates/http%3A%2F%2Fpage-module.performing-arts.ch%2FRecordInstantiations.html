@@ -1,4 +1,7 @@
 <!-- instantiations -->
+
+[[#if (hasPermission "forms:ldp:*")]]
+
 <semantic-query 
     query="SELECT ?label ?order ?archivalstatus ?instantiation ?signatur WHERE {
         VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
@@ -33,3 +36,35 @@
         {{/each}}
     </template>
 </semantic-query>
+
+[[else]]
+
+<semantic-query 
+    query="SELECT DISTINCT ?label ?carriertype WHERE {
+        VALUES (?label) { ( spav:asarm ) }
+        ?? rico:hasInstantiation [
+            spao:hasArchivalStatus spav:asarm ;
+            rico:hasCarrierType ?carriertype 
+        ]
+    }"
+    template='{{#ifCond bindings.length ">" 0}}<h5 style="text-transform: capitalize;"><mp-label iri="{{bindings.0.label.value}}"></mp-label></h5>{{/ifCond}}
+        <ul class="list-unstyled">{{#each bindings}}
+            <li><mp-label iri="{{carriertype.value}}"></mp-label></li>
+        {{/each}}</ul> '>
+</semantic-query>
+
+<semantic-query 
+    query="SELECT DISTINCT ?label ?material WHERE {
+        VALUES (?label) { ( <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationMaterial> ) }
+        ?? rico:hasInstantiation [
+            spao:hasArchivalStatus spav:asarm ;
+            crm:P45_consists_of ?material 
+        ]
+    }"
+    template='{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+        <ul class="list-unstyled">{{#each bindings}}
+            <li><mp-label iri="{{material.value}}"></mp-label></li>
+        {{/each}}</ul> '>
+</semantic-query>
+
+[[/if]]

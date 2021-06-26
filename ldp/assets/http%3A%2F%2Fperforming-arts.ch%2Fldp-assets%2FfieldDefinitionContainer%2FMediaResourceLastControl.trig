@@ -1,0 +1,48 @@
+
+<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceLastControl/context> {
+  <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceLastControl>
+    a <http://www.metaphacts.com/ontology/fields#Field>, <http://www.w3.org/ns/prov#Entity>,
+      <http://www.w3.org/ns/ldp#Resource>;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Last control"@en, "Dernier contrôle"@fr;
+    <http://www.metaphacts.com/ontology/fields#deletePattern> _:genid-19860b9aa1814cf6984cc7996ccf9c06-s2w62w;
+    <http://www.metaphacts.com/ontology/fields#maxOccurs> "1";
+    <http://www.metaphacts.com/ontology/fields#insertPattern> _:genid-19860b9aa1814cf6984cc7996ccf9c06-x4z7l;
+    <http://www.metaphacts.com/ontology/fields#askPattern> _:genid-19860b9aa1814cf6984cc7996ccf9c06-dzx9g;
+    <http://www.metaphacts.com/ontology/fields#selectPattern> _:genid-19860b9aa1814cf6984cc7996ccf9c06-rboku4;
+    <http://www.metaphacts.com/ontology/fields#domain> <https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource>;
+    <http://www.metaphacts.com/ontology/fields#xsdDatatype> <http://www.w3.org/2001/XMLSchema#string>;
+    <http://www.w3.org/ns/prov#wasAttributedTo> <http://www.metaphacts.com/resource/user/bw>;
+    <http://www.w3.org/ns/prov#generatedAtTime> "2021-06-02T10:14:08.779Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+  
+  _:genid-19860b9aa1814cf6984cc7996ccf9c06-rboku4 a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """SELECT $value WHERE {
+  $subject spao:lastControl [ rico:normalizedDateValue $value ] .
+}""" .
+  
+  _:genid-19860b9aa1814cf6984cc7996ccf9c06-s2w62w a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """DELETE {
+  $subject spao:lastControl ?lastcontrol .
+  ?lastcontrol rico:normalizedDateValue $value ;
+     ?p ?o .
+} WHERE {
+  $subject spao:lastControl ?lastcontrol .
+  ?lastcontrol rico:normalizedDateValue $value ;
+     ?p ?o .
+}""" .
+  
+  _:genid-19860b9aa1814cf6984cc7996ccf9c06-x4z7l a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> """INSERT {
+  $subject spao:lastControl ?lastcontrol .
+  ?lastcontrol a rico:SingleDate ;
+      rico:dateStandard \"ISO 8601\" ;
+      rico:normalizedDateValue $value .
+} WHERE {
+  BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR($subject), \"last_control\")))) AS ?lastcontrol)
+}""" .
+  
+  _:genid-19860b9aa1814cf6984cc7996ccf9c06-dzx9g a <http://spinrdf.org/sp#Query>;
+    <http://spinrdf.org/sp#text> "ASK { FILTER(REGEX($value, \"^([\\\\+-]?\\\\d{4}(?!\\\\d{2}\\\\b))((-?)((0[1-9]|1[0-2])(\\\\3([12]\\\\d|0[1-9]|3[01]))?))?$\")) }" .
+  
+  <http://www.metaphacts.com/ontologies/platform#fieldDefinitionContainer> <http://www.w3.org/ns/ldp#contains>
+      <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceLastControl> .
+}
