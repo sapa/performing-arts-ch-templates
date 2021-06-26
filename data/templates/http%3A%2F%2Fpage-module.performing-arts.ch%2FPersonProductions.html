@@ -95,8 +95,7 @@
       
 <semantic-search-query-constant 
     domain='<[[resolvePrefix "frbroo:F25_Performance_Plan"]]>'
-    query='SELECT DISTINCT ?plan ?premieredatebegin
-    WHERE {
+    query='SELECT DISTINCT ?plan ?premieredatebegin WHERE {
         ?personactivity crm:P14_carried_out_by ?? .
         {
             # reference work
@@ -180,9 +179,14 @@
           
           <template id='season'> 
             <semantic-query 
-              query='SELECT DISTINCT ?season WHERE { } LIMIT 1'
+              query='SELECT DISTINCT ?season WHERE {
+                ?expressioncreation frbroo:R17_created <{{plan.value}}> ;
+                  a frbroo:F28_Expression_Creation ;
+                  crm:P10_falls_within ?season .
+                FILTER(CONTAINS(STR(?season), "/s/"))
+              } LIMIT 1'
               template = '{{>season-list}} '>           
-              <template id='seaon-list'> 
+              <template id='season-list'> 
                 <div>{{#each bindings}}<semantic-link iri="{{season.value}}"></semantic-link>{{/each}}</div>
               </template>
             </semantic-query>   
