@@ -125,6 +125,7 @@
 <bs-col sm="4">
 
     <!-- venues -->
+    <div class="text-item">
     <semantic-query 
         query='SELECT ?label WHERE {
             VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupVenue>) }
@@ -149,6 +150,7 @@
           <mp-label iri="{{data.node.value}}"></mp-label>{{else}}
           <semantic-link iri="{{data.node.value}}"></semantic-link>{{/if}}'> 
     </semantic-tree>
+    </div>
 
     [[#if (hasPermission "forms:ldp:*")]]
     <mp-field-visualization
