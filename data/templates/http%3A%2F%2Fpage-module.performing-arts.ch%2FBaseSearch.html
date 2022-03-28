@@ -1,0 +1,500 @@
+<style>
+  .domainCards {
+    margin: 0 -10px;
+  }
+
+  .domainCardItem {
+    display: flex;
+    padding: 20px 10px;
+  }
+
+  /* hide unwanted categories */
+  .domainCardItem:nth-child(6), .domainCardItem:nth-child(7) {
+    display: none;
+  }
+
+  .domainCard {
+    width: 100%;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px;
+  }
+
+  .domainCard--selected {
+    border: 1px solid black;
+  }
+
+  .domainCardThumbnail {
+    line-height: 50px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+  }
+
+  .domainCardThumbnail img {
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+
+  .domainItems {
+    margin: 10px 0;
+  }
+
+  .domainItemWrap {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  /* hide unwanted categories */
+  .domainItemWrap:nth-child(6), .domainItemWrap:nth-child(7) {
+    display: none;
+  }
+
+  .domainItem {
+    color: #333;
+    padding: 4px 6px;
+  }
+
+  .domainItem:hover {
+    color: #333;
+  }
+
+  .domainItem--selected {
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+  }
+
+  .domainItemThumbnail {
+    line-height: 24px;
+    margin-right: 5px;
+    height: 24px;
+    width: 24px;
+    text-align: center;
+  }
+
+  .domainItemThumbnail img {
+    padding: 4px;
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+
+  .domainRemove {
+    color: #333;
+    margin: 0 5px;
+  }
+
+  .clearSearch {
+    color: #333;
+  }
+
+  div.facet {
+    width: 16em;
+  }
+
+  img.facet__relation__content__category-image {
+    display: none;
+  }
+</style>
+[[#*inline 'fallsWithinQuery']]
+  {
+    [[> @partial-block ]](crm:P89_falls_within) ?__value__ .
+    [[#if include]] [[include]] [[else]]
+        ?__value__ owl:sameAs ?external ; a crm:E53_Place .
+      FILTER(CONTAINS(STR(?external), \"http://classifications.data.admin.ch/canton/\"))  
+    [[/if]]
+  } UNION {
+    [[> @partial-block ]](crm:P89_falls_within/crm:P89_falls_within) ?__value__ .
+    [[#if include]] [[include]] [[else]]
+        ?__value__ owl:sameAs ?external ; a crm:E53_Place .
+      FILTER(CONTAINS(STR(?external), \"http://classifications.data.admin.ch/canton/\"))  
+    [[/if]]
+  } UNION {
+    [[> @partial-block ]](crm:P89_falls_within/crm:P89_falls_within/crm:P89_falls_within) ?__value__ .
+    [[#if include]] [[include]] [[else]]
+        ?__value__ owl:sameAs ?external ; a crm:E53_Place .
+      FILTER(CONTAINS(STR(?external), \"http://classifications.data.admin.ch/canton/\"))  
+    [[/if]]
+  }
+[[/inline]]
+  <semantic-search 
+    id='mainSearch'
+    categories='{
+      "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>": [{
+        "kind": "resource"
+      }],
+      "<http://www.w3.org/2004/02/skos/core#Concept>": [{
+        "kind": "resource"
+      }],
+      "<http://www.w3.org/2001/XMLSchema#Decimal>": [{
+        "kind": "numeric-range",
+        "queryPattern": "{
+          $subject ?__relation__ ?literal .
+          FILTER(?literal >= ?__numericRangeBeginValue__) .
+          FILTER(?literal <= ?__numericRangeEndValue__) .
+        }"
+      }]
+    }'
+    relations='{
+      "<http://search.performing-arts.ch/genre>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          ?work frbroo:R12_is_realised_in ?subject ;
+            crm:P2_has_type ?__value__ .
+        }"
+      }],
+      "<http://search.performing-arts.ch/premieretype>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          ?performance frbroo:R25_performed ?subject ; crm:P9_consists_of ?recorded_performance .
+          ?recorded_performance a frbroo:F31_Performance ; crm:P2_has_type ?__value__ .
+          ?__value__ a crm:E55_Type; skos:inScheme spav:hl .
+        }"
+      }],
+      "<http://search.performing-arts.ch/producer>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          ?expressioncreation frbroo:R17_created ?subject ;
+                              crm:P9_consists_of ?spav .
+          ?spav crm:P2_has_type spav:muwgo ;
+                crm:P14_carried_out_by ?__value__ .
+          FILTER(CONTAINS(STR(?__value__), \"/a/\"))
+        }"
+      }],
+      "<http://search.performing-arts.ch/productionvenue>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          ?performance frbroo:R25_performed ?subject ;
+                        crm:P8_took_place_on_or_within ?__value__ .
+          FILTER(CONTAINS(STR(?__value__), \"/o/\"))
+        }"
+      }],
+      "<http://search.performing-arts.ch/productionplace>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          ?performance frbroo:R25_performed ?subject ;
+                        crm:P8_took_place_on_or_within/crm:P156_occupies/crm:P89_falls_within ?__value__ .
+        }"
+      }],
+      "<http://search.performing-arts.ch/productioncanton>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          [[#> fallsWithinQuery]]?performance frbroo:R25_performed ?subject ; crm:P8_took_place_on_or_within/crm:P156_occupies/[[/fallsWithinQuery]]  
+        }"
+      }],
+      "<http://search.performing-arts.ch/stagedirection>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          ?expressioncreation frbroo:R17_created ?subject ;
+                              crm:P9_consists_of ?spav .
+          ?spav crm:P2_has_type spav:mutnt ;
+                crm:P14_carried_out_by ?__value__ .
+          FILTER(CONTAINS(STR(?__value__), \"/a/\"))
+        }"
+      }],
+      "<http://search.performing-arts.ch/premieredate>": [{
+        "kind": "numeric-range",
+        "queryPattern": "{
+          ?performance frbroo:R25_performed ?subject ;
+                        crm:P9_consists_of ?recorded_performance .
+          ?recorded_performance  a frbroo:F31_Performance ;
+                          crm:P4_has_time-span/crm:P82a_begin_of_the_begin ?date .
+          BIND(YEAR(?date) AS ?literal)
+          FILTER(?literal >= ?__numericRangeBeginValue__) .
+          FILTER(?literal <= ?__numericRangeEndValue__) .
+        }"
+      }],
+      "<http://search.performing-arts.ch/grouptype>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          ?subject crm:P2_has_type ?__value__ .
+        }"
+      }],
+      "<http://search.performing-arts.ch/groupplace>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          ?subject crm:P74_has_current_or_former_residence/crm:P89_falls_within ?__value__ .
+        }"
+      }],
+      "<http://search.performing-arts.ch/groupgenre>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          ?pursuit crm:P14_carried_out_by ?subject ; 
+            a frbroo:F51_Pursuit ;
+            frbroo:R59_had_typical_subject ?__value__ . 
+        }"
+      }],
+      "<http://search.performing-arts.ch/groupcanton>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          [[#> fallsWithinQuery]]$subject crm:P74_has_current_or_former_residence/[[/fallsWithinQuery]] 
+        }"
+      }],
+      "<http://search.performing-arts.ch/venuecanton>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          [[#> fallsWithinQuery]]$subject crm:P156_occupies/[[/fallsWithinQuery]]
+        }"
+      }],
+      "<http://search.performing-arts.ch/venueplace>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          ?subject crm:P156_occupies/crm:P89_falls_within ?__value__ .
+        }"
+      }],
+      "<http://search.performing-arts.ch/withincanton>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          [[#> fallsWithinQuery]]$subject [[/fallsWithinQuery]] 
+        }"
+      }],
+      "<http://search.performing-arts.ch/withincountry>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          [[#> fallsWithinQuery include="FILTER NOT EXISTS { ?__value__ <http://www.cidoc-crm.org/cidoc-crm/P89_falls_within> ?otherplace .}"]] $subject [[/fallsWithinQuery]] 
+        }"
+      }], 
+      "<http://search.performing-arts.ch/has_recording>": [{
+        "kind": "resource",
+        "queryPattern": "{
+          ?subject ^frbroo:R25_performed/crm:P9_consists_of/^crm:P70_documents/a ?__value__.
+        }"
+      }]
+    }'
+    search-profile='{
+      "categories": [
+        {
+          "iri": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "label": "[[i18n "SearchProductions" bundle="performing-arts-ch"]]",
+          "thumbnail": "../assets/icons/solid/theater-masks.svg"
+        },
+        {
+          "iri": "<http://www.cidoc-crm.org/cidoc-crm/E21_Person>",
+          "label": "[[i18n "SearchPersons" bundle="performing-arts-ch"]]",
+          "thumbnail": "../assets/icons/solid/user.svg"
+        },
+        {
+          "iri": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
+          "label": "[[i18n "SearchGroups" bundle="performing-arts-ch"]]",
+          "thumbnail": "../assets/icons/solid/users.svg"
+        },
+        {
+          "iri": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>",
+          "label": "[[i18n "SearchVenues" bundle="performing-arts-ch"]]",
+          "thumbnail": "../assets/icons/solid/landmark.svg"
+        },
+        {
+          "iri": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",
+          "label": "[[i18n "SearchPlaces" bundle="performing-arts-ch"]]",
+          "thumbnail": "../assets/icons/solid/map-marker-alt.svg"
+        },
+        {
+          "iri": "<http://www.w3.org/2004/02/skos/core#Concept>",
+          "label": "Concepts",
+          "thumbnail": "../assets/icons/solid/comment-lines.svg"
+        },
+        {
+          "iri": "<http://www.w3.org/2001/XMLSchema#Decimal>",
+          "label": "Numbers"
+        },
+        {
+          "iri": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>",
+          "label": "Actors",
+          "thumbnail": "../assets/icons/solid/user.svg"
+        }
+      ],
+      "relations": [
+        {
+          "iri": "<http://search.performing-arts.ch/genre>",
+          "label": "[[i18n "FilterGenre" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/premieretype>",
+          "label": "[[i18n "FilterPremiere" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/producer>",
+          "label": "[[i18n "FilterProducer" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/productionvenue>",
+          "label": "[[i18n "FilterVenue" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/productioncanton>",
+          "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/productionplace>",
+          "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/stagedirection>",
+          "label": "[[i18n "FilterStageDirection" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/premieredate>",
+          "label": "[[i18n "FilterYear" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://www.w3.org/2001/XMLSchema#Decimal>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/has_recording>",
+          "label": "[[i18n "FilterHasRecording" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>",
+          "hasRange": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/grouptype>",
+          "label": "[[i18n "FilterType" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
+          "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/groupgenre>",
+          "label": "[[i18n "FilterGenre" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
+          "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/groupcanton>",
+          "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/groupplace>",
+          "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E74_Group>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/venuecanton>",
+          "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/venueplace>",
+          "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/withincanton>",
+          "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+        },
+        {
+          "iri": "<http://search.performing-arts.ch/withincountry>",
+          "label": "[[i18n "FilterCountry" bundle="performing-arts-ch"]]",
+          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>",
+          "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
+        }
+      ]
+    }'
+    limit='500'
+  >
+
+    [[> @partial-block]]
+    
+    <div data-flex-layout="row stretch-stretch">
+  
+      <div data-flex-self="size-1of3" style="flex: 0 0 0; margin-top: 1em;">
+
+        [[#if type]]
+          <semantic-search-facet 
+                    value-relations='{
+                            "<http://search.performing-arts.ch/has_recording>": {
+                              "kind": "resource",
+                              "valuesQuery": "select ?value (\"Yes\" as ?label) (COUNT(DISTINCT ?subject) AS ?count) { ?subject ^frbroo:R25_performed/crm:P9_consists_of/^crm:P70_documents/a ?value.} GROUP BY ?value ",
+                              "tupleTemplate": "<span> <mp-highlight highlight=\"{{highlight}}\"> {{label.value}} </mp-highlight> <img src=\"../assets/icons/solid/camcorder-solid.svg\" style=\"height: 1.4em; width: 1.4em; padding-right:0.5em;\" /> ({{count.value}})</span>"
+                            }
+                          }'>
+          </semantic-search-facet>
+        [[/if]]
+          
+      </div>
+      <div style='flex: 1;'>
+        <semantic-search-facet-breadcrumbs></semantic-search-facet-breadcrumbs>
+
+        [[#if type]]
+        [[else]]
+          <semantic-search-result-holder>
+            <semantic-search-result> 
+              <semantic-query
+                id="search-result-overview"
+                query='SELECT ?type ?typeLabel ?typeThumbnail (COUNT(?subject) as ?count) WHERE {
+                  ?subject a ?type .
+                  VALUES (?type ?typeLabel ?typeThumbnail ?typeSort) {
+                    (frbroo:F25_Performance_Plan "[[i18n "SearchProductions" bundle="performing-arts-ch"]]" "../assets/icons/solid/theater-masks.svg" "0"^^xsd:integer)
+                    (crm:E21_Person "[[i18n "SearchPersons" bundle="performing-arts-ch"]]" "../assets/icons/solid/user.svg" "1"^^xsd:integer)
+                    (crm:E74_Group "[[i18n "SearchGroups" bundle="performing-arts-ch"]]" "../assets/icons/solid/users.svg" "2"^^xsd:integer)
+                    (crm:E22_Man-Made_Object "[[i18n "SearchVenues" bundle="performing-arts-ch"]]" "../assets/icons/solid/landmark.svg" "3"^^xsd:integer)
+                    (crm:E53_Place "[[i18n "SearchPlaces" bundle="performing-arts-ch"]]" "../assets/icons/solid/map-marker-alt.svg" "4"^^xsd:integer)
+                  }
+                } GROUP BY ?type ?typeLabel ?typeThumbnail
+                ORDER BY ?typeSort'
+                template="{{> template }}"
+              >
+                <template id="template">
+                    [[> searchTypeResultTemplate]]
+                </template>
+              </semantic-query>
+            <semantic-search-result> 
+          </semantic-search-result-holder>
+        [[/if]]
+
+        [[> sapaModule:SearchProductionsResults]]
+        [[> sapaModule:SearchPersonsResults]]
+        [[> sapaModule:SearchGroupsResults]]
+        [[> sapaModule:SearchPlacesResults]]
+        [[> sapaModule:SearchPlacesResults]]
+        
+      </div>
+    </div>
+  </semantic-search>
+
+  [[#*inline "searchTypeResultTemplate"]]
+
+    <div class='domainCards'>
+      <div data-flex-layout='rows stretch-stretch'>
+        {{#each bindings}}
+          <div data-flex-self='size-1of5 md-half sm-full' class='domainCardItem'>
+            <button type=button class='btn btn-secondary domainCard'>
+                <div class='domainCardThumbnail'>
+                  {{#if typeThumbnail}}
+                    <img src='{{typeThumbnail.value}}' alt='{{typeLabel.value}}' /> 
+                  {{else}}
+                    <i class='fa fa-edit fa-lg'></i>
+                  {{/if}}
+                </div>
+                <h4>{{typeLabel.value}}</h4>
+                <div>{{count.value}}</div>
+            </button>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  
+  [[/inline]]
