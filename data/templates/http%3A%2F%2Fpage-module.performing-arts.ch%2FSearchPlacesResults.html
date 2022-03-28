@@ -1,4 +1,4 @@
-<semantic-search-result-holder domains-include='["http://www.cidoc-crm.org/cidoc-crm/E53_Place"]'>
+<semantic-search-result-holder>
 
     <div data-flex-self="md-full">
 
@@ -21,7 +21,7 @@
 
         <semantic-search-result>
         <semantic-table 
-            query='SELECT DISTINCT ?subject WHERE { }'
+            query='SELECT DISTINCT ?subject WHERE { ?subject a crm:E53_Place }'
             id="place-table" 
             options='{"showFilter": false, "showTableHeading": true, "enableSort": true}'
             column-configuration='[

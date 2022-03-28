@@ -422,7 +422,6 @@
   
       <div data-flex-self="size-1of3" style="flex: 0 0 0; margin-top: 1em;">
 
-        [[#if type]]
           <semantic-search-facet 
                     value-relations='{
                             "<http://search.performing-arts.ch/has_recording>": {
@@ -432,69 +431,71 @@
                             }
                           }'>
           </semantic-search-facet>
-        [[/if]]
           
       </div>
       <div style='flex: 1;'>
         <semantic-search-facet-breadcrumbs></semantic-search-facet-breadcrumbs>
 
-        [[#if type]]
-        [[else]]
-          <semantic-search-result-holder>
-            <semantic-search-result> 
-              <semantic-query
-                id="search-result-overview"
-                query='SELECT ?type ?typeLabel ?typeThumbnail (COUNT(?subject) as ?count) WHERE {
-                  ?subject a ?type .
-                  VALUES (?type ?typeLabel ?typeThumbnail ?typeSort) {
-                    (frbroo:F25_Performance_Plan "[[i18n "SearchProductions" bundle="performing-arts-ch"]]" "../assets/icons/solid/theater-masks.svg" "0"^^xsd:integer)
-                    (crm:E21_Person "[[i18n "SearchPersons" bundle="performing-arts-ch"]]" "../assets/icons/solid/user.svg" "1"^^xsd:integer)
-                    (crm:E74_Group "[[i18n "SearchGroups" bundle="performing-arts-ch"]]" "../assets/icons/solid/users.svg" "2"^^xsd:integer)
-                    (crm:E22_Man-Made_Object "[[i18n "SearchVenues" bundle="performing-arts-ch"]]" "../assets/icons/solid/landmark.svg" "3"^^xsd:integer)
-                    (crm:E53_Place "[[i18n "SearchPlaces" bundle="performing-arts-ch"]]" "../assets/icons/solid/map-marker-alt.svg" "4"^^xsd:integer)
-                  }
-                } GROUP BY ?type ?typeLabel ?typeThumbnail
-                ORDER BY ?typeSort'
-                template="{{> template }}"
-              >
-                <template id="template">
-                    [[> searchTypeResultTemplate]]
-                </template>
-              </semantic-query>
-            <semantic-search-result> 
-          </semantic-search-result-holder>
-        [[/if]]
+        <semantic-search-result-holder>
+          <semantic-search-result> 
+            <semantic-query
+              id="search-result-overview"
+              query='SELECT ?type ?typeTab ?typeLabel ?typeThumbnail (COUNT(?subject) as ?count) WHERE {
+                ?subject a ?type .
+                VALUES (?type ?typeTab ?typeLabel ?typeThumbnail ?typeSort) {
+                  (frbroo:F25_Performance_Plan "tab-productions" "[[i18n "SearchProductions" bundle="performing-arts-ch"]]" "../assets/icons/solid/theater-masks.svg" "0"^^xsd:integer)
+                  (crm:E21_Person "tab-persons" "[[i18n "SearchPersons" bundle="performing-arts-ch"]]" "../assets/icons/solid/user.svg" "1"^^xsd:integer)
+                  (crm:E74_Group "tab-groups" "[[i18n "SearchGroups" bundle="performing-arts-ch"]]" "../assets/icons/solid/users.svg" "2"^^xsd:integer)
+                  (crm:E22_Man-Made_Object "tab-venues" "[[i18n "SearchVenues" bundle="performing-arts-ch"]]" "../assets/icons/solid/landmark.svg" "3"^^xsd:integer)
+                  (crm:E53_Place "tab-place" "[[i18n "SearchPlaces" bundle="performing-arts-ch"]]" "../assets/icons/solid/map-marker-alt.svg" "4"^^xsd:integer)
+                }
+              } GROUP BY ?type ?typeTab ?typeLabel ?typeThumbnail
+              ORDER BY ?typeSort'
+              template="{{> template }}"
+            >
+              <template id="template">
+                  [[> searchTypeResultTemplate]]
+              </template>
+            </semantic-query>
+          <semantic-search-result> 
+        </semantic-search-result-holder>
 
-        [[> sapaModule:SearchProductionsResults]]
-        [[> sapaModule:SearchPersonsResults]]
-        [[> sapaModule:SearchGroupsResults]]
-        [[> sapaModule:SearchPlacesResults]]
-        [[> sapaModule:SearchPlacesResults]]
-        
+
       </div>
     </div>
   </semantic-search>
 
   [[#*inline "searchTypeResultTemplate"]]
 
-    <div class='domainCards'>
-      <div data-flex-layout='rows stretch-stretch'>
+    <bs-tab-container id="tabs-search-type-result">
+      <bs-nav variant="tabs" class="flex-row">
         {{#each bindings}}
-          <div data-flex-self='size-1of5 md-half sm-full' class='domainCardItem'>
-            <button type=button class='btn btn-secondary domainCard'>
-                <div class='domainCardThumbnail'>
-                  {{#if typeThumbnail}}
-                    <img src='{{typeThumbnail.value}}' alt='{{typeLabel.value}}' /> 
-                  {{else}}
-                    <i class='fa fa-edit fa-lg'></i>
-                  {{/if}}
-                </div>
-                <h4>{{typeLabel.value}}</h4>
-                <div>{{count.value}}</div>
-            </button>
-          </div>
+          <bs-nav-item>
+            <bs-nav-link event-key="{{typeTab.value}}">
+              {{typeLabel.value}}
+              {{count.value}}
+            </bs-nav-link>
+          </bs-nav-item>
         {{/each}}
-      </div>
-    </div>
+      </bs-nav>
+      <bs-tab-content>
+        <bs-tab-pane event-key="tab-persons">
+          [[> sapaModule:SearchPersonsResults]]
+        </bs-tab-pane>
+        <bs-tab-pane event-key="tab-productions">
+          [[> sapaModule:SearchProductionsResults]]
+        </bs-tab-pane>
+        <bs-tab-pane event-key="tab-venues">
+          [[> sapaModule:SearchVenuesResults]]
+        </bs-tab-pane>
+        <bs-tab-pane event-key="tab-groups">
+          [[> sapaModule:SearchGroupsResults]]
+        </bs-tab-pane>
+        <bs-tab-pane event-key="tab-places">
+          [[> sapaModule:SearchPlacesResults]]
+        </bs-tab-pane>
+      </bs-tab-content>
+    </bs-tab-container>
+
   
   [[/inline]]

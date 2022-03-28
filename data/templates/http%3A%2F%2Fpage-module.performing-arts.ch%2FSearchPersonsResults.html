@@ -1,4 +1,4 @@
-<semantic-search-result-holder domains-include='["http://www.cidoc-crm.org/cidoc-crm/E21_Person"]'>
+<semantic-search-result-holder>
 
   <div data-flex-self="md-full">
 
@@ -23,6 +23,7 @@
       <semantic-table 
         query='SELECT DISTINCT ?subject ?dob ?description
         WHERE {
+          ?subject a crm:E21_Person .
           OPTIONAL {
             ?subject rico:birthDate/rico:normalizedDateValue ?dob 
           }
@@ -93,4 +94,4 @@
     </div>
 
   </div>
-</semantic-search-result-holder>
+  </semantic-search-result-holder>

@@ -7,14 +7,11 @@
 <div class="page">
   <div class='page__body' style="padding-top:6em;">
 
-    [[#> sapaModule:baseSearch type=(urlParam "type") ]]
+    [[#> sapaModule:baseSearch]]
+      
       <semantic-search-query-keyword 
         id='keywordQuery'
-        [[#if (urlParam "type")]]
-          domain='<[[urlParam "type"]]>'
-        [[else]]
-          domain="<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>"
-        [[/if]]
+        domain="<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>"
         query='SELECT DISTINCT ?subject WHERE {
           [[#if (urlParam "type")]]
             BIND(<[[urlParam "type"]]> as ?__domain__)

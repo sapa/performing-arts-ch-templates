@@ -1,4 +1,4 @@
-<semantic-search-result-holder domains-include='["http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan"]'>
+<semantic-search-result-holder>
 
   <div data-flex-self="md-full">
 
@@ -22,6 +22,7 @@
     <semantic-search-result>
       <semantic-table 
         query='SELECT DISTINCT ?subject ?premieredatebegin WHERE { 
+          ?subject a frbroo:F25_Performance_Plan .
           OPTIONAL {
             ?performance frbroo:R25_performed ?subject ;
               crm:P9_consists_of/crm:P4_has_time-span/crm:P82a_begin_of_the_begin ?premieredatebegin
