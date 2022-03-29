@@ -1,4 +1,9 @@
-<semantic-search-result-holder>
+<semantic-search-result-holder
+    [[#if overrideDomain]]
+    [[else]]
+        domains-include='["http://www.cidoc-crm.org/cidoc-crm/E53_Place"]'
+    [[/if]]
+>
 
     <div data-flex-self="md-full">
 
@@ -21,7 +26,11 @@
 
         <semantic-search-result>
         <semantic-table 
-            query='SELECT DISTINCT ?subject WHERE { ?subject a crm:E53_Place }'
+            query='SELECT DISTINCT ?subject WHERE { 
+                [[#if overrideDomain]]
+                    ?subject a crm:E53_Place .
+                [[/if]]
+            }'
             id="place-table" 
             options='{"showFilter": false, "showTableHeading": true, "enableSort": true}'
             column-configuration='[

@@ -1,4 +1,9 @@
-<semantic-search-result-holder>
+<semantic-search-result-holder
+  [[#if overrideDomain]]
+  [[else]]
+    domains-include='["http://www.cidoc-crm.org/cidoc-crm/E74_Group", "http://www.cidoc-crm.org/cidoc-crm/E40_Legal_Body"]'
+  [[/if]]
+>
 
   <div data-flex-self="md-full">
 
@@ -22,11 +27,14 @@
     <semantic-search-result>
       <semantic-table 
         query='SELECT ?subject (GROUP_CONCAT(DISTINCT ?beginning; SEPARATOR=", ") AS ?beginnings) WHERE {
-          ?subject a ?entityType .
-          VALUES (?entityType) {
-            (crm:E74_Group)
-            (crm:E40_Legal_Body)
-          }
+          
+          [[#if overrideDomain]]
+            ?subject a ?entityType .
+            VALUES (?entityType) {
+              (crm:E74_Group)
+              (crm:E40_Legal_Body)
+            }
+          [[/if]]
           OPTIONAL {
             ?subject rico:hasBeginningDate/rico:normalizedDateValue ?beginning 
           }

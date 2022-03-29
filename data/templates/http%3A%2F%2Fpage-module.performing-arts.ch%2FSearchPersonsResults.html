@@ -1,4 +1,9 @@
-<semantic-search-result-holder>
+<semantic-search-result-holder
+  [[#if overrideDomain]]
+  [[else]]
+    domains-include='["http://www.cidoc-crm.org/cidoc-crm/E21_Person"]'
+  [[/if]]
+>
 
   <div data-flex-self="md-full">
 
@@ -23,7 +28,9 @@
       <semantic-table 
         query='SELECT DISTINCT ?subject ?dob ?description
         WHERE {
-          ?subject a crm:E21_Person .
+          [[#if overrideDomain]]
+            ?subject a crm:E21_Person .
+          [[/if]]
           OPTIONAL {
             ?subject rico:birthDate/rico:normalizedDateValue ?dob 
           }
