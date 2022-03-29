@@ -126,7 +126,7 @@
   }
 [[/inline]]
   <semantic-search 
-    id='mainSearch'
+    id='[[#if id]][[id]][[else]]mainSearch[[/if]]'
     categories='{
       "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>": [{
         "kind": "resource"
@@ -320,103 +320,103 @@
         {
           "iri": "<http://search.performing-arts.ch/genre>",
           "label": "[[i18n "FilterGenre" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>[[/if]]",
           "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
         },
         {
           "iri": "<http://search.performing-arts.ch/premieretype>",
           "label": "[[i18n "FilterPremiere" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>[[/if]]",
           "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
         },
         {
           "iri": "<http://search.performing-arts.ch/producer>",
           "label": "[[i18n "FilterProducer" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>[[/if]]",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
         },
         {
           "iri": "<http://search.performing-arts.ch/productionvenue>",
           "label": "[[i18n "FilterVenue" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>[[/if]]",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>"
         },
         {
           "iri": "<http://search.performing-arts.ch/productioncanton>",
           "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>[[/if]]",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
         },
         {
           "iri": "<http://search.performing-arts.ch/productionplace>",
           "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>[[/if]]",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
         },
         {
           "iri": "<http://search.performing-arts.ch/stagedirection>",
           "label": "[[i18n "FilterStageDirection" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>[[/if]]",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E39_Actor>"
         },
         {
           "iri": "<http://search.performing-arts.ch/premieredate>",
           "label": "[[i18n "FilterYear" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>[[/if]]",
           "hasRange": "<http://www.w3.org/2001/XMLSchema#Decimal>"
         },
         {
           "iri": "<http://search.performing-arts.ch/has_recording>",
           "label": "[[i18n "FilterHasRecording" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>[[/if]]",
           "hasRange": "<http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan>"
         },
         {
           "iri": "<http://search.performing-arts.ch/grouptype>",
           "label": "[[i18n "FilterType" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://www.cidoc-crm.org/cidoc-crm/E74_Group>[[/if]]",
           "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
         },
         {
           "iri": "<http://search.performing-arts.ch/groupgenre>",
           "label": "[[i18n "FilterGenre" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://www.cidoc-crm.org/cidoc-crm/E74_Group>[[/if]]",
           "hasRange": "<http://www.w3.org/2004/02/skos/core#Concept>"
         },
         {
           "iri": "<http://search.performing-arts.ch/groupcanton>",
           "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://www.cidoc-crm.org/cidoc-crm/E74_Group>[[/if]]",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
         },
         {
           "iri": "<http://search.performing-arts.ch/groupplace>",
           "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://www.cidoc-crm.org/cidoc-crm/E74_Group>[[/if]]",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
         },
         {
           "iri": "<http://search.performing-arts.ch/venuecanton>",
           "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>[[/if]]",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
         },
         {
           "iri": "<http://search.performing-arts.ch/venueplace>",
           "label": "[[i18n "FilterPlace" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object>[[/if]]",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
         },
         {
           "iri": "<http://search.performing-arts.ch/withincanton>",
           "label": "[[i18n "FilterCanton" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://www.cidoc-crm.org/cidoc-crm/E53_Place>[[/if]]",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
         },
         {
           "iri": "<http://search.performing-arts.ch/withincountry>",
           "label": "[[i18n "FilterCountry" bundle="performing-arts-ch"]]",
-          "hasDomain": "<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>",
+          "hasDomain": "[[#if searchAllDomains]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[else]]<http://www.cidoc-crm.org/cidoc-crm/E53_Place>[[/if]]",
           "hasRange": "<http://www.cidoc-crm.org/cidoc-crm/E53_Place>"
         }
       ]
@@ -444,34 +444,42 @@
       <div style='flex: 1;'>
         <semantic-search-facet-breadcrumbs></semantic-search-facet-breadcrumbs>
 
-        <semantic-search-result-holder>
-          <semantic-search-result> 
-            <semantic-query
-              id="search-result-overview"
-              query='SELECT ?type ?typeTab ?typeLabel ?typeThumbnail (COUNT(DISTINCT ?subject) as ?count) WHERE {
-                ?subject a ?type .
-                VALUES (?type ?typeTab ?typeLabel ?typeThumbnail ?typeSort) {
-                  (frbroo:F25_Performance_Plan "tab-productions" "[[i18n "SearchProductions" bundle="performing-arts-ch"]]" "../assets/icons/solid/theater-masks.svg" "0"^^xsd:integer)
-                  (crm:E21_Person "tab-persons" "[[i18n "SearchPersons" bundle="performing-arts-ch"]]" "../assets/icons/solid/user.svg" "1"^^xsd:integer)
-                  (crm:E74_Group "tab-groups" "[[i18n "SearchGroups" bundle="performing-arts-ch"]]" "../assets/icons/solid/users.svg" "2"^^xsd:integer)
-                  (crm:E22_Man-Made_Object "tab-venues" "[[i18n "SearchVenues" bundle="performing-arts-ch"]]" "../assets/icons/solid/landmark.svg" "3"^^xsd:integer)
-                  (crm:E53_Place "tab-places" "[[i18n "SearchPlaces" bundle="performing-arts-ch"]]" "../assets/icons/solid/map-marker-alt.svg" "4"^^xsd:integer)
-                }
-              } GROUP BY ?type ?typeTab ?typeLabel ?typeThumbnail
-              ORDER BY ?typeSort'
-              template="{{> template }}"
-              no-result-template="{{> no-result-template }}"
-            >
-              <template id="template">
-                  [[> searchTypeResultTemplate]]
-              </template>
-              <template id="no-result-template">
-                <bs-alert variant="warning" class="search-results__alert pull-left">
-                  <span class="num-results" class="search-results__alert">[[i18n "SearchNoResults" bundle="performing-arts-ch"]]</span>
-                </bs-alert>
-            </semantic-query>
-          <semantic-search-result> 
-        </semantic-search-result-holder>
+          [[#if searchAllDomains]]
+          <semantic-search-result-holder>
+            <semantic-search-result> 
+              <semantic-query
+                id="search-result-overview"
+                query='SELECT ?type ?typeTab ?typeLabel ?typeThumbnail (COUNT(DISTINCT ?subject) as ?count) WHERE {
+                  ?subject a ?type .
+                  VALUES (?type ?typeTab ?typeLabel ?typeThumbnail ?typeSort) {
+                    (frbroo:F25_Performance_Plan "tab-productions" "[[i18n "SearchProductions" bundle="performing-arts-ch"]]" "../assets/icons/solid/theater-masks.svg" "0"^^xsd:integer)
+                    (crm:E21_Person "tab-persons" "[[i18n "SearchPersons" bundle="performing-arts-ch"]]" "../assets/icons/solid/user.svg" "1"^^xsd:integer)
+                    (crm:E74_Group "tab-groups" "[[i18n "SearchGroups" bundle="performing-arts-ch"]]" "../assets/icons/solid/users.svg" "2"^^xsd:integer)
+                    (crm:E22_Man-Made_Object "tab-venues" "[[i18n "SearchVenues" bundle="performing-arts-ch"]]" "../assets/icons/solid/landmark.svg" "3"^^xsd:integer)
+                    (crm:E53_Place "tab-places" "[[i18n "SearchPlaces" bundle="performing-arts-ch"]]" "../assets/icons/solid/map-marker-alt.svg" "4"^^xsd:integer)
+                  }
+                } GROUP BY ?type ?typeTab ?typeLabel ?typeThumbnail
+                ORDER BY ?typeSort'
+                template="{{> template }}"
+                no-result-template="{{> no-result-template }}"
+              >
+                <template id="template">
+                    [[> searchTypeResultTemplate]]
+                </template>
+                <template id="no-result-template">
+                  <bs-alert variant="warning" class="search-results__alert pull-left">
+                    <span class="num-results" class="search-results__alert">[[i18n "SearchNoResults" bundle="performing-arts-ch"]]</span>
+                  </bs-alert>
+              </semantic-query>
+            <semantic-search-result> 
+          </semantic-search-result-holder>
+        [[else]]
+          [[> sapaModule:SearchPersonsResults ]]
+          [[> sapaModule:SearchProductionsResults ]]
+          [[> sapaModule:SearchVenuesResults ]]
+          [[> sapaModule:SearchGroupsResults ]]
+          [[> sapaModule:SearchPlacesResults ]]
+        [[/if]]
 
 
       </div>
