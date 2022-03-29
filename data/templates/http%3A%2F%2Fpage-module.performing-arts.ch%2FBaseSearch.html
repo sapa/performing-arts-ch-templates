@@ -100,6 +100,9 @@
   img.facet__relation__content__category-image {
     display: none;
   }
+  .search-results__alert.alert-warning {
+    color:#333;
+  }
 </style>
 [[#*inline 'fallsWithinQuery']]
   {
@@ -457,10 +460,15 @@
               } GROUP BY ?type ?typeTab ?typeLabel ?typeThumbnail
               ORDER BY ?typeSort'
               template="{{> template }}"
+              no-result-template="{{> no-result-template }}"
             >
               <template id="template">
                   [[> searchTypeResultTemplate]]
               </template>
+              <template id="no-result-template">
+                <bs-alert variant="warning" class="search-results__alert pull-left">
+                  <span class="num-results" class="search-results__alert">[[i18n "SearchNoResults" bundle="performing-arts-ch"]]</span>
+                </bs-alert>
             </semantic-query>
           <semantic-search-result> 
         </semantic-search-result-holder>
