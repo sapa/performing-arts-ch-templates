@@ -7,45 +7,58 @@
 <div class="page">
   <div class='page__body' style="padding-top:6em;">
 
-    [[#> sapaModule:baseSearch]]
-      
-      <semantic-search-query-keyword 
-        id='keywordQuery'
-        domain="<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>"
-        query='SELECT DISTINCT ?subject WHERE {
-          [[#if (urlParam "type")]]
-            BIND(<[[urlParam "type"]]> as ?__domain__)
-          [[else]]
-            VALUES(?__domain__) {
-              (frbroo:F25_Performance_Plan)
-              (crm:E21_Person)
-              (crm:E74_Group)
-              (crm:E22_Man-Made_Object)
-              (crm:E53_Place)
-            }
-          [[/if]]
-          FILTER(?__domain__ IN (frbroo:F25_Performance_Plan, crm:E21_Person, crm:E74_Group, crm:E22_Man-Made_Object, crm:E53_Place))
-          ?subject rdf:type|rdf:type/rdfs:subClassOf ?__domain__ . 
-          FILTER(!CONTAINS(STR(?subject), "/u/") && !CONTAINS(STR(?subject), "/x/"))
-          OPTIONAL { 
-            ?subject crm:P2_has_type ?crmtype . 
-            FILTER(?__domain__ != crm:E22_Man-Made_Object || ?crmtype = spav:dwmkn )
-          }
-          ?subject rdfs:label|(crm:P131_is_identified_by/rdf:value)|(crm:P102_has_title/rdf:value) ?label .
-          SERVICE <http://www.bigdata.com/rdf/search#search> {
-            ?label bds:search ?__token__ ;
-            bds:minRelevance "0.1" ;
-            bds:relevance ?score ; 
-            bds:matchAllTerms "true" .
-          }
-        }'
-        placeholder='[[i18n "SearchPrompt" bundle="performing-arts-ch" escapeHTML=false]]'
-        min-search-term-length='1'
-        debounce='600'
-      >
+    <h3>[[i18n "Search" bundle="performing-arts-ch" ]] </h3>
+    [[> component-search]]
 
-      </semantic-search-query-keyword>
-    [[/ sapaModule:BaseSearch]]
+    <h3>[[i18n "Browse" bundle="performing-arts-ch"]]</h3>
+    [[> component-browse]]
 
   </div>
 </div>
+
+[[#*inline "component-browse"]]
+
+[[/inline]]
+
+[[#*inline "component-search"]]
+
+[[#> sapaModule:baseSearch]]    
+  <semantic-search-query-keyword 
+    id='keywordQuery'
+    domain="<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>"
+    query='SELECT DISTINCT ?subject WHERE {
+      [[#if (urlParam "type")]]
+        BIND(<[[urlParam "type"]]> as ?__domain__)
+      [[else]]
+        VALUES(?__domain__) {
+          (frbroo:F25_Performance_Plan)
+          (crm:E21_Person)
+          (crm:E74_Group)
+          (crm:E22_Man-Made_Object)
+          (crm:E53_Place)
+        }
+      [[/if]]
+      FILTER(?__domain__ IN (frbroo:F25_Performance_Plan, crm:E21_Person, crm:E74_Group, crm:E22_Man-Made_Object, crm:E53_Place))
+      ?subject rdf:type|rdf:type/rdfs:subClassOf ?__domain__ . 
+      FILTER(!CONTAINS(STR(?subject), "/u/") && !CONTAINS(STR(?subject), "/x/"))
+      OPTIONAL { 
+        ?subject crm:P2_has_type ?crmtype . 
+        FILTER(?__domain__ != crm:E22_Man-Made_Object || ?crmtype = spav:dwmkn )
+      }
+      ?subject rdfs:label|(crm:P131_is_identified_by/rdf:value)|(crm:P102_has_title/rdf:value) ?label .
+      SERVICE <http://www.bigdata.com/rdf/search#search> {
+        ?label bds:search ?__token__ ;
+        bds:minRelevance "0.1" ;
+        bds:relevance ?score ; 
+        bds:matchAllTerms "true" .
+      }
+    }'
+    placeholder='[[i18n "SearchPrompt" bundle="performing-arts-ch" escapeHTML=false]]'
+    min-search-term-length='1'
+    debounce='600'
+  >
+
+  </semantic-search-query-keyword>
+[[/ sapaModule:BaseSearch]]
+
+[[/inline]]
