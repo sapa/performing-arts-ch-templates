@@ -482,9 +482,11 @@
                   <bs-nav-link event-key="{{typeTab.value}}"
                     data-flex-layout="row center-left"
                   >
-                    <div class="domainItemThumbnail">
-                      <img src="{{typeThumbnail.value}}"/>
-                    </div>
+                    {{#if typeThumbnail.value}}
+                      <div class="domainItemThumbnail">
+                        <img src="{{typeThumbnail.value}}"/>
+                      </div>
+                    {{/if}}
                     {{typeLabel.value}}
                     ({{count.value}})
                   </bs-nav-link>
