@@ -8,7 +8,14 @@
     <div data-flex-self="md-full">
 
         <semantic-search-result>
-        <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}" template='{{> template}}'>
+        <mp-sparql-result-counts 
+            id='search-result-count' 
+            query="SELECT DISTINCT ?subject { 
+                [[#if overrideDomain]]
+                    ?subject a crm:E53_Place .
+                [[/if]]}" 
+            template='{{> template}}'
+        >
             <template id='template'>
             {{#if hasLimit}}
             <bs-alert variant="warning" class="search-results__alert pull-left">

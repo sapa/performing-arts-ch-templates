@@ -8,7 +8,18 @@
   <div data-flex-self="md-full">
 
     <semantic-search-result>
-      <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}" template='{{> template}}'>
+      <mp-sparql-result-counts 
+        id='search-result-count'
+        query="SELECT DISTINCT ?subject {
+          [[#if overrideDomain]]
+            ?subject a ?entityType .
+            VALUES (?entityType) {
+              (crm:E74_Group)
+              (crm:E40_Legal_Body)
+            }
+          [[/if]]}" 
+        template='{{> template}}'
+      >
         <template id='template'>
           {{#if hasLimit}}
           <bs-alert variant="warning" class="search-results__alert pull-left">
@@ -27,7 +38,6 @@
     <semantic-search-result>
       <semantic-table 
         query='SELECT ?subject (GROUP_CONCAT(DISTINCT ?beginning; SEPARATOR=", ") AS ?beginnings) WHERE {
-          
           [[#if overrideDomain]]
             ?subject a ?entityType .
             VALUES (?entityType) {
