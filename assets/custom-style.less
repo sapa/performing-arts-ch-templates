@@ -1,3 +1,5 @@
+// out: custom-style.css
+
 // LESS Variables
 @sapa-blue: rgb(8, 54, 88);
 @sapa-red: rgb(230, 55, 92);
@@ -52,6 +54,20 @@ div.semantic-form hr {
 div.form-section {
     font-weight: bold;
     font-size: 1.2em;
+}
+
+.sapa-component {
+    &.search-types {
+        .nav-link {
+            padding: 0;
+            color: black;
+            &.active {
+                background: none;
+                border: none;
+                font-weight: bold;
+            }
+        }
+    }
 }
 
 .semantic-form-input-decorator__label {

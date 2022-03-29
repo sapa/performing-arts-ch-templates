@@ -473,16 +473,27 @@
   [[#*inline "searchTypeResultTemplate"]]
 
     <bs-tab-container id="tabs-search-type-result">
-      <bs-nav variant="pills" class="flex-row">
-        {{#each bindings}}
-          <bs-nav-item>
-            <bs-nav-link event-key="{{typeTab.value}}">
-              {{typeLabel.value}}
-              {{count.value}}
-            </bs-nav-link>
-          </bs-nav-item>
-        {{/each}}
-      </bs-nav>
+      <div class="sapa-component search-types domainItems">
+        <bs-nav variant="pills" class="flex-row">
+          {{#each bindings}}
+            <span class='domainItemWrap'>
+              <span data-flex-layout="row center-left">
+                <bs-nav-item class='domainItem' data-flex-layout="row center-left">
+                  <bs-nav-link event-key="{{typeTab.value}}"
+                    data-flex-layout="row center-left"
+                  >
+                    <div class="domainItemThumbnail">
+                      <img src="{{typeThumbnail.value}}"/>
+                    </div>
+                    {{typeLabel.value}}
+                    ({{count.value}})
+                  </bs-nav-link>
+                </bs-nav-item>
+              </span>
+            </span>
+          {{/each}}
+        </bs-nav>
+      </div>
       <bs-tab-content>
         <bs-tab-pane event-key="tab-persons">
           [[> sapaModule:SearchPersonsResults overrideDomain="true"]]
