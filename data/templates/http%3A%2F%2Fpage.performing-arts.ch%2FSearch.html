@@ -5,34 +5,69 @@
 </ol>
 
 <div class="page">
-  <div class='page__body' style="padding-top:6em;">
+
+  <div class="sapa-component panel-home-search page__header">
+    
+      <div class="page__body">
+        <h3>[[i18n "SearchGeneric" bundle="performing-arts-ch"]]</h3>
+        [[> component-search]]
+      </div>
+    
+  </div>
+
+  <div class='sapa-component panel-home-browse page__body'>
 
     <bs-tab-container default-active-key="search">
+      <h3>[[i18n "BrowseGeneric" bundle="performing-arts-ch"]]</h3>
+
+
+    <div class="sapa-component domain-cards-tabs">
       <bs-nav variant="pills">
         <!-- TODO: recycle buttons with icons-->
-        <bs-nav-item>
-          <bs-nav-link event-key="search">[[i18n "SearchGeneric" bundle="performing-arts-ch"]]</bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-          <bs-nav-link event-key="productions">[[i18n "BrowseProductions" bundle="performing-arts-ch"]]</bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-          <bs-nav-link event-key="persons">[[i18n "BrowsePersons" bundle="performing-arts-ch"]]</bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-          <bs-nav-link event-key="groups">[[i18n "BrowseGroups" bundle="performing-arts-ch"]]</bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-          <bs-nav-link event-key="venues">[[i18n "BrowseVenues" bundle="performing-arts-ch"]]</bs-nav-link>
-        </bs-nav-item>
-        <bs-nav-item>
-          <bs-nav-link event-key="places">[[i18n "BrowsePlaces" bundle="performing-arts-ch"]]</bs-nav-link>
-        </bs-nav-item>
+          [[#> component-domain-cards-holder]]
+          <bs-nav-item>
+            <bs-nav-link event-key="productions">
+              [[> component-domain-card 
+                label=(i18n "BrowseProductions" bundle="performing-arts-ch")
+                thumbnail="../assets/icons/solid/theater-masks.svg"
+              ]]
+            </bs-nav-link>
+          </bs-nav-item>
+          <bs-nav-item>
+            <bs-nav-link event-key="persons">
+              [[> component-domain-card
+                label=(i18n "BrowsePersons" bundle="performing-arts-ch")
+                thumbnail="../assets/icons/solid/user.svg"
+              ]]
+            </bs-nav-link>
+          </bs-nav-item>
+          <bs-nav-item>
+            <bs-nav-link event-key="groups">
+              [[> component-domain-card
+                label=(i18n "BrowseGroups" bundle="performing-arts-ch")
+                thumbnail="../assets/icons/solid/users.svg"
+              ]]
+            </bs-nav-link>
+          </bs-nav-item>
+          <bs-nav-item>
+            <bs-nav-link event-key="venues">
+              [[> component-domain-card
+                label=(i18n "BrowseVenues" bundle="performing-arts-ch")
+                thumbnail="../assets/icons/solid/landmark.svg"
+              ]]
+            </bs-nav-link>
+          </bs-nav-item>
+          <bs-nav-item>
+            <bs-nav-link event-key="places">
+              [[> component-domain-card
+                label=(i18n "BrowsePlaces" bundle="performing-arts-ch")
+                thumbnail="../assets/icons/solid/map-marker-alt.svg"
+              ]]
+            </bs-nav-link>
+          </bs-nav-item>
+          [[/ component-domain-cards-holder]]
       </bs-nav>
       <bs-tab-content>
-        <bs-tab-pane event-key="search">
-          [[> component-search]]
-        </bs-tab-pane>
         <bs-tab-pane event-key="productions">
           [[> component-browse domain="frbroo:F25_Performance_Plan" id="browse-productions"]]
         </bs-tab-pane>
@@ -71,6 +106,30 @@
 
 [[/inline]]
 
+[[#*inline "component-domain-card"]]
+  <div class="domainCardItem">
+    <button type=button class='btn btn-secondary domainCard'>
+      <div class='domainCardThumbnail'>
+        [[#if thumbnail]]
+          <img src='[[thumbnail]]' alt='[[label]]' /> 
+        [[else]]
+          <i class='fa fa-edit fa-lg'></i>
+        [[/if]]
+      </div>
+      <h4>[[label]]</h4>
+      [[#if count]]<div>[[count]]</div>[[/if]]
+    </button>
+  </div>
+[[/inline]]
+
+[[#*inline "component-domain-cards-holder"]]
+  <div class="domainCards">
+    <div data-flex-layout="rows stretch-stretch">
+      [[> @partial-block]]
+    </div>
+  </div>
+[[/inline]]
+
 [[#*inline "component-search"]]
 
 [[#> sapaModule:baseSearch searchAllDomains="true"]]    
@@ -92,6 +151,7 @@ query='SELECT DISTINCT ?subject WHERE {
       (frbroo:F25_Performance_Plan)
       (crm:E21_Person)
       (crm:E74_Group)
+      (crm:E40_Legal_Body)
       (crm:E22_Man-Made_Object)
       (crm:E53_Place)
     }

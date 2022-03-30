@@ -35,6 +35,25 @@ div.form-section {
   font-weight: bold;
   font-size: 1.2em;
 }
+.sapa-component.domain-cards-tabs .nav {
+  display: block;
+}
+.sapa-component.domain-cards-tabs .nav .nav-link {
+  padding: 0;
+}
+.sapa-component.domain-cards-tabs .nav .nav-link.active {
+  background: none;
+  border: none;
+}
+.sapa-component.domain-cards-tabs .nav .nav-link.active button {
+  background-color: #008cba;
+}
+.sapa-component.panel-home-browse {
+  padding-top: 3rem;
+}
+.sapa-component.panel-home-search {
+  padding: 3rem 0 1rem 0;
+}
 .sapa-component.search-types .nav-link {
   padding: 0;
   color: black;
