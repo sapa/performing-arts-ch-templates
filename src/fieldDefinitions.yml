@@ -17,7 +17,7 @@ fields:
         - autosuggestion: 'SELECT $value $label WHERE {
             $value skos:inScheme spav:mu ;
             skos:prefLabel ?label .
-            FILTER(REGEX(STR(?label), "?token", "i"))
+            FILTER(REGEX(STR(?label), \"?token\", \"i\"))
             } LIMIT 10'
       treePatterns:
         type: simple
@@ -154,7 +154,7 @@ fields:
         - autosuggestion: 'SELECT $value $label WHERE {
             $value a spao:ArchivalPlace ;
             rdfs:label $label .
-            FILTER REGEX($label, "?token", "i")
+            FILTER REGEX($label, \"?token\", \"i\")
             }'
       treePatterns:
         type: simple
@@ -414,7 +414,7 @@ fields:
             $value a skos:Concept ;
             skos:inScheme spav:mn ;
             skos:prefLabel ?label .
-            FILTER(REGEX(STR(?label), "?token", "i"))
+            FILTER(REGEX(STR(?label), \"?token\", \"i\"))
             } LIMIT 10'
 
 
@@ -495,7 +495,7 @@ fields:
             $value a crm:E40_Legal_Body ;
       crm:P2_has_type spav:vrjhq ;
             rdfs:label $label .
-            FILTER(REGEX(STR(?label), "?token", "i"))
+            FILTER(REGEX(STR(?label), \"?token\", \"i\"))
             FILTER(CONTAINS(STR(?value), "/a/"))
             } LIMIT 10'
 
@@ -611,7 +611,7 @@ fields:
         - autosuggestion: 'SELECT ?value ?label WHERE {
             ?value rdf:type/rdfs:subClassOf* rico:Group ;
             rdfs:label ?label .
-            FILTER(REGEX(STR(?label), "?token", "i"))
+            FILTER(REGEX(STR(?label), \"?token\", \"i\"))
             FILTER(CONTAINS(STR(?value), "/a/"))
             } LIMIT 10'
 
@@ -798,7 +798,7 @@ fields:
         - autosuggestion: 'SELECT ?value ?label WHERE {
             ?value rdf:type/rdfs:subClassOf* rico:Group ;
             rdfs:label ?label .
-            FILTER(REGEX(STR(?label), "?token", "i"))
+            FILTER(REGEX(STR(?label), \"?token\", \"i\"))
             FILTER(CONTAINS(STR(?value), "/a/"))
             } LIMIT 10'
 
@@ -1099,7 +1099,7 @@ fields:
         - autosuggestion: 'SELECT $value $label WHERE {
             $value a rico:Instantiation ;
       rico:identifier $label .
-            FILTER(REGEX($label, "?token", "i"))
+            FILTER(REGEX($label, \"?token\", \"i\"))
             FILTER(!CONTAINS(STR(?value), "/u/"))
             }'
 
@@ -1662,7 +1662,7 @@ fields:
         - autosuggestion: 'SELECT $value ?label WHERE {
             $value rdf:type/rdfs:subClassOf* crm:E39_Actor ;
             rdfs:label ?label .
-            FILTER(REGEX(STR(?label), "?token", "i"))
+            FILTER(REGEX(STR(?label), \"?token\", \"i\"))
             FILTER(CONTAINS(STR($value), "/a/"))
             } LIMIT 10'
 
@@ -2089,7 +2089,7 @@ fields:
         - autosuggestion: 'SELECT $value $label WHERE {
             $value a crm:E53_Place ;
             rdfs:label $label .
-            FILTER REGEX($label, "?token", "i")
+            FILTER REGEX($label, \"?token\", \"i\")
             }'
       treePatterns:
         type: simple
@@ -2287,7 +2287,7 @@ fields:
         - autosuggestion: 'SELECT $value $label WHERE {
             $value rdf:type/rdfs:subClassOf* rico:RecordResource ;
       rico:identifier $label .
-            FILTER(REGEX($label, "?token", "i"))
+            FILTER(REGEX($label, \"?token\", \"i\"))
             }'
 
 
@@ -2313,7 +2313,7 @@ fields:
         - autosuggestion: 'SELECT $value $label WHERE {
       $value a rico:RecordPart ;
         rdfs:label $label .
-      FILTER(REGEX($label, "?token", "i"))
+      FILTER(REGEX($label, \"?token\", \"i\"))
             }'
 
 
@@ -3592,7 +3592,7 @@ fields:
             UNION
             { $value rdf:type rico:Record . }
             $value rdfs:label $label .
-            FILTER(REGEX($label, "?token", "i"))
+            FILTER(REGEX($label, \"?token\", \"i\"))
             FILTER(!CONTAINS(STR(?value), "/u/"))
             }'
 
@@ -3781,7 +3781,7 @@ fields:
       crm:P2_has_type spav:dwmkn ;
             rdfs:label ?label .
             FILTER NOT EXISTS { $subject crm:P46_is_composed_of $value . }
-            FILTER(REGEX(STR(?label), "?token", "i"))
+            FILTER(REGEX(STR(?label), \"?token\", \"i\"))
             FILTER(CONTAINS(STR(?value), "/o/"))
             } LIMIT 10'
 
@@ -3845,7 +3845,7 @@ fields:
       crm:P2_has_type spav:dwmkn ;
             rdfs:label ?label .
             FILTER NOT EXISTS { $subject crm:P46i_forms_part_of $value . }
-            FILTER(REGEX(STR(?label), "?token", "i"))
+            FILTER(REGEX(STR(?label), \"?token\", \"i\"))
             FILTER(CONTAINS(STR(?value), "/o/"))
             } LIMIT 10'
 
