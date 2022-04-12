@@ -172,9 +172,36 @@ fields:
         FILTER REGEX($label, "?token", "i")
       }'
     treePatterns:
-      type: simple
-      schemePattern: '?item a spao:ArchivalPlace.'
-      relationPattern: '?item rico:containedBy ?parent.'
+      type: full
+      rootsQuery: 'SELECT DISTINCT ?item ?hasChildren WHERE {
+          ?item a spao:ArchivalPlace .
+          FILTER(NOT EXISTS { ?item rico:containedBy ?parent. })
+          ?item rdfs:label ?label.
+          OPTIONAL { ?child rico:containedBy ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
+      childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+          ?item rico:containedBy ?parent ;
+          rdfs:label ?label.
+          OPTIONAL { ?child rico:containedBy  ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
+      parentsQuery: 'SELECT ?item ?parent WHERE {
+          ?item rico:containedBy ?parent .
+        }'
+      searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
+          ?item a spao:ArchivalPlace ;
+            rdfs:label ?label .
+          ?label bds:search ?__token__ ;
+              bds:relevance ?score ; 
+              bds:matchAllTerms "true"
+          OPTIONAL { ?child rico:containedBy ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY DESC (?score) (?label)
+        LIMIT 200'
 
 
   - id: AssociationMembers
