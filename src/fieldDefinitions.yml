@@ -6,8 +6,8 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
     maxOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E7_Activity']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E55_Type']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E7_Activity
+    range: http://www.cidoc-crm.org/cidoc-crm/E55_Type
     queries:
       - select: 'SELECT ?value WHERE {
       $subject crm:P2_has_type $value.
@@ -28,8 +28,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity
     label: Acting
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E21_Person']
+    domain: http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan
+    range: http://www.cidoc-crm.org/cidoc-crm/E21_Person
     queries:
       - select: 'SELECT $value $index WHERE {
         ?performance frbroo:R25_performed $subject ;
@@ -62,8 +62,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorResidence
     label: Current or former residence
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E39_Actor']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E53_Place']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
+    range: http://www.cidoc-crm.org/cidoc-crm/E53_Place
     queries:
       - select: 'SELECT ?value $label WHERE {
         $subject crm:P74_has_current_or_former_residence $res .
@@ -142,7 +142,7 @@ fields:
     label: Bibliography
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
     maxOccurs: 4
-    domain: ['https://www.ica.org/standards/RiC/ontology#Person']
+    domain: https://www.ica.org/standards/RiC/ontology#Person
     queries:
       - select: 'SELECT ?value WHERE { $subject spao:hasBibliography ?value . }'
       - insert: 'INSERT { $subject spao:hasBibliography $value . } WHERE { }'
@@ -154,8 +154,8 @@ fields:
     label: Parent
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['http://ontology.performing-arts.ch/ArchivalPlace']
-    range: ['http://ontology.performing-arts.ch/ArchivalPlace']
+    domain: http://ontology.performing-arts.ch/ArchivalPlace
+    range: http://ontology.performing-arts.ch/ArchivalPlace
     queries:
       - select: 'SELECT $value WHERE {
         $subject rico:containedBy $value .
@@ -182,8 +182,8 @@ fields:
     label: Association members
     description: used for display only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E39_Actor']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E39_Actor']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
+    range: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
     queries:
       - select: 'SELECT $value ?unidentified WHERE {
         $value crm:P107i_is_current_or_former_member_of $subject .
@@ -197,7 +197,7 @@ fields:
     label: Byline
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object', 'http://www.cidoc-crm.org/cidoc-crm/E74_Group']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object', 'http://www.cidoc-crm.org/cidoc-crm/E74_Group
     queries:
       - select: 'SELECT $value WHERE {
         BIND(IRI(CONCAT ("http://data.performing-arts.ch/x/", MD5(CONCAT(STR(?subject), "byline")))) AS $identifier)
@@ -228,8 +228,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype
     label: CIDOC type
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
+    range: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
     queries:
       - select: 'SELECT $value WHERE { $subject crm:P2_has_type $value }'
       - insert: 'INSERT { $subject crm:P2_has_type $value } WHERE {}'
@@ -243,7 +243,7 @@ fields:
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
     minOccurs: 1
     maxOccurs: 4
-    domain: ['https://www.ica.org/standards/RiC/ontology#Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#Concept
     queries:
       - select: 'SELECT $value WHERE {
         $subject rdfs:label $value .
@@ -269,7 +269,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/DeliveryNumber
     label: Delivery number
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT ?value WHERE { $subject spao:deliveryNumber ?value. }'
       - insert: 'INSERT { $subject spao:deliveryNumber $value. } WHERE {}'
@@ -281,7 +281,7 @@ fields:
     label: Description
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
     queries:
       - select: 'SELECT ?value WHERE {
         $subject crm:P3_has_note $note.
@@ -310,7 +310,7 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#string
     minOccurs: 1
     maxOccurs: 1
-    domain: ['http://www.loc.gov/premis/rdf/v1#File']
+    domain: http://www.loc.gov/premis/rdf/v1#File
     queries:
       - select: 'SELECT $value WHERE { $subject premis:compositionLevel $value . }'
       - insert: 'INSERT { $subject premis:compositionLevel $value . } WHERE { }'
@@ -324,7 +324,7 @@ fields:
     description: MD5
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['http://www.loc.gov/premis/rdf/v1#File']
+    domain: http://www.loc.gov/premis/rdf/v1#File
     queries:
       - select: 'SELECT $value WHERE { $subject premis:fixity [ rdf:value $value ] . }'
       - insert: 'INSERT { 
@@ -350,7 +350,7 @@ fields:
     label: MD5
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['http://www.loc.gov/premis/rdf/v1#File']
+    domain: http://www.loc.gov/premis/rdf/v1#File
     queries:
       - select: 'SELECT $value WHERE {
         $subject premis:fixity $fixity.
@@ -377,7 +377,7 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#string
     minOccurs: 1
     maxOccurs: 1
-    domain: ['http://www.loc.gov/premis/rdf/v1#File']
+    domain: http://www.loc.gov/premis/rdf/v1#File
     queries:
       - select: 'SELECT $value WHERE { $subject premis:originalName $value . }'
       - insert: 'INSERT {
@@ -396,7 +396,7 @@ fields:
     description: Bytes
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['http://www.loc.gov/premis/rdf/v1#File']
+    domain: http://www.loc.gov/premis/rdf/v1#File
     queries:
       - select: 'SELECT $value WHERE { $subject premis:size $value . }'
       - insert: 'INSERT { $subject premis:size $value . } WHERE { }'
@@ -408,8 +408,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Genre
     label: Genre
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E55_Type']
+    domain: http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan
+    range: http://www.cidoc-crm.org/cidoc-crm/E55_Type
     queries:
       - select: 'SELECT ?value ?label WHERE {
         ?work frbroo:R12_is_realised_in $subject ;
@@ -437,7 +437,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym
     label: Acronym
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E74_Group
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P131_is_identified_by ?identifier.
@@ -465,7 +465,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName
     label: Alternative name
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E74_Group
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P131_is_identified_by ?identifier.
@@ -493,8 +493,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation
     label: Association memberships
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E40_Legal_Body']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E74_Group
+    range: http://www.cidoc-crm.org/cidoc-crm/E40_Legal_Body
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P107i_is_current_or_former_member_of $value .
@@ -521,7 +521,7 @@ fields:
     description: Year, e.g. 1965
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Group']
+    domain: https://www.ica.org/standards/RiC/ontology#Group
     queries:
       - select: 'SELECT ?value WHERE {
         $subject rico:hasBeginningDate ?date .
@@ -552,7 +552,7 @@ fields:
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
     minOccurs: 1
     maxOccurs: 4
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E74_Group
     queries:
       - select: 'SELECT $value WHERE {
         $subject rdfs:label $value .
@@ -579,8 +579,8 @@ fields:
     label: Type
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E55_Type']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E74_Group
+    range: http://www.cidoc-crm.org/cidoc-crm/E55_Type
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P131_is_identified_by $identifier .
@@ -607,8 +607,8 @@ fields:
     label: controls
     description: display only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Group']
-    range: ['https://www.ica.org/standards/RiC/ontology#Group']
+    domain: https://www.ica.org/standards/RiC/ontology#Group
+    range: https://www.ica.org/standards/RiC/ontology#Group
     queries:
       - select: 'SELECT ?value WHERE { ?value rico:controlledBy $subject . }'
       - insert: 'INSERT { $value rico:controlledBy $subject } WHERE {}'
@@ -618,8 +618,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController
     label: Responsible body
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Group']
-    range: ['https://www.ica.org/standards/RiC/ontology#Group']
+    domain: https://www.ica.org/standards/RiC/ontology#Group
+    range: https://www.ica.org/standards/RiC/ontology#Group
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:controlledBy ?value. }'
       - insert: 'INSERT { $subject rico:controlledBy $value. } WHERE {}'
@@ -637,7 +637,7 @@ fields:
     description: Year, e.g. 2012
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Group']
+    domain: https://www.ica.org/standards/RiC/ontology#Group
     queries:
       - select: 'SELECT ?value WHERE {
         $subject rico:hasEndDate ?date .
@@ -666,7 +666,7 @@ fields:
     label: Genric name
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
     maxOccurs: 4
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E74_Group
     queries:
       - select: 'SELECT $value WHERE {
         $subject rdfs:label $value .
@@ -693,8 +693,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre
     label: Genre
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E55_Type']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E74_Group
+    range: http://www.cidoc-crm.org/cidoc-crm/E55_Type
     queries:
       - select: 'SELECT ?value WHERE {
         ?pursuit a frbroo:F51_Pursuit ;
@@ -761,7 +761,7 @@ fields:
     label: Administrative history
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
     maxOccurs: 4
-    domain: ['https://www.ica.org/standards/RiC/ontology#Group']
+    domain: https://www.ica.org/standards/RiC/ontology#Group
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:history ?value }'
       - insert: 'INSERT { $subject rico:history $value } WHERE {}'
@@ -772,8 +772,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember
     label: Members
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E39_Actor']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E39_Actor']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
+    range: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
     queries:
       - select: 'SELECT $value ?unidentified WHERE {
         $subject crm:P107_has_current_or_former_member $value .
@@ -810,8 +810,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor
     label: Predecessor
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Group']
-    range: ['https://www.ica.org/standards/RiC/ontology#Group']
+    domain: https://www.ica.org/standards/RiC/ontology#Group
+    range: https://www.ica.org/standards/RiC/ontology#Group
     queries:
       - select: 'SELECT ?value WHERE {
         $subject rico:isSuccessorOf ?value.
@@ -831,8 +831,8 @@ fields:
     description: This is the technical group type. It should be either Group or Legal Body.
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
-    domain: ['http://www.w3.org/2002/07/owl#Class']
-    range: ['http://www.w3.org/2002/07/owl#Class']
+    domain: http://www.w3.org/2002/07/owl#Class
+    range: http://www.w3.org/2002/07/owl#Class
     queries:
       - select: 'SELECT $value WHERE {
         $subject a $value.
@@ -859,7 +859,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRepertories
     label: Repertories
     datatype: http://www.w3.org/2001/XMLSchema#boolean
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E74_Group
     queries:
       - select: 'SELECT ?value WHERE {
         $subject <http://ontology.performing-arts.ch/isPartOfRepertories> ?value .
@@ -878,8 +878,8 @@ fields:
     label: Successor
     description: display only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Group']
-    range: ['https://www.ica.org/standards/RiC/ontology#Group']
+    domain: https://www.ica.org/standards/RiC/ontology#Group
+    range: https://www.ica.org/standards/RiC/ontology#Group
     queries:
       - select: 'SELECT ?value WHERE { $value rico:isSuccessorOf ?subject . }'
       - insert: 'INSERT { $value rico:isSuccessorOf ?subject . } WHERE {}'
@@ -889,8 +889,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType
     label: Typ
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E55_Type']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E74_Group
+    range: http://www.cidoc-crm.org/cidoc-crm/E55_Type
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P2_has_type $value .
@@ -967,8 +967,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupVenue
     label: Venues
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E74_Group
+    range: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
     queries:
       - select: 'SELECT ?value WHERE {
         $subject crm:P14i_performed ?activity .
@@ -1058,8 +1058,8 @@ fields:
     label: Archival status
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasArchivalStatus $value . }'
       - insert: 'INSERT { $subject spao:hasArchivalStatus $value . } WHERE { }'
@@ -1073,8 +1073,8 @@ fields:
     description: e.g. http://media.performing-arts.ch/iiif/image/ABC-123
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
-    range: ['rico:CarrierType']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
+    range: rico:CarrierType
     queries:
       - select: 'SELECT $value WHERE {
     $subject rico:hasCarrierType $value .
@@ -1096,8 +1096,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCondition
     label: Condition
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasCondition $value . }'
       - insert: 'INSERT { $subject spao:hasCondition $value . } WHERE { }'
@@ -1114,7 +1114,7 @@ fields:
     label: Copy path
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
     queries:
       - select: 'SELECT ?value WHERE { $subject <http://temp.performing-arts.ch/hasCopyPath> ?value . }'
       - insert: 'INSERT { $subject <http://temp.performing-arts.ch/hasCopyPath> $value} WHERE {}'
@@ -1125,8 +1125,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerived
     label: Derived instantiation
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
-    range: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
+    range: https://www.ica.org/standards/RiC/ontology#Instantiation
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:hasDerivedInstantiation ?value . }'
       - insert: 'INSERT { $subject rico:hasDerivedInstantiation $value . } WHERE { }'
@@ -1144,8 +1144,8 @@ fields:
     label: Extent
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
-    range: ['https://www.ica.org/standards/RiC/ontology#RecordResourceExtent']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
+    range: https://www.ica.org/standards/RiC/ontology#RecordResourceExtent
     queries:
       - select: 'SELECT $value WHERE {
         $subject rico:hasExtent $value.
@@ -1166,7 +1166,7 @@ fields:
     label: History
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:history ?value . }'
       - insert: 'INSERT { $subject rico:history $value} WHERE {}'
@@ -1178,7 +1178,7 @@ fields:
     label: Integrity
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:integrity ?value . }'
       - insert: 'INSERT { $subject rico:integrity $value} WHERE {}'
@@ -1190,8 +1190,8 @@ fields:
     label: Material
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
-    range: ['rico:CarrierType']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
+    range: rico:CarrierType
     queries:
       - select: 'SELECT $value WHERE {
     $subject crm:P45_consists_of $value .
@@ -1214,7 +1214,7 @@ fields:
     label: Physical characteristics
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:physicalCharacteristics ?value . }'
       - insert: 'INSERT { $subject rico:physicalCharacteristics $value} WHERE {}'
@@ -1225,7 +1225,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationPreparationDate
     label: Creation date
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
     queries:
       - select: 'SELECT $value WHERE { $subject spao:preparationDate $value . }'
       - insert: 'INSERT { $subject spao:preparationDate $value . } WHERE { }'
@@ -1238,8 +1238,8 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
-    range: ['https://www.ica.org/standards/RiC/ontology#Record', 'https://www.ica.org/standards/RiC/ontology#RecordPart']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
+    range: https://www.ica.org/standards/RiC/ontology#Record', 'https://www.ica.org/standards/RiC/ontology#RecordPart
     queries:
       - select: 'SELECT ?value WHERE { $value rico:hasInstantiation $subject . }'
       - insert: 'INSERT { $value rico:hasInstantiation $subject . } WHERE { }'
@@ -1266,8 +1266,8 @@ fields:
     label: Representation type
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject rico:hasRepresentationType $value . }'
       - insert: 'INSERT { $subject rico:hasRepresentationType $value . } WHERE { }'
@@ -1280,8 +1280,8 @@ fields:
     label: Aspect ratio
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject ebucore:aspectRatio $value . }'
       - insert: 'INSERT { $subject ebucore:aspectRatio $value . } WHERE { }'
@@ -1298,7 +1298,7 @@ fields:
     label: Channels
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
     queries:
       - select: 'SELECT ?value WHERE { $subject ebucore:channels ?value . }'
       - insert: 'INSERT { $subject ebucore:channels $value} WHERE {}'
@@ -1311,8 +1311,8 @@ fields:
     label: Color
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject rdau:P60558 $value . }'
       - insert: 'INSERT { $subject rdau:P60558 $value . } WHERE { }'
@@ -1329,8 +1329,8 @@ fields:
     label: Audio format
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { 
         $subject ebucore:hasFormat $value .
@@ -1356,8 +1356,8 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE {
         $subject ebucore:hasFormat $value .
@@ -1382,8 +1382,8 @@ fields:
     label: Video format
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE {
         $subject ebucore:hasFormat $value .
@@ -1408,7 +1408,7 @@ fields:
     label: Height
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
     queries:
       - select: 'SELECT ?value WHERE { $subject ebucore:height ?value . }'
       - insert: 'INSERT { $subject ebucore:height $value} WHERE {}'
@@ -1421,7 +1421,7 @@ fields:
     label: Last control
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
     queries:
       - select: 'SELECT $value WHERE {
         $subject spao:lastControl [ rico:normalizedDateValue $value ] .
@@ -1451,7 +1451,7 @@ fields:
     label: Sampling rate
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
     queries:
       - select: 'SELECT ?value WHERE { $subject ebucore:samplingRate ?value . }'
       - insert: 'INSERT { $subject ebucore:samplingRate $value} WHERE {}'
@@ -1464,8 +1464,8 @@ fields:
     label: Scanning format
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject ebucore:scanningFormat $value . }'
       - insert: 'INSERT { $subject ebucore:scanningFormat $value . } WHERE { }'
@@ -1478,8 +1478,8 @@ fields:
     label: Scanning order
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject ebucore:scanningOrder $value . }'
       - insert: 'INSERT { $subject ebucore:scanningOrder $value . } WHERE { }'
@@ -1492,8 +1492,8 @@ fields:
     label: Standard
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject ebucore:hasStandard $value . }'
       - insert: 'INSERT { $subject ebucore:hasStandard $value . } WHERE { }'
@@ -1509,8 +1509,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceVideoDamage
     label: Video damage
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasVideoDamage $value . }'
       - insert: 'INSERT { $subject spao:hasVideoDamage $value . } WHERE { }'
@@ -1527,7 +1527,7 @@ fields:
     label: Width
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
     queries:
       - select: 'SELECT ?value WHERE { $subject ebucore:width ?value . }'
       - insert: 'INSERT { $subject ebucore:width $value} WHERE {}'
@@ -1540,7 +1540,7 @@ fields:
     label: Internal note
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
     queries:
       - select: 'SELECT ?value WHERE {
         $subject crm:P3_has_note $note.
@@ -1568,7 +1568,7 @@ fields:
     label: Note
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
     queries:
       - select: 'SELECT ?value WHERE {
         $subject crm:P3_has_note $note.
@@ -1595,8 +1595,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language
     label: Performance Language
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E55_Type']
+    domain: http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan
+    range: http://www.cidoc-crm.org/cidoc-crm/E55_Type
     queries:
       - select: 'SELECT ?value WHERE { 
         ?pw frbroo:R12_is_realised_in $subject ;
@@ -1620,7 +1620,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Subtitle
     label: Performance Subtitle
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
-    domain: ['http://iflastandards.info/ns/fr/frbr/frbroo/F31_Performance']
+    domain: http://iflastandards.info/ns/fr/frbr/frbroo/F31_Performance
     queries:
       - select: 'SELECT ?value WHERE {
         ?perform crm:P9_consists_of $subject;
@@ -1656,8 +1656,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Venue
     label: Performance Venue
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://iflastandards.info/ns/fr/frbr/frbroo/F31_Performance']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
+    domain: http://iflastandards.info/ns/fr/frbr/frbroo/F31_Performance
+    range: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
     queries:
       - select: 'SELECT ?value
       WHERE {
@@ -1684,8 +1684,8 @@ fields:
     label: Carried out by
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E7_Activity']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E39_Actor']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E7_Activity
+    range: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
     queries:
       - select: 'SELECT ?value ?label WHERE {
         $subject a crm:E7_Activity ;
@@ -1709,7 +1709,7 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#string
     minOccurs: 0
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Person']
+    domain: https://www.ica.org/standards/RiC/ontology#Person
     queries:
       - select: 'SELECT ?value WHERE {
         $subject rico:birthDate ?date .
@@ -1738,8 +1738,8 @@ fields:
     label: Place of birth
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E67_Birth']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E53_Place']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E67_Birth
+    range: http://www.cidoc-crm.org/cidoc-crm/E53_Place
     queries:
       - select: 'SELECT ?value WHERE {
         $subject crm:P98i_was_born ?birth .
@@ -1822,7 +1822,7 @@ fields:
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
     minOccurs: 1
     maxOccurs: 4
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E21_Person']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E21_Person
     queries:
       - select: 'SELECT ?value WHERE {
         $subject crm:P131_is_identified_by ?identifier .
@@ -1854,8 +1854,8 @@ fields:
     description: Additional type of the common appellation
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E55_Type']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation
+    range: http://www.cidoc-crm.org/cidoc-crm/E55_Type
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P131_is_identified_by ?identifier .
@@ -1885,7 +1885,7 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#string
     minOccurs: 0
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Person']
+    domain: https://www.ica.org/standards/RiC/ontology#Person
     queries:
       - select: 'SELECT ?value WHERE {
         $subject rico:deathDate ?date .
@@ -1914,8 +1914,8 @@ fields:
     label: Place of death
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Person']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E53_Place']
+    domain: https://www.ica.org/standards/RiC/ontology#Person
+    range: http://www.cidoc-crm.org/cidoc-crm/E53_Place
     queries:
       - select: 'SELECT ?value WHERE {
         $subject crm:P100i_died_in ?death .
@@ -1996,8 +1996,8 @@ fields:
     label: Gender
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E21_Person']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E21_Person
+    range: http://www.cidoc-crm.org/cidoc-crm/E74_Group
     queries:
       - select: 'SELECT ?value WHERE {
         $subject crm:P107i_is_current_or_former_member_of ?value.
@@ -2023,8 +2023,8 @@ fields:
     label: Group
     description: display only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E39_Actor']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E39_Actor']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
+    range: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
     queries:
       - select: 'SELECT $value WHERE {
         $value crm:P107_has_current_or_former_member $subject .
@@ -2039,7 +2039,7 @@ fields:
     label: Biographical information
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
     maxOccurs: 4
-    domain: ['https://www.ica.org/standards/RiC/ontology#Person']
+    domain: https://www.ica.org/standards/RiC/ontology#Person
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:history ?value }'
       - insert: 'INSERT { $subject rico:history $value } WHERE { }'
@@ -2051,8 +2051,8 @@ fields:
     label: Miscellaneous appellation
     description: Any additional appellation
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E21_Person']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E21_Person
+    range: http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation
     queries:
       - select: 'SELECT ?value WHERE {
         $subject crm:P131_is_identified_by ?value .
@@ -2071,8 +2071,8 @@ fields:
     label: Type
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E55_Type']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation
+    range: http://www.cidoc-crm.org/cidoc-crm/E55_Type
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P2_has_type $value .
@@ -2094,7 +2094,7 @@ fields:
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
     minOccurs: 1
     maxOccurs: 4
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E82_Actor_Appellation
     queries:
       - select: 'SELECT $value WHERE {
         $subject rdf:value $value .
@@ -2114,7 +2114,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonSwiss
     label: CH
     datatype: http://www.w3.org/2001/XMLSchema#boolean
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E21_Person']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E21_Person
     queries:
       - select: 'SELECT ?value WHERE {
         BIND(EXISTS {?subject crm:P107i_is_current_or_former_member_of <http://data.performing-arts.ch/g/nation/ch>} AS ?value)
@@ -2137,8 +2137,8 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
     maxOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E53_Place']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E53_Place']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E53_Place
+    range: http://www.cidoc-crm.org/cidoc-crm/E53_Place
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P89_falls_within $value .
@@ -2165,8 +2165,8 @@ fields:
     label: Groups
     description: used for labels only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
+    range: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
     queries:
       - select: ''
       - insert: 'INSERT { $subject ?predicate $value} WHERE {}'
@@ -2178,7 +2178,7 @@ fields:
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
     minOccurs: 1
     maxOccurs: 4
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E53_Place']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E53_Place
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P87_is_identified_by ?identifier .
@@ -2205,8 +2205,8 @@ fields:
     label: Persons
     description: used labels only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
+    range: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
     queries:
       - select: ''
       - insert: 'INSERT { $subject ?predicate $value} WHERE {}'
@@ -2216,8 +2216,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Premiere_Type
     label: Premiere Type
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://iflastandards.info/ns/fr/frbr/frbroo/F31_Performance']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E55_Type', 'http://www.w3.org/2004/02/skos/core#Concept']
+    domain: http://iflastandards.info/ns/fr/frbr/frbroo/F31_Performance
+    range: http://www.cidoc-crm.org/cidoc-crm/E55_Type', 'http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT ?value WHERE {
         $subject a frbroo:F31_Performance ; 
@@ -2232,7 +2232,7 @@ fields:
     label: Comment
     description: A short comment that helps to identify the entity.
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
     queries:
       - select: 'SELECT ?value WHERE {
         $subject rdfs:comment ?value.
@@ -2250,7 +2250,7 @@ fields:
     label: Label
     description: A short comment that helps to identify the entity.
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['http://www.w3.org/2002/07/owl#Class']
+    domain: http://www.w3.org/2002/07/owl#Class
     queries:
       - select: 'SELECT ?value WHERE {
         $subject rdfs:label ?value.
@@ -2268,8 +2268,8 @@ fields:
     label: Type_Setter
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
-    range: ['rdfs:Class']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
+    range: rdfs:Class
     queries:
       - select: 'SELECT $value WHERE { $subject a $value }'
       - insert: 'INSERT { $subject a $value } WHERE {}'
@@ -2280,7 +2280,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordAnnotationRecto
     label: Annotation recto
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['https://www.ica.org/standards/RiC/ontology#Record']
+    domain: https://www.ica.org/standards/RiC/ontology#Record
     queries:
       - select: 'SELECT ?value WHERE {
         $subject spao:hasAnnotationRecto $value . 
@@ -2297,7 +2297,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordAnnotationVerso
     label: Annotation verso
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['https://www.ica.org/standards/RiC/ontology#Record']
+    domain: https://www.ica.org/standards/RiC/ontology#Record
     queries:
       - select: 'SELECT ?value WHERE {
         $subject spao:hasAnnotationVerso $value . 
@@ -2314,8 +2314,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordDocumentaryForm
     label: Documentary form
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Record', 'https://www.ica.org/standards/RiC/ontology#RecordPart']
-    range: ['https://www.ica.org/standards/RiC/ontology#RecordResourceDocumentaryForm']
+    domain: https://www.ica.org/standards/RiC/ontology#Record', 'https://www.ica.org/standards/RiC/ontology#RecordPart
+    range: https://www.ica.org/standards/RiC/ontology#RecordResourceDocumentaryForm
     queries:
       - select: 'SELECT $value WHERE { $subject rico:hasDocumentaryFormType ?value . }'
       - insert: 'INSERT { $subject rico:hasDocumentaryFormType $value . } WHERE { }'
@@ -2341,8 +2341,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation
     label: Instantiation
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.loc.gov/premis/rdf/v1#Representation']
-    range: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: http://www.loc.gov/premis/rdf/v1#Representation
+    range: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT ?value WHERE { $subject premis:represents ?value . }'
       - insert: 'INSERT { $subject premis:represents $value . } WHERE { }'
@@ -2358,8 +2358,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordParts
     label: Record parts
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Record']
-    range: ['https://www.ica.org/standards/RiC/ontology#RecordPart']
+    domain: https://www.ica.org/standards/RiC/ontology#Record
+    range: https://www.ica.org/standards/RiC/ontology#RecordPart
     queries:
       - select: 'SELECT $value $index WHERE {
     $value rico:isOrWasConstituentOf $subject .
@@ -2384,8 +2384,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition
     label: Mode of acquisition
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT ?value WHERE {
         $subject rico:isAssociatedWithEvent ?event .
@@ -2414,7 +2414,7 @@ fields:
     label: Conditions of use
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject rico:conditionsOfUse $value. }'
       - insert: 'INSERT { $subject rico:conditionsOfUse $value. } WHERE {}'
@@ -2425,8 +2425,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightDeclaration
     label: Copyright declaration
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['skos:Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: skos:Concept
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasCopyrightDeclaration $value. }'
       - insert: 'INSERT { $subject spao:hasCopyrightDeclaration $value. } WHERE { }'
@@ -2447,7 +2447,7 @@ fields:
     label: Copyright notice
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject schema:copyrightNotice $value. }'
       - insert: 'INSERT { $subject schema:copyrightNotice $value. } WHERE { }'
@@ -2458,8 +2458,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreator
     label: Creator
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['https://www.ica.org/standards/RiC/ontology#Person']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: https://www.ica.org/standards/RiC/ontology#Person
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:hasCreator ?value . }'
       - insert: 'INSERT { $subject rico:hasCreator $value . } WHERE {}'
@@ -2478,7 +2478,7 @@ fields:
     label: Credit
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasCredit $value. }'
       - insert: 'INSERT { $subject spao:hasCredit $value. } WHERE {}'
@@ -2489,7 +2489,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate
     label: Date
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject rico:isAssociatedWithDate $value . }'
       - insert: 'INSERT { $subject rico:isAssociatedWithDate $value . } WHERE { }'
@@ -2502,7 +2502,7 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject rico:hasBeginningDate $value . }'
       - insert: 'INSERT { $subject rico:hasBeginningDate $value . } WHERE { }'
@@ -2514,7 +2514,7 @@ fields:
     label: Certainty
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Date']
+    domain: https://www.ica.org/standards/RiC/ontology#Date
     queries:
       - select: 'SELECT $value WHERE { $subject rico:certainty $value . }'
       - insert: 'INSERT { $subject rico:certainty $value . } WHERE { }'
@@ -2534,7 +2534,7 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject rico:hasEndDate $value . }'
       - insert: 'INSERT { $subject rico:hasEndDate $value . } WHERE { }'
@@ -2545,7 +2545,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateNoValue
     label: No date type
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE {
         $subject rico:expressedDate ?label. 
@@ -2575,7 +2575,7 @@ fields:
     label: Qualifier
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Date']
+    domain: https://www.ica.org/standards/RiC/ontology#Date
     queries:
       - select: 'SELECT $value WHERE { $subject rico:dateQualifier $value . }'
       - insert: 'INSERT { $subject rico:dateQualifier $value . } WHERE { }'
@@ -2591,7 +2591,7 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject a $value . }'
       - insert: 'INSERT { $subject a $value . } WHERE { }'
@@ -2604,7 +2604,7 @@ fields:
     description: e.g. 1999, 1987-04 or 1965-09-20
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Date']
+    domain: https://www.ica.org/standards/RiC/ontology#Date
     queries:
       - select: 'SELECT $value WHERE {
         $subject rico:expressedDate $value .
@@ -2627,7 +2627,7 @@ fields:
     label: Content description
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:descriptiveNote ?value . }'
       - insert: 'INSERT { $subject rico:descriptiveNote $value . } WHERE { }'
@@ -2638,7 +2638,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDoublets
     label: Doublets
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasDoublets $value. }'
       - insert: 'INSERT { $subject spao:hasDoublets $value. } WHERE {}'
@@ -2649,8 +2649,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtent
     label: Extent
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['https://www.ica.org/standards/RiC/ontology#RecordResourceExtent']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: https://www.ica.org/standards/RiC/ontology#RecordResourceExtent
     queries:
       - select: 'SELECT $value WHERE {
         $subject rico:hasExtent $value.
@@ -2670,7 +2670,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceExtentDepricated
     label: Extent (depricated)
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject rico:recordResourceExtent $value. }'
       - insert: 'INSERT { $subject rico:recordResourceExtent $value. } WHERE { }'
@@ -2682,8 +2682,8 @@ fields:
     label: Extent Unit
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Extent']
-    range: ['https://www.ica.org/standards/RiC/ontology#unitOfMeasurement']
+    domain: https://www.ica.org/standards/RiC/ontology#Extent
+    range: https://www.ica.org/standards/RiC/ontology#unitOfMeasurement
     queries:
       - select: 'SELECT $value WHERE { $subject rico:hasUnitOfMeasurement $value. }'
       - insert: 'INSERT { $subject rico:hasUnitOfMeasurement $value. } WHERE { }'
@@ -2697,7 +2697,7 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#string
     minOccurs: 1
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Extent']
+    domain: https://www.ica.org/standards/RiC/ontology#Extent
     queries:
       - select: 'SELECT $value WHERE { $subject rico:quantity $value. }'
       - insert: 'INSERT { $subject rico:quantity $value. } WHERE { }'
@@ -2710,8 +2710,8 @@ fields:
     label: Record hierarchy
     description: used for display only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: ''
       - insert: 'INSERT { $subject rico:isOrWasIncludedIn $value} WHERE { }'
@@ -2722,7 +2722,7 @@ fields:
     label: Record set history
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT ?value WHERE {
         $subject rico:history ?value .
@@ -2736,8 +2736,8 @@ fields:
     label: IIIF
     description: e.g. https://media.performing-arts.ch/iiif/3/image%2F123-ABC
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['rdfs:Class']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: rdfs:Class
     queries:
       - select: 'SELECT $value WHERE {
     $subject rico:hasInstantiation $value .
@@ -2768,7 +2768,7 @@ fields:
     label: Index
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject olo:index $value. }'
       - insert: 'INSERT { $subject olo:index $value. } WHERE {}'
@@ -2779,8 +2779,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceLanguage
     label: Language
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject rico:hasOrHadLanguage $value . }'
       - insert: 'INSERT { $subject rico:hasOrHadLanguage $value . } WHERE { }'
@@ -2802,7 +2802,7 @@ fields:
     label: Date (depricated)
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject spao:legacyDate $value. }'
       - insert: 'INSERT { $subject spao:legacyDate $value. } WHERE {}'
@@ -2815,7 +2815,7 @@ fields:
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
     minOccurs: 1
     maxOccurs: 4
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:name ?value . }'
       - insert: 'INSERT { $subject rico:name $value . } WHERE {}'
@@ -2828,7 +2828,7 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#string
     minOccurs: 1
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:name ?value . }'
       - insert: 'INSERT { $subject rico:name $value . } WHERE {}'
@@ -2840,7 +2840,7 @@ fields:
     label: Packing
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['http://ontology.performing-arts.ch/ArchivalPlace']
+    domain: http://ontology.performing-arts.ch/ArchivalPlace
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasPacking $value. }'
       - insert: 'INSERT { $subject spao:hasPacking $value. } WHERE {}'
@@ -2868,7 +2868,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePackingDepricated
     label: Packing (depricated)
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasPacking $value. }'
       - insert: 'INSERT { $subject spao:hasPacking $value. } WHERE {}'
@@ -2898,8 +2898,8 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['https://www.ica.org/standards/RiC/ontology#RecordSet']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: https://www.ica.org/standards/RiC/ontology#RecordSet
     queries:
       - select: 'SELECT ?value ?label WHERE {
         $subject rico:isOrWasIncludedIn ?value .
@@ -2966,8 +2966,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePhotoType
     label: Type of print
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Record']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#Record
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE {
     $subject rico:hasRecordState $value.
@@ -2986,8 +2986,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePlace
     label: Place
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['https://www.ica.org/standards/RiC/ontology#Place']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: https://www.ica.org/standards/RiC/ontology#Place
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:isAssociatedWithPlace ?value . }'
       - insert: 'INSERT { $subject rico:isAssociatedWithPlace $value . } WHERE {}'
@@ -3055,7 +3055,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingConvention
     label: Processing convention
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasProcessingConvention $value. }'
       - insert: 'INSERT { $subject spao:hasProcessingConvention $value. } WHERE { }'
@@ -3066,7 +3066,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingDate
     label: Processing date
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation', 'https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation', 'https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasProcessingDate $value . }'
       - insert: 'INSERT { $subject spao:hasProcessingDate $value . } WHERE { }'
@@ -3078,7 +3078,7 @@ fields:
     label: Protection duration
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasProtectionDuration $value. }'
       - insert: 'INSERT { $subject spao:hasProtectionDuration $value. } WHERE { }'
@@ -3089,8 +3089,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance
     label: Provenienz
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['https://www.ica.org/standards/RiC/ontology#Agent']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: https://www.ica.org/standards/RiC/ontology#Agent
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:hasProvenance $value . }'
       - insert: 'INSERT { $subject rico:hasProvenance $value . } WHERE { }'
@@ -3107,7 +3107,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceRelated
     label: Related material
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject spao:isRelatedTo $value. }'
       - insert: 'INSERT { $subject spao:isRelatedTo $value. } WHERE {}'
@@ -3118,7 +3118,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceResponsible
     label: Responsible employee
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasResponsibleEmployee $value. }'
       - insert: 'INSERT { $subject spao:hasResponsibleEmployee $value. } WHERE { }'
@@ -3129,8 +3129,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject
     label: Subject
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan', 'http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object', 'https://www.ica.org/standards/RiC/ontology#Agent', 'https://www.ica.org/standards/RiC/ontology#Concept', 'https://www.ica.org/standards/RiC/ontology#Thing']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan', 'http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object', 'https://www.ica.org/standards/RiC/ontology#Agent', 'https://www.ica.org/standards/RiC/ontology#Concept', 'https://www.ica.org/standards/RiC/ontology#Thing
     queries:
       - select: 'SELECT $value WHERE { $subject rico:hasOrHadSubject $value . }'
       - insert: 'INSERT { $subject rico:hasOrHadSubject $value . } WHERE {}'
@@ -3177,8 +3177,8 @@ fields:
     label: Usage rights still
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasUsageRightsStill $value . }'
       - insert: 'INSERT { $subject spao:hasUsageRightsStill $value. } WHERE {}'
@@ -3197,8 +3197,8 @@ fields:
     label: Usage rights streaming
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasUsageRightsStreaming $value. }'
       - insert: 'INSERT { $subject spao:hasUsageRightsStreaming $value. } WHERE { }'
@@ -3218,8 +3218,8 @@ fields:
     description: e.g. http://vimeo.com/123
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['rdfs:Class']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: rdfs:Class
     queries:
       - select: 'SELECT $value WHERE {
     $subject rico:hasInstantiation $value .
@@ -3251,7 +3251,7 @@ fields:
     label: Cassation
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT ?value WHERE { $subject spao:cassation ?value . }'
       - insert: 'INSERT { $subject spao:cassation $value . } WHERE { }'
@@ -3262,8 +3262,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetDocumentaryForm
     label: Documentary form
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordSet']
-    range: ['https://www.ica.org/standards/RiC/ontology#RecordResourceDocumentaryForm']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordSet
+    range: https://www.ica.org/standards/RiC/ontology#RecordResourceDocumentaryForm
     queries:
       - select: 'SELECT $value WHERE { $subject rico:hasOrHadAllMembersWithDocumentaryFormType $value . }'
       - insert: 'INSERT { $subject rico:hasOrHadAllMembersWithDocumentaryFormType $value . } WHERE { }'
@@ -3291,8 +3291,8 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordSet']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept', 'https://www.ica.org/standards/RiC/ontology#RecordSetType']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordSet
+    range: http://www.w3.org/2004/02/skos/core#Concept', 'https://www.ica.org/standards/RiC/ontology#RecordSetType
     queries:
       - select: 'SELECT ?value ?label WHERE {
         $subject rico:hasRecordSetType ?value.
@@ -3317,7 +3317,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordSetVirtual
     label: virtual
     datatype: http://www.w3.org/2001/XMLSchema#boolean
-    domain: ['https://www.ica.org/standards/RiC/ontology#Record', 'https://www.ica.org/standards/RiC/ontology#RecordSet']
+    domain: https://www.ica.org/standards/RiC/ontology#Record', 'https://www.ica.org/standards/RiC/ontology#RecordSet
     queries:
       - select: 'SELECT $value WHERE {
         $subject <http://temp.performing-arts.ch/isVirtual> $value.
@@ -3337,7 +3337,7 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#string
     minOccurs: 1
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Record', 'https://www.ica.org/standards/RiC/ontology#RecordSet']
+    domain: https://www.ica.org/standards/RiC/ontology#Record', 'https://www.ica.org/standards/RiC/ontology#RecordSet
     queries:
       - select: 'SELECT $value WHERE { $subject rico:name $value . }'
       - insert: 'INSERT { $subject rico:name $value} WHERE {}'
@@ -3348,8 +3348,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RepresentationFile
     label: File
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.loc.gov/premis/rdf/v1#Representation']
-    range: ['http://www.loc.gov/premis/rdf/v1#File']
+    domain: http://www.loc.gov/premis/rdf/v1#Representation
+    range: http://www.loc.gov/premis/rdf/v1#File
     queries:
       - select: 'SELECT $value WHERE { $value premis:isIncludedIn $subject . }'
       - insert: 'INSERT { $value premis:isIncludedIn $subject . } WHERE { }'
@@ -3361,8 +3361,8 @@ fields:
     label: External resources
     description: Expects URIs from other databases such as Wikidata, GND, etc.
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
-    range: ['rdfs:Class']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
+    range: rdfs:Class
     queries:
       - select: 'SELECT ?value ?label
       WHERE {
@@ -3397,7 +3397,7 @@ fields:
     description: HH:MM:SS
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource']
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
     queries:
       - select: 'SELECT ?value WHERE { $subject schema:duration $value . }'
       - insert: 'INSERT { $subject schema:duration $value . } WHERE {}'
@@ -3410,8 +3410,8 @@ fields:
     label: Scope ID
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['http://www.w3.org/2002/07/owl#Class']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: http://www.w3.org/2002/07/owl#Class
     queries:
       - select: 'SELECT $value WHERE {
         $subject owl:sameAs $value .
@@ -3432,8 +3432,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Subtitle_Language
     label: Subtitle Language
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E55_Type']
+    domain: http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan
+    range: http://www.cidoc-crm.org/cidoc-crm/E55_Type
     queries:
       - select: 'SELECT ?value WHERE { 
         ?pw frbroo:R12_is_realised_in $subject. 
@@ -3459,8 +3459,8 @@ fields:
     label: Accessibility
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Instantiation', 'https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation', 'https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasAccessibility $value. }'
       - insert: 'INSERT { $subject spao:hasAccessibility $value. } WHERE { }'
@@ -3477,7 +3477,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingAccessibility
     label: Accessibility
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE {
         $subject spao:hasAccessibility $value.
@@ -3496,7 +3496,7 @@ fields:
     label: Conditions of access
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE {
         $subject rico:conditionsOfAccess $value.
@@ -3515,7 +3515,7 @@ fields:
     label: Identifier
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Thing']
+    domain: https://www.ica.org/standards/RiC/ontology#Thing
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:identifier ?value. }'
       - insert: 'INSERT { $subject rico:identifier $value. } WHERE {}'
@@ -3526,7 +3526,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier
     label: Legacy identifier
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['https://www.ica.org/standards/RiC/ontology#Thing']
+    domain: https://www.ica.org/standards/RiC/ontology#Thing
     queries:
       - select: 'SELECT ?value WHERE { $subject spao:legacyIdentifier ?value. }'
       - insert: 'INSERT { $subject spao:legacyIdentifier $value. } WHERE {}'
@@ -3537,8 +3537,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLocation
     label: Location
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Thing']
-    range: ['http://ontology.performing-arts.ch/ArchivalPlace']
+    domain: https://www.ica.org/standards/RiC/ontology#Thing
+    range: http://ontology.performing-arts.ch/ArchivalPlace
     queries:
       - select: 'SELECT $value WHERE { $subject rico:hasOrHadLocation $value. }'
       - insert: 'INSERT { $subject rico:hasOrHadLocation $value. } WHERE { }'
@@ -3607,7 +3607,7 @@ fields:
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
     minOccurs: 1
     maxOccurs: 4
-    domain: ['https://www.ica.org/standards/RiC/ontology#Thing']
+    domain: https://www.ica.org/standards/RiC/ontology#Thing
     queries:
       - select: 'SELECT ?value WHERE { $subject rico:name ?value . }'
       - insert: 'INSERT { $subject rico:name $value} WHERE {}'
@@ -3618,7 +3618,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNote
     label: Anmerkung
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasNote $value. }'
       - insert: 'INSERT { $subject spao:hasNote $value. } WHERE { }'
@@ -3629,7 +3629,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNoteInternal
     label: Internal note
     datatype: http://www.w3.org/2001/XMLSchema#string
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasInternalNote $value. }'
       - insert: 'INSERT { $subject spao:hasInternalNote $value. } WHERE { }'
@@ -3641,8 +3641,8 @@ fields:
     label: Permission
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasPermission $value . }'
       - insert: 'INSERT { $subject spao:hasPermission $value . } WHERE { }'
@@ -3661,7 +3661,7 @@ fields:
     label: Physical usability
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#RecordResource']
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasPhysicalUsability $value . }'
       - insert: 'INSERT { $subject spao:hasPhysicalUsability $value . } WHERE { }'
@@ -3679,8 +3679,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso
     label: See also
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['https://www.ica.org/standards/RiC/ontology#Thing']
-    range: ['https://www.ica.org/standards/RiC/ontology#Thing']
+    domain: https://www.ica.org/standards/RiC/ontology#Thing
+    range: https://www.ica.org/standards/RiC/ontology#Thing
     queries:
       - select: 'SELECT $value WHERE { $subject spao:seeAlso $value. }'
       - insert: 'INSERT { $subject spao:seeAlso $value. } WHERE {}'
@@ -3704,8 +3704,8 @@ fields:
     label: Terms of protection
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Thing']
-    range: ['http://www.w3.org/2004/02/skos/core#Concept']
+    domain: https://www.ica.org/standards/RiC/ontology#Thing
+    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject spao:hasTermsOfProtection $value. }'
       - insert: 'INSERT { $subject spao:hasTermsOfProtection $value . } WHERE { }'
@@ -3722,7 +3722,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym
     label: Acronym
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
     queries:
       - select: 'SELECT DISTINCT ?value WHERE {
         $subject crm:P102_has_title $title .
@@ -3749,7 +3749,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAltTitle
     label: Alternative name
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
     queries:
       - select: 'SELECT DISTINCT ?value WHERE {
         $subject crm:P102_has_title $title .
@@ -3779,7 +3779,7 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#string
     minOccurs: 0
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Thing']
+    domain: https://www.ica.org/standards/RiC/ontology#Thing
     queries:
       - select: 'SELECT $value WHERE {
     $subject rico:hasBeginningDate ?beginning .
@@ -3810,7 +3810,7 @@ fields:
     datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
     minOccurs: 1
     maxOccurs: 4
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
     queries:
       - select: 'SELECT ?value WHERE {
         $subject rdfs:label $value .
@@ -3838,8 +3838,8 @@ fields:
     label: Type
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E55_Type']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
+    range: http://www.cidoc-crm.org/cidoc-crm/E55_Type
     queries:
       - select: 'SELECT ?value WHERE {
         $subject crm:P102_has_title $title .
@@ -3865,8 +3865,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains
     label: contains
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
+    range: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
     queries:
       - select: 'SELECT DISTINCT ?value ?label ?unidentified WHERE {
         $subject crm:P46_is_composed_of ?value .
@@ -3895,7 +3895,7 @@ fields:
     datatype: http://www.w3.org/2001/XMLSchema#string
     minOccurs: 0
     maxOccurs: 1
-    domain: ['https://www.ica.org/standards/RiC/ontology#Thing']
+    domain: https://www.ica.org/standards/RiC/ontology#Thing
     queries:
       - select: 'SELECT $value WHERE {
     $subject rico:hasEndDate ?end .
@@ -3925,8 +3925,8 @@ fields:
     label: is part of
     description: display only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
+    range: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
     queries:
       - select: 'SELECT DISTINCT ?value ?label ?unidentified WHERE {
         { $subject crm:P46i_forms_part_of ?value . }
@@ -3957,8 +3957,8 @@ fields:
     label: Location
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     maxOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E53_Place']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
+    range: http://www.cidoc-crm.org/cidoc-crm/E53_Place
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P156_occupies $loc.
@@ -4039,8 +4039,8 @@ fields:
     label: managed by
     description: display only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
+    range: http://www.cidoc-crm.org/cidoc-crm/E74_Group
     queries:
       - select: 'SELECT DISTINCT $value WHERE {
     {
@@ -4069,8 +4069,8 @@ fields:
     label: Producers
     description: display only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E74_Group']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object
+    range: http://www.cidoc-crm.org/cidoc-crm/E74_Group
     queries:
       - select: ''
       - insert: 'INSERT {
@@ -4088,8 +4088,8 @@ fields:
     label: Website
     description: e.g. http://www.sapa.swiss
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E39_Actor']
-    range: ['http://metaphacts.com/Link']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
+    range: http://metaphacts.com/Link
     queries:
       - select: 'SELECT ?value ?label WHERE {
         $subject crm:P76_has_contact_point ?c.
@@ -4117,8 +4117,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/WorkActivity
     label: Work Activity
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E7_Activity']
+    domain: http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan
+    range: http://www.cidoc-crm.org/cidoc-crm/E7_Activity
     queries:
       - select: 'SELECT ?value $index WHERE {
         ?subject frbroo:R14_incorporates ?sce.
@@ -4141,8 +4141,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/misc_performance_functions
     label: misc. Performance Functions
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E55_Type']
+    domain: http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan
+    range: http://www.cidoc-crm.org/cidoc-crm/E55_Type
     queries:
       - select: 'SELECT DISTINCT ?value ?actor WHERE {
         ?genericperformance frbroo:R25_performed ?subject ;
@@ -4164,8 +4164,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/reference_work_functions
     label: reference work functions
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E7_Activity']
+    domain: http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan
+    range: http://www.cidoc-crm.org/cidoc-crm/E7_Activity
     queries:
       - select: 'SELECT DISTINCT ?value WHERE {
         ?subject frbroo:R14_incorporates ?sce.
@@ -4179,8 +4179,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/season
     label: Season
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: ['http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan']
-    range: ['http://www.cidoc-crm.org/cidoc-crm/E4_Period']
+    domain: http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan
+    range: http://www.cidoc-crm.org/cidoc-crm/E4_Period
     queries:
       - select: 'SELECT ?value ?label WHERE {
         ?expressioncreation frbroo:R17_created ?subject .
@@ -4201,8 +4201,8 @@ fields:
     label: typeset
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
-    domain: ['http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity']
-    range: ['rdfs:Class']
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
+    range: rdfs:Class
     queries:
       - select: 'SELECT ?value WHERE {
         $subject a ?value.
