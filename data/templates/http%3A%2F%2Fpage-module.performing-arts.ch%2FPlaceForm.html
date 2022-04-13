@@ -1,3 +1,5 @@
+[[> sapaModule:FieldDefinitions]]
+
   <div data-flex-layout='row top-stretch'>
     <semantic-form 
      [[#if create]]
@@ -11,20 +13,20 @@
       browser-persistence=true
       persistence='ldp' 
       form-id='places'
-      fields='[[fieldDefinitions
-        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
-        place_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceName"
-        falls_within="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceFallsWithin"
-        same_as="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
-      ]]'>
+      fields='[
+        [[> RDFtype]],
+        [[> PlaceName]],
+        [[> PlaceFallsWithin]],
+        [[> SameAs]]
+      ]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-        <semantic-form-hidden-input for='rdf_type' default-values='["[[resolvePrefix "crm:E53_Place"]]", "[[resolvePrefix "rico:Place"]]"]'></semantic-form-hidden-input>
+        <semantic-form-hidden-input for="RDFtype" default-values='["[[resolvePrefix "crm:E53_Place"]]", "[[resolvePrefix "rico:Place"]]"]'></semantic-form-hidden-input>
         </div>
-        <semantic-form-text-input for="place_name" languages='["en", "de", "fr", "it"]'></semantic-form-text-input>
-        <semantic-form-tree-picker-input for="falls_within" ></semantic-form-tree-picker-input>
-        <semantic-form-text-input for="same_as"></semantic-form-text-input>
+        <semantic-form-text-input for="PlaceName" languages='["en", "de", "fr", "it"]'></semantic-form-text-input>
+        <semantic-form-tree-picker-input for="PlaceFallsWithin" ></semantic-form-tree-picker-input>
+        <semantic-form-text-input for="SameAs"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
         <button name="submit" class="btn btn-secondary">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>

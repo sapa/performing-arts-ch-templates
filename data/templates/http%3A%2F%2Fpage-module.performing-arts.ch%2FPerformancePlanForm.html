@@ -1,3 +1,5 @@
+[[> sapaModule:FieldDefinitions]]
+
   <div data-flex-layout='row top-stretch'>
     <semantic-form 
      [[#if create]]
@@ -11,44 +13,44 @@
       browser-persistence=true
       persistence='ldp' 
       form-id='places'
-      fields='[[fieldDefinitions
-        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
-        genre="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Genre"
-        comment="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment"
-        sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
-        workactivity="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/WorkActivity"
-        actor="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorActivity"
-      ]]'>
+      fields='[
+        [[> RDFtype]],
+        [[> Genre]],
+        [[> RDFSComment]],
+        [[> SameAs]],
+        [[> WorkActivity]],
+        [[> ActorActivity]]
+      ]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-          <semantic-form-hidden-input for='rdf_type' default-value='[[resolvePrefix "frbroo:F25_Performance_Plan"]]'></semantic-form-hidden-input>
+          <semantic-form-hidden-input for="RDFtype" default-value='[[resolvePrefix "frbroo:F25_Performance_Plan"]]'></semantic-form-hidden-input>
         </div>
-        <semantic-form-tree-picker-input for="genre"></semantic-form-tree-picker-input>
+        <semantic-form-tree-picker-input for="Genre"></semantic-form-tree-picker-input>
 
-        <semantic-form-autocomplete-input for="actor"></semantic-form-autocomplete-input>
+        <semantic-form-autocomplete-input for="ActorActivity"></semantic-form-autocomplete-input>
 
-        <semantic-form-composite-input for="workactivity" new-subject-template="http://data.performing-arts.ch/x/{{UUID}}"
-          fields='[[fieldDefinitions
-            typeset="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/typeset"
-            Activity_Type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Activity_Type"
-            Carried_Out_by="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performed_By"
-          ]]'>
+        <semantic-form-composite-input for="WorkActivity" new-subject-template="http://data.performing-arts.ch/x/{{UUID}}"
+          fields='[
+            [[> typeset]],
+            [[> Activity_Type]],
+            [[> Performed_By]]
+          ]'>
           <div style="display: none;">
-            <semantic-form-hidden-input for='typeset' default-value='http://www.cidoc-crm.org/cidoc-crm/E7_Activity'></semantic-form-hidden-input>
+            <semantic-form-hidden-input for="typeset" default-value='http://www.cidoc-crm.org/cidoc-crm/E7_Activity'></semantic-form-hidden-input>
           </div>
           <bs-row>
             <bs-col sm='6'>
-              <semantic-form-autocomplete-input for='Activity_Type'></semantic-form-autocomplete-input>          
+              <semantic-form-autocomplete-input for="Activity_Type"></semantic-form-autocomplete-input>          
             </bs-col>
             <bs-col sm='6'>
-              <semantic-form-autocomplete-input for='Carried_Out_by' placeholder='Search persons...'></semantic-form-autocomplete-input>
+              <semantic-form-autocomplete-input for="Performed_By" placeholder='Search persons...'></semantic-form-autocomplete-input>
             </bs-col>
           </bs-row>
        </semantic-form-composite-input>
 
-        <semantic-form-text-input for="comment"></semantic-form-text-input>
-        <semantic-form-text-input for="sameAs"></semantic-form-text-input>
+        <semantic-form-text-input for="RDFSComment"></semantic-form-text-input>
+        <semantic-form-text-input for="SameAs"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>
         <button name="submit" class="btn btn-secondary">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>
         <button name="reset" class="btn btn-secondary">[[i18n "FormReset" bundle="performing-arts-ch"]]</button>
