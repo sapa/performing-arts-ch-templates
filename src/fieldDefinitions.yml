@@ -20,8 +20,6 @@ fields:
         skos:prefLabel ?label .
         FILTER(REGEX(STR(?label), "?token", "i"))
       } LIMIT 10'
-    treePatterns:
-      type: simple
 
 
   - id: ActorActivity
@@ -105,6 +103,9 @@ fields:
         BIND(BOUND(?child) AS ?hasChildren)
       }
       ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
+        ?parent crm:P89_falls_within ?item .
+      }'
       childrenQuery: 'PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -724,58 +725,58 @@ fields:
     range: http://www.cidoc-crm.org/cidoc-crm/E55_Type
     queries:
       - select: 'SELECT ?value WHERE {
-        ?pursuit a frbroo:F51_Pursuit ;
-    crm:P14_carried_out_by $subject ;
-    frbroo:R59_had_typical_subject ?value. 
+          ?pursuit a frbroo:F51_Pursuit ;
+            crm:P14_carried_out_by $subject ;
+          frbroo:R59_had_typical_subject ?value. 
       }'
       - insert: 'INSERT {
-        ?pursuit a frbroo:F51_Pursuit ;
-    crm:P14_carried_out_by $subject ;
-    frbroo:R59_had_typical_subject ?value. 
-      } WHERE {	 
-        BIND(IRI(CONCAT("http://data.performing-arts.ch/x/", MD5(CONCAT(STR(?subject), "genre_focus")))) as ?pursuit)
-      }'
+          ?pursuit a frbroo:F51_Pursuit ;
+            crm:P14_carried_out_by $subject ;
+            frbroo:R59_had_typical_subject ?value. 
+          } WHERE {	 
+            BIND(IRI(CONCAT("http://data.performing-arts.ch/x/", MD5(CONCAT(STR(?subject), "genre_focus")))) as ?pursuit)
+          }'
       - delete: 'DELETE {
-        ?pursuit a frbroo:F51_Pursuit ;
-    crm:P14_carried_out_by $subject ;
-    frbroo:R59_had_typical_subject ?value. 
-      } WHERE {}'
+          ?pursuit a frbroo:F51_Pursuit ;
+            crm:P14_carried_out_by $subject ;
+            frbroo:R59_had_typical_subject ?value. 
+          } WHERE {}'
       - valueSet: 'SELECT $value WHERE {
-        $value a skos:Concept ;
-        skos:inScheme spav:mn .
-      }'
+          $value a skos:Concept ;
+            skos:inScheme spav:mn .
+        }'
       - autosuggestion: 'SELECT DISTINCT ?value ?label WHERE {
-        SERVICE Repository:lookup {
-        ?value lookup:token ?__token__ ;
-    lookup:name ?label ;
-    lookup:type skos:Concept ;
-      skos:inScheme spav:mn .
-        }
+          ?value a skos:Concept ;
+            skos:inScheme spav:mn ;
+            rdfs:label ?label .
+          ?label bds:search ?__token__ ;
+            bds:matchAllTerms "true" .
       }'
     treePatterns:
       type: full
       rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
-        ?item skos:inScheme spav:mn .
-        FILTER(NOT EXISTS { ?item skos:broader ?parent. })
-        ?item skos:prefLabel ?label.
-        OPTIONAL { ?child skos:broader ?item. }
-        BIND(BOUND(?child) AS ?hasChildren)
-      }
-      ORDER BY (?label)'
-      childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
-        ?item skos:broader ?parent ;
-        skos:prefLabel ?label.
-        OPTIONAL { ?child skos:broader ?item. }
-        BIND(BOUND(?child) AS ?hasChildren)
-      }
-      ORDER BY (?label)'
-      searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-        SERVICE Repository:lookup {
-        ?item skos:inScheme spav:mn ;
-        lookup:token ?__token__;
-    lookup:name ?label ;
-        lookup:limit 400 .
+          ?item skos:inScheme spav:mn .
+          FILTER(NOT EXISTS { ?item skos:broader ?parent. })
+          ?item skos:prefLabel ?label.
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
         }
+        ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
+          ?parent skos:broader ?item .
+      }'
+      childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+          ?item skos:broader ?parent ;
+            skos:prefLabel ?label.
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
+      searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
+        ?item skos:inScheme spav:mn ;
+          skos:prefLabel ?label .
+        ?label bds:search ?__token__ ;
+          bds:matchAllTerms "true" .
         OPTIONAL { ?child skos:broader ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
       }
@@ -960,6 +961,9 @@ fields:
         BIND(BOUND(?child) AS ?hasChildren)
       }
       ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
+          ?parent skos:broader ?item .
+        }'
       childrenQuery: 'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
@@ -1018,65 +1022,28 @@ fields:
         crm:P16_used_specific_object ?value . 
       } WHERE {}'
       - autosuggestion: 'SELECT ?value ?label WHERE {
-        ?value a crm:E22_Man-Made_Object ;
-        crm:P2_has_type spav:dwmkn ;
-        rdfs:label ?venue_label .
+          ?value a crm:E22_Man-Made_Object ;
+            crm:P2_has_type spav:dwmkn ;
+            rdfs:label ?venue_label .
         SERVICE <http://www.bigdata.com/rdf/search#search> {
-        ?venue_label bds:search "?token" ;
-        bds:minRelevance "0.1" ;
-        bds:relevance ?score ; 
-        bds:matchAllTerms "true" .
+          ?venue_label bds:search ?__token__ ;
+          bds:minRelevance "0.1" ;
+          bds:relevance ?score ; 
+          bds:matchAllTerms "true" .
         }
         FILTER(CONTAINS(STR(?value), "/o/"))
         OPTIONAL {
-    ?parent crm:P46_is_composed_of ?value ;
-        rdfs:label ?parent_label .
-        FILTER((LANGMATCHES(LANG(?parent_label), "")) || (LANGMATCHES(LANG(?parent_label), ?__userPreferredLanguage__)))
+          ?parent crm:P46_is_composed_of ?value ;
+          rdfs:label ?parent_label .
+          FILTER((LANGMATCHES(LANG(?parent_label), "")) || (LANGMATCHES(LANG(?parent_label), ?__userPreferredLanguage__)))
         }
         OPTIONAL {
-        ?value crm:P156_occupies/crm:P89_falls_within/rdfs:label ?place_label .
-        FILTER((LANGMATCHES(LANG(?place_label), ?__userPreferredLanguage__)))
+          ?value crm:P156_occupies/crm:P89_falls_within/rdfs:label ?place_label .
+          FILTER((LANGMATCHES(LANG(?place_label), ?__userPreferredLanguage__)))
         }
 
         BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, " (", ?parent_label, IF(BOUND(?place_label), CONCAT(", ", ?place_label), ""), ")"), IF(BOUND(?place_label), CONCAT(?venue_label, " (", ?place_label, ")"), ?venue_label)) AS ?label)
         FILTER((LANGMATCHES(LANG(?venue_label), "")) || (LANGMATCHES(LANG(?venue_label), ?__userPreferredLanguage__)))
-        BIND(LCASE(REPLACE(REPLACE(str(?token),"\\*", ""), "\\\\", "")) as ?lower_token)
-        BIND(LCASE(?venue_label) AS ?venue_label_lower)
-  
-        BIND(
-        REPLACE(
-        REPLACE(
-    REPLACE(
-        REPLACE(
-        REPLACE(
-        REPLACE(
-        REPLACE(
-        str(?lower_token),"á","a"),
-        "é","e")
-        ,"í","i"),
-        "ó","o"),
-        "ú","u"),
-        "ü","u"),
-        "ö","o") as ?clean_token)
-  
-        BIND(
-        REPLACE(
-        REPLACE(
-        REPLACE(
-        REPLACE(
-        REPLACE(
-        REPLACE(
-        REPLACE(
-        str(?venue_label_lower),"á","a"),
-              "é","e")
-          ,"í","i"),
-        "ó","o"),
-      "ú","u"),
-    "ü","u"),
-        "ö","o")
-        as ?venue_label_clean) .
-
-        FILTER(contains(STR(?venue_label_clean),?clean_token))
       } LIMIT 20'
 
 
@@ -1470,7 +1437,7 @@ fields:
         ?lastcontrol rico:normalizedDateValue $value ;
         ?p ?o .
       }'
-      - ask: 'ASK { FILTER(REGEX($value, "^([\\+-]?\\d{4}(?!\\d{2}\\b))((-?)((0[1-9]|1[0-2])(\\3([12]\\d|0[1-9]|3[01]))?))?$")) }'
+      - ask: 'ASK { FILTER(REGEX($value, "^([\\\\+-]?\\\\d{4}(?!\\\\d{2}\\\\b))((-?)((0[1-9]|1[0-2])(\\\\3([12]\\\\d|0[1-9]|3[01]))?))?$")) }'
 
 
   - id: MediaResourceSamplingRate
@@ -1757,7 +1724,7 @@ fields:
         rico:normalizedDateValue ?value ;
         rico:dateStandard "ISO 8601" .
       } WHERE {}'
-      - ask: 'ASK { FILTER(REGEX($value, "^([\\+-]?\\d{4}(?!\\d{2}\\b))((-?)((0[1-9]|1[0-2])(\\3([12]\\d|0[1-9]|3[01]))?))?$")) }'
+      - ask: 'ASK { FILTER(REGEX($value, "^([\\\\+-]?\\\\d{4}(?!\\\\d{2}\\\\b))((-?)((0[1-9]|1[0-2])(\\\\3([12]\\\\d|0[1-9]|3[01]))?))?$")) }'
 
 
   - id: PersonBirthPlace
@@ -1809,6 +1776,9 @@ fields:
         BIND(BOUND(?child) AS ?hasChildren)
       }
       ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
+        ?item ^crm:P89_falls_within ?parent.
+      }'
       childrenQuery: 'PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -1933,7 +1903,7 @@ fields:
         rico:normalizedDateValue ?value ;
         rico:dateStandard "ISO 8601" .
       } WHERE {}'
-      - ask: 'ASK { FILTER(REGEX($value, "^([\\+-]?\\d{4}(?!\\d{2}\\b))((-?)((0[1-9]|1[0-2])(\\3([12]\\d|0[1-9]|3[01]))?))?$")) }'
+      - ask: 'ASK { FILTER(REGEX($value, "^([\\\\+-]?\\\\d{4}(?!\\\\d{2}\\\\b))((-?)((0[1-9]|1[0-2])(\\\\3([12]\\\\d|0[1-9]|3[01]))?))?$")) }'
 
 
   - id: PersonDeathPlace
@@ -1985,6 +1955,9 @@ fields:
         BIND(BOUND(?child) AS ?hasChildren)
       }
       ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
+        ?item ^crm:P89_falls_within ?parent.
+      }'
       childrenQuery: 'PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -2786,7 +2759,7 @@ fields:
     FILTER(CONTAINS(STR($value), "media.performing-arts.ch/iiif"))
       }'
       - ask: 'ASK {
-        FILTER(REGEX(STR($value), "http(s)*://media\\.performing-arts\\.ch/iiif/3/(image|document)%2F[\\d\\w-_]+"))
+        FILTER(REGEX(STR($value), "http(s)*://media\\\\.performing-arts\\\\.ch/iiif/3/(image|document)%2F[\\\\d\\\\w-_]+"))
       }'
 
 
@@ -2960,6 +2933,9 @@ fields:
         BIND(BOUND(?child) AS ?hasChildren)
       }
       ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
+          ?item ^rico:isOrWasIncludedIn ?parent.
+        }'
       childrenQuery: 'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
@@ -3045,6 +3021,9 @@ fields:
         BIND(BOUND(?child) AS ?hasChildren)
       }
       ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
+        ?item ^crm:P89_falls_within ?parent.
+      }'
       childrenQuery: 'PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -3163,40 +3142,40 @@ fields:
       - insert: 'INSERT { $subject rico:hasOrHadSubject $value . } WHERE {}'
       - delete: 'DELETE { $subject rico:hasOrHadSubject $value} WHERE {}'
       - autosuggestion: 'SELECT DISTINCT $value ?label WHERE {
-        BIND(?__userPreferredLanguage__ AS ?lang)
-        #type
-        VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) {
-        (rico:Person "person" "Person" "personne" "persona")
-        (rico:Group "group" "Gruppe" "groupe" "gruppo")
-        (rico:CorporateBody "group" "Gruppe" "groupe" "gruppo")
-        (rico:Family "group" "Gruppe" "groupe" "gruppo")
-        (frbroo:F26_Recording "recording" "Aufnahme" "enregistrement" "registrazione")
-        (frbroo:F25_Performance_Plan "production" "Produktion" "production" "produzion")
-        (crm:E22_Man-Made_Object "venue" "Spielstätte" "lieu de représentation" "teatro")
-        }
-        BIND(
-        IF(?lang = "de", ?type_label_de, 
-        IF(?lang = "fr", ?type_label_fr, 
-        IF(?lang = "it", ?type_label_it, ?type_label_en)
-        )
-        ) AS ?type_label)
-        SERVICE Repository:lookup {
-        $value lookup:token "?token" ;
-        lookup:name ?item_label
-        }
-        $value rdf:type ?type .
-        BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator)
-        FILTER(?type_indicator != "x")
-        FILTER(?type_indicator != "u")
-        OPTIONAL { $value crm:P2_has_type ?crmtype. }
-        FILTER((?type != crm:E22_Man-Made_Object) || (?crmtype = spav:dwmkn))
-        OPTIONAL {
-        $value crm:P74_has_current_or_former_residence/crm:P89_falls_within/rdfs:label ?place_label .
-        BIND(LANG(?place_label) AS ?place_label_lang)
-        }
-        FILTER(!BOUND(?place_label_lang) || ?place_label_lang = ?lang)
-        BIND(CONCAT(?item_label, " (", ?type_label, IF(BOUND(?place_label), CONCAT(", ", ?place_label), ""), ")") AS ?label)
-      }'
+          BIND(?__userPreferredLanguage__ AS ?lang)
+          
+          VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) {
+            (rico:Person "person" "Person" "personne" "persona")
+            (rico:Group "group" "Gruppe" "groupe" "gruppo")
+            (rico:CorporateBody "group" "Gruppe" "groupe" "gruppo")
+            (rico:Family "group" "Gruppe" "groupe" "gruppo")
+            (frbroo:F26_Recording "recording" "Aufnahme" "enregistrement" "registrazione")
+            (frbroo:F25_Performance_Plan "production" "Produktion" "production" "produzion")
+            (crm:E22_Man-Made_Object "venue" "Spielstätte" "lieu de représentation" "teatro")
+          }
+          BIND(
+            IF(?lang = "de", ?type_label_de, 
+            IF(?lang = "fr", ?type_label_fr, 
+            IF(?lang = "it", ?type_label_it, ?type_label_en)
+            )
+          ) AS ?type_label)
+
+          $value rdfs:label ?item_label .
+          ?item_label bds:search ?__token__ ;
+            bds:matchAllTerms "true" .
+          $value rdf:type ?type .
+          BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator)
+          FILTER(?type_indicator != "x")
+          FILTER(?type_indicator != "u")
+          OPTIONAL { $value crm:P2_has_type ?crmtype. }
+          FILTER((?type != crm:E22_Man-Made_Object) || (?crmtype = spav:dwmkn))
+          OPTIONAL {
+            $value crm:P74_has_current_or_former_residence/crm:P89_falls_within/rdfs:label ?place_label .
+            BIND(LANG(?place_label) AS ?place_label_lang)
+          }
+          FILTER(!BOUND(?place_label_lang) || ?place_label_lang = ?lang)
+          BIND(CONCAT(?item_label, " (", ?type_label, IF(BOUND(?place_label), CONCAT(", ", ?place_label), ""), ")") AS ?label)
+        } LIMIT 100'
 
 
   - id: RecordResourceUsageRightsStill
@@ -3269,7 +3248,7 @@ fields:
     FILTER(CONTAINS(STR($value), "://vimeo.com"))
       }'
       - ask: 'ASK {
-        FILTER(REGEX(STR($value), "http://vimeo.com/{\\d}+"))
+        FILTER(REGEX(STR($value), "http://vimeo.com/{\\\\d}+"))
       }'
 
 
@@ -3596,6 +3575,9 @@ fields:
         BIND(BOUND(?child) AS ?hasChildren)
       }
       ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
+        ?item ^rico:containedBy ?parent.
+      }'
       childrenQuery: 'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
@@ -4028,6 +4010,9 @@ fields:
         BIND(BOUND(?child) AS ?hasChildren)
       }
       ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
+        ?item ^crm:P89_falls_within ?parent.
+      }'
       childrenQuery: 'PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
