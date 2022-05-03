@@ -124,12 +124,11 @@ fields:
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
       SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-        SERVICE Repository:lookup {
-        ?item lookup:token ?__token__;
-        lookup:name ?label ;
-        lookup:limit 400 ;
-        lookup:type crm:E53_Place .
-        }
+        ?item a crm:E53_Place ;
+      rdfs:label ?label .
+    ?label bds:search ?__token__ ;
+        bds:relevance ?score ; 
+        bds:matchAllTerms "true"
         FILTER(CONTAINS(STR(?item), "/p/"))
         OPTIONAL { ?child crm:P89_falls_within ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
@@ -175,16 +174,17 @@ fields:
     treePatterns:
       type: full
       rootsQuery: 'SELECT DISTINCT ?item ?hasChildren WHERE {
-          ?item a spao:ArchivalPlace .
+          ?item a spao:ArchivalPlace ;
+            (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?label.
           FILTER(NOT EXISTS { ?item rico:containedBy ?parent. })
-          ?item rdfs:label ?label.
           OPTIONAL { ?child rico:containedBy ?item. }
           BIND(BOUND(?child) AS ?hasChildren)
         }
         ORDER BY (?label)'
       childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
-          ?item rico:containedBy ?parent ;
-          rdfs:label ?label.
+          ?item rico:containedBy ?parent.
+          ?item a spao:ArchivalPlace ;
+            (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?label.
           OPTIONAL { ?child rico:containedBy  ?item. }
           BIND(BOUND(?child) AS ?hasChildren)
         }
@@ -748,10 +748,11 @@ fields:
       - autosuggestion: 'SELECT DISTINCT ?value ?label WHERE {
           ?value a skos:Concept ;
             skos:inScheme spav:mn ;
-            rdfs:label ?label .
+            rdfs:label|skos:prefLabel ?label . 
           ?label bds:search ?__token__ ;
+            bds:relevance ?score ;
             bds:matchAllTerms "true" .
-      }'
+        } LIMIT 100'
     treePatterns:
       type: full
       rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
@@ -776,7 +777,8 @@ fields:
         ?item skos:inScheme spav:mn ;
           skos:prefLabel ?label .
         ?label bds:search ?__token__ ;
-          bds:matchAllTerms "true" .
+          bds:matchAllTerms "true" ;
+          bds:relevance ?score .
         OPTIONAL { ?child skos:broader ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
       }
@@ -937,14 +939,13 @@ fields:
       PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
       PREFIX spav: <http://vocab.performing-arts.ch/>
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-      SELECT DISTINCT ?value ?label WHERE {
-        SERVICE Repository:lookup {
-        ?value lookup:token ?__token__ ;
-    lookup:type skos:Concept ;
-    lookup:name ?label ;
-      skos:inScheme spav:vr .
-        }
-      }'
+      SELECT DISTINCT ?value ?label WHERE { 
+        ?value skos:inScheme spav:vr ;
+          skos:prefLabel ?label . 
+        ?label bds:search ?__token__ ;
+          bds:relevance ?score ;
+          bds:matchAllTerms "true" 
+      } LIMIT 100'
     treePatterns:
       type: full
       rootsQuery: 'PREFIX spav: <http://vocab.performing-arts.ch/>
@@ -981,12 +982,11 @@ fields:
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
       SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-        SERVICE Repository:lookup {
         ?item skos:inScheme spav:vr ;
-        lookup:token ?__token__;
-    lookup:name ?label ;
-        lookup:limit 400 .
-        }
+          skos:prefLabel ?label . 
+        ?label bds:search ?__token__ ; 
+          bds:relevance ?score ; 
+          bds:matchAllTerms "true"
         OPTIONAL { ?child skos:broader ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
       }
@@ -1081,9 +1081,33 @@ fields:
     $value a rico:CarrierType .
       }'
     treePatterns:
-      type: simple
-      schemePattern: '?item skos:inScheme spav:fv .'
-      relationPattern: '?item skos:broader ?parent'
+      type: full
+      rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+          FILTER(NOT EXISTS { ?item skos:broader ?parent. })
+          ?item a rico:CarrierType ; (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?label.
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
+      childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+          ?item skos:broader ?parent.
+          ?item a rico:CarrierType ;(rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?label.
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
+      searchQuery: '
+        SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
+          ?item a rico:CarrierType ; 
+          (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?label . 
+          ?label bds:search ?__token__ ; 
+          bds:relevance ?score ; 
+          bds:matchAllTerms "true"
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY DESC (?score) (?label)
+        LIMIT 200'
 
 
   - id: InstantiationCondition
@@ -1198,9 +1222,34 @@ fields:
     $value a rico:CarrierType .
       }'
     treePatterns:
-      type: simple
-      schemePattern: '?item skos:inScheme spav:zj .'
-      relationPattern: '?item skos:broader ?parent'
+      type: full
+      rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+          FILTER(NOT EXISTS { ?item skos:broader ?parent. })
+          ?item a rico:CarrierType .
+          ?item rico:name ?label.
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
+      childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+          ?item a rico:CarrierType .
+          ?item skos:broader ?parent.
+          ?item rico:name ?label.
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
+      searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
+          ?item a rico:CarrierType ;
+          rico:name ?label . 
+          ?label bds:search ?__token__ ; 
+          bds:relevance ?score ; 
+          bds:matchAllTerms "true"
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY DESC (?score) (?label)
+        LIMIT 200'
 
 
   - id: InstantiationPhysicalCharacteristics
@@ -1826,13 +1875,11 @@ fields:
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
       SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-        SERVICE Repository:lookup {
-        ?item lookup:token ?__token__;
-    lookup:name ?label ;
-        lookup:score ?score ;
-        lookup:limit 400 ;
-        lookup:type crm:E53_Place .
-        }
+        ?item a crm:E53_Place ;
+          rdfs:label ?label .
+        ?label bds:search ?__token__ ;
+          bds:relevance ?score ; 
+          bds:matchAllTerms "true"
         FILTER(CONTAINS(STR(?item), "/p/"))
         OPTIONAL { ?child crm:P89_falls_within ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
@@ -2005,13 +2052,11 @@ fields:
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
       SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-        SERVICE Repository:lookup {
-        ?item lookup:token ?__token__;
-    lookup:name ?label ;
-        lookup:score ?score ;
-        lookup:limit 400 ;
-        lookup:type crm:E53_Place .
-        }
+        ?item a crm:E53_Place ;
+          rdfs:label ?label .
+        ?label bds:search ?__token__ ;
+          bds:relevance ?score ; 
+          bds:matchAllTerms "true"
         FILTER(CONTAINS(STR(?item), "/p/"))
         OPTIONAL { ?child crm:P89_falls_within ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
@@ -2184,9 +2229,34 @@ fields:
         FILTER REGEX($label, "?token", "i")
       }'
     treePatterns:
-      type: simple
-      schemePattern: '?item a crm:E53_Place.'
-      relationPattern: '?item crm:P89_falls_within ?parent.'
+      type: full
+      rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+        FILTER(NOT EXISTS { ?item crm:P89_falls_within ?parent. })
+        ?item a crm:E53_Place ;
+        rdfs:label ?label .
+        OPTIONAL { ?child crm:P89_falls_within ?item. }
+        BIND(BOUND(?child) AS ?hasChildren)
+      }
+        ORDER BY (?label)'
+      childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+        ?item crm:P89_falls_within ?parent.
+        ?item a crm:E53_Place ;
+        rdfs:label ?label .
+        OPTIONAL { ?child crm:P89_falls_within ?item. }
+        BIND(BOUND(?child) AS ?hasChildren)
+      }
+        ORDER BY (?label)'
+      searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
+        ?item a crm:E53_Place ;
+        rdfs:label ?label .
+        ?label bds:search ?__token__ ;
+        bds:relevance ?score ;
+        bds:matchAllTerms "true"
+        OPTIONAL { ?child skos:broader ?item. }
+        BIND(BOUND(?child) AS ?hasChildren)
+      }
+        ORDER BY DESC (?score) (?label)
+        LIMIT 200'
 
 
   - id: PlaceGroups
@@ -2388,7 +2458,7 @@ fields:
         ?item rico:name ?label .
           ?label bds:search ?__token__ ; 
           bds:relevance ?score ; 		 	 
-          bds:matchAllTerms "true"
+          bds:matchAllTerms "true" .
         OPTIONAL { ?child skos:broader ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
       }
@@ -2848,13 +2918,41 @@ fields:
       - valueSet: 'SELECT $value WHERE { ?value skos:inScheme spav:lg . }'
       - autosuggestion: 'SELECT $value ?label WHERE {
         $value skos:inScheme spav:lg ;
-        rdfs:label ?label .
-        FILTER REGEX(STR(?label), "?token")
+        rdfs:label|skos:prefLabel ?label .
+        ?label bds:search ?__token__ ;
+          bds:matchAllTerms "true" .
       } LIMIT 10'
     treePatterns:
-      type: simple
-      schemePattern: '?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:lg'
-      relationPattern: '?item <http://www.w3.org/2004/02/skos/core#broader> ?parent'
+      type: full
+      rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+          FILTER(NOT EXISTS { ?item skos:broader ?parent. })
+          ?item skos:inScheme spav:lg ;
+          skos:prefLabel ?label .
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
+      childrenQuery: '
+        SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+          ?item skos:broader ?parent.
+          ?item (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?label.
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
+      searchQuery: 'PREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
+        SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
+        ?item skos:inScheme spav:lg ;
+        skos:prefLabel ?label .
+        ?label bds:search ?__token__ ; 
+        bds:relevance ?score ; bds:matchAllTerms "true"
+        OPTIONAL { ?child skos:broader ?item. }
+        BIND(BOUND(?child) AS ?hasChildren)
+      }
+        ORDER BY DESC (?score) (?label)
+        LIMIT 200'
 
 
   - id: RecordResourceLegacyDate
@@ -3013,13 +3111,11 @@ fields:
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
       SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-        SERVICE Repository:lookup {
-        ?item lookup:token ?__token__ ;
-    lookup:name ?label ;
-        lookup:score ?score ;
-        lookup:limit 100 ;
-        lookup:type rico:RecordSet .
-        }
+        ?item a rico:RecordSet ;
+          rdfs:label ?label .
+        ?label bds:search ?__token__ ;
+          bds:relevance ?score ; 
+          bds:matchAllTerms "true"
         OPTIONAL { ?child rico:isOrWasIncludedIn ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
       } ORDER BY ASC (?label)'
@@ -3108,7 +3204,8 @@ fields:
         ?item a rico:Place ;
     rdfs:label ?label .
         ?label bds:search ?__token__ ;
-        bds:matchAllTerms "true" .
+        bds:relevance ?score ; 
+        bds:matchAllTerms "true"
         FILTER(CONTAINS(STR(?item), "/p/"))
         OPTIONAL { ?child crm:P89_falls_within ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
@@ -3219,10 +3316,10 @@ fields:
             IF(?lang = "it", ?type_label_it, ?type_label_en)
             )
           ) AS ?type_label)
-
-          $value rdfs:label ?item_label .
-          ?item_label bds:search ?__token__ ;
-            bds:matchAllTerms "true" .
+        $value rdfs:label ?item_label .
+        ?item_label bds:search ?__token__ ;
+          bds:matchAllTerms "true" .
+        
           $value rdf:type ?type .
           BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator)
           FILTER(?type_indicator != "x")
@@ -3346,9 +3443,48 @@ fields:
         FILTER(REGEX(STR(?label), "?token","i"))
       } LIMIT 10'
     treePatterns:
-      type: simple
-      schemePattern: '?item skos:inScheme spav:df'
-      relationPattern: '?item skos:broader ?parent'
+      type: full
+      rootsQuery: 'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX dc: <http://purl.org/dc/elements/1.1/>
+        SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+        FILTER(NOT EXISTS { ?item skos:broader ?parent. })
+        ?item a rico:RecordResourceDocumentaryForm ;
+        skos:inScheme spav:df ;
+        rico:name ?label .
+        OPTIONAL { ?child skos:broader ?item. }
+        BIND(BOUND(?child) AS ?hasChildren)
+      }
+        ORDER BY (?label)'
+      childrenQuery: 'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX dc: <http://purl.org/dc/elements/1.1/>
+        SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+        ?item skos:broader ?parent.
+        ?item (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?label.
+        OPTIONAL { ?child skos:broader ?item. }
+        BIND(BOUND(?child) AS ?hasChildren)
+      }
+        ORDER BY (?label)'
+      searchQuery: 'PREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
+        SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
+        ?item a rico:RecordResourceDocumentaryForm ;
+        skos:inScheme spav:df ;
+        rico:name ?label .
+        ?label bds:search ?__token__ ; 
+        bds:relevance ?score ; 
+        bds:matchAllTerms "true"
+        OPTIONAL { ?child skos:broader ?item. }
+        BIND(BOUND(?child) AS ?hasChildren)
+      }
+        ORDER BY DESC (?score) (?label)
+        LIMIT 200'
 
 
   - id: RecordSetType
@@ -3656,13 +3792,11 @@ fields:
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
       SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-        SERVICE Repository:lookup {
-        ?item lookup:token ?__token__;
-        lookup:type spao:ArchivalPlace ;
-    lookup:name ?label ;
-        lookup:score ?score ;
-        lookup:limit 400 .
-        }
+        ?item a spao:ArchivalPlace;
+          rdfs:label ?label .
+        ?label bds:search ?__token__ ;
+          bds:relevance ?score ; 
+          bds:matchAllTerms "true"
         OPTIONAL { ?child rico:containedBy ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
       }
@@ -4091,13 +4225,11 @@ fields:
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
       PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
       SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-        SERVICE Repository:lookup {
-        ?item lookup:token ?__token__;
-    lookup:name ?label ;
-        lookup:score ?score ;
-        lookup:limit 400 ;
-        lookup:type crm:E53_Place .
-        }
+        ?item a crm:E53_Place ;
+      rdfs:label ?label .
+    ?label bds:search ?__token__ ;
+        bds:relevance ?score ; 
+        bds:matchAllTerms "true"
         FILTER(CONTAINS(STR(?item), "/p/"))
         OPTIONAL { ?child crm:P89_falls_within ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
