@@ -997,9 +997,11 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
             "domain" : "https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource",
             "range" : "http://www.w3.org/2004/02/skos/core#Concept",
             "treePatterns": {
-                "type": "simple",
-                "schemePattern": "?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:vd ",
-                "relationPattern": "?item skos:broader ?parent"
+                "type": "full",
+                "rootsQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { FILTER(NOT EXISTS { ?item skos:broader ?parent. }) ?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:vd . ?item (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?label. OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
+                "childrenQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { ?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:vd . ?item skos:broader ?parent. ?item (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?label. OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
+                "parentsQuery": "SELECT DISTINCT ?item ?parent ?parentLabel WHERE { ?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:vd . ?item skos:broader ?parent. ?parent (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?parentLabel. }",
+                "searchQuery": "SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE { ?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:vd . ?item (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY DESC (?score) (?label) LIMIT 200 "
             },
                 "selectPattern" : "SELECT $value WHERE { $subject spao:hasVideoDamage $value . }",
                 "insertPattern" : "INSERT { $subject spao:hasVideoDamage $value . } WHERE { }",
