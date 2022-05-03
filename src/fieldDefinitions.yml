@@ -2324,17 +2324,48 @@ fields:
         $value a rico:RecordResourceDocumentaryForm ;
         skos:inScheme spav:df .
       }'
-      - autosuggestion: 'PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
-      SELECT $value $label WHERE {
-        $value a rico:RecordResourceDocumentaryForm ;
-        skos:inScheme spav:df ;
-        rico:name ?label .
-        FILTER(REGEX(STR(?label), "?token","i"))
-      } LIMIT 10'
+      - autosuggestion: 'SELECT DISTINCT ?value ?label  WHERE {
+          ?value rico:hasDocumentaryFormType ?type .
+          ?type rico:name ?label .
+          ?label bds:search ?__token__ ; bds:relevance ?score ;
+            bds:matchAllTerms "true"
+        } LIMIT 10'
     treePatterns:
-      type: simple
-      schemePattern: '?item skos:inScheme spav:df'
-      relationPattern: '?item skos:broader ?parent'
+      type: full
+      rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+          FILTER(NOT EXISTS { ?item skos:broader ?parent. })
+          ?item skos:inScheme spav:df .
+          ?item rico:name ?label .
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
+      childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+          ?item skos:broader ?parent;
+            skos:inScheme spav:df .
+          ?item rico:name ?label .
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent ?parentLabel WHERE {
+        ?item skos:broader ?parent ;
+          skos:inScheme spav:df .
+        ?item skos:broader ?parent.
+        ?parent (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?parentLabel.
+      }'
+      searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
+        ?item skos:inScheme spav:df .
+        ?item rico:name ?label .
+          ?label bds:search ?__token__ ; 
+          bds:relevance ?score ; 		 	 
+          bds:matchAllTerms "true"
+        OPTIONAL { ?child skos:broader ?item. }
+        BIND(BOUND(?child) AS ?hasChildren)
+      }
+      ORDER BY DESC (?score) (?label)
+      LIMIT 200
+      '
 
 
   - id: RecordInstantiation
