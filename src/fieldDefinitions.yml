@@ -1239,19 +1239,18 @@ fields:
       - insert: 'INSERT { $value rico:hasInstantiation $subject . } WHERE { }'
       - delete: 'DELETE { $value rico:hasInstantiation $subject . } WHERE { }'
       - autosuggestion: 'SELECT $value $label WHERE {
-        VALUES (?type ?type_label) {
-        (rico:Record " (Record)")
-        (rico:RecordPart " (Record Part)")
-        }
-        SERVICE Repository:lookup {
-        ?value lookup:token "?token" ;
-        rdf:type ?type .
-        }
-        $value rico:name ?name .
-        OPTIONAL {
-        $value rico:identifier ?identifier .
-        }
-        BIND(CONCAT(IF(BOUND(?identifier), CONCAT(?identifier, ": "), ""), ?name, ?type_label) AS ?label)
+          VALUES (?type ?type_label) {
+            (rico:Record " (Record)")
+            (rico:RecordPart " (Record Part)")
+          }
+          $value rico:name ?name .
+          ?name bds:search ?__token__ ; 
+            bds:relevance ?score ; 
+            bds:matchAllTerms "true" 
+          OPTIONAL {
+            $value rico:identifier ?identifier .
+          }
+          BIND(CONCAT(IF(BOUND(?identifier), CONCAT(?identifier, ": "), ""), ?name, ?type_label) AS ?label)
       }'
 
 
