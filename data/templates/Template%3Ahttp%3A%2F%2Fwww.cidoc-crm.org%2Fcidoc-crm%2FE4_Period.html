@@ -153,9 +153,9 @@
                         } ORDER BY ASC(?titlelabel)' 
                         id='search-result'
                         column-configuration='[
-                            {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch"]]", "cellTemplate": "{{>producer}}"}, 
-                            {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch"]]", "variableName": "titlelabel", "cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
-                            {"displayName": "[[i18n "ProductionsTableStageDirection" bundle="performing-arts-ch"]]", "cellTemplate": "{{>stagedirection}}"}
+                            {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{>producer}}"}, 
+                            {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch" escapeHTML =false]]", "variableName": "titlelabel", "cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
+                            {"displayName": "[[i18n "ProductionsTableStageDirection" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{>stagedirection}}"}
                         ]'
                         number-of-displayed-rows=20
                         options='{"showFilter": true, "enableSort": false}'>

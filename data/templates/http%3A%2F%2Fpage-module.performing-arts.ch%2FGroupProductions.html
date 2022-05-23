@@ -187,10 +187,10 @@
         ORDER BY ASC(?season)' 
           id='search-result'
           column-configuration='[
-            {"displayName": "[[i18n "ProductionsTableSeason" bundle="performing-arts-ch"]]", "variableName": "season"}, 
-            {"displayName": "[[i18n "ProductionsTableVenue" bundle="performing-arts-ch"]]", "cellTemplate": "{{> venue}}", "variableName": "venues"},
-            {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch"]]", "variableName": "titlelabel", "cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
-            {"displayName": "[[i18n "ProductionsTableStageDirection" bundle="performing-arts-ch"]]", "cellTemplate": "{{>stagedirection}}", "variableName": "directors"},
+            {"displayName": "[[i18n "ProductionsTableSeason" bundle="performing-arts-ch" escapeHTML =false]]", "variableName": "season"}, 
+            {"displayName": "[[i18n "ProductionsTableVenue" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{> venue}}", "variableName": "venues"},
+            {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch" escapeHTML =false]]", "variableName": "titlelabel", "cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
+            {"displayName": "[[i18n "ProductionsTableStageDirection" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{>stagedirection}}", "variableName": "directors"},
             {"displayName": "", "cellTemplate": "{{> recording}}"}
           ]'
           number-of-displayed-rows=20

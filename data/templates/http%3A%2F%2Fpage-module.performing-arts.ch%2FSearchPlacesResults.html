@@ -41,8 +41,8 @@
             id="place-table" 
             options='{"showFilter": false, "showTableHeading": true, "enableSort": true}'
             column-configuration='[
-                {"displayName": "[[i18n "PlacesTableName" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
-                {"displayName": "[[i18n "PlacesTableFallsWithin" bundle="performing-arts-ch"]]", "cellTemplate": "{{> parents}}"}
+                {"displayName": "[[i18n "PlacesTableName" bundle="performing-arts-ch" escapeHTML =false]]", "variableName": "subject"} ,
+                {"displayName": "[[i18n "PlacesTableFallsWithin" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{> parents}}"}
             ]'>
             <template id='parents'>                     
             <semantic-query 

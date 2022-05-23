@@ -51,10 +51,10 @@
         id="person-table" 
         options='{"showFilter": false, "showTableHeading": true}'
         column-configuration='[
-          {"displayName": "[[i18n "PersonsTableName" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
-          {"displayName": "[[i18n "PersonsTableAdditionalNames" bundle="performing-arts-ch"]]", "cellTemplate": "{{> additional-names}}"} ,
-          {"displayName": "[[i18n "PersonsTableLiveDates" bundle="performing-arts-ch"]]", "cellTemplate": "{{> live-dates}}", "variableName": "dob"} ,
-          {"displayName": "[[i18n "PersonsTableDescription" bundle="performing-arts-ch"]]", "variableName": "description"}
+          {"displayName": "[[i18n "PersonsTableName" bundle="performing-arts-ch" escapeHTML =false]]", "variableName": "subject"} ,
+          {"displayName": "[[i18n "PersonsTableAdditionalNames" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{> additional-names}}"} ,
+          {"displayName": "[[i18n "PersonsTableLiveDates" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{> live-dates}}", "variableName": "dob"} ,
+          {"displayName": "[[i18n "PersonsTableDescription" bundle="performing-arts-ch" escapeHTML =false]]", "variableName": "description"}
         ]'>
 
         <template id='additional-names'>

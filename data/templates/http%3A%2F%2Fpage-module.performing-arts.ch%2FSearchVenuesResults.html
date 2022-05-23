@@ -47,9 +47,9 @@
         id="venue-table" 
         options='{"showFilter": false, "showTableHeading": true}'
         column-configuration='[
-          {"displayName": "[[i18n "VenuesTableName" bundle="performing-arts-ch"]]", "cellTemplate": "{{> venue}}"} ,
-          {"displayName": "[[i18n "VenuesTablePlace" bundle="performing-arts-ch"]]", "variableName": "place"} ,
-          {"displayName": "[[i18n "VenuesTableDates" bundle="performing-arts-ch"]]", "cellTemplate": "{{> dates}}", "variableName": "beginning"}
+          {"displayName": "[[i18n "VenuesTableName" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{> venue}}"} ,
+          {"displayName": "[[i18n "VenuesTablePlace" bundle="performing-arts-ch" escapeHTML =false]]", "variableName": "place"} ,
+          {"displayName": "[[i18n "VenuesTableDates" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{> dates}}", "variableName": "beginning"}
         ]'>
 
         <template id='venue'>                     
