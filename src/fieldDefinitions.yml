@@ -1225,23 +1225,28 @@ fields:
       type: full
       rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
           FILTER(NOT EXISTS { ?item skos:broader ?parent. })
-          ?item a rico:CarrierType .
-          ?item rico:name ?label.
+          ?item skos:inScheme spav:zj .
+          ?item skos:prefLabel ?label.
           OPTIONAL { ?child skos:broader ?item. }
           BIND(BOUND(?child) AS ?hasChildren)
         }
         ORDER BY (?label)'
       childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
-          ?item a rico:CarrierType .
+          ?item skos:inScheme spav:zj .
           ?item skos:broader ?parent.
-          ?item rico:name ?label.
+          ?item skos:prefLabel ?label.
           OPTIONAL { ?child skos:broader ?item. }
           BIND(BOUND(?child) AS ?hasChildren)
         }
         ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent ?parentLabel WHERE {
+          ?item skos:inScheme spav:zj .
+          ?item skos:broader ?parent.
+          ?parent skos:prefLabel ?parentLabel.
+        }'
       searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-          ?item a rico:CarrierType ;
-          rico:name ?label . 
+          ?item skos:inScheme spav:zj ;
+          skos:prefLabel ?label . 
           ?label bds:search ?__token__ ; 
           bds:relevance ?score ; 
           bds:matchAllTerms "true"
