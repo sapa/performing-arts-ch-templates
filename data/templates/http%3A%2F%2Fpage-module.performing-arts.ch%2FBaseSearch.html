@@ -450,13 +450,14 @@
               <semantic-query
                 id="search-result-overview"
                 query='SELECT ?type ?typeTab ?typeLabel ?typeThumbnail (COUNT(DISTINCT ?subject) as ?count) WHERE {
-                  ?subject a ?type .
-                  VALUES (?type ?typeTab ?typeLabel ?typeThumbnail ?typeSort) {
-                    (frbroo:F25_Performance_Plan "tab-productions" "[[i18n "SearchProductions" bundle="performing-arts-ch"]]" "../assets/icons/solid/theater-masks.svg" "0"^^xsd:integer)
-                    (crm:E21_Person "tab-persons" "[[i18n "SearchPersons" bundle="performing-arts-ch"]]" "../assets/icons/solid/user.svg" "1"^^xsd:integer)
-                    (crm:E74_Group "tab-groups" "[[i18n "SearchGroups" bundle="performing-arts-ch"]]" "../assets/icons/solid/users.svg" "2"^^xsd:integer)
-                    (crm:E22_Man-Made_Object "tab-venues" "[[i18n "SearchVenues" bundle="performing-arts-ch"]]" "../assets/icons/solid/landmark.svg" "3"^^xsd:integer)
-                    (crm:E53_Place "tab-places" "[[i18n "SearchPlaces" bundle="performing-arts-ch"]]" "../assets/icons/solid/map-marker-alt.svg" "4"^^xsd:integer)
+                  ?subject a ?typeRaw .
+                  VALUES (?typeRaw ?type ?typeTab ?typeLabel ?typeThumbnail ?typeSort) {
+                    (frbroo:F25_Performance_Plan frbroo:F25_Performance_Plan "tab-productions" "[[i18n "SearchProductions" bundle="performing-arts-ch"]]" "../assets/icons/solid/theater-masks.svg" "0"^^xsd:integer)
+                    (crm:E21_Person crm:E21_Person "tab-persons" "[[i18n "SearchPersons" bundle="performing-arts-ch"]]" "../assets/icons/solid/user.svg" "1"^^xsd:integer)
+                    (crm:E74_Group crm:E74_Group "tab-groups" "[[i18n "SearchGroups" bundle="performing-arts-ch"]]" "../assets/icons/solid/users.svg" "2"^^xsd:integer)
+                    (crm:E40_Legal_Body crm:E74_Group "tab-groups" "[[i18n "SearchGroups" bundle="performing-arts-ch"]]" "../assets/icons/solid/users.svg" "2"^^xsd:integer)
+                    (crm:E22_Man-Made_Object crm:E22_Man-Made_Object "tab-venues" "[[i18n "SearchVenues" bundle="performing-arts-ch"]]" "../assets/icons/solid/landmark.svg" "3"^^xsd:integer)
+                    (crm:E53_Place crm:E53_Place "tab-places" "[[i18n "SearchPlaces" bundle="performing-arts-ch"]]" "../assets/icons/solid/map-marker-alt.svg" "4"^^xsd:integer)
                   }
                 } GROUP BY ?type ?typeTab ?typeLabel ?typeThumbnail
                 ORDER BY ?typeSort'
