@@ -1,9 +1,21 @@
-<semantic-search-result-holder domains-include='["http://www.cidoc-crm.org/cidoc-crm/E53_Place"]'>
+<semantic-search-result-holder
+    [[#if overrideDomain]]
+    [[else]]
+        domains-include='["http://www.cidoc-crm.org/cidoc-crm/E53_Place"]'
+    [[/if]]
+>
 
     <div data-flex-self="md-full">
 
         <semantic-search-result>
-        <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}" template='{{> template}}'>
+        <mp-sparql-result-counts 
+            id='search-result-count' 
+            query="SELECT DISTINCT ?subject { 
+                [[#if overrideDomain]]
+                    ?subject a crm:E53_Place .
+                [[/if]]}" 
+            template='{{> template}}'
+        >
             <template id='template'>
             {{#if hasLimit}}
             <bs-alert variant="warning" class="search-results__alert pull-left">
@@ -21,12 +33,16 @@
 
         <semantic-search-result>
         <semantic-table 
-            query='SELECT DISTINCT ?subject WHERE { }'
+            query='SELECT DISTINCT ?subject WHERE { 
+                [[#if overrideDomain]]
+                    ?subject a crm:E53_Place .
+                [[/if]]
+            }'
             id="place-table" 
             options='{"showFilter": false, "showTableHeading": true, "enableSort": true}'
             column-configuration='[
-                {"displayName": "[[i18n "PlacesTableName" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
-                {"displayName": "[[i18n "PlacesTableFallsWithin" bundle="performing-arts-ch"]]", "cellTemplate": "{{> parents}}"}
+                {"displayName": "[[i18n "PlacesTableName" bundle="performing-arts-ch" escapeHTML =false]]", "variableName": "subject"} ,
+                {"displayName": "[[i18n "PlacesTableFallsWithin" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{> parents}}"}
             ]'>
             <template id='parents'>                     
             <semantic-query 

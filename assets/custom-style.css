@@ -35,6 +35,34 @@ div.form-section {
   font-weight: bold;
   font-size: 1.2em;
 }
+.sapa-component.domain-cards-tabs .nav {
+  display: block;
+}
+.sapa-component.domain-cards-tabs .nav .nav-link {
+  padding: 0;
+}
+.sapa-component.domain-cards-tabs .nav .nav-link.active {
+  background: none;
+  border: none;
+}
+.sapa-component.domain-cards-tabs .nav .nav-link.active button {
+  background-color: #008cba;
+}
+.sapa-component.panel-home-browse {
+  padding-top: 3rem;
+}
+.sapa-component.panel-home-search {
+  padding: 3rem 0 1rem 0;
+}
+.sapa-component.search-types .nav-link {
+  padding: 0;
+  color: black;
+}
+.sapa-component.search-types .nav-link.active {
+  background: none;
+  border: none;
+  font-weight: bold;
+}
 .semantic-form-input-decorator__label {
   font-weight: 500 !important;
 }
@@ -69,7 +97,7 @@ div.form-section {
   margin: 0 0 0.2em 0 !important;
 }
 .knowledgeGraphBar__uriRow {
-  font-size: 0.8em ;
+  font-size: 0.8em;
 }
 .knowledgeGraphBar__toggle {
   display: none;
@@ -109,17 +137,17 @@ div.form-section {
 }
 .bg-primary .navbar-brand,
 .navbar-dark .navbar-nav .nav-link {
-  color: #cccccc;
+  color: hsl(0, 0%, 80%);
 }
 .bg-primary .dropdown-menu .dropdown-item.active,
 .bg-primary .dropdown-menu .dropdown-item:focus,
 .bg-primary .dropdown-menu .dropdown-item:hover {
-  color: #ffffff;
+  color: hsl(0, 0%, 100%);
   background-color: #062b45 !important;
 }
 .bg-primary .navbar-brand:hover,
 .bg-primary .navbar-brand:focus {
-  color: #ffffff;
+  color: hsl(0, 0%, 100%);
 }
 .bg-primary .dropdown-menu > .active > a,
 .bg-primary .dropdown-menu > .active > a:hover,
@@ -131,11 +159,11 @@ div.form-section {
   background-color: #062b45 !important;
 }
 .bg-primary .navbar-nav > li > a {
-  color: #cccccc;
+  color: hsl(0, 0%, 80%);
 }
 .bg-primary .navbar-nav > li > a:hover,
 .bg-primary .navbar-nav > li > a:focus {
-  color: #ffffff;
+  color: hsl(0, 0%, 100%);
 }
 .nav-tabs > .nav-link,
 #tabs > .nav-tabs > li > a,
@@ -145,7 +173,7 @@ div.form-section {
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
-  background-color: #e6e6e6;
+  background-color: hsl(0, 0%, 90%);
 }
 #tabs > .nav-tabs > li > a:hover {
   color: black;

@@ -1,9 +1,22 @@
-<semantic-search-result-holder domains-include='["http://www.cidoc-crm.org/cidoc-crm/E21_Person"]'>
+<semantic-search-result-holder
+  [[#if overrideDomain]]
+  [[else]]
+    domains-include='["http://www.cidoc-crm.org/cidoc-crm/E21_Person"]'
+  [[/if]]
+>
 
   <div data-flex-self="md-full">
 
     <semantic-search-result>
-      <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}" template='{{> template}}'>
+      <mp-sparql-result-counts 
+        id='search-result-count' 
+        query="SELECT DISTINCT ?subject {
+          [[#if overrideDomain]]
+            ?subject a crm:E21_Person .
+          [[/if]]
+        }" 
+        template='{{> template}}'
+      >
         <template id='template'>
           {{#if hasLimit}}
           <bs-alert variant="warning" class="search-results__alert pull-left">
@@ -23,6 +36,9 @@
       <semantic-table 
         query='SELECT DISTINCT ?subject ?dob ?description
         WHERE {
+          [[#if overrideDomain]]
+            ?subject a crm:E21_Person .
+          [[/if]]
           OPTIONAL {
             ?subject rico:birthDate/rico:normalizedDateValue ?dob 
           }
@@ -35,10 +51,10 @@
         id="person-table" 
         options='{"showFilter": false, "showTableHeading": true}'
         column-configuration='[
-          {"displayName": "[[i18n "PersonsTableName" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
-          {"displayName": "[[i18n "PersonsTableAdditionalNames" bundle="performing-arts-ch"]]", "cellTemplate": "{{> additional-names}}"} ,
-          {"displayName": "[[i18n "PersonsTableLiveDates" bundle="performing-arts-ch"]]", "cellTemplate": "{{> live-dates}}", "variableName": "dob"} ,
-          {"displayName": "[[i18n "PersonsTableDescription" bundle="performing-arts-ch"]]", "variableName": "description"}
+          {"displayName": "[[i18n "PersonsTableName" bundle="performing-arts-ch" escapeHTML =false]]", "variableName": "subject"} ,
+          {"displayName": "[[i18n "PersonsTableAdditionalNames" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{> additional-names}}"} ,
+          {"displayName": "[[i18n "PersonsTableLiveDates" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{> live-dates}}", "variableName": "dob"} ,
+          {"displayName": "[[i18n "PersonsTableDescription" bundle="performing-arts-ch" escapeHTML =false]]", "variableName": "description"}
         ]'>
 
         <template id='additional-names'>
@@ -93,4 +109,4 @@
     </div>
 
   </div>
-</semantic-search-result-holder>
+  </semantic-search-result-holder>

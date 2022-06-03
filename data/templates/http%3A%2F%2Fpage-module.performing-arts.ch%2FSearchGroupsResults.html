@@ -1,9 +1,25 @@
-<semantic-search-result-holder domains-include='["http://www.cidoc-crm.org/cidoc-crm/E74_Group", "http://www.cidoc-crm.org/cidoc-crm/E40_Legal_Body"]'>
+<semantic-search-result-holder
+  [[#if overrideDomain]]
+  [[else]]
+    domains-include='["http://www.cidoc-crm.org/cidoc-crm/E74_Group", "http://www.cidoc-crm.org/cidoc-crm/E40_Legal_Body"]'
+  [[/if]]
+>
 
   <div data-flex-self="md-full">
 
     <semantic-search-result>
-      <mp-sparql-result-counts id='search-result-count' query="SELECT DISTINCT ?subject {}" template='{{> template}}'>
+      <mp-sparql-result-counts 
+        id='search-result-count'
+        query="SELECT DISTINCT ?subject {
+          [[#if overrideDomain]]
+            ?subject a ?entityType .
+            VALUES (?entityType) {
+              (crm:E74_Group)
+              (crm:E40_Legal_Body)
+            }
+          [[/if]]}" 
+        template='{{> template}}'
+      >
         <template id='template'>
           {{#if hasLimit}}
           <bs-alert variant="warning" class="search-results__alert pull-left">
@@ -22,6 +38,13 @@
     <semantic-search-result>
       <semantic-table 
         query='SELECT ?subject (GROUP_CONCAT(DISTINCT ?beginning; SEPARATOR=", ") AS ?beginnings) WHERE {
+          [[#if overrideDomain]]
+            ?subject a ?entityType .
+            VALUES (?entityType) {
+              (crm:E74_Group)
+              (crm:E40_Legal_Body)
+            }
+          [[/if]]
           OPTIONAL {
             ?subject rico:hasBeginningDate/rico:normalizedDateValue ?beginning 
           }
@@ -29,10 +52,10 @@
         id='group-table'
         options='{"showFilter": false, "showTableHeading": true}'
         column-configuration='[
-          {"displayName": "[[i18n "GroupsTableName" bundle="performing-arts-ch"]]", "variableName": "subject"} ,
-          {"displayName": "[[i18n "GroupsTableAdditionalNames" bundle="performing-arts-ch"]]", "cellTemplate": "{{> additional-names}}"} ,
-          {"displayName": "[[i18n "GroupsTablePlace" bundle="performing-arts-ch"]]", "cellTemplate": "{{> places}}"},
-          {"displayName": "[[i18n "GroupsTableDates" bundle="performing-arts-ch"]]", "cellTemplate": "{{> dates}}", "variableName": "beginnings"}
+          {"displayName": "[[i18n "GroupsTableName" bundle="performing-arts-ch" escapeHTML =false]]", "variableName": "subject"} ,
+          {"displayName": "[[i18n "GroupsTableAdditionalNames" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{> additional-names}}"} ,
+          {"displayName": "[[i18n "GroupsTablePlace" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{> places}}"},
+          {"displayName": "[[i18n "GroupsTableDates" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate": "{{> dates}}", "variableName": "beginnings"}
         ]'>
 
         <template id='additional-names'>                     
