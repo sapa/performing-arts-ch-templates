@@ -1073,6 +1073,9 @@ fields:
           BIND(BOUND(?child) AS ?hasChildren)
         }
         ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
+          ?item skos:broader ?parent .
+        }'
       searchQuery: '
         SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
           ?item a rico:CarrierType ; 
