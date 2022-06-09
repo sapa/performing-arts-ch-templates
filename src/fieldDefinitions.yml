@@ -3067,7 +3067,7 @@ fields:
       PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
       SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
         ?item a rico:RecordSet ;
-          rdfs:label ?label .
+          rico:name ?label .
         ?label bds:search ?__token__ ;
           bds:relevance ?score ; 
           bds:matchAllTerms "true"
