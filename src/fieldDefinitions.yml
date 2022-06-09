@@ -3133,7 +3133,7 @@ fields:
       }
       ORDER BY (?label)'
       parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
-        ?item ^crm:P89_falls_within ?parent.
+        ?item crm:P89_falls_within ?parent.
       }'
       childrenQuery: 'PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
