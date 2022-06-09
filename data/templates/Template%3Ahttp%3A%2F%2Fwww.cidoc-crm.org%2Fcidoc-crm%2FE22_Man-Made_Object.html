@@ -1,3 +1,5 @@
+[[> sapaModule:FieldDefinitions]]
+
 <div class="page">
 
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
@@ -91,11 +93,11 @@
             <!-- managed by / part of / contains -->
             <mp-field-visualization
                 subject='[[this]]'
-                fields='[[fieldDefinitions
-                    contains="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueContains"
-                    management="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueManagement"
-                    part_of="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueIsPartOf"
-                ]]'
+                fields='[
+                    [[> VenueContains]],
+                    [[> VenueManagement]],
+                    [[> VenueIsPartOf]]
+                ]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                 >
             </mp-field-visualization> 
@@ -168,9 +170,9 @@
         <bs-col sm="4">
             <mp-field-visualization
                 subject='[[this]]'
-                fields='[[fieldDefinitions
-                    note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
-                ]]'
+                fields='[
+                    [[> NotePublic]]
+                ]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
             >
             </mp-field-visualization> 
@@ -178,9 +180,9 @@
             [[#if (hasPermission "forms:ldp:*")]]
             <mp-field-visualization
                 subject='[[this]]'
-                fields='[[fieldDefinitions
-                    note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
-                ]]'
+                fields='[
+                    [[> NoteInternal]]
+                ]'
                 template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
             >
             </mp-field-visualization> 
