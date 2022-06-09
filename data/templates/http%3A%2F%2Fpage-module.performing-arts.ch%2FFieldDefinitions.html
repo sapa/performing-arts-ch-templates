@@ -185,7 +185,7 @@
                 "selectPattern" : "SELECT $value WHERE { $subject premis:compositionLevel $value . }",
                 "insertPattern" : "INSERT { $subject premis:compositionLevel $value . } WHERE { }",
                 "deletePattern" : "DELETE { $subject premis:compositionLevel $value . } WHERE {}",
-                "askPattern" : "ASK { FILTER(REGEX($value, \"^\\d$\")) }",
+                "askPattern" : "ASK { FILTER(REGEX($value, \"^\\\\d$\")) }",
         "iri" : "FileCompositionLevel"
     }
 [[/inline]]
@@ -245,7 +245,7 @@
                 "selectPattern" : "SELECT $value WHERE { $subject premis:size $value . }",
                 "insertPattern" : "INSERT { $subject premis:size $value . } WHERE { }",
                 "deletePattern" : "DELETE { $subject premis:size $value . } WHERE {}",
-                "askPattern" : "ASK { FILTER(REGEX($value, \"^\\d+$\")) }",
+                "askPattern" : "ASK { FILTER(REGEX($value, \"^\\\\d+$\")) }",
         "iri" : "FileSize"
     }
 [[/inline]]

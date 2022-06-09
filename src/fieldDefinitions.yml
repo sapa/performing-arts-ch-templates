@@ -333,7 +333,7 @@ fields:
       - select: 'SELECT $value WHERE { $subject premis:compositionLevel $value . }'
       - insert: 'INSERT { $subject premis:compositionLevel $value . } WHERE { }'
       - delete: 'DELETE { $subject premis:compositionLevel $value . } WHERE {}'
-      - ask: 'ASK { FILTER(REGEX($value, "^\\d$")) }'
+      - ask: 'ASK { FILTER(REGEX($value, "^\\\\d$")) }'
 
 
   - id: FileFixity
@@ -419,7 +419,7 @@ fields:
       - select: 'SELECT $value WHERE { $subject premis:size $value . }'
       - insert: 'INSERT { $subject premis:size $value . } WHERE { }'
       - delete: 'DELETE { $subject premis:size $value . } WHERE {}'
-      - ask: 'ASK { FILTER(REGEX($value, "^\\d+$")) }'
+      - ask: 'ASK { FILTER(REGEX($value, "^\\\\d+$")) }'
 
 
   - id: Genre
