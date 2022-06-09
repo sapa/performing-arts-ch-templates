@@ -1346,7 +1346,8 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
             "treePatterns": {
                 "type": "full",
                 "rootsQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { FILTER(NOT EXISTS { ?item crm:P89_falls_within ?parent. }) ?item a crm:E53_Place ; rdfs:label ?label . OPTIONAL { ?child crm:P89_falls_within ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
-                "childrenQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { ?item crm:P89_falls_within ?parent. ?item a crm:E53_Place ; rdfs:label ?label . OPTIONAL { ?child crm:P89_falls_within ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
+                "childrenQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { ?item crm:P89_falls_within ?parent. ?item rdfs:label ?label. OPTIONAL { ?child crm:P89_falls_within ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
+                "parentsQuery": "SELECT DISTINCT ?item ?parent WHERE { ?item crm:P89_falls_within ?parent. }",
                 "searchQuery": "SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE { ?item a crm:E53_Place ; rdfs:label ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY DESC (?score) (?label) LIMIT 200"
             },
                 "selectPattern" : "SELECT $value WHERE { $subject crm:P89_falls_within $value . }",

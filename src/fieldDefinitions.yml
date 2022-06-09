@@ -2184,21 +2184,23 @@ fields:
     treePatterns:
       type: full
       rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
-        FILTER(NOT EXISTS { ?item crm:P89_falls_within ?parent. })
-        ?item a crm:E53_Place ;
-        rdfs:label ?label .
-        OPTIONAL { ?child crm:P89_falls_within ?item. }
-        BIND(BOUND(?child) AS ?hasChildren)
-      }
+          FILTER(NOT EXISTS { ?item crm:P89_falls_within ?parent. })
+          ?item a crm:E53_Place ;
+          rdfs:label ?label .
+          OPTIONAL { ?child crm:P89_falls_within ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
         ORDER BY (?label)'
       childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
-        ?item crm:P89_falls_within ?parent.
-        ?item a crm:E53_Place ;
-        rdfs:label ?label .
-        OPTIONAL { ?child crm:P89_falls_within ?item. }
-        BIND(BOUND(?child) AS ?hasChildren)
-      }
+          ?item crm:P89_falls_within ?parent.
+          ?item rdfs:label ?label.
+          OPTIONAL { ?child crm:P89_falls_within ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
         ORDER BY (?label)'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
+        ?item crm:P89_falls_within ?parent.
+      }'
       searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
         ?item a crm:E53_Place ;
         rdfs:label ?label .
