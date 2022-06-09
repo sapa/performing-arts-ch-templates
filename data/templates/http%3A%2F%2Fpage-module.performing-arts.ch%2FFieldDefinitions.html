@@ -421,10 +421,10 @@
             "range" : "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
             "treePatterns": {
                 "type": "full",
-                "rootsQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { ?item skos:inScheme spav:mn . FILTER(NOT EXISTS { ?item skos:broader ?parent. }) ?item skos:prefLabel ?label. OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
-                "childrenQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { ?item skos:broader ?parent ; skos:prefLabel ?label. OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
-                "parentsQuery": "SELECT DISTINCT ?item ?parent WHERE { ?parent skos:broader ?item . }",
-                "searchQuery": "SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE { ?item skos:inScheme spav:mn ; skos:prefLabel ?label . ?label bds:search ?__token__ ; bds:matchAllTerms \"true\" ; bds:relevance ?score . OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY DESC (?score) (?label) LIMIT 200"
+                "rootsQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { ?item skos:inScheme spav:mn . FILTER(NOT EXISTS { ?item skos:broader ?parent. }) OPTIONAL { ?item skos:prefLabel ?label. FILTER(LANGMATCHES(LANG(?label), ?__userPreferredLanguage__)) } OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY LCASE(?label)",
+                "childrenQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { ?item skos:broader ?parent . OPTIONAL { ?item skos:prefLabel ?label. FILTER(LANGMATCHES(LANG(?label), ?__userPreferredLanguage__)) } OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
+                "parentsQuery": "SELECT DISTINCT ?item ?parent WHERE { ?item skos:broader ?parent . }",
+                "searchQuery": "SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE { ?item skos:inScheme spav:mn ; skos:prefLabel ?label . ?label bds:search ?__token__ ; bds:matchAllTerms \"true\" ; bds:relevance ?score . OPTIONAL { ?item skos:broader ?child. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY DESC (?score) (?label) LIMIT 200"
             },
                 "selectPattern" : "SELECT ?value WHERE { ?pursuit a frbroo:F51_Pursuit ; crm:P14_carried_out_by $subject ; frbroo:R59_had_typical_subject ?value. }",
                 "insertPattern" : "INSERT { ?pursuit a frbroo:F51_Pursuit ; crm:P14_carried_out_by $subject ; frbroo:R59_had_typical_subject ?value. } WHERE { BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"genre_focus\")))) as ?pursuit) }",

@@ -758,17 +758,23 @@ fields:
       rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
           ?item skos:inScheme spav:mn .
           FILTER(NOT EXISTS { ?item skos:broader ?parent. })
-          ?item skos:prefLabel ?label.
+          OPTIONAL {
+            ?item skos:prefLabel ?label.
+            FILTER(LANGMATCHES(LANG(?label), ?__userPreferredLanguage__))
+          }
           OPTIONAL { ?child skos:broader ?item. }
           BIND(BOUND(?child) AS ?hasChildren)
         }
-        ORDER BY (?label)'
+        ORDER BY LCASE(?label)'
       parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
-          ?parent skos:broader ?item .
+          ?item skos:broader ?parent .
       }'
       childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
-          ?item skos:broader ?parent ;
-            skos:prefLabel ?label.
+          ?item skos:broader ?parent . 
+          OPTIONAL {
+            ?item skos:prefLabel ?label.
+            FILTER(LANGMATCHES(LANG(?label), ?__userPreferredLanguage__))
+          }
           OPTIONAL { ?child skos:broader ?item. }
           BIND(BOUND(?child) AS ?hasChildren)
         }
@@ -779,7 +785,7 @@ fields:
         ?label bds:search ?__token__ ;
           bds:matchAllTerms "true" ;
           bds:relevance ?score .
-        OPTIONAL { ?child skos:broader ?item. }
+        OPTIONAL { ?item skos:broader ?child. }
         BIND(BOUND(?child) AS ?hasChildren)
       }
       ORDER BY DESC (?score) (?label)
