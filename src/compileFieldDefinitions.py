@@ -4,7 +4,7 @@ from sariFieldDefinitionsGenerator import generator
 inputFile = 'fieldDefinitions.yml'
 outputFile = '../data/templates/http%3A%2F%2Fpage-module.performing-arts.ch%2FFieldDefinitions.html'
 
-def addLocalisation(jsonString, bundle="bso"):
+def addLocalisation(jsonString, bundle):
     import re
 
     def replaceWithLocalised(match):
@@ -18,8 +18,7 @@ def addLocalisation(jsonString, bundle="bso"):
 model = generator.loadSourceFromFile(inputFile)
 
 output = generator.generate(model, generator.INLINE)
-
-#output = addLocalisation(output)
+output = addLocalisation(output, 'sapa-fields')
 
 with open(outputFile, 'w') as f:
     f.write(output)
