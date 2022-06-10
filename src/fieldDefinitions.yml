@@ -4130,45 +4130,29 @@ fields:
       } LIMIT 100'
     treePatterns:
       type: full
-      rootsQuery: 'PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-      PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-      PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
-      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-      PREFIX dc: <http://purl.org/dc/elements/1.1/>
-      SELECT DISTINCT ?item ?label ?hasChildren WHERE {
-        ?item a crm:E53_Place .
-        FILTER(NOT EXISTS { ?item crm:P89_falls_within ?parent. })
-        FILTER(CONTAINS(STR(?item), "/p/"))
-        ?item rdfs:label ?label.
-        OPTIONAL { ?child crm:P89_falls_within ?item. }
-        BIND(BOUND(?child) AS ?hasChildren)
-      }
-      ORDER BY (?label)'
+      rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+          ?item a crm:E53_Place .
+          FILTER(NOT EXISTS { ?item crm:P89_falls_within ?parent. })
+          FILTER(CONTAINS(STR(?item), "/p/"))
+          ?item rdfs:label ?label.
+          OPTIONAL { ?child crm:P89_falls_within ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
       parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
-        ?item ^crm:P89_falls_within ?parent.
-      }'
-      childrenQuery: 'PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-      PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-      PREFIX rico: <https://www.ica.org/standards/RiC/ontology#>
-      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-      PREFIX dc: <http://purl.org/dc/elements/1.1/>
-      SELECT DISTINCT ?item ?label ?hasChildren WHERE {
-        ?item crm:P89_falls_within ?parent.
-        ?item rdfs:label ?label.
-        OPTIONAL { ?child crm:P89_falls_within ?item. }
-        BIND(BOUND(?child) AS ?hasChildren)
-      }
-      ORDER BY (?label)'
-      searchQuery: 'PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
-      PREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#>
-      PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-      PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#>
-      SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
+          ?item crm:P89_falls_within ?parent.
+        }'
+      childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
+          ?item crm:P89_falls_within ?parent.
+          ?item rdfs:label ?label.
+          OPTIONAL { ?child crm:P89_falls_within ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY (?label)'
+      searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
         ?item a crm:E53_Place ;
-      rdfs:label ?label .
-    ?label bds:search ?__token__ ;
+          rdfs:label ?label .
+        ?label bds:search ?__token__ ;
         bds:relevance ?score ; 
         bds:matchAllTerms "true"
         FILTER(CONTAINS(STR(?item), "/p/"))
