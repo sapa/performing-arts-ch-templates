@@ -1,3 +1,5 @@
+[[> sapaModule:FieldDefinitions]]
+
   <div data-flex-layout='row top-stretch'>
     <semantic-form 
      [[#if create]]
@@ -11,28 +13,28 @@
       browser-persistence=true
       persistence='ldp' 
       form-id='places'
-      fields='[[fieldDefinitions
-        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
-        label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSLabel"
-        parent="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ArchivalPlaceParent"
-        packing="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePacking"
-      ]]'>
+      fields='[
+        [[> RDFtype]],
+        [[> RDFSLabel]],
+        [[> ArchivalPlaceParent]],
+        [[> RecordResourcePacking]]
+      ]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-            <semantic-form-hidden-input for='rdf_type' default-values='["[[resolvePrefix "spao:ArchivalPlace"]]"]'></semantic-form-hidden-input>
+            <semantic-form-hidden-input for='RDFtype' default-values='["[[resolvePrefix "spao:ArchivalPlace"]]"]'></semantic-form-hidden-input>
         </div>
         <bs-row>
           <bs-col sm='6'>
-            <semantic-form-text-input for="label"></semantic-form-text-input>
+            <semantic-form-text-input for="RDFSLabel"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='6'>
-            <semantic-form-tree-picker-input for="parent" ></semantic-form-tree-picker-input>
+            <semantic-form-tree-picker-input for="ArchivalPlaceParent" ></semantic-form-tree-picker-input>
           </bs-col>
         </bs-row>
         <bs-row>
           <bs-col sm='12'>
-            <semantic-form-checklist-input type='radio' row=true for="packing"></semantic-form-checklist-input>
+            <semantic-form-checklist-input type='radio' row=true for="RecordResourcePacking"></semantic-form-checklist-input>
           </bs-col>
         </bs-row>
         <semantic-form-errors></semantic-form-errors>
