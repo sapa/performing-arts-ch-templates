@@ -8,8 +8,13 @@
 
   <div class='sapa-component panel-home-browse page__body'>
 
-    [[> component-search]]
-
+    [[> component-search showEverything=(urlParam "browse")]]
+    [[#if (urlParam "browse")]]
+    [[else]]
+      <div class="float-right">
+        <semantic-link iri="sapa:search" urlqueryparam-browse="true">[[i18n "SearchShowEverything" bundle="performing-arts-ch"]]</semantic-link>
+      </div>
+    [[/if]]
   </div>
 </div>
 
@@ -24,7 +29,7 @@
           ?subject a [[domain]] .
         }"
         domain='<[[resolvePrefix domain]]>'>
-        </semantic-search-query-constant>
+      </semantic-search-query-constant>
     [[/ sapaModule:BaseSearch]]
 
 [[/inline]]
@@ -53,6 +58,15 @@
   </div>
 [[/inline]]
 
+[[#*inline "component-show-everything"]]
+Everything
+[[#> sapaModule:BaseSearch searchAllDomains="true"]]    
+  <semantic-search-query-constant query="SELECT ?subject WHERE { ?subject a ?type}">
+  </semantic-search-query-constant>
+[[/ sapaModule:BaseSearch]]
+
+[[/inline]]
+
 [[#*inline "component-search"]]
 
 [[#> sapaModule:BaseSearch searchAllDomains="true"]]    
@@ -66,6 +80,23 @@
 <semantic-search-query-keyword 
 id='keywordQuery-[[#if domain]][[domain]][[else]]global[[/if]]'
 domain="[[#if domain]]<[[resolvePrefix domain]]>[[else]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[/if]]"
+[[#if showEverything]]
+  default-query='SELECT DISTINCT ?subject WHERE {
+    [[#if domain]]
+      BIND([[domain]] as ?__domain__)
+    [[else]]
+      VALUES(?__domain__) {
+        (frbroo:F25_Performance_Plan)
+        (crm:E21_Person)
+        (crm:E74_Group)
+        (crm:E40_Legal_Body)
+        (crm:E22_Man-Made_Object)
+        (crm:E53_Place)
+      }
+    [[/if]]
+    ?subject rdf:type|rdf:type/rdfs:subClassOf ?__domain__ . 
+    }'
+[[/if]]
 query='SELECT DISTINCT ?subject WHERE {
   [[#if domain]]
     BIND([[domain]] as ?__domain__)
