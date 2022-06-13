@@ -71,6 +71,7 @@
 <semantic-search-query-keyword 
 id='keywordQuery-[[#if domain]][[domain]][[else]]global[[/if]]'
 domain="[[#if domain]]<[[resolvePrefix domain]]>[[else]]<http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity>[[/if]]"
+tokenize-lucene-query="false"
 [[#if showEverything]]
   default-query='SELECT DISTINCT ?subject WHERE {
     [[#if domain]]
