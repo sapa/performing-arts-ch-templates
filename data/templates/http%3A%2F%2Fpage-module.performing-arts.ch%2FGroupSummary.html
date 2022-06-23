@@ -1,3 +1,5 @@
+[[> sapaModule:FieldDefinitions]]
+
 <bs-row>
 
 <bs-col sm="4">
@@ -92,13 +94,13 @@
 
     <mp-field-visualization
         subject='[[this]]'
-        fields='[[fieldDefinitions
-            predecessor="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor"
-            successor="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupSuccessor"
-            controller="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController"
-            controlled="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupControlled"
-            website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
-        ]]'
+        fields='[
+            [[> GroupPredecessor]],
+            [[> GroupSuccessor]],
+            [[> GroupController]],
+            [[> GroupControlled]],
+            [[> Website]]
+        ]'
         template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
         [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
         >
@@ -155,10 +157,10 @@
     [[#if (hasPermission "forms:ldp:*")]]
     <mp-field-visualization
         subject='[[this]]'
-        fields='[[fieldDefinitions
-            association_members="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers"
-            associations="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation"
-        ]]'
+        fields='[
+            [[> AssociationMembers]],
+            [[> GroupAssociation]]
+        ]'
         template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
     >
     </mp-field-visualization> 
@@ -166,10 +168,10 @@
 
     <mp-field-visualization
         subject='[[this]]'
-        fields='[[fieldDefinitions
-            members="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember"
-            note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
-        ]]'
+        fields='[
+            [[> GroupMember]],
+            [[> NotePublic]]
+        ]'
         template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
     >
     </mp-field-visualization> 
@@ -177,9 +179,9 @@
     [[#if (hasPermission "forms:ldp:*")]]
     <mp-field-visualization
         subject='[[this]]'
-        fields='[[fieldDefinitions
-            note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
-        ]]'
+        fields='[
+            [[> NoteInternal]]
+        ]'
         template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
     >
     </mp-field-visualization> 

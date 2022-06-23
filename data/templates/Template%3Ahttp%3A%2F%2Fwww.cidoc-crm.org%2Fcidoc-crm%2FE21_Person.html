@@ -1,3 +1,5 @@
+[[> sapaModule:FieldDefinitions]]
+
 <div class="page">
   
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='Summary' unmount-on-exit=true>
@@ -102,9 +104,9 @@
                 </semantic-query>
                 <mp-field-visualization
                     subject='[[this]]'
-                    fields='[[fieldDefinitions
-                        website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
-                    ]]'
+                    fields='[
+                        [[> Website]]
+                    ]'
                     template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                 >
                 </mp-field-visualization> 
@@ -164,10 +166,10 @@
 
                 <mp-field-visualization
                     subject='[[this]]'
-                    fields='[[fieldDefinitions
-                        groups="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonGroup"
-                        note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
-                    ]]'
+                    fields='[
+                        [[> PersonGroup]],
+                        [[> NotePublic]]
+                    ]'
                     template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                     [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
                 >
@@ -176,9 +178,9 @@
                 [[#if (hasPermission "forms:ldp:*")]]
                 <mp-field-visualization
                     subject='[[this]]'
-                    fields='[[fieldDefinitions
-                        note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
-                    ]]'
+                    fields='[
+                        [[> NoteInternal]]
+                    ]'
                     template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
                     [[!-- show in include [[> sapaModule:FieldBasedVisualizationList ]] --]]
                 >

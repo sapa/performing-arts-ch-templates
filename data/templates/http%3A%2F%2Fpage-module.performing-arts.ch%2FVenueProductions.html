@@ -166,10 +166,10 @@
             query='SELECT DISTINCT ?plan ?season ?titlelabel ?stagedirection WHERE { }' 
             id='search-result'
             column-configuration='[
-              {"displayName": "[[i18n "ProductionsTableSeason" bundle="performing-arts-ch"]]", "variableName": "season"}, 
-              {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch"]]", "cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
-              {"displayName": "[[i18n "ProductionsTableGenre" bundle="performing-arts-ch"]]", "cellTemplate":"{{>genre}}"},
-              {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch"]]", "cellTemplate":"{{>producer}}"},
+              {"displayName": "[[i18n "ProductionsTableSeason" bundle="performing-arts-ch" escapeHTML =false]]", "variableName": "season"}, 
+              {"displayName": "[[i18n "ProductionsTableTitle" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate":"<semantic-link title=\"{{titlelabel.value}}\" iri=\"{{plan.value}}\"></semantic-link>"}, 
+              {"displayName": "[[i18n "ProductionsTableGenre" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate":"{{>genre}}"},
+              {"displayName": "[[i18n "ProductionsTableProducer" bundle="performing-arts-ch" escapeHTML =false]]", "cellTemplate":"{{>producer}}"},
               {"displayName": "", "cellTemplate": "{{> recording}}"}
             ]'
             number-of-displayed-rows=20

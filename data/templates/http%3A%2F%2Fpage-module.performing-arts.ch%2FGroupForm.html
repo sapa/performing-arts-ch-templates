@@ -1,3 +1,5 @@
+[[> sapaModule:FieldDefinitions]]
+
 <div data-flex-layout='row top-stretch'>
 <semantic-form 
  [[#if create]]
@@ -10,117 +12,117 @@
       browser-persistence=true
       form-id='groups'
        persistence='ldp'             
-       fields='[[fieldDefinitions
-        rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRDFType"
-        common_appellation="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellation"
-        common_appellation_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupCommonAppellationType"
-        alternative_name="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAltName"
-        acronym="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAcronym"
-        description="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Description"
-        byline="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Byline"
-        group_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupType"
-        residence="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ActorResidence"
-        genre="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupGenre"
-        predecessor="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor"
-        beginning="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupBeginning"
-        end="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupEnd"
-        controller="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupController"
-        website="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Website"
-        venues="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupVenue"
-        members="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupMember"
-        associations="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupAssociation"
-        sameAs="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs"
-        history="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupHistory"
-        bibliography="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AgentBibliography"
-        note_public="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NotePublic"
-        note_internal="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteInternal"
-        repertories="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupRepertories"
-      ]]'>
+       fields='[
+        [[> GroupRDFType]],
+        [[> GroupCommonAppellation]],
+        [[> GroupCommonAppellationType]],
+        [[> GroupAltName]],
+        [[> GroupAcronym]],
+        [[> Description]],
+        [[> Byline]],
+        [[> GroupType]],
+        [[> ActorResidence]],
+        [[> GroupGenre]],
+        [[> GroupPredecessor]],
+        [[> GroupBeginning]],
+        [[> GroupEnd]],
+        [[> GroupController]],
+        [[> Website]],
+        [[> GroupVenue]],
+        [[> GroupMember]],
+        [[> GroupAssociation]],
+        [[> SameAs]],
+        [[> GroupHistory]],
+        [[> AgentBibliography]],
+        [[> NotePublic]],
+        [[> NoteInternal]],
+        [[> GroupRepertories]]
+      ]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionIdentification" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
-        <bs-row><bs-col sm='12'><semantic-form-checklist-input for="rdf_type" type="radio"  default-values='["[[resolvePrefix "crm:E74_Group"]]", "[[resolvePrefix "rico:Group"]]"]' row=true></semantic-form-checklist-input></bs-col></bs-row>
+        <bs-row><bs-col sm='12'><semantic-form-checklist-input for="GroupRDFType" type="radio"  default-values='["[[resolvePrefix "crm:E74_Group"]]", "[[resolvePrefix "rico:Group"]]"]' row=true></semantic-form-checklist-input></bs-col></bs-row>
         <bs-row>
           <bs-col sm='6'>
-            <semantic-form-text-input for='common_appellation' languages='["en","de","fr","it"]'></semantic-form-text-input>
+            <semantic-form-text-input for="GroupCommonAppellation" languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
           <bs-col sm='3'>
-            <semantic-form-checklist-input type='radio' row=true for='common_appellation_type' default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
+            <semantic-form-checklist-input type='radio' row=true for="GroupCommonAppellationType" default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
           </bs-col>
           <bs-col sm='3'>
-            <semantic-form-text-input for="acronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
+            <semantic-form-text-input for="GroupAcronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <bs-row>
           <bs-col sm='6'>
-            <semantic-form-text-input for="alternative_name" languages='["en","de","fr","it"]'></semantic-form-text-input>
+            <semantic-form-text-input for="GroupAltName" languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
           <bs-col sm='6'>
-            <semantic-form-text-input for="byline"></semantic-form-text-input>
+            <semantic-form-text-input for="Byline"></semantic-form-text-input>
           </bs-col>
         </bs-row> 
         <hr />
         <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionDescription" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='3'>
-            <semantic-form-tree-picker-input for="genre"></semantic-form-tree-picker-input>
+            <semantic-form-tree-picker-input for="GroupGenre"></semantic-form-tree-picker-input>
           </bs-col>
           <bs-col sm='3'>
-            <semantic-form-tree-picker-input for="group_type"></semantic-form-tree-picker-input>
+            <semantic-form-tree-picker-input for="GroupType"></semantic-form-tree-picker-input>
           </bs-col>
           <bs-col sm='6'>
-            <semantic-form-text-input for="description"></semantic-form-text-input>
+            <semantic-form-text-input for="Description"></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <bs-row>
           <bs-col sm='4'>
-            <semantic-form-tree-picker-input for="residence"></semantic-form-tree-picker-input>
+            <semantic-form-tree-picker-input for="ActorResidence"></semantic-form-tree-picker-input>
           </bs-col>
           <bs-col sm='4'>
-            <semantic-form-text-input for="beginning"></semantic-form-text-input>
+            <semantic-form-text-input for="GroupBeginning"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='4'>
-            <semantic-form-text-input for="end"></semantic-form-text-input>
+            <semantic-form-text-input for="GroupEnd"></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <bs-row>
           <bs-col sm='4'>
-            <semantic-form-autocomplete-input for="predecessor"></semantic-form-autocomplete-input>
+            <semantic-form-autocomplete-input for="GroupPredecessor"></semantic-form-autocomplete-input>
           </bs-col>
           <bs-col sm='4'>
-            <semantic-form-autocomplete-input for="controller"></semantic-form-autocomplete-input>
+            <semantic-form-autocomplete-input for="GroupController"></semantic-form-autocomplete-input>
           </bs-col>
           <bs-col sm='4'>
-            <semantic-form-autocomplete-input for="associations"></semantic-form-autocomplete-input>
+            <semantic-form-autocomplete-input for="GroupAssociation"></semantic-form-autocomplete-input>
           </bs-col>
         </bs-row>
         <bs-row>
           <bs-col sm='6'>
-            <semantic-form-autocomplete-input for="members">
-              <semantic-form new-subject-template="http://data.performing-arts.ch/a/{{UUID}}" fields='[[fieldDefinitions
-                  member_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
-                  member_label="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PersonCommonAppellation"
-              ]]'>
+            <semantic-form-autocomplete-input for="GroupMember">
+              <semantic-form new-subject-template="http://data.performing-arts.ch/a/{{UUID}}" fields='[
+                  [[> RDFtype]],
+                  [[> PersonCommonAppellation]]
+              ]'>
                   <div style="display: none;">
-                      <semantic-form-hidden-input for='member_type' default-values='["[[resolvePrefix "crm:E21_Person"]]", "[[resolvePrefix "rico:Person"]]"]'></semantic-form-hidden-input>
+                      <semantic-form-hidden-input for="RDFtype" default-values='["[[resolvePrefix "crm:E21_Person"]]", "[[resolvePrefix "rico:Person"]]"]'></semantic-form-hidden-input>
                   </div>
-                  <semantic-form-text-input for="member_label" languages='["en","de","fr","it"]'></semantic-form-text-input>
+                  <semantic-form-text-input for="PersonCommonAppellation" languages='["en","de","fr","it"]'></semantic-form-text-input>
                   <button name="submit" class="btn btn-secondary">Create Person</button>
                 </semantic-form>
               </semantic-form-autocomplete-input>            
           </bs-col>
           <bs-col sm='6'>            
-            <semantic-form-autocomplete-input for="venues">
-              <semantic-form new-subject-template="http://data.performing-arts.ch/o/{{UUID}}" fields='[[fieldDefinitions
-                  venue_rdf_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype"
-                  venue_cidoc_type="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/CIDOCtype"
-                  venue_common_title="http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueCommonTitle"
-              ]]'>
+            <semantic-form-autocomplete-input for="GroupVenue">
+              <semantic-form new-subject-template="http://data.performing-arts.ch/o/{{UUID}}" fields='[
+                  [[> RDFtype]],
+                  [[> CIDOCtype]],
+                  [[> VenueCommonTitle]]
+              ]'>
                   <div style="display: none;">
-                    <semantic-form-hidden-input for='venue_rdf_type' default-values='["[[resolvePrefix "crm:E22_Man-Made_Object"]]", "[[resolvePrefix "rico:Thing"]]"]'></semantic-form-hidden-input>
-                      <semantic-form-hidden-input for="venue_cidoc_type" default-value='[[resolvePrefix "spav:dwmkn"]]'></semantic-form-hidden-input>
+                    <semantic-form-hidden-input for="RDFtype" default-values='["[[resolvePrefix "crm:E22_Man-Made_Object"]]", "[[resolvePrefix "rico:Thing"]]"]'></semantic-form-hidden-input>
+                      <semantic-form-hidden-input for="CIDOCtype" default-value='[[resolvePrefix "spav:dwmkn"]]'></semantic-form-hidden-input>
                   </div>
-                  <semantic-form-text-input for="venue_common_title"></semantic-form-text-input>
+                  <semantic-form-text-input for="VenueCommonTitle"></semantic-form-text-input>
                   <button name="submit" class="btn btn-secondary">[[i18n "FormCreateVenue" bundle="performing-arts-ch"]]</button>
               </semantic-form>            
             </semantic-form-autocomplete-input>            
@@ -128,35 +130,35 @@
         </bs-row>
         <bs-row>
           <bs-col sm='12'>
-            <semantic-form-text-input for='history' multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>
+            <semantic-form-text-input for="GroupHistory" multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <bs-row>
           <bs-col sm='12'>
-            <semantic-form-text-input for='bibliography' multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>
+            <semantic-form-text-input for="AgentBibliography" multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <hr />
         <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionAddInfo" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='6'>
-            <semantic-form-text-input for="website"></semantic-form-text-input>
+            <semantic-form-text-input for="Website"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='6'>
-            <semantic-form-text-input for="sameAs"></semantic-form-text-input>
+            <semantic-form-text-input for="SameAs"></semantic-form-text-input>
           </bs-col>
         </bs-row>
         <hr />
         <bs-row><bs-col sm='12'><div class='form-section'>[[i18n "FormSectionNotes" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm="6">
-            <semantic-form-text-input for="note_public" multiline=true></semantic-form-text-input>
+            <semantic-form-text-input for="NotePublic" multiline=true></semantic-form-text-input>
           </bs-col>
           <bs-col sm="5">
-            <semantic-form-text-input for="note_internal" multiline=true></semantic-form-text-input>
+            <semantic-form-text-input for="NoteInternal" multiline=true></semantic-form-text-input>
           </bs-col>
           <bs-col sm="1">
-            <semantic-form-checkbox-input for='repertories'></semantic-form-checkbox-input>
+            <semantic-form-checkbox-input for="GroupRepertories"></semantic-form-checkbox-input>
           </bs-col>
         </bs-row>
         <hr />

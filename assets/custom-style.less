@@ -1,8 +1,12 @@
+// out: custom-style.css
+
 // LESS Variables
 @sapa-blue: rgb(8, 54, 88);
 @sapa-red: rgb(230, 55, 92);
 
 @base-color: @sapa-blue;
+@mp-blue: #0e619e;
+@bs-blue: #008cba;
 
 @link: lighten(@sapa-blue, 15%);
 @link-hover: lighten(@sapa-blue, 30%);
@@ -52,6 +56,41 @@ div.semantic-form hr {
 div.form-section {
     font-weight: bold;
     font-size: 1.2em;
+}
+
+.sapa-component {
+    &.domain-cards-tabs {
+        .nav {
+            display: block;
+            .nav-link {
+                padding: 0;
+                &.active {
+                    background: none;
+                    border: none;
+                    button {
+                        background-color: @bs-blue;
+                    }
+                }
+            }
+        }
+    }
+    &.panel-home-browse {
+        padding-top: 3rem;
+    }
+    &.panel-home-search {
+        padding: 3rem 0 1rem 0;
+    }
+    &.search-types {
+        .nav-link {
+            padding: 0;
+            color: black;
+            &.active {
+                background: none;
+                border: none;
+                font-weight: bold;
+            }
+        }
+    }
 }
 
 .semantic-form-input-decorator__label {
