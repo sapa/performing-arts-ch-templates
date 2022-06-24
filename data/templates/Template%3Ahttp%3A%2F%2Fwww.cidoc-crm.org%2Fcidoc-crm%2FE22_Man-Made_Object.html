@@ -195,7 +195,7 @@
         
                     ?record rico:hasOrHadSubject ?? .
                 } LIMIT 1'
-                template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
+                template='<h5>{{#each bindings}}{{label.value}}</h5>'>
             </semantic-query>
             <semantic-tree
                 query='SELECT DISTINCT ?node ?parent ?identifier ?level WHERE {
