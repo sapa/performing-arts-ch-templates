@@ -1,33 +1,36 @@
             <!-- identifier -->
             <semantic-query 
-                query="SELECT ?label ?identifier WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier>) }
+                query="SELECT ?label ?identifier  WHERE {
+            VALUES (?label) { ( '[[i18n "field_identifier" bundle="sapa-fields"]]') }
+        
                     ?? rico:identifier ?identifier . }"
-                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                     <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
             </semantic-query>
 
             <!-- legacy identifier -->
             <semantic-query 
-                query="SELECT ?label ?identifier WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier>) }
+                query="SELECT ?label ?identifier  WHERE {
+            VALUES (?label) { ( '[[i18n "field_legacy_identifier" bundle="sapa-fields"]]') }
+        
                     ?? spao:legacyIdentifier ?identifier . }"
-                template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                     <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
             </semantic-query>
 
             [[#if (hasPermission "forms:ldp:*")]] 
             <!-- ScopeID -->
             <semantic-query 
-                query='SELECT ?label ?scope_url ?scope_id WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ScopeID>) }
+                query='SELECT ?label ?scope_url ?scope_id  WHERE {
+            VALUES (?label) { ( "[[i18n "field_scope_id" bundle="sapa-fields"]]") }
+        
                     ?? owl:sameAs ?scope.
                     FILTER(CONTAINS(STR(?scope), "http://catalogue.collectiondeladanse.ch")) .
                     BIND(STRAFTER(STR(?scope), "?ID=") AS ?scope_id)
                     BIND(CONCAT("https://scope.tanzarchiv.ch/tanzarchiv/detail.aspx-ID=", ?scope_id, ".html") AS ?scope_url)
                 }'
                 template='<div>
-                    {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                    {{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                     <ul class="list-unstyled">{{#each bindings}}
                         <li><a href="{{scope_url.value}}" target="_blank">{{scope_id.value}}</a></li>
                     {{/each}}</ul>    

@@ -3,8 +3,9 @@
 [[#if (hasPermission "forms:ldp:*")]]
 
 <semantic-query 
-    query="SELECT ?label ?order ?archivalstatus ?instantiation ?signatur WHERE {
-        VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordInstantiation>) }
+    query="SELECT ?label ?order ?archivalstatus ?instantiation ?signatur  WHERE {
+            VALUES (?label) { ( '[[i18n "field_instantiation" bundle="sapa-fields"]]') }
+        
         VALUES (?order ?archivalstatus) {
             ( 1 spav:asarm )
             ( 2 spav:asprc )
@@ -20,7 +21,7 @@
     } ORDER BY ASC (?order)"
     template='{{> instantiation-properties }}'>
     <template id='instantiation-properties'>
-        {{#ifCond bindings.length ">" 0}}<hr/><h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+        {{#ifCond bindings.length ">" 0}}<hr/><h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
         {{#each bindings}}
         {{#if signatur}}
             <h5><semantic-link iri="{{instantiation.value}}"></semantic-link></h5>
@@ -61,7 +62,7 @@
             crm:P45_consists_of ?material 
         ]
     }"
-    template='{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+    template='{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
         <ul class="list-unstyled">{{#each bindings}}
             <li><mp-label iri="{{material.value}}"></mp-label></li>
         {{/each}}</ul> '>
