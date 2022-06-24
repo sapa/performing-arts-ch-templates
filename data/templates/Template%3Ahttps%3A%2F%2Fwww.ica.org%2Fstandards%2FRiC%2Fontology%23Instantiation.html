@@ -94,10 +94,11 @@
 
                     <!-- packing -->
                     <semantic-query 
-                        query="SELECT ?label ?value WHERE {
-                            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePacking>) }
+                        query="SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( '[[i18n "field_packing" bundle="sapa-fields"]]') }
+        
                             ?? spao:hasPacking ?value . }"
-                        template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                        template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                             <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
                     </semantic-query>
 
@@ -139,13 +140,14 @@
 
                     <!-- history -->
                     <semantic-query 
-                        query="SELECT ?label ?history WHERE {
-                                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory>) }
+                        query="SELECT ?label ?history  WHERE {
+            VALUES (?label) { ( '[[i18n "field_record_set_history" bundle="sapa-fields"]]') }
+        
                                 ?? rico:history ?history .
                             }"
                         template='<div>
                             {{#ifCond bindings.length ">" 0}}
-                                <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
+                                <h5>{{bindings.0.label.value}}</h5>
                             {{/ifCond}}
                             <div>{{#each bindings}}
                                 <p style="white-space: pre-line;">{{history.value}}</p>
@@ -170,10 +172,11 @@
 
                     <!-- protection duration -->
                     <semantic-query 
-                        query='SELECT ?label ?value WHERE {
-                            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProtectionDuration>) }
+                        query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_protection_duration" bundle="sapa-fields"]]") }
+        
                             ?? spao:hasProtectionDuration ?value . }'
-                        template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                        template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                             <ul class="list-unstyled">{{#each bindings}}<li>{{value.value}}</li>{{/each}}</ul></div>'>
                     </semantic-query>
 
@@ -622,13 +625,14 @@
 
                             <!-- history -->
                             <semantic-query 
-                                query="SELECT ?label ?history WHERE {
-                                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory>) }
+                                query="SELECT ?label ?history  WHERE {
+            VALUES (?label) { ( '[[i18n "field_record_set_history" bundle="sapa-fields"]]') }
+        
                                     <{{file.value}}> rico:history ?history .
                                     }"
                                 template='<div>
                                     {{#ifCond bindings.length ">" 0}}
-                                        <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
+                                        <h5>{{bindings.0.label.value}}</h5>
                                     {{/ifCond}}
                                     <div>{{#each bindings}}
                                         <p style="white-space: pre-line;">{{history.value}}</p>

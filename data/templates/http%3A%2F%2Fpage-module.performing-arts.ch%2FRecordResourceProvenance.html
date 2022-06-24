@@ -1,11 +1,12 @@
             <!-- provenance -->
             <semantic-query 
-                query="SELECT ?label ?provenance WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProvenance>) }
+                query="SELECT ?label ?provenance  WHERE {
+            VALUES (?label) { ( '[[i18n "field_provenienz" bundle="sapa-fields"]]') }
+        
                     ?? rico:hasProvenance ?provenance . }"
                 template='<div>
                     {{#ifCond bindings.length ">" 0}}
-                        <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
+                        <h5>{{bindings.0.label.value}}</h5>
                     {{/ifCond}}
                     <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{provenance.value}}"></semantic-link></li>{{/each}}</ul>
                 </div>'>
@@ -13,12 +14,13 @@
 
             <!-- history -->
             <semantic-query 
-                query="SELECT ?label ?history WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceHistory>) }
+                query="SELECT ?label ?history  WHERE {
+            VALUES (?label) { ( '[[i18n "field_record_set_history" bundle="sapa-fields"]]') }
+        
                     ?? rico:history ?history . }"
                 template='<div>
                     {{#ifCond bindings.length ">" 0}}
-                        <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
+                        <h5>{{bindings.0.label.value}}</h5>
                     {{/ifCond}}
                     <div>{{#each bindings}}<p style="white-space: pre-line;">{{history.value}}</p>{{/each}}</div>
                 </div>'>
@@ -26,12 +28,13 @@
 
             <!-- acquisition -->
             <semantic-query 
-                query="SELECT ?label ?acquisition WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceAcquisition>) }
+                query="SELECT ?label ?acquisition  WHERE {
+            VALUES (?label) { ( '[[i18n "field_mode_of_acquisition" bundle="sapa-fields"]]') }
+        
                     ?? rico:isAssociatedWithEvent [ a rico:Event ; rico:hasEventType ?acquisition ] . }"
                 template='<div>
                     {{#ifCond bindings.length ">" 0}}
-                        <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
+                        <h5>{{bindings.0.label.value}}</h5>
                     {{/ifCond}}
                     <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{acquisition.value}}"></mp-label></li>{{/each}}</ul>
                 </div>'>
@@ -39,12 +42,13 @@
 
             <!-- delivery number -->
                 <semantic-query 
-                query="SELECT ?label ?delivery_number WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/DeliveryNumber>) }
+                query="SELECT ?label ?delivery_number  WHERE {
+            VALUES (?label) { ( '[[i18n "field_delivery_number" bundle="sapa-fields"]]') }
+        
                     ?? spao:deliveryNumber ?delivery_number . }"
                 template='<div>
                     {{#ifCond bindings.length ">" 0}}
-                        <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
+                        <h5>{{bindings.0.label.value}}</h5>
                     {{/ifCond}}
                     <ul class="list-unstyled">{{#each bindings}}<li>{{delivery_number.value}}</li>{{/each}}</ul>
                 </div>'>

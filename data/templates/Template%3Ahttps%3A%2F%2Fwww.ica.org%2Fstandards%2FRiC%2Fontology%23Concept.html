@@ -30,8 +30,9 @@
 
             <!-- record sets -->
             <semantic-query 
-                query='SELECT ?label WHERE {
-                        VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Records>) }
+                query='SELECT ?label  WHERE {
+            VALUES (?label) { ( "[[i18n "field_archival_holdings" bundle="sapa-fields"]]") }
+        
                         ?record rico:hasOrHadSubject ?? .
                     } LIMIT 1'
                 template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
