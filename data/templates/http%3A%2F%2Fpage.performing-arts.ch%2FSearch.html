@@ -18,46 +18,6 @@
   </div>
 </div>
 
-[[#*inline "component-browse"]]
-
-    [[#> sapaModule:BaseSearch id=id]] 
-
-      [[> component-keyword-search domain=domain]]
-      
-      <semantic-search-query-constant
-        query="SELECT DISTINCT ?subject WHERE {
-          ?subject a [[domain]] .
-        }"
-        domain='<[[resolvePrefix domain]]>'>
-      </semantic-search-query-constant>
-    [[/ sapaModule:BaseSearch]]
-
-[[/inline]]
-
-[[#*inline "component-domain-card"]]
-  <div class="domainCardItem">
-    <button type=button class='btn btn-secondary domainCard'>
-      <div class='domainCardThumbnail'>
-        [[#if thumbnail]]
-          <img src='[[thumbnail]]' alt='[[label]]' /> 
-        [[else]]
-          <i class='fa fa-edit fa-lg'></i>
-        [[/if]]
-      </div>
-      <h4>[[label]]</h4>
-      [[#if count]]<div>[[count]]</div>[[/if]]
-    </button>
-  </div>
-[[/inline]]
-
-[[#*inline "component-domain-cards-holder"]]
-  <div class="domainCards">
-    <div data-flex-layout="rows stretch-stretch">
-      [[> @partial-block]]
-    </div>
-  </div>
-[[/inline]]
-
 [[#*inline "component-search"]]
 
 [[#> sapaModule:BaseSearch searchAllDomains="true"]]    
@@ -86,8 +46,9 @@ tokenize-lucene-query="false"
         (crm:E53_Place)
       }
     [[/if]]
-    ?subject rdf:type|rdf:type/rdfs:subClassOf ?__domain__ . 
-    }'
+    ?subject rdf:type ?__domain__ ;
+      rdfs:label ?label .
+  }'
 [[/if]]
 query='SELECT DISTINCT ?subject WHERE {
   [[#if domain]]
