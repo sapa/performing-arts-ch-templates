@@ -3,7 +3,7 @@
         ?? owl:sameAs ?value
         BIND (REPLACE(STR(?value), ".*\\/c*b*", "") as ?localname)
         BIND (STRBEFORE(STR(?value), ?localname) as ?prefix)
-        VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs>) }
+        VALUES (?fieldlabel) { ( "[[i18n "field_external_resources" bundle="sapa-fields"]]") }
         VALUES (?prefix ?source ?order)
         {
           ("http://www.wikidata.org/entity/" "Wikidata" 0)
@@ -21,7 +21,7 @@
         ?source) as ?label)
     } ORDER BY ASC(?order)'
     template='<div style="margin-bottom:1.4em;">
-      {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.fieldlabel.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+      {{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.fieldlabel.value}}</h5>{{/ifCond}}
       <ul class="list-unstyled">
         {{#each bindings}}<li><a target="_blank" href="{{value.value}}">{{label.value}}</a></li>{{/each}}
       </ul></div>'>

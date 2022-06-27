@@ -112,12 +112,13 @@
     </semantic-query>
 
     <semantic-query 
-        query='SELECT ?label ?value WHERE {
-            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AgentBibliography>) }
+        query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_bibliography" bundle="sapa-fields"]]") }
+        
             ?? spao:hasBibliography ?value . }'
         template='<div>
             {{#ifCond bindings.length ">" 0}}
-                <h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>
+                <h5>{{bindings.0.label.value}}</h5>
             {{/ifCond}}
             {{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
     </semantic-query>
@@ -129,13 +130,14 @@
     <!-- venues -->
     <div class="text-item">
     <semantic-query 
-        query='SELECT ?label WHERE {
-            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupVenue>) }
+        query='SELECT ?label  WHERE {
+            VALUES (?label) { ( "[[i18n "field_venues" bundle="sapa-fields"]]") }
+        
             ?? crm:P14i_performed ?activity .
             ?activity crm:P2_has_type spav:mujfv ;
                 crm:P16_used_specific_object ?venue .
             } LIMIT 1'
-        template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
+        template='<h5>{{#each bindings}}{{label.value}}{{/each}}</h5>'>
     </semantic-query>
     <semantic-tree
          query='SELECT DISTINCT ?node ?parent ?unidentified WHERE {
@@ -189,11 +191,12 @@
 
     <!-- record sets -->
     <semantic-query 
-        query='SELECT ?label WHERE {
-            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Records>) }
+        query='SELECT ?label  WHERE {
+            VALUES (?label) { ( "[[i18n "field_archival_holdings" bundle="sapa-fields"]]") }
+        
             ?record rico:hasOrHadSubject ?? .
         } LIMIT 1'
-        template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
+        template='<h5>{{#each bindings}}{{label.value}}{{/each}}</h5>'>
     </semantic-query>
     <semantic-tree
         query='SELECT DISTINCT ?node ?parent ?identifier ?level WHERE {

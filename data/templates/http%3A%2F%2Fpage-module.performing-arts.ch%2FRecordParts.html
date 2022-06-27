@@ -12,30 +12,33 @@
         {{#each bindings}}
         <h5><mp-label iri="{{part.value}}"></mp-label></h5>
         <semantic-query 
-            query="SELECT ?label ?identifier WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingIdentifier>) }
+            query="SELECT ?label ?identifier  WHERE {
+            VALUES (?label) { ( '[[i18n "field_identifier" bundle="sapa-fields"]]') }
+        
                 <{{part.value}}> rico:identifier ?identifier . }"
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
         </semantic-query>
         <semantic-query 
-            query="SELECT ?label ?identifier WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLegacyIdentifier>) }
+            query="SELECT ?label ?identifier  WHERE {
+            VALUES (?label) { ( '[[i18n "field_legacy_identifier" bundle="sapa-fields"]]') }
+        
                 <{{part.value}}> spao:legacyIdentifier ?identifier . }"
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
         </semantic-query>
         <semantic-query 
-            query='SELECT ?label ?subject ?identified WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubject>) }
+            query='SELECT ?label ?subject ?identified  WHERE {
+            VALUES (?label) { ( "[[i18n "field_subject" bundle="sapa-fields"]]") }
+        
                 <{{part.value}}> rico:hasOrHadSubject ?subject .
                 BIND(IF(!CONTAINS(STR(?subject), "/u/"), "true","") AS ?identified)
             }'
             template='<div>
                 {{#ifCond bindings.length ">" 0}}
-                    <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>
+                    <h6>{{bindings.0.label.value}}</h6>
                 {{/ifCond}}
                 <ul class="list-unstyled">
                 {{#each bindings}}
@@ -49,53 +52,58 @@
             </div>'>
         </semantic-query>
         <semantic-query 
-            query="SELECT ?label ?content_description WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDescription>) }
+            query="SELECT ?label ?content_description  WHERE {
+            VALUES (?label) { ( '[[i18n "field_content_description" bundle="sapa-fields"]]') }
+        
                 <{{part.value}}> rico:descriptiveNote ?content_description . }"
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <div>{{#each bindings}}<p style="white-space: pre-line;">{{content_description.value}}</p>{{/each}}</div></div>'>
         </semantic-query>
         <semantic-query 
-            query='SELECT ?label ?value WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNote>) }
+            query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_anmerkung" bundle="sapa-fields"]]") }
+        
                 <{{part.value}}> spao:hasNote ?value . }'
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <div>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div></div>'>
         </semantic-query>
         [[#if (hasPermission "forms:ldp:*")]] 
         <!-- internal note -->
         <semantic-query 
-            query='SELECT ?label ?value WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingNoteInternal>) }
+            query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_internal_note" bundle="sapa-fields"]]") }
+        
                 <{{part.value}}> spao:hasInternalNote ?value . }'
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <div>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div></div>'>
         </semantic-query>
         <!-- responsible employee -->
         <semantic-query 
-            query='SELECT ?label ?value WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceResponsible>) }
+            query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_responsible_employee" bundle="sapa-fields"]]") }
+        
                 <{{part.value}}> spao:hasResponsibleEmployee ?value . }'
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}<li>{{value.value}}</li>{{/each}}</ul></div>'>
         </semantic-query>
         [[/if]]
         <semantic-query 
-            query='SELECT ?label ?value WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingConvention>) }
+            query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_processing_convention" bundle="sapa-fields"]]") }
+        
                 <{{part.value}}> spao:hasProcessingConvention ?value . }'
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}<li>{{value.value}}</li>{{/each}}</ul></div>'>
         </semantic-query>
         <semantic-query 
-            query="SELECT DISTINCT ?label ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
-            WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceProcessingDate>) }
+            query="SELECT DISTINCT ?label ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty WHERE {
+            VALUES (?label) { ( '[[i18n "field_processing_date" bundle="sapa-fields"]]') }
+        
                 <{{part.value}}> spao:hasProcessingDate ?date .
                 {
                     OPTIONAL { ?date rico:normalizedDateValue ?normalized_date. }
@@ -120,7 +128,7 @@
                 }
             }"
             template='<div>
-                {{#ifCond bindings.length ">" 0}}<h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                {{#ifCond bindings.length ">" 0}}<h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}
                     <li>
                         {{#if single_date.value}}
@@ -145,41 +153,45 @@
             >
         </semantic-query>
         <semantic-query 
-            query='SELECT ?label ?value WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCopyrightDeclaration>) }
+            query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_copyright_declaration" bundle="sapa-fields"]]") }
+        
                 <{{part.value}}> spao:hasCopyrightDeclaration ?value . }'
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
         </semantic-query>
         <semantic-query 
-            query='SELECT ?label ?value WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStill>) }
+            query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_usage_rights_still" bundle="sapa-fields"]]") }
+        
                 <{{part.value}}> spao:hasUsageRightsStill ?value . } LIMIT 1'
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
         </semantic-query>
         <semantic-query 
-            query='SELECT ?label ?value WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceUsageRightsStreaming>) }
+            query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_usage_rights_streaming" bundle="sapa-fields"]]") }
+        
                 <{{part.value}}> spao:hasUsageRightsStreaming ?value . } LIMIT 1'
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
         </semantic-query>
         <semantic-query 
-            query="SELECT ?label ?documentary_form WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordDocumentaryForm>) }
+            query="SELECT ?label ?documentary_form  WHERE {
+            VALUES (?label) { ( '[[i18n "field_documentary_form" bundle="sapa-fields"]]') }
+        
                 <{{part.value}}> rico:hasDocumentaryFormType ?documentary_form . }"
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{documentary_form.value}}"></mp-label></li>{{/each}}</ul></div>'>
         </semantic-query>
         <semantic-query 
-            query="SELECT DISTINCT ?label ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
-            WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>) }
+            query="SELECT DISTINCT ?label ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty WHERE {
+            VALUES (?label) { ( '[[i18n "field_date" bundle="sapa-fields"]]') }
+        
                 <{{part.value}}> rico:isAssociatedWithDate ?date .
                 {
                     OPTIONAL { ?date rico:normalizedDateValue ?normalized_date. }
@@ -205,7 +217,7 @@
         
             }"
             template='<div>
-                {{#ifCond bindings.length ">" 0}}<h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                {{#ifCond bindings.length ">" 0}}<h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}
                     <li>
                         {{#if single_date.value}}
@@ -230,18 +242,20 @@
             >
         </semantic-query>
         <semantic-query 
-            query="SELECT ?label ?value WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLocation>) }
+            query="SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( '[[i18n "field_location" bundle="sapa-fields"]]') }
+        
                 <{{part.value}}> rico:hasOrHadLocation ?value . }"
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{value.value}}"></semantic-link></li>{{/each}}</ul></div>'>
         </semantic-query>
         <!-- see also -->
         [[#if (hasPermission "forms:ldp:*")]]
         <semantic-query
-            query='SELECT DISTINCT ?label ?value WHERE { 
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso>) }
+            query='SELECT DISTINCT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_see_also" bundle="sapa-fields"]]") }
+        
                 {
                     <{{part.value}}> spao:seeAlso ?value .
                     MINUS { ?value a rico:RecordPart . } 
@@ -252,15 +266,16 @@
                 }
             }'
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}
                     <li><semantic-link iri="{{value.value}}"></semantic-link></li>
                 {{/each}}</ul></div>'>
         </semantic-query>
         [[else]]
         <semantic-query
-            query='SELECT DISTINCT ?label ?value WHERE { 
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso>) }
+            query='SELECT DISTINCT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_see_also" bundle="sapa-fields"]]") }
+        
                 {
                     <{{part.value}}> spao:seeAlso ?value .
                     MINUS { ?value a rico:RecordPart . } 
@@ -273,7 +288,7 @@
                 }
             }'
             template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h6>{{/ifCond}}
+                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
                 <ul class="list-unstyled">{{#each bindings}}
                     <li><semantic-link iri="{{value.value}}"></semantic-link></li>
                 {{/each}}</ul></div>'>

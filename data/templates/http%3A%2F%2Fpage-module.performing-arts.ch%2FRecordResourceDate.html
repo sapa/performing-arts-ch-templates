@@ -1,12 +1,13 @@
 <!-- date -->
 
 <semantic-query 
-    query="SELECT ?label ?date WHERE {
-        VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>) }
+    query="SELECT ?label ?date  WHERE {
+            VALUES (?label) { ( '[[i18n "field_date" bundle="sapa-fields"]]') }
+        
         ?? spao:legacyDate ?date .
     }"
     template='<div>
-        {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+        {{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
         <ul class="list-unstyled">{{#each bindings}}
             <li>{{date.value}}</li>
         {{/each}}</ul></div>'
@@ -15,9 +16,9 @@
 
 
 <semantic-query 
-    query="SELECT DISTINCT ?label ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty
-    WHERE {
-        VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDate>) }
+    query="SELECT DISTINCT ?label ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty WHERE {
+            VALUES (?label) { ( '[[i18n "field_date" bundle="sapa-fields"]]') }
+        
         ?? rico:isAssociatedWithDate ?date .
         {
             OPTIONAL { ?date rico:normalizedDateValue ?normalized_date. }
@@ -44,7 +45,7 @@
         }
     }"
     template='<div>
-        {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+        {{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
         <ul class="list-unstyled">{{#each bindings}}
             <li>
                 {{#if single_date.value}}

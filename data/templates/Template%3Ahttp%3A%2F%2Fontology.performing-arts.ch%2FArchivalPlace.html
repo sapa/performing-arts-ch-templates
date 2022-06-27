@@ -9,10 +9,11 @@
                     </semantic-query>
                     <!-- packing -->
                     <semantic-query 
-                        query="SELECT ?label ?value WHERE {
-                            VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePacking>) }
+                        query="SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( '[[i18n "field_packing" bundle="sapa-fields"]]') }
+        
                             ?? spao:hasPacking ?value . }"
-                        template='<div>{{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.label.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                        template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                             <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
                     </semantic-query>
                 </bs-col>

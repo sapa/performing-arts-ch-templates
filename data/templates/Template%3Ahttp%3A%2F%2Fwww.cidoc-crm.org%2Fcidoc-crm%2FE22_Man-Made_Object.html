@@ -142,9 +142,9 @@
           ></semantic-chart>
 
           <semantic-query 
-            query='SELECT ?label ?producer (COUNT(?plan) AS ?plancount)
-            WHERE {
-                VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueProducers>) }
+            query='SELECT ?label ?producer (COUNT(?plan) AS ?plancount) WHERE {
+            VALUES (?label) { ( "[[i18n "field_producers" bundle="sapa-fields"]]") }
+        
                 ?genericperformance crm:P8_took_place_on_or_within ?? ;
                     a frbroo:F31_Performance ;
                 frbroo:R25_performed ?plan .
@@ -159,7 +159,7 @@
             <template id='producer-list'>
                 <div style="margin: 1em 0em;">
                     {{#each bindings}}
-                    {{#if @first}}<h5><semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context></h5><semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{else}}, <semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{/if}}
+                    {{#if @first}}<h5>{{label.value}}</h5><semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{else}}, <semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{/if}}
                     {{/each}}
                 </div>
             </template>
@@ -190,11 +190,12 @@
         
             <!-- record sets -->
             <semantic-query 
-                query='SELECT ?label WHERE {
-                    VALUES (?label) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Records>) }
+                query='SELECT ?label  WHERE {
+            VALUES (?label) { ( "[[i18n "field_archival_holdings" bundle="sapa-fields"]]") }
+        
                     ?record rico:hasOrHadSubject ?? .
                 } LIMIT 1'
-                template='<h5>{{#each bindings}}<semantic-context repository="assets"><mp-label iri="{{label.value}}"></mp-label></semantic-context>{{/each}}</h5>'>
+                template='<h5>{{#each bindings}}{{label.value}}{{/each}}</h5>'>
             </semantic-query>
             <semantic-tree
                 query='SELECT DISTINCT ?node ?parent ?identifier ?level WHERE {
