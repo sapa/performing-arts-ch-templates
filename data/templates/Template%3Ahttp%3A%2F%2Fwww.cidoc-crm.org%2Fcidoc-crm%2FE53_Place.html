@@ -42,13 +42,13 @@
           <bs-col sm="4">
               <semantic-query 
                   query='SELECT DISTINCT ?fieldlabel ?group WHERE {
-                      VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlaceGroups>) }
+                      VALUES (?fieldlabel) { ( "[[i18n "field_groups" bundle="sapa-fields"]]" ) }
                       ?groupsite crm:P89_falls_within ?? .
                       ?group crm:P74_has_current_or_former_residence ?groupsite ;
                           rdfs:label ?label .
                   } ORDER BY lcase(?label)'
                   template='<div>
-                      {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.fieldlabel.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                      {{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.fieldlabel.value}}</h5>{{/ifCond}}
                       <ul class="list-unstyled">
                       {{#each bindings}}<li><semantic-link iri="{{group.value}}">{{label.value}}</semantic-link></li>{{/each}}
                       </ul></div>'>
@@ -57,14 +57,14 @@
           <bs-col sm="4">
               <semantic-query 
                   query='SELECT DISTINCT ?fieldlabel ?venue WHERE {
-                      VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupVenue>) }
+                      VALUES (?fieldlabel) { ( "[[i18n "field_venues" bundle="sapa-fields"]]" ) }
                       ?venuesite crm:P89_falls_within ?? .
                       ?venue crm:P156_occupies ?venuesite ;
                           crm:P2_has_type spav:dwmkn ;
                           rdfs:label ?label .
                   } ORDER BY lcase(?label)'
                   template='<div>
-                      {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.fieldlabel.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                      {{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.fieldlabel.value}}</h5>{{/ifCond}}
                       <ul class="list-unstyled">
                       {{#each bindings}}<li><semantic-link iri="{{venue.value}}">{{venue.label}}</semantic-link></li>{{/each}}
                       </ul></div>'>
@@ -75,7 +75,7 @@
                   query='SELECT DISTINCT ?person ?fieldlabel (GROUP_CONCAT(DISTINCT ?eventstr; SEPARATOR=", ") AS ?lifedates)
                   WHERE {
                       SELECT * {
-                          VALUES (?fieldlabel) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/PlacePersons>) }
+                          VALUES (?fieldlabel) { ( "[[i18n "field_persons" bundle="sapa-fields"]]" ) }
                           ?event crm:P7_took_place_at ?? .
                           {
                               ?event a crm:E67_Birth .
@@ -94,7 +94,7 @@
                   } GROUP BY ?person ?fieldlabel
                   ORDER BY ASC(?eventstr)'
                   template='<div>
-                      {{#ifCond bindings.length ">" 0}}<h5><semantic-context repository="assets"><mp-label iri="{{bindings.0.fieldlabel.value}}"></mp-label></semantic-context></h5>{{/ifCond}}
+                      {{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.fieldlabel.value}}</h5>{{/ifCond}}
                       <ul class="list-unstyled">
                       {{#each bindings}}                    
                           <li><semantic-link iri="{{person.value}}">{{person.value}}</semantic-link>
