@@ -46,8 +46,12 @@ tokenize-lucene-query="false"
         (crm:E53_Place)
       }
     [[/if]]
-    ?subject rdf:type ?__domain__ ;
-      rdfs:label ?label .
+    ?subject rdf:type ?__domain__ .
+    MINUS {
+      FILTER NOT EXISTS {
+        ?subject rdfs:label ?label .
+      }
+    }
   }'
 [[/if]]
 query='SELECT DISTINCT ?subject WHERE {
