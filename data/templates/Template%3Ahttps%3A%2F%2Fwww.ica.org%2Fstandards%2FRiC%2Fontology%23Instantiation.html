@@ -312,6 +312,14 @@
                         template='<div><h5>Note</h5><ul class="list-unstyled">{{#each bindings}}<li>{{note.value}}</li>{{/each}}</ul></div>'>
                     </semantic-query>
 
+                    <!-- internal notes -->
+                    [[#if (hasPermission "forms:ldp")]]
+                        <semantic-query 
+                            query='SELECT ?note WHERE { ?? spao:hasInternalNote ?note . }'
+                            template='<div><h5>Internal Note</h5><ul class="list-unstyled">{{#each bindings}}<li>{{note.value}}</li>{{/each}}</ul></div>'>
+                        </semantic-query>
+                    [[/if]]
+
                     <!-- width -->
                     <semantic-query 
                         query="SELECT ?width WHERE { ?? ebucore:width ?width . }"
