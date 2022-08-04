@@ -215,7 +215,7 @@
                         OPTIONAL { ?node rico:identifier ?identifier }
                         OPTIONAL { ?node rico:hasRecordSetType ?rslevel . }
                         BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
-                    }'
+                    } ORDER BY ?identifier'
                     tuple-template='{{>node}}'> 
                     <template id='node'>
                         <span>
