@@ -1301,15 +1301,6 @@ fields:
       - delete: 'DELETE { $subject rico:hasRepresentationType $value . } WHERE {}'
       - valueSet: 'SELECT $value WHERE { $value skos:inScheme spav:rt . }'
 
-  - id: InternalNote
-    label: Internal note
-    datatype: http://www.w3.org/2001/XMLSchema#string
-    maxOccurs: 1
-    queries:
-      - select: 'SELECT $value WHERE { $subject spao:hasInternalNote $value . }'
-      - insert: 'INSERT { $subject spao:hasInternalNote $value . } WHERE { }'
-      - delete: 'DELETE { $subject spao:hasInternalNote $value . } WHERE {}'
-
   - id: MediaResourceAspectRatio
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceAspectRatio
     label: Aspect ratio
