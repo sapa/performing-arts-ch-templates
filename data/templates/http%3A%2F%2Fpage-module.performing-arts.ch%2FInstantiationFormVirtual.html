@@ -24,6 +24,7 @@
         [[> InstantiationDerived]],
         [[> InstantiationCopyPath]],
         [[> InstantiationCondition]],
+        [[> InternalNote]],
         [[> ThingLocation]],
         [[> RepresentationFile]],
         [[> RecordResourceResponsible]],
@@ -134,6 +135,7 @@
         </bs-row>        <bs-row>
           <bs-col sm='4'>
             <semantic-form-text-input for="RecordResourceProtectionDuration"></semantic-form-text-input>
+            <semantic-form-text-input for="InternalNote" multiline=true></semantic-form-text-input>
           </bs-col>
           <bs-col sm='2'>
             <semantic-form-checklist-input type='radio' for="ThingTermsProtection"></semantic-form-checklist-input>
@@ -251,7 +253,8 @@
                   <semantic-form-autocomplete-input for="ThingSeeAlso"></semantic-form-autocomplete-input>                  
                 </bs-col>
               </bs-row>        
-
+          </semantic-form-composite-input>
+        </bs-col>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
         <button name="submit" class="btn btn-secondary">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>

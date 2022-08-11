@@ -29,11 +29,12 @@
             OPTIONAL { ?child rico:isOrWasIncludedIn ?item }
             BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
             OPTIONAL { ?item olo:index ?index }
+            OPTIONAL { ?item rico:identifier ?identifier }
             OPTIONAL {
               ?item rico:name ?l .
               BIND(LCASE(?l) AS ?label)             
             }
-          } ORDER BY (?index)'
+          } ORDER BY ?identifier ?index ?la'
         parents-query='
           SELECT ?item ?parent WHERE {
             ?item rico:isOrWasIncludedIn ?parent .
