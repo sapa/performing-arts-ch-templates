@@ -14,6 +14,16 @@
                         >
                     </semantic-query>
 
+                    <!-- legacy identifier -->
+                    <semantic-query 
+                        query="SELECT ?legacy_identifier WHERE { ?? spao:legacyIdentifier ?legacy_identifier . }"
+                        template='<div>
+                            <h5>[[i18n "field_legacy_identifier" bundle="sapa-fields"]]</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{legacy_identifier.value}}</li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
                     <!-- archival status -->
                     <semantic-query 
                         query="SELECT ?archival_status WHERE { ?? spao:hasArchivalStatus ?archival_status . }"
