@@ -238,3 +238,7 @@ div.SemanticTreeInput--inputAndButtons {
 .footer__links-col {
   font-size: 0.7em;
 }
+nav.metaphacts-header-navbar.DEVELOPMENT {
+  background: #e6375c;
+  background: repeating-linear-gradient(45deg, #083658, #083658 10px, #0a446f 10px, #0a446f 20px) !important;
+}
