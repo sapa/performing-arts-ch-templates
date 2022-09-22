@@ -1023,6 +1023,48 @@ fields:
         FILTER((LANGMATCHES(LANG(?venue_label), "")) || (LANGMATCHES(LANG(?venue_label), ?__userPreferredLanguage__)))
       } LIMIT 20'
 
+  - id: IdentifierType
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/IdentifierType
+    label: Identifier type
+    datatype: xsd:anyURI
+    domain: rico:Identifier
+    range: crm:E55_Type
+    minOccurs: 1
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT $value WHERE {
+        $subject crm:P2_has_type $value .
+      }'
+      - insert: 'INSERT {
+        $subject crm:P2_has_type $value .
+      } WHERE {}'
+      - delete: 'DELETE {
+        $subject crm:P2_has_type $value .
+      } WHERE {}'
+      - valueSet: 'SELECT $value WHERE {
+        $value a skos:Concept ;
+        skos:inScheme spav:id .
+      } ORDER BY ?label'
+
+  - id: IdentifierValue
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/IdentifierValue
+    label: Identifier value
+    datatype: xsd:string
+    domain: rico:Identifier
+    range: xsd:string
+    minOccurs: 1
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT $value WHERE {
+        $subject rdf:value $value .
+      }'
+      - insert: 'INSERT {
+        $subject rdf:value $value .
+      } WHERE {}'
+      - delete: 'DELETE {
+        $subject rdf:value $value .
+      } WHERE {}'
+
 
   - id: InstantiationArchivalStatus
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationArchivalStatus
