@@ -8,6 +8,25 @@
                     <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
             </semantic-query>
 
+            <!-- typed identifier -->
+            <semantic-query 
+                query="SELECT ?identifier ?type WHERE {
+                    ?? rico:hasOrHadIdentifier ?identifierUri .
+                    ?identifierUri rdf:value ?identifier ;
+                        crm:P2_has_type ?type . 
+                }"
+                template="{{> template}}">
+                <template id="template">
+                    <div>
+                        <h5>[[i18n "field_typed_identifier" bundle="sapa-fields"]]</h5>
+                        <ul class="list-unstyled">
+                            {{#each bindings}}
+                                <li>{{identifier.value}} (<mp-label iri="{{type.value}}"></mp-label>)</li>
+                            {{/each}}
+                    </div>
+                </template>
+            </semantic-query>
+            
             <!-- legacy identifier -->
             <semantic-query 
                 query="SELECT ?label ?identifier  WHERE {
