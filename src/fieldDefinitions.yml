@@ -3674,6 +3674,15 @@ fields:
       - insert: 'INSERT { $subject spao:legacyIdentifier $value. } WHERE {}'
       - delete: 'DELETE { $subject spao:legacyIdentifier $value. } WHERE {}'
 
+  - id: ThingTypedIdentifier
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingTypedIdentifier
+    label: Typed Identifier
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    domain: https://www.ica.org/standards/RiC/ontology#Thing
+    queries:
+      - select: 'SELECT ?value WHERE { $subject rico:hasOrHadIdentifier ?value. }'
+      - insert: 'INSERT { $subject rico:hasOrHadIdentifier $value. } WHERE {}'
+      - delete: 'DELETE { $subject rico:hasOrHadIdentifier $value. } WHERE {}'
 
   - id: ThingLocation
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingLocation
