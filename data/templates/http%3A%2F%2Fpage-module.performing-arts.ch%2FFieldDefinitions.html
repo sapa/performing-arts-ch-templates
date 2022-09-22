@@ -560,6 +560,39 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "iri" : "GroupVenue"
     }
 [[/inline]]
+ [[#*inline "IdentifierType"]]
+    {
+        "id" : "IdentifierType",
+
+            "label": "[[i18n "field_identifier_type" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "xsd:anyURI",
+            "domain" : "rico:Identifier",
+            "range" : "crm:E55_Type",
+                "selectPattern" : "SELECT $value WHERE { $subject crm:P2_has_type $value . }",
+                "insertPattern" : "INSERT { $subject crm:P2_has_type $value . } WHERE {}",
+                "deletePattern" : "DELETE { $subject crm:P2_has_type $value . } WHERE {}",
+                "valueSetPattern" : "SELECT $value WHERE { $value a skos:Concept ; skos:inScheme spav:id . } ORDER BY ?label",
+        "iri" : "IdentifierType"
+    }
+[[/inline]]
+ [[#*inline "IdentifierValue"]]
+    {
+        "id" : "IdentifierValue",
+
+            "label": "[[i18n "field_identifier_value" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "xsd:string",
+            "domain" : "rico:Identifier",
+            "range" : "xsd:string",
+                "selectPattern" : "SELECT $value WHERE { $subject rdf:value $value . }",
+                "insertPattern" : "INSERT { $subject rdf:value $value . } WHERE {}",
+                "deletePattern" : "DELETE { $subject rdf:value $value . } WHERE {}",
+        "iri" : "IdentifierValue"
+    }
+[[/inline]]
  [[#*inline "InstantiationArchivalStatus"]]
     {
         "id" : "InstantiationArchivalStatus",
@@ -2412,6 +2445,19 @@ WHERE { BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , STR(UUID())) ) 
                 "insertPattern" : "INSERT { $subject spao:legacyIdentifier $value. } WHERE {}",
                 "deletePattern" : "DELETE { $subject spao:legacyIdentifier $value. } WHERE {}",
         "iri" : "ThingLegacyIdentifier"
+    }
+[[/inline]]
+ [[#*inline "ThingTypedIdentifier"]]
+    {
+        "id" : "ThingTypedIdentifier",
+
+            "label": "[[i18n "field_typed_identifier" bundle="sapa-fields"]]",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "domain" : "https://www.ica.org/standards/RiC/ontology#Thing",
+                "selectPattern" : "SELECT ?value WHERE { $subject rico:hasOrHadIdentifier ?value. }",
+                "insertPattern" : "INSERT { $subject rico:hasOrHadIdentifier $value. } WHERE {}",
+                "deletePattern" : "DELETE { $subject rico:hasOrHadIdentifier $value. } WHERE {}",
+        "iri" : "ThingTypedIdentifier"
     }
 [[/inline]]
  [[#*inline "ThingLocation"]]
