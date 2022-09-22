@@ -2414,6 +2414,19 @@ WHERE { BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , STR(UUID())) ) 
         "iri" : "ThingLegacyIdentifier"
     }
 [[/inline]]
+ [[#*inline "ThingTypedIdentifier"]]
+    {
+        "id" : "ThingTypedIdentifier",
+
+            "label": "[[i18n "field_typed_identifier" bundle="sapa-fields"]]",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "domain" : "https://www.ica.org/standards/RiC/ontology#Thing",
+                "selectPattern" : "SELECT ?value WHERE { $subject rico:hasOrHadIdentifier ?value. }",
+                "insertPattern" : "INSERT { $subject rico:hasOrHadIdentifier $value. } WHERE {}",
+                "deletePattern" : "DELETE { $subject rico:hasOrHadIdentifier $value. } WHERE {}",
+        "iri" : "ThingTypedIdentifier"
+    }
+[[/inline]]
  [[#*inline "ThingLocation"]]
     {
         "id" : "ThingLocation",
