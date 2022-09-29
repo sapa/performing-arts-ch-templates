@@ -12,6 +12,7 @@
     <h3 style="margin-top: 2em; margin-bottom: 1em;">Archive Plan</h3>
     <div style="height: 1000px">
     <semantic-lazy-tree escape-lucene-syntax='false'
+        tokenize-lucene-query="false"
         roots-query='
           SELECT DISTINCT ?item ?index ?hasChildren WHERE {
             VALUES (?item) { (<http://data.performing-arts.ch/r/sapa>) }
