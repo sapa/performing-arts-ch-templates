@@ -42,7 +42,7 @@
             <semantic-form-text-input for="VenueCommonTitle" languages='["en","de","fr","it"]'></semantic-form-text-input>
           </bs-col>
           <bs-col sm='3'>
-            <semantic-form-checklist-input type='radio' row=true for="VenueCommonTitleType" default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
+            <semantic-form-checklist-input type='radio' clearable=true row=true for="VenueCommonTitleType" default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
           </bs-col>
           <bs-col sm='3'>
             <semantic-form-text-input for="VenueAcronym" languages='["en","de","fr","it"]'></semantic-form-text-input>
@@ -90,7 +90,7 @@
                       <semantic-form-text-input for="VenueCommonTitle" languages='["en","de","fr","it"]'></semantic-form-text-input>
                     </bs-col>
                     <bs-col sm='4'>
-                      <semantic-form-checklist-input type='radio' for="VenueCommonTitleType" default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
+                      <semantic-form-checklist-input type='radio' clearable=true for="VenueCommonTitleType" default-value='[[resolvePrefix "spav:yanuj"]]'></semantic-form-checklist-input>
                     </bs-col>
                   </bs-row>
                 <button name="submit" class="btn btn-secondary">[[i18n "FormCreateVenue" bundle="performing-arts-ch"]]</button>
