@@ -14,6 +14,8 @@
                     ?? rico:hasOrHadIdentifier ?identifierUri .
                     ?identifierUri rdf:value ?identifier ;
                         crm:P2_has_type ?type . 
+                    # Exclude technical identifier from display
+                    FILTER (?type != <http://vocab.performing-arts.ch/idtec>)
                 }"
                 template="{{> template}}">
                 <template id="template">
