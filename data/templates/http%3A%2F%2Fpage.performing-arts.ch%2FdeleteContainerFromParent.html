@@ -96,17 +96,20 @@
     </semantic-query>
 </div>
 <div>
-    <semantic-link
-        iri="[[urlParam "back"]]"
-        urlqueryparam-view="page"
-        type="button"
-        class="btn-secondary btn"
-    >[[i18n "NavCancel" bundle="performing-arts-ch"]]</semantic-link>
-    <semantic-context repository="default">
-      <mp-ldp-remove-from-container-action container="[[urlParam "parent"]]" iri="[[urlParam "container"]]">
-          <button type="button" class="btn btn-primary">[[i18n "DeleteEntityButton" bundle="performing-arts-ch"]]</button>
-      </mp-ldp-remove-from-container-action>
-    </semantic-context>
+    <bs-alert variant="warning">
+        <p>[[i18n "DeleteEntityWarning" escapeHTML=false bundle="performing-arts-ch" ]]</p>
+        <semantic-link
+            iri="[[urlParam "back"]]"
+            urlqueryparam-view="page"
+            type="button"
+            class="btn-secondary btn"
+        >[[i18n "NavCancel" bundle="performing-arts-ch"]]</semantic-link>&nbsp;
+        <semantic-context repository="default">
+        <mp-ldp-remove-from-container-action container="[[urlParam "parent"]]" iri="[[urlParam "container"]]">
+            <button type="button" class="btn btn-primary">[[i18n "DeleteEntityButton" bundle="performing-arts-ch"]]</button>
+        </mp-ldp-remove-from-container-action>
+        </semantic-context>
+    </bs-alert>
 </div>
 
 [[/inline]]
@@ -116,15 +119,12 @@
 <p>[[i18n "DeleteEntityInUse" bundle="performing-arts-ch"]]</p>
 <p>[[i18n "DeleteEntityListEntitiesInUse" bundle="performing-arts-ch"]]</p>
 <semantic-table
-    query='SELECT DISTINCT ?entity ?entityGraph ?entityContainer ?entityParentContainer WHERE {
+    query='SELECT DISTINCT (GROUP_CONCAT(?entity;SEPARATOR=";") as ?entities) ?entityGraph ?entityContainer ?entityParentContainer WHERE {
         {
             BIND(URI(STRBEFORE("[[urlParam "container"]]", "/container")) as ?resource)
             BIND(URI(CONCAT("[[urlParam "container"]]", "/context")) as ?resourceGraph)
             GRAPH ?entityGraph {
                 ?s ?p ?resource .
-            }
-            OPTIONAL {
-                ?entityGraph crm:P67_refers_to ?entity .
             }
             FILTER(?entityGraph != ?resourceGraph)
         } UNION {
@@ -133,23 +133,29 @@
             GRAPH ?entityGraph {
                 ?resource ?p ?o .
             }
-            OPTIONAL {
-                ?entityGraph crm:P67_refers_to ?entity .
-            }
             FILTER(?entityGraph != ?resourceGraph)
         }
         BIND(URI(STRBEFORE(STR(?entityGraph), "/context")) as ?entityContainer)
         OPTIONAL {
             ?entityParentContainer ldp:contains ?entityContainer .
         }
-    }'
+        OPTIONAL {
+            GRAPH ?entityGraph {
+                ?entity a ?type .
+                FILTER NOT EXISTS {
+                    ?entity a ldp:Resource .
+                }
+            }
+        }
+    } GROUP BY ?entityGraph ?entityContainer ?entityParentContainer'
     options='{
         "showFilter": false
     }'
     column-configuration='[
     {
-        "variableName": "entity",
-        "displayName": "[[i18n "EntityLabel" bundle="performing-arts-ch"]]"
+        "variableName": "entities",
+        "displayName": "[[i18n "EntityLabel" bundle="performing-arts-ch"]]",
+        "cellTemplate": "{{> template-entities}}"
     },
     {
         "variableName": "entityGraph",
@@ -188,13 +194,20 @@
                         <mp-event-trigger type="Dialog.HideAll">
                             <button type="button" class="btn btn-secondary btn-xs">[[i18n "NavCancel" bundle="performing-arts-ch"]]</button>
                         </mp-event-trigger>
-                        <mp-ldp-remove-from-container-action container="{{entityParentContainer.value}}" iri="{{entityContainer.value}}">
-                            <button type="button" class="btn btn-primary btn-xs">[[i18n "DeleteEntityButton" bundle="performing-arts-ch"]]</button>
-                        </mp-ldp-remove-from-container-action>
+                        <semantic-context repository="default">
+                            <mp-ldp-remove-from-container-action container="{{entityParentContainer.value}}" iri="{{entityContainer.value}}">
+                                <button type="button" class="btn btn-primary btn-xs">[[i18n "DeleteEntityButton" bundle="performing-arts-ch"]]</button>
+                            </mp-ldp-remove-from-container-action>
+                        </semantic-context>
                     </div>
                 </mp-overlay-dialog-content>
             </mp-overlay-dialog>
         {{/if}}
+    </template>
+    <template id="template-entities">
+        {{#each (split entities.value ";")}}
+            <semantic-link iri="{{this}}"></semantic-link><br/>
+        {{/each}}
     </template>
 </semantic-table>
 
