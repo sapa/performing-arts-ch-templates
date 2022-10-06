@@ -119,7 +119,7 @@
 <p>[[i18n "DeleteEntityInUse" bundle="performing-arts-ch"]]</p>
 <p>[[i18n "DeleteEntityListEntitiesInUse" bundle="performing-arts-ch"]]</p>
 <semantic-table
-    query='SELECT DISTINCT (GROUP_CONCAT(?entity;SEPARATOR=";") as ?entities) ?entityGraph ?entityContainer ?entityParentContainer WHERE {
+    query='SELECT DISTINCT (GROUP_CONCAT(DISTINCT ?entity;SEPARATOR=";") as ?entities) ?entityGraph ?entityContainer ?entityParentContainer WHERE {
         {
             BIND(URI(STRBEFORE("[[urlParam "container"]]", "/container")) as ?resource)
             BIND(URI(CONCAT("[[urlParam "container"]]", "/context")) as ?resourceGraph)
@@ -141,7 +141,8 @@
         }
         OPTIONAL {
             GRAPH ?entityGraph {
-                ?entity a ?type .
+                ?entity a ?type ;
+                    rico:name|rdfs:label ?label
                 FILTER NOT EXISTS {
                     ?entity a ldp:Resource .
                 }
