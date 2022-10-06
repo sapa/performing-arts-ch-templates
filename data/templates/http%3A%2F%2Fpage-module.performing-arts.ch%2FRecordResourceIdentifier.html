@@ -14,9 +14,13 @@
                     ?? rico:hasOrHadIdentifier ?identifierUri .
                     ?identifierUri rdf:value ?identifier ;
                         crm:P2_has_type ?type . 
-                    # Exclude technical identifier from display
-                    FILTER (?type != <http://vocab.performing-arts.ch/idtec>)
-                }"
+                    # Exclude technical identifier and specify order
+                    VALUES (?type ?order) {
+                        (<http://vocab.performing-arts.ch/idcon> '1'^^xsd:integer)
+                        (<http://vocab.performing-arts.ch/iduni> '2'^^xsd:integer)
+                        (<http://vocab.performing-arts.ch/idold> '3'^^xsd:integer)
+                    }
+                } ORDER BY ?order ?identifier"
                 template="{{> template}}">
                 <template id="template">
                     <div>
