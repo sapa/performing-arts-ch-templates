@@ -1,0 +1,19 @@
+<semantic-query
+  query='SELECT ?container ?parentContainer WHERE {
+      BIND(URI(CONCAT(STR(??), "/container")) AS ?container) 
+      ?parentContainer ldp:contains ?container .
+  } LIMIT 1'
+  template="{{> deleteButtonTemplate}}"
+>
+<template id="deleteButtonTemplate">
+    {{#each bindings}}
+        <semantic-link iri="sapa:deleteContainerFromParent" 
+            urlqueryparam-container="{{container.value}}" 
+            urlqueryparam-parent="{{parentContainer.value}}" 
+            urlqueryparam-back="[[this]]"
+            urlqueryparam-redirect="[[resolvePrefix "sapa:Search"]]">
+            <button class="btn btn-primary btn-s">[[i18n "DeleteEntityButton" bundle="performing-arts-ch"]]&hellip;</button>
+        </semantic-link>
+    {{/each}}
+</template>
+</semantic-query>

@@ -1,0 +1,214 @@
+<div class="page">
+  <div class='page__body'>
+  [[#if (hasPermission "api:ldp:*:delete")]] 
+      <div class="container-fluid">
+        <bs-row class="panel">
+            <bs-col sm="12">
+                <h2>[[i18n "DeleteEntityTitle" bundle="performing-arts-ch"]]</h2>
+                <semantic-if
+                    query='ASK {
+                        {
+                            BIND(URI(STRBEFORE("[[urlParam "container"]]", "/container")) as ?resource)
+                            BIND(URI(CONCAT("[[urlParam "container"]]", "/context")) as ?resourceGraph)
+                            GRAPH ?g {
+                                ?s ?p ?resource .
+                            }
+                            FILTER(?g != ?resourceGraph)
+                        } UNION {
+                            BIND(URI(STRBEFORE("[[urlParam "container"]]", "/container")) as ?resource)
+                            BIND(URI(CONCAT("[[urlParam "container"]]", "/context")) as ?resourceGraph)
+                            GRAPH ?g {
+                                ?resource ?p ?o .
+                            }
+                            FILTER(?g != ?resourceGraph)
+                        }  
+                    }'
+                    then="{{> template-resource-in-use}}"
+                    else="{{> template-delete-resource}}">
+                    <template id="template-resource-in-use">
+                        [[> component-resource-in-use]]
+                    </template>
+                    <template id="template-delete-resource">
+                        [[> component-delete-resource]]
+                    </template>
+                </semantic-if>
+            </bs-col>
+        </bs-row>
+    </div>
+
+    <div class="deleted">
+        <semantic-query
+          query='SELECT ?type WHERE {
+            <[[urlParam "container"]]> a ?type .
+          }'
+          template="<span>{{#each bindings}}{{/each}}</span>"
+          no-result-template='{{> template}}'
+          >
+          <template id="template">
+            <div>
+                <div class="modal-backdrop in"></div>
+                <div class="modal-dialogmodal-lg modal-dialog overlay-modal in modal" id="deletedModal" style="display:block;">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <p>[[i18n "DeleteEntityDeleted" bundle="performing-arts-ch"]]</p>
+                            <semantic-link iri="[[#if (urlParam "redirect")]][[urlParam "redirect"]][[else]][[urlParam "back"]][[/if]]" urlqueryparam-view="page" class="btn btn-primary btn-md">[[i18n "NavBack" bundle="performing-arts-ch"]]</semantic-link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </template>
+        </semantic-query>
+      </div>
+
+    [[else]]
+    <bs-alert variant="warning">
+        [[i18n "PlatformNoPermissionToAccessPage" bundle="performing-arts-ch"]]
+    </bs-alert>
+    [[/if]]
+  </div>
+</div>
+
+
+[[#*inline "component-delete-resource"]]
+
+<div class="gap">
+    [[i18n "DeleteEntityConfirm" bundle="performing-arts-ch"]] 
+    <p><mp-label iri="[[urlParam "container"]]"></mp-label> [[urlParam "container"]]?</p>
+    <semantic-query
+        query='SELECT DISTINCT ?subject WHERE {
+            BIND(URI(STRBEFORE("[[urlParam "container"]]", "/container")) as ?subject)
+            GRAPH <[[urlParam "container"]]/context> {
+                ?subject rdfs:label ?label .
+            }
+        }'
+        template='{{> template-delete-resource-confirmation}}'
+        no-result-template=''>
+        <template id="template-delete-resource-confirmation">
+            <p>[[i18n "DeleteEntityConfirmResourcesContained" bundle="performing-arts-ch"]]:</p>
+            <div>
+                <ul>
+                {{#each bindings}}
+                    <li><semantic-link iri="{{subject.value}}"></semantic-link></li>
+                {{/each}}
+                </ul>
+            </div>
+        </template>
+    </semantic-query>
+</div>
+<div>
+    <bs-alert variant="warning">
+        <p>[[i18n "DeleteEntityWarning" escapeHTML=false bundle="performing-arts-ch" ]]</p>
+        <semantic-link
+            iri="[[urlParam "back"]]"
+            urlqueryparam-view="page"
+            type="button"
+            class="btn-secondary btn"
+        >[[i18n "NavCancel" bundle="performing-arts-ch"]]</semantic-link>&nbsp;
+        <semantic-context repository="default">
+        <mp-ldp-remove-from-container-action container="[[urlParam "parent"]]" iri="[[urlParam "container"]]">
+            <button type="button" class="btn btn-primary">[[i18n "DeleteEntityButton" bundle="performing-arts-ch"]]</button>
+        </mp-ldp-remove-from-container-action>
+        </semantic-context>
+    </bs-alert>
+</div>
+
+[[/inline]]
+
+[[#*inline "component-resource-in-use"]]
+
+<p>[[i18n "DeleteEntityInUse" bundle="performing-arts-ch"]]</p>
+<p>[[i18n "DeleteEntityListEntitiesInUse" bundle="performing-arts-ch"]]</p>
+<semantic-table
+    query='SELECT DISTINCT (GROUP_CONCAT(?entity;SEPARATOR=";") as ?entities) ?entityGraph ?entityContainer ?entityParentContainer WHERE {
+        {
+            BIND(URI(STRBEFORE("[[urlParam "container"]]", "/container")) as ?resource)
+            BIND(URI(CONCAT("[[urlParam "container"]]", "/context")) as ?resourceGraph)
+            GRAPH ?entityGraph {
+                ?s ?p ?resource .
+            }
+            FILTER(?entityGraph != ?resourceGraph)
+        } UNION {
+            BIND(URI(STRBEFORE("[[urlParam "container"]]", "/container")) as ?resource)
+            BIND(URI(CONCAT("[[urlParam "container"]]", "/context")) as ?resourceGraph)
+            GRAPH ?entityGraph {
+                ?resource ?p ?o .
+            }
+            FILTER(?entityGraph != ?resourceGraph)
+        }
+        BIND(URI(STRBEFORE(STR(?entityGraph), "/context")) as ?entityContainer)
+        OPTIONAL {
+            ?entityParentContainer ldp:contains ?entityContainer .
+        }
+        OPTIONAL {
+            GRAPH ?entityGraph {
+                ?entity a ?type .
+                FILTER NOT EXISTS {
+                    ?entity a ldp:Resource .
+                }
+            }
+        }
+    } GROUP BY ?entityGraph ?entityContainer ?entityParentContainer'
+    options='{
+        "showFilter": false
+    }'
+    column-configuration='[
+    {
+        "variableName": "entities",
+        "displayName": "[[i18n "EntityLabel" bundle="performing-arts-ch"]]",
+        "cellTemplate": "{{> template-entities}}"
+    },
+    {
+        "variableName": "entityGraph",
+        "displayName": "[[i18n "EntityGraph" bundle="performing-arts-ch"]]",
+        "cellTemplate": "<semantic-link iri=\"[[resolvePrefix "Assets:NamedGraph"]]\" urlqueryparam-view=\"graph\" urlqueryparam-graph=\"{{entityGraph.value}}\">[[i18n "NavView" bundle="performing-arts-ch"]]</semantic-link>"
+    },
+    {
+        "variableName": "entityContainer",
+        "displayName": "[[i18n "DeleteEntityButton" bundle="performing-arts-ch"]]",
+        "cellTemplate": "{{> template-delete-container}}"
+    }]'
+>
+    <template id="template-delete-container">
+        {{#if entityParentContainer.value}}
+            <mp-overlay-dialog type="modal" bs-size="large">
+                <mp-overlay-dialog-trigger>
+                    <button type="button" class="btn btn-secondary btn-xs">[[i18n "DeleteEntityButton" bundle="performing-arts-ch"]]</button>
+                </mp-overlay-dialog-trigger>
+                <mp-overlay-dialog-content>
+                    <div style="width:800px;height:600px;margin:0 -.5rem 1rem -.5rem;">
+                        <ontodia query='
+                            CONSTRUCT {
+                            ?s ?p ?o
+                            } WHERE {
+                                GRAPH <{{entityGraph.value}}> {
+                                    ?s ?p ?o .
+                                }
+                                FILTER(?p != rdf:type)
+                            }
+                        '>
+                            <ontodia-canvas></ontodia-canvas>
+                        </ontodia>
+                    </div>
+                    <p>[[i18n "DeleteEntityConfirmStatements" bundle="performing-arts-ch"]]</p>
+                    <div>
+                        <mp-event-trigger type="Dialog.HideAll">
+                            <button type="button" class="btn btn-secondary btn-xs">[[i18n "NavCancel" bundle="performing-arts-ch"]]</button>
+                        </mp-event-trigger>
+                        <semantic-context repository="default">
+                            <mp-ldp-remove-from-container-action container="{{entityParentContainer.value}}" iri="{{entityContainer.value}}">
+                                <button type="button" class="btn btn-primary btn-xs">[[i18n "DeleteEntityButton" bundle="performing-arts-ch"]]</button>
+                            </mp-ldp-remove-from-container-action>
+                        </semantic-context>
+                    </div>
+                </mp-overlay-dialog-content>
+            </mp-overlay-dialog>
+        {{/if}}
+    </template>
+    <template id="template-entities">
+        {{#each (split entities.value ";")}}
+            <semantic-link iri="{{this}}"></semantic-link><br/>
+        {{/each}}
+    </template>
+</semantic-table>
+
+[[/inline]]

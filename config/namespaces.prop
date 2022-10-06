@@ -35,3 +35,4 @@ spao = http://ontology.performing-arts.ch/
 ebucore = https://www.ebu.ch/metadata/ontologies/ebucore#
 crypHashFunc = http://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions/
 lookup = http://www.metaphacts.com/ontologies/platform/repository/lookup#
+ldp=http://www.w3.org/ns/ldp#
