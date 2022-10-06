@@ -21,7 +21,7 @@
         </bs-tab>
         [[/if]]
 
-        [[#if (hasPermission "forms:ldp:*")]] 
+        [[#if (hasPermission "api:ldp:*:delete")]] 
         <bs-tab event-key='delete' title='[[i18n "TabDelete" bundle="performing-arts-ch"]]'>
             [[> sapaModule:DeleteEntity]]
         </bs-tab>
