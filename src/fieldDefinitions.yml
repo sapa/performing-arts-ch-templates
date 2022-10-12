@@ -3518,7 +3518,6 @@ fields:
     label: Title
     datatype: http://www.w3.org/2001/XMLSchema#string
     minOccurs: 1
-    maxOccurs: 1
     queries:
       - select: 'SELECT ?value WHERE {
         $subject rdfs:label ?value ;

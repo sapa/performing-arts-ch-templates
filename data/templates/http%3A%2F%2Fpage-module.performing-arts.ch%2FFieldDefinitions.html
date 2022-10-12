@@ -2292,7 +2292,6 @@ $value rdf:type ?type . BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FI
 
             "label": "[[i18n "field_title" bundle="sapa-fields"]]",
             "minOccurs" : "1",
-            "maxOccurs" : "1",
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#string",
                 "selectPattern" : "SELECT ?value WHERE { $subject rdfs:label ?value ; crm:P102_has_title ?title . ?title a crm:E35_Title ; crm:P2_has_type spav:gotlb ; rdf:value ?value . }",
                 "insertPattern" : "INSERT { $subject rdfs:label $value . ?title rdf:value ?value . } WHERE { $subject crm:P102_has_title ?title . ?title a crm:E35_Title ; crm:P2_has_type spav:gotlb . }",
