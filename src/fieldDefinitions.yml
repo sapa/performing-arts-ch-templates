@@ -3540,6 +3540,33 @@ fields:
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
         }'
 
+  - id: RecordingTitleType
+    label: Type
+    datatype: xsd:anyURI
+    minOccurs: 1
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE {
+          $subject crm:P2_has_type ?value .
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject crm:P2_has_type $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STRBEFORE(STR($subject), "/title"), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject crm:P2_has_type $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STRBEFORE(STR($subject), "/title"), "/container/context")) as ?g)
+        }'
+      - valueSet: 'SELECT ?value WHERE {
+          ?value skos:inScheme spav:go .
+        }'
+
   - id: RecordingTitleValue
     label: Title
     datatype: xsd:langString
