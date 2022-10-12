@@ -16,8 +16,8 @@
       fields='[
         [[> RDFtype]],
         [[> RDFSLabel]],
+        [[> RecordingProduction]],
         [[> RecordingTitle]]
-        
       ]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
@@ -44,7 +44,11 @@
             </semantic-form-composite-input>
           </bs-col>
         </bs-row>
-        
+        <bs-row>
+          <bs-col sm='6'>
+            <semantic-form-autocomplete-input for="RecordingProduction"></semantic-form-autocomplete-input>
+          </bs-col>
+        </bs-row>
         <hr>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
