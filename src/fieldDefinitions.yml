@@ -3516,29 +3516,43 @@ fields:
 
   - id: RecordingTitle
     label: Title
-    datatype: http://www.w3.org/2001/XMLSchema#string
+    datatype: xsd:langString
     minOccurs: 1
     queries:
       - select: 'SELECT ?value WHERE {
-        $subject rdfs:label ?value ;
-          crm:P102_has_title ?title .
-        ?title a crm:E35_Title ;
-          crm:P2_has_type spav:gotlb ;
-          rdf:value ?value .
+        BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        GRAPH ?g {
+          $subject rdfs:label ?value ;
+            crm:P102_has_title ?title .
+          ?title a crm:E35_Title ;
+            crm:P2_has_type spav:gotlb ;
+            rdf:value ?value .
+        }
       }'
       - insert: 'INSERT {
-          $subject rdfs:label $value .
-          ?title rdf:value ?value .
+          GRAPH ?g {
+            $subject rdfs:label $value .
+            ?title rdf:value ?value .
+          }
         } WHERE {
-          $subject crm:P102_has_title ?title .
-        ?title a crm:E35_Title ;
-          crm:P2_has_type spav:gotlb .
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject crm:P102_has_title ?title .
+            ?title a crm:E35_Title ;
+              crm:P2_has_type spav:gotlb .
+          }
         }'
       - delete: 'DELETE {
-          $subject rdfs:label $value .
-          ?title rdf:value ?value .
+          GRAPH ?g {
+            $subject rdfs:label $value .
+            ?title rdf:value ?value .
+          }
         } WHERE {
-          $subject crm:P102_has_title ?title .
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject crm:P102_has_title ?title .
+            ?title rdf:value ?value .
+          }
         }'
 
   - id: Records
