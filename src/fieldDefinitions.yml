@@ -3554,14 +3554,14 @@ fields:
             $subject crm:P2_has_type $value .
           }
         } WHERE {
-          BIND(URI(CONCAT(STRBEFORE(STR($subject), "/title"), "/container/context")) as ?g)
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
         }'
       - delete: 'DELETE {
           GRAPH ?g {
             $subject crm:P2_has_type $value .
           }
         } WHERE {
-          BIND(URI(CONCAT(STRBEFORE(STR($subject), "/title"), "/container/context")) as ?g)
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
         }'
       - valueSet: 'SELECT ?value WHERE {
           ?value skos:inScheme spav:go .
@@ -3580,14 +3580,15 @@ fields:
             $subject rdf:value $value .
           }
         } WHERE {
-          BIND(URI(CONCAT(STRBEFORE(STR($subject), "/title"), "/container/context")) as ?g)
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
         }'
       - delete: 'DELETE {
           GRAPH ?g {
             $subject rdf:value $value .
           }
         } WHERE {
-          BIND(URI(CONCAT(STRBEFORE(STR($subject), "/title"), "/container/context")) as ?g)
+          $parent crm:P102_has_title $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
         }'
 
   - id: Records

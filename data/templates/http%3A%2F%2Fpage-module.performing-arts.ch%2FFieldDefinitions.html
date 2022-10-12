@@ -2308,8 +2308,8 @@ $value rdf:type ?type . BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FI
             "maxOccurs" : "1",
             "xsdDatatype" : "xsd:anyURI",
                 "selectPattern" : "SELECT ?value WHERE { $subject crm:P2_has_type ?value . }",
-                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { BIND(URI(CONCAT(STRBEFORE(STR($subject), \"/title\"), \"/container/context\")) as ?g) }",
-                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { BIND(URI(CONCAT(STRBEFORE(STR($subject), \"/title\"), \"/container/context\")) as ?g) }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
                 "valueSetPattern" : "SELECT ?value WHERE { ?value skos:inScheme spav:go . }",
         "iri" : "RecordingTitleType"
     }
@@ -2322,8 +2322,8 @@ $value rdf:type ?type . BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FI
             "minOccurs" : "1",
             "xsdDatatype" : "xsd:langString",
                 "selectPattern" : "SELECT ?value WHERE { $subject rdf:value ?value . }",
-                "insertPattern" : "INSERT { GRAPH ?g { $subject rdf:value $value . } } WHERE { BIND(URI(CONCAT(STRBEFORE(STR($subject), \"/title\"), \"/container/context\")) as ?g) }",
-                "deletePattern" : "DELETE { GRAPH ?g { $subject rdf:value $value . } } WHERE { BIND(URI(CONCAT(STRBEFORE(STR($subject), \"/title\"), \"/container/context\")) as ?g) }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject rdf:value $value . } } WHERE { BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject rdf:value $value . } } WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
         "iri" : "RecordingTitleValue"
     }
 [[/inline]]
