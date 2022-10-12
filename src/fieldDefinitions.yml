@@ -3591,11 +3591,9 @@ fields:
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
         }'
 
-  - id: RecordingTitleType
+  - id: RecordingType
     label: Type
     datatype: xsd:anyURI
-    minOccurs: 1
-    maxOccurs: 1
     queries:
       - select: 'SELECT ?value WHERE {
           $subject crm:P2_has_type ?value .
@@ -3618,6 +3616,59 @@ fields:
           ?value skos:inScheme spav:go .
         }'
 
+  - id: RecordingTitleRDFType
+    label: RDF Type
+    datatype: xsd:anyURI
+    queries:
+      - select: 'SELECT ?value WHERE {
+          $subject a ?value .
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject a $value .
+          }
+        } WHERE {
+          ?parent crm:P102_has_title $subject.
+          BIND(URI(CONCAT(STR(?parent), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject a $value .
+          }
+        } WHERE {
+          ?parent crm:P102_has_title $subject.
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+        }'
+
+  - id: RecordingTitleType
+    label: Type
+    datatype: xsd:anyURI
+    minOccurs: 1
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE {
+          $subject crm:P2_has_type ?value .
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject crm:P2_has_type $value .
+          }
+        } WHERE {
+          ?parent crm:P102_has_title $subject.
+          BIND(URI(CONCAT(STR(?parent), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject crm:P2_has_type $value .
+          }
+        } WHERE {
+          ?parent crm:P102_has_title $subject.
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+        }'
+      - valueSet: 'SELECT ?value WHERE {
+          ?value skos:inScheme spav:go .
+        }'
+
   - id: RecordingTitleValue
     label: Title
     datatype: xsd:langString
@@ -3631,15 +3682,16 @@ fields:
             $subject rdf:value $value .
           }
         } WHERE {
-          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+          ?parent crm:P102_has_title $subject .
+          BIND(URI(CONCAT(STR(?parent), "/container/context")) as ?g)
         }'
       - delete: 'DELETE {
           GRAPH ?g {
             $subject rdf:value $value .
           }
         } WHERE {
-          $parent crm:P102_has_title $subject .
-          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+          ?parent crm:P102_has_title $subject .
+          BIND(URI(CONCAT(STR(?parent), "/container/context")) as ?g)
         }'
 
   - id: Records
