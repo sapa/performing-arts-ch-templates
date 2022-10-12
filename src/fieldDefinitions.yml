@@ -3603,17 +3603,17 @@ fields:
             $subject crm:P2_has_type $value .
           }
         } WHERE {
-          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
         }'
       - delete: 'DELETE {
           GRAPH ?g {
             $subject crm:P2_has_type $value .
           }
         } WHERE {
-          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
         }'
       - valueSet: 'SELECT ?value WHERE {
-          ?value skos:inScheme spav:go .
+          ?value skos:inScheme spav:rg .
         }'
 
   - id: RecordingTitleRDFType

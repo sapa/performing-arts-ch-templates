@@ -2321,9 +2321,9 @@ $value rdf:type ?type . BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FI
             "label": "[[i18n "field_type" bundle="sapa-fields"]]",
             "xsdDatatype" : "xsd:anyURI",
                 "selectPattern" : "SELECT ?value WHERE { $subject crm:P2_has_type ?value . }",
-                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
-                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
-                "valueSetPattern" : "SELECT ?value WHERE { ?value skos:inScheme spav:go . }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "valueSetPattern" : "SELECT ?value WHERE { ?value skos:inScheme spav:rg . }",
         "iri" : "RecordingType"
     }
 [[/inline]]
