@@ -3516,43 +3516,51 @@ fields:
 
   - id: RecordingTitle
     label: Title
-    datatype: xsd:langString
+    datatype: xsd:anyURI
     minOccurs: 1
     queries:
       - select: 'SELECT ?value WHERE {
         BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
         GRAPH ?g {
-          $subject rdfs:label ?value ;
-            crm:P102_has_title ?title .
-          ?title a crm:E35_Title ;
-            crm:P2_has_type spav:gotlb ;
-            rdf:value ?value .
+          $subject crm:P102_has_title ?value .
         }
       }'
       - insert: 'INSERT {
           GRAPH ?g {
-            $subject rdfs:label $value .
-            ?title rdf:value ?value .
+            $subject crm:P102_has_title $value .
           }
         } WHERE {
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
-          GRAPH ?g {
-            $subject crm:P102_has_title ?title .
-            ?title a crm:E35_Title ;
-              crm:P2_has_type spav:gotlb .
-          }
         }'
       - delete: 'DELETE {
           GRAPH ?g {
-            $subject rdfs:label $value .
-            ?title rdf:value ?value .
+            $subject crm:P102_has_title $value .
           }
         } WHERE {
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+
+  - id: RecordingTitleValue
+    label: Title
+    datatype: xsd:langString
+    minOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE {
+          $subject rdf:value ?value .
+        }'
+      - insert: 'INSERT {
           GRAPH ?g {
-            $subject crm:P102_has_title ?title .
-            ?title rdf:value ?value .
+            $subject rdf:value $value .
           }
+        } WHERE {
+          BIND(URI(CONCAT(STRBEFORE(STR($subject), "/title"), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject rdf:value $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STRBEFORE(STR($subject), "/title"), "/container/context")) as ?g)
         }'
 
   - id: Records

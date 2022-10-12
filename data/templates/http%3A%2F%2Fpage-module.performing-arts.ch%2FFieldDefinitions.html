@@ -2292,11 +2292,24 @@ $value rdf:type ?type . BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FI
 
             "label": "[[i18n "field_title" bundle="sapa-fields"]]",
             "minOccurs" : "1",
-            "xsdDatatype" : "xsd:langString",
-                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject rdfs:label ?value ; crm:P102_has_title ?title . ?title a crm:E35_Title ; crm:P2_has_type spav:gotlb ; rdf:value ?value . } }",
-                "insertPattern" : "INSERT { GRAPH ?g { $subject rdfs:label $value . ?title rdf:value ?value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P102_has_title ?title . ?title a crm:E35_Title ; crm:P2_has_type spav:gotlb . } }",
-                "deletePattern" : "DELETE { GRAPH ?g { $subject rdfs:label $value . ?title rdf:value ?value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P102_has_title ?title . ?title rdf:value ?value . } }",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P102_has_title ?value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P102_has_title $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P102_has_title $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
         "iri" : "RecordingTitle"
+    }
+[[/inline]]
+ [[#*inline "RecordingTitleValue"]]
+    {
+        "id" : "RecordingTitleValue",
+
+            "label": "[[i18n "field_title" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "xsdDatatype" : "xsd:langString",
+                "selectPattern" : "SELECT ?value WHERE { $subject rdf:value ?value . }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject rdf:value $value . } } WHERE { BIND(URI(CONCAT(STRBEFORE(STR($subject), \"/title\"), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject rdf:value $value . } } WHERE { BIND(URI(CONCAT(STRBEFORE(STR($subject), \"/title\"), \"/container/context\")) as ?g) }",
+        "iri" : "RecordingTitleValue"
     }
 [[/inline]]
  [[#*inline "Records"]]
