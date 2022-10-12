@@ -2286,6 +2286,18 @@ $value rdf:type ?type . BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FI
         "iri" : "RecordSetVirtual"
     }
 [[/inline]]
+ [[#*inline "RecordingDuration"]]
+    {
+        "id" : "RecordingDuration",
+
+            "label": "[[i18n "field_duration" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:string",
+                "selectPattern" : "SELECT ?value WHERE { $subject schema:duration ?value . }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject schema:duration $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject schema:duration $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "RecordingDuration"
+    }
+[[/inline]]
  [[#*inline "RecordingProduction"]]
     {
         "id" : "RecordingProduction",

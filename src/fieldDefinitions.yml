@@ -3514,6 +3514,28 @@ fields:
         $subject <http://temp.performing-arts.ch/isVirtual> $value.
       } WHERE { }'
 
+  - id: RecordingDuration
+    label: Duration
+    datatype: xsd:string
+    queries:
+      - select: 'SELECT ?value WHERE {
+          $subject schema:duration ?value .
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject schema:duration $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject schema:duration $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+
   - id: RecordingProduction
     label: Production
     datatype: xsd:anyURI
