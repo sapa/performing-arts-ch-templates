@@ -3514,6 +3514,33 @@ fields:
         $subject <http://temp.performing-arts.ch/isVirtual> $value.
       } WHERE { }'
 
+  - id: RecordingTitle
+    label: Title
+    datatype: http://www.w3.org/2001/XMLSchema#string
+    minOccurs: 1
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE {
+        $subject rdfs:label ?value ;
+          crm:P102_has_title ?title .
+        ?title a crm:E35_Title ;
+          crm:P2_has_type spav:gotlb ;
+          rdf:value ?value .
+      }'
+      - insert: 'INSERT {
+          $subject rdfs:label $value .
+          ?title rdf:value ?value .
+        } WHERE {
+          $subject crm:P102_has_title ?title .
+        ?title a crm:E35_Title ;
+          crm:P2_has_type spav:gotlb .
+        }'
+      - delete: 'DELETE {
+          $subject rdfs:label $value .
+          ?title rdf:value ?value .
+        } WHERE {
+          $subject crm:P102_has_title ?title .
+        }'
 
   - id: Records
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Records

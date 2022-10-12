@@ -11,10 +11,11 @@
      [[/if]]
       
       browser-persistence=true
-      persistence='ldp' 
+      persistence='sparql' 
       form-id='recording'
       fields='[
-        [[> RDFtype]]
+        [[> RDFtype]],
+        [[> RecordingTitle]]
         
       ]'>
       <bs-panel>
@@ -25,7 +26,7 @@
         <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionIdentification" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='4'>
-            
+            <semantic-form-text-input for="RecordingTitle"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='8'>
           </bs-col>
