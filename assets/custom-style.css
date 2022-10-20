@@ -35,6 +35,9 @@ div.form-section {
   font-weight: bold;
   font-size: 1.2em;
 }
+.sapa-component.form-field-deprecated span.semantic-form-input-decorator__label::after {
+  content: " (deprecated)";
+}
 .sapa-component.domain-cards-tabs .nav {
   display: block;
 }
