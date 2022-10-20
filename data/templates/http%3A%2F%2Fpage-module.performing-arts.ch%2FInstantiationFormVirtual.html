@@ -58,6 +58,8 @@
               <semantic-form-text-input for="IdentifierValue"></semantic-form-text-input>
               <semantic-form-select-input for="IdentifierType"></semantic-form-select-input>
             </semantic-form-composite-input>
+            <div class="sapa-component form-field-deprecated"><semantic-form-text-input for="ThingIdentifier"></semantic-form-text-input></div>
+            <div class="sapa-component form-field-deprecated"><semantic-form-text-input for="ThingLegacyIdentifier"></semantic-form-text-input></div>
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-select-input for="InstantiationRepresentationType"></semantic-form-select-input>
@@ -267,14 +269,6 @@
               </bs-row>        
           </semantic-form-composite-input>
           <hr>
-          <bs-row>
-            <bs-col sm='12'>
-              <div class="form-section">[[i18n "FormDeprecated" bundle="performing-arts-ch"]]</div>
-              <semantic-form-text-input for="ThingIdentifier"></semantic-form-text-input>
-              <semantic-form-text-input for="ThingLegacyIdentifier"></semantic-form-text-input>
-            </bs-col>
-          </bs-row>
-        </bs-col>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
         <button name="submit" class="btn btn-secondary">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>
