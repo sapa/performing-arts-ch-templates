@@ -206,9 +206,11 @@
         {{/if}}
     </template>
     <template id="template-entities">
-        {{#each (split entities.value ";")}}
-            <semantic-link iri="{{this}}"></semantic-link><br/>
-        {{/each}}
+        {{#if entities.value}}
+            {{#each (split entities.value ";")}}
+                <semantic-link iri="{{this}}"></semantic-link><br/>
+            {{/each}}
+        {{/if}}
     </template>
 </semantic-table>
 
