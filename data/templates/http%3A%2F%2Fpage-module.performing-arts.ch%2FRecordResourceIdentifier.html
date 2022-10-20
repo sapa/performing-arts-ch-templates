@@ -1,13 +1,3 @@
-            <!-- identifier -->
-            <semantic-query 
-                query="SELECT ?label ?identifier  WHERE {
-            VALUES (?label) { ( '[[i18n "field_identifier" bundle="sapa-fields"]]') }
-        
-                    ?? rico:identifier ?identifier . }"
-                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
-                    <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
-            </semantic-query>
-
             <!-- typed identifier -->
             <semantic-query 
                 query="SELECT ?identifier ?type WHERE {
@@ -34,6 +24,16 @@
                             {{/each}}
                     </div>
                 </template>
+            </semantic-query>
+
+             <!-- identifier -->
+             <semantic-query 
+                query="SELECT ?label ?identifier  WHERE {
+            VALUES (?label) { ( '[[i18n "field_identifier" bundle="sapa-fields"]]') }
+        
+                    ?? rico:identifier ?identifier . }"
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
             </semantic-query>
             
             <!-- legacy identifier -->
