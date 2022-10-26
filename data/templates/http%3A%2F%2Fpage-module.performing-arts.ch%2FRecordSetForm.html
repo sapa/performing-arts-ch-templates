@@ -16,6 +16,7 @@
       fields='[
         [[> RDFtype]],
         [[> ThingIdentifier]],
+        [[> ThingTypedIdentifier]],
         [[> ThingLegacyIdentifier]],
         [[> ScopeID]],
         [[> RecordResourceName]],
@@ -73,8 +74,19 @@
         <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionIdentification" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='4'>
-            <semantic-form-text-input for="ThingIdentifier"></semantic-form-text-input>
-            <semantic-form-text-input for="ThingLegacyIdentifier"></semantic-form-text-input>
+            <semantic-form-composite-input 
+              for="ThingTypedIdentifier"
+              new-subject-template="http://data.performing-arts.ch/x/{{UUID}}"
+              fields='[
+                [[> RDFtype]],
+                [[> IdentifierType]],
+                [[> IdentifierValue]]
+              ]'>
+              <semantic-form-text-input for="IdentifierValue"></semantic-form-text-input>
+              <semantic-form-select-input for="IdentifierType"></semantic-form-select-input>
+            </semantic-form-composite-input>
+            <div class="sapa-component form-field-deprecated"><semantic-form-text-input for="ThingIdentifier"></semantic-form-text-input></div>
+            <div class="sapa-component form-field-deprecated"><semantic-form-text-input for="ThingLegacyIdentifier"></semantic-form-text-input></div>
           </bs-col>
           <bs-col sm='7'>
             <semantic-form-text-input for="RecordResourceName" languages='["en","de","fr","it"]'></semantic-form-text-input>

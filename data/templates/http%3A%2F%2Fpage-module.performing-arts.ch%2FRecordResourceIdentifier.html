@@ -1,5 +1,33 @@
-            <!-- identifier -->
+            <!-- typed identifier -->
             <semantic-query 
+                query="SELECT ?identifier ?type WHERE {
+                    ?? rico:hasOrHadIdentifier ?identifierUri .
+                    ?identifierUri rdf:value ?identifier ;
+                        crm:P2_has_type ?type . 
+                    # Exclude technical identifier and specify order
+                    VALUES (?type ?order) {
+                        (<http://vocab.performing-arts.ch/iduni> '1'^^xsd:integer)
+                        (<http://vocab.performing-arts.ch/idcon> '2'^^xsd:integer)
+                        (<http://vocab.performing-arts.ch/idold> '3'^^xsd:integer)
+                        [[#if (hasPermission 'forms:ldp:*')]]
+                            (<http://vocab.performing-arts.ch/idtec> '4'^^xsd:integer)
+                        [[/if]]
+                    }
+                } ORDER BY ?order ?identifier"
+                template="{{> template}}">
+                <template id="template">
+                    <div>
+                        <h5>[[i18n "field_typed_identifier" bundle="sapa-fields"]]</h5>
+                        <ul class="list-unstyled">
+                            {{#each bindings}}
+                                <li><span class=" {{#ifCond type.value '==' 'http://vocab.performing-arts.ch/iduni'}}sapa-component font-bold{{/ifCond}}">{{identifier.value}}</span> (<mp-label iri="{{type.value}}"></mp-label>)</li>
+                            {{/each}}
+                    </div>
+                </template>
+            </semantic-query>
+
+             <!-- identifier -->
+             <semantic-query 
                 query="SELECT ?label ?identifier  WHERE {
             VALUES (?label) { ( '[[i18n "field_identifier" bundle="sapa-fields"]]') }
         
@@ -7,7 +35,7 @@
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                     <ul class="list-unstyled">{{#each bindings}}<li>{{identifier.value}}</li>{{/each}}</ul></div>'>
             </semantic-query>
-
+            
             <!-- legacy identifier -->
             <semantic-query 
                 query="SELECT ?label ?identifier  WHERE {

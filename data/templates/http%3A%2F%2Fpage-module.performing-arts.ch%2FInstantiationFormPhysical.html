@@ -17,6 +17,8 @@
         [[> RDFtype]],
         [[> InstantiationRecord]],
         [[> ThingIdentifier]],
+        [[> ThingTypedIdentifier]],
+        [[> ThingLegacyIdentifier]],
         [[> InstantiationArchivalStatus]],
         [[> InstantiationRepresentationType]],
         [[> InstantiationCarrierType]],
@@ -27,7 +29,7 @@
         [[> InstantiationCondition]],
         [[> InstantiationMaterial]],
         [[> InstantiationExtent]],
-        [[> InternalNote]],
+        [[> ThingNoteInternal]],
         [[> RecordResourcePackingDepricated]],
         [[> ThingLocation]],
         [[> InstantiationPhysicalCharacteristics]],
@@ -63,7 +65,17 @@
         </div>
         <bs-row>
           <bs-col sm='4'>
-            <semantic-form-text-input for="ThingIdentifier"></semantic-form-text-input>
+            <semantic-form-composite-input 
+              for="ThingTypedIdentifier"
+              new-subject-template="http://data.performing-arts.ch/x/{{UUID}}"
+              fields='[
+                [[> RDFtype]],
+                [[> IdentifierType]],
+                [[> IdentifierValue]]
+              ]'>
+              <semantic-form-text-input for="IdentifierValue"></semantic-form-text-input>
+              <semantic-form-select-input for="IdentifierType"></semantic-form-select-input>
+            </semantic-form-composite-input>
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-select-input for="InstantiationRepresentationType"></semantic-form-select-input>
@@ -197,7 +209,7 @@
         </bs-row>        <bs-row>
           <bs-col sm='4'>
             <semantic-form-text-input for="RecordResourceProtectionDuration"></semantic-form-text-input>
-            <semantic-form-text-input for="InternalNote" multiline=true></semantic-form-text-input>
+            <semantic-form-text-input for="ThingNoteInternal" multiline=true></semantic-form-text-input>
           </bs-col>
           <bs-col sm='2'>
             <semantic-form-checklist-input type='radio' clearable=true for="ThingTermsProtection"></semantic-form-checklist-input>

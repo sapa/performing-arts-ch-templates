@@ -14,6 +14,35 @@
                         >
                     </semantic-query>
 
+                    <!-- legacy identifier -->
+                    <semantic-query 
+                        query="SELECT ?legacy_identifier WHERE { ?? spao:legacyIdentifier ?legacy_identifier . }"
+                        template='<div>
+                            <h5>[[i18n "field_legacy_identifier" bundle="sapa-fields"]]</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{legacy_identifier.value}}</li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
+                    <!-- typed identifier -->
+                    <semantic-query 
+                    query="SELECT ?identifier ?type WHERE {
+                        ?? rico:hasOrHadIdentifier ?identifierUri .
+                        ?identifierUri rdf:value ?identifier ;
+                            crm:P2_has_type ?type . 
+                    }"
+                    template="{{> template}}">
+                        <template id="template">
+                            <div>
+                                <h5>[[i18n "field_typed_identifier" bundle="sapa-fields"]]</h5>
+                                <ul class="list-unstyled">
+                                    {{#each bindings}}
+                                        <li>{{identifier.value}} (<mp-label iri="{{type.value}}"></mp-label>)</li>
+                                    {{/each}}
+                            </div>
+                        </template>
+                    </semantic-query>
+
                     <!-- archival status -->
                     <semantic-query 
                         query="SELECT ?archival_status WHERE { ?? spao:hasArchivalStatus ?archival_status . }"
@@ -28,7 +57,7 @@
                     <semantic-query 
                         query='SELECT ?representation_type WHERE { ?? rico:hasRepresentationType ?representation_type . }'
                         template='<div>
-                            <h5>Pepresentation type</h5>
+                            <h5>Representation type</h5>
                             <ul class="list-unstyled">{{#each bindings}}
                                 <li><mp-label iri="{{representation_type.value}}"></mp-label></li>
                             {{/each}}</ul>
@@ -748,6 +777,12 @@
             [[> sapaModule:InstantiationFormVirtual]]
         </bs-tab>
         [[/if]]
+
+        [[#if (hasPermission "api:ldp:*:delete")]] 
+        <bs-tab event-key='delete' title='[[i18n "TabDelete" bundle="performing-arts-ch"]]'>
+            [[> sapaModule:DeleteEntity]]
+        </bs-tab>
+        [[/if]]      
         
         [[> sapaModule:AdminTabs]]
 

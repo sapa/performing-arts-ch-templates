@@ -865,6 +865,12 @@
 </bs-tab>
 [[/if]]
 
+[[#if (hasPermission "api:ldp:*:delete")]] 
+<bs-tab event-key='delete' title='[[i18n "TabDelete" bundle="performing-arts-ch"]]'>
+    [[> sapaModule:DeleteEntity]]
+</bs-tab>
+[[/if]]
+
 [[> sapaModule:AdminTabs]]
 
 </bs-tabs>  
