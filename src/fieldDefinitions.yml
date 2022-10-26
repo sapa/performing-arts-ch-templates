@@ -2828,7 +2828,7 @@ fields:
       - select: 'SELECT $value WHERE { $subject rico:quantity $value. }'
       - insert: 'INSERT { $subject rico:quantity $value. } WHERE { }'
       - delete: 'DELETE { $subject rico:quantity $value. } WHERE { }'
-      - ask: 'ASK { FILTER(REGEX($value, "^\\\\d+$")) }'
+      - ask: 'ASK { FILTER(REGEX($value, "^[\\\\d,.]+$")) }'
 
 
   - id: RecordResourceHierarchy

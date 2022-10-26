@@ -1852,7 +1852,7 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
                 "selectPattern" : "SELECT $value WHERE { $subject rico:quantity $value. }",
                 "insertPattern" : "INSERT { $subject rico:quantity $value. } WHERE { }",
                 "deletePattern" : "DELETE { $subject rico:quantity $value. } WHERE { }",
-                "askPattern" : "ASK { FILTER(REGEX($value, \"^\\\\d+$\")) }",
+                "askPattern" : "ASK { FILTER(REGEX($value, \"^[\\\\d,.]+$\")) }",
         "iri" : "RecordResourceExtentValue"
     }
 [[/inline]]
