@@ -3395,7 +3395,7 @@ fields:
     FILTER(CONTAINS(STR($value), "://vimeo.com"))
       }'
       - ask: 'ASK {
-        FILTER(REGEX(STR($value), "http://vimeo.com/{\\\\d}+"))
+        FILTER(REGEX(STR($value), "https?://vimeo.com/\\\\d+"))
       }'
 
 
