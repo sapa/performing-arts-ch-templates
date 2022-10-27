@@ -1852,7 +1852,7 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
                 "selectPattern" : "SELECT $value WHERE { $subject rico:quantity $value. }",
                 "insertPattern" : "INSERT { $subject rico:quantity $value. } WHERE { }",
                 "deletePattern" : "DELETE { $subject rico:quantity $value. } WHERE { }",
-                "askPattern" : "ASK { FILTER(REGEX($value, \"^\\\\d+$\")) }",
+                "askPattern" : "ASK { FILTER(REGEX($value, \"^[\\\\d,.]+$\")) }",
         "iri" : "RecordResourceExtentValue"
     }
 [[/inline]]
@@ -2215,7 +2215,7 @@ $value rdf:type ?type . BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FI
                 "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvonl . FILTER(CONTAINS(STR($value), \"://vimeo.com\")) }",
                 "insertPattern" : "INSERT { $subject rico:hasInstantiation $value . $value a rico:Instantiation ; rico:hasCarrierType spav:fvonl ; rico:hasRepresentationType spav:rtmi . } WHERE { }",
                 "deletePattern" : "DELETE { $subject rico:hasInstantiation $value . $value ?p ?o . } WHERE { $subject rico:hasInstantiation $value . $value ?p ?o . FILTER(CONTAINS(STR($value), \"://vimeo.com\")) }",
-                "askPattern" : "ASK { FILTER(REGEX(STR($value), \"http://vimeo.com/{\\\\d}+\")) }",
+                "askPattern" : "ASK { FILTER(REGEX(STR($value), \"https?://vimeo.com/\\\\d+\")) }",
         "iri" : "RecordResourceVimeo"
     }
 [[/inline]]
