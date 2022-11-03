@@ -2301,6 +2301,20 @@ $value rdf:type ?type . BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FI
         "iri" : "Records"
     }
 [[/inline]]
+ [[#*inline "ReplacedBy"]]
+    {
+        "id" : "ReplacedBy",
+
+            "label": "[[i18n "field_replaced_by" bundle="sapa-fields"]]",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $subject spao:replacedBy ?value . }",
+                "insertPattern" : "INSERT { $subject spao:replacedBy $value . } WHERE { }",
+                "deletePattern" : "DELETE { $subject spao:replacedBy $value . } WHERE { }",
+                "askPattern" : "ASK { $subject a ?type . $value a ?type. }",
+        "iri" : "ReplacedBy"
+    }
+[[/inline]]
  [[#*inline "RepresentationFile"]]
     {
         "id" : "RepresentationFile",
