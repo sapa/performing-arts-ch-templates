@@ -413,7 +413,7 @@
                 query='SELECT ?label ?value  WHERE {
             VALUES (?label) { ( "[[i18n "field_internal_note" bundle="sapa-fields"]]") }
         
-                    ?? spao:hasNoteInternal ?value . }'
+                    ?? spao:hasInternalNote ?value . }'
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                     {{#each bindings}}<div style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
