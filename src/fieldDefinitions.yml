@@ -3539,6 +3539,7 @@ fields:
       - ask: 'ASK { 
           $subject a ?type .
           $value a ?type. 
+          FILTER($subject != $value)
       }'
 
   - id: RepresentationFile
