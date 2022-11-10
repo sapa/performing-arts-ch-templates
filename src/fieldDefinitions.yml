@@ -2853,11 +2853,17 @@ fields:
       - insert: 'INSERT { $subject rico:hasCreator $value . } WHERE {}'
       - delete: 'DELETE { $subject rico:hasCreator $value} WHERE {}'
       - autosuggestion: 'SELECT ?value ?label WHERE {
-        ?value a rico:Person ;
-    rdfs:label ?label .
-        ?label bds:search ?__token__ ;
-        bds:relevance ?score ; 
-        bds:matchAllTerms "true"
+        {
+          ?value a rico:Person ;
+            rdfs:label ?label .
+          ?label bds:search ?__token__ ;
+          bds:relevance ?score ; 
+          bds:matchAllTerms "true"
+        } UNION {
+          BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
+          ?value a/rdfs:subClassOf* crm:E39_Actor ;
+            rdfs:label ?label .
+        }
       } LIMIT 100'
 
 
@@ -3363,11 +3369,16 @@ fields:
         }
         ORDER BY (?label)'
       searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-        ?item a rico:RecordSet ;
-          rico:name ?label .
-        ?label bds:search ?__token__ ;
-          bds:relevance ?score ; 
-          bds:matchAllTerms "true"
+        {
+          ?item a rico:RecordSet ;
+            rico:name ?label .
+          ?label bds:search ?__token__ ;
+            bds:relevance ?score ; 
+            bds:matchAllTerms "true"
+        } UNION {
+          BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?item)
+          ?item a rico:RecordSet .
+        }
         OPTIONAL { ?child rico:isOrWasIncludedIn ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
       } ORDER BY ASC (?label)'
@@ -3511,10 +3522,17 @@ fields:
       - insert: 'INSERT { $subject rico:hasProvenance $value . } WHERE { }'
       - delete: 'DELETE { $subject rico:hasProvenance $value . } WHERE { }'
       - autosuggestion: 'SELECT ?value ?label WHERE {
-        ?value rdf:type/rdfs:subClassOf* rico:Agent .
-        FILTER(CONTAINS(STR(?value), "/a/"))
-        ?value rdfs:label ?label .
-        FILTER(REGEX(STR(?label), "?token"))
+        {
+          ?value rdf:type/rdfs:subClassOf* rico:Agent .
+          FILTER(CONTAINS(STR(?value), "/a/"))
+          ?value rdfs:label ?label .
+          ?label bds:search ?__token__ ;
+            bds:matchAllTerms "true" .
+         } UNION {
+          BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
+          ?value a/rdfs:subClassOf* rico:Agent ;
+            rdfs:label ?label .
+         }
       } LIMIT 10'
 
 
@@ -3568,11 +3586,16 @@ fields:
             IF(?lang = "it", ?type_label_it, ?type_label_en)
             )
           ) AS ?type_label)
-        $value rdfs:label ?item_label .
-        ?item_label bds:search ?__token__ ;
-          bds:matchAllTerms "true" .
-        
-          $value rdf:type ?type .
+          {
+            $value rdfs:label ?item_label .
+            ?item_label bds:search ?__token__ ;
+              bds:matchAllTerms "true" .
+            $value rdf:type ?type .
+          } UNION {
+            BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
+            $value rdf:type ?type ;
+              rdfs:label ?item_label .
+          }
           BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator)
           FILTER(?type_indicator != "x")
           FILTER(?type_indicator != "u")
@@ -4198,16 +4221,28 @@ fields:
       - insert: 'INSERT { $subject spao:seeAlso $value. } WHERE {}'
       - delete: 'DELETE { $subject spao:seeAlso $value. } WHERE {}'
       - autosuggestion: 'SELECT $value $label WHERE {
-        { $value a rico:Concept . }
-        UNION
-        { $value rdf:type/rdfs:subClassOf* rico:Agent . }
-        UNION
-        { $value rdf:type rico:RecordSet . }
-        UNION
-        { $value rdf:type rico:Record . }
-        $value rdfs:label $label .
-        FILTER(REGEX($label, "?token", "i"))
-        FILTER(!CONTAINS(STR(?value), "/u/"))
+        {
+          { $value a rico:Concept . }
+          UNION
+          { $value rdf:type/rdfs:subClassOf* rico:Agent . }
+          UNION
+          { $value rdf:type rico:RecordSet . }
+          UNION
+          { $value rdf:type rico:Record . }
+          $value rdfs:label $label .
+          FILTER(REGEX($label, "?token", "i"))
+          FILTER(!CONTAINS(STR(?value), "/u/"))
+        } UNION {
+          BIND(URI(REPLACE(REPLACE("?token", "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
+          $value rdfs:label $label ;
+            a/rdfs:subClassOf* ?type .
+          VALUES (?type) {
+            ( rico:Concept )
+            ( rico:Agent )
+            ( rico:RecordSet )
+            ( rico:Record )
+          }
+        }
       }'
 
 
