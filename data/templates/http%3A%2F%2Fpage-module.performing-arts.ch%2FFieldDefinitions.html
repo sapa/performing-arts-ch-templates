@@ -1090,11 +1090,27 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "iri" : "NotePublic"
     }
 [[/inline]]
+ [[#*inline "Performance_Genre"]]
+    {
+        "id" : "Performance_Genre",
+
+            "label": "[[i18n "field_genre" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:anyURI",
+            "domain" : "frbroo:F25_Performance_Plan",
+            "range" : "crm:E55_Type",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P2_has_type ?value . ?value skos:inScheme spav:mn . }",
+                "insertPattern" : "INSERT { $subject crm:P2_has_type $value } WHERE {}",
+                "deletePattern" : "DELETE { $subject crm:P2_has_type $value } WHERE {}",
+                "valueSetPattern" : "SELECT ?value ?label WHERE { ?value skos:inScheme spav:mn . } ORDER BY (?label)",
+        "iri" : "Performance_Genre"
+    }
+[[/inline]]
  [[#*inline "Performance_Title"]]
     {
         "id" : "Performance_Title",
 
             "label": "[[i18n "field_title" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
             "maxOccurs" : "1",
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#langString",
             "domain" : "frbroo:F25_Performance_Plan",

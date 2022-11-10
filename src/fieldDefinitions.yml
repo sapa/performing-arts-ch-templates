@@ -1688,11 +1688,31 @@ fields:
         rdf:value $value.
       } WHERE {} '
 
+  - id: Performance_Genre
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Genre
+    label: Genre
+    datatype: xsd:anyURI
+    minOccurs: 0
+    domain: frbroo:F25_Performance_Plan
+    range: crm:E55_Type
+    queries:
+    - select: 'SELECT ?value WHERE {
+        $subject crm:P2_has_type ?value .
+        ?value skos:inScheme spav:mn .
+      }'
+    - insert: 'INSERT { $subject crm:P2_has_type $value } WHERE {}'
+    - delete: 'DELETE { $subject crm:P2_has_type $value } WHERE {}'
+    - valueSet: 'SELECT ?value ?label WHERE {
+        ?value skos:inScheme spav:mn .
+      }
+      ORDER BY (?label)'
+
   - id: Performance_Title
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Title
     label: Title
     datatype: http://www.w3.org/2001/XMLSchema#langString
     domain: frbroo:F25_Performance_Plan
+    minOccurs: 1
     maxOccurs: 1
     queries:
       - select: 'SELECT ?value WHERE { $subject rdfs:label ?value . }'
