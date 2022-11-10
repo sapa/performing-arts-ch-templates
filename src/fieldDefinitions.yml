@@ -1688,7 +1688,102 @@ fields:
         rdf:value $value.
       } WHERE {} '
 
-  - id: Performance_Genre
+  - id: Performance_Note_Value_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteValue_SPARQLMode
+    label: Note
+    datatype: xsd:langString
+    minOccurs: 1
+    domain: crm:E33_Linguistic_Object
+    queries:
+      - select: 'SELECT $value WHERE { 
+          $parent crm:P67_is_referred_to_by $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject rdf:value $value .
+          }
+        }'
+      - insert: 'INSERT { 
+          GRAPH ?g {
+            $subject rdf:value $value .
+          } 
+        } WHERE {
+          $parent crm:P67_is_referred_to_by $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE { 
+          GRAPH ?g {
+            $subject rdf:value $value 
+          }
+        } WHERE {
+          $parent crm:P67_is_referred_to_by $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+        }'
+  
+  - id: Performance_Note_Entity_Typed_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteTyped_SPARQLMode
+    label: Note
+    datatype: xsd:anyURI
+    queries:
+      - select: 'SELECT ?value WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject crm:P67_is_referred_to_by ?value .
+          }
+          ?value crm:P2_has_type/skos:inScheme spav:eo
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject crm:P67_is_referred_to_by $value .
+            $value a crm:E33_Linguistic_Object .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject crm:P67_is_referred_to_by $value .
+            $value a crm:E33_Linguistic_Object .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      
+
+  - id: Performance_Note_Type_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteType_SPARQLMode
+    label: Note type
+    datatype: xsd:anyURI
+    range: crm:E55_Type
+    queries:
+      - select: 'SELECT ?value WHERE {
+          $parent crm:P67_is_referred_to_by $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject crm:P2_has_type ?value .
+          }
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject crm:P2_has_type $value .
+          }
+        } WHERE {
+          $parent crm:P67_is_referred_to_by $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject crm:P2_has_type $value .
+          }
+        } WHERE {
+          $parent crm:P67_is_referred_to_by $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+        }'
+      - valueSet: 'SELECT ?value ?label WHERE {
+          ?value skos:inScheme spav:eo ;
+            skos:prefLabel ?label .
+          }'
+
+  - id: Performance_Genre_SPARQLMode
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Genre
     label: Genre
     datatype: xsd:anyURI
@@ -1700,14 +1795,26 @@ fields:
         $subject crm:P2_has_type ?value .
         ?value skos:inScheme spav:mn .
       }'
-    - insert: 'INSERT { $subject crm:P2_has_type $value } WHERE {}'
-    - delete: 'DELETE { $subject crm:P2_has_type $value } WHERE {}'
+    - insert: 'INSERT { 
+        GRAPH ?g {
+          $subject crm:P2_has_type $value .
+        }
+      } WHERE {
+        BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+      }'
+    - delete: 'DELETE { 
+        GRAPH ?g {
+          $subject crm:P2_has_type $value 
+        }
+      } WHERE {
+        BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+      }'
     - valueSet: 'SELECT ?value ?label WHERE {
         ?value skos:inScheme spav:mn .
       }
       ORDER BY (?label)'
 
-  - id: Performance_Title
+  - id: Performance_Title_SPARQLMode
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Title
     label: Title
     datatype: http://www.w3.org/2001/XMLSchema#langString
@@ -1715,9 +1822,26 @@ fields:
     minOccurs: 1
     maxOccurs: 1
     queries:
-      - select: 'SELECT ?value WHERE { $subject rdfs:label ?value . }'
-      - insert: 'INSERT { $subject rdfs:label $value} WHERE {}'
-      - delete: 'DELETE { $subject rdfs:label $value} WHERE {}'
+      - select: 'SELECT ?value WHERE { 
+          GRAPH ?g {
+            $subject rdfs:label ?value . 
+          }
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - insert: 'INSERT { 
+          GRAPH ?g {
+            $subject rdfs:label $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE { 
+          GRAPH ?g {
+            $subject rdfs:label $value .
+          } 
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
 
   - id: Performance_Language
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language
@@ -2400,6 +2524,34 @@ fields:
       - insert: 'INSERT { $subject a $value } WHERE {}'
       - delete: 'DELETE { $subject a $value } WHERE {}'
 
+  - id: RDFtype_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype_SPARQLMode
+    label: Type_Setter
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    minOccurs: 1
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
+    range: rdfs:Class
+    queries:
+      - select: 'SELECT $value WHERE { 
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject a $value .
+          }
+        }'
+      - insert: 'INSERT { 
+          GRAPH ?g {
+            $subject a $value .
+          } 
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE { 
+          GRAPH ?g {
+            $subject a $value 
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
 
   - id: RecordAnnotationRecto
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordAnnotationRecto
@@ -3604,6 +3756,48 @@ fields:
         $subject owl:sameAs $value .
       } WHERE { }'
 
+  - id: SameAs_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs_SPARQLMode
+    label: External resources
+    description: Expects URIs from other databases such as Wikidata, GND, etc.
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
+    range: rdfs:Class
+    queries:
+      - select: 'SELECT ?value ?label
+      WHERE {
+        BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        GRAPH ?g {
+          $subject owl:sameAs ?value .
+        }
+        BIND(REPLACE(STR(?value), ".*\\\\/c*b*", "") as ?localname)
+        BIND(STRBEFORE(STR(?value), ?localname) as ?prefix)
+        VALUES(?prefix ?source ?order)
+        {
+          ("http://www.wikidata.org/entity/" "Wikidata" 0)
+          ("http://www.isni.org/" "ISNI" 1)
+          ("http://viaf.org/viaf/" "VIAF" 2)
+          ("http://d-nb.info/gnd/" "GND" 3)
+          ("https://catalogue.bnf.fr/ark:/12148/cb" "BnF" 4)
+          ("http://geonames.org/" "Geonames" 5)
+          ("http://classifications.data.admin.ch/municipality/" "Swiss Municipality" 6)
+          ("http://classifications.data.admin.ch/canton/" "Swiss Municipality" 7)
+          ("http://tls.theaterwissenschaft.ch/wiki/" "Theaterlexikon der Schweiz" 8)
+        }
+        BIND(IF(?order<8, CONCAT(?source,": ",?localname), ?source) AS ?label)
+      } ORDER BY ASC(?order)'
+      - insert: 'INSERT {
+        BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        GRAPH ?g {
+          $subject owl:sameAs $value .
+        }
+      } WHERE {}'
+      - delete: 'DELETE {
+        BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        GRAPH ?g {
+          $subject owl:sameAs $value .
+        }
+      } WHERE { }'
 
   - id: SchemaDuration
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SchemaDuration
