@@ -60,10 +60,10 @@
                   ?? crm:P9_consists_of ?production .
                   ?production crm:P2_has_type spav:muwgo ;
                       crm:P14_carried_out_by ?producer .
-                  OPTIONAL {
-                      ?expressioncreation crm:P10_falls_within ?season .
-                      FILTER(CONTAINS(STR(?season), "/s/"))
-                  }
+                  #OPTIONAL {
+                  #    ?expressioncreation crm:P10_falls_within ?season .
+                  #    FILTER(CONTAINS(STR(?season), "/s/"))
+                  #}
                   BIND(IF(CONTAINS(STR($producer), "/u/"), "true", "") AS ?unidentified)
               }'
           template='<p>{{#each bindings}}{{#if @first}}{{else}}, {{/if}}{{#if unidentified.value}}<mp-label iri="{{producer.value}}"></mp-label>{{else}}<semantic-link iri="{{producer.value}}"></semantic-link>{{/if}}{{#if @last}}{{#if season}}<br><semantic-link iri="{{season.value}}"></semantic-link>{{/if}}{{/if}}{{/each}}</p>'>
