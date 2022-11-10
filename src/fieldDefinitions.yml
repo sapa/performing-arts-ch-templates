@@ -1688,6 +1688,16 @@ fields:
         rdf:value $value.
       } WHERE {} '
 
+  - id: Performance_Title
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Title
+    label: Title
+    datatype: http://www.w3.org/2001/XMLSchema#langString
+    domain: frbroo:F25_Performance_Plan
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE { $subject rdfs:label ?value . }'
+      - insert: 'INSERT { $subject rdfs:label $value} WHERE {}'
+      - delete: 'DELETE { $subject rdfs:label $value} WHERE {}'
 
   - id: Performance_Language
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Language

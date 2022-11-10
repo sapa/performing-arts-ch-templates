@@ -1090,6 +1090,20 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "iri" : "NotePublic"
     }
 [[/inline]]
+ [[#*inline "Performance_Title"]]
+    {
+        "id" : "Performance_Title",
+
+            "label": "[[i18n "field_title" bundle="sapa-fields"]]",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#langString",
+            "domain" : "frbroo:F25_Performance_Plan",
+                "selectPattern" : "SELECT ?value WHERE { $subject rdfs:label ?value . }",
+                "insertPattern" : "INSERT { $subject rdfs:label $value} WHERE {}",
+                "deletePattern" : "DELETE { $subject rdfs:label $value} WHERE {}",
+        "iri" : "Performance_Title"
+    }
+[[/inline]]
  [[#*inline "Performance_Language"]]
     {
         "id" : "Performance_Language",
