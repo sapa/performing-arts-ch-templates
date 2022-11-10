@@ -3260,10 +3260,17 @@ fields:
       - insert: 'INSERT { $subject rico:hasProvenance $value . } WHERE { }'
       - delete: 'DELETE { $subject rico:hasProvenance $value . } WHERE { }'
       - autosuggestion: 'SELECT ?value ?label WHERE {
-        ?value rdf:type/rdfs:subClassOf* rico:Agent .
-        FILTER(CONTAINS(STR(?value), "/a/"))
-        ?value rdfs:label ?label .
-        FILTER(REGEX(STR(?label), "?token"))
+        {
+          ?value rdf:type/rdfs:subClassOf* rico:Agent .
+          FILTER(CONTAINS(STR(?value), "/a/"))
+          ?value rdfs:label ?label .
+          ?label bds:search ?__token__ ;
+            bds:matchAllTerms "true" .
+         } UNION {
+          BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
+          ?value a/rdfs:subClassOf* rico:Agent ;
+            rdfs:label ?label .
+         }
       } LIMIT 10'
 
 
