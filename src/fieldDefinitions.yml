@@ -1714,6 +1714,32 @@ fields:
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
         }'
 
+  - id: Performance_Music_Title_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Music_Title_SPARQLMode
+    label: Music Title
+    datatype: xsd:langString
+    queries:
+      - select: 'SELECT ?value WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject <http://temp.performing-arts.ch/hasMusicTitle> ?value .
+          }
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject <http://temp.performing-arts.ch/hasMusicTitle> $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject <http://temp.performing-arts.ch/hasMusicTitle> $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+
   - id: Performance_Note_Value_SPARQLMode
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteValue_SPARQLMode
     label: Note
@@ -2518,6 +2544,34 @@ fields:
       - delete: 'DELETE {
         $subject rdfs:comment $value
       } WHERE {}'
+
+  - id: RDFSComment_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSComment_SPARQLMode
+    label: Comment
+    description: A short comment that helps to identify the entity.
+    datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
+    queries:
+      - select: 'SELECT ?value WHERE {
+        BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        GRAPH ?g {
+          $subject rdfs:comment ?value.
+        }
+      }'
+      - insert: 'INSERT {
+        GRAPH ?g {
+          $subject rdfs:comment ?value.
+        }
+      } WHERE {
+        BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+      }'
+      - delete: 'DELETE {
+        GRAPH ?g {
+          $subject rdfs:comment ?value.
+        }
+      } WHERE {
+        BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+      }'
 
 
   - id: RDFSLabel

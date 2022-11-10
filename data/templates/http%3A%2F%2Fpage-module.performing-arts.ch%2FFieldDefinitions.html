@@ -1102,6 +1102,18 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "iri" : "Performance_External_ID_SPARQLMode"
     }
 [[/inline]]
+ [[#*inline "Performance_Music_Title_SPARQLMode"]]
+    {
+        "id" : "Performance_Music_Title_SPARQLMode",
+
+            "label": "[[i18n "field_music_title" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:langString",
+                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject <http://temp.performing-arts.ch/hasMusicTitle> ?value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject <http://temp.performing-arts.ch/hasMusicTitle> $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject <http://temp.performing-arts.ch/hasMusicTitle> $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "Performance_Music_Title_SPARQLMode"
+    }
+[[/inline]]
  [[#*inline "Performance_Note_Value_SPARQLMode"]]
     {
         "id" : "Performance_Note_Value_SPARQLMode",
@@ -1538,6 +1550,20 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
                 "insertPattern" : "INSERT { $subject rdfs:comment $value } WHERE {}",
                 "deletePattern" : "DELETE { $subject rdfs:comment $value } WHERE {}",
         "iri" : "RDFSComment"
+    }
+[[/inline]]
+ [[#*inline "RDFSComment_SPARQLMode"]]
+    {
+        "id" : "RDFSComment_SPARQLMode",
+
+            "label": "[[i18n "field_comment" bundle="sapa-fields"]]",
+            "description" : "A short comment that helps to identify the entity.",
+            "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+            "domain" : "http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity",
+                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject rdfs:comment ?value. } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject rdfs:comment ?value. } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject rdfs:comment ?value. } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "RDFSComment_SPARQLMode"
     }
 [[/inline]]
  [[#*inline "RDFSLabel"]]
