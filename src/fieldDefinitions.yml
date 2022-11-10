@@ -4135,6 +4135,68 @@ fields:
     }
       }'
 
+  - id: TitleEntity_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/TitleEntity_SPARQLMode
+    label: Title
+    datatype: xsd:anyURI
+    minOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject crm:P102_has_title ?value .
+          }
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject crm:P102_has_title $value .
+            $value a crm:E35_Title .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject crm:P102_has_title $value .
+            $value a crm:E35_Title .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+
+  - id: TitleType_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/TitleType_SPARQLMode
+    label: Type
+    datatype: xsd:anyURI
+    minOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE {
+          $parent crm:P102_has_title $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject crm:P2_has_type ?value .
+          }
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject crm:P2_has_type $value .
+          }
+        } WHERE {
+          $parent crm:P102_has_title $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject crm:P2_has_type $value .
+          }
+        } WHERE {
+          $parent crm:P102_has_title $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+        }'
+      - valueSet: 'SELECT ?value ?label WHERE {
+          ?value skos:inScheme spav:go ;
+            skos:prefLabel ?label .
+        }'
 
   - id: VenueAcronym
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/VenueAcronym
