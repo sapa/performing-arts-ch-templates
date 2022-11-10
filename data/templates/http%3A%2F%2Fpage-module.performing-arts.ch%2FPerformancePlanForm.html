@@ -17,14 +17,14 @@
         [[> RDFtype_SPARQLMode]],
         [[> Performance_Genre_SPARQLMode]],
         [[> Performance_Note_Entity_Typed_SPARQLMode]],
-        [[> Performance_Title_SPARQLMode]]
+        [[> Performance_Label_SPARQLMode]]
       ]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
           <semantic-form-hidden-input for="RDFtype_SPARQLMode" default-value='[[resolvePrefix "frbroo:F25_Performance_Plan"]]'></semantic-form-hidden-input>
         </div>
-        <semantic-form-text-input for="Performance_Title_SPARQLMode" languages='["en","de","it","fr"]' ></semantic-form-text-input>
+        <semantic-form-text-input for="Performance_Label_SPARQLMode" languages='["en","de","it","fr"]' ></semantic-form-text-input>
         <semantic-form-select-input for="Performance_Genre_SPARQLMode" ></semantic-form-select-input>
         <semantic-form-composite-input for="Performance_Note_Entity_Typed_SPARQLMode"
           new-subject-template='/note/{{UUID}}'

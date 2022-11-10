@@ -1814,9 +1814,9 @@ fields:
       }
       ORDER BY (?label)'
 
-  - id: Performance_Title_SPARQLMode
-    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Title
-    label: Title
+  - id: Performance_Label_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Label
+    label: Label
     datatype: http://www.w3.org/2001/XMLSchema#langString
     domain: frbroo:F25_Performance_Plan
     minOccurs: 1

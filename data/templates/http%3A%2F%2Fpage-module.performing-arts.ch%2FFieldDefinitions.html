@@ -1145,11 +1145,11 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "iri" : "Performance_Genre_SPARQLMode"
     }
 [[/inline]]
- [[#*inline "Performance_Title_SPARQLMode"]]
+ [[#*inline "Performance_Label_SPARQLMode"]]
     {
-        "id" : "Performance_Title_SPARQLMode",
+        "id" : "Performance_Label_SPARQLMode",
 
-            "label": "[[i18n "field_title" bundle="sapa-fields"]]",
+            "label": "[[i18n "field_label" bundle="sapa-fields"]]",
             "minOccurs" : "1",
             "maxOccurs" : "1",
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#langString",
@@ -1157,7 +1157,7 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
                 "selectPattern" : "SELECT ?value WHERE { GRAPH ?g { $subject rdfs:label ?value . } BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
                 "insertPattern" : "INSERT { GRAPH ?g { $subject rdfs:label $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
                 "deletePattern" : "DELETE { GRAPH ?g { $subject rdfs:label $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
-        "iri" : "Performance_Title_SPARQLMode"
+        "iri" : "Performance_Label_SPARQLMode"
     }
 [[/inline]]
  [[#*inline "Performance_Language"]]
