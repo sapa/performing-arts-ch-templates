@@ -1688,6 +1688,32 @@ fields:
         rdf:value $value.
       } WHERE {} '
 
+  - id: Performance_External_ID_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_External_ID_SPARQLMode
+    label: External ID
+    datatype: xsd:anyURI
+    queries:
+      - select: 'SELECT ?value WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject crm:P1_is_identified_by ?value .
+          }
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject crm:P1_is_identified_by $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject crm:P1_is_identified_by $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+
   - id: Performance_Note_Value_SPARQLMode
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/NoteValue_SPARQLMode
     label: Note
@@ -4196,6 +4222,36 @@ fields:
       - valueSet: 'SELECT ?value ?label WHERE {
           ?value skos:inScheme spav:go ;
             skos:prefLabel ?label .
+        }'
+
+  - id: TitleValue_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/TitleValue_SPARQLMode
+    label: Title
+    datatype: xsd:langString
+    minOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE {
+          $parent crm:P102_has_title $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject rdf:value ?value .
+          }
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject rdf:value $value .
+          }
+        } WHERE {
+          $parent crm:P102_has_title $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject rdf:value $value .
+          }
+        } WHERE {
+          $parent crm:P102_has_title $subject .
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
         }'
 
   - id: VenueAcronym

@@ -1090,6 +1090,18 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "iri" : "NotePublic"
     }
 [[/inline]]
+ [[#*inline "Performance_External_ID_SPARQLMode"]]
+    {
+        "id" : "Performance_External_ID_SPARQLMode",
+
+            "label": "[[i18n "field_external_id" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P1_is_identified_by ?value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P1_is_identified_by $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P1_is_identified_by $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "Performance_External_ID_SPARQLMode"
+    }
+[[/inline]]
  [[#*inline "Performance_Note_Value_SPARQLMode"]]
     {
         "id" : "Performance_Note_Value_SPARQLMode",
@@ -2710,6 +2722,19 @@ WHERE { BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , STR(UUID())) ) 
                 "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
                 "valueSetPattern" : "SELECT ?value ?label WHERE { ?value skos:inScheme spav:go ; skos:prefLabel ?label . }",
         "iri" : "TitleType_SPARQLMode"
+    }
+[[/inline]]
+ [[#*inline "TitleValue_SPARQLMode"]]
+    {
+        "id" : "TitleValue_SPARQLMode",
+
+            "label": "[[i18n "field_title" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "xsdDatatype" : "xsd:langString",
+                "selectPattern" : "SELECT ?value WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) GRAPH ?g { $subject rdf:value ?value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject rdf:value $value . } } WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject rdf:value $value . } } WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+        "iri" : "TitleValue_SPARQLMode"
     }
 [[/inline]]
  [[#*inline "VenueAcronym"]]

@@ -15,6 +15,7 @@
       form-id='performancePlan'
       fields='[
         [[> RDFtype_SPARQLMode]],
+        [[> Performance_External_ID_SPARQLMode]],
         [[> Performance_Genre_SPARQLMode]],
         [[> Performance_Note_Entity_Typed_SPARQLMode]],
         [[> Performance_Label_SPARQLMode]],
@@ -29,9 +30,11 @@
         <semantic-form-composite-input for="TitleEntity_SPARQLMode"
           new-subject-template='/title/{{UUID}}'
           fields='[
-            [[> TitleType_SPARQLMode]]
+            [[> TitleType_SPARQLMode]],
+            [[> TitleValue_SPARQLMode]]
           ]'
         >
+          <semantic-form-text-input for="TitleValue_SPARQLMode" languages='["en","de","it","fr"]' ></semantic-form-text-input>
           <semantic-form-select-input for="TitleType_SPARQLMode"></semantic-form-select-input>
         </semantic-form-composite-input>
         <semantic-form-select-input for="Performance_Genre_SPARQLMode" ></semantic-form-select-input>
@@ -45,6 +48,7 @@
           <semantic-form-text-input for="Performance_Note_Value_SPARQLMode" languages='["en","de","it","fr"]' ></semantic-form-text-input>
           <semantic-form-select-input for="Performance_Note_Type_SPARQLMode"></semantic-form-select-input>
         </semantic-form-composite-input>
+        <semantic-form-text-input for="Performance_External_ID_SPARQLMode"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>
         <button name="submit" class="btn btn-secondary">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>
         <button name="reset" class="btn btn-secondary">[[i18n "FormReset" bundle="performing-arts-ch"]]</button>
