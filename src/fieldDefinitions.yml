@@ -3324,11 +3324,16 @@ fields:
             IF(?lang = "it", ?type_label_it, ?type_label_en)
             )
           ) AS ?type_label)
-        $value rdfs:label ?item_label .
-        ?item_label bds:search ?__token__ ;
-          bds:matchAllTerms "true" .
-        
-          $value rdf:type ?type .
+          {
+            $value rdfs:label ?item_label .
+            ?item_label bds:search ?__token__ ;
+              bds:matchAllTerms "true" .
+            $value rdf:type ?type .
+          } UNION {
+            BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
+            $value rdf:type ?type ;
+              rdfs:label ?item_label .
+          }
           BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator)
           FILTER(?type_indicator != "x")
           FILTER(?type_indicator != "u")
