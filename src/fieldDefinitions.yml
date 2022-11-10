@@ -3903,16 +3903,28 @@ fields:
       - insert: 'INSERT { $subject spao:seeAlso $value. } WHERE {}'
       - delete: 'DELETE { $subject spao:seeAlso $value. } WHERE {}'
       - autosuggestion: 'SELECT $value $label WHERE {
-        { $value a rico:Concept . }
-        UNION
-        { $value rdf:type/rdfs:subClassOf* rico:Agent . }
-        UNION
-        { $value rdf:type rico:RecordSet . }
-        UNION
-        { $value rdf:type rico:Record . }
-        $value rdfs:label $label .
-        FILTER(REGEX($label, "?token", "i"))
-        FILTER(!CONTAINS(STR(?value), "/u/"))
+        {
+          { $value a rico:Concept . }
+          UNION
+          { $value rdf:type/rdfs:subClassOf* rico:Agent . }
+          UNION
+          { $value rdf:type rico:RecordSet . }
+          UNION
+          { $value rdf:type rico:Record . }
+          $value rdfs:label $label .
+          FILTER(REGEX($label, "?token", "i"))
+          FILTER(!CONTAINS(STR(?value), "/u/"))
+        } UNION {
+          BIND(URI(REPLACE(REPLACE("?token", "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
+          $value rdfs:label $label ;
+            a/rdfs:subClassOf* ?type .
+          VALUES (?type) {
+            ( rico:Concept )
+            ( rico:Agent )
+            ( rico:RecordSet )
+            ( rico:Record )
+          }
+        }
       }'
 
 
