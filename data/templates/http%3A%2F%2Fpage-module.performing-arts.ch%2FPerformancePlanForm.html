@@ -3,7 +3,7 @@
   <div data-flex-layout='row top-stretch'>
     <semantic-form 
      [[#if create]]
-        new-subject-template='http://data.performing-arts.ch/a/{{UUID}}'
+        new-subject-template='http://data.performing-arts.ch/w/{{UUID}}'
         post-action="redirect"
       [[else]]
         subject='[[this]]'
@@ -12,45 +12,16 @@
       
       browser-persistence=true
       persistence='ldp' 
-      form-id='places'
+      form-id='performancePlan'
       fields='[
-        [[> RDFtype]],
-        [[> Genre]],
-        [[> RDFSComment]],
-        [[> SameAs]],
-        [[> WorkActivity]],
-        [[> ActorActivity]]
+        [[> RDFtype]]
       ]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
           <semantic-form-hidden-input for="RDFtype" default-value='[[resolvePrefix "frbroo:F25_Performance_Plan"]]'></semantic-form-hidden-input>
         </div>
-        <semantic-form-tree-picker-input for="Genre"></semantic-form-tree-picker-input>
-
-        <semantic-form-autocomplete-input for="ActorActivity"></semantic-form-autocomplete-input>
-
-        <semantic-form-composite-input for="WorkActivity" new-subject-template="http://data.performing-arts.ch/x/{{UUID}}"
-          fields='[
-            [[> typeset]],
-            [[> Activity_Type]],
-            [[> Performed_By]]
-          ]'>
-          <div style="display: none;">
-            <semantic-form-hidden-input for="typeset" default-value='http://www.cidoc-crm.org/cidoc-crm/E7_Activity'></semantic-form-hidden-input>
-          </div>
-          <bs-row>
-            <bs-col sm='6'>
-              <semantic-form-autocomplete-input for="Activity_Type"></semantic-form-autocomplete-input>          
-            </bs-col>
-            <bs-col sm='6'>
-              <semantic-form-autocomplete-input for="Performed_By" placeholder='Search persons...'></semantic-form-autocomplete-input>
-            </bs-col>
-          </bs-row>
-       </semantic-form-composite-input>
-
-        <semantic-form-text-input for="RDFSComment"></semantic-form-text-input>
-        <semantic-form-text-input for="SameAs"></semantic-form-text-input>
+       
         <semantic-form-errors></semantic-form-errors>
         <button name="submit" class="btn btn-secondary">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>
         <button name="reset" class="btn btn-secondary">[[i18n "FormReset" bundle="performing-arts-ch"]]</button>
