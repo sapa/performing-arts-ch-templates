@@ -1090,6 +1090,100 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "iri" : "NotePublic"
     }
 [[/inline]]
+ [[#*inline "Performance_External_ID_SPARQLMode"]]
+    {
+        "id" : "Performance_External_ID_SPARQLMode",
+
+            "label": "[[i18n "field_external_id" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P1_is_identified_by ?value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P1_is_identified_by $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P1_is_identified_by $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "Performance_External_ID_SPARQLMode"
+    }
+[[/inline]]
+ [[#*inline "Performance_Music_Title_SPARQLMode"]]
+    {
+        "id" : "Performance_Music_Title_SPARQLMode",
+
+            "label": "[[i18n "field_music_title" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:langString",
+                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject <http://temp.performing-arts.ch/hasMusicTitle> ?value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject <http://temp.performing-arts.ch/hasMusicTitle> $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject <http://temp.performing-arts.ch/hasMusicTitle> $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "Performance_Music_Title_SPARQLMode"
+    }
+[[/inline]]
+ [[#*inline "Performance_Note_Value_SPARQLMode"]]
+    {
+        "id" : "Performance_Note_Value_SPARQLMode",
+
+            "label": "[[i18n "field_note" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "xsdDatatype" : "xsd:langString",
+            "domain" : "crm:E33_Linguistic_Object",
+                "selectPattern" : "SELECT $value WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) GRAPH ?g { $subject rdf:value $value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject rdf:value $value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject rdf:value $value } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+        "iri" : "Performance_Note_Value_SPARQLMode"
+    }
+[[/inline]]
+ [[#*inline "Performance_Note_Entity_Typed_SPARQLMode"]]
+    {
+        "id" : "Performance_Note_Entity_Typed_SPARQLMode",
+
+            "label": "[[i18n "field_note" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P67_is_referred_to_by ?value . } ?value crm:P2_has_type/skos:inScheme spav:eo }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P67_is_referred_to_by $value . $value a crm:E33_Linguistic_Object . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P67_is_referred_to_by $value . $value a crm:E33_Linguistic_Object . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "Performance_Note_Entity_Typed_SPARQLMode"
+    }
+[[/inline]]
+ [[#*inline "Performance_Note_Type_SPARQLMode"]]
+    {
+        "id" : "Performance_Note_Type_SPARQLMode",
+
+            "label": "[[i18n "field_note_type" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:anyURI",
+            "range" : "crm:E55_Type",
+                "selectPattern" : "SELECT ?value WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P2_has_type ?value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "valueSetPattern" : "SELECT ?value ?label WHERE { ?value skos:inScheme spav:eo ; skos:prefLabel ?label . }",
+        "iri" : "Performance_Note_Type_SPARQLMode"
+    }
+[[/inline]]
+ [[#*inline "Performance_Genre_SPARQLMode"]]
+    {
+        "id" : "Performance_Genre_SPARQLMode",
+
+            "label": "[[i18n "field_genre" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:anyURI",
+            "domain" : "frbroo:F25_Performance_Plan",
+            "range" : "crm:E55_Type",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P2_has_type ?value . ?value skos:inScheme spav:mn . }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P2_has_type $value } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "valueSetPattern" : "SELECT ?value ?label WHERE { ?value skos:inScheme spav:mn . } ORDER BY (?label)",
+        "iri" : "Performance_Genre_SPARQLMode"
+    }
+[[/inline]]
+ [[#*inline "Performance_Label_SPARQLMode"]]
+    {
+        "id" : "Performance_Label_SPARQLMode",
+
+            "label": "[[i18n "field_label" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#langString",
+            "domain" : "frbroo:F25_Performance_Plan",
+                "selectPattern" : "SELECT ?value WHERE { GRAPH ?g { $subject rdfs:label ?value . } BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject rdfs:label $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject rdfs:label $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "Performance_Label_SPARQLMode"
+    }
+[[/inline]]
  [[#*inline "Performance_Language"]]
     {
         "id" : "Performance_Language",
@@ -1458,6 +1552,20 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
         "iri" : "RDFSComment"
     }
 [[/inline]]
+ [[#*inline "RDFSComment_SPARQLMode"]]
+    {
+        "id" : "RDFSComment_SPARQLMode",
+
+            "label": "[[i18n "field_comment" bundle="sapa-fields"]]",
+            "description" : "A short comment that helps to identify the entity.",
+            "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString",
+            "domain" : "http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity",
+                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject rdfs:comment ?value. } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject rdfs:comment ?value. } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject rdfs:comment ?value. } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "RDFSComment_SPARQLMode"
+    }
+[[/inline]]
  [[#*inline "RDFSLabel"]]
     {
         "id" : "RDFSLabel",
@@ -1485,6 +1593,21 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
                 "insertPattern" : "INSERT { $subject a $value } WHERE {}",
                 "deletePattern" : "DELETE { $subject a $value } WHERE {}",
         "iri" : "RDFtype"
+    }
+[[/inline]]
+ [[#*inline "RDFtype_SPARQLMode"]]
+    {
+        "id" : "RDFtype_SPARQLMode",
+
+            "label": "[[i18n "field_type_setter" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "domain" : "http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity",
+            "range" : "rdfs:Class",
+                "selectPattern" : "SELECT $value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject a $value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject a $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject a $value } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "RDFtype_SPARQLMode"
     }
 [[/inline]]
  [[#*inline "RecordAnnotationRecto"]]
@@ -2344,6 +2467,21 @@ $value rdf:type ?type . BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FI
         "iri" : "SameAs"
     }
 [[/inline]]
+ [[#*inline "SameAs_SPARQLMode"]]
+    {
+        "id" : "SameAs_SPARQLMode",
+
+            "label": "[[i18n "field_external_resources" bundle="sapa-fields"]]",
+            "description" : "Expects URIs from other databases such as Wikidata, GND, etc.",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "domain" : "http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity",
+            "range" : "rdfs:Class",
+                "selectPattern" : "SELECT ?value ?label WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject owl:sameAs ?value . } BIND(REPLACE(STR(?value), \".*\\\\/c*b*\", \"\") as ?localname) BIND(STRBEFORE(STR(?value), ?localname) as ?prefix) VALUES(?prefix ?source ?order) { (\"http://www.wikidata.org/entity/\" \"Wikidata\" 0) (\"http://www.isni.org/\" \"ISNI\" 1) (\"http://viaf.org/viaf/\" \"VIAF\" 2) (\"http://d-nb.info/gnd/\" \"GND\" 3) (\"https://catalogue.bnf.fr/ark:/12148/cb\" \"BnF\" 4) (\"http://geonames.org/\" \"Geonames\" 5) (\"http://classifications.data.admin.ch/municipality/\" \"Swiss Municipality\" 6) (\"http://classifications.data.admin.ch/canton/\" \"Swiss Municipality\" 7) (\"http://tls.theaterwissenschaft.ch/wiki/\" \"Theaterlexikon der Schweiz\" 8) } BIND(IF(?order<8, CONCAT(?source,\": \",?localname), ?source) AS ?label) } ORDER BY ASC(?order)",
+                "insertPattern" : "INSERT { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject owl:sameAs $value . } } WHERE {}",
+                "deletePattern" : "DELETE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject owl:sameAs $value . } } WHERE { }",
+        "iri" : "SameAs_SPARQLMode"
+    }
+[[/inline]]
  [[#*inline "SchemaDuration"]]
     {
         "id" : "SchemaDuration",
@@ -2597,6 +2735,46 @@ WHERE { BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , STR(UUID())) ) 
                 "deletePattern" : "DELETE { $subject spao:hasTermsOfProtection $value . } WHERE { }",
                 "valueSetPattern" : "SELECT ?value WHERE { VALUES ( $value ) { ( spav:tpeop ) ( spav:tpunk ) } }",
         "iri" : "ThingTermsProtection"
+    }
+[[/inline]]
+ [[#*inline "TitleEntity_SPARQLMode"]]
+    {
+        "id" : "TitleEntity_SPARQLMode",
+
+            "label": "[[i18n "field_title" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P102_has_title ?value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P102_has_title $value . $value a crm:E35_Title . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P102_has_title $value . $value a crm:E35_Title . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "TitleEntity_SPARQLMode"
+    }
+[[/inline]]
+ [[#*inline "TitleType_SPARQLMode"]]
+    {
+        "id" : "TitleType_SPARQLMode",
+
+            "label": "[[i18n "field_type" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P2_has_type ?value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "valueSetPattern" : "SELECT ?value ?label WHERE { ?value skos:inScheme spav:go ; skos:prefLabel ?label . }",
+        "iri" : "TitleType_SPARQLMode"
+    }
+[[/inline]]
+ [[#*inline "TitleValue_SPARQLMode"]]
+    {
+        "id" : "TitleValue_SPARQLMode",
+
+            "label": "[[i18n "field_title" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "xsdDatatype" : "xsd:langString",
+                "selectPattern" : "SELECT ?value WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) GRAPH ?g { $subject rdf:value ?value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject rdf:value $value . } } WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject rdf:value $value . } } WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+        "iri" : "TitleValue_SPARQLMode"
     }
 [[/inline]]
  [[#*inline "VenueAcronym"]]
