@@ -2026,7 +2026,7 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
                 "rootsQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { ?item a rico:RecordSet FILTER(NOT EXISTS { ?item rico:isOrWasIncludedIn ?parent. }) ?item rico:name ?label. OPTIONAL { ?child rico:isOrWasIncludedIn ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
                 "childrenQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { ?item rico:isOrWasIncludedIn ?parent. ?item rico:name ?label. OPTIONAL { ?child rico:isOrWasIncludedIn ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
                 "parentsQuery": "SELECT DISTINCT ?item ?parent WHERE { ?item rico:isOrWasIncludedIn ?parent. }",
-                "searchQuery": "SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE { ?item a rico:RecordSet ; rico:name ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" OPTIONAL { ?child rico:isOrWasIncludedIn ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY ASC (?label)"
+                "searchQuery": "SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE { { ?item a rico:RecordSet ; rico:name ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } UNION { BIND(URI(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?item) ?item a rico:RecordSet . } OPTIONAL { ?child rico:isOrWasIncludedIn ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY ASC (?label)"
             },
                 "selectPattern" : "SELECT ?value ?label WHERE { $subject rico:isOrWasIncludedIn ?value . }",
                 "insertPattern" : "INSERT { $subject rico:isOrWasIncludedIn $value} WHERE {}",

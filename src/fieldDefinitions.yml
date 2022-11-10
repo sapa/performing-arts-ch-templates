@@ -3101,11 +3101,16 @@ fields:
         }
         ORDER BY (?label)'
       searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-        ?item a rico:RecordSet ;
-          rico:name ?label .
-        ?label bds:search ?__token__ ;
-          bds:relevance ?score ; 
-          bds:matchAllTerms "true"
+        {
+          ?item a rico:RecordSet ;
+            rico:name ?label .
+          ?label bds:search ?__token__ ;
+            bds:relevance ?score ; 
+            bds:matchAllTerms "true"
+        } UNION {
+          BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?item)
+          ?item a rico:RecordSet .
+        }
         OPTIONAL { ?child rico:isOrWasIncludedIn ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
       } ORDER BY ASC (?label)'
