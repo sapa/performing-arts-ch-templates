@@ -2591,11 +2591,17 @@ fields:
       - insert: 'INSERT { $subject rico:hasCreator $value . } WHERE {}'
       - delete: 'DELETE { $subject rico:hasCreator $value} WHERE {}'
       - autosuggestion: 'SELECT ?value ?label WHERE {
-        ?value a rico:Person ;
-    rdfs:label ?label .
-        ?label bds:search ?__token__ ;
-        bds:relevance ?score ; 
-        bds:matchAllTerms "true"
+        {
+          ?value a rico:Person ;
+            rdfs:label ?label .
+          ?label bds:search ?__token__ ;
+          bds:relevance ?score ; 
+          bds:matchAllTerms "true"
+        } UNION {
+          BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
+          ?value a/rdfs:subClassOf* crm:E39_Actor ;
+            rdfs:label ?label .
+        }
       } LIMIT 100'
 
 

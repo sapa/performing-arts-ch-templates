@@ -1635,7 +1635,7 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
                 "selectPattern" : "SELECT ?value WHERE { $subject rico:hasCreator ?value . }",
                 "insertPattern" : "INSERT { $subject rico:hasCreator $value . } WHERE {}",
                 "deletePattern" : "DELETE { $subject rico:hasCreator $value} WHERE {}",
-                "autosuggestionPattern" : "SELECT ?value ?label WHERE { ?value a rico:Person ; rdfs:label ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } LIMIT 100",
+                "autosuggestionPattern" : "SELECT ?value ?label WHERE { { ?value a rico:Person ; rdfs:label ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } UNION { BIND(URI(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?value) ?value a/rdfs:subClassOf* crm:E39_Actor ; rdfs:label ?label . } } LIMIT 100",
         "iri" : "RecordResourceCreator"
     }
 [[/inline]]
