@@ -33,6 +33,31 @@
             query='SELECT ?value WHERE {  <{{instantiation.value}}> rico:hasCarrierType ?value . }'
             template='<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{value.value}}"></mp-label>{{else}}, <mp-label iri="{{value.value}}"></mp-label>{{/if}}{{/each}}</div>' >
         </semantic-query>
+        <!-- typed identifier -->
+        <semantic-query 
+            query="SELECT ?identifier ?type WHERE {
+                <{{instantiation.value}}> rico:hasOrHadIdentifier ?identifierUri .
+                ?identifierUri rdf:value ?identifier ;
+                    crm:P2_has_type ?type . 
+                # Exclude technical identifier and specify order
+                VALUES (?type ?order) {
+                    (<http://vocab.performing-arts.ch/iduni> '1'^^xsd:integer)
+                    (<http://vocab.performing-arts.ch/idcon> '2'^^xsd:integer)
+                    (<http://vocab.performing-arts.ch/idold> '3'^^xsd:integer)
+                    (<http://vocab.performing-arts.ch/idtec> '4'^^xsd:integer)
+                }
+            } ORDER BY ?order ?identifier"
+            template="{{> template}}">
+            <template id="template">
+                <p>
+                    <h5>[[i18n "field_typed_identifier" bundle="sapa-fields"]]</h5>
+                    <ul class="list-unstyled">
+                        {{#each bindings}}
+                            <li><span>{{identifier.value}}</span> (<mp-label iri="{{type.value}}"></mp-label>)</li>
+                        {{/each}}
+                </p>
+            </template>
+        </semantic-query>
         <hr />
         {{/each}}
     </template>
