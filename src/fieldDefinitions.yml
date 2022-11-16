@@ -525,10 +525,14 @@ fields:
         $subject crm:P107i_is_current_or_former_member_of $value .
       } WHERE {}'
       - autosuggestion: 'SELECT $value $label WHERE {
-        $value a crm:E40_Legal_Body ;
-    crm:P2_has_type spav:vrjhq ;
-        rdfs:label $label .
-        FILTER(REGEX(STR(?label), "?token", "i"))
+          $value a crm:E40_Legal_Body ;
+            crm:P2_has_type spav:vrjhq ;
+              rdfs:label $label .
+        {
+          FILTER(REGEX(STR(?label), "?token", "i"))
+        } UNION {
+          BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
+        }
         FILTER(CONTAINS(STR(?value), "/a/"))
       } LIMIT 10'
 
@@ -644,7 +648,11 @@ fields:
       - autosuggestion: 'SELECT ?value ?label WHERE {
         ?value rdf:type/rdfs:subClassOf* rico:Group ;
         rdfs:label ?label .
-        FILTER(REGEX(STR(?label), "?token", "i"))
+        {
+          FILTER(REGEX(STR(?label), "?token", "i"))
+        } UNION {
+            BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
+        }
         FILTER(CONTAINS(STR(?value), "/a/"))
       } LIMIT 10'
 
@@ -813,19 +821,23 @@ fields:
       } WHERE {}'
       - autosuggestion: 'SELECT DISTINCT ?value ?label ?score WHERE {
         ?value a crm:E21_Person ;
-        crm:P131_is_identified_by [ rdf:value ?ll ] .
+          crm:P131_is_identified_by [ rdf:value ?ll ] .
         FILTER(CONTAINS(STR(?value), "/a/"))
-        SERVICE bds:search {
-        ?ll bds:search ?__token__ ;
-        bds:minRelevance "0.1" ;
-        bds:relevance ?score ; 
-        bds:matchAllTerms "true" .
+        {
+          SERVICE bds:search {
+            ?ll bds:search ?__token__ ;
+            bds:minRelevance "0.1" ;
+            bds:relevance ?score ; 
+            bds:matchAllTerms "true" .
+          }
+        } UNION {
+          BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
         }
         ?value rdfs:label ?l .
         OPTIONAL {
-        ?value crm:P3_has_note [
-        crm:P2_has_type spav:eoept ;
-        rdf:value ?note ]
+          ?value crm:P3_has_note [
+          crm:P2_has_type spav:eoept ;
+          rdf:value ?note ]
         }
         BIND(IF(BOUND(?note), CONCAT(?l, " (", ?note, ")"), ?l) AS ?label)
       } ORDER BY DESC (?score)
@@ -846,7 +858,11 @@ fields:
       - autosuggestion: 'SELECT ?value ?label WHERE {
         ?value rdf:type/rdfs:subClassOf* rico:Group ;
         rdfs:label ?label .
-        FILTER(REGEX(STR(?label), "?token", "i"))
+        {
+          FILTER(REGEX(STR(?label), "?token", "i"))
+        } UNION {
+          BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
+        }
         FILTER(CONTAINS(STR(?value), "/a/"))
       } LIMIT 10'
 
@@ -1172,9 +1188,14 @@ fields:
       - insert: 'INSERT { $subject rico:hasDerivedInstantiation $value . } WHERE { }'
       - delete: 'DELETE { $subject rico:hasDerivedInstantiation $value} WHERE { }'
       - autosuggestion: 'SELECT $value $label WHERE {
-        $value a rico:Instantiation ;
-    rico:identifier $label .
-        FILTER(REGEX($label, "?token", "i"))
+        {
+          $value a rico:Instantiation ;
+            rico:identifier $label .
+          FILTER(REGEX($label, "?token", "i"))
+        } UNION {
+          BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""),"\\\\.$", "")) AS ?value)
+          ?value rico:identifier $label .
+        }
         FILTER(!CONTAINS(STR(?value), "/u/"))
       }'
 
@@ -1314,20 +1335,25 @@ fields:
       - select: 'SELECT ?value WHERE { $value rico:hasInstantiation $subject . }'
       - insert: 'INSERT { $value rico:hasInstantiation $subject . } WHERE { }'
       - delete: 'DELETE { $value rico:hasInstantiation $subject . } WHERE { }'
-      - autosuggestion: 'SELECT $value $label WHERE {
+      - autosuggestion: 'SELECT DISTINCT $value (MIN($label) as $label) WHERE {
           VALUES (?type ?type_label) {
             (rico:Record " (Record)")
             (rico:RecordPart " (Record Part)")
           }
-          $value rico:name ?name .
-          ?name bds:search ?__token__ ; 
-            bds:relevance ?score ; 
-            bds:matchAllTerms "true" 
+          {
+            $value rico:name ?name .
+            ?name bds:search ?__token__ ; 
+              bds:relevance ?score ; 
+              bds:matchAllTerms "true" 
+          } UNION {
+            BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
+            ?value rico:name ?name .
+          }
           OPTIONAL {
             $value rico:identifier ?identifier .
           }
           BIND(CONCAT(IF(BOUND(?identifier), CONCAT(?identifier, ": "), ""), ?name, ?type_label) AS ?label)
-      }'
+      } GROUP BY ?value'
 
 
   - id: InstantiationRepresentationType
