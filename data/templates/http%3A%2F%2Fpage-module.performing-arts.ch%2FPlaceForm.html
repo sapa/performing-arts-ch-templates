@@ -17,7 +17,8 @@
         [[> RDFtype]],
         [[> PlaceName]],
         [[> PlaceFallsWithin]],
-        [[> SameAs]]
+        [[> SameAs]],
+        [[> ReplacedBy]]
       ]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
@@ -27,6 +28,8 @@
         <semantic-form-text-input for="PlaceName" languages='["en", "de", "fr", "it"]'></semantic-form-text-input>
         <semantic-form-tree-picker-input for="PlaceFallsWithin" ></semantic-form-tree-picker-input>
         <semantic-form-text-input for="SameAs"></semantic-form-text-input>
+        <hr/>
+        [[> sapaModule:FormSectionReplacedBy]]
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
         <button name="submit" class="btn btn-secondary">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>

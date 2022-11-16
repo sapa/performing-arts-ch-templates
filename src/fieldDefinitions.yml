@@ -3526,7 +3526,21 @@ fields:
       - select: 'SELECT $value WHERE { $subject rico:name $value . }'
       - insert: 'INSERT { $subject rico:name $value} WHERE {}'
       - delete: 'DELETE { $subject rico:name $value} WHERE {}'
-
+  
+  - id: ReplacedBy
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ReplacedBy
+    label: Replaced by
+    datatype: xsd:anyURI
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE { $subject spao:replacedBy ?value . }'
+      - insert: 'INSERT { $subject spao:replacedBy $value . } WHERE { }'
+      - delete: 'DELETE { $subject spao:replacedBy $value . } WHERE { }'
+      - ask: 'ASK { 
+          $subject a ?type .
+          $value a ?type. 
+          FILTER($subject != $value)
+      }'
 
   - id: RepresentationFile
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RepresentationFile
