@@ -1830,9 +1830,8 @@ fields:
           $parent crm:P67_is_referred_to_by $subject .
           BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
         }'
-      - valueSet: 'SELECT ?value ?label WHERE {
-          ?value skos:inScheme spav:eo ;
-            skos:prefLabel ?label .
+      - valueSet: 'SELECT ?value WHERE {
+          ?value skos:inScheme spav:eo .
           }'
 
   - id: Performance_Genre_SPARQLMode
@@ -4273,9 +4272,8 @@ fields:
           $parent crm:P102_has_title $subject .
           BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
         }'
-      - valueSet: 'SELECT ?value ?label WHERE {
-          ?value skos:inScheme spav:go ;
-            skos:prefLabel ?label .
+      - valueSet: 'SELECT ?value WHERE {
+          ?value skos:inScheme spav:go .
         }'
 
   - id: TitleValue_SPARQLMode
