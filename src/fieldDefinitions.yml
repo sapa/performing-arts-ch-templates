@@ -1172,9 +1172,14 @@ fields:
       - insert: 'INSERT { $subject rico:hasDerivedInstantiation $value . } WHERE { }'
       - delete: 'DELETE { $subject rico:hasDerivedInstantiation $value} WHERE { }'
       - autosuggestion: 'SELECT $value $label WHERE {
-        $value a rico:Instantiation ;
-    rico:identifier $label .
-        FILTER(REGEX($label, "?token", "i"))
+        {
+          $value a rico:Instantiation ;
+            rico:identifier $label .
+          FILTER(REGEX($label, "?token", "i"))
+        } UNION {
+          BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""),"\\\\.$", "")) AS ?value)
+          ?value rico:identifier $label .
+        }
         FILTER(!CONTAINS(STR(?value), "/u/"))
       }'
 

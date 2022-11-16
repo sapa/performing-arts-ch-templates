@@ -677,7 +677,7 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
                 "selectPattern" : "SELECT ?value WHERE { $subject rico:hasDerivedInstantiation ?value . }",
                 "insertPattern" : "INSERT { $subject rico:hasDerivedInstantiation $value . } WHERE { }",
                 "deletePattern" : "DELETE { $subject rico:hasDerivedInstantiation $value} WHERE { }",
-                "autosuggestionPattern" : "SELECT $value $label WHERE { $value a rico:Instantiation ; rico:identifier $label . FILTER(REGEX($label, \"?token\", \"i\")) FILTER(!CONTAINS(STR(?value), \"/u/\")) }",
+                "autosuggestionPattern" : "SELECT $value $label WHERE { { $value a rico:Instantiation ; rico:identifier $label . FILTER(REGEX($label, \"?token\", \"i\")) } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"),\"\\\\.$\", \"\")) AS ?value) ?value rico:identifier $label . } FILTER(!CONTAINS(STR(?value), \"/u/\")) }",
         "iri" : "InstantiationDerived"
     }
 [[/inline]]
