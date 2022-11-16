@@ -1150,7 +1150,7 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
                 "selectPattern" : "SELECT ?value WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P2_has_type ?value . } }",
                 "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
                 "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
-                "valueSetPattern" : "SELECT ?value ?label WHERE { ?value skos:inScheme spav:eo ; skos:prefLabel ?label . }",
+                "valueSetPattern" : "SELECT ?value WHERE { ?value skos:inScheme spav:eo . }",
         "iri" : "Performance_Note_Type_SPARQLMode"
     }
 [[/inline]]
@@ -2759,7 +2759,7 @@ WHERE { BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , STR(UUID())) ) 
                 "selectPattern" : "SELECT ?value WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P2_has_type ?value . } }",
                 "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
                 "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P2_has_type $value . } } WHERE { $parent crm:P102_has_title $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
-                "valueSetPattern" : "SELECT ?value ?label WHERE { ?value skos:inScheme spav:go ; skos:prefLabel ?label . }",
+                "valueSetPattern" : "SELECT ?value WHERE { ?value skos:inScheme spav:go . }",
         "iri" : "TitleType_SPARQLMode"
     }
 [[/inline]]
