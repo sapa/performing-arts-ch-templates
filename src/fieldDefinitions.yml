@@ -1314,20 +1314,25 @@ fields:
       - select: 'SELECT ?value WHERE { $value rico:hasInstantiation $subject . }'
       - insert: 'INSERT { $value rico:hasInstantiation $subject . } WHERE { }'
       - delete: 'DELETE { $value rico:hasInstantiation $subject . } WHERE { }'
-      - autosuggestion: 'SELECT $value $label WHERE {
+      - autosuggestion: 'SELECT DISTINCT $value (MIN($label) as $label) WHERE {
           VALUES (?type ?type_label) {
             (rico:Record " (Record)")
             (rico:RecordPart " (Record Part)")
           }
-          $value rico:name ?name .
-          ?name bds:search ?__token__ ; 
-            bds:relevance ?score ; 
-            bds:matchAllTerms "true" 
+          {
+            $value rico:name ?name .
+            ?name bds:search ?__token__ ; 
+              bds:relevance ?score ; 
+              bds:matchAllTerms "true" 
+          } UNION {
+            BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
+            ?value rico:name ?name .
+          }
           OPTIONAL {
             $value rico:identifier ?identifier .
           }
           BIND(CONCAT(IF(BOUND(?identifier), CONCAT(?identifier, ": "), ""), ?name, ?type_label) AS ?label)
-      }'
+      } GROUP BY ?value'
 
 
   - id: InstantiationRepresentationType
