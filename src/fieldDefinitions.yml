@@ -525,10 +525,14 @@ fields:
         $subject crm:P107i_is_current_or_former_member_of $value .
       } WHERE {}'
       - autosuggestion: 'SELECT $value $label WHERE {
-        $value a crm:E40_Legal_Body ;
-    crm:P2_has_type spav:vrjhq ;
-        rdfs:label $label .
-        FILTER(REGEX(STR(?label), "?token", "i"))
+          $value a crm:E40_Legal_Body ;
+            crm:P2_has_type spav:vrjhq ;
+              rdfs:label $label .
+        {
+          FILTER(REGEX(STR(?label), "?token", "i"))
+        } UNION {
+          BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
+        }
         FILTER(CONTAINS(STR(?value), "/a/"))
       } LIMIT 10'
 
@@ -817,19 +821,23 @@ fields:
       } WHERE {}'
       - autosuggestion: 'SELECT DISTINCT ?value ?label ?score WHERE {
         ?value a crm:E21_Person ;
-        crm:P131_is_identified_by [ rdf:value ?ll ] .
+          crm:P131_is_identified_by [ rdf:value ?ll ] .
         FILTER(CONTAINS(STR(?value), "/a/"))
-        SERVICE bds:search {
-        ?ll bds:search ?__token__ ;
-        bds:minRelevance "0.1" ;
-        bds:relevance ?score ; 
-        bds:matchAllTerms "true" .
+        {
+          SERVICE bds:search {
+            ?ll bds:search ?__token__ ;
+            bds:minRelevance "0.1" ;
+            bds:relevance ?score ; 
+            bds:matchAllTerms "true" .
+          }
+        } UNION {
+          BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
         }
         ?value rdfs:label ?l .
         OPTIONAL {
-        ?value crm:P3_has_note [
-        crm:P2_has_type spav:eoept ;
-        rdf:value ?note ]
+          ?value crm:P3_has_note [
+          crm:P2_has_type spav:eoept ;
+          rdf:value ?note ]
         }
         BIND(IF(BOUND(?note), CONCAT(?l, " (", ?note, ")"), ?l) AS ?label)
       } ORDER BY DESC (?score)

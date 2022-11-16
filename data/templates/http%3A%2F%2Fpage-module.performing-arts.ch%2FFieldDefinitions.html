@@ -301,7 +301,7 @@
                 "selectPattern" : "SELECT $value WHERE { $subject crm:P107i_is_current_or_former_member_of $value . $value crm:P2_has_type spav:vrjhq . } ",
                 "insertPattern" : "INSERT { $subject crm:P107i_is_current_or_former_member_of $value . } WHERE {}",
                 "deletePattern" : "DELETE { $subject crm:P107i_is_current_or_former_member_of $value . } WHERE {}",
-                "autosuggestionPattern" : "SELECT $value $label WHERE { $value a crm:E40_Legal_Body ; crm:P2_has_type spav:vrjhq ; rdfs:label $label . FILTER(REGEX(STR(?label), \"?token\", \"i\")) FILTER(CONTAINS(STR(?value), \"/a/\")) } LIMIT 10",
+                "autosuggestionPattern" : "SELECT $value $label WHERE { $value a crm:E40_Legal_Body ; crm:P2_has_type spav:vrjhq ; rdfs:label $label . { FILTER(REGEX(STR(?label), \"?token\", \"i\")) } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) } FILTER(CONTAINS(STR(?value), \"/a/\")) } LIMIT 10",
         "iri" : "GroupAssociation"
     }
 [[/inline]]
@@ -459,7 +459,7 @@
                 "selectPattern" : "SELECT $value ?unidentified WHERE { $subject crm:P107_has_current_or_former_member $value . BIND(IF(CONTAINS(STR($value), \"/u/\"), \"true\", \"\") AS ?unidentified) }",
                 "insertPattern" : "INSERT { $subject crm:P107_has_current_or_former_member $value . } WHERE {}",
                 "deletePattern" : "DELETE { $subject crm:P107_has_current_or_former_member $value . } WHERE {}",
-                "autosuggestionPattern" : "SELECT DISTINCT ?value ?label ?score WHERE { ?value a crm:E21_Person ; crm:P131_is_identified_by [ rdf:value ?ll ] . FILTER(CONTAINS(STR(?value), \"/a/\")) SERVICE bds:search { ?ll bds:search ?__token__ ; bds:minRelevance \"0.1\" ; bds:relevance ?score ; bds:matchAllTerms \"true\" . } ?value rdfs:label ?l . OPTIONAL { ?value crm:P3_has_note [ crm:P2_has_type spav:eoept ; rdf:value ?note ] } BIND(IF(BOUND(?note), CONCAT(?l, \" (\", ?note, \")\"), ?l) AS ?label) } ORDER BY DESC (?score) LIMIT 10",
+                "autosuggestionPattern" : "SELECT DISTINCT ?value ?label ?score WHERE { ?value a crm:E21_Person ; crm:P131_is_identified_by [ rdf:value ?ll ] . FILTER(CONTAINS(STR(?value), \"/a/\")) { SERVICE bds:search { ?ll bds:search ?__token__ ; bds:minRelevance \"0.1\" ; bds:relevance ?score ; bds:matchAllTerms \"true\" . } } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) } ?value rdfs:label ?l . OPTIONAL { ?value crm:P3_has_note [ crm:P2_has_type spav:eoept ; rdf:value ?note ] } BIND(IF(BOUND(?note), CONCAT(?l, \" (\", ?note, \")\"), ?l) AS ?label) } ORDER BY DESC (?score) LIMIT 10",
         "iri" : "GroupMember"
     }
 [[/inline]]
