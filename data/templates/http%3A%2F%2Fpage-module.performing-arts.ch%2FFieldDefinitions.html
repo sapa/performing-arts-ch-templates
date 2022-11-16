@@ -473,7 +473,7 @@
             "range" : "https://www.ica.org/standards/RiC/ontology#Group",
                 "selectPattern" : "SELECT ?value WHERE { $subject rico:isSuccessorOf ?value. }",
                 "insertPattern" : "INSERT { $subject rico:isSuccessorOf $value. } WHERE {}",
-                "autosuggestionPattern" : "SELECT ?value ?label WHERE { ?value rdf:type/rdfs:subClassOf* rico:Group ; rdfs:label ?label . FILTER(REGEX(STR(?label), \"?token\", \"i\")) FILTER(CONTAINS(STR(?value), \"/a/\")) } LIMIT 10",
+                "autosuggestionPattern" : "SELECT ?value ?label WHERE { ?value rdf:type/rdfs:subClassOf* rico:Group ; rdfs:label ?label . { FILTER(REGEX(STR(?label), \"?token\", \"i\")) } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) } FILTER(CONTAINS(STR(?value), \"/a/\")) } LIMIT 10",
         "iri" : "GroupPredecessor"
     }
 [[/inline]]
