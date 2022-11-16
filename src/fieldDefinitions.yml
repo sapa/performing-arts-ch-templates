@@ -644,7 +644,11 @@ fields:
       - autosuggestion: 'SELECT ?value ?label WHERE {
         ?value rdf:type/rdfs:subClassOf* rico:Group ;
         rdfs:label ?label .
-        FILTER(REGEX(STR(?label), "?token", "i"))
+        {
+          FILTER(REGEX(STR(?label), "?token", "i"))
+        } UNION {
+            BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
+        }
         FILTER(CONTAINS(STR(?value), "/a/"))
       } LIMIT 10'
 
