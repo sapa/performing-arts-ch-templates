@@ -399,7 +399,10 @@
             <ul class="list-unstyled">{{#each bindings}}
                 <li>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link iri="{{record.value}}"></semantic-link></li>
             {{/each}}</ul></div>'>
-        </semantic-query>          
+        </semantic-query>     
+        
+        <!-- external resources -->
+        [[> sapaModule:ExternalResources]]
 
         </bs-col>
         </bs-row>
