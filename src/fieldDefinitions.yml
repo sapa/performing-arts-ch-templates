@@ -1473,7 +1473,7 @@ fields:
 
   - id: MediaResourceHeight
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceHeight
-    label: Height
+    label: Frame Height
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
     domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
@@ -1622,7 +1622,7 @@ fields:
 
   - id: MediaResourceWidth
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceWidth
-    label: Width
+    label: Frame Width
     datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
     domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
