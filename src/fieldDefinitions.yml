@@ -1194,7 +1194,7 @@ fields:
           FILTER(REGEX($label, "?token", "i"))
         } UNION {
           BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""),"\\\\.$", "")) AS ?value)
-          ?value rico:identifier $label .
+          OPTIONAL {?value rico:identifier $label .}
         }
         FILTER(!CONTAINS(STR(?value), "/u/"))
       }'
