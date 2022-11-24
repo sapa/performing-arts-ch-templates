@@ -353,7 +353,7 @@
                     <semantic-query 
                         query="SELECT ?width WHERE { ?? ebucore:width ?width . }"
                         template='<div>
-                            <h5>Width</h5>
+                            <h5>Frame Width</h5>
                             <ul class="list-unstyled">{{#each bindings}}
                                 <li>{{width.value}}</li>
                             {{/each}}</ul></div>'>
@@ -363,7 +363,7 @@
                     <semantic-query 
                         query="SELECT ?height WHERE { ?? ebucore:height ?height . }"
                         template='<div>
-                            <h5>Height</h5>
+                            <h5>Frame Height</h5>
                             <ul class="list-unstyled">{{#each bindings}}
                                 <li>{{height.value}}</li>
                             {{/each}}</ul></div>'>
@@ -546,7 +546,7 @@
                             <semantic-query 
                                 query="SELECT ?width WHERE { <{{file.value}}> ebucore:width ?width . }"
                                 template='<div>
-                                    <h5>Width</h5>
+                                    <h5>Frame Width</h5>
                                     <ul class="list-unstyled">{{#each bindings}}
                                         <li>{{width.value}}</li>
                                     {{/each}}</ul></div>'>
@@ -556,7 +556,7 @@
                             <semantic-query 
                                 query="SELECT ?height WHERE { <{{file.value}}> ebucore:height ?height . }"
                                 template='<div>
-                                    <h5>Height</h5>
+                                    <h5>Frame Height</h5>
                                     <ul class="list-unstyled">{{#each bindings}}
                                         <li>{{height.value}}</li>
                                     {{/each}}</ul></div>'>
