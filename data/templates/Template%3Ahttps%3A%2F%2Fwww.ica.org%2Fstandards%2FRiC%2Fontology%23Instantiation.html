@@ -53,6 +53,16 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
+                    <!-- recording system -->
+                    <semantic-query 
+                        query="SELECT ?recording_system WHERE { ?? spao:recordingSystem ?recording_system . }"
+                        template='<div>
+                            <h5>[[i18n "field_recording_system" bundle="sapa-fields"]]</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><mp-label iri="{{recording_system.value}}"></mp-label></li>
+                            {{/each}}</ul></div>'>
+                        </semantic-query>
+
                     <!-- representation type -->
                     <semantic-query 
                         query='SELECT ?representation_type WHERE { ?? rico:hasRepresentationType ?representation_type . }'
