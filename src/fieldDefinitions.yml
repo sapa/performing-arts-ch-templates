@@ -1953,21 +1953,27 @@ fields:
       - select: 'SELECT ?value WHERE {
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
           GRAPH ?g {
-            $subject crm:P1_is_identified_by ?value .
+            $subject crm:P1_is_identified_by/rdf:value ?value .
           }
         }'
       - insert: 'INSERT {
           GRAPH ?g {
-            $subject crm:P1_is_identified_by $value .
+            $subject crm:P1_is_identified_by ?identifier .
+            ?identifier a crm:E42_Identifier ;
+              rdf:value $value .
           }
         } WHERE {
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+          BIND(URI(CONCAT(STR($subject), "/identifier/", MD5(STR($value)))) as ?identifier)
         }'
       - delete: 'DELETE {
           GRAPH ?g {
-            $subject crm:P1_is_identified_by $value .
+            $subject crm:P1_is_identified_by ?identifier ;
+              rdf:value $value .
           }
         } WHERE {
+          $subject crm:P1_is_identified_by ?identifier ;
+            rdf:value $value .
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
         }'
 
