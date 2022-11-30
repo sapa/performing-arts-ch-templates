@@ -1722,19 +1722,19 @@ fields:
       - select: 'SELECT ?value WHERE {
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
           GRAPH ?g {
-            $subject crm:P1_is_identified_by ?value .
+            $subject owl:sameAs ?value .
           }
         }'
       - insert: 'INSERT {
           GRAPH ?g {
-            $subject crm:P1_is_identified_by $value .
+            $subject owl:sameAs $value .
           }
         } WHERE {
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
         }'
       - delete: 'DELETE {
           GRAPH ?g {
-            $subject crm:P1_is_identified_by $value .
+            $subject owl:sameAs $value .
           }
         } WHERE {
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
@@ -1944,6 +1944,38 @@ fields:
         FILTER REGEX(STR(?label), "?token","i")
       } LIMIT 10'
 
+
+  - id: Performance_Rep_ID_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_External_ID_SPARQLMode
+    label: Rep ID
+    datatype: xsd:string
+    queries:
+      - select: 'SELECT ?value WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject crm:P1_is_identified_by/rdf:value ?value .
+          }
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject crm:P1_is_identified_by ?identifier .
+            ?identifier a crm:E42_Identifier ;
+              rdf:value $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+          BIND(URI(CONCAT(STR($subject), "/identifier/", MD5(STR($value)))) as ?identifier)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject crm:P1_is_identified_by ?identifier ;
+              rdf:value $value .
+          }
+        } WHERE {
+          $subject crm:P1_is_identified_by ?identifier ;
+            rdf:value $value .
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
 
   - id: Performance_Subtitle
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Subtitle
