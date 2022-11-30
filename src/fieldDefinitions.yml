@@ -1945,6 +1945,32 @@ fields:
       } LIMIT 10'
 
 
+  - id: Performance_Rep_ID_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_External_ID_SPARQLMode
+    label: Rep ID
+    datatype: xsd:string
+    queries:
+      - select: 'SELECT ?value WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject crm:P1_is_identified_by ?value .
+          }
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject crm:P1_is_identified_by $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject crm:P1_is_identified_by $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+
   - id: Performance_Subtitle
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/Performance_Subtitle
     label: Performance Subtitle

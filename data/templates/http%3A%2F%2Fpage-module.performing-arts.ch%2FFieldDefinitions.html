@@ -1198,6 +1198,18 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "iri" : "Performance_Language"
     }
 [[/inline]]
+ [[#*inline "Performance_Rep_ID_SPARQLMode"]]
+    {
+        "id" : "Performance_Rep_ID_SPARQLMode",
+
+            "label": "[[i18n "field_rep_id" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:string",
+                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P1_is_identified_by ?value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P1_is_identified_by $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P1_is_identified_by $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "Performance_Rep_ID_SPARQLMode"
+    }
+[[/inline]]
  [[#*inline "Performance_Subtitle"]]
     {
         "id" : "Performance_Subtitle",
