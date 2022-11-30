@@ -1,0 +1,29 @@
+[[#if (urlParam "ignoreReplacedBy")]]
+[[else]]
+<semantic-query
+  query="SELECT ?replacement WHERE {
+    ?? spao:replacedBy ?replacement .
+  } LIMIT 1"
+  template="{{> template}}"
+>
+  <template id="template">
+    <div class="fade modal-backdrop show"></div>
+    <div role="dialog" aria-modal="true" class="fade overlay-modal modal show" tabindex="-1" style="display: block;margin-top:5%">
+      <div title="My Dialog" role="document" class="modal-dialog modal-dialog overlay-modal__dialog">
+        <div class="modal-content"><div class="overlay-modal__header modal-header">
+          <button type="button" class="close">
+            <a href="?uri=[[this]]&ignoreReplacedBy=true">
+              <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+            </a>
+          </button>
+        </div>
+        <div class="overlay-modal__body modal-body">
+          <p>[[i18n "ReplaceEntityReplaced" bundle="performing-arts-ch"]]</p>
+          <semantic-link iri="{{bindings.0.replacement.value}}"></semantic-link>
+        </div>
+      </div>
+    </div>
+  </div>
+  </template>
+</semantic-query>
+[[/if]]
