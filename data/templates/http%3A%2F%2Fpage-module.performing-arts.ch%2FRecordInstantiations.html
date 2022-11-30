@@ -1,5 +1,4 @@
 <!-- instantiations -->
-
 [[#if (hasPermission "forms:ldp:*")]]
 
 <semantic-query 
@@ -23,16 +22,6 @@
     <template id='instantiation-properties'>
         {{#ifCond bindings.length ">" 0}}<hr/><h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
         {{#each bindings}}
-        {{#if signatur}}
-            <h5><semantic-link iri="{{instantiation.value}}"></semantic-link></h5>
-            <p><mp-label iri="{{archivalstatus.value}}"></mp-label></p>
-        {{else}}
-            <h5><semantic-link iri="{{instantiation.value}}"><mp-label iri="{{archivalstatus.value}}"></mp-label></semantic-link></h5>
-        {{/if}}
-        <semantic-query 
-            query='SELECT ?value WHERE {  <{{instantiation.value}}> rico:hasCarrierType ?value . }'
-            template='<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{value.value}}"></mp-label>{{else}}, <mp-label iri="{{value.value}}"></mp-label>{{/if}}{{/each}}</div>' >
-        </semantic-query>
         <!-- typed identifier -->
         <semantic-query 
             query="SELECT ?identifier ?type WHERE {
@@ -57,6 +46,16 @@
                         {{/each}}
                 </p>
             </template>
+        </semantic-query>
+        {{#if signatur}}
+            <h5><semantic-link iri="{{instantiation.value}}"></semantic-link></h5>
+            <p><mp-label iri="{{archivalstatus.value}}"></mp-label></p>
+        {{else}}
+            <h5><semantic-link iri="{{instantiation.value}}"><mp-label iri="{{archivalstatus.value}}"></mp-label></semantic-link></h5>
+        {{/if}}
+        <semantic-query 
+            query='SELECT ?value WHERE {  <{{instantiation.value}}> rico:hasCarrierType ?value . }'
+            template='<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{value.value}}"></mp-label>{{else}}, <mp-label iri="{{value.value}}"></mp-label>{{/if}}{{/each}}</div>' >
         </semantic-query>
         <hr />
         {{/each}}
