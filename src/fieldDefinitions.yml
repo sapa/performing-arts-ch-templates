@@ -1722,19 +1722,19 @@ fields:
       - select: 'SELECT ?value WHERE {
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
           GRAPH ?g {
-            $subject crm:P1_is_identified_by ?value .
+            $subject owl:sameAs ?value .
           }
         }'
       - insert: 'INSERT {
           GRAPH ?g {
-            $subject crm:P1_is_identified_by $value .
+            $subject owl:sameAs $value .
           }
         } WHERE {
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
         }'
       - delete: 'DELETE {
           GRAPH ?g {
-            $subject crm:P1_is_identified_by $value .
+            $subject owl:sameAs $value .
           }
         } WHERE {
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)

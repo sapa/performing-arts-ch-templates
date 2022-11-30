@@ -1096,9 +1096,9 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
 
             "label": "[[i18n "field_external_id" bundle="sapa-fields"]]",
             "xsdDatatype" : "xsd:anyURI",
-                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P1_is_identified_by ?value . } }",
-                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P1_is_identified_by $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
-                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P1_is_identified_by $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject owl:sameAs ?value . } }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject owl:sameAs $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject owl:sameAs $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
         "iri" : "Performance_External_ID_SPARQLMode"
     }
 [[/inline]]
