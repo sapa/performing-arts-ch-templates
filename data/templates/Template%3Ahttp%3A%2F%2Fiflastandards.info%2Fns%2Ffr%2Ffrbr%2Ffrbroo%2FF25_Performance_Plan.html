@@ -39,8 +39,13 @@
             <!-- genre -->
             <semantic-query 
                 query='SELECT ?genre WHERE {
-                    ?work frbroo:R12_is_realised_in ?? ;
-                      crm:P2_has_type ?genre .
+                    {
+                      ?work frbroo:R12_is_realised_in ?? ;
+                        crm:P2_has_type ?genre .
+                    } UNION {
+                      ?? crm:P2_has_type ?genre .
+                      ?genre skos:inScheme spav:mn .
+                    }
                   }'
             template='<p>{{#each bindings}}{{#if @first}}<mp-label iri="{{genre.value}}"></mp-label>{{else}}, <mp-label iri="{{genre.value}}"></mp-label>{{/if}}{{/each}}</p>'>
             </semantic-query>
