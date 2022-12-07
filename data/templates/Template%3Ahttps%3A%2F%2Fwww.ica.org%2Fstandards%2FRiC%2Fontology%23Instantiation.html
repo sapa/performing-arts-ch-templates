@@ -181,16 +181,6 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
-                    <!-- content description -->
-                    <semantic-query 
-                        query="SELECT ?description WHERE { ?? rico:descriptiveNote ?description . } ORDER BY ASC (?description)"
-                        template='<div>
-                            <h5>[[i18n "field_content_description" bundle="sapa-fields"]]</h5>
-                            <ul class="list-unstyled">{{#each bindings}}
-                                <li>{{description.value}}</li>
-                            {{/each}}</ul></div>'>
-                    </semantic-query>
-
                     <!-- history -->
                     <semantic-query 
                         query="SELECT ?label ?history  WHERE {
