@@ -1153,7 +1153,7 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
 
             "label": "[[i18n "field_note" bundle="sapa-fields"]]",
             "xsdDatatype" : "xsd:anyURI",
-                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P67_is_referred_to_by ?value . } ?value crm:P2_has_type/skos:inScheme spav:eo }",
+                "selectPattern" : "SELECT ?value WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $subject crm:P67_is_referred_to_by ?value . } }",
                 "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P67_is_referred_to_by $value . $value a crm:E33_Linguistic_Object . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
                 "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P67_is_referred_to_by $value . $value a crm:E33_Linguistic_Object . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
         "iri" : "Performance_Note_Entity_Typed_SPARQLMode"

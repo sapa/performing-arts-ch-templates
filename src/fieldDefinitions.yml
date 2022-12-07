@@ -1846,7 +1846,6 @@ fields:
           GRAPH ?g {
             $subject crm:P67_is_referred_to_by ?value .
           }
-          ?value crm:P2_has_type/skos:inScheme spav:eo
         }'
       - insert: 'INSERT {
           GRAPH ?g {
