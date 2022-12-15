@@ -526,10 +526,10 @@ fields:
       } WHERE {}'
       - autosuggestion: 'SELECT $value $label WHERE {
           $value a crm:E40_Legal_Body ;
-            crm:P2_has_type spav:vrjhq ;
               rdfs:label $label .
         {
-          FILTER(REGEX(STR(?label), "?token", "i"))
+          $label bds:search ?__token__ ;
+            bds:matchAllTerms "true" .
         } UNION {
           BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
         }
