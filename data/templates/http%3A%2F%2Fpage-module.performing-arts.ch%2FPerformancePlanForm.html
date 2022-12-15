@@ -3,7 +3,7 @@
   <div data-flex-layout='row top-stretch'>
     <semantic-form 
      [[#if create]]
-        new-subject-template='http://data.performing-arts.ch/a/{{UUID}}'
+        new-subject-template='http://data.performing-arts.ch/w/{{UUID}}'
         post-action="redirect"
       [[else]]
         subject='[[this]]'
@@ -11,46 +11,50 @@
      [[/if]]
       
       browser-persistence=true
-      persistence='ldp' 
-      form-id='places'
+      persistence='sparql' 
+      form-id='performancePlan'
       fields='[
-        [[> RDFtype]],
-        [[> Genre]],
-        [[> RDFSComment]],
-        [[> SameAs]],
-        [[> WorkActivity]],
-        [[> ActorActivity]]
+        [[> RDFSComment_SPARQLMode]],
+        [[> RDFtype_SPARQLMode]],
+        [[> Performance_External_ID_SPARQLMode]],
+        [[> Performance_Rep_ID_SPARQLMode]],
+        [[> Performance_Genre_SPARQLMode]],
+        [[> Performance_Music_Title_SPARQLMode]],
+        [[> Performance_Note_Entity_Typed_SPARQLMode]],
+        [[> Performance_Label_SPARQLMode]],
+        [[> TitleEntity_SPARQLMode]]
       ]'>
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-          <semantic-form-hidden-input for="RDFtype" default-value='[[resolvePrefix "frbroo:F25_Performance_Plan"]]'></semantic-form-hidden-input>
+          <semantic-form-hidden-input for="RDFtype_SPARQLMode" default-value='[[resolvePrefix "frbroo:F25_Performance_Plan"]]'></semantic-form-hidden-input>
         </div>
-        <semantic-form-tree-picker-input for="Genre"></semantic-form-tree-picker-input>
-
-        <semantic-form-autocomplete-input for="ActorActivity"></semantic-form-autocomplete-input>
-
-        <semantic-form-composite-input for="WorkActivity" new-subject-template="http://data.performing-arts.ch/x/{{UUID}}"
+        <semantic-form-text-input for="Performance_Label_SPARQLMode" languages='["en","de","it","fr"]' ></semantic-form-text-input>
+        <semantic-form-composite-input for="TitleEntity_SPARQLMode"
+          new-subject-template='/title/{{UUID}}'
           fields='[
-            [[> typeset]],
-            [[> Activity_Type]],
-            [[> Performed_By]]
-          ]'>
-          <div style="display: none;">
-            <semantic-form-hidden-input for="typeset" default-value='http://www.cidoc-crm.org/cidoc-crm/E7_Activity'></semantic-form-hidden-input>
-          </div>
-          <bs-row>
-            <bs-col sm='6'>
-              <semantic-form-autocomplete-input for="Activity_Type"></semantic-form-autocomplete-input>          
-            </bs-col>
-            <bs-col sm='6'>
-              <semantic-form-autocomplete-input for="Performed_By" placeholder='Search persons...'></semantic-form-autocomplete-input>
-            </bs-col>
-          </bs-row>
-       </semantic-form-composite-input>
-
-        <semantic-form-text-input for="RDFSComment"></semantic-form-text-input>
-        <semantic-form-text-input for="SameAs"></semantic-form-text-input>
+            [[> TitleType_SPARQLMode]],
+            [[> TitleValue_SPARQLMode]]
+          ]'
+        >
+          <semantic-form-text-input for="TitleValue_SPARQLMode" languages='["en","de","it","fr"]' ></semantic-form-text-input>
+          <semantic-form-select-input for="TitleType_SPARQLMode"></semantic-form-select-input>
+        </semantic-form-composite-input>
+        <semantic-form-select-input for="Performance_Genre_SPARQLMode" ></semantic-form-select-input>
+        <semantic-form-composite-input for="Performance_Note_Entity_Typed_SPARQLMode"
+          new-subject-template='/note/{{UUID}}'
+          fields='[
+            [[> Performance_Note_Type_SPARQLMode]],
+            [[> Performance_Note_Value_SPARQLMode]]
+          ]'
+        >
+          <semantic-form-text-input for="Performance_Note_Value_SPARQLMode" languages='["en","de","it","fr"]' ></semantic-form-text-input>
+          <semantic-form-select-input for="Performance_Note_Type_SPARQLMode"></semantic-form-select-input>
+        </semantic-form-composite-input>
+        <semantic-form-text-input for="Performance_Rep_ID_SPARQLMode"></semantic-form-text-input>
+        <semantic-form-text-input for="Performance_External_ID_SPARQLMode"></semantic-form-text-input>
+        <semantic-form-text-input for="Performance_Music_Title_SPARQLMode"></semantic-form-text-input>
+        <semantic-form-text-input for="RDFSComment_SPARQLMode"></semantic-form-text-input>
         <semantic-form-errors></semantic-form-errors>
         <button name="submit" class="btn btn-secondary">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>
         <button name="reset" class="btn btn-secondary">[[i18n "FormReset" bundle="performing-arts-ch"]]</button>
