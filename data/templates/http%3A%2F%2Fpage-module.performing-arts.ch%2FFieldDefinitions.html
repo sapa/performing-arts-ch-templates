@@ -301,7 +301,7 @@
                 "selectPattern" : "SELECT $value WHERE { $subject crm:P107i_is_current_or_former_member_of $value . $value crm:P2_has_type spav:vrjhq . } ",
                 "insertPattern" : "INSERT { $subject crm:P107i_is_current_or_former_member_of $value . } WHERE {}",
                 "deletePattern" : "DELETE { $subject crm:P107i_is_current_or_former_member_of $value . } WHERE {}",
-                "autosuggestionPattern" : "SELECT $value $label WHERE { $value a crm:E40_Legal_Body ; crm:P2_has_type spav:vrjhq ; rdfs:label $label . { FILTER(REGEX(STR(?label), \"?token\", \"i\")) } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) } FILTER(CONTAINS(STR(?value), \"/a/\")) } LIMIT 10",
+                "autosuggestionPattern" : "SELECT $value $label WHERE { $value a crm:E40_Legal_Body ; rdfs:label $label . { $label bds:search ?__token__ ; bds:matchAllTerms \"true\" . } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) } FILTER(CONTAINS(STR(?value), \"/a/\")) } LIMIT 10",
         "iri" : "GroupAssociation"
     }
 [[/inline]]
