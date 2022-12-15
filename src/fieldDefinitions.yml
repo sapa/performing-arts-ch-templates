@@ -516,7 +516,8 @@ fields:
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P107i_is_current_or_former_member_of $value .
-        $value crm:P2_has_type spav:vrjhq .
+        $value crm:P2_has_type ?type .
+        ?type skos:broader* spav:vrjhq .
       } '
       - insert: 'INSERT {
         $subject crm:P107i_is_current_or_former_member_of $value .
@@ -527,6 +528,8 @@ fields:
       - autosuggestion: 'SELECT $value $label WHERE {
           $value a crm:E40_Legal_Body ;
               rdfs:label $label .
+          $value crm:P2_has_type ?type .
+          ?type skos:broader* spav:vrjhq .
         {
           $label bds:search ?__token__ ;
             bds:matchAllTerms "true" .
