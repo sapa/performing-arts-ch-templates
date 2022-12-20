@@ -7,14 +7,22 @@
         VALUES (?prefix ?source ?order)
         {
           ("http://www.wikidata.org/entity/" "Wikidata" 0)
+          ("https://www.wikidata.org/entity/" "Wikidata" 0)
           ("http://www.isni.org/" "ISNI" 1)
+          ("https://www.isni.org/" "ISNI" 1)
           ("http://viaf.org/viaf/" "VIAF" 2)
+          ("https://viaf.org/viaf/" "VIAF" 2)
           ("http://d-nb.info/gnd/" "GND" 3)
+          ("https://d-nb.info/gnd/" "GND" 3)
           ("https://catalogue.bnf.fr/ark:/12148/cb" "BnF" 4)
           ("http://geonames.org/" "Geonames" 5)
+          ("https://geonames.org/" "Geonames" 5)
           ("http://classifications.data.admin.ch/municipality/" "[[i18n "ExternalResourcesSwissMunicipality" bundle="performing-arts-ch"]]" 6)
+          ("https://classifications.data.admin.ch/municipality/" "[[i18n "ExternalResourcesSwissMunicipality" bundle="performing-arts-ch"]]" 6)
           ("http://classifications.data.admin.ch/canton/" "[[i18n "ExternalResourcesSwissMunicipality" bundle="performing-arts-ch"]]" 7)
+          ("https://classifications.data.admin.ch/canton/" "[[i18n "ExternalResourcesSwissMunicipality" bundle="performing-arts-ch"]]" 7)
           ("http://tls.theaterwissenschaft.ch/wiki/" "[[i18n "ExternalResourcesTLS" bundle="performing-arts-ch"]]" 8)
+          ("https://tls.theaterwissenschaft.ch/wiki/" "[[i18n "ExternalResourcesTLS" bundle="performing-arts-ch"]]" 8)
         }
         BIND (IF(?order<8,
         CONCAT(?source,": ",?localname) ,

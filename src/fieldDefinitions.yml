@@ -3953,14 +3953,22 @@ fields:
         VALUES(?prefix ?source ?order)
         {
           ("http://www.wikidata.org/entity/" "Wikidata" 0)
+          ("https://www.wikidata.org/entity/" "Wikidata" 0)
           ("http://www.isni.org/" "ISNI" 1)
+          ("https://www.isni.org/" "ISNI" 1)
           ("http://viaf.org/viaf/" "VIAF" 2)
+          ("https://viaf.org/viaf/" "VIAF" 2)
           ("http://d-nb.info/gnd/" "GND" 3)
+          ("https://d-nb.info/gnd/" "GND" 3)
           ("https://catalogue.bnf.fr/ark:/12148/cb" "BnF" 4)
           ("http://geonames.org/" "Geonames" 5)
+          ("https://geonames.org/" "Geonames" 5)
           ("http://classifications.data.admin.ch/municipality/" "Swiss Municipality" 6)
+          ("https://classifications.data.admin.ch/municipality/" "Swiss Municipality" 6)
           ("http://classifications.data.admin.ch/canton/" "Swiss Municipality" 7)
+          ("https://classifications.data.admin.ch/canton/" "Swiss Municipality" 7)
           ("http://tls.theaterwissenschaft.ch/wiki/" "Theaterlexikon der Schweiz" 8)
+          ("https://tls.theaterwissenschaft.ch/wiki/" "Theaterlexikon der Schweiz" 8)
         }
         BIND(IF(?order<8, CONCAT(?source,": ",?localname), ?source) AS ?label)
       } ORDER BY ASC(?order)'
