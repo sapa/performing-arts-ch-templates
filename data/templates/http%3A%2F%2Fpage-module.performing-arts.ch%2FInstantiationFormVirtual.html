@@ -22,6 +22,7 @@
         [[> InstantiationArchivalStatus]],
         [[> InstantiationRepresentationType]],
         [[> InstantiationCarrierType]],
+        [[> InstantiationRecordingSystem]],
         [[> InstantiationHistory]],
         [[> InstantiationDerived]],
         [[> InstantiationCopyPath]],
@@ -29,12 +30,14 @@
         [[> ThingNoteInternal]],
         [[> ThingLocation]],
         [[> RepresentationFile]],
+        [[> RecordResourceAcquisition]],
         [[> RecordResourceResponsible]],
         [[> InstantiationPreparationDate]],
         [[> ThingAccessability]],
         [[> ThingPermission]],
         [[> ThingPhysicalUsability]],
         [[> RecordResourceProtectionDuration]],
+        [[> RecordResourceDescription]],
         [[> ThingTermsProtection]],
         [[> ThingSeeAlso]],
         [[> ThingNote]]
@@ -58,10 +61,13 @@
               <semantic-form-text-input for="IdentifierValue"></semantic-form-text-input>
               <semantic-form-select-input for="IdentifierType"></semantic-form-select-input>
             </semantic-form-composite-input>
+            <div class="sapa-component form-field-deprecated"><semantic-form-text-input for="ThingIdentifier"></semantic-form-text-input></div>
+            <div class="sapa-component form-field-deprecated"><semantic-form-text-input for="ThingLegacyIdentifier"></semantic-form-text-input></div>
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-select-input for="InstantiationRepresentationType"></semantic-form-select-input>
             <semantic-form-tree-picker-input for="InstantiationCarrierType"></semantic-form-tree-picker-input>
+            <semantic-form-tree-picker-input for="InstantiationRecordingSystem"></semantic-form-tree-picker-input>
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-select-input for="InstantiationArchivalStatus"></semantic-form-select-input>
@@ -72,6 +78,8 @@
         <bs-row>
           <bs-col sm='4'>
             <semantic-form-text-input for="InstantiationHistory" multiline=true></semantic-form-text-input>
+            <semantic-form-select-input for="RecordResourceAcquisition"></semantic-form-select-input>
+            <semantic-form-text-input for="RecordResourceDescription" multiline=true></semantic-form-text-input>
             <semantic-form-autocomplete-input for="InstantiationDerived"></semantic-form-autocomplete-input>
             <semantic-form-text-input for="InstantiationCopyPath" multiline=true></semantic-form-text-input>
           </bs-col>
@@ -266,7 +274,7 @@
                 </bs-col>
               </bs-row>        
           </semantic-form-composite-input>
-        </bs-col>
+          <hr>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
         <button name="submit" class="btn btn-secondary">[[i18n "FormSubmit" bundle="performing-arts-ch"]]</button>

@@ -469,7 +469,7 @@
                 query='SELECT ?label ?value  WHERE {
             VALUES (?label) { ( "[[i18n "field_internal_note" bundle="sapa-fields"]]") }
         
-                    ?? spao:hasNoteInternal ?value . }'
+                    ?? spao:hasInternalNote ?value . }'
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                     {{#each bindings}}<div class="text-item" style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
@@ -840,7 +840,7 @@
                           { 
                               ?record rico:hasOrHadSubject <{{recording.value}}> ;
                                 rico:hasInstantiation ?vimeo_url .
-                              FILTER(CONTAINS(STR(?vimeo_url), 'http://vimeo.com'))
+                              FILTER(CONTAINS(STR(?vimeo_url), '://vimeo.com'))
                               ?vimeo_url rico:hasCarrierType spav:fvonl .
                               BIND(STRAFTER(STR(?vimeo_url), 'vimeo.com/') AS ?vimeo_id)
                           }"
@@ -862,6 +862,12 @@
 [[#if (hasPermission "forms:ldp:*")]] 
 <bs-tab event-key='record editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
 [[> sapaModule:RecordForm]]
+</bs-tab>
+[[/if]]
+
+[[#if (hasPermission "api:ldp:*:delete")]] 
+<bs-tab event-key='delete' title='[[i18n "TabDelete" bundle="performing-arts-ch"]]'>
+    [[> sapaModule:DeleteEntity]]
 </bs-tab>
 [[/if]]
 

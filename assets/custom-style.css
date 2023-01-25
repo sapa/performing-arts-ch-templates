@@ -35,6 +35,12 @@ div.form-section {
   font-weight: bold;
   font-size: 1.2em;
 }
+.sapa-component.font-bold {
+  font-weight: bold;
+}
+.sapa-component.form-field-deprecated span.semantic-form-input-decorator__label::after {
+  content: " (deprecated)";
+}
 .sapa-component.domain-cards-tabs .nav {
   display: block;
 }
@@ -242,4 +248,8 @@ nav.metaphacts-header-navbar.DEVELOPMENT,
 nav.metaphacts-header-navbar.dev\.performing-arts\.ch {
   background: #e6375c;
   background: repeating-linear-gradient(45deg, #c83535, #c83535 10px, #872828 10px, #87283d 20px) !important;
+}
+nav.metaphacts-header-navbar.LOCAL {
+  background: #e6375c;
+  background: repeating-linear-gradient(45deg, #35c8ad, #35adc8 10px, #35c8ad 10px, #35adc8 20px) !important;
 }

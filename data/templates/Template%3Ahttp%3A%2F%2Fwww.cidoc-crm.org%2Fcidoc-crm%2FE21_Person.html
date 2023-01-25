@@ -1,4 +1,5 @@
 [[> sapaModule:FieldDefinitions]]
+[[> sapaModule:ReplacedByNotice]]
 
 <div class="page">
   
@@ -243,6 +244,12 @@
         [[#if (hasPermission "forms:ldp:*")]] 
         <bs-tab event-key='person editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
             [[> sapaModule:PersonForm]]
+        </bs-tab>
+        [[/if]]
+
+        [[#if (hasPermission "api:ldp:*:delete")]] 
+        <bs-tab event-key='delete' title='[[i18n "TabDelete" bundle="performing-arts-ch"]]'>
+            [[> sapaModule:DeleteEntity]]
         </bs-tab>
         [[/if]]
 

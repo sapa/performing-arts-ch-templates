@@ -1,3 +1,5 @@
+[[> sapaModule:ReplacedByNotice]]
+
 <div class="page">
     <bs-tabs id='record-tabs' class='page__body-navtabs' default-active-key='about' unmount-on-exit=true>
         <bs-tab event-key='about' title='[[i18n "TabSummary" bundle="performing-arts-ch"]]'>
@@ -11,6 +13,12 @@
         [[#if (hasPermission "forms:ldp:*")]] 
         <bs-tab event-key='group' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
             [[> sapaModule:GroupForm]]
+        </bs-tab>
+        [[/if]]
+
+        [[#if (hasPermission "api:ldp:*:delete")]] 
+        <bs-tab event-key='delete' title='[[i18n "TabDelete" bundle="performing-arts-ch"]]'>
+            [[> sapaModule:DeleteEntity]]
         </bs-tab>
         [[/if]]
 

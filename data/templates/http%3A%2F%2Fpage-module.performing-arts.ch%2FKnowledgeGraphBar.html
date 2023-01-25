@@ -65,8 +65,10 @@
               ?? a ?type .
               OPTIONAL { ?? <http://example.com/resource> ?null }
             }
-            BIND(IF(CONTAINS(STR(?graph), '/temp-context'), 'not yet permanent', ??) AS ?uri) 
-            BIND(IF(CONTAINS(STR(?graph), '/temp-context'), ?null, 'true'^^xsd:boolean) AS ?button)
+            BIND(?? as ?uri)
+            BIND('true'^^xsd:boolean as ?button)
+            #BIND(IF(CONTAINS(STR(?graph), '/temp-context'), 'not yet permanent', ??) AS ?uri) 
+            #BIND(IF(CONTAINS(STR(?graph), '/temp-context'), ?null, 'true'^^xsd:boolean) AS ?button)
           } LIMIT 1"
           template="<div class='knowledgeGraphBar__uriRow'>{{#each bindings}}{{log this}}<b>URI</b>: <i>{{uri.value}}</i>{{#if button.value}}<mp-copy-to-clipboard text='{{uri.value}}'><button class='btn btn-secondary knowledgeGraphBar__copyIri'></button></mp-copy-to-clipboard>{{/if}}{{/each}}</div>">
       </semantic-query>
