@@ -321,8 +321,14 @@
       </bs-row>
       
     </bs-tab>
-  
-      [[> sapaModule:AdminTabs]]
+
+    [[#if (hasPermission "forms:ldp:*")]] 
+      <bs-tab event-key='record editing' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
+        [[> sapaModule:RecordingForm]]
+      </bs-tab>
+    [[/if]]
+
+    [[> sapaModule:AdminTabs]]
             
   </bs-tabs>  
 </div>
