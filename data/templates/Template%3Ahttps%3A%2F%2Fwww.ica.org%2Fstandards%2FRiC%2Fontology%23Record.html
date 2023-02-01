@@ -344,36 +344,7 @@
             <!-- ALLIED MATERIALS -->
 
             <!-- location -->
-            <semantic-query
-                query='SELECT ?location (COUNT(?mid) as ?depth) {
-                    {
-                        SELECT ?root {
-                            ?root a spao:ArchivalPlace .
-                            FILTER NOT EXISTS {
-                                ?root rico:containedBy ?superRoot .
-                                FILTER (?root != ?superRoot)
-                            }
-                        }
-                    }
-                    ?? rico:hasOrHadLocation/rico:containedBy* ?location .
-                    ?location rico:containedBy* ?mid .
-                    ?mid rico:containedBy* ?root .
-                } GROUP BY ?location
-                ORDER BY ?depth'
-                template="{{> template-location }}"
-            >
-                <template id="template-location">
-                    <div>
-                        <h5>[[i18n "field_location" bundle="sapa-fields"]]</h5>
-                        <p>
-                            {{#each bindings}}
-                                <semantic-link iri="{{location.value}}"></semantic-link>{{#if @last}}{{else}} / {{/if}}
-                            {{/each}}
-                        </p>
-                        </ul>
-                    </div>
-                </template>
-            </semantic-query>
+            [[> sapaModule:LocationHierarchy]]
 
             <!-- packing -->
             <semantic-query 
