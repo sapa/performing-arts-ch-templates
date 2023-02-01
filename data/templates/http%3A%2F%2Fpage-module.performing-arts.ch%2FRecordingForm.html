@@ -17,6 +17,9 @@
         [[> RDFtype]],
         [[> RDFSLabel]],
         [[> RecordingDuration]],
+        [[> RecordingNote]],
+        [[> RecordingNoteValue]],
+        [[> RecordingNoteType]],
         [[> RecordingProduction]],
         [[> RecordingTitle]],
         [[> RecordingType]]
@@ -59,6 +62,16 @@
             <semantic-form-text-input for="RecordingDuration"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='6'>
+            <semantic-form-composite-input for="RecordingNote"
+            new-subject-template="/note/{{UUID}}"
+            fields='[
+              [[> RecordingNoteType]],
+              [[> RecordingNoteValue]]
+            ]'
+          >
+            <semantic-form-text-input for="RecordingNoteValue" languages='["en", "de", "fr", "it"]' require-language="true"></semantic-form-text-input>
+            <semantic-form-select-input for="RecordingNoteType"></semantic-form-select-input>
+          </semantic-form-composite-input>
           </bs-col>
         </bs-row>
         <hr>

@@ -2451,6 +2451,43 @@ VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) { (ri
         "iri" : "RecordingDuration"
     }
 [[/inline]]
+ [[#*inline "RecordingNote"]]
+    {
+        "id" : "RecordingNote",
+
+            "label": "[[i18n "field_note" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P67_is_referred_to_by ?value . ?value a crm:E33_Linguistic_Object ; crm:P2_has_type ?type . ?type skos:inScheme spav:eo . }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P67_is_referred_to_by ?value . ?value a crm:E33_Linguistic_Object . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P67_is_referred_to_by ?value . ?value a crm:E33_Linguistic_Object . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "RecordingNote"
+    }
+[[/inline]]
+ [[#*inline "RecordingNoteType"]]
+    {
+        "id" : "RecordingNoteType",
+
+            "label": "[[i18n "field_type" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P2_has_type ?value }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P2_has_type ?value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P2_has_type ?value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "valueSetPattern" : "SELECT ?value WHERE { ?value skos:inScheme spav:eo . }",
+        "iri" : "RecordingNoteType"
+    }
+[[/inline]]
+ [[#*inline "RecordingNoteValue"]]
+    {
+        "id" : "RecordingNoteValue",
+
+            "label": "[[i18n "field_note" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:string",
+                "selectPattern" : "SELECT ?value WHERE { $subject rdf:value ?value . }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject rdf:value ?value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject rdf:value ?value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+        "iri" : "RecordingNoteValue"
+    }
+[[/inline]]
  [[#*inline "RecordingProduction"]]
     {
         "id" : "RecordingProduction",
