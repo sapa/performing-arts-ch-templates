@@ -1611,6 +1611,20 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
         "iri" : "RDFSLabel"
     }
 [[/inline]]
+ [[#*inline "RDFSLabel_SPARQLMode"]]
+    {
+        "id" : "RDFSLabel_SPARQLMode",
+
+            "label": "[[i18n "field_label" bundle="sapa-fields"]]",
+            "description" : "A short comment that helps to identify the entity.",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#string",
+            "domain" : "http://www.w3.org/2002/07/owl#Class",
+                "selectPattern" : "SELECT ?value WHERE { $subject rdfs:label ?value. }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject rdfs:label $value } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject rdfs:label $value } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "RDFSLabel_SPARQLMode"
+    }
+[[/inline]]
  [[#*inline "RDFtype"]]
     {
         "id" : "RDFtype",

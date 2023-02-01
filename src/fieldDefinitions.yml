@@ -2689,6 +2689,31 @@ fields:
         $subject rdfs:label $value
       } WHERE {}'
 
+  - id: RDFSLabel_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFSLabel_SPARQLMode
+    label: Label
+    description: A short comment that helps to identify the entity.
+    datatype: http://www.w3.org/2001/XMLSchema#string
+    domain: http://www.w3.org/2002/07/owl#Class
+    queries:
+      - select: 'SELECT ?value WHERE {
+        $subject rdfs:label ?value.
+      }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject rdfs:label $value
+          }
+      } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+      }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject rdfs:label $value
+          }
+      } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+      }'
+
 
   - id: RDFtype
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RDFtype
