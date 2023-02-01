@@ -122,6 +122,28 @@
           template='<div><h5>Note on music</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
         </semantic-query>
 
+        <!-- public note -->
+        <semantic-query
+          query='SELECT ?value WHERE {
+            ?? crm:P67_is_referred_to_by ?linguistic.
+            ?linguistic crm:P2_has_type spav:eonvd ;
+              rdf:value ?value .
+          }'
+          template='<div><h5>Note</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+        </semantic-query>
+
+        <!-- internal note -->
+        [[#if (hasPermission "forms:ldp:*")]] 
+          <semantic-query
+            query='SELECT ?value WHERE {
+              ?? crm:P67_is_referred_to_by ?linguistic.
+              ?linguistic crm:P2_has_type spav:eokdx ;
+                rdf:value ?value .
+            }'
+            template='<div><h5>Internal Note</h5>{{#each bindings}}<p style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>'>
+          </semantic-query>
+        [[/if]]
+
         <!-- genre2 -->
         <semantic-query
           query='SELECT ?genre WHERE { ?? <http://temp.performing-arts.ch/genre2> ?genre . }'
@@ -327,7 +349,7 @@
         [[> sapaModule:RecordingForm]]
       </bs-tab>
     [[/if]]
-
+    
     [[> sapaModule:AdminTabs]]
             
   </bs-tabs>  

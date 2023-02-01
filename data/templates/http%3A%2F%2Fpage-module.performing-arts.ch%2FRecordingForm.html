@@ -14,9 +14,12 @@
       persistence='sparql' 
       form-id='recording'
       fields='[
-        [[> RDFtype]],
-        [[> RDFSLabel]],
+        [[> RDFtype_SPARQLMode]],
+        [[> RDFSLabel_SPARQLMode]],
         [[> RecordingDuration]],
+        [[> RecordingNote]],
+        [[> RecordingNoteValue]],
+        [[> RecordingNoteType]],
         [[> RecordingProduction]],
         [[> RecordingTitle]],
         [[> RecordingType]]
@@ -24,12 +27,12 @@
       <bs-panel>
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
-          <semantic-form-hidden-input for="RDFtype" default-value='[[resolvePrefix "frbroo:F26_Recording"]]'></semantic-form-hidden-input>
+          <semantic-form-hidden-input for="RDFtype_SPARQLMode" default-value='[[resolvePrefix "frbroo:F26_Recording"]]'></semantic-form-hidden-input>
         </div>
         <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionIdentification" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
         <bs-row>
           <bs-col sm='6'>
-            <semantic-form-text-input for="RDFSLabel" languages='["en", "de", "fr", "it"]' require-language="true"></semantic-form-text-input>
+            <semantic-form-text-input for="RDFSLabel_SPARQLMode" languages='["en", "de", "fr", "it"]' require-language="false"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='6'>
             <semantic-form-composite-input for="RecordingTitle"
@@ -59,6 +62,16 @@
             <semantic-form-text-input for="RecordingDuration"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='6'>
+            <semantic-form-composite-input for="RecordingNote"
+            new-subject-template="/note/{{UUID}}"
+            fields='[
+              [[> RecordingNoteType]],
+              [[> RecordingNoteValue]]
+            ]'
+          >
+            <semantic-form-text-input for="RecordingNoteValue" languages='["en", "de", "fr", "it"]' require-language="true"></semantic-form-text-input>
+            <semantic-form-select-input for="RecordingNoteType"></semantic-form-select-input>
+          </semantic-form-composite-input>
           </bs-col>
         </bs-row>
         <hr>

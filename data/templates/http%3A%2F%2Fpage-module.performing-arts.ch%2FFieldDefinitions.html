@@ -1611,6 +1611,20 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
         "iri" : "RDFSLabel"
     }
 [[/inline]]
+ [[#*inline "RDFSLabel_SPARQLMode"]]
+    {
+        "id" : "RDFSLabel_SPARQLMode",
+
+            "label": "[[i18n "field_label" bundle="sapa-fields"]]",
+            "description" : "A short comment that helps to identify the entity.",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#string",
+            "domain" : "http://www.w3.org/2002/07/owl#Class",
+                "selectPattern" : "SELECT ?value WHERE { $subject rdfs:label ?value. }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject rdfs:label $value } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject rdfs:label $value } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "RDFSLabel_SPARQLMode"
+    }
+[[/inline]]
  [[#*inline "RDFtype"]]
     {
         "id" : "RDFtype",
@@ -2451,6 +2465,43 @@ VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) { (ri
         "iri" : "RecordingDuration"
     }
 [[/inline]]
+ [[#*inline "RecordingNote"]]
+    {
+        "id" : "RecordingNote",
+
+            "label": "[[i18n "field_note" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P67_is_referred_to_by ?value . ?value a crm:E33_Linguistic_Object ; crm:P2_has_type ?type . ?type skos:inScheme spav:eo . }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P67_is_referred_to_by ?value . ?value a crm:E33_Linguistic_Object . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P67_is_referred_to_by ?value . ?value a crm:E33_Linguistic_Object . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+        "iri" : "RecordingNote"
+    }
+[[/inline]]
+ [[#*inline "RecordingNoteType"]]
+    {
+        "id" : "RecordingNoteType",
+
+            "label": "[[i18n "field_type" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P2_has_type ?value }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P2_has_type ?value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P2_has_type ?value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "valueSetPattern" : "SELECT ?value WHERE { ?value skos:inScheme spav:eo . }",
+        "iri" : "RecordingNoteType"
+    }
+[[/inline]]
+ [[#*inline "RecordingNoteValue"]]
+    {
+        "id" : "RecordingNoteValue",
+
+            "label": "[[i18n "field_note" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:string",
+                "selectPattern" : "SELECT ?value WHERE { $subject rdf:value ?value . }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject rdf:value ?value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject rdf:value ?value . } } WHERE { $parent crm:P67_is_referred_to_by $subject . BIND(URI(CONCAT(STR($parent), \"/container/context\")) as ?g) }",
+        "iri" : "RecordingNoteValue"
+    }
+[[/inline]]
  [[#*inline "RecordingProduction"]]
     {
         "id" : "RecordingProduction",
@@ -2461,8 +2512,9 @@ VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) { (ri
                 "insertPattern" : "INSERT { GRAPH ?g { $subject frbroo:R14_incorporates $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
                 "deletePattern" : "DELETE { GRAPH ?g { $subject frbroo:R14_incorporates $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
                 "autosuggestionPattern" : "SELECT DISTINCT $value ?label WHERE { BIND(?__userPreferredLanguage__ AS ?lang)
-VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) { (frbroo:F25_Performance_Plan \"production\" \"Produktion\" \"production\" \"produzion\") } BIND( IF(?lang = \"de\", ?type_label_de, IF(?lang = \"fr\", ?type_label_fr, IF(?lang = \"it\", ?type_label_it, ?type_label_en) ) ) AS ?type_label) $value rdfs:label ?item_label . ?item_label bds:search ?__token__ ; bds:matchAllTerms \"true\" .
-$value rdf:type ?type . BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FILTER(?type_indicator != \"x\") FILTER(?type_indicator != \"u\") OPTIONAL { $value crm:P2_has_type ?crmtype. } FILTER((?type != crm:E22_Man-Made_Object) || (?crmtype = spav:dwmkn)) OPTIONAL { $value crm:P74_has_current_or_former_residence/crm:P89_falls_within/rdfs:label ?place_label . BIND(LANG(?place_label) AS ?place_label_lang) } FILTER(!BOUND(?place_label_lang) || ?place_label_lang = ?lang) BIND(CONCAT(?item_label, \" (\", ?type_label, IF(BOUND(?place_label), CONCAT(\", \", ?place_label), \"\"), \")\") AS ?label) } LIMIT 100",
+VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) { (frbroo:F25_Performance_Plan \"production\" \"Produktion\" \"production\" \"produzion\") } BIND( IF(?lang = \"de\", ?type_label_de, IF(?lang = \"fr\", ?type_label_fr, IF(?lang = \"it\", ?type_label_it, ?type_label_en) ) ) AS ?type_label)
+{ $value rdfs:label ?item_label . ?item_label bds:search ?__token__ ; bds:matchAllTerms \"true\" . $value rdf:type ?type . } UNION { BIND(URI(REPLACE(REPLACE(\"?token\", \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) ?value rdfs:label ?item_label . $value rdf:type ?type . }
+BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FILTER(?type_indicator != \"x\") FILTER(?type_indicator != \"u\") OPTIONAL { $value crm:P2_has_type ?crmtype. } FILTER((?type != crm:E22_Man-Made_Object) || (?crmtype = spav:dwmkn)) OPTIONAL { $value crm:P74_has_current_or_former_residence/crm:P89_falls_within/rdfs:label ?place_label . BIND(LANG(?place_label) AS ?place_label_lang) } FILTER(!BOUND(?place_label_lang) || ?place_label_lang = ?lang) BIND(CONCAT(?item_label, \" (\", ?type_label, IF(BOUND(?place_label), CONCAT(\", \", ?place_label), \"\"), \")\") AS ?label) } LIMIT 100",
         "iri" : "RecordingProduction"
     }
 [[/inline]]
