@@ -152,6 +152,14 @@
           </div>'>
         </semantic-query>
 
+        <!-- Performance Plan -->
+        <semantic-query
+          query='SELECT ?value WHERE { ?? frbroo:R14_incorporates ?value . }'
+          template='<div><h5>Performance Plan</h5>
+            <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{value.value}}"></semantic-link></li>{{/each}}</ul>
+          </div>'>
+        </semantic-query>
+
         <!-- creation functions - production -->
         [[> sapaModule:ShowActivities function="spav:muwgo"]]
         
