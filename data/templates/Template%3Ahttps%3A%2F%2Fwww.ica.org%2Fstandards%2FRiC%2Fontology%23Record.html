@@ -344,14 +344,7 @@
             <!-- ALLIED MATERIALS -->
 
             <!-- location -->
-            <semantic-query 
-                query="SELECT ?label ?value  WHERE {
-            VALUES (?label) { ( '[[i18n "field_location" bundle="sapa-fields"]]') }
-        
-                    ?? rico:hasOrHadLocation ?value . }"
-                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
-                    <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{value.value}}"></semantic-link></li>{{/each}}</ul></div>'>
-            </semantic-query>
+            [[> sapaModule:LocationHierarchy]]
 
             <!-- packing -->
             <semantic-query 
