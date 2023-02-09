@@ -750,7 +750,9 @@
                 <bs-col sm="4">
 
                     <!-- location -->
-                    [[> sapaModule:LocationHierarchy]]
+                    [[#if (hasPermission "forms:ldp:*")]]
+                        [[> sapaModule:LocationHierarchy]]
+                    [[/if]]
                     
                     <!-- record resource -->
                     <semantic-query 

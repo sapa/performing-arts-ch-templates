@@ -344,7 +344,9 @@
             <!-- ALLIED MATERIALS -->
 
             <!-- location -->
-            [[> sapaModule:LocationHierarchy]]
+            [[#if (hasPermission "forms:ldp:*")]]
+                [[> sapaModule:LocationHierarchy]]
+            [[/if]]
 
             <!-- packing -->
             <semantic-query 
