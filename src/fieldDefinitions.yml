@@ -4252,15 +4252,16 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs
     label: External resources
     description: Expects URIs from other databases such as Wikidata, GND, etc.
-    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    datatype: xsd:string
     domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
     range: rdfs:Class
     queries:
       - select: 'SELECT ?value ?label
       WHERE {
-        $subject owl:sameAs ?value .
-        BIND(REPLACE(STR(?value), ".*\\\\/c*b*", "") as ?localname)
-        BIND(STRBEFORE(STR(?value), ?localname) as ?prefix)
+        $subject owl:sameAs ?valueAsString .
+        BIND(REPLACE(STR(?valueAsString), ".*\\\\/c*b*", "") as ?localname)
+        BIND(STRBEFORE(STR(?valueAsString), ?localname) as ?prefix)
+        BIND(IRI(?valueAsString) as ?value)
         VALUES(?prefix ?source ?order)
         {
           ("http://www.wikidata.org/entity/" "Wikidata" 0)
@@ -4284,11 +4285,39 @@ fields:
         BIND(IF(?order<8, CONCAT(?source,": ",?localname), ?source) AS ?label)
       } ORDER BY ASC(?order)'
       - insert: 'INSERT {
-        $subject owl:sameAs $value .
-      } WHERE {}'
+        $subject owl:sameAs ?valueAsUri .
+      } WHERE {
+        BIND(IRI(?value) as ?valueAsUri)
+      }'
       - delete: 'DELETE {
-        $subject owl:sameAs $value .
-      } WHERE { }'
+        $subject owl:sameAs ?valueAsUri .
+      } WHERE {
+        BIND(IRI(?value) as ?valueAsUri)
+      }'
+      - ask: 'ASK {
+          BIND(REPLACE(STR(?value), ".*\\\\/c*b*", "") as ?localname)
+          BIND(STRBEFORE(STR(?value), ?localname) as ?prefix)
+          VALUES(?prefix ?source ?order)
+          {
+            ("http://www.wikidata.org/entity/" "Wikidata" 0)
+            ("https://www.wikidata.org/entity/" "Wikidata" 0)
+            ("http://www.isni.org/" "ISNI" 1)
+            ("https://www.isni.org/" "ISNI" 1)
+            ("http://viaf.org/viaf/" "VIAF" 2)
+            ("https://viaf.org/viaf/" "VIAF" 2)
+            ("http://d-nb.info/gnd/" "GND" 3)
+            ("https://d-nb.info/gnd/" "GND" 3)
+            ("https://catalogue.bnf.fr/ark:/12148/cb" "BnF" 4)
+            ("http://geonames.org/" "Geonames" 5)
+            ("https://geonames.org/" "Geonames" 5)
+            ("http://classifications.data.admin.ch/municipality/" "Swiss Municipality" 6)
+            ("https://classifications.data.admin.ch/municipality/" "Swiss Municipality" 6)
+            ("http://classifications.data.admin.ch/canton/" "Swiss Municipality" 7)
+            ("https://classifications.data.admin.ch/canton/" "Swiss Municipality" 7)
+            ("http://tls.theaterwissenschaft.ch/wiki/" "Theaterlexikon der Schweiz" 8)
+            ("https://tls.theaterwissenschaft.ch/wiki/" "Theaterlexikon der Schweiz" 8)
+          }
+      }'
 
   - id: SameAs_SPARQLMode
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/SameAs_SPARQLMode
