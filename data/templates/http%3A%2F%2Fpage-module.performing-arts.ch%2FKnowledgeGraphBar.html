@@ -1,7 +1,12 @@
+<style>
+.knowledgeGraphBar__thumbnail img{
+  max-width: 120px !important;
+}
+</style>
 <div class="knowledgeGraphBar">
   <div class='knowledgeGraphBar__thumbnail'>
     [[#if thumbnail]]
-      <img src="[[thumbnail]]">
+      <img src="[[thumbnail]]" >
     [[else]]
       <semantic-query 
         query='SELECT ?icon
@@ -23,9 +28,12 @@
             (spao:ArchivalPlace "../assets/icons/solid/archive.svg")
           }
         }'
-        template='<div>{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style="height: 120px; width: 120px; max-height: 120px; max-width: 120px; padding: 20px"></mp-resource-thumbnail>{{/each}}</div>'>
+        template='<div>{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style="max-height:300px; padding: 10px;"></mp-resource-thumbnail>{{/each}}</div>'>
       </semantic-query>
+      
     [[/if]]
+
+
   </div>
   
   <div class="knowledgeGraphBar__summary">
