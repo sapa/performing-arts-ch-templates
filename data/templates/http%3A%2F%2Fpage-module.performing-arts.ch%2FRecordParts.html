@@ -7,6 +7,7 @@
     } ORDER BY ASC (?index)"
     template='{{> part-properties }}'>
     <template id='part-properties'>
+        <div id='sapa-parts-module'>
         <strong><p>Parts</p></strong>
         <hr />
         {{#each bindings}}
@@ -323,5 +324,6 @@
         [[/if]]
         <hr />
         {{/each}}
+        </div>
     </template>
 </semantic-query>
