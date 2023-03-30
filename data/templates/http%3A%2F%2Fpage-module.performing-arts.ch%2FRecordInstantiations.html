@@ -79,14 +79,13 @@
 </semantic-query>
 
 <semantic-query 
-    query="SELECT DISTINCT ?label ?material WHERE {
-        VALUES (?label) { ( <http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationMaterial> ) }
+    query="SELECT DISTINCT ?material WHERE {
         ?? rico:hasInstantiation [
             spao:hasArchivalStatus spav:asarm ;
             crm:P45_consists_of ?material 
         ]
     }"
-    template='{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
+    template='{{#ifCond bindings.length ">" 0}}<h5>[[i18n "field_material" bundle="sapa-fields"]]</h5>{{/ifCond}}
         <ul class="list-unstyled">{{#each bindings}}
             <li><mp-label iri="{{material.value}}"></mp-label></li>
         {{/each}}</ul> '>
