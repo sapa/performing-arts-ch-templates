@@ -4258,10 +4258,10 @@ fields:
     queries:
       - select: 'SELECT ?value ?label
       WHERE {
-        $subject owl:sameAs ?valueAsString .
-        BIND(REPLACE(STR(?valueAsString), ".*\\\\/c*b*", "") as ?localname)
-        BIND(STRBEFORE(STR(?valueAsString), ?localname) as ?prefix)
-        BIND(IRI(?valueAsString) as ?value)
+        $subject owl:sameAs ?valueAsIri .
+        BIND(REPLACE(STR(?valueAsIri), ".*\\\\/c*b*", "") as ?localname)
+        BIND(STRBEFORE(STR(?valueAsIri), ?localname) as ?prefix)
+        BIND(xsd:string(?valueAsIri) as ?value)
         VALUES(?prefix ?source ?order)
         {
           ("http://www.wikidata.org/entity/" "Wikidata" 0)
