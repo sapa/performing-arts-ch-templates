@@ -20,6 +20,16 @@
 
             [[> sapaModule:RecordResourceExtent]]
 
+            <!-- physical characteristics -->
+            <semantic-query 
+                query="SELECT ?physical WHERE { ?? rico:physicalCharacteristics ?physical . } ORDER BY ASC (?physical)"
+                template='<div>
+                    <h5>Physical Characteristics</h5>
+                    <ul class="list-unstyled">{{#each bindings}}
+                        <li>{{physical.value}}</li>
+                    {{/each}}</ul></div>'>
+            </semantic-query>
+
             <!-- PROVENANCE -->
 
             [[> sapaModule:RecordResourceProvenance]]
