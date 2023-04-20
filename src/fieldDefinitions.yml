@@ -4675,6 +4675,10 @@ fields:
           { $value rdf:type rico:RecordSet . }
           UNION
           { $value rdf:type rico:Record . }
+          UNION
+          { $value rdf:type rico:RecordPart . }
+          UNION
+          { $value rdf:type rico:Instantiation . }
           $value rdfs:label $label .
           FILTER(REGEX($label, "?token", "i"))
           FILTER(!CONTAINS(STR(?value), "/u/"))
@@ -4687,6 +4691,8 @@ fields:
             ( rico:Agent )
             ( rico:RecordSet )
             ( rico:Record )
+            ( rico:RecordPart )
+            ( rico:Instantiation )
           }
         }
       }'
