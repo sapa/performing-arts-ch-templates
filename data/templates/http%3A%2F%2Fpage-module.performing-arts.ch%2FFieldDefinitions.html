@@ -2893,7 +2893,7 @@ WHERE { BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , STR(UUID())) ) 
                 "selectPattern" : "SELECT $value WHERE { $subject spao:seeAlso $value. }",
                 "insertPattern" : "INSERT { $subject spao:seeAlso $value. } WHERE {}",
                 "deletePattern" : "DELETE { $subject spao:seeAlso $value. } WHERE {}",
-                "autosuggestionPattern" : "SELECT $value $label WHERE { { { $value a rico:Concept . } UNION { $value rdf:type/rdfs:subClassOf* rico:Agent . } UNION { $value rdf:type rico:RecordSet . } UNION { $value rdf:type rico:Record . } $value rdfs:label $label . FILTER(REGEX($label, \"?token\", \"i\")) FILTER(!CONTAINS(STR(?value), \"/u/\")) } UNION { BIND(URI(REPLACE(REPLACE(\"?token\", \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) $value rdfs:label $label ; a/rdfs:subClassOf* ?type . VALUES (?type) { ( rico:Concept ) ( rico:Agent ) ( rico:RecordSet ) ( rico:Record ) } } }",
+                "autosuggestionPattern" : "SELECT $value $label WHERE { { { $value a rico:Concept . } UNION { $value rdf:type/rdfs:subClassOf* rico:Agent . } UNION { $value rdf:type rico:RecordSet . } UNION { $value rdf:type rico:Record . } UNION { $value rdf:type rico:RecordPart . } UNION { $value rdf:type rico:Instantiation . } $value rdfs:label|rico:name $label . FILTER(REGEX($label, \"?token\", \"i\")) FILTER(!CONTAINS(STR(?value), \"/u/\")) } UNION { BIND(URI(REPLACE(REPLACE(\"?token\", \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) $value rdfs:label|rico:name $label ; a/rdfs:subClassOf* ?type . VALUES (?type) { ( rico:Concept ) ( rico:Agent ) ( rico:RecordSet ) ( rico:Record ) ( rico:RecordPart ) ( rico:Instantiation ) } } }",
         "iri" : "ThingSeeAlso"
     }
 [[/inline]]
