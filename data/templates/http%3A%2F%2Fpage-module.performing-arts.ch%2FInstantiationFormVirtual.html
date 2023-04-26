@@ -276,7 +276,39 @@
                 </bs-col>
               </bs-row>        
             </semantic-form-composite-input>
-            <semantic-form-autocomplete-input for="RepresentationFileExternal"></semantic-form-autocomplete-input>
+            <bs-row>
+              <bs-col md="6">
+                <semantic-form-autocomplete-input for="RepresentationFileExternal"></semantic-form-autocomplete-input>
+              </bs-col>
+              <bs-col md="6">
+                <semantic-form-template template="{{> template}}">
+                  <template id="template">
+                    {{#if model.fields.RepresentationFileExternal}}
+                      {{#each model.fields.RepresentationFileExternal.values}}
+                        {{#if this.node}}
+                          <semantic-query
+                            query="SELECT ?subject WHERE {
+                              BIND(<{{this.node.value}}> as ?file)
+                              GRAPH ?g {
+                                ?file a premis:File .
+                              }
+                              BIND(URI(STRBEFORE(STR(?g), '/container')) as ?subject)
+                            } LIMIT 1"
+                            template="{{> valueTemplate}}"
+                            >
+                              <template id="valueTemplate">
+                                <span>
+                                  Defined in <a href="?uri={{bindings.0.subject.value}}" target="_blank"><mp-label iri="{{bindings.0.subject.value}}"></mp-label></a>
+                                </span>
+                              </template>
+                            </semantic-query>
+                          {{/if}}
+                      {{/each}}
+                    {{/if}}
+                  </template>
+                </semantic-form-template>
+              </bs-col>
+            </bs-row>
           <hr>
         <semantic-form-errors></semantic-form-errors>
         <!-- save and reset button for form -->
