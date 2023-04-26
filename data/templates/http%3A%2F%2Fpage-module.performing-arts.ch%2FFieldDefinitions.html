@@ -2621,10 +2621,25 @@ BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FILTER(?type_indicator != 
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
             "domain" : "http://www.loc.gov/premis/rdf/v1#Representation",
             "range" : "http://www.loc.gov/premis/rdf/v1#File",
-                "selectPattern" : "SELECT $value WHERE { $value premis:isIncludedIn $subject . }",
+                "selectPattern" : "SELECT $value WHERE { $value premis:isIncludedIn $subject . BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) GRAPH ?g { $value a premis:File . } }",
                 "insertPattern" : "INSERT { $value premis:isIncludedIn $subject . } WHERE { }",
                 "deletePattern" : "DELETE { $value premis:isIncludedIn $subject . } WHERE {}",
         "iri" : "RepresentationFile"
+    }
+[[/inline]]
+ [[#*inline "RepresentationFileExternal"]]
+    {
+        "id" : "RepresentationFileExternal",
+
+            "label": "[[i18n "field_file__existing_" bundle="sapa-fields"]]",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "domain" : "http://www.loc.gov/premis/rdf/v1#Representation",
+            "range" : "http://www.loc.gov/premis/rdf/v1#File",
+                "selectPattern" : "SELECT $value WHERE { $value premis:isIncludedIn $subject . BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) FILTER NOT EXISTS { GRAPH ?g { $value a premis:File . } } }",
+                "insertPattern" : "INSERT { $value premis:isIncludedIn $subject . } WHERE {}",
+                "deletePattern" : "DELETE { $value premis:isIncludedIn $subject . } WHERE {}",
+                "autosuggestionPattern" : "SELECT $value $label WHERE { { $value a premis:File ; rdfs:label $label . FILTER(REGEX($label, \"?token\", \"i\")) FILTER(CONTAINS(STR(?value), \"/o/\")) } UNION { BIND(URI(REPLACE(REPLACE(\"?token\", \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) $value rdfs:label $label ; a premis:File . } }",
+        "iri" : "RepresentationFileExternal"
     }
 [[/inline]]
  [[#*inline "SameAs"]]
