@@ -284,6 +284,9 @@
                 <semantic-form-template template="{{> template}}">
                   <template id="template">
                     {{#if model.fields.RepresentationFileExternal}}
+                      {{#if model.fields.RepresentationFileExternal.values}}
+                        <div class="semantic-form-input-decorator__header"><span class="semantic-form-input-decorator__label">Sources:</span></div>
+                      {{/if}}
                       {{#each model.fields.RepresentationFileExternal.values}}
                         {{#if this.node}}
                           <semantic-query
@@ -297,7 +300,7 @@
                             template="{{> valueTemplate}}"
                             >
                               <template id="valueTemplate">
-                                <div style="padding-top: .5rem;">
+                                <div style="padding-top: .8rem;padding-bottom:.9rem">
                                   Defined in <a href="?uri={{bindings.0.subject.value}}" target="_blank"><mp-label iri="{{bindings.0.subject.value}}"></mp-label></a>
                                 </div>
                               </template>
