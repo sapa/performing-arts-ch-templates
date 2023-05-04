@@ -283,6 +283,7 @@
         <bs-col sm="4">
 
           <!-- record sets -->
+          <!--
           <semantic-tree
             query='SELECT DISTINCT ?node ?parent WHERE {
               {
@@ -303,7 +304,7 @@
             }'
             tuple-template='<span><semantic-link iri="{{data.node.value}}"></semantic-link></span>'> 
           </semantic-tree>
-
+          -->
           <!-- recordings -->
           [[#if (hasPermission "forms:ldp:*")]] 
           <semantic-query 
