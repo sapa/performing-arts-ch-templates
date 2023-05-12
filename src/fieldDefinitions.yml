@@ -4243,46 +4243,9 @@ fields:
     domain: http://www.loc.gov/premis/rdf/v1#Representation
     range: http://www.loc.gov/premis/rdf/v1#File
     queries:
-      - select: 'SELECT $value WHERE { 
-          $value premis:isIncludedIn $subject . 
-          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
-          GRAPH ?g {
-            $value a premis:File .
-          }
-        }'
+      - select: 'SELECT $value WHERE { $value premis:isIncludedIn $subject . }'
       - insert: 'INSERT { $value premis:isIncludedIn $subject . } WHERE { }'
       - delete: 'DELETE { $value premis:isIncludedIn $subject . } WHERE {}'
-
-  - id: RepresentationFileExternal
-    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RepresentationFile
-    label: File (existing)
-    datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: http://www.loc.gov/premis/rdf/v1#Representation
-    range: http://www.loc.gov/premis/rdf/v1#File
-    queries:
-      - select: 'SELECT $value WHERE { 
-          $value premis:isIncludedIn $subject . 
-          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
-          FILTER NOT EXISTS {
-            GRAPH ?g {
-              $value a premis:File .
-            }
-          }
-        }'
-      - insert: 'INSERT { $value premis:isIncludedIn $subject . } WHERE {}'
-      - delete: 'DELETE { $value premis:isIncludedIn $subject . } WHERE {}'
-      - autosuggestion: 'SELECT $value $label WHERE {
-        {
-          $value a premis:File ; 
-            rdfs:label $label .
-          FILTER(REGEX($label, "?token", "i"))
-          FILTER(CONTAINS(STR(?value), "/o/"))
-        } UNION {
-          BIND(URI(REPLACE(REPLACE("?token", "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
-          $value rdfs:label $label ;
-            a premis:File .
-        }
-      }'
 
 
   - id: SameAs
