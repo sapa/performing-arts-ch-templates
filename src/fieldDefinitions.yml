@@ -322,6 +322,19 @@ fields:
       } WHERE {}'
 
 
+  - id: EbucoreDuration
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/EbucoreDuration
+    label: Duration
+    description: HH:MM:SS
+    datatype: http://www.w3.org/2001/XMLSchema#string
+    maxOccurs: 1
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
+    queries:
+      - select: 'SELECT ?value WHERE { $subject ebucore:duration $value . }'
+      - insert: 'INSERT { $subject ebucore:duration $value . } WHERE {}'
+      - delete: 'DELETE { $subject ebucore:duration $value . } WHERE {}'
+      - ask: 'ASK { FILTER(REGEX($value, "^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]$")) }'
+
   - id: FileCompositionLevel
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/FileCompositionLevel
     label: Composition level
