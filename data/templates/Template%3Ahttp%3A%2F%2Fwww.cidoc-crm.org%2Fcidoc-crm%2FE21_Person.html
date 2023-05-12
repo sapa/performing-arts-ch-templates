@@ -83,7 +83,7 @@
                             FILTER(!CONTAINS(STR(?birthplace), "wikidata"))
                         }
                     } LIMIT 1'
-                    template='<div>{{#each bindings}}{{#if birthdate}}* {{else}}{{#if birthplace}}* {{/if}}{{/if}}{{#if birthdate}}<span style="padding-right:0.1em;" title="{{birthdate.value}}">{{birthdate.value}}</span>{{/if}}{{#if birthdate}}{{#if birthplace}}, {{/if}}{{/if}}
+                    template='<div>{{#each bindings}}{{#if birthdate}}* {{else}}{{#if birthplace}}* {{/if}}{{/if}}{{#if birthdate}}<span style="padding-right:0.1em;" title="{{birthdate.value}}">{{dateTimeFormat birthdate.value "DD.MM.YYYY"}}</span>{{/if}}{{#if birthdate}}{{#if birthplace}}, {{/if}}{{/if}}
                     {{#if birthplace}}<semantic-link iri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>{{/if}}{{/each}}</div>'>
                 </semantic-query>
 
@@ -100,7 +100,7 @@
                             FILTER(!CONTAINS(STR(?deathplace), "wikidata"))
                         }
                     } LIMIT 1'
-                    template='<div>{{#each bindings}}{{#if deathdate}}† {{else}}{{#if deathplace}}† {{/if}}{{/if}}{{#if deathdate}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{deathdate.value}}</span>{{/if}}{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
+                    template='<div>{{#each bindings}}{{#if deathdate}}† {{else}}{{#if deathplace}}† {{/if}}{{/if}}{{#if deathdate}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{dateTimeFormat deathdate.value "DD.MM.YYYY"}}</span>{{/if}}{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
                         {{#if deathplace}}<semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>{{/if}}{{/each}}</div>'>
                 </semantic-query>
                 <mp-field-visualization
