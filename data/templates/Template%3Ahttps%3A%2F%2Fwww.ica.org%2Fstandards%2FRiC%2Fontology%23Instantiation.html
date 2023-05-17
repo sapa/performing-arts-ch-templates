@@ -306,6 +306,19 @@
                 </bs-col>
 
                 <bs-col sm="4">
+
+                    <!-- carrier type / medium -->
+                    <!-- TODO: Do we really need to repeat this here? -->
+                    <semantic-query 
+                        query='SELECT ?carrier_type WHERE { ?? rico:hasCarrierType ?carrier_type . }'
+                        template='<div>
+                            <h5>Carrier type</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><mp-label iri="{{carrier_type.value}}"></mp-label></li>
+                            {{/each}}</ul>
+                        </div>'>
+                    </semantic-query>
+
                     <!-- formats -->
                     <semantic-query 
                         query="SELECT ?format ?order WHERE {
