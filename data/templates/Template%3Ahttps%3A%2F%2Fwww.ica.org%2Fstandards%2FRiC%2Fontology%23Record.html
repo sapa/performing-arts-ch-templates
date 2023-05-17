@@ -33,13 +33,7 @@
             <!-- PROVENANCE -->
 
             [[> sapaModule:RecordResourceProvenance]]
-
-        </bs-col>
-
-        <bs-col sm="4">
-
-            [[> sapaModule:RecordResourceImages]]
-
+            
             <!-- CONTENT -->
 
             <!-- content description -->
@@ -55,8 +49,6 @@
                     <div>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>
                 </div>'>
             </semantic-query>
-
-            [[> sapaModule:RecordParts]]
 
             <!-- creator -->
             <semantic-query 
@@ -242,11 +234,103 @@
                     <div>{{#each bindings}}<p class="text-item" style="white-space: pre-line;">{{value.value}}</p>{{/each}}</div>
                 </div>'>
             </semantic-query>
+            
+            <!-- notes -->
+            <semantic-query 
+                query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_anmerkung" bundle="sapa-fields"]]") }
+        
+                    ?? spao:hasNote ?value . }'
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
+                    {{#each bindings}}<div class="text-item" style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
+            </semantic-query>
 
-            <!-- INSTANTIATIONS -->
+            [[#if (hasPermission "forms:ldp:*")]] 
+            <!-- internal notes -->
+            <semantic-query 
+                query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_internal_note" bundle="sapa-fields"]]") }
+        
+                    ?? spao:hasInternalNote ?value . }'
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
+                    {{#each bindings}}<div class="text-item" style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
+            </semantic-query>
 
-            [[> sapaModule:RecordInstantiations]]
+            <!-- responsible employee -->
+            <semantic-query 
+                query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_responsible_employee" bundle="sapa-fields"]]") }
+        
+                    ?? spao:hasResponsibleEmployee ?value . }'
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li>{{value.value}}</li>{{/each}}</ul></div>'>
+            </semantic-query>
+            [[/if]]
 
+            <!-- processing convention -->
+            <semantic-query 
+                query='SELECT ?label ?value  WHERE {
+            VALUES (?label) { ( "[[i18n "field_processing_convention" bundle="sapa-fields"]]") }
+        
+                    ?? spao:hasProcessingConvention ?value . }'
+                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
+                    {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
+            </semantic-query>
+
+            <!-- processing date -->
+            <semantic-query 
+                query="SELECT DISTINCT ?label ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty WHERE {
+            VALUES (?label) { ( '[[i18n "field_processing_date" bundle="sapa-fields"]]') }
+        
+                    ?? spao:hasProcessingDate ?date .
+                    {
+                        OPTIONAL { ?date rico:normalizedDateValue ?normalized_date. }
+                        OPTIONAL { ?date rico:expressedDate ?expressed_date. }
+                        BIND(IF(BOUND(?expressed_date), ?expressed_date, ?normalized_date) AS ?single_date)
+                        OPTIONAL { ?date rico:dateQualifier ?single_qualifier . }
+                        OPTIONAL { ?date rico:certainty ?single_certainty . }
+                    } UNION {
+                        ?date a rico:DateRange .
+                        OPTIONAL {
+                            ?date rico:hasBeginningDate ?b .
+                            ?b rico:normalizedDateValue ?beginning_date .
+                            OPTIONAL { ?b rico:dateQualifier ?beginning_qualifier . }
+                            OPTIONAL { ?b rico:certainty ?beginning_certainty . }
+                        }
+                        OPTIONAL {
+                            ?date rico:hasEndDate ?e .
+                            ?e rico:normalizedDateValue ?end_date .
+                            OPTIONAL { ?e rico:dateQualifier ?end_qualifier . }
+                            OPTIONAL { ?e rico:certainty ?end_certainty . }
+                        }
+                    }
+                }"
+                template='<div>
+                    {{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}
+                        <li>
+                            {{#if single_date.value}}
+                                {{#if single_qualifier.value}}<mp-label iri="{{single_qualifier.value}}"></mp-label> {{/if}}
+                                {{single_date.value}}
+                                {{#if single_certainty.value}}<span> (<mp-label iri="{{single_certainty.value}}"></mp-label>)</span>{{/if}}
+                            {{else}}
+                                {{#if beginning_date.value}}
+                                    {{#if beginning_qualifier.value}}<mp-label iri="{{beginning_qualifier.value}}"></mp-label> {{/if}}
+                                    {{beginning_date.value}}
+                                    {{#if beginning_certainty.value}}<span> (<mp-label iri="{{beginning_certainty.value}}"></mp-label>)</span>{{/if}}
+                                {{/if}}
+                                <span> - </span>
+                                {{#if end_date.value}}
+                                    {{#if end_qualifier.value}}<mp-label iri="{{end_qualifier.value}}"></mp-label> {{/if}}
+                                    {{end_date.value}}
+                                    {{#if end_certainty.value}}<span> (<mp-label iri="{{end_certainty.value}}"></mp-label>)</span>{{/if}}
+                                {{/if}}
+                            {{/if}}
+                        </li>
+                    {{/each}}</ul></div>'
+                >
+            </semantic-query>
+            
             <!-- ASSESSMENT -->
 
             <!-- documentary form -->
@@ -346,6 +430,18 @@
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                     {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
+        </bs-col>
+
+        <bs-col sm="4">
+
+            [[> sapaModule:RecordResourceImages]]
+
+
+            [[> sapaModule:RecordParts]]
+
+            <!-- INSTANTIATIONS -->
+
+            [[> sapaModule:RecordInstantiations]]
 
         </bs-col>
 
@@ -457,102 +553,6 @@
                     <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{value.value}}"></semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
             [[/if]]
-
-            <!-- notes -->
-            <semantic-query 
-                query='SELECT ?label ?value  WHERE {
-            VALUES (?label) { ( "[[i18n "field_anmerkung" bundle="sapa-fields"]]") }
-        
-                    ?? spao:hasNote ?value . }'
-                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
-                    {{#each bindings}}<div class="text-item" style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
-            </semantic-query>
-
-            [[#if (hasPermission "forms:ldp:*")]] 
-            <!-- internal notes -->
-            <semantic-query 
-                query='SELECT ?label ?value  WHERE {
-            VALUES (?label) { ( "[[i18n "field_internal_note" bundle="sapa-fields"]]") }
-        
-                    ?? spao:hasInternalNote ?value . }'
-                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
-                    {{#each bindings}}<div class="text-item" style="margin-top: 0.8em; white-space: pre-line;">{{value.value}}</div>{{/each}}</div>'>
-            </semantic-query>
-
-            <!-- responsible employee -->
-            <semantic-query 
-                query='SELECT ?label ?value  WHERE {
-            VALUES (?label) { ( "[[i18n "field_responsible_employee" bundle="sapa-fields"]]") }
-        
-                    ?? spao:hasResponsibleEmployee ?value . }'
-                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
-                    <ul class="list-unstyled">{{#each bindings}}<li>{{value.value}}</li>{{/each}}</ul></div>'>
-            </semantic-query>
-            [[/if]]
-
-            <!-- processing convention -->
-            <semantic-query 
-                query='SELECT ?label ?value  WHERE {
-            VALUES (?label) { ( "[[i18n "field_processing_convention" bundle="sapa-fields"]]") }
-        
-                    ?? spao:hasProcessingConvention ?value . }'
-                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
-                    {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
-            </semantic-query>
-
-            <!-- processing date -->
-            <semantic-query 
-                query="SELECT DISTINCT ?label ?single_date ?single_qualifier ?single_certainty ?beginning_date ?beginning_qualifier ?beginning_certainty ?end_date ?end_qualifier ?end_certainty WHERE {
-            VALUES (?label) { ( '[[i18n "field_processing_date" bundle="sapa-fields"]]') }
-        
-                    ?? spao:hasProcessingDate ?date .
-                    {
-                        OPTIONAL { ?date rico:normalizedDateValue ?normalized_date. }
-                        OPTIONAL { ?date rico:expressedDate ?expressed_date. }
-                        BIND(IF(BOUND(?expressed_date), ?expressed_date, ?normalized_date) AS ?single_date)
-                        OPTIONAL { ?date rico:dateQualifier ?single_qualifier . }
-                        OPTIONAL { ?date rico:certainty ?single_certainty . }
-                    } UNION {
-                        ?date a rico:DateRange .
-                        OPTIONAL {
-                            ?date rico:hasBeginningDate ?b .
-                            ?b rico:normalizedDateValue ?beginning_date .
-                            OPTIONAL { ?b rico:dateQualifier ?beginning_qualifier . }
-                            OPTIONAL { ?b rico:certainty ?beginning_certainty . }
-                        }
-                        OPTIONAL {
-                            ?date rico:hasEndDate ?e .
-                            ?e rico:normalizedDateValue ?end_date .
-                            OPTIONAL { ?e rico:dateQualifier ?end_qualifier . }
-                            OPTIONAL { ?e rico:certainty ?end_certainty . }
-                        }
-                    }
-                }"
-                template='<div>
-                    {{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
-                    <ul class="list-unstyled">{{#each bindings}}
-                        <li>
-                            {{#if single_date.value}}
-                                {{#if single_qualifier.value}}<mp-label iri="{{single_qualifier.value}}"></mp-label> {{/if}}
-                                {{single_date.value}}
-                                {{#if single_certainty.value}}<span> (<mp-label iri="{{single_certainty.value}}"></mp-label>)</span>{{/if}}
-                            {{else}}
-                                {{#if beginning_date.value}}
-                                    {{#if beginning_qualifier.value}}<mp-label iri="{{beginning_qualifier.value}}"></mp-label> {{/if}}
-                                    {{beginning_date.value}}
-                                    {{#if beginning_certainty.value}}<span> (<mp-label iri="{{beginning_certainty.value}}"></mp-label>)</span>{{/if}}
-                                {{/if}}
-                                <span> - </span>
-                                {{#if end_date.value}}
-                                    {{#if end_qualifier.value}}<mp-label iri="{{end_qualifier.value}}"></mp-label> {{/if}}
-                                    {{end_date.value}}
-                                    {{#if end_certainty.value}}<span> (<mp-label iri="{{end_certainty.value}}"></mp-label>)</span>{{/if}}
-                                {{/if}}
-                            {{/if}}
-                        </li>
-                    {{/each}}</ul></div>'
-                >
-            </semantic-query>
 
             [[#if (hasPermission "forms:ldp:*")]] 
             <semantic-query 
