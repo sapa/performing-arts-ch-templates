@@ -33,7 +33,7 @@
             (spao:ArchivalPlace "../assets/icons/solid/archive.svg")
           }
         }'
-        template='<div class = "caption-block">{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style=" height:75% padding: 10px;"></mp-resource-thumbnail> {{/each}} </div>'>
+        template='<div>{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style=" height:75% padding: 10px;"></mp-resource-thumbnail> {{/each}} </div>'>
       </semantic-query>
     [[/if]]
 
@@ -90,6 +90,7 @@
           }"
           template="<div class='knowledgeGraphBar__uriRow'>{{#each bindings}}<b>Image Source</b>: <a href='https://commons.wikimedia.org/'><i> Wikimedia Commons </i> </a><mp-copy-to-clipboard text='{{value.value}}'><button class='btn btn-secondary knowledgeGraphBar__copyIri'></button></mp-copy-to-clipboard>{{/each}}</div>">
       </semantic-query>
+    
     </div>
   </div>
   
