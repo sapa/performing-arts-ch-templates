@@ -33,13 +33,7 @@
             <!-- PROVENANCE -->
 
             [[> sapaModule:RecordResourceProvenance]]
-
-        </bs-col>
-
-        <bs-col sm="4">
-
-            [[> sapaModule:RecordResourceImages]]
-
+            
             <!-- CONTENT -->
 
             <!-- content description -->
@@ -346,6 +340,12 @@
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                     {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
+
+        </bs-col>
+
+        <bs-col sm="4">
+
+            [[> sapaModule:RecordResourceImages]]
 
         </bs-col>
 
