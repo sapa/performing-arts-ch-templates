@@ -268,6 +268,33 @@
 
         </semantic-table>
       </semantic-search-result>
+
+      <div class="pull-right" style="display: flex; margin-top: 12px;">
+        <semantic-search-result>
+          <mp-sparql-download id='csv-result' query='SELECT DISTINCT ?title ?plan ?premieredate ?premieredatebegin ?season ?season_label (GROUP_CONCAT(DISTINCT ?producerlabel; SEPARATOR=", ") AS ?producers) WHERE {
+            
+            ?season rdfs:label ?season_label .
+            OPTIONAL {
+              ?plan crm:P102_has_title ?titleIri .
+              ?titleIri crm:P2_has_type <http://vocab.performing-arts.ch/gotlb> ;
+                rdf:value ?title .
+            }
+            OPTIONAL {
+              ?expressioncreation frbroo:R17_created ?plan ;
+                crm:P9_consists_of ?production . 
+              ?production crm:P2_has_type spav:muwgo ;
+                crm:P14_carried_out_by ?producer .
+              ?producer rdfs:label ?producerlabel .
+            }
+          } GROUP BY ?title ?plan ?premieredate ?premieredatebegin ?season ?season_label
+          ORDER BY ASC(?premieredatebegin)'
+                              header="text/csv"
+                              filename="productions-[[singleValueFromSelect "SELECT ?label WHERE { ?? rdfs:label ?label }"]].csv"
+                              >
+            <button class="btn btn-secondary">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
+          </mp-sparql-download>
+        </semantic-search-result>
+      </div>
     </div>
   </semantic-search-result-holder>
 </div>
