@@ -154,10 +154,10 @@
           </bs-col>
         </bs-row>
         <bs-row>
-          <bs-col sm='6'>
+          <bs-col sm='4'>
             <semantic-form-text-input for="RecordResourceResponsible"></semantic-form-text-input>
           </bs-col>          
-          <bs-col sm='6'>
+          <bs-col sm='4'>
             <semantic-form-switch for="InstantiationPreparationDate" switch-on-field='RecordResourceDateType'>
               <semantic-form-switch-case label='Single Date'>
                 <semantic-form-composite-input for="InstantiationPreparationDate" new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[
@@ -214,6 +214,9 @@
                 </semantic-form-composite-input>
               </semantic-form-switch-case>
             </semantic-form-switch>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-autocomplete-input for="ThingSeeAlso"></semantic-form-autocomplete-input>
           </bs-col>          
         </bs-row>        <bs-row>
           <bs-col sm='4'>

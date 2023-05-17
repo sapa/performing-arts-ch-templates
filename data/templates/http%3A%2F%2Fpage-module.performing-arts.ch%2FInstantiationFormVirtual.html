@@ -15,6 +15,7 @@
       form-id='instantiaton'
       fields='[
         [[> RDFtype]],
+        [[> EbucoreDuration]],
         [[> InstantiationRecord]],
         [[> ThingIdentifier]],
         [[> ThingTypedIdentifier]],
@@ -27,6 +28,9 @@
         [[> InstantiationDerived]],
         [[> InstantiationCopyPath]],
         [[> InstantiationCondition]],
+        [[> InstantiationIntegrity]],
+        [[> MediaResourceLastControl]],
+        [[> MediaResourceVideoDamage]],
         [[> ThingNoteInternal]],
         [[> ThingLocation]],
         [[> RepresentationFile]],
@@ -83,19 +87,23 @@
             <semantic-form-text-input for="RecordResourceDescription" multiline=true></semantic-form-text-input>
             <semantic-form-autocomplete-input for="InstantiationDerived"></semantic-form-autocomplete-input>
             <semantic-form-text-input for="InstantiationCopyPath" multiline=true></semantic-form-text-input>
+            <semantic-form-text-input for="EbucoreDuration"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-select-input for="InstantiationCondition"></semantic-form-select-input>
+            <semantic-form-text-input for="InstantiationIntegrity" multiline=true></semantic-form-text-input>
+            <semantic-form-text-input for="MediaResourceLastControl"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-tree-picker-input for="ThingLocation"></semantic-form-tree-picker-input>
+            <semantic-form-tree-picker-input for="MediaResourceVideoDamage"></semantic-form-tree-picker-input>
           </bs-col>
         </bs-row>
         <bs-row>
-          <bs-col sm='6'>
+          <bs-col sm='4'>
             <semantic-form-text-input for="RecordResourceResponsible"></semantic-form-text-input>
           </bs-col>          
-          <bs-col sm='6'>
+          <bs-col sm='4'>
             <semantic-form-switch for="InstantiationPreparationDate" switch-on-field='RecordResourceDateType'>
               <semantic-form-switch-case label='Single Date'>
                 <semantic-form-composite-input for="InstantiationPreparationDate" new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[
@@ -152,6 +160,9 @@
                 </semantic-form-composite-input>
               </semantic-form-switch-case>
             </semantic-form-switch>
+          </bs-col>
+          <bs-col sm='4'>
+            <semantic-form-autocomplete-input for="ThingSeeAlso"></semantic-form-autocomplete-input>
           </bs-col>          
         </bs-row>        <bs-row>
           <bs-col sm='4'>
@@ -193,7 +204,6 @@
               [[> MediaResourceHeight]],
               [[> MediaResourceChannels]],
               [[> MediaResourceSamplingRate]],
-              [[> MediaResourceVideoDamage]],
               [[> MediaResourceScanningFormat]],
               [[> MediaResourceScanningOrder]],
               [[> InstantiationHistory]],
@@ -219,7 +229,7 @@
                   <semantic-form-text-input for="FileFixity"></semantic-form-text-input>                  
                 </bs-col>
                 <bs-col sm='2'>
-                  <semantic-form-text-input for="SchemaDuration"></semantic-form-text-input>
+                  <div class="sapa-component form-field-deprecated"><semantic-form-text-input for="SchemaDuration"></semantic-form-text-input></div>
                 </bs-col>
               </bs-row>
 
@@ -259,19 +269,19 @@
                   <semantic-form-text-input for="MediaResourceSamplingRate"></semantic-form-text-input>
                 </bs-col>
                 <bs-col sm='4'>
-                  <semantic-form-tree-picker-input for="MediaResourceVideoDamage"></semantic-form-tree-picker-input>
+                  <div class="sapa-component form-field-deprecated"><semantic-form-tree-picker-input for="MediaResourceVideoDamage"></semantic-form-tree-picker-input></div>
                 </bs-col>
               </bs-row>
               <bs-row>
                 <bs-col sm='4'>
-                  <semantic-form-text-input for="InstantiationHistory" multiline=true></semantic-form-text-input>
+                  <div class="sapa-component form-field-deprecated"><semantic-form-text-input for="InstantiationHistory" multiline=true></semantic-form-text-input></div>
                 </bs-col>
                 <bs-col sm='4'>
-                  <semantic-form-text-input for="InstantiationIntegrity" multiline=true></semantic-form-text-input>
-                  <semantic-form-text-input for="MediaResourceLastControl"></semantic-form-text-input>
+                  <div class="sapa-component form-field-deprecated"><semantic-form-text-input for="InstantiationIntegrity" multiline=true></semantic-form-text-input></div>
+                  <div class="sapa-component form-field-deprecated"><semantic-form-text-input for="MediaResourceLastControl"></semantic-form-text-input></div>
                 </bs-col>
                 <bs-col sm='4'>
-                  <semantic-form-autocomplete-input for="ThingSeeAlso"></semantic-form-autocomplete-input>                  
+                  <semantic-form-autocomplete-input for="ThingSeeAlso"></semantic-form-autocomplete-input>
                 </bs-col>
               </bs-row>        
           </semantic-form-composite-input>
