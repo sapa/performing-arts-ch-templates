@@ -1,10 +1,18 @@
 <!-- parts -->
 <semantic-query 
-    query="SELECT ?headline ?part ?index WHERE {
+    query="SELECT ?headline ?part ?identifier WHERE {
         VALUES (?headline) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart>) }
         ?part rico:isOrWasConstituentOf ?? .
-        OPTIONAL { ?? olo:index ?index . }
-    } ORDER BY ASC (?index)"
+        OPTIONAL { 
+            ?part rico:identifier ?simpleIdentifier .
+        }
+        OPTIONAL {
+            ?part rico:hasOrHadIdentifier ?typedIdentifier .
+            ?typedIdentifier crm:P2_has_type <http://vocab.performing-arts.ch/idtec> ;
+                rdf:value ?identifierValue .
+        }
+        BIND(COALESCE(?identifierValue, ?simpleIdentifier) as ?identifier)
+    } ORDER BY ASC (?identifier)"
     template='{{> part-properties }}'>
     <template id='part-properties'>
         <div id='sapa-parts-module'>
