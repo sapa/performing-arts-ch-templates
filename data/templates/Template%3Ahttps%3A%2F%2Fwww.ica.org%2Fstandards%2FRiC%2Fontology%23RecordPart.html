@@ -353,10 +353,16 @@
 
             <!-- ALLIED MATERIALS -->
 
-            <!-- location -->
-            [[#if (hasPermission "forms:ldp:*")]]
-                [[> sapaModule:LocationHierarchy]]
-            [[/if]]
+            <!-- record -->
+            <semantic-query
+            query='SELECT DISTINCT ?record WHERE { 
+                ?? rico:isOrWasConstituentOf ?record .
+            }'
+            template='<div><h5>Record</h5>
+                <ul class="list-unstyled">{{#each bindings}}
+                    <li><semantic-link iri="{{record.value}}"></semantic-link></li>
+                {{/each}}</ul></div>'>
+            </semantic-query>     
 
             <!-- packing -->
             <semantic-query 
@@ -377,37 +383,6 @@
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                     {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
-
-            <semantic-query 
-                query='SELECT ?label WHERE { BIND ("[[i18n "field_record_hierarchy" bundle="sapa-fields"]]" AS ?label) . }'
-                template='<h5>{{#each bindings}}{{label.value}}{{/each}}</h5>'>
-            </semantic-query>
-            <semantic-tree
-                 query='SELECT DISTINCT ?node ?parent ?name ?index ?identifier ?level WHERE {
-                    { ?? rico:isOrWasIncludedIn* ?node }
-                    UNION
-                    { ?node rico:isOrWasIncludedIn ?? } 
-                    FILTER(ISIRI(?node))
-                    FILTER(CONTAINS(STR(?node), "/r/"))
-                    OPTIONAL {
-                        ?node rico:isOrWasIncludedIn ?parent.
-                        FILTER(ISIRI(?parent))
-                    }
-                    OPTIONAL { ?node rico:identifier ?identifier }
-                    OPTIONAL { ?node rico:hasRecordSetType ?rslevel . }
-                    BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
-                    OPTIONAL { ?node olo:index ?index }
-                  } ORDER BY ASC(?index) ASC(?identifier)
-                  LIMIT 200'
-               collapsed="true"
-               keys-opened='[[this]]'
-               parent-binding-name="parent"
-               node-binding-name="node"
-               tuple-template='{{> node}}'>
-                <template id='node'>
-                    <span>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link uri="{{node.value}}"></semantic-link>{{#if level}} (<mp-label iri="{{level.value}}""></mp-label>){{/if}}</span>
-                </template>
-            </semantic-tree>
 
             <!-- related material -->
             <semantic-query 
