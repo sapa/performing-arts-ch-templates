@@ -23,7 +23,7 @@
         <strong><p>Parts</p></strong>
         <hr />
         {{#each bindings}}
-        <h5><mp-label iri="{{part.value}}"></mp-label></h5>
+        <h5><semantic-link iri="{{part.value}}"></semantic-link></h5>
             <!-- typed identifier -->
             <semantic-query 
             query="SELECT ?identifier ?type WHERE {
