@@ -529,7 +529,7 @@ fields:
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P107i_is_current_or_former_member_of $value .
-        $value crm:P2_has_type ?type .
+        $value a rico:CorporateBody .
       } '
       - insert: 'INSERT {
         $subject crm:P107i_is_current_or_former_member_of $value .
@@ -856,6 +856,22 @@ fields:
       } ORDER BY DESC (?score)
       LIMIT 10'
 
+  - id: GroupAndAssociationMembers_display
+    label: Members
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    domain: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
+    range: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
+    queries:
+      - select: 'SELECT ?value ?unidentified WHERE {
+          {
+            $subject crm:P107_has_current_or_former_member $value .
+            BIND(IF(CONTAINS(STR($value), "/u/"), "true", "") AS ?unidentified)
+          } UNION {
+            $subject crm:P107i_is_current_or_former_member_of $value .
+            $value a rico:CorporateBody .
+          }
+
+      }'
 
   - id: GroupPredecessor
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/GroupPredecessor

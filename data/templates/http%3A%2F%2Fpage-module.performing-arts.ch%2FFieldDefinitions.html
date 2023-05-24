@@ -314,7 +314,7 @@
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
             "domain" : "http://www.cidoc-crm.org/cidoc-crm/E74_Group",
             "range" : "http://www.cidoc-crm.org/cidoc-crm/E40_Legal_Body",
-                "selectPattern" : "SELECT $value WHERE { $subject crm:P107i_is_current_or_former_member_of $value . $value crm:P2_has_type ?type . } ",
+                "selectPattern" : "SELECT $value WHERE { $subject crm:P107i_is_current_or_former_member_of $value . $value a rico:CorporateBody . } ",
                 "insertPattern" : "INSERT { $subject crm:P107i_is_current_or_former_member_of $value . } WHERE {}",
                 "deletePattern" : "DELETE { $subject crm:P107i_is_current_or_former_member_of $value . } WHERE {}",
                 "autosuggestionPattern" : "SELECT $value $label WHERE { $value a rico:CorporateBody ; rdfs:label $label . { $label bds:search ?__token__ ; bds:matchAllTerms \"true\" . } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) } FILTER(CONTAINS(STR(?value), \"/a/\")) } LIMIT 10",
@@ -477,6 +477,19 @@
                 "deletePattern" : "DELETE { $subject crm:P107_has_current_or_former_member $value . } WHERE {}",
                 "autosuggestionPattern" : "SELECT DISTINCT ?value ?label ?score WHERE { ?value a crm:E21_Person ; crm:P131_is_identified_by [ rdf:value ?ll ] . FILTER(CONTAINS(STR(?value), \"/a/\")) { SERVICE bds:search { ?ll bds:search ?__token__ ; bds:minRelevance \"0.1\" ; bds:relevance ?score ; bds:matchAllTerms \"true\" . } } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) } ?value rdfs:label ?l . OPTIONAL { ?value crm:P3_has_note [ crm:P2_has_type spav:eoept ; rdf:value ?note ] } BIND(IF(BOUND(?note), CONCAT(?l, \" (\", ?note, \")\"), ?l) AS ?label) } ORDER BY DESC (?score) LIMIT 10",
         "iri" : "GroupMember"
+    }
+[[/inline]]
+ [[#*inline "GroupAndAssociationMembers_display"]]
+    {
+        "id" : "GroupAndAssociationMembers_display",
+
+            "label": "[[i18n "field_members" bundle="sapa-fields"]]",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "domain" : "http://www.cidoc-crm.org/cidoc-crm/E39_Actor",
+            "range" : "http://www.cidoc-crm.org/cidoc-crm/E39_Actor",
+                "selectPattern" : "SELECT ?value ?unidentified WHERE { { $subject crm:P107_has_current_or_former_member $value . BIND(IF(CONTAINS(STR($value), \"/u/\"), \"true\", \"\") AS ?unidentified) } UNION { $subject crm:P107i_is_current_or_former_member_of $value . $value a rico:CorporateBody . }
+}",
+        "iri" : "GroupAndAssociationMembers_display"
     }
 [[/inline]]
  [[#*inline "GroupPredecessor"]]
