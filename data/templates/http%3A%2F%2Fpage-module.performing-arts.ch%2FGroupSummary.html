@@ -160,8 +160,7 @@
     <mp-field-visualization
         subject='[[this]]'
         fields='[
-            [[> AssociationMembers]],
-            [[> GroupAssociation]]
+            [[> AssociationMembers]]
         ]'
         template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
     >
@@ -171,7 +170,7 @@
     <mp-field-visualization
         subject='[[this]]'
         fields='[
-            [[> GroupMember]],
+            [[> GroupAndAssociationMembers_display]],
             [[> NotePublic]]
         ]'
         template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
