@@ -529,7 +529,7 @@ fields:
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P107i_is_current_or_former_member_of $value .
-        $value crm:P2_has_type ?type .
+        $value a rico:CorporateBody .
       } '
       - insert: 'INSERT {
         $subject crm:P107i_is_current_or_former_member_of $value .
