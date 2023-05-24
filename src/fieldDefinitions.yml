@@ -1102,6 +1102,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationArchivalStatus
     label: Archival status
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    minOccurs: 1
     maxOccurs: 1
     domain: https://www.ica.org/standards/RiC/ontology#Instantiation
     range: http://www.w3.org/2004/02/skos/core#Concept
