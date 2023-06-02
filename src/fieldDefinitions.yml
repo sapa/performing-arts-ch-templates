@@ -1264,9 +1264,8 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationMaterial
     label: Material
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    maxOccurs: 1
     domain: https://www.ica.org/standards/RiC/ontology#Instantiation
-    range: rico:CarrierType
+    range: skos:Concept
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P45_consists_of $value .

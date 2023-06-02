@@ -746,10 +746,9 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "id" : "InstantiationMaterial",
 
             "label": "[[i18n "field_material" bundle="sapa-fields"]]",
-            "maxOccurs" : "1",
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
             "domain" : "https://www.ica.org/standards/RiC/ontology#Instantiation",
-            "range" : "rico:CarrierType",
+            "range" : "skos:Concept",
             "treePatterns": {
                 "type": "full",
                 "rootsQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { FILTER(NOT EXISTS { ?item skos:broader ?parent. }) ?item skos:inScheme spav:zj . ?item skos:prefLabel ?label. OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
