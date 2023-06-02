@@ -197,7 +197,7 @@ fields:
 
   - id: AssociationMembers
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers
-    label: Association members
+    label: Group members
     description: used for display only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     domain: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
