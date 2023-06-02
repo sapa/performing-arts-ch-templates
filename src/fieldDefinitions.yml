@@ -1123,15 +1123,15 @@ fields:
     range: rico:CarrierType
     queries:
       - select: 'SELECT $value WHERE {
-    $subject rico:hasCarrierType $value .
-    $value a rico:CarrierType .
+        $subject rico:hasCarrierType $value .
+        $value a rico:CarrierType .
       }'
       - insert: 'INSERT { $subject rico:hasCarrierType $value . } WHERE { }'
       - delete: 'DELETE {
-    $subject rico:hasCarrierType $value .
-      } WHERE {
-    $value a rico:CarrierType .
-      }'
+          $subject rico:hasCarrierType $value .
+        } WHERE {
+          $value a rico:CarrierType .
+        }'
     treePatterns:
       type: full
       rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
