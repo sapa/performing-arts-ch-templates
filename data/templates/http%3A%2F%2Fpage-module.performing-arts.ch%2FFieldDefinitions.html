@@ -757,9 +757,9 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
                 "parentsQuery": "SELECT DISTINCT ?item ?parent ?parentLabel WHERE { ?item skos:inScheme spav:zj . ?item skos:broader ?parent. ?parent skos:prefLabel ?parentLabel. }",
                 "searchQuery": "SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE { ?item skos:inScheme spav:zj ; skos:prefLabel ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY DESC (?score) (?label) LIMIT 200"
             },
-                "selectPattern" : "SELECT $value WHERE { $subject crm:P45_consists_of $value . $value a rico:CarrierType . }",
-                "insertPattern" : "INSERT { $subject rico:hasCarrierType $value . } WHERE { }",
-                "deletePattern" : "DELETE { $subject crm:P45_consists_of $value . } WHERE { $value a rico:CarrierType . }",
+                "selectPattern" : "SELECT $value WHERE { $subject crm:P45_consists_of $value . $value skos:inScheme spav:zj  . }",
+                "insertPattern" : "INSERT { $subject crm:P45_consists_of $value . } WHERE { }",
+                "deletePattern" : "DELETE { $subject crm:P45_consists_of $value . } WHERE { $value skos:inScheme spav:zj . }",
         "iri" : "InstantiationMaterial"
     }
 [[/inline]]
