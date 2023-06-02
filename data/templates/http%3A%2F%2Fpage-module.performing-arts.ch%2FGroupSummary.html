@@ -156,10 +156,22 @@
     </semantic-tree>
     </div>
 
+    [[#if (hasPermission "forms:ldp:*")]]
     <mp-field-visualization
         subject='[[this]]'
         fields='[
-            [[> GroupAndAssociationMembers_display]],
+            [[> AssociationMembers]],
+            [[> GroupAssociation]]
+        ]'
+        template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
+    >
+    </mp-field-visualization> 
+    [[/if]]
+
+    <mp-field-visualization
+        subject='[[this]]'
+        fields='[
+            [[> GroupMember]],
             [[> NotePublic]]
         ]'
         template='{{> sapaModule:FieldBasedVisualizationList subject="[[this]]"}}' 
