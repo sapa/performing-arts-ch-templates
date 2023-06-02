@@ -1120,15 +1120,15 @@ fields:
     range: rico:CarrierType
     queries:
       - select: 'SELECT $value WHERE {
-    $subject rico:hasCarrierType $value .
-    $value a rico:CarrierType .
+        $subject rico:hasCarrierType $value .
+        $value a rico:CarrierType .
       }'
       - insert: 'INSERT { $subject rico:hasCarrierType $value . } WHERE { }'
       - delete: 'DELETE {
-    $subject rico:hasCarrierType $value .
-      } WHERE {
-    $value a rico:CarrierType .
-      }'
+          $subject rico:hasCarrierType $value .
+        } WHERE {
+          $value a rico:CarrierType .
+        }'
     treePatterns:
       type: full
       rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
@@ -1269,15 +1269,15 @@ fields:
     range: rico:CarrierType
     queries:
       - select: 'SELECT $value WHERE {
-    $subject crm:P45_consists_of $value .
-    $value a rico:CarrierType .
+        $subject crm:P45_consists_of $value .
+        $value skos:inScheme spav:zj  .
       }'
-      - insert: 'INSERT { $subject rico:hasCarrierType $value . } WHERE { }'
+      - insert: 'INSERT { $subject crm:P45_consists_of $value . } WHERE { }'
       - delete: 'DELETE {
-    $subject crm:P45_consists_of $value .
-      } WHERE {
-    $value a rico:CarrierType .
-      }'
+          $subject crm:P45_consists_of $value .
+       } WHERE {
+        $value skos:inScheme spav:zj .
+        }'
     treePatterns:
       type: full
       rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
