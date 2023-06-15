@@ -197,7 +197,7 @@ fields:
 
   - id: AssociationMembers
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers
-    label: Association members
+    label: Group members
     description: used for display only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     domain: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
@@ -529,8 +529,7 @@ fields:
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P107i_is_current_or_former_member_of $value .
-        $value crm:P2_has_type ?type .
-        ?type skos:broader* spav:vrjhq .
+        $value a rico:CorporateBody .
       } '
       - insert: 'INSERT {
         $subject crm:P107i_is_current_or_former_member_of $value .
@@ -539,10 +538,8 @@ fields:
         $subject crm:P107i_is_current_or_former_member_of $value .
       } WHERE {}'
       - autosuggestion: 'SELECT $value $label WHERE {
-          $value a crm:E40_Legal_Body ;
+          $value a rico:CorporateBody ;
               rdfs:label $label .
-          $value crm:P2_has_type ?type .
-          ?type skos:broader* spav:vrjhq .
         {
           $label bds:search ?__token__ ;
             bds:matchAllTerms "true" .
