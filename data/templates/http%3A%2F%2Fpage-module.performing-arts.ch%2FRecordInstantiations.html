@@ -65,16 +65,18 @@
 [[else]]
 
 <semantic-query 
-    query="SELECT DISTINCT ?label ?carriertype WHERE {
+    query="SELECT DISTINCT ?instantiation ?label ?carriertype WHERE {
         VALUES (?label) { ( spav:asarm ) }
-        ?? rico:hasInstantiation [
-            spao:hasArchivalStatus spav:asarm ;
-            rico:hasCarrierType ?carriertype 
-        ]
+        ?? rico:hasInstantiation ?instantiation .
+        ?instantiation spao:hasArchivalStatus spav:asarm ;
+            rico:hasCarrierType ?carriertype .
     }"
     template='{{#ifCond bindings.length ">" 0}}<h5 style="text-transform: capitalize;"><mp-label iri="{{bindings.0.label.value}}"></mp-label></h5>{{/ifCond}}
         <ul class="list-unstyled">{{#each bindings}}
-            <li><mp-label iri="{{carriertype.value}}"></mp-label></li>
+            <li>
+                <h5><semantic-link iri="{{instantiation.value}}"></semantic-link></h5>
+                <mp-label iri="{{carriertype.value}}"></mp-label>
+            </li>
         {{/each}}</ul> '>
 </semantic-query>
 
