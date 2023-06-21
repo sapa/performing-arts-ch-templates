@@ -1,6 +1,4 @@
 <!-- instantiations -->
-[[#if (hasPermission "forms:ldp:*")]]
-
 <semantic-query 
     query="SELECT ?label ?order ?archivalstatus ?instantiation ?signatur  WHERE {
             VALUES (?label) { ( '[[i18n "field_instantiation" bundle="sapa-fields"]]') }
@@ -61,36 +59,3 @@
         {{/each}}
     </template>
 </semantic-query>
-
-[[else]]
-
-<semantic-query 
-    query="SELECT DISTINCT ?instantiation ?label ?carriertype WHERE {
-        VALUES (?label) { ( spav:asarm ) }
-        ?? rico:hasInstantiation ?instantiation .
-        ?instantiation spao:hasArchivalStatus spav:asarm ;
-            rico:hasCarrierType ?carriertype .
-    }"
-    template='{{#ifCond bindings.length ">" 0}}<h5 style="text-transform: capitalize;"><mp-label iri="{{bindings.0.label.value}}"></mp-label></h5>{{/ifCond}}
-        <ul class="list-unstyled">{{#each bindings}}
-            <li>
-                <h5><semantic-link iri="{{instantiation.value}}"></semantic-link></h5>
-                <mp-label iri="{{carriertype.value}}"></mp-label>
-            </li>
-        {{/each}}</ul> '>
-</semantic-query>
-
-<semantic-query 
-    query="SELECT DISTINCT ?material WHERE {
-        ?? rico:hasInstantiation [
-            spao:hasArchivalStatus spav:asarm ;
-            crm:P45_consists_of ?material 
-        ]
-    }"
-    template='{{#ifCond bindings.length ">" 0}}<h5>[[i18n "field_material" bundle="sapa-fields"]]</h5>{{/ifCond}}
-        <ul class="list-unstyled">{{#each bindings}}
-            <li><mp-label iri="{{material.value}}"></mp-label></li>
-        {{/each}}</ul> '>
-</semantic-query>
-
-[[/if]]
