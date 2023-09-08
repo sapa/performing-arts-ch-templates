@@ -197,7 +197,7 @@ fields:
 
   - id: AssociationMembers
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/AssociationMembers
-    label: Group members
+    label: Association members
     description: used for display only
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     domain: http://www.cidoc-crm.org/cidoc-crm/E39_Actor
@@ -3272,17 +3272,17 @@ fields:
       }'
       - insert: 'INSERT {
     $subject rico:hasInstantiation $value .
-    $value rico:hasCarrierType spav:cttif ;
+    $value rico:hasCarrierType spav:fvtif ;
         rico:hasRepresentationType spav:rtvs .
       } WHERE {
       }'
       - delete: 'DELETE {
     $subject rico:hasInstantiation $value .
-    $value rico:hasCarrierType spav:cttif ;
+    $value rico:hasCarrierType spav:fvtif ;
         rico:hasRepresentationType spav:rtvs . 
       } WHERE {
     $subject rico:hasInstantiation $value .
-    $value rico:hasCarrierType spav:cttif .
+    $value rico:hasCarrierType spav:fvtif .
     FILTER(CONTAINS(STR($value), "media.performing-arts.ch/iiif"))
       }'
       - ask: 'ASK {
