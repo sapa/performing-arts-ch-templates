@@ -2077,8 +2077,8 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
             "domain" : "https://www.ica.org/standards/RiC/ontology#RecordResource",
             "range" : "rdfs:Class",
                 "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation $value . FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif\")) }",
-                "insertPattern" : "INSERT { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvtif ; rico:hasRepresentationType spav:rtvs . } WHERE { }",
-                "deletePattern" : "DELETE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvtif ; rico:hasRepresentationType spav:rtvs . } WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvtif . FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif\")) }",
+                "insertPattern" : "INSERT { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:cttif ; rico:hasRepresentationType spav:rtvs . } WHERE { }",
+                "deletePattern" : "DELETE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:cttif ; rico:hasRepresentationType spav:rtvs . } WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:cttif . FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif\")) }",
                 "askPattern" : "ASK { FILTER(REGEX(STR($value), \"http(s)*://media\\\\.performing-arts\\\\.ch/iiif/3/(image|document)%2F[\\\\d\\\\w-_]+\")) }",
         "iri" : "RecordResourceIIIF"
     }
