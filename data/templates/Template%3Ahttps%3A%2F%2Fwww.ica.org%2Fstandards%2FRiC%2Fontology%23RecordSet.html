@@ -347,7 +347,7 @@
                     BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
                     OPTIONAL { ?node olo:index ?index }
                   } ORDER BY ASC(?index) ASC(?identifier)
-                  LIMIT 200'
+                  LIMIT 1000'
                collapsed="true"
                keys-opened='[[this]]'
                parent-binding-name="parent"
