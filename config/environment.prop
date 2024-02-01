@@ -1,1 +1,2 @@
 shiroSessionTimeoutSecs = 14400
+allowedCrossOrigin = *
