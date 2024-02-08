@@ -312,7 +312,7 @@
                                     <h5>Last control</h5>
                                     <ul class="list-unstyled">
                                         {{#each bindings}}
-                                            <li>{{dateTimeFormat date.value "DD.MM.YYYY"}}</li>
+                                            <li>{{#ifCond (dateTimeFormat date.value "DD.MM.YYYY") "==" "Invalid date"}}{{date.value}}{{else}}{{dateTimeFormat date.value "DD.MM.YYYY"}}{{/ifCond}}</li>
                                         {{/each}}
                                     </ul>
                                 </div>
