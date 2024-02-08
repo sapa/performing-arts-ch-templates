@@ -296,11 +296,27 @@
                     </semantic-query>
 
                     [[#if (hasPermission "forms:ldp:*")]] 
-                    <!-- responsible employee -->
-                    <semantic-query 
-                        query='SELECT ?employee WHERE { ?? spao:hasResponsibleEmployee ?employee . }'
-                        template='<div><h5>Responsible employee</h5><ul class="list-unstyled">{{#each bindings}}<li>{{employee.value}}</li>{{/each}}</ul></div>'>
-                    </semantic-query>
+                        <!-- responsible employee -->
+                        <semantic-query 
+                            query='SELECT ?employee WHERE { ?? spao:hasResponsibleEmployee ?employee . }'
+                            template='<div><h5>Responsible employee</h5><ul class="list-unstyled">{{#each bindings}}<li>{{employee.value}}</li>{{/each}}</ul></div>'>
+                        </semantic-query>
+
+                        <!-- last control -->
+                        <semantic-query
+                            query="SELECT ?date WHERE { ?? spao:lastControl ?date }"
+                            template="{{> template}}">
+                        >
+                            <template id="template">
+                                <div>
+                                    <h5>Last control</h5>
+                                    <ul class="list-unstyled">
+                                        {{#each bindings}}
+                                            <li>{{#ifCond (dateTimeFormat date.value "DD.MM.YYYY") "==" "Invalid date"}}{{date.value}}{{else}}{{dateTimeFormat date.value "DD.MM.YYYY"}}{{/ifCond}}</li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                        </semantic-query>
                     [[/if]]
 
                 </bs-col>
