@@ -314,10 +314,10 @@
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
             "domain" : "http://www.cidoc-crm.org/cidoc-crm/E74_Group",
             "range" : "http://www.cidoc-crm.org/cidoc-crm/E40_Legal_Body",
-                "selectPattern" : "SELECT $value WHERE { $subject crm:P107i_is_current_or_former_member_of $value . $value crm:P2_has_type ?type . ?type skos:broader* spav:vrjhq . } ",
+                "selectPattern" : "SELECT $value WHERE { $subject crm:P107i_is_current_or_former_member_of $value . $value a rico:CorporateBody . } ",
                 "insertPattern" : "INSERT { $subject crm:P107i_is_current_or_former_member_of $value . } WHERE {}",
                 "deletePattern" : "DELETE { $subject crm:P107i_is_current_or_former_member_of $value . } WHERE {}",
-                "autosuggestionPattern" : "SELECT $value $label WHERE { $value a crm:E40_Legal_Body ; rdfs:label $label . $value crm:P2_has_type ?type . ?type skos:broader* spav:vrjhq . { $label bds:search ?__token__ ; bds:matchAllTerms \"true\" . } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) } FILTER(CONTAINS(STR(?value), \"/a/\")) } LIMIT 10",
+                "autosuggestionPattern" : "SELECT $value $label WHERE { $value a rico:CorporateBody ; rdfs:label $label . { $label bds:search ?__token__ ; bds:matchAllTerms \"true\" . } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) } FILTER(CONTAINS(STR(?value), \"/a/\")) } LIMIT 10",
         "iri" : "GroupAssociation"
     }
 [[/inline]]
@@ -614,6 +614,7 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "id" : "InstantiationArchivalStatus",
 
             "label": "[[i18n "field_archival_status" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
             "maxOccurs" : "1",
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
             "domain" : "https://www.ica.org/standards/RiC/ontology#Instantiation",
@@ -745,10 +746,9 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "id" : "InstantiationMaterial",
 
             "label": "[[i18n "field_material" bundle="sapa-fields"]]",
-            "maxOccurs" : "1",
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
             "domain" : "https://www.ica.org/standards/RiC/ontology#Instantiation",
-            "range" : "rico:CarrierType",
+            "range" : "skos:Concept",
             "treePatterns": {
                 "type": "full",
                 "rootsQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { FILTER(NOT EXISTS { ?item skos:broader ?parent. }) ?item skos:inScheme spav:zj . ?item skos:prefLabel ?label. OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
@@ -756,9 +756,9 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
                 "parentsQuery": "SELECT DISTINCT ?item ?parent ?parentLabel WHERE { ?item skos:inScheme spav:zj . ?item skos:broader ?parent. ?parent skos:prefLabel ?parentLabel. }",
                 "searchQuery": "SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE { ?item skos:inScheme spav:zj ; skos:prefLabel ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY DESC (?score) (?label) LIMIT 200"
             },
-                "selectPattern" : "SELECT $value WHERE { $subject crm:P45_consists_of $value . $value a rico:CarrierType . }",
-                "insertPattern" : "INSERT { $subject rico:hasCarrierType $value . } WHERE { }",
-                "deletePattern" : "DELETE { $subject crm:P45_consists_of $value . } WHERE { $value a rico:CarrierType . }",
+                "selectPattern" : "SELECT $value WHERE { $subject crm:P45_consists_of $value . $value skos:inScheme spav:zj  . }",
+                "insertPattern" : "INSERT { $subject crm:P45_consists_of $value . } WHERE { }",
+                "deletePattern" : "DELETE { $subject crm:P45_consists_of $value . } WHERE { $value skos:inScheme spav:zj . }",
         "iri" : "InstantiationMaterial"
     }
 [[/inline]]
@@ -2077,8 +2077,8 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
             "domain" : "https://www.ica.org/standards/RiC/ontology#RecordResource",
             "range" : "rdfs:Class",
                 "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation $value . FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif\")) }",
-                "insertPattern" : "INSERT { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:cttif ; rico:hasRepresentationType spav:rtvs . } WHERE { }",
-                "deletePattern" : "DELETE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:cttif ; rico:hasRepresentationType spav:rtvs . } WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:cttif . FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif\")) }",
+                "insertPattern" : "INSERT { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvtif ; rico:hasRepresentationType spav:rtvs . } WHERE { }",
+                "deletePattern" : "DELETE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvtif ; rico:hasRepresentationType spav:rtvs . } WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvtif . FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif\")) }",
                 "askPattern" : "ASK { FILTER(REGEX(STR($value), \"http(s)*://media\\\\.performing-arts\\\\.ch/iiif/3/(image|document)%2F[\\\\d\\\\w-_]+\")) }",
         "iri" : "RecordResourceIIIF"
     }

@@ -40,11 +40,6 @@
 
             [[> sapaModule:RecordResourceProvenance]]
 
-        </bs-col>
-
-        <bs-col sm="4">
-
-            [[> sapaModule:RecordResourceImages]]
 
             <!-- CONTENT -->
 
@@ -290,6 +285,16 @@
                     {{#each bindings}}<div>{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
+        </bs-col>
+
+        <bs-col sm="4">
+
+            [[> sapaModule:RecordResourceImages]]
+
+            <!-- INSTANTIATIONS -->
+
+            [[> sapaModule:RecordInstantiations]]
+
 
         </bs-col>
 
@@ -342,7 +347,7 @@
                     BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
                     OPTIONAL { ?node olo:index ?index }
                   } ORDER BY ASC(?index) ASC(?identifier)
-                  LIMIT 200'
+                  LIMIT 1000'
                collapsed="true"
                keys-opened='[[this]]'
                parent-binding-name="parent"

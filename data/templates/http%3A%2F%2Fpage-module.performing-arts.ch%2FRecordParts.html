@@ -1,17 +1,29 @@
 <!-- parts -->
 <semantic-query 
-    query="SELECT ?headline ?part ?index WHERE {
+    query="SELECT ?headline ?part ?identifier WHERE {
         VALUES (?headline) { (<http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordPart>) }
         ?part rico:isOrWasConstituentOf ?? .
-        OPTIONAL { ?? olo:index ?index . }
-    } ORDER BY ASC (?index)"
+        OPTIONAL { 
+            ?part rico:identifier ?simpleIdentifier .
+        }
+        OPTIONAL {
+            ?part rico:hasOrHadIdentifier ?typedIdentifier .
+            ?typedIdentifier crm:P2_has_type <http://vocab.performing-arts.ch/idtec> ;
+                rdf:value ?identifierValue .
+            BIND(STRBEFORE(?identifierValue, '-') as ?iv1)
+            BIND(STRBEFORE(STRAFTER(?identifierValue, '-'), '-') as ?iv2)
+            BIND(STRAFTER(STRAFTER(?identifierValue, '-'), '-') as ?iv3)
+            BIND(CONCAT(IF(STRLEN(?iv1) = 1, CONCAT('00', ?iv1), IF(STRLEN(?iv1) = 2, CONCAT('0', ?iv1), ?iv1)),'-',IF(STRLEN(?iv2) = 1, CONCAT('00', ?iv2), IF(STRLEN(?iv2) = 2, CONCAT('0', ?iv2), ?iv2)),'-',IF(STRLEN(?iv3) = 1, CONCAT('00', ?iv3), IF(STRLEN(?iv3) = 2, CONCAT('0', ?iv3), ?iv3))) as ?paddedIdentifier)
+        }
+        BIND(COALESCE(?paddedIdentifier, ?identifierValue, ?simpleIdentifier) as ?identifier)
+    } ORDER BY ASC (?identifier)"
     template='{{> part-properties }}'>
     <template id='part-properties'>
         <div id='sapa-parts-module'>
         <strong><p>Parts</p></strong>
         <hr />
         {{#each bindings}}
-        <h5><mp-label iri="{{part.value}}"></mp-label></h5>
+        <h5><semantic-link iri="{{part.value}}"></semantic-link></h5>
             <!-- typed identifier -->
             <semantic-query 
             query="SELECT ?identifier ?type WHERE {

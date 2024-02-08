@@ -72,10 +72,11 @@
 
                 <!-- date and place of birth -->
                 <semantic-query 
-                    query='SELECT ?birthdate ?birthplace WHERE {
+                    query='SELECT ?birthdate ?birthplace ?birthdateLength WHERE {
                         OPTIONAL {
                             ?? rico:birthDate ?b .
                             ?b rico:normalizedDateValue ?birthdate .
+                            BIND(STRLEN(?birthdate) AS ?birthdateLength)
                         }
                         OPTIONAL {
                             ?? crm:P98i_was_born ?birth .
@@ -83,16 +84,17 @@
                             FILTER(!CONTAINS(STR(?birthplace), "wikidata"))
                         }
                     } LIMIT 1'
-                    template='<div>{{#each bindings}}{{#if birthdate}}* {{else}}{{#if birthplace}}* {{/if}}{{/if}}{{#if birthdate}}<span style="padding-right:0.1em;" title="{{birthdate.value}}">{{dateTimeFormat birthdate.value "DD.MM.YYYY"}}</span>{{/if}}{{#if birthdate}}{{#if birthplace}}, {{/if}}{{/if}}
+                    template='<div>{{#each bindings}}{{#if birthdate}}* {{else}}{{#if birthplace}}* {{/if}}{{/if}}{{#if birthdate}}<span style="padding-right:0.1em;" title="{{birthdate.value}}">{{#ifCond birthdateLength.value "==" "4"}}{{dateTimeFormat birthdate.value "YYYY"}}{{else}}{{#ifCond birthdateLength.value "==" "7"}}{{dateTimeFormat birthdate.value "MM.YYYY"}}{{else}}{{dateTimeFormat birthdate.value "DD.MM.YYYY"}}{{/ifCond}}{{/ifCond}}</span>{{/if}}{{#if birthdate}}{{#if birthplace}}, {{/if}}{{/if}}
                     {{#if birthplace}}<semantic-link iri="{{birthplace.value}}">{{birthplace.value}}</semantic-link>{{/if}}{{/each}}</div>'>
                 </semantic-query>
 
                 <!-- date and place of death -->
                 <semantic-query 
-                    query='SELECT ?deathdate ?deathplace WHERE {
+                    query='SELECT ?deathdate ?deathplace ?deathdateLength WHERE {
                         OPTIONAL {
                             ?? rico:deathDate ?d .
                             ?d rico:normalizedDateValue ?deathdate .
+                            BIND(STRLEN(?deathdate) AS ?deathdateLength)
                         }
                         OPTIONAL {
                             ?? crm:P100i_died_in ?death .
@@ -100,7 +102,7 @@
                             FILTER(!CONTAINS(STR(?deathplace), "wikidata"))
                         }
                     } LIMIT 1'
-                    template='<div>{{#each bindings}}{{#if deathdate}}† {{else}}{{#if deathplace}}† {{/if}}{{/if}}{{#if deathdate}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{dateTimeFormat deathdate.value "DD.MM.YYYY"}}</span>{{/if}}{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
+                    template='<div>{{#each bindings}}{{#if deathdate}}† {{else}}{{#if deathplace}}† {{/if}}{{/if}}{{#if deathdate}}<span style="padding-right:0.1em;" title="{{deathdate.value}}">{{#ifCond deathdateLength.value "==" "4"}}{{dateTimeFormat deathdate.value "YYYY"}}{{else}}{{#ifCond deathdateLength.value "==" "7"}}{{dateTimeFormat deathdate.value "MM.YYYY"}}{{else}}{{dateTimeFormat deathdate.value "DD.MM.YYYY"}}{{/ifCond}}{{/ifCond}}</span>{{/if}}{{#if deathdate}}{{#if deathplace}}, {{/if}}{{/if}}
                         {{#if deathplace}}<semantic-link iri="{{deathplace.value}}">{{deathplace.value}}</semantic-link>{{/if}}{{/each}}</div>'>
                 </semantic-query>
                 <mp-field-visualization

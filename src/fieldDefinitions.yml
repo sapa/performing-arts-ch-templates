@@ -529,8 +529,7 @@ fields:
     queries:
       - select: 'SELECT $value WHERE {
         $subject crm:P107i_is_current_or_former_member_of $value .
-        $value crm:P2_has_type ?type .
-        ?type skos:broader* spav:vrjhq .
+        $value a rico:CorporateBody .
       } '
       - insert: 'INSERT {
         $subject crm:P107i_is_current_or_former_member_of $value .
@@ -539,10 +538,8 @@ fields:
         $subject crm:P107i_is_current_or_former_member_of $value .
       } WHERE {}'
       - autosuggestion: 'SELECT $value $label WHERE {
-          $value a crm:E40_Legal_Body ;
+          $value a rico:CorporateBody ;
               rdfs:label $label .
-          $value crm:P2_has_type ?type .
-          ?type skos:broader* spav:vrjhq .
         {
           $label bds:search ?__token__ ;
             bds:matchAllTerms "true" .
@@ -1102,6 +1099,7 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationArchivalStatus
     label: Archival status
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    minOccurs: 1
     maxOccurs: 1
     domain: https://www.ica.org/standards/RiC/ontology#Instantiation
     range: http://www.w3.org/2004/02/skos/core#Concept
@@ -1122,15 +1120,15 @@ fields:
     range: rico:CarrierType
     queries:
       - select: 'SELECT $value WHERE {
-    $subject rico:hasCarrierType $value .
-    $value a rico:CarrierType .
+        $subject rico:hasCarrierType $value .
+        $value a rico:CarrierType .
       }'
       - insert: 'INSERT { $subject rico:hasCarrierType $value . } WHERE { }'
       - delete: 'DELETE {
-    $subject rico:hasCarrierType $value .
-      } WHERE {
-    $value a rico:CarrierType .
-      }'
+          $subject rico:hasCarrierType $value .
+        } WHERE {
+          $value a rico:CarrierType .
+        }'
     treePatterns:
       type: full
       rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
@@ -1266,20 +1264,19 @@ fields:
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationMaterial
     label: Material
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    maxOccurs: 1
     domain: https://www.ica.org/standards/RiC/ontology#Instantiation
-    range: rico:CarrierType
+    range: skos:Concept
     queries:
       - select: 'SELECT $value WHERE {
-    $subject crm:P45_consists_of $value .
-    $value a rico:CarrierType .
+        $subject crm:P45_consists_of $value .
+        $value skos:inScheme spav:zj  .
       }'
-      - insert: 'INSERT { $subject rico:hasCarrierType $value . } WHERE { }'
+      - insert: 'INSERT { $subject crm:P45_consists_of $value . } WHERE { }'
       - delete: 'DELETE {
-    $subject crm:P45_consists_of $value .
-      } WHERE {
-    $value a rico:CarrierType .
-      }'
+          $subject crm:P45_consists_of $value .
+       } WHERE {
+        $value skos:inScheme spav:zj .
+        }'
     treePatterns:
       type: full
       rootsQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
@@ -3275,17 +3272,17 @@ fields:
       }'
       - insert: 'INSERT {
     $subject rico:hasInstantiation $value .
-    $value rico:hasCarrierType spav:cttif ;
+    $value rico:hasCarrierType spav:fvtif ;
         rico:hasRepresentationType spav:rtvs .
       } WHERE {
       }'
       - delete: 'DELETE {
     $subject rico:hasInstantiation $value .
-    $value rico:hasCarrierType spav:cttif ;
+    $value rico:hasCarrierType spav:fvtif ;
         rico:hasRepresentationType spav:rtvs . 
       } WHERE {
     $subject rico:hasInstantiation $value .
-    $value rico:hasCarrierType spav:cttif .
+    $value rico:hasCarrierType spav:fvtif .
     FILTER(CONTAINS(STR($value), "media.performing-arts.ch/iiif"))
       }'
       - ask: 'ASK {
