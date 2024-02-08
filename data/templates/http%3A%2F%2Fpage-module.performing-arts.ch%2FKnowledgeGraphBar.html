@@ -1,7 +1,7 @@
 <style>
-.knowledgeGraphBar__thumbnail img{
-  max-width: 120px !important;
-}
+  .knowledgeGraphBar__thumbnail img{
+    max-width: 120px !important;
+  }
 </style>
 <div class="knowledgeGraphBar">
   <div class='knowledgeGraphBar__thumbnail'>
@@ -30,7 +30,7 @@
         }'
         template='<div>{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style="max-height:300px; padding: 10px;"></mp-resource-thumbnail>{{/each}}</div>'>
       </semantic-query>
-      
+
     [[/if]]
 
 
@@ -80,7 +80,17 @@
           } LIMIT 1"
           template="<div class='knowledgeGraphBar__uriRow'>{{#each bindings}}{{log this}}<b>URI</b>: <i>{{uri.value}}</i>{{#if button.value}}<mp-copy-to-clipboard text='{{uri.value}}'><button class='btn btn-secondary knowledgeGraphBar__copyIri'></button></mp-copy-to-clipboard>{{/if}}{{/each}}</div>">
       </semantic-query>
+      <semantic-query 
+          query="SELECT ?value WHERE {
+            ?? a crm:E21_Person; 
+              owl:sameAs ?wikiId . 
+            SERVICE <https://query.wikidata.org/sparql> {?wikiId wdt:P18 ?value . FILTER (STRSTARTS(str(?wikiId), 'http://www.wikidata.org/entity/'))}
+          }"
+          template="<div class='knowledgeGraphBar__uriRow'>{{#each bindings}}<b>Image Source</b>: <a href='https://commons.wikimedia.org/'><i> Wikimedia Commons </i> </a><mp-copy-to-clipboard text='{{value.value}}'><button class='btn btn-secondary knowledgeGraphBar__copyIri'></button></mp-copy-to-clipboard>{{/each}}</div>">
+      </semantic-query>
+    
     </div>
   </div>
+  
 </div>
   
