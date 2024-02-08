@@ -95,8 +95,7 @@
               FILTER (STRSTARTS(str(?wikiId), "http://www.wikidata.org/entity/"))
               }
               BIND(REPLACE(STR(?wikimedia_image_raw), "%3A", ":") as ?wikimedia_image)
-              BIND(CONCAT("https://commons.wikimedia.org/wiki/File:", STRAFTER(STR(?wikimedia_image), "FilePath/")) as ?tifVariant) 
-              BIND(IF( STRENDS(STR(?wikimedia_image_raw),".tif"), ?tifVariant, ?wikimedia_image_raw ) as ?value)
+              BIND(CONCAT("https://commons.wikimedia.org/wiki/File:", STRAFTER(STR(?wikimedia_image), "FilePath/")) as ?value) 
           } LIMIT 1'
           template="<div class='knowledgeGraphBar__uriRow'>{{#each bindings}}<b>Image Source</b>: <a href='{{value.value}}' target='_blank'><i> Wikimedia Commons </i> </a>{{/each}}</div>">
       </semantic-query>
