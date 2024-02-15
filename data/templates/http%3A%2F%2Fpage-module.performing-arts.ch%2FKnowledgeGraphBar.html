@@ -1,12 +1,13 @@
 <style>
-.knowledgeGraphBar__thumbnail img{
-  max-width: 120px !important;
-}
+  .knowledgeGraphBar__thumbnail img{
+    max-width: 120px !important;
+  }
 </style>
 <div class="knowledgeGraphBar">
-  <div class='knowledgeGraphBar__thumbnail'>
+  <div class='knowledgeGraphBar__thumbnail' >
     [[#if thumbnail]]
       <img src="[[thumbnail]]" >
+      
     [[else]]
       <semantic-query 
         query='SELECT ?icon
@@ -28,9 +29,8 @@
             (spao:ArchivalPlace "../assets/icons/solid/archive.svg")
           }
         }'
-        template='<div>{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style="max-height:300px; padding: 10px;"></mp-resource-thumbnail>{{/each}}</div>'>
+        template='<div>{{#each bindings}}<mp-resource-thumbnail no-image-uri="{{icon.value}}" iri="[[this]]" style=" height:75% padding: 10px;"></mp-resource-thumbnail> {{/each}} </div>'>
       </semantic-query>
-      
     [[/if]]
 
 
@@ -52,8 +52,7 @@
     <div class='knowledgeGraphBar__bottomRow'>
       <div class='knowledgeGraphBar__graphInfos'>
         <semantic-query 
-          query="SELECT ?description
-          WHERE {
+          query="SELECT ?description WHERE {
             ?? a ?class .
             FILTER(CONTAINS(STR(?class), 'RiC') || CONTAINS(STR(?class), 'frbroo'))
             OPTIONAL { ?? crm:P2_has_type ?crmtype . }
@@ -65,8 +64,15 @@
             OPTIONAL { ?? rico:hasRecordSetType ?record_set_type . }
             BIND(IF(BOUND(?timespan), ?timespan, IF(BOUND(?genre), ?genre, IF(BOUND(?crmtype), ?crmtype, IF(BOUND(?record_set_type), ?record_set_type, ?class)))) AS ?description)
           }"
-          template="<p>{{#each bindings}}{{#if @first}}<mp-label iri='{{description.value}}'></mp-label>{{else}}, <mp-label iri='{{description.value}}'></mp-label>{{/if}}{{/each}}</p>">
-      </semantic-query>      
+          template="{{> template}}">
+          <template id="template">
+            <p>
+              {{#each bindings}}
+                <mp-label iri='{{description.value}}'></mp-label>
+              {{/each}}
+            </p>
+          </template>
+      </semantic-query>
       <semantic-query 
           query="SELECT ?uri ?button WHERE {
             GRAPH ?graph {
@@ -80,7 +86,22 @@
           } LIMIT 1"
           template="<div class='knowledgeGraphBar__uriRow'>{{#each bindings}}{{log this}}<b>URI</b>: <i>{{uri.value}}</i>{{#if button.value}}<mp-copy-to-clipboard text='{{uri.value}}'><button class='btn btn-secondary knowledgeGraphBar__copyIri'></button></mp-copy-to-clipboard>{{/if}}{{/each}}</div>">
       </semantic-query>
+      <semantic-query 
+          query='SELECT ?value WHERE {
+            ?? a crm:E21_Person; 
+              owl:sameAs ?wikiId . 
+            SERVICE <https://query.wikidata.org/sparql> {
+                ?wikiId wdt:P18 ?wikimedia_image_raw . 
+              FILTER (STRSTARTS(str(?wikiId), "http://www.wikidata.org/entity/"))
+              }
+              BIND(REPLACE(STR(?wikimedia_image_raw), "%3A", ":") as ?wikimedia_image)
+              BIND(CONCAT("https://commons.wikimedia.org/wiki/File:", STRAFTER(STR(?wikimedia_image), "FilePath/")) as ?value) 
+          } LIMIT 1'
+          template="<div class='knowledgeGraphBar__uriRow'>{{#each bindings}}<b>Image Source</b>: <a href='{{value.value}}' target='_blank'><i> Wikimedia Commons </i> </a>{{/each}}</div>">
+      </semantic-query>
+    
     </div>
   </div>
+  
 </div>
   
