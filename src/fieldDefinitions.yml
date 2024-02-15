@@ -3267,27 +3267,27 @@ fields:
     range: rdfs:Class
     queries:
       - select: 'SELECT $value WHERE {
-    $subject rico:hasInstantiation $value .
-    FILTER(CONTAINS(STR($value), "media.performing-arts.ch/iiif"))
+          $subject rico:hasInstantiation $value .
+          FILTER(CONTAINS(STR($value), "media.performing-arts.ch/iiif"))
       }'
       - insert: 'INSERT {
-    $subject rico:hasInstantiation $value .
-    $value rico:hasCarrierType spav:fvtif ;
-        rico:hasRepresentationType spav:rtvs .
-      } WHERE {
-      }'
+            $subject rico:hasInstantiation $value .
+            $value rico:hasCarrierType spav:fvtif ;
+              rico:hasRepresentationType spav:rtvs .
+          } WHERE {
+        }'
       - delete: 'DELETE {
-    $subject rico:hasInstantiation $value .
-    $value rico:hasCarrierType spav:fvtif ;
-        rico:hasRepresentationType spav:rtvs . 
-      } WHERE {
-    $subject rico:hasInstantiation $value .
-    $value rico:hasCarrierType spav:fvtif .
-    FILTER(CONTAINS(STR($value), "media.performing-arts.ch/iiif"))
-      }'
+          $subject rico:hasInstantiation $value .
+          $value rico:hasCarrierType spav:fvtif ;
+            rico:hasRepresentationType spav:rtvs . 
+        } WHERE {
+          $subject rico:hasInstantiation $value .
+          $value rico:hasCarrierType spav:fvtif .
+          FILTER(CONTAINS(STR($value), "media.performing-arts.ch/iiif"))
+        }'
       - ask: 'ASK {
-        FILTER(REGEX(STR($value), "http(s)*://media\\\\.performing-arts\\\\.ch/iiif/3/(image|document)%2F[\\\\d\\\\w-_]+"))
-      }'
+          FILTER(REGEX(STR($value), "http(s)*://media\\\\.performing-arts\\\\.ch/iiif/3/(image|document)%2F[\\\\d\\\\w-_]+"))
+        }'
 
 
   - id: RecordResourceIndex
