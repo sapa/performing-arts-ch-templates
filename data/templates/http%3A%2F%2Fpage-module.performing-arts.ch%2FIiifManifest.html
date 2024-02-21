@@ -3,6 +3,15 @@
  query="SELECT ?manifest WHERE {
     ?? rico:hasInstantiation ?manifest .
     ?manifest rico:hasCarrierType spav:fvman .
- }">
+ }"
+ template="{{> template-manifest}}">
+    <template id="template-manifest">            
+        <p>
+            <h5>[[i18n "field_iiif_manifest" bundle="sapa-fields"]]</h5>
+            <ul class="list-unstyled">
+                {{#each bindings}}
+                    <li><span><img src="/assets/icons/iiif.png" height="19px"/>&nbsp;<a href="{{manifest.value}}" target="_blank">{{manifest.value}}</a></span></li>
+                {{/each}}
+        </p>
+    </template>
  </semantic-query>
- 
