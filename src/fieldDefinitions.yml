@@ -3268,7 +3268,8 @@ fields:
     queries:
       - select: 'SELECT $value WHERE {
           $subject rico:hasInstantiation $value .
-          FILTER(CONTAINS(STR($value), "media.performing-arts.ch/iiif"))
+          $value rico:hasCarrierType spav:fvtif ;
+            rico:hasRepresentationType spav:rtvs .
       }'
       - insert: 'INSERT {
             $subject rico:hasInstantiation $value .
