@@ -3757,11 +3757,6 @@ fields:
           FILTER(?type_indicator != "u")
           OPTIONAL { $value crm:P2_has_type ?crmtype. }
           FILTER((?type != crm:E22_Man-Made_Object) || (?crmtype = spav:dwmkn))
-          OPTIONAL {
-            $value crm:P74_has_current_or_former_residence/crm:P89_falls_within/rdfs:label ?place_label .
-            BIND(LANG(?place_label) AS ?place_label_lang)
-          }
-          FILTER(!BOUND(?place_label_lang) || ?place_label_lang = ?lang)
           BIND(CONCAT(?item_label, " (", ?type_label, IF(BOUND(?place_label), CONCAT(", ", ?place_label), ""), ")") AS ?label)
         } LIMIT 100'
 
