@@ -2076,11 +2076,25 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
             "domain" : "https://www.ica.org/standards/RiC/ontology#RecordResource",
             "range" : "rdfs:Class",
-                "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation $value . FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif\")) }",
+                "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvtif ; rico:hasRepresentationType spav:rtvs . }",
                 "insertPattern" : "INSERT { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvtif ; rico:hasRepresentationType spav:rtvs . } WHERE { }",
                 "deletePattern" : "DELETE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvtif ; rico:hasRepresentationType spav:rtvs . } WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvtif . FILTER(CONTAINS(STR($value), \"media.performing-arts.ch/iiif\")) }",
                 "askPattern" : "ASK { FILTER(REGEX(STR($value), \"http(s)*://media\\\\.performing-arts\\\\.ch/iiif/3/(image|document)%2F[\\\\d\\\\w-_]+\")) }",
         "iri" : "RecordResourceIIIF"
+    }
+[[/inline]]
+ [[#*inline "RecordResourceIIIFManifest"]]
+    {
+        "id" : "RecordResourceIIIFManifest",
+
+            "label": "[[i18n "field_iiif_manifest" bundle="sapa-fields"]]",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "domain" : "https://www.ica.org/standards/RiC/ontology#RecordResource",
+            "range" : "rdfs:Class",
+                "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvman . }",
+                "insertPattern" : "INSERT { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvman . } WHERE { }",
+                "deletePattern" : "DELETE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvman . } WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:fvman . }",
+        "iri" : "RecordResourceIIIFManifest"
     }
 [[/inline]]
  [[#*inline "RecordResourceIndex"]]
