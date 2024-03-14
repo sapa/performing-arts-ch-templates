@@ -1,3 +1,8 @@
+<style>
+    clover-viewer > div > div > div > div > div > div > div > div:nth-child(2){
+        display: none;
+    }
+</style>
 <!-- iiif Manifest -->
 <semantic-query
  query="SELECT ?manifest WHERE {
@@ -9,15 +14,28 @@
         <p>
             <h5>[[i18n "field_iiif_manifest" bundle="sapa-fields"]]</h5>
             {{#each bindings}}
-                <clover-viewer
-                id="{{manifest.value}}"
-                options='{
-                    "informationPanel": {
-                    "open": false
-                    }
-                }'
-                ></clover-viewer>
-          {{/each}}
+                <div style="height:400px;">
+                    <clover-viewer
+                    id="{{manifest.value}}"
+                    options='{
+                        "canvasHeight": "400px",
+                        "informationPanel": {
+                            "open": false
+                        },
+                        "openSeadragon": {
+                            "showRotationControl": false,
+                            "showFullPageControl": false,
+                            "showNavigator": false,
+                            "showNavigationControl": false,
+                            "showZoomControl": false,
+                            "showHomeControl": false
+                        },
+                        "showIIIFBadge": false
+
+                    }'
+                    ></clover-viewer>
+                </div>
+            {{/each}}
         </p>
     </template>
  </semantic-query>
