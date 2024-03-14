@@ -976,6 +976,20 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "iri" : "MediaResourceFormatVideo"
     }
 [[/inline]]
+ [[#*inline "MediaResourceFrameRate"]]
+    {
+        "id" : "MediaResourceFrameRate",
+
+            "label": "[[i18n "field_frame_rate" bundle="sapa-fields"]]",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#string",
+                "selectPattern" : "SELECT ?value WHERE { $subject ebucore:frameRate ?value . }",
+                "insertPattern" : "INSERT { $subject ebucore:frameRate $value} WHERE {}",
+                "deletePattern" : "DELETE { $subject ebucore:frameRate $value} WHERE {}",
+                "askPattern" : "ASK { FILTER(REGEX($value, \"^[0-9]*$\")) }",
+        "iri" : "MediaResourceFrameRate"
+    }
+[[/inline]]
  [[#*inline "MediaResourceHeight"]]
     {
         "id" : "MediaResourceHeight",
