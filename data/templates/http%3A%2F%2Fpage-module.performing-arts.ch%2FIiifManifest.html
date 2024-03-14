@@ -8,10 +8,16 @@
     <template id="template-manifest">            
         <p>
             <h5>[[i18n "field_iiif_manifest" bundle="sapa-fields"]]</h5>
-            <ul class="list-unstyled">
-                {{#each bindings}}
-                    <li><span><img src="/assets/icons/iiif.png" height="19px"/>&nbsp;<a href="{{manifest.value}}" target="_blank">{{manifest.value}}</a></span></li>
-                {{/each}}
+            {{#each bindings}}
+                <clover-viewer
+                id="{{manifest.value}}"
+                options='{
+                    "informationPanel": {
+                    "open": false
+                    }
+                }'
+                ></clover-viewer>
+          {{/each}}
         </p>
     </template>
  </semantic-query>
