@@ -898,6 +898,20 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "iri" : "MediaResourceColor"
     }
 [[/inline]]
+ [[#*inline "MediaResourceDisplayMode"]]
+    {
+        "id" : "MediaResourceDisplayMode",
+
+            "label": "[[i18n "field_display_mode" bundle="sapa-fields"]]",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+                "selectPattern" : "SELECT $value WHERE { $subject spao:displayMode $value . }",
+                "insertPattern" : "INSERT { $subject spao:displayMode $value . } WHERE { }",
+                "deletePattern" : "DELETE { $subject spao:displayMode $value . } WHERE {}",
+                "valueSetPattern" : "SELECT $value WHERE { $value skos:inScheme spav:ar . }",
+        "iri" : "MediaResourceDisplayMode"
+    }
+[[/inline]]
  [[#*inline "MediaResourceFormatAudio"]]
     {
         "id" : "MediaResourceFormatAudio",
