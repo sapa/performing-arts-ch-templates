@@ -599,6 +599,16 @@
                                     {{/each}}</ul></div>'>
                             </semantic-query>
 
+                            <!-- frame rate -->
+                            <semantic-query 
+                                query="SELECT ?frame_rate WHERE { <{{file.value}}> ebucore:frameRate ?frame_rate . }"
+                                template='<div>
+                                    <h5>Frame rate</h5>
+                                    <ul class="list-unstyled">{{#each bindings}}
+                                        <li>{{frame_rate.value}}</li>
+                                    {{/each}}</ul></div>'>
+                            </semantic-query>
+
                             <!-- ebucore standard -->
                             <semantic-query 
                                 query='SELECT ?standard WHERE { <{{file.value}}> ebucore:hasStandard ?standard . }'
