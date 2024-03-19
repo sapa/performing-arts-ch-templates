@@ -89,6 +89,16 @@
                         </div>'>
                     </semantic-query>
 
+                    <!-- frame rate -->
+                    <semantic-query 
+                        query="SELECT ?frame_rate WHERE { ?? ebucore:frameRate ?frame_rate .  }"
+                        template='<div>
+                            <h5>Frame rate</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{frame_rate.value}}</li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
                     <!-- physical characteristics -->
                     <semantic-query 
                         query="SELECT ?physical WHERE { ?? rico:physicalCharacteristics ?physical . } ORDER BY ASC (?physical)"
@@ -403,16 +413,6 @@
                             <h5>Aspect ratio</h5>
                             <ul class="list-unstyled">{{#each bindings}}
                                 <li><mp-label iri="{{aspect_ratio.value}}"></mp-label></li>
-                            {{/each}}</ul></div>'>
-                    </semantic-query>
-
-                    <!-- frame rate -->
-                    <semantic-query 
-                        query="SELECT ?frame_rate WHERE { ?? ebucore:frameRate ?frame_rate .  }"
-                        template='<div>
-                            <h5>Frame rate</h5>
-                            <ul class="list-unstyled">{{#each bindings}}
-                                <li>{{frame_rate.value}}</li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
