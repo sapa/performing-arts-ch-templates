@@ -281,20 +281,23 @@
         <semantic-query
         query='SELECT DISTINCT ?record ?identifier WHERE { 
           {
-            ?record rico:hasOrHadSubject ?? ;
-              a rico:RecordSet .
-          } UNION {
-            ?record rico:hasOrHadSubject ?? ;
-              a rico:Record .
+           ?record rico:hasOrHadSubject ?? ;
+             a ?type .
+             VALUES (?type ?priority) {
+               (rico:RecordPart "1")
+               (rico:RecordSet "2")
+               (rico:Record "3")
+             }
           } UNION {
             ?recordpart rico:hasOrHadSubject ?? ;
               a rico:RecordPart ;
               rico:isOrWasConstituentOf ?record .
+             BIND("4" as ?priority)
           }
           OPTIONAL {
             ?record rico:identifier ?identifier .
           }
-        }'
+        } ORDER BY ?priority'
         template='<div><h5>Record (Set)</h5>
             <ul class="list-unstyled">{{#each bindings}}
                 <li>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link iri="{{record.value}}"></semantic-link></li>
