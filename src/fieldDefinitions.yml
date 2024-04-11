@@ -1469,6 +1469,15 @@ fields:
       schemePattern: '?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:cl '
       relationPattern: '?item skos:broader ?parent'
 
+  - id: MediaResourceDisplayMode
+    label: Display Mode
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT $value WHERE { $subject spao:displayMode $value . }'
+      - insert: 'INSERT { $subject spao:displayMode $value . } WHERE { }'
+      - delete: 'DELETE { $subject spao:displayMode $value . } WHERE {}'
+      - valueSet: 'SELECT $value WHERE { $value skos:inScheme spav:ar . }'
 
   - id: MediaResourceFormatAudio
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceFormatAudio

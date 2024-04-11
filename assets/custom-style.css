@@ -249,6 +249,17 @@ div.SemanticTreeInput--inputAndButtons {
 .footer__links-col {
   font-size: 0.7em;
 }
+.page__body-navtabs a[data-rb-event-key="ontodia"][aria-selected="false"],
+.page__body-navtabs a[data-rb-event-key="statements"][aria-selected="false"],
+.page__body-navtabs a[data-rb-event-key*="editing"][aria-selected="false"],
+.page__body-navtabs a[data-rb-event-key="delete"][aria-selected="false"] {
+  color: #999 !important;
+}
+#sapa-parts-module {
+  background-color: rgba(220, 216, 230, 0.575);
+  padding-left: 2%;
+  padding-right: 2%;
+}
 nav.metaphacts-header-navbar.DEVELOPMENT,
 nav.metaphacts-header-navbar.dev\.performing-arts\.ch {
   background: #e6375c;
