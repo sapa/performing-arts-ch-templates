@@ -69,6 +69,7 @@
             <p>
               {{#each bindings}}
                 <mp-label iri='{{description.value}}'></mp-label>
+                {{#unless @last}},&nbsp;{{/unless}}
               {{/each}}
             </p>
           </template>

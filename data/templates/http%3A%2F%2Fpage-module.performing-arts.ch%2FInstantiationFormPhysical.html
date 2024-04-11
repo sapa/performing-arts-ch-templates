@@ -40,10 +40,11 @@
         [[> MediaResourceWidth]],
         [[> MediaResourceHeight]],
         [[> MediaResourceAspectRatio]],
+        [[> MediaResourceFrameRate]],
         [[> MediaResourceVideoDamage]],
         [[> MediaResourceChannels]],
         [[> MediaResourceSamplingRate]],
-        [[> SchemaDuration]],
+        [[> EbucoreDuration]],
         [[> MediaResourceScanningFormat]],
         [[> MediaResourceScanningOrder]],
         [[> RepresentationFile]],
@@ -132,7 +133,7 @@
         </bs-row>
         <bs-row>
           <bs-col sm='2'>
-            <semantic-form-text-input for="SchemaDuration"></semantic-form-text-input>
+            <semantic-form-text-input for="EbucoreDuration"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='2'>
             <semantic-form-select-input for="MediaResourceColor"></semantic-form-select-input>
@@ -142,6 +143,7 @@
             <semantic-form-text-input for="MediaResourceWidth"></semantic-form-text-input>
             <semantic-form-text-input for="MediaResourceHeight"></semantic-form-text-input>
             <semantic-form-select-input for="MediaResourceAspectRatio"></semantic-form-select-input>
+            <semantic-form-text-input for="MediaResourceFrameRate"></semantic-form-text-input>
             <semantic-form-checklist-input type='radio' clearable=true row=false for="MediaResourceScanningFormat"></semantic-form-checklist-input>
             <semantic-form-checklist-input type='radio' clearable=true row=false for="MediaResourceScanningOrder"></semantic-form-checklist-input>
           </bs-col>

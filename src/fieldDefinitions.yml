@@ -1548,6 +1548,15 @@ fields:
       schemePattern: '?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:vf '
       relationPattern: '?item skos:broader ?parent'
 
+  - id: MediaResourceFrameRate
+    label: Frame rate
+    datatype: http://www.w3.org/2001/XMLSchema#string
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE { $subject ebucore:frameRate ?value . }'
+      - insert: 'INSERT { $subject ebucore:frameRate $value} WHERE {}'
+      - delete: 'DELETE { $subject ebucore:frameRate $value} WHERE {}'
+      - ask: 'ASK { FILTER(REGEX($value, "^[0-9]*$")) }'
 
   - id: MediaResourceHeight
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceHeight
@@ -3757,11 +3766,6 @@ fields:
           FILTER(?type_indicator != "u")
           OPTIONAL { $value crm:P2_has_type ?crmtype. }
           FILTER((?type != crm:E22_Man-Made_Object) || (?crmtype = spav:dwmkn))
-          OPTIONAL {
-            $value crm:P74_has_current_or_former_residence/crm:P89_falls_within/rdfs:label ?place_label .
-            BIND(LANG(?place_label) AS ?place_label_lang)
-          }
-          FILTER(!BOUND(?place_label_lang) || ?place_label_lang = ?lang)
           BIND(CONCAT(?item_label, " (", ?type_label, IF(BOUND(?place_label), CONCAT(", ", ?place_label), ""), ")") AS ?label)
         } LIMIT 100'
 
