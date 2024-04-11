@@ -253,7 +253,9 @@ nav.metaphacts-header-navbar.LOCAL {
   background: #e6375c;
   background: repeating-linear-gradient(45deg, #35c8ad, #35adc8 10px, #35c8ad 10px, #35adc8 20px) !important;
 }
-#sapa-parts-module {
-  background-color: rgba(220, 216, 230, 0.575); 
-  padding-left: 2%; padding-right:2%;
+div[data-radix-popper-content-wrapper] {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  transform: translate(0, 0) !important;
 }
