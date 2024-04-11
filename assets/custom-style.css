@@ -35,6 +35,11 @@ div.form-section {
   font-weight: bold;
   font-size: 1.2em;
 }
+#sapa-parts-module {
+  background-color: rgba(220, 216, 230, 0.575);
+  padding-left: 2%;
+  padding-right: 2%;
+}
 .sapa-component.font-bold {
   font-weight: bold;
 }
@@ -244,6 +249,17 @@ div.SemanticTreeInput--inputAndButtons {
 .footer__links-col {
   font-size: 0.7em;
 }
+.page__body-navtabs a[data-rb-event-key="ontodia"][aria-selected="false"],
+.page__body-navtabs a[data-rb-event-key="statements"][aria-selected="false"],
+.page__body-navtabs a[data-rb-event-key*="editing"][aria-selected="false"],
+.page__body-navtabs a[data-rb-event-key="delete"][aria-selected="false"] {
+  color: #999 !important;
+}
+#sapa-parts-module {
+  background-color: rgba(220, 216, 230, 0.575);
+  padding-left: 2%;
+  padding-right: 2%;
+}
 nav.metaphacts-header-navbar.DEVELOPMENT,
 nav.metaphacts-header-navbar.dev\.performing-arts\.ch {
   background: #e6375c;
@@ -253,7 +269,9 @@ nav.metaphacts-header-navbar.LOCAL {
   background: #e6375c;
   background: repeating-linear-gradient(45deg, #35c8ad, #35adc8 10px, #35c8ad 10px, #35adc8 20px) !important;
 }
-#sapa-parts-module {
-  background-color: rgba(220, 216, 230, 0.575); 
-  padding-left: 2%; padding-right:2%;
+div[data-radix-popper-content-wrapper] {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  transform: translate(0, 0) !important;
 }

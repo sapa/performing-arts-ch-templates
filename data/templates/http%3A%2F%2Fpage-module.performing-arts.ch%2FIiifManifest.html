@@ -1,3 +1,8 @@
+<style>
+    clover-viewer > div > div > div > div > div > div > div > div:nth-child(2){
+        display: none;
+    }
+</style>
 <!-- iiif Manifest -->
 <semantic-query
  query="SELECT ?manifest WHERE {
@@ -8,10 +13,28 @@
     <template id="template-manifest">            
         <p>
             <h5>[[i18n "field_iiif_manifest" bundle="sapa-fields"]]</h5>
-            <ul class="list-unstyled">
-                {{#each bindings}}
-                    <li><span><img src="/assets/icons/iiif.png" height="19px"/>&nbsp;<a href="{{manifest.value}}" target="_blank">{{manifest.value}}</a></span></li>
-                {{/each}}
+            {{#each bindings}}
+                <div>
+                    <clover-viewer
+                    id="{{manifest.value}}"
+                    options='{
+                        "canvasHeight": "400px",
+                        "informationPanel": {
+                            "open": false,
+                            "renderToggle": false
+                        },
+                        "openSeadragon": {
+                            "showRotationControl": false,
+                            "showFullPageControl": true,
+                            "showNavigator": false,
+                            "showNavigationControl": true,
+                            "showZoomControl": false,
+                            "showHomeControl": false
+                        }
+                    }'
+                    ></clover-viewer>
+                </div>
+            {{/each}}
         </p>
     </template>
  </semantic-query>
