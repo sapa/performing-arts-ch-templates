@@ -171,6 +171,16 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
+                    <!-- display mode -->
+                    <semantic-query 
+                        query="SELECT ?display_mode WHERE { ?? spao:displayMode ?display_mode . }"
+                        template='<div>
+                            <h5>[[i18n "field_display_mode" bundle="sapa-fields"]]</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><mp-label iri="{{display_mode.value}}"></mp-label></li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
                     <!-- video damage -->
                     <semantic-query 
                         query='SELECT ?value WHERE { ?? spao:hasVideoDamage ?value . }'
@@ -402,16 +412,6 @@
                             <h5>Aspect ratio</h5>
                             <ul class="list-unstyled">{{#each bindings}}
                                 <li><mp-label iri="{{aspect_ratio.value}}"></mp-label></li>
-                            {{/each}}</ul></div>'>
-                    </semantic-query>
-
-                    <!-- display mode -->
-                    <semantic-query 
-                        query="SELECT ?display_mode WHERE { ?? spao:displayMode ?display_mode . }"
-                        template='<div>
-                            <h5>[[i18n "field_display_mode" bundle="sapa-fields"]]</h5>
-                            <ul class="list-unstyled">{{#each bindings}}
-                                <li><mp-label iri="{{display_mode.value}}"></mp-label></li>
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
