@@ -248,6 +248,34 @@
 
         </semantic-table>
       </semantic-search-result>
+
+      <div class="pull-right" style="display: flex; margin-top: 12px;">
+        <semantic-search-result>
+          <mp-sparql-download id='csv-result' query='SELECT (?season_label AS ?season) (?plan_label AS ?plan) (?titlelabel AS ?title) (GROUP_CONCAT(DISTINCT ?directorlabel; SEPARATOR=", ") AS ?directors) (GROUP_CONCAT(DISTINCT ?venuelabel; SEPARATOR=", ") AS ?venues) WHERE {
+            ?season rdfs:label ?season_label .
+            ?plan rdfs:label ?plan_label .
+            FILTER(LANGMATCHES(LANG(?season_label), ?__userPreferredLanguage__))
+            OPTIONAL {
+              ?expressioncreation frbroo:R17_created ?plan ;
+                  crm:P9_consists_of ?activity .
+                ?activity crm:P2_has_type spav:mutnt ;
+                  crm:P14_carried_out_by ?stagedirection .
+                  ?stagedirection rdfs:label ?directorlabel .
+            }
+            OPTIONAL {
+              ?performance frbroo:R25_performed ?plan ;
+                crm:P8_took_place_on_or_within ?venue .
+              ?venue rdfs:label ?venuelabel .
+            }
+        } GROUP BY ?season_label ?plan_label ?titlelabel
+        ORDER BY ASC(?season)'
+            header="text/csv"
+            filename="productions.csv"
+            >
+            <button class="btn btn-secondary">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
+          </mp-sparql-download>
+        </semantic-search-result>
+      </div>
     </div>
   </semantic-search-result-holder>
 </div>
