@@ -475,6 +475,15 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
+                    <!-- playback speed -->
+                    <semantic-query 
+                        query="SELECT ?playback_speed WHERE { ?? ebucore:playbackSpeed ?playback_speed . }"
+                        template='<div>
+                            <h5>[[i18n "field_playback_speed" bundle="sapa-fields"]]</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li>{{playback_speed.value}}</li>
+                            {{/each}}</ul></div>'>
+
                     <!-- sampling rate -->
                     <semantic-query 
                         query="SELECT ?sampling_rate WHERE { ?? ebucore:samplingRate ?sampling_rate . }"
