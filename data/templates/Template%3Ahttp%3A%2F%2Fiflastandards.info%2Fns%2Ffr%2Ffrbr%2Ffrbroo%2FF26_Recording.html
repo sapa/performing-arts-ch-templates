@@ -297,8 +297,8 @@
           OPTIONAL {
             ?record rico:identifier ?identifier .
           }
-        } ORDER BY ?priority'
-        template='<div><h5>Record (Set)</h5>
+        } ORDER BY ?priority LIMIT 1'
+        template='<div><h5>Record Resource</h5>
             <ul class="list-unstyled">{{#each bindings}}
                 <li>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link iri="{{record.value}}"></semantic-link></li>
             {{/each}}</ul></div>'>
