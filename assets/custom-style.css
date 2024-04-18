@@ -249,11 +249,21 @@ div.SemanticTreeInput--inputAndButtons {
 .footer__links-col {
   font-size: 0.7em;
 }
+.page__body-navtabs a {
+  border-radius: 4px 4px 0px 0px !important;
+}
 .page__body-navtabs a[data-rb-event-key="ontodia"][aria-selected="false"],
 .page__body-navtabs a[data-rb-event-key="statements"][aria-selected="false"],
 .page__body-navtabs a[data-rb-event-key*="editing"][aria-selected="false"],
 .page__body-navtabs a[data-rb-event-key="delete"][aria-selected="false"] {
   color: #999 !important;
+}
+.page__body-navtabs a[data-rb-event-key="about"][aria-selected="false"],
+.page__body-navtabs a[data-rb-event-key="productions"][aria-selected="false"],
+.page__body-navtabs a[data-rb-event-key="video"][aria-selected="false"] {
+  border: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
+  background-color: #efefef;
 }
 #sapa-parts-module {
   background-color: rgba(220, 216, 230, 0.575);
