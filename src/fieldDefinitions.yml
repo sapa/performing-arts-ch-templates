@@ -1609,6 +1609,16 @@ fields:
       }'
       - ask: 'ASK { FILTER(REGEX($value, "^([\\\\+-]?\\\\d{4}(?!\\\\d{2}\\\\b))((-?)((0[1-9]|1[0-2])(\\\\3([12]\\\\d|0[1-9]|3[01]))?))?$")) }'
 
+  - id: MediaResourcePlaybackSpeed
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourcePlaybackSpeed
+    label: Playback speed
+    datatype: http://www.w3.org/2001/XMLSchema#string
+    maxOccurs: 1
+    domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
+    queries:
+      - select: 'SELECT ?value WHERE { $subject ebucore:playbackSpeed ?value . }'
+      - insert: 'INSERT { $subject ebucore:playbackSpeed $value} WHERE {}'
+      - delete: 'DELETE { $subject ebucore:playbackSpeed $value} WHERE {}'
 
   - id: MediaResourceSamplingRate
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceSamplingRate
