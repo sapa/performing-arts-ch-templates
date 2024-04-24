@@ -1,7 +1,7 @@
 <!-- instantiations -->
 <semantic-query 
     query="SELECT ?derived_instantiation  WHERE {
-        ?derived_instantiation rico:hasInstantiation ?? .
+        ?? rico:hasDerivedInstantiation ?derived_instantiation .
     }"
     template='{{> instantiation-properties }}'>
     <template id='instantiation-properties'>
