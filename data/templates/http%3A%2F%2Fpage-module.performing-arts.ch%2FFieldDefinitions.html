@@ -847,18 +847,11 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
 
             "label": "[[i18n "field_aspect_ratio" bundle="sapa-fields"]]",
             "maxOccurs" : "1",
-            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#string",
             "domain" : "https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource",
-            "range" : "http://www.w3.org/2004/02/skos/core#Concept",
-            "treePatterns": {
-                "type": "simple",
-                "schemePattern": "?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:ar ",
-                "relationPattern": "?item skos:broader ?parent"
-            },
                 "selectPattern" : "SELECT $value WHERE { $subject ebucore:aspectRatio $value . }",
                 "insertPattern" : "INSERT { $subject ebucore:aspectRatio $value . } WHERE { }",
                 "deletePattern" : "DELETE { $subject ebucore:aspectRatio $value . } WHERE {}",
-                "valueSetPattern" : "SELECT $value WHERE { $value skos:inScheme spav:ar . }",
         "iri" : "MediaResourceAspectRatio"
     }
 [[/inline]]
