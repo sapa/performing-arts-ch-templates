@@ -1424,20 +1424,13 @@ fields:
   - id: MediaResourceAspectRatio
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceAspectRatio
     label: Aspect ratio
-    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
     domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
-    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject ebucore:aspectRatio $value . }'
       - insert: 'INSERT { $subject ebucore:aspectRatio $value . } WHERE { }'
       - delete: 'DELETE { $subject ebucore:aspectRatio $value . } WHERE {}'
-      - valueSet: 'SELECT $value WHERE { $value skos:inScheme spav:ar . }'
-    treePatterns:
-      type: simple
-      schemePattern: '?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:ar '
-      relationPattern: '?item skos:broader ?parent'
-
 
   - id: MediaResourceChannels
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceChannels
