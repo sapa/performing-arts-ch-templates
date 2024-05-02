@@ -2275,6 +2275,22 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
         "iri" : "RecordResourceParent"
     }
 [[/inline]]
+ [[#*inline "RecordResourcePDF"]]
+    {
+        "id" : "RecordResourcePDF",
+
+            "label": "[[i18n "field_pdf" bundle="sapa-fields"]]",
+            "description" : "e.g. https://cloud.sapa.swiss/s/Bpoo56qtRyjtWdA",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "domain" : "https://www.ica.org/standards/RiC/ontology#RecordResource",
+            "range" : "rdfs:Class",
+                "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:pdf . }",
+                "insertPattern" : "INSERT { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:pdf . } WHERE { }",
+                "deletePattern" : "DELETE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:pdf . } WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:pdf . }",
+                "askPattern" : "ASK { FILTER(REGEX(STR($value), \"https://cloud\\.sapa\\.swiss/s/[A-Za-z0-9]+\")) }",
+        "iri" : "RecordResourcePDF"
+    }
+[[/inline]]
  [[#*inline "RecordResourcePhotoType"]]
     {
         "id" : "RecordResourcePhotoType",
