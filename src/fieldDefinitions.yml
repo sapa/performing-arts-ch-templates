@@ -3561,6 +3561,34 @@ fields:
       } ORDER BY ASC (?label)'
 
 
+  - id: RecordResourcePDF
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePDF
+    label: PDF
+    description: e.g. https://cloud.sapa.swiss/s/Bpoo56qtRyjtWdA
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: rdfs:Class
+    queries:
+      - select: 'SELECT $value WHERE {
+          $subject rico:hasInstantiation $value .
+          $value rico:hasCarrierType spav:pdf .
+      }'
+      - insert: 'INSERT {
+            $subject rico:hasInstantiation $value .
+            $value rico:hasCarrierType spav:pdf .
+          } WHERE {
+        }'
+      - delete: 'DELETE {
+          $subject rico:hasInstantiation $value .
+          $value rico:hasCarrierType spav:pdf .
+        } WHERE {
+          $subject rico:hasInstantiation $value .
+          $value rico:hasCarrierType spav:pdf .
+        }'
+      - ask: 'ASK {
+          FILTER(REGEX(STR($value), "https://cloud\\.sapa\\.swiss/s/[A-Za-z0-9]+"))
+        }'
+
   - id: RecordResourcePhotoType
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePhotoType
     label: Type of print
