@@ -1,0 +1,27 @@
+<ol class="page-breadcrumb">
+  <li>
+    <mp-link title="Home" url="/">Home</mp-link>
+  </li>
+</ol>
+
+<div class="page">
+  <div class='page__body'>
+    <h2>Docuteam Bridge</h2>
+    
+    Subject: http://data.performing-arts.ch/o/45408448-f608-45b8-9d6a-ca67197b2dd3
+
+    <semantic-table
+      query="SELECT * WHERE {
+        BIND(<http://data.performing-arts.ch/o/45408448-f608-45b8-9d6a-ca67197b2dd3> as ?subject)
+        BIND(<http://data.performing-arts.ch/p/f2c238c5-ac04-4ad5-8115-fe155201cc33> as ?cosmos)
+        BIND(<http://vocab.performing-arts.ch/aspcd> as ?aspcd)
+        ?subject rico:hasOrHadLocation ?cosmos ;
+          spao:hasArchivalStatus ?aspcd .
+        ?subject rico:hasOrHadIdentifier ?cosmosIdentifier .
+        ?cosmosIdentifier crm:P2_has_type spav:idpid ;
+          rdf:value ?cosmosPID
+      }""
+    ></semantic-table>
+
+  </div>
+</div>
