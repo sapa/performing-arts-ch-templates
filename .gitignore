@@ -1,4 +1,5 @@
 data/templates/*metaphacts*.html
+data/templates/*secret.performing-arts.ch*.html
 data/repositories/
 config/repositories/
 /updatecontainer.sh
