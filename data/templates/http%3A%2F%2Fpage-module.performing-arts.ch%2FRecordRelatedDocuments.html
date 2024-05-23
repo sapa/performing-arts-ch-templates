@@ -1,0 +1,23 @@
+<!-- related documents -->
+<semantic-query 
+    query='SELECT ?value  WHERE {
+        ?? rico:hasInstantiation ?OnlineFile .
+        ?OnlineFile a rico:Instantiation ; 
+            rico:hasCarrierType spav:fvonl ; 
+            rico:hasRepresentationType spav:rttx ; 
+            rico:descriptiveNote ?value .
+     }'
+    template='{{> template}}'>
+    <template id="template">
+        <div>
+            <h5>[[i18n "field_related_documents" bundle="sapa-fields"]]</h5>
+            <ul class="list-unstyled">
+                {{#each bindings}}
+                    <li>
+                        <a href="{{value.value}}" target="_blank">{{value.value}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+    </div>
+    </template>
+</semantic-query>
