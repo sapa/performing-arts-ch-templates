@@ -802,7 +802,7 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
                 "selectPattern" : "SELECT ?value WHERE { $value rico:hasInstantiation $subject . }",
                 "insertPattern" : "INSERT { $value rico:hasInstantiation $subject . } WHERE { }",
                 "deletePattern" : "DELETE { $value rico:hasInstantiation $subject . } WHERE { }",
-                "autosuggestionPattern" : "SELECT DISTINCT $value (MIN($label) as $label) WHERE { VALUES (?type ?type_label) { (rico:Record \" (Record)\") (rico:RecordPart \" (Record Part)\") } { $value rico:name ?name . ?name bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } UNION { BIND(URI(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?value) ?value rico:name ?name . } OPTIONAL { $value rico:identifier ?identifier . } BIND(CONCAT(IF(BOUND(?identifier), CONCAT(?identifier, \": \"), \"\"), ?name, ?type_label) AS ?label) } GROUP BY ?value",
+                "autosuggestionPattern" : "SELECT DISTINCT $value (MIN($label) as $label) WHERE { VALUES (?type ?type_label) { (rico:Record \" (Record)\") (rico:RecordPart \" (Record Part)\") } { $value rico:name ?name . ?name bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } UNION { BIND(URI(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?value) ?value rico:name ?name . } UNION { BIND(xsd:string(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?searchToken) $value rico:identifier ?searchToken ; rico:name ?name . } UNION { BIND(xsd:string(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?searchToken) ?itemIdentifier rdf:value ?searchToken . ?value rico:hasOrHadIdentifier ?itemIdentifier ; rico:name ?name . } OPTIONAL { $value rico:identifier ?identifier . } BIND(CONCAT(IF(BOUND(?identifier), CONCAT(?identifier, \": \"), \"\"), ?name, ?type_label) AS ?label) } GROUP BY ?value",
         "iri" : "InstantiationRecord"
     }
 [[/inline]]
@@ -2276,8 +2276,22 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
                 "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation ?pdfFile . ?pdfFile a rico:Instantiation ; rico:hasCarrierType spav:fvonl ; rico:hasRepresentationType spav:rttx ; rico:descriptiveNote $value . }",
                 "insertPattern" : "INSERT { $subject rico:hasInstantiation ?pdfFile . ?pdfFile a rico:Instantiation ; rico:hasCarrierType spav:fvonl ; rico:hasRepresentationType spav:rttx ; rico:descriptiveNote $value . } WHERE { BIND(URI(CONCAT(STR($subject), \"/pdf/\", MD5(STR($value)))) as ?pdfFile) }",
-                "askPattern" : "ASK { FILTER(REGEX(STR($value), \"https://cloud.sapa.swiss/s/\\\\w*\")) }",
+                "askPattern" : "ASK { FILTER(REGEX(STR($value), \"https://cloud.sapa.swiss/s/[A-Za-z0-9]+\")) }",
         "iri" : "RecordResourcePDFCloud"
+ [[#*inline "RecordResourcePDF"]]
+    {
+        "id" : "RecordResourcePDF",
+
+            "label": "[[i18n "field_pdf" bundle="sapa-fields"]]",
+            "description" : "e.g. https://cloud.sapa.swiss/s/Bpoo56qtRyjtWdA",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "domain" : "https://www.ica.org/standards/RiC/ontology#RecordResource",
+            "range" : "rdfs:Class",
+                "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:pdf . }",
+                "insertPattern" : "INSERT { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:pdf . } WHERE { }",
+                "deletePattern" : "DELETE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:pdf . } WHERE { $subject rico:hasInstantiation $value . $value rico:hasCarrierType spav:pdf . }",
+                "askPattern" : "ASK { FILTER(REGEX(STR($value), \"https://cloud\\.sapa\\.swiss/s/[A-Za-z0-9]+\")) }",
+        "iri" : "RecordResourcePDF"
     }
 [[/inline]]
  [[#*inline "RecordResourcePhotoType"]]
