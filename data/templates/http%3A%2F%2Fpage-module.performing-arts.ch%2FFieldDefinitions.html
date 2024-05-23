@@ -2268,6 +2268,16 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
         "iri" : "RecordResourceParent"
     }
 [[/inline]]
+ [[#*inline "RecordResourcePDFCloud"]]
+    {
+        "id" : "RecordResourcePDFCloud",
+
+            "label": "[[i18n "field_sapa_cloud" bundle="sapa-fields"]]",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+                "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation ?pdfFile . ?pdfFile a rico:Instantiation ; rico:hasCarrierType spav:fvonl ; rico:hasRepresentationType spav:rttx ; rico:descriptiveNote $value . }",
+                "insertPattern" : "INSERT { $subject rico:hasInstantiation ?pdfFile . ?pdfFile a rico:Instantiation ; rico:hasCarrierType spav:fvonl ; rico:hasRepresentationType spav:rttx ; rico:descriptiveNote $value . } WHERE { BIND(URI(CONCAT(STR($subject), \"/pdf/\", MD5(STR($value)))) as ?pdfFile) }",
+                "askPattern" : "ASK { FILTER(REGEX(STR($value), \"https://cloud.sapa.swiss/s/[A-Za-z0-9]+\")) }",
+        "iri" : "RecordResourcePDFCloud"
  [[#*inline "RecordResourcePDF"]]
     {
         "id" : "RecordResourcePDF",

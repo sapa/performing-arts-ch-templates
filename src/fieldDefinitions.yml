@@ -3569,6 +3569,29 @@ fields:
         BIND(BOUND(?child) AS ?hasChildren)
       } ORDER BY ASC (?label)'
 
+  - id: RecordResourcePDFCloud
+    label: SAPA Cloud
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    queries:
+      - select: 'SELECT $value WHERE {
+          $subject rico:hasInstantiation ?pdfFile .
+          ?pdfFile a rico:Instantiation ; 
+            rico:hasCarrierType spav:fvonl ; 
+            rico:hasRepresentationType spav:rttx ; 
+            rico:descriptiveNote $value .
+        }'
+      - insert: 'INSERT {
+          $subject rico:hasInstantiation ?pdfFile .
+          ?pdfFile a rico:Instantiation ; 
+            rico:hasCarrierType spav:fvonl ; 
+            rico:hasRepresentationType spav:rttx ; 
+            rico:descriptiveNote $value .
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/pdf/", MD5(STR($value)))) as ?pdfFile)
+        }'
+      - ask: 'ASK {
+         FILTER(REGEX(STR($value), "https://cloud.sapa.swiss/s/\\\\w*"))
+      }'
 
   - id: RecordResourcePDF
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePDF
