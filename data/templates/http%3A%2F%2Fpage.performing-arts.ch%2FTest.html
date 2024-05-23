@@ -1,0 +1,17 @@
+[[#eq (i18n "langcode" bundle="templates") "de"]]
+    [[> show-language-template template="sapaText:about-de"]]
+[[/eq]]
+[[#eq (i18n "langcode" bundle="templates") "en"]]
+    [[> show-language-template template="sapaText:about-en"]]
+[[/eq]]
+[[#eq (i18n "langcode" bundle="templates") "fr"]]
+    [[> show-language-template template="sapaText:about-fr"]]
+[[/eq]]
+[[#eq (i18n "langcode" bundle="templates") "it"]]
+    [[> show-language-template template="sapaText:about-it"]]
+[[/eq]]
+
+[[#*inline "show-language-template"]]
+    [[> (template)]]
+    <a href="?action=edit&uri=[[resolvePrefix template]]">Edit</a>
+[[/inline]]
