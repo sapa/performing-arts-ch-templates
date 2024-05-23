@@ -3590,7 +3590,7 @@ fields:
           BIND(URI(CONCAT(STR($subject), "/pdf/", MD5(STR($value)))) as ?pdfFile)
         }'
       - ask: 'ASK {
-         FILTER(REGEX(STR($value), "https://cloud.sapa.swiss/s/\\\\w*"))
+         FILTER(REGEX(STR($value), "https://cloud.sapa.swiss/s/[A-Za-z0-9]+"))
       }'
 
   - id: RecordResourcePDF
