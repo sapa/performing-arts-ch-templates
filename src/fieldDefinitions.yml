@@ -1367,7 +1367,7 @@ fields:
               rico:name ?name .
           } UNION {
             BIND(xsd:string(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?searchToken)
-            ?itemIdentifier rdfs:label ?searchToken .
+            ?itemIdentifier rdf:value ?searchToken .
             ?value rico:hasOrHadIdentifier ?itemIdentifier ;
               rico:name ?name .
           }
