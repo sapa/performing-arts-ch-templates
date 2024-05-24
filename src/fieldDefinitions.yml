@@ -3569,6 +3569,20 @@ fields:
         BIND(BOUND(?child) AS ?hasChildren)
       } ORDER BY ASC (?label)'
 
+
+  - id: RecordResourcePDFCloudDescription
+    label: Description
+    datatype: http://www.w3.org/2001/XMLSchema#string
+    minOccurs: 0
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT $value WHERE {
+          $subject rico:descriptiveNote ?value .
+        }'
+      - insert: 'INSERT {
+          $subject rico:descriptiveNote ?value .
+        } WHERE {}'
+
   - id: RecordResourcePDFCloudResource
     label: SAPA Cloud
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
@@ -3579,10 +3593,19 @@ fields:
             rico:hasCarrierType spav:fvonl ; 
             rico:hasRepresentationType spav:rttx .
         }'
+      - insert: 'INSERT {
+          $subject rico:hasInstantiation ?value .
+          ?value a rico:Instantiation ; 
+            rico:hasCarrierType spav:fvonl ; 
+            rico:hasRepresentationType spav:rttx .
+        } WHERE {
+        }'
 
   - id: RecordResourcePDFCloudURL
     label: URL
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    minOccurs: 1
+    maxOccurs: 1
     queries:
       - select: 'SELECT $value WHERE {
           $subject rico:hasInstantiation ?value .

@@ -2268,6 +2268,18 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
         "iri" : "RecordResourceParent"
     }
 [[/inline]]
+ [[#*inline "RecordResourcePDFCloudDescription"]]
+    {
+        "id" : "RecordResourcePDFCloudDescription",
+
+            "label": "[[i18n "field_description" bundle="sapa-fields"]]",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#string",
+                "selectPattern" : "SELECT $value WHERE { $subject rico:descriptiveNote ?value . }",
+                "insertPattern" : "INSERT { $subject rico:descriptiveNote ?value . } WHERE {}",
+        "iri" : "RecordResourcePDFCloudDescription"
+    }
+[[/inline]]
  [[#*inline "RecordResourcePDFCloudResource"]]
     {
         "id" : "RecordResourcePDFCloudResource",
@@ -2275,6 +2287,7 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
             "label": "[[i18n "field_sapa_cloud" bundle="sapa-fields"]]",
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
                 "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation ?value . ?value a rico:Instantiation ; rico:hasCarrierType spav:fvonl ; rico:hasRepresentationType spav:rttx . }",
+                "insertPattern" : "INSERT { $subject rico:hasInstantiation ?value . ?value a rico:Instantiation ; rico:hasCarrierType spav:fvonl ; rico:hasRepresentationType spav:rttx . } WHERE { }",
         "iri" : "RecordResourcePDFCloudResource"
     }
 [[/inline]]
@@ -2283,6 +2296,8 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
         "id" : "RecordResourcePDFCloudURL",
 
             "label": "[[i18n "field_url" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "maxOccurs" : "1",
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
                 "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation ?value . ?value a rico:Instantiation ; rico:hasCarrierType spav:fvonl ; rico:hasRepresentationType spav:rttx . }",
                 "insertPattern" : "INSERT { $subject rico:hasInstantiation ?value . ?value a rico:Instantiation ; rico:hasCarrierType spav:fvonl ; rico:hasRepresentationType spav:rttx . } WHERE { }",

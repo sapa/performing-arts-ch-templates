@@ -394,12 +394,28 @@
           <bs-col sm='6'>
             <semantic-form-composite-input 
               for="RecordResourcePDFCloudResource"
-              new-subject-template="."
+              new-subject-template="{{RecordResourcePDFCloudURL}}"
+              new-subject-template-settings='{
+                "placeholders": {
+                  "RecordResourcePDFCloudURL": {
+                    "transform": "none"
+                  }
+                }
+              }'
               fields='[
-                [[> RecordResourcePDFCloudURL]]
+                [[> RecordResourcePDFCloudDescription]],
+                {
+                  "id" : "RecordResourcePDFCloudURL",
+                  "label": "[[i18n "field_url" bundle="sapa-fields"]]",
+                  "minOccurs" : "1",
+                  "maxOccurs" : "1",
+                  "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+                  "askPattern" : "ASK { FILTER(REGEX(STR($value), \"https://cloud.sapa.swiss/s/[A-Za-z0-9]+\")) }"
+              }
               ]'
             >
               <semantic-form-text-input for="RecordResourcePDFCloudURL"></semantic-form-text-input>
+              <semantic-form-text-input for="RecordResourcePDFCloudDescription"></semantic-form-text-input>
 
             </semantic-form-composite-input>
           </bs-col>
