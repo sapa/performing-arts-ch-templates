@@ -392,6 +392,11 @@
             <semantic-form-text-input for="RecordResourceIIIFManifest"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='6'>
+            <style>
+              .semantic-form-subject-input__suggest-label {
+                display: none;
+              }
+            </style>
             <semantic-form-composite-input 
               for="RecordResourcePDFCloudResource"
               new-subject-template="{{RecordResourcePDFCloudURL}}"
@@ -402,6 +407,8 @@
                   }
                 }
               }'
+              default-edit-subject="true"
+              default-suggest-subject="false"
               fields='[
                 [[> RecordResourcePDFCloudDescription]],
                 {
@@ -414,7 +421,7 @@
               }
               ]'
             >
-              <semantic-form-text-input for="RecordResourcePDFCloudURL"></semantic-form-text-input>
+              <semantic-form-subject-input></semantic-form-subject-input>
               <semantic-form-text-input for="RecordResourcePDFCloudDescription"></semantic-form-text-input>
 
             </semantic-form-composite-input>
