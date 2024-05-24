@@ -3569,29 +3569,37 @@ fields:
         BIND(BOUND(?child) AS ?hasChildren)
       } ORDER BY ASC (?label)'
 
-  - id: RecordResourcePDFCloud
+
+  - id: RecordResourcePDFCloudDescription
+    label: Description
+    datatype: http://www.w3.org/2001/XMLSchema#string
+    minOccurs: 0
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT $value WHERE {
+          $subject rico:descriptiveNote ?value .
+        }'
+      - insert: 'INSERT {
+          $subject rico:descriptiveNote ?value .
+        } WHERE {}'
+
+  - id: RecordResourcePDFCloudResource
     label: SAPA Cloud
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     queries:
       - select: 'SELECT $value WHERE {
-          $subject rico:hasInstantiation ?pdfFile .
-          ?pdfFile a rico:Instantiation ; 
+          $subject rico:hasInstantiation ?value .
+          ?value a rico:Instantiation ; 
             rico:hasCarrierType spav:fvonl ; 
-            rico:hasRepresentationType spav:rttx ; 
-            rico:descriptiveNote $value .
+            rico:hasRepresentationType spav:rttx .
         }'
       - insert: 'INSERT {
-          $subject rico:hasInstantiation ?pdfFile .
-          ?pdfFile a rico:Instantiation ; 
+          $subject rico:hasInstantiation ?value .
+          ?value a rico:Instantiation ; 
             rico:hasCarrierType spav:fvonl ; 
-            rico:hasRepresentationType spav:rttx ; 
-            rico:descriptiveNote $value .
+            rico:hasRepresentationType spav:rttx .
         } WHERE {
-          BIND(URI(CONCAT(STR($subject), "/pdf/", MD5(STR($value)))) as ?pdfFile)
         }'
-      - ask: 'ASK {
-         FILTER(REGEX(STR($value), "https://cloud.sapa.swiss/s/[A-Za-z0-9]+"))
-      }'
 
   - id: RecordResourcePDF
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePDF
