@@ -1,11 +1,13 @@
 <!-- related documents -->
 <semantic-query 
-    query='SELECT ?value  WHERE {
-        ?? rico:hasInstantiation ?OnlineFile .
-        ?OnlineFile a rico:Instantiation ; 
+    query='SELECT ?value ?description WHERE {
+        ?? rico:hasInstantiation ?value .
+        ?value a rico:Instantiation ; 
             rico:hasCarrierType spav:fvonl ; 
-            rico:hasRepresentationType spav:rttx ; 
-            rico:descriptiveNote ?value .
+            rico:hasRepresentationType spav:rttx .
+        OPTIONAL {
+            ?value rico:descriptiveNote ?description .
+        }
      }'
     template='{{> template}}'>
     <template id="template">
@@ -14,7 +16,7 @@
             <ul class="list-unstyled">
                 {{#each bindings}}
                     <li>
-                        <a href="{{value.value}}" target="_blank">{{value.value}}</a>
+                        <a href="{{value.value}}" target="_blank">{{#if description.value}}{{description.value}}{{else}}{{value.value}}{{/if}}</a>
                     </li>
                 {{/each}}
             </ul>

@@ -63,7 +63,7 @@
         [[> RecordResourceResponsible]],
         [[> RecordResourceIIIF]],
         [[> RecordResourceIIIFManifest]],
-        [[> RecordResourcePDFCloud]],
+        [[> RecordResourcePDFCloudResource]],
         [[> RecordResourceVimeo]],
         [[> RDFSComment]]
       ]'>
@@ -392,7 +392,16 @@
             <semantic-form-text-input for="RecordResourceIIIFManifest"></semantic-form-text-input>
           </bs-col>
           <bs-col sm='6'>
-            <semantic-form-text-input for="RecordResourcePDFCloud"></semantic-form-text-input>
+            <semantic-form-composite-input 
+              for="RecordResourcePDFCloudResource"
+              new-subject-template="."
+              fields='[
+                [[> RecordResourcePDFCloudURL]]
+              ]'
+            >
+              <semantic-form-text-input for="RecordResourcePDFCloudURL"></semantic-form-text-input>
+
+            </semantic-form-composite-input>
           </bs-col>
         </bs-row>
         <hr>
