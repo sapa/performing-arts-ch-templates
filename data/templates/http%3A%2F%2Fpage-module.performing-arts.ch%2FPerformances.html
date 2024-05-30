@@ -10,6 +10,52 @@
       {{#each bindings}}
         <h6><semantic-link iri="{{performance.value}}"></semantic-link></h6>
 
+        <!-- venue -->
+        <semantic-query 
+          query='SELECT ?type ?venue ?unidentified
+          WHERE {
+              VALUES (?type) {
+                  (spav:dwmkn) # venue
+              }
+              BIND(<{{performance.value}}> AS ?performance)
+              ?performance crm:P8_took_place_on_or_within ?venue .
+              BIND(IF(CONTAINS(STR($venue), "/u/"), "true", "") AS ?unidentified)
+          }'
+          template="{{> template-venue}}"
+        >
+          <template id="template-venue">
+            <h5><mp-label iri="[[resolvePrefix "spav:dwmkn"]]"></mp-label></h5>
+            <ul class="list-unstyled">
+            {{#each bindings}}
+              <li>
+                {{#if unidentified.value}}<mp-label iri="{{venue.value}}"></mp-label>{{else}}<semantic-link iri="{{venue.value}}"></semantic-link>{{/if}}
+              </li>
+            {{/each}}
+            </ul>
+          </template>>
+        </semantic-query>
+
+        <!-- dates -->
+        <semantic-query
+          query="SELECT ?date WHERE {
+            BIND(<{{performance.value}}> AS ?performance)
+            ?performance crm:P9_consists_of ?subPerformance .
+            ?subPerformance crm:P4_has_time-span/rdfs:label ?date.
+          }"
+          template="{{> template-dates}}"
+          >
+            <template id="template-dates">
+              <h5>Dates</h5>
+              <ul class="list-unstyled">
+              {{#each bindings}}
+                <li>
+                  {{dateTimeFormat date.value "DD.MM.YYYY"}}
+                </li>
+              {{/each}}
+              </ul>
+            </template>
+          </semantic-query>
+
         <!-- creation functions - direction -->
         {{> sapaModule:ShowActivities function="spav:mucbq" resource=performance.value}}
 
@@ -120,43 +166,6 @@
 
         <!-- performance functions - contribution -->
         {{> sapaModule:ShowActivities function="spav:munuj" resource=performance.value}}
-
-        <!-- venue -->
-        <semantic-query 
-          query='SELECT ?type ?venue ?unidentified
-          WHERE {
-              VALUES (?type) {
-                  (spav:dwmkn) # venue
-              }
-              BIND(<{{performance.value}}> AS ?performance)
-              ?performance crm:P8_took_place_on_or_within ?venue .
-              BIND(IF(CONTAINS(STR($venue), "/u/"), "true", "") AS ?unidentified)
-          }'
-          template='<div class="text-item">{{#each bindings}}
-            {{#if @first}}<h5><mp-label iri="{{type.value}}"></mp-label></h5>{{else}}, {{/if}}
-            {{#if unidentified.value}}<mp-label iri="{{venue.value}}"></mp-label>{{else}}<semantic-link iri="{{venue.value}}"></semantic-link>{{/if}}
-            {{/each}}</div>'>
-        </semantic-query>
-
-        <!-- dates -->
-        <semantic-query
-          query="SELECT ?date WHERE {
-            BIND(<{{performance.value}}> AS ?performance)
-            ?performance crm:P9_consists_of ?subPerformance .
-            ?subPerformance crm:P4_has_time-span/rdfs:label ?date.
-          }"
-          template="{{> template-dates}}"
-          >
-          <template id="template-dates">
-            <h5>Dates</h5>
-            <ul class="list-unstyled">
-            {{#each bindings}}
-              <li>
-                {{dateTimeFormat date.value "DD.MM.YYYY"}}
-              </li>
-            {{/each}}
-            </ul>
-          </semantic-query>
           <hr />
         {{/each}}
       </div>
