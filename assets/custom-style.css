@@ -270,6 +270,14 @@ div.SemanticTreeInput--inputAndButtons {
   padding-left: 2%;
   padding-right: 2%;
 }
+#sapa-parts-module > h5 {
+  padding-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+#sapa-parts-module h6 a {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
 nav.metaphacts-header-navbar.DEVELOPMENT,
 nav.metaphacts-header-navbar.dev\.performing-arts\.ch {
   background: #e6375c;
