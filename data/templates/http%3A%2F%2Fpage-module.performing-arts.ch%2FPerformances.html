@@ -1,0 +1,134 @@
+<semantic-query
+  query="SELECT ?performance WHERE {
+    ?performance frbroo:R25_performed ?? .
+  }" 
+  template='{{> template-performances }}'>
+>
+  <template id='template-performances'>
+    <div id='sapa-parts-module'>
+      <h5>Performances</h5>
+      {{#each bindings}}
+        <semantic-link iri="{{performance.value}}"></semantic-link>
+
+       <!-- creation functions - direction -->
+       {{> sapaModule:ShowActivities function="spav:mucbq" resource=performance.value}}
+
+       <!-- creation functions - stage direction -->
+      {{> sapaModule:ShowActivities function="spav:mutnt" resource=performance.value}}
+      
+      <!-- creation functions - assistant stage direction -->
+      {{> sapaModule:ShowActivities function="spav:mugkn" resource=performance.value}}
+      
+      <!-- creation functions - film direction -->
+      {{> sapaModule:ShowActivities function="spav:muctj" resource=performance.value}}
+      
+      <!-- creation functions - dramaturgy -->
+      {{> sapaModule:ShowActivities function="spav:musim" resource=performance.value}}
+      
+      <!-- creation functions - choreography -->
+      {{> sapaModule:ShowActivities function="spav:mubbv" resource=performance.value}}
+      
+      <!-- creation functions - conductor -->
+      {{> sapaModule:ShowActivities function="spav:muqfg" resource=performance.value}}
+      
+      <!-- creation functions - choral conductor -->
+      {{> sapaModule:ShowActivities function="spav:mufcc" resource=performance.value}}
+
+      <!-- creation functions - stage design -->
+      {{> sapaModule:ShowActivities function="spav:mulga" resource=performance.value}}
+
+      <!-- creation functions - light -->
+      {{> sapaModule:ShowActivities function="spav:murni" resource=performance.value}}
+
+      <!-- creation functions - costume design -->
+      {{> sapaModule:ShowActivities function="spav:muecs" resource=performance.value}}
+
+      <!-- creation functions - video -->
+      {{> sapaModule:ShowActivities function="spav:muqju" resource=performance.value}}
+
+      <!-- creation functions - camera -->
+      {{> sapaModule:ShowActivities function="spav:mujig" resource=performance.value}}
+
+        <!-- creation functions - projection -->
+      {{> sapaModule:ShowActivities function="spav:mufwk" resource=performance.value}}
+
+      <!-- creation functions - sound -->
+      {{> sapaModule:ShowActivities function="spav:muxzh" resource=performance.value}}
+
+      <!-- reference functions - authorship -->
+      {{> sapaModule:ShowActivities function="spav:muiuk" resource=performance.value}}
+
+      <!-- reference functions - libretto -->
+      {{> sapaModule:ShowActivities function="spav:mujmh" resource=performance.value}}
+
+      <!-- reference functions - lyrics -->
+      {{> sapaModule:ShowActivities function="spav:muvhj" resource=performance.value}}
+      
+      <!-- reference functions - adaption -->
+      {{> sapaModule:ShowActivities function="spav:mudcw" resource=performance.value}}
+      
+      <!-- reference functions - translation -->
+      {{> sapaModule:ShowActivities function="spav:muwyo" resource=performance.value}}
+      
+      <!-- reference functions - added text -->
+      {{> sapaModule:ShowActivities function="spav:mupvk" resource=performance.value}}
+      
+      <!-- reference functions - added lyrics -->
+      {{> sapaModule:ShowActivities function="spav:muzua" resource=performance.value}}
+      
+      <!-- reference functions - screenplay -->
+      {{> sapaModule:ShowActivities function="spav:mupot" resource=performance.value}}
+      
+      <!-- reference functions - composition -->
+      {{> sapaModule:ShowActivities function="spav:mufbo" resource=performance.value}}
+      
+      <!-- performance functions - acting -->
+      {{> sapaModule:ShowActivities function="spav:munib" resource=performance.value}}
+      
+      <!-- performance functions - dance -->
+      {{> sapaModule:ShowActivities function="spav:mulcp" resource=performance.value}}
+       
+      <!-- performance functions - performance -->
+      {{> sapaModule:ShowActivities function="spav:muawx" resource=performance.value}}
+     
+      <!-- performance functions - pantomine -->
+      {{> sapaModule:ShowActivities function="spav:mujhq" resource=performance.value}}
+
+      <!-- performance functions - puppet show -->
+      {{> sapaModule:ShowActivities function="spav:muhkf" resource=performance.value}}
+      
+      <!-- performance functions - music performance -->
+      {{> sapaModule:ShowActivities function="spav:muiim" resource=performance.value}}
+      
+      <!-- performance functions - singing -->
+      {{> sapaModule:ShowActivities function="spav:muygg" resource=performance.value}}
+
+       <!-- performance functions - intrumental performance -->
+      {{> sapaModule:ShowActivities function="spav:mupah" resource=performance.value}}
+        
+      <!-- performance functions - oeil extérieure -->
+      {{> sapaModule:ShowActivities function="spav:mudat" resource=performance.value}}
+
+      <!-- performance functions - narration -->
+      {{> sapaModule:ShowActivities function="spav:muacs" resource=performance.value}}
+
+      <!-- performance functions - host -->
+      {{> sapaModule:ShowActivities function="spav:mupfz" resource=performance.value}}
+
+      <!-- performance functions - moderation -->
+      {{> sapaModule:ShowActivities function="spav:mumnc" resource=performance.value}}
+      
+      <!-- performance functions - contribution -->
+      {{> sapaModule:ShowActivities function="spav:munuj" resource=performance.value}}
+
+        <semantic-query
+          query="SELECT ?subPerformance WHERE {
+            BIND(<{{performance.value}}> AS ?performance)
+            ?performance crm:P9_consists_of ?subPerformance .
+            ?subPerformance rdfs:label ?label .
+          }">
+        </semantic-query>
+        <hr />
+      {{/each}}
+    </div>
+</semantic-query>
