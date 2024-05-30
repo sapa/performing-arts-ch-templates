@@ -8,7 +8,7 @@
     <div id='sapa-parts-module'>
       <h5>Performances</h5>
       {{#each bindings}}
-        <semantic-link iri="{{performance.value}}"></semantic-link>
+        <h6><semantic-link iri="{{performance.value}}"></semantic-link></h6>
 
        <!-- creation functions - direction -->
        {{> sapaModule:ShowActivities function="spav:mucbq" resource=performance.value}}
@@ -122,11 +122,20 @@
       {{> sapaModule:ShowActivities function="spav:munuj" resource=performance.value}}
 
         <semantic-query
-          query="SELECT ?subPerformance WHERE {
+          query="SELECT ?date WHERE {
             BIND(<{{performance.value}}> AS ?performance)
             ?performance crm:P9_consists_of ?subPerformance .
-            ?subPerformance rdfs:label ?label .
-          }">
+            ?subPerformance crm:P4_has_time-span/rdfs:label ?date.
+          }"
+          template="{{> template-dates}}"
+          >
+          <template id="template-dates">
+            <h5>Dates</h5>
+            <ul class="list-unstyled">
+            {{#each bindings}}
+              <li>{{date.value}}</li>
+            {{/each}}
+            </ul>
         </semantic-query>
         <hr />
       {{/each}}
