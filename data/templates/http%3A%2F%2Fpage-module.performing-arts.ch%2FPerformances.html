@@ -121,6 +121,23 @@
         <!-- performance functions - contribution -->
         {{> sapaModule:ShowActivities function="spav:munuj" resource=performance.value}}
 
+        <!-- venue -->
+        <semantic-query 
+          query='SELECT ?type ?venue ?unidentified
+          WHERE {
+              VALUES (?type) {
+                  (spav:dwmkn) # venue
+              }
+              BIND(<{{performance.value}}> AS ?performance)
+              ?performance crm:P8_took_place_on_or_within ?venue .
+              BIND(IF(CONTAINS(STR($venue), "/u/"), "true", "") AS ?unidentified)
+          }'
+          template='<div class="text-item">{{#each bindings}}
+            {{#if @first}}<h5><mp-label iri="{{type.value}}"></mp-label></h5>{{else}}, {{/if}}
+            {{#if unidentified.value}}<mp-label iri="{{venue.value}}"></mp-label>{{else}}<semantic-link iri="{{venue.value}}"></semantic-link>{{/if}}
+            {{/each}}</div>'>
+        </semantic-query>
+
         <semantic-query
           query="SELECT ?date WHERE {
             BIND(<{{performance.value}}> AS ?performance)
