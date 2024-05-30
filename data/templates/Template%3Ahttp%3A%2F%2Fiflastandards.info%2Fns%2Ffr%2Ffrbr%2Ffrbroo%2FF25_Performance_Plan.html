@@ -98,23 +98,6 @@
               </div>'>
             </semantic-query>
 
-            <!-- venue -->
-            <semantic-query 
-              query='SELECT ?type ?venue ?unidentified
-              WHERE {
-                  VALUES (?type) {
-                      (spav:dwmkn) # venue
-                  }
-                  ?performance frbroo:R25_performed ?? ;
-                      crm:P8_took_place_on_or_within ?venue .
-                  BIND(IF(CONTAINS(STR($venue), "/u/"), "true", "") AS ?unidentified)
-              }'
-              template='<div class="text-item">{{#each bindings}}
-                {{#if @first}}<h5><mp-label iri="{{type.value}}"></mp-label></h5>{{else}}, {{/if}}
-                {{#if unidentified.value}}<mp-label iri="{{venue.value}}"></mp-label>{{else}}<semantic-link iri="{{venue.value}}"></semantic-link>{{/if}}
-                {{/each}}</div>'>
-            </semantic-query>
-
             <!-- description -->
             <semantic-query
               query='SELECT ?value WHERE {
