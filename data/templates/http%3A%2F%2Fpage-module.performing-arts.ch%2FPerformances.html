@@ -138,6 +138,7 @@
             {{/each}}</div>'>
         </semantic-query>
 
+        <!-- dates -->
         <semantic-query
           query="SELECT ?date WHERE {
             BIND(<{{performance.value}}> AS ?performance)
@@ -155,8 +156,9 @@
               </li>
             {{/each}}
             </ul>
-        </semantic-query>
-        <hr />
-      {{/each}}
-    </div>
+          </semantic-query>
+          <hr />
+        {{/each}}
+      </div>
+  </template>
 </semantic-query>
