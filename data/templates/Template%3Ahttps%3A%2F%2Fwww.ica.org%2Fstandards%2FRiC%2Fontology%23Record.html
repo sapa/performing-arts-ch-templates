@@ -434,8 +434,6 @@
 
         <bs-col sm="4">
 
-            [[> sapaModule:RecordRelatedDocuments]]
-
             [[> sapaModule:RecordResourceImages]]
 
             [[> sapaModule:RecordParts]]
@@ -506,6 +504,9 @@
                     <span>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link uri="{{node.value}}"></semantic-link>{{#if level}} (<mp-label iri="{{level.value}}""></mp-label>){{/if}}</span>
                 </template>
             </semantic-tree>
+
+            <!-- related documents -->
+            [[> sapaModule:RecordRelatedDocuments]]
 
             <!-- related material -->
             <semantic-query 
