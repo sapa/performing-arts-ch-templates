@@ -15,9 +15,6 @@
             ?expressioncreation frbroo:R17_created ?reference ;
                 crm:P9_consists_of ?activity .
         } UNION {
-            ?genericperformance frbroo:R25_performed ?subject ;
-            crm:P9_consists_of ?activity . 
-        } UNION {
             ?subject crm:P9_consists_of ?activity .
         }
         ?activity crm:P2_has_type ?function ;
