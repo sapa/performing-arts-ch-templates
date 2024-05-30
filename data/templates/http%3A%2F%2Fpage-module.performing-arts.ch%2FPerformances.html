@@ -133,7 +133,9 @@
             <h5>Dates</h5>
             <ul class="list-unstyled">
             {{#each bindings}}
-              <li>{{date.value}}</li>
+              <li>
+                {{dateTimeFormat date.value "DD.MM.YYYY"}}
+              </li>
             {{/each}}
             </ul>
         </semantic-query>
