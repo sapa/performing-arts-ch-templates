@@ -63,6 +63,7 @@
         [[> RecordResourceResponsible]],
         [[> RecordResourceIIIF]],
         [[> RecordResourceIIIFManifest]],
+        [[> RecordResourcePDFCloudResource]],
         [[> RecordResourceVimeo]],
         [[> RDFSComment]]
       ]'>
@@ -390,7 +391,41 @@
           <bs-col sm='6'>
             <semantic-form-text-input for="RecordResourceIIIFManifest"></semantic-form-text-input>
           </bs-col>
-          <bs-col sm='6'></bs-col>
+          <bs-col sm='6'>
+            <style>
+              .semantic-form-subject-input__suggest-label {
+                display: none;
+              }
+            </style>
+            <semantic-form-composite-input 
+              for="RecordResourcePDFCloudResource"
+              new-subject-template="{{RecordResourcePDFCloudURL}}"
+              new-subject-template-settings='{
+                "placeholders": {
+                  "RecordResourcePDFCloudURL": {
+                    "transform": "none"
+                  }
+                }
+              }'
+              default-edit-subject="true"
+              default-suggest-subject="false"
+              fields='[
+                [[> RecordResourcePDFCloudDescription]],
+                {
+                  "id" : "RecordResourcePDFCloudURL",
+                  "label": "[[i18n "field_url" bundle="sapa-fields"]]",
+                  "minOccurs" : "1",
+                  "maxOccurs" : "1",
+                  "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+                  "askPattern" : "ASK { FILTER(REGEX(STR($value), \"https://cloud.sapa.swiss/s/[A-Za-z0-9]+\")) }"
+              }
+              ]'
+            >
+              <semantic-form-subject-input></semantic-form-subject-input>
+              <semantic-form-text-input for="RecordResourcePDFCloudDescription"></semantic-form-text-input>
+
+            </semantic-form-composite-input>
+          </bs-col>
         </bs-row>
         <hr>
         <bs-row>
@@ -416,7 +451,8 @@
               [[> ThingLocation]],
               [[> ThingSeeAlso]],
               [[> RecordResourceVimeo]],
-              [[> RecordResourceIIIF]]
+              [[> RecordResourceIIIF]],
+              [[> RecordResourcePDFCloudResource]]
               ]'>
               <div style='display: none;'>
                 <semantic-form-hidden-input for="RDFtype" default-value='[[resolvePrefix "rico:RecordPart"]]'></semantic-form-hidden-input>
@@ -534,6 +570,36 @@
                 </bs-col>
                 <bs-col sm='6'>
                   <semantic-form-text-input for="RecordResourceVimeo"></semantic-form-text-input>
+                </bs-col>
+                <bs-col sm='6'>      
+                  <semantic-form-composite-input 
+                    for="RecordResourcePDFCloudResource"
+                    new-subject-template="{{RecordResourcePDFCloudURL}}"
+                    new-subject-template-settings='{
+                      "placeholders": {
+                        "RecordResourcePDFCloudURL": {
+                          "transform": "none"
+                        }
+                      }
+                    }'
+                    default-edit-subject="true"
+                    default-suggest-subject="false"
+                    fields='[
+                      [[> RecordResourcePDFCloudDescription]],
+                      {
+                        "id" : "RecordResourcePDFCloudURL",
+                        "label": "[[i18n "field_url" bundle="sapa-fields"]]",
+                        "minOccurs" : "1",
+                        "maxOccurs" : "1",
+                        "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+                        "askPattern" : "ASK { FILTER(REGEX(STR($value), \"https://cloud.sapa.swiss/s/[A-Za-z0-9]+\")) }"
+                    }
+                    ]'
+                  >
+                    <semantic-form-subject-input></semantic-form-subject-input>
+                    <semantic-form-text-input for="RecordResourcePDFCloudDescription"></semantic-form-text-input>
+
+                  </semantic-form-composite-input>
                 </bs-col>
               </bs-row>
               <hr />

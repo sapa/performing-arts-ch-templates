@@ -1,0 +1,25 @@
+<!-- related documents -->
+<semantic-query 
+    query='SELECT ?value ?description WHERE {
+        ?? rico:hasInstantiation ?value .
+        ?value a rico:Instantiation ; 
+            rico:hasCarrierType spav:fvonl ; 
+            rico:hasRepresentationType spav:rttx .
+        OPTIONAL {
+            ?value rico:descriptiveNote ?description .
+        }
+     }'
+    template='{{> template}}'>
+    <template id="template">
+        <div>
+            <h5>[[i18n "field_related_documents" bundle="sapa-fields"]]</h5>
+            <ul class="list-unstyled">
+                {{#each bindings}}
+                    <li>
+                        <a href="{{value.value}}" target="_blank">{{#if description.value}}{{description.value}}{{else}}{{value.value}}{{/if}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+    </div>
+    </template>
+</semantic-query>
