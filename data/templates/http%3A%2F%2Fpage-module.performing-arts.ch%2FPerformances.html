@@ -37,7 +37,7 @@
 
         <!-- dates -->
         <semantic-query
-          query="SELECT ?date WHERE {
+          query="SELECT ?date ?subPerformance WHERE {
             BIND(<{{performance.value}}> AS ?performance)
             ?performance crm:P9_consists_of ?subPerformance .
             ?subPerformance crm:P4_has_time-span/rdfs:label ?date.
@@ -49,7 +49,7 @@
               <ul class="list-unstyled">
               {{#each bindings}}
                 <li>
-                  {{dateTimeFormat date.value "DD.MM.YYYY"}}
+                  <semantic-link iri="{{subPerformance.value}}">{{dateTimeFormat date.value "DD.MM.YYYY"}}</semantic-link>
                 </li>
               {{/each}}
               </ul>
