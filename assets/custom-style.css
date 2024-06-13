@@ -35,6 +35,9 @@ div.form-section {
   font-weight: bold;
   font-size: 1.2em;
 }
+pdfjs-viewer-element {
+  height: 100%;
+}
 #sapa-parts-module {
   background-color: rgba(220, 216, 230, 0.575);
   padding-left: 2%;
