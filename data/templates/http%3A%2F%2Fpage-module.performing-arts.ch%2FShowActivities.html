@@ -1,21 +1,25 @@
+[[#*inline "chosen-function"]][[#if function]][[function]][[else]]{{function}}[[/if]][[/inline]]
+
 <semantic-query 
     query='SELECT ?function ?actor ?class ?index ?activitylabel ?activitycomment ?bool WHERE {
+        [[#if function]]
+            BIND(?? as ?subject)
+        [[else]]
+            BIND(<{{resource}}> AS ?subject)
+        [[/if]]
         {
-            ?expressioncreation frbroo:R17_created ?? ;
+            ?expressioncreation frbroo:R17_created ?subject ;
                 crm:P9_consists_of ?activity .
         } UNION {
-            ?? frbroo:R14_incorporates ?reference .
+            ?subject frbroo:R14_incorporates ?reference .
             ?expressioncreation frbroo:R17_created ?reference ;
                 crm:P9_consists_of ?activity .
         } UNION {
-            ?genericperformance frbroo:R25_performed ?? ;
-            crm:P9_consists_of ?activity . 
-        } UNION {
-            ?? crm:P9_consists_of ?activity .
+            ?subject crm:P9_consists_of ?activity .
         }
         ?activity crm:P2_has_type ?function ;
             crm:P14_carried_out_by ?actor .
-        FILTER(?function = [[function]])
+        FILTER(?function = [[> chosen-function]])
         OPTIONAL { ?activity olo:index ?index . }
         OPTIONAL { ?activity rdfs:label ?activitylabel . }
         OPTIONAL { ?activity rdfs:comment ?activitycomment . }
