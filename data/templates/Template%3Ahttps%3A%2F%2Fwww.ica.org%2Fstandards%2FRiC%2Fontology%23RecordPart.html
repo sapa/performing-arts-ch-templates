@@ -340,7 +340,7 @@
         </bs-col>
 
         <bs-col sm="4">
-
+            
             [[> sapaModule:RecordResourceImages]]
 
             <!-- INSTANTIATIONS -->
@@ -383,6 +383,9 @@
                 template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
                     {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
+
+            <!-- related documents -->
+            [[> sapaModule:RecordRelatedDocuments]]
 
             <!-- related material -->
             <semantic-query 

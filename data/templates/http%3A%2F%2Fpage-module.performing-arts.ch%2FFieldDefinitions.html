@@ -802,7 +802,7 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
                 "selectPattern" : "SELECT ?value WHERE { $value rico:hasInstantiation $subject . }",
                 "insertPattern" : "INSERT { $value rico:hasInstantiation $subject . } WHERE { }",
                 "deletePattern" : "DELETE { $value rico:hasInstantiation $subject . } WHERE { }",
-                "autosuggestionPattern" : "SELECT DISTINCT $value (MIN($label) as $label) WHERE { VALUES (?type ?type_label) { (rico:Record \" (Record)\") (rico:RecordPart \" (Record Part)\") } { $value rico:name ?name . ?name bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } UNION { BIND(URI(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?value) ?value rico:name ?name . } OPTIONAL { $value rico:identifier ?identifier . } BIND(CONCAT(IF(BOUND(?identifier), CONCAT(?identifier, \": \"), \"\"), ?name, ?type_label) AS ?label) } GROUP BY ?value",
+                "autosuggestionPattern" : "SELECT DISTINCT $value (MIN($label) as $label) WHERE { VALUES (?type ?type_label) { (rico:Record \" (Record)\") (rico:RecordPart \" (Record Part)\") } { $value rico:name ?name . ?name bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } UNION { BIND(URI(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?value) ?value rico:name ?name . } UNION { BIND(xsd:string(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?searchToken) $value rico:identifier ?searchToken ; rico:name ?name . } UNION { BIND(xsd:string(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?searchToken) ?itemIdentifier rdf:value ?identifierValue . ?value rico:hasOrHadIdentifier ?itemIdentifier ; rico:name ?name . FILTER(?identifierValue = ?searchToken) } OPTIONAL { $value rico:identifier ?identifier . } BIND(CONCAT(IF(BOUND(?identifier), CONCAT(?identifier, \": \"), \"\"), ?name, ?type_label) AS ?label) } GROUP BY ?value",
         "iri" : "InstantiationRecord"
     }
 [[/inline]]
@@ -847,18 +847,11 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
 
             "label": "[[i18n "field_aspect_ratio" bundle="sapa-fields"]]",
             "maxOccurs" : "1",
-            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#string",
             "domain" : "https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource",
-            "range" : "http://www.w3.org/2004/02/skos/core#Concept",
-            "treePatterns": {
-                "type": "simple",
-                "schemePattern": "?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:ar ",
-                "relationPattern": "?item skos:broader ?parent"
-            },
                 "selectPattern" : "SELECT $value WHERE { $subject ebucore:aspectRatio $value . }",
                 "insertPattern" : "INSERT { $subject ebucore:aspectRatio $value . } WHERE { }",
                 "deletePattern" : "DELETE { $subject ebucore:aspectRatio $value . } WHERE {}",
-                "valueSetPattern" : "SELECT $value WHERE { $value skos:inScheme spav:ar . }",
         "iri" : "MediaResourceAspectRatio"
     }
 [[/inline]]
@@ -2273,6 +2266,29 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
                 "deletePattern" : "DELETE { $subject rico:isOrWasIncludedIn $value} WHERE {}",
                 "autosuggestionPattern" : "PREFIX rico: <https://www.ica.org/standards/RiC/ontology#> PREFIX lookup: <http://www.metaphacts.com/ontologies/platform/repository/lookup#> PREFIX Repository: <http://www.metaphacts.com/ontologies/repository#> PREFIX spav: <http://vocab.performing-arts.ch/> PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT DISTINCT ?value ?label WHERE { ?value a rico:RecordSet ; rdfs:label ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } LIMIT 100",
         "iri" : "RecordResourceParent"
+    }
+[[/inline]]
+ [[#*inline "RecordResourcePDFCloudDescription"]]
+    {
+        "id" : "RecordResourcePDFCloudDescription",
+
+            "label": "[[i18n "field_description" bundle="sapa-fields"]]",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#string",
+                "selectPattern" : "SELECT $value WHERE { $subject rico:descriptiveNote ?value . }",
+                "insertPattern" : "INSERT { $subject rico:descriptiveNote ?value . } WHERE {}",
+        "iri" : "RecordResourcePDFCloudDescription"
+    }
+[[/inline]]
+ [[#*inline "RecordResourcePDFCloudResource"]]
+    {
+        "id" : "RecordResourcePDFCloudResource",
+
+            "label": "[[i18n "field_sapa_cloud" bundle="sapa-fields"]]",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+                "selectPattern" : "SELECT $value WHERE { $subject rico:hasInstantiation ?value . ?value a rico:Instantiation ; rico:hasCarrierType spav:fvonl ; rico:hasRepresentationType spav:rttx . }",
+                "insertPattern" : "INSERT { $subject rico:hasInstantiation ?value . ?value a rico:Instantiation ; rico:hasCarrierType spav:fvonl ; rico:hasRepresentationType spav:rttx . } WHERE { }",
+        "iri" : "RecordResourcePDFCloudResource"
     }
 [[/inline]]
  [[#*inline "RecordResourcePDF"]]

@@ -1361,6 +1361,16 @@ fields:
           } UNION {
             BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
             ?value rico:name ?name .
+          } UNION {
+            BIND(xsd:string(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?searchToken)
+            $value rico:identifier ?searchToken ;
+              rico:name ?name .
+          } UNION {
+            BIND(xsd:string(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?searchToken)
+            ?itemIdentifier rdf:value ?identifierValue .
+            ?value rico:hasOrHadIdentifier ?itemIdentifier ;
+              rico:name ?name .
+            FILTER(?identifierValue = ?searchToken)
           }
           OPTIONAL {
             $value rico:identifier ?identifier .
@@ -1424,20 +1434,13 @@ fields:
   - id: MediaResourceAspectRatio
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceAspectRatio
     label: Aspect ratio
-    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    datatype: http://www.w3.org/2001/XMLSchema#string
     maxOccurs: 1
     domain: https://www.ebu.ch/metadata/ontologies/ebucore#MediaResource
-    range: http://www.w3.org/2004/02/skos/core#Concept
     queries:
       - select: 'SELECT $value WHERE { $subject ebucore:aspectRatio $value . }'
       - insert: 'INSERT { $subject ebucore:aspectRatio $value . } WHERE { }'
       - delete: 'DELETE { $subject ebucore:aspectRatio $value . } WHERE {}'
-      - valueSet: 'SELECT $value WHERE { $value skos:inScheme spav:ar . }'
-    treePatterns:
-      type: simple
-      schemePattern: '?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:ar '
-      relationPattern: '?item skos:broader ?parent'
-
 
   - id: MediaResourceChannels
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceChannels
@@ -3567,6 +3570,37 @@ fields:
         BIND(BOUND(?child) AS ?hasChildren)
       } ORDER BY ASC (?label)'
 
+
+  - id: RecordResourcePDFCloudDescription
+    label: Description
+    datatype: http://www.w3.org/2001/XMLSchema#string
+    minOccurs: 0
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT $value WHERE {
+          $subject rico:descriptiveNote ?value .
+        }'
+      - insert: 'INSERT {
+          $subject rico:descriptiveNote ?value .
+        } WHERE {}'
+
+  - id: RecordResourcePDFCloudResource
+    label: SAPA Cloud
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    queries:
+      - select: 'SELECT $value WHERE {
+          $subject rico:hasInstantiation ?value .
+          ?value a rico:Instantiation ; 
+            rico:hasCarrierType spav:fvonl ; 
+            rico:hasRepresentationType spav:rttx .
+        }'
+      - insert: 'INSERT {
+          $subject rico:hasInstantiation ?value .
+          ?value a rico:Instantiation ; 
+            rico:hasCarrierType spav:fvonl ; 
+            rico:hasRepresentationType spav:rttx .
+        } WHERE {
+        }'
 
   - id: RecordResourcePDF
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourcePDF

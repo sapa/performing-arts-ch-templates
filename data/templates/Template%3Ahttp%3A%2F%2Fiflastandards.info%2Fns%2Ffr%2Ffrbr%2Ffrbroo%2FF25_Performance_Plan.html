@@ -98,23 +98,6 @@
               </div>'>
             </semantic-query>
 
-            <!-- venue -->
-            <semantic-query 
-              query='SELECT ?type ?venue ?unidentified
-              WHERE {
-                  VALUES (?type) {
-                      (spav:dwmkn) # venue
-                  }
-                  ?performance frbroo:R25_performed ?? ;
-                      crm:P8_took_place_on_or_within ?venue .
-                  BIND(IF(CONTAINS(STR($venue), "/u/"), "true", "") AS ?unidentified)
-              }'
-              template='<div class="text-item">{{#each bindings}}
-                {{#if @first}}<h5><mp-label iri="{{type.value}}"></mp-label></h5>{{else}}, {{/if}}
-                {{#if unidentified.value}}<mp-label iri="{{venue.value}}"></mp-label>{{else}}<semantic-link iri="{{venue.value}}"></semantic-link>{{/if}}
-                {{/each}}</div>'>
-            </semantic-query>
-
             <!-- description -->
             <semantic-query
               query='SELECT ?value WHERE {
@@ -189,95 +172,98 @@
             />
             </semantic-query>
 
+            <!-- creation functions - direction -->
+            [[> sapaModule:ShowActivities function="spav:mucbq"]]
+            
+            <!-- creation functions - stage direction -->
+            [[> sapaModule:ShowActivities function="spav:mutnt"]]
+            
+            <!-- creation functions - assistant stage direction -->
+            [[> sapaModule:ShowActivities function="spav:mugkn"]]
+            
+            <!-- creation functions - film direction -->
+            [[> sapaModule:ShowActivities function="spav:muctj"]]
+            
+            <!-- creation functions - dramaturgy -->
+            [[> sapaModule:ShowActivities function="spav:musim"]]
+            
+            <!-- creation functions - choreography -->
+            [[> sapaModule:ShowActivities function="spav:mubbv"]]
+            
+            <!-- creation functions - conductor -->
+            [[> sapaModule:ShowActivities function="spav:muqfg"]]
+            
+            <!-- creation functions - choral conductor -->
+            [[> sapaModule:ShowActivities function="spav:mufcc"]]
+  
+            <!-- creation functions - art direction -->
+            [[> sapaModule:ShowActivities function="spav:mulga"]]
+  
+            <!-- creation functions - scenographery -->
+            [[> sapaModule:ShowActivities function="spav:muqjb"]]
+  
+            <!-- creation functions - light -->
+            [[> sapaModule:ShowActivities function="spav:murni"]]
+  
+            <!-- creation functions - costume design -->
+            [[> sapaModule:ShowActivities function="spav:muecs"]]
+      
+            <!-- creation functions - video -->
+            [[> sapaModule:ShowActivities function="spav:muqju"]]
+  
+            <!-- creation functions - camera -->
+            [[> sapaModule:ShowActivities function="spav:mujig"]]
+  
+            <!-- creation functions - projection -->
+            [[> sapaModule:ShowActivities function="spav:mufwk"]]
+  
+            <!-- creation functions - sound -->
+            [[> sapaModule:ShowActivities function="spav:muxzh"]]
+            
+            <!-- performance functions - acting -->
+            [[> sapaModule:ShowActivities function="spav:munib"]]
+            
+            <!-- performance functions - dance -->
+            [[> sapaModule:ShowActivities function="spav:mulcp"]]
+             
+            <!-- performance functions - performance -->
+            [[> sapaModule:ShowActivities function="spav:muawx"]]
+           
+            <!-- performance functions - pantomine -->
+            [[> sapaModule:ShowActivities function="spav:mujhq"]]
+  
+            <!-- performance functions - puppet show -->
+            [[> sapaModule:ShowActivities function="spav:muhkf"]]
+            
+            <!-- performance functions - music performance -->
+            [[> sapaModule:ShowActivities function="spav:muiim"]]
+            
+            <!-- performance functions - singing -->
+            [[> sapaModule:ShowActivities function="spav:muygg"]]
+  
+             <!-- performance functions - intrumental performance -->
+            [[> sapaModule:ShowActivities function="spav:mupah"]]
+              
+            <!-- performance functions - oeil extérieure -->
+            [[> sapaModule:ShowActivities function="spav:mudat"]]
+  
+            <!-- performance functions - narration -->
+            [[> sapaModule:ShowActivities function="spav:muacs"]]
+  
+            <!-- performance functions - host -->
+            [[> sapaModule:ShowActivities function="spav:mupfz"]]
+  
+            <!-- performance functions - moderation -->
+            [[> sapaModule:ShowActivities function="spav:mumnc"]]
+            
+            <!-- performance functions - contribution -->
+            [[> sapaModule:ShowActivities function="spav:munuj"]]
+
         </bs-col>
         <bs-col sm="4">
           
-          <!-- creation functions - direction -->
-          [[> sapaModule:ShowActivities function="spav:mucbq"]]
-          
-          <!-- creation functions - stage direction -->
-          [[> sapaModule:ShowActivities function="spav:mutnt"]]
-          
-          <!-- creation functions - assistant stage direction -->
-          [[> sapaModule:ShowActivities function="spav:mugkn"]]
-          
-          <!-- creation functions - film direction -->
-          [[> sapaModule:ShowActivities function="spav:muctj"]]
-          
-          <!-- creation functions - dramaturgy -->
-          [[> sapaModule:ShowActivities function="spav:musim"]]
-          
-          <!-- creation functions - choreography -->
-          [[> sapaModule:ShowActivities function="spav:mubbv"]]
-          
-          <!-- creation functions - conductor -->
-          [[> sapaModule:ShowActivities function="spav:muqfg"]]
-          
-          <!-- creation functions - choral conductor -->
-					[[> sapaModule:ShowActivities function="spav:mufcc"]]
-
-					<!-- creation functions - art direction -->
-					[[> sapaModule:ShowActivities function="spav:mulga"]]
-
-					<!-- creation functions - scenographery -->
-					[[> sapaModule:ShowActivities function="spav:muqjb"]]
-
-					<!-- creation functions - light -->
-					[[> sapaModule:ShowActivities function="spav:murni"]]
-
-          <!-- creation functions - costume design -->
-					[[> sapaModule:ShowActivities function="spav:muecs"]]
-    
-          <!-- creation functions - video -->
-          [[> sapaModule:ShowActivities function="spav:muqju"]]
-
-          <!-- creation functions - camera -->
-          [[> sapaModule:ShowActivities function="spav:mujig"]]
-
-          <!-- creation functions - projection -->
-					[[> sapaModule:ShowActivities function="spav:mufwk"]]
-
-          <!-- creation functions - sound -->
-					[[> sapaModule:ShowActivities function="spav:muxzh"]]
-          
-          <!-- performance functions - acting -->
-					[[> sapaModule:ShowActivities function="spav:munib"]]
-          
-          <!-- performance functions - dance -->
-					[[> sapaModule:ShowActivities function="spav:mulcp"]]
-           
-					<!-- performance functions - performance -->
-				  [[> sapaModule:ShowActivities function="spav:muawx"]]
-         
-					<!-- performance functions - pantomine -->
-				  [[> sapaModule:ShowActivities function="spav:mujhq"]]
-
-          <!-- performance functions - puppet show -->
-				  [[> sapaModule:ShowActivities function="spav:muhkf"]]
-          
-          <!-- performance functions - music performance -->
-				  [[> sapaModule:ShowActivities function="spav:muiim"]]
-          
-          <!-- performance functions - singing -->
-				  [[> sapaModule:ShowActivities function="spav:muygg"]]
-
- 					<!-- performance functions - intrumental performance -->
-				  [[> sapaModule:ShowActivities function="spav:mupah"]]
-            
-          <!-- performance functions - oeil extérieure -->
-				  [[> sapaModule:ShowActivities function="spav:mudat"]]
-
-          <!-- performance functions - narration -->
-				  [[> sapaModule:ShowActivities function="spav:muacs"]]
-
-          <!-- performance functions - host -->
-				  [[> sapaModule:ShowActivities function="spav:mupfz"]]
-
-          <!-- performance functions - moderation -->
-				  [[> sapaModule:ShowActivities function="spav:mumnc"]]
-          
-          <!-- performance functions - contribution -->
-          [[> sapaModule:ShowActivities function="spav:munuj"]]
+          <!-- performances -->
+          [[> sapaModule:Performances]]
         
         </bs-col>
         <bs-col sm="4">

@@ -38,6 +38,7 @@
         [[> RecordResourceIIIF]],
         [[> RecordResourceExtent]],
         [[> RecordResourceExtentDepricated]],
+        [[> RecordResourcePDFCloudResource]],
         [[> RecordResourceHistory]],
         [[> RecordSetCassation]],
         [[> RDFSComment]],
@@ -280,7 +281,44 @@
           </bs-col>          
           <bs-col sm='6'>
             <semantic-form-autocomplete-input for="ThingSeeAlso"></semantic-form-autocomplete-input>
-          </bs-col>          
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='6'>
+            <style>
+              .semantic-form-subject-input__suggest-label {
+                display: none;
+              }
+            </style>
+            <semantic-form-composite-input 
+              for="RecordResourcePDFCloudResource"
+              new-subject-template="{{RecordResourcePDFCloudURL}}"
+              new-subject-template-settings='{
+                "placeholders": {
+                  "RecordResourcePDFCloudURL": {
+                    "transform": "none"
+                  }
+                }
+              }'
+              default-edit-subject="true"
+              default-suggest-subject="false"
+              fields='[
+                [[> RecordResourcePDFCloudDescription]],
+                {
+                  "id" : "RecordResourcePDFCloudURL",
+                  "label": "[[i18n "field_url" bundle="sapa-fields"]]",
+                  "minOccurs" : "1",
+                  "maxOccurs" : "1",
+                  "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+                  "askPattern" : "ASK { FILTER(REGEX(STR($value), \"https://cloud.sapa.swiss/s/[A-Za-z0-9]+\")) }"
+              }
+              ]'
+            >
+              <semantic-form-subject-input></semantic-form-subject-input>
+              <semantic-form-text-input for="RecordResourcePDFCloudDescription"></semantic-form-text-input>
+
+            </semantic-form-composite-input>
+          </bs-col>
         </bs-row>
         <hr />
         <bs-row><bs-col sm='12'><div class="form-section">[[i18n "FormSectionNotes" bundle="performing-arts-ch"]]</div></bs-col></bs-row>
