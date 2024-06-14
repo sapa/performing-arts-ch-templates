@@ -1,0 +1,18 @@
+name: Update PROD Templates
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH into server and run update script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST_PROD}}
+          username: ${{ secrets.SSH_USER_PROD }}
+          key: ${{ secrets.DEPLOY_KEY_PROD }}
+          passphrase: ${{ secrets.DEPLOY_KEY_PASS_PROD }}
+          script: sudo bash /home/sari/scripts/updateTemplates.sh
+          
