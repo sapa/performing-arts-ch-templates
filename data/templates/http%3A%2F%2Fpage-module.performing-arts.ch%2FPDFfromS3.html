@@ -1,0 +1,24 @@
+<!-- iiif Manifest -->
+<semantic-query
+ query="SELECT ?pdf WHERE {
+    ?? rico:hasInstantiation ?pdf .
+    ?pdf rico:hasCarrierType spav:fvonl .
+ }"
+ template="{{> template-pdf}}">
+    <template id="template-pdf">            
+        <p>
+            {{#each bindings}}
+                <div>
+                    <p><strong>PDF/S3</strong></p>
+                    <div style="height:400px;">
+                      <pdfjs-viewer-element 
+                        src="{{pdf.value}}" 
+                        viewer-path="/assets/pdfjs-4.2.67-dist"
+                        >
+                      ></pdfjs-viewer-element>
+                    </div>
+                </div>
+            {{/each}}
+        </p>
+    </template>
+ </semantic-query>
