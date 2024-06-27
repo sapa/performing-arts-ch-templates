@@ -1,8 +1,9 @@
-<!-- iiif Manifest -->
+<!-- PDF -->
 <semantic-query
  query="SELECT ?pdf WHERE {
     ?? rico:hasInstantiation ?pdf .
     ?pdf rico:hasCarrierType spav:fvonl .
+    FILTER(STRENDS(STR(?pdf), '.pdf'))
  }"
  template="{{> template-pdf}}">
     <template id="template-pdf">            
