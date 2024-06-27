@@ -2050,12 +2050,12 @@ fields:
         }'
       - delete: 'DELETE {
           GRAPH ?g {
-            $subject crm:P1_is_identified_by ?identifier ;
-              rdf:value $value .
+            $subject crm:P1_is_identified_by ?identifier .
+            ?identifier rdf:value $value .
           }
         } WHERE {
-          $subject crm:P1_is_identified_by ?identifier ;
-            rdf:value $value .
+          $subject crm:P1_is_identified_by ?identifier .
+          ?identifier rdf:value $value .
           BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
         }'
 
