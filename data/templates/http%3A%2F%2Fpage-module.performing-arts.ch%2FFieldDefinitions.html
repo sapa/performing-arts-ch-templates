@@ -1742,16 +1742,16 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
             "range" : "https://www.ica.org/standards/RiC/ontology#RecordResourceDocumentaryForm",
             "treePatterns": {
                 "type": "full",
-                "rootsQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { FILTER(NOT EXISTS { ?item skos:broader ?parent. }) ?item skos:inScheme spav:df . ?item rico:name ?label . OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
-                "childrenQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { ?item skos:broader ?parent; skos:inScheme spav:df . ?item rico:name ?label . OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY (?label)",
-                "parentsQuery": "SELECT DISTINCT ?item ?parent ?parentLabel WHERE { ?item skos:broader ?parent ; skos:inScheme spav:df . ?item skos:broader ?parent. ?parent (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?parentLabel. }",
-                "searchQuery": "SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE { ?item skos:inScheme spav:df . ?item rico:name ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" . OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY DESC (?score) (?label) LIMIT 200 "
+                "rootsQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { FILTER(NOT EXISTS { ?item skos:broader ?parent. }) ?item skos:inScheme spav:df . ?item rico:name ?label . OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) BIND(?__userPreferredLanguage__ AS ?lang) FILTER(LANG(?label) = ?lang) } ORDER BY (?label)",
+                "childrenQuery": "SELECT DISTINCT ?item ?label ?hasChildren WHERE { ?item skos:broader ?parent; skos:inScheme spav:df . ?item rico:name ?label . OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) BIND(?__userPreferredLanguage__ AS ?lang) FILTER(LANG(?label) = ?lang) } ORDER BY (?label)",
+                "parentsQuery": "SELECT DISTINCT ?item ?parent ?parentLabel WHERE { ?item skos:broader ?parent ; skos:inScheme spav:df . ?item skos:broader ?parent. ?parent (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?parentLabel. BIND(?__userPreferredLanguage__ AS ?lang) FILTER(LANG(?parentLabel) = ?lang) }",
+                "searchQuery": "SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE { ?item skos:inScheme spav:df . ?item rico:name ?searchTerm, ?label . ?searchTerm bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" . OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) BIND(?__userPreferredLanguage__ AS ?lang) FILTER(LANG(?label) = ?lang) } ORDER BY DESC (?score) (?label) LIMIT 200 "
             },
                 "selectPattern" : "SELECT $value WHERE { $subject rico:hasDocumentaryFormType ?value . }",
                 "insertPattern" : "INSERT { $subject rico:hasDocumentaryFormType $value . } WHERE { }",
                 "deletePattern" : "DELETE { $subject rico:hasDocumentaryFormType $value . } WHERE { }",
                 "valueSetPattern" : "SELECT $value WHERE { $value a rico:RecordResourceDocumentaryForm ; skos:inScheme spav:df . }",
-                "autosuggestionPattern" : "SELECT DISTINCT ?value ?label  WHERE { ?value rico:hasDocumentaryFormType ?type . ?type rico:name ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } LIMIT 10",
+                "autosuggestionPattern" : "SELECT DISTINCT ?value ?label  WHERE { ?value rico:hasDocumentaryFormType ?type . ?type rico:name ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" BIND(?__userPreferredLanguage__ AS ?lang) FILTER(LANG(?label) = ?lang) } LIMIT 10",
         "iri" : "RecordDocumentaryForm"
     }
 [[/inline]]

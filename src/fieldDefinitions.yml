@@ -2850,6 +2850,8 @@ fields:
           ?type rico:name ?label .
           ?label bds:search ?__token__ ; bds:relevance ?score ;
             bds:matchAllTerms "true"
+          BIND(?__userPreferredLanguage__ AS ?lang)
+          FILTER(LANG(?label) = ?lang)
         } LIMIT 10'
     treePatterns:
       type: full
@@ -2859,6 +2861,8 @@ fields:
           ?item rico:name ?label .
           OPTIONAL { ?child skos:broader ?item. }
           BIND(BOUND(?child) AS ?hasChildren)
+          BIND(?__userPreferredLanguage__ AS ?lang)
+          FILTER(LANG(?label) = ?lang)
         }
         ORDER BY (?label)'
       childrenQuery: 'SELECT DISTINCT ?item ?label ?hasChildren WHERE {
@@ -2867,6 +2871,8 @@ fields:
           ?item rico:name ?label .
           OPTIONAL { ?child skos:broader ?item. }
           BIND(BOUND(?child) AS ?hasChildren)
+          BIND(?__userPreferredLanguage__ AS ?lang)
+          FILTER(LANG(?label) = ?lang)
         }
         ORDER BY (?label)'
       parentsQuery: 'SELECT DISTINCT ?item ?parent ?parentLabel WHERE {
@@ -2874,15 +2880,19 @@ fields:
           skos:inScheme spav:df .
         ?item skos:broader ?parent.
         ?parent (rdfs:label|skos:prefLabel|rdf:value|dc:title|rico:name|rico:identifier) ?parentLabel.
+          BIND(?__userPreferredLanguage__ AS ?lang)
+          FILTER(LANG(?parentLabel) = ?lang)
       }'
       searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
         ?item skos:inScheme spav:df .
-        ?item rico:name ?label .
-          ?label bds:search ?__token__ ; 
+        ?item rico:name ?searchTerm, ?label .
+          ?searchTerm bds:search ?__token__ ; 
           bds:relevance ?score ; 		 	 
           bds:matchAllTerms "true" .
         OPTIONAL { ?child skos:broader ?item. }
         BIND(BOUND(?child) AS ?hasChildren)
+        BIND(?__userPreferredLanguage__ AS ?lang)
+        FILTER(LANG(?label) = ?lang)
       }
       ORDER BY DESC (?score) (?label)
       LIMIT 200
