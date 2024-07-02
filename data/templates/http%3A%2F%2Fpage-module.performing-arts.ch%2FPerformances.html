@@ -35,14 +35,18 @@
           </template>>
         </semantic-query>
 
-        <!-- dates -->
+        <!-- dates and type -->
         <semantic-query
-          query="SELECT ?date_begin ?date_end ?subPerformance WHERE {
+          query="SELECT ?date_begin ?date_end ?subPerformance ?premiereType WHERE {
             BIND(<{{performance.value}}> AS ?performance)
             ?performance crm:P9_consists_of ?subPerformance .
             ?subPerformance crm:P4_has_time-span ?timespan .
             ?timespan crm:P82a_begin_of_the_begin ?date_begin ;
               crm:P82b_end_of_the_end ?date_end .
+            OPTIONAL {
+              ?subPerformance crm:P2_has_type ?premiereType .
+              ?premiereType skos:inScheme spav:hl .
+            }
           }"
           template="{{> template-dates}}"
           >
@@ -51,8 +55,8 @@
               <ul class="list-unstyled">
               {{#each bindings}}
                 <li>
-                 
                   <semantic-link iri="{{subPerformance.value}}">{{dateTimeFormat date_begin.value "DD.MM.YYYY"}}{{#ifCond date_begin.value "==" date_end.value}}{{else}} - {{dateTimeFormat date_end.value "DD.MM.YYYY"}}{{/ifCond}}</semantic-link>
+                  {{#if premiereType.value}}<br><mp-label iri="{{premiereType.value}}"></mp-label>{{/if}}
                 </li>
               {{/each}}
               </ul>
