@@ -40,7 +40,7 @@
           query="SELECT ?date ?subPerformance WHERE {
             BIND(<{{performance.value}}> AS ?performance)
             ?performance crm:P9_consists_of ?subPerformance .
-            ?subPerformance crm:P4_has_time-span/rdfs:label ?date.
+            ?subPerformance crm:P4_has_time-span/crm:P82a_begin_of_the_begin ?date.
           }"
           template="{{> template-dates}}"
           >
