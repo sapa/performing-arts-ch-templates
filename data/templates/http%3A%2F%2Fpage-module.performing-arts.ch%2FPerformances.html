@@ -37,10 +37,12 @@
 
         <!-- dates -->
         <semantic-query
-          query="SELECT ?date ?subPerformance WHERE {
+          query="SELECT ?date_begin ?date_end ?subPerformance WHERE {
             BIND(<{{performance.value}}> AS ?performance)
             ?performance crm:P9_consists_of ?subPerformance .
-            ?subPerformance crm:P4_has_time-span/crm:P82a_begin_of_the_begin ?date.
+            ?subPerformance crm:P4_has_time-span ?timespan .
+            ?timespan crm:P82a_begin_of_the_begin ?date_begin ;
+              crm:P82b_end_of_the_end ?date_end .
           }"
           template="{{> template-dates}}"
           >
@@ -49,7 +51,8 @@
               <ul class="list-unstyled">
               {{#each bindings}}
                 <li>
-                  <semantic-link iri="{{subPerformance.value}}">{{dateTimeFormat date.value "DD.MM.YYYY"}}</semantic-link>
+                 
+                  <semantic-link iri="{{subPerformance.value}}">{{dateTimeFormat date_begin.value "DD.MM.YYYY"}}{{#ifCond date_begin.value "==" date_end.value}}{{else}} - {{dateTimeFormat date_end.value "DD.MM.YYYY"}}{{/ifCond}}</semantic-link>
                 </li>
               {{/each}}
               </ul>
