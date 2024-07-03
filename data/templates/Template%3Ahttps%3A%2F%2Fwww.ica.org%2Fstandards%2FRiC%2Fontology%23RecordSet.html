@@ -411,19 +411,6 @@
                     <ul class="list-unstyled">{{#each bindings}}<li><semantic-link iri="{{value.value}}"></semantic-link></li>{{/each}}</ul></div>'>
             </semantic-query>
             [[/if]]
-                      
-            <!-- vimeo -->
-            <semantic-query 
-              query="SELECT ?vimeo_id WHERE 
-              { 
-                  ?record rico:hasOrHadSubject <{{recording.value}}> ;
-                    rico:hasInstantiation ?vimeo_url .
-                  FILTER(CONTAINS(STR(?vimeo_url), '://vimeo.com'))
-                  ?vimeo_url rico:hasCarrierType spav:fvonl .
-                  BIND(STRAFTER(STR(?vimeo_url), 'vimeo.com/') AS ?vimeo_id)
-              }"
-              template='{{#each bindings}}<iframe src="https://player.vimeo.com/video/{{vimeo_id.value}}" frameborder="0" style="width:100%; height:600px;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>{{/each}}'>
-            </semantic-query>
 
             <!-- notes -->
             <semantic-query 
