@@ -199,7 +199,23 @@
                             <ul class="list-unstyled">{{#each bindings}}
                                 <li>{{description.value}}</li>
                             {{/each}}</ul></div>'>
-                    </semantic-query> 
+                    </semantic-query>
+
+                    <!-- history -->
+                    <semantic-query 
+                        query="SELECT ?label ?history  WHERE {
+            VALUES (?label) { ( '[[i18n "field_record_set_history" bundle="sapa-fields"]]') }
+        
+                                ?? rico:history ?history .
+                            }"
+                        template='<div>
+                            {{#ifCond bindings.length ">" 0}}
+                                <h5>{{bindings.0.label.value}}</h5>
+                            {{/ifCond}}
+                            <div>{{#each bindings}}
+                                <p style="white-space: pre-line;">{{history.value}}</p>
+                            {{/each}}</div></div>'>
+                    </semantic-query>        
 
                     <!-- last control -->
                     <semantic-query 
