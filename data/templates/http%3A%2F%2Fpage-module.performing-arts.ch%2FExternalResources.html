@@ -1,8 +1,6 @@
     <semantic-query 
     query='SELECT ?fieldlabel ?value ?label WHERE {
         ?? owl:sameAs ?value
-        BIND (REPLACE(STR(?value), ".*\\/c*b*", "") as ?localname)
-        BIND (STRBEFORE(STR(?value), ?localname) as ?prefix)
         VALUES (?fieldlabel) { ( "[[i18n "field_external_resources" bundle="sapa-fields"]]") }
         VALUES (?prefix ?source ?order)
         {
@@ -24,6 +22,8 @@
           ("http://tls.theaterwissenschaft.ch/wiki/" "[[i18n "ExternalResourcesTLS" bundle="performing-arts-ch"]]" 8)
           ("https://tls.theaterwissenschaft.ch/wiki/" "[[i18n "ExternalResourcesTLS" bundle="performing-arts-ch"]]" 8)
         }
+        FILTER(STRSTARTS(STR(?value), ?prefix))
+        BIND(STRAFTER(STR(?value), ?prefix) as ?localname)
         BIND (IF(?order<8,
         CONCAT(?source,": ",?localname) ,
         ?source) as ?label)
