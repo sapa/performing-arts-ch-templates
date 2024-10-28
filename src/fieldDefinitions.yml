@@ -4422,8 +4422,6 @@ fields:
         BIND(IRI(?value) as ?valueAsUri)
       }'
       - ask: 'ASK {
-          BIND(REPLACE(STR(?value), ".*\\\\/c*b*", "") as ?localname)
-          BIND(STRBEFORE(STR(?value), ?localname) as ?prefix)
           VALUES(?prefix ?source ?order)
           {
             ("http://www.wikidata.org/entity/" "Wikidata" 0)
@@ -4444,6 +4442,7 @@ fields:
             ("http://tls.theaterwissenschaft.ch/wiki/" "Theaterlexikon der Schweiz" 8)
             ("https://tls.theaterwissenschaft.ch/wiki/" "Theaterlexikon der Schweiz" 8)
           }
+          FILTER(STRSTARTS(?value, ?prefix))
       }'
 
   - id: SameAs_SPARQLMode
