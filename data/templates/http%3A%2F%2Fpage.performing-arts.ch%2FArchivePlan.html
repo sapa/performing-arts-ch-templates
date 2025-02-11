@@ -61,7 +61,7 @@
             BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
             OPTIONAL { ?item rico:identifier ?identifier }
             OPTIONAL { 
-                ?node rico:hasOrHadIdentifier ?id .
+                ?item rico:hasOrHadIdentifier ?id .
                 ?id a rico:Identifier ;
                     crm:P2_has_type spav:iduni ;
                     rdf:value ?valueIDunique .
