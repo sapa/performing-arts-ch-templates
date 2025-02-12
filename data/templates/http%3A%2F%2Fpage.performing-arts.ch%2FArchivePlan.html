@@ -56,17 +56,23 @@
             FILTER(CONTAINS(LCASE(STR(?label)), LCASE(?clean_token)))
           } ORDER BY DESC (?score) (?label) LIMIT 500'
         node-data-query='
-          SELECT DISTINCT ?item ?identifier ?level {
+          SELECT DISTINCT ?item ?identifier ?level ?valueIDunique {
             OPTIONAL { ?item rico:hasRecordSetType ?rslevel . }
             BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
             OPTIONAL { ?item rico:identifier ?identifier }
+            OPTIONAL { 
+                ?item rico:hasOrHadIdentifier ?id .
+                ?id a rico:Identifier ;
+                    crm:P2_has_type spav:iduni ;
+                    rdf:value ?valueIDunique .
+            }
           } ORDER BY (?identifier)'
         placeholder='Select or search for a name or signature ...'
         node-template='{{>node}}'
         >
         <template id='node'>
           <span>
-            {{#if data.identifier}}{{data.identifier.value}}: {{/if}}<semantic-link uri="{{iri}}">{{label}}</semantic-link>{{#if data.level}} (<mp-label iri="{{data.level.value}}"></mp-label>){{/if}}
+            {{#if data.identifier}}{{data.identifier.value}}: {{/if}}<semantic-link uri="{{iri}}">{{label}}</semantic-link>{{#if data.valueIDunique}} ({{data.valueIDunique.value}}){{/if}}{{#if data.level}} (<mp-label iri="{{data.level.value}}"></mp-label>){{/if}}
           </span>
         </template>
       </semantic-lazy-tree>
