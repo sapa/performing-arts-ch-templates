@@ -59,10 +59,15 @@
           SELECT DISTINCT ?item ?identifier ?level ?valueIDunique {
             OPTIONAL { ?item rico:hasRecordSetType ?rslevel . }
             BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
-            OPTIONAL { ?item rico:identifier ?identifier }
             OPTIONAL { 
-                ?item rico:hasOrHadIdentifier ?id .
-                ?id a rico:Identifier ;
+              ?item rico:hasOrHadIdentifier ?idCon .
+              ?idCon a rico:Identifier ;
+                crm:P2_has_type spav:idcon ;
+                rdf:value ?identifier .
+            }
+            OPTIONAL { 
+                ?item rico:hasOrHadIdentifier ?idUni .
+                ?idUni a rico:Identifier ;
                     crm:P2_has_type spav:iduni ;
                     rdf:value ?valueIDunique .
             }
