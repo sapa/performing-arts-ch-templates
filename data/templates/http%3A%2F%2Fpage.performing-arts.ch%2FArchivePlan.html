@@ -72,7 +72,7 @@
         >
         <template id='node'>
           <span>
-            {{#if data.identifier}}{{data.identifier.value}}: {{/if}}<semantic-link uri="{{iri}}">{{label}}</semantic-link>{{#if data.valueIDunique}}({{data.valueIDunique.value}}){{/if}}{{#if data.level}} (<mp-label iri="{{data.level.value}}"></mp-label>){{/if}}
+            {{#if data.identifier}}{{data.identifier.value}}: {{/if}}<semantic-link uri="{{iri}}">{{label}}</semantic-link>{{#if data.valueIDunique}} ({{data.valueIDunique.value}}){{/if}}{{#if data.level}} (<mp-label iri="{{data.level.value}}"></mp-label>){{/if}}
           </span>
         </template>
       </semantic-lazy-tree>
