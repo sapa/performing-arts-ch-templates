@@ -1207,7 +1207,13 @@ fields:
             rico:identifier $label .
           FILTER(REGEX($label, "?token", "i"))
         } UNION {
+          $value a rico:Instantiation ;
+            rico:hasOrHadIdentifier ?identifier .
+            ?identifier rdf:value $label .
+            FILTER(REGEX($label, "?token", "i"))
+        } UNION {
           BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""),"\\\\.$", "")) AS ?value)
+          $value a rico:Instantiation .
           OPTIONAL {?value rico:identifier $label .}
         }
         FILTER(!CONTAINS(STR(?value), "/u/"))
