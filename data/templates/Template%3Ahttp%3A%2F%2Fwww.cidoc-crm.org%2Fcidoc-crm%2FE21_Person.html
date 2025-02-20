@@ -201,7 +201,7 @@
                 template='<h5>{{#each bindings}}{{label.value}}{{/each}}</h5>'>
                 </semantic-query>
                 <semantic-tree
-                    query='SELECT DISTINCT ?node ?parent ?identifier ?level WHERE {
+                    query='SELECT DISTINCT ?node ?parent ?identifier ?level ?idTecValue WHERE {
                         {
                             ?record rico:hasOrHadSubject ?? ;
                                 rico:isOrWasIncludedIn* ?node .
@@ -216,9 +216,17 @@
                         FILTER(CONTAINS(STR(?node), "/r/"))
                         OPTIONAL { ?node rico:isOrWasIncludedIn ?parent. FILTER(ISIRI(?parent)) }
                         OPTIONAL { ?node rico:identifier ?identifier }
+                        OPTIONAL {
+                            ?node rico:hasOrHadIdentifier ?identifierTec .
+                            ?identifierTec a rico:Identifier ;
+                                  crm:P2_has_type spav:idtec ;
+                                  rdf:value ?idTecValue
+                            BIND(xsd:integer(STRAFTER(?idTecValue, "-")) AS ?idTecPart2)
+                            BIND(xsd:integer(STRBEFORE(?idTecValue, "-")) AS ?idTecPart1)
+                          }
                         OPTIONAL { ?node rico:hasRecordSetType ?rslevel . }
                         BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
-                    } ORDER BY ?identifier'
+                    } ORDER BY ?idTecPart1 ?idTecPart2 ?identifier'
                     tuple-template='{{>node}}'> 
                     <template id='node'>
                         <span>
