@@ -42,8 +42,28 @@
           }'
         search-query='
           SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
-            { ?item a rico:RecordSet } UNION { ?item a rico:Record }
-            {?item rico:name ?label} UNION {?item rico:identifier ?label} UNION {?item rico:descriptiveNote ?label} UNION {?item rico:history ?label} UNION {?item spao:deliveryNumber ?label} UNION {?item spao:hasNote ?label}
+            { 
+              ?item a rico:RecordSet 
+            } UNION { 
+              ?item a rico:Record 
+            }
+            {
+              ?item rico:name ?label
+            } UNION {
+              ?item rico:identifier ?label
+            } UNION {
+              ?item rico:descriptiveNote ?label
+            } UNION {
+              ?item rico:history ?label
+            } UNION {
+              ?item spao:deliveryNumber ?label
+            } UNION {
+              ?item spao:hasNote ?label
+            } UNION {
+              ?item rico:hasOrHadIdentifier ?identifier .
+              ?identifier a rico:Identifier ;
+                rdf:value ?label .
+            }
             SERVICE <http://www.bigdata.com/rdf/search#search> {
               ?label bds:search ?__token__ ;
               bds:minRelevance "0.06" ;
