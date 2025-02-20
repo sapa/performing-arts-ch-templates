@@ -344,7 +344,12 @@
                         ?node rico:isOrWasIncludedIn ?parent.
                         FILTER(ISIRI(?parent))
                     }
-                    OPTIONAL { ?node rico:identifier ?identifier }
+                    OPTIONAL { 
+                        ?node rico:hasOrHadIdentifier ?idCon .
+                        ?idCon a rico:Identifier ;
+                            crm:P2_has_type spav:idcon ;
+                            rdf:value ?identifier .
+                    }
                     OPTIONAL { ?node rico:hasRecordSetType ?rslevel . }
                     OPTIONAL { 
                         ?node rico:hasOrHadIdentifier ?id .
