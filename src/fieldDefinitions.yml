@@ -1575,7 +1575,7 @@ fields:
       - select: 'SELECT ?value WHERE { $subject ebucore:frameRate ?value . }'
       - insert: 'INSERT { $subject ebucore:frameRate $value} WHERE {}'
       - delete: 'DELETE { $subject ebucore:frameRate $value} WHERE {}'
-      - ask: 'ASK { FILTER(REGEX($value, "^[0-9]*$")) }'
+      - ask: 'ASK { FILTER(REGEX($value, "^[0-9]+i?$")) }'
 
   - id: MediaResourceHeight
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/MediaResourceHeight

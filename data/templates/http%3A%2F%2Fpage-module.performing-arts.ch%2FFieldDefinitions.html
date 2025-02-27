@@ -979,7 +979,7 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
                 "selectPattern" : "SELECT ?value WHERE { $subject ebucore:frameRate ?value . }",
                 "insertPattern" : "INSERT { $subject ebucore:frameRate $value} WHERE {}",
                 "deletePattern" : "DELETE { $subject ebucore:frameRate $value} WHERE {}",
-                "askPattern" : "ASK { FILTER(REGEX($value, \"^[0-9]*$\")) }",
+                "askPattern" : "ASK { FILTER(REGEX($value, \"^[0-9]+i?$\")) }",
         "iri" : "MediaResourceFrameRate"
     }
 [[/inline]]
