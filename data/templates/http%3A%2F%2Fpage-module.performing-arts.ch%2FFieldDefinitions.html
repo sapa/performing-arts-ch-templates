@@ -694,7 +694,7 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
                 "selectPattern" : "SELECT ?value WHERE { $subject rico:hasDerivedInstantiation ?value . }",
                 "insertPattern" : "INSERT { $subject rico:hasDerivedInstantiation $value . } WHERE { }",
                 "deletePattern" : "DELETE { $subject rico:hasDerivedInstantiation $value} WHERE { }",
-                "autosuggestionPattern" : "SELECT $value $label WHERE { { $value a rico:Instantiation ; rico:identifier $label . FILTER(REGEX($label, \"?token\", \"i\")) } UNION { $value a rico:Instantiation ; rico:hasOrHadIdentifier ?identifier . ?identifier rdf:value $label . FILTER(REGEX($label, \"?token\", \"i\")) } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"),\"\\\\.$\", \"\")) AS ?value) $value a rico:Instantiation . OPTIONAL {?value rico:identifier $label .} } FILTER(!CONTAINS(STR(?value), \"/u/\")) }",
+                "autosuggestionPattern" : "SELECT $value $label WHERE { { $value a rico:Instantiation ; rico:identifier $label . FILTER(REGEX($label, \"?token\", \"i\")) } UNION { $value a rico:Instantiation ; rico:hasOrHadIdentifier ?identifier . ?identifier rdf:value $label . FILTER(REGEX($label, \"?token\", \"i\")) } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"),\"\\\\.$\", \"\")) AS ?value) $value a rico:Instantiation . OPTIONAL {?value rico:identifier|rico:hasOrHadIdentifier/rdf:value $label_raw .} BIND(COALESCE(?label_raw, ?value) AS ?label) } FILTER(!CONTAINS(STR(?value), \"/u/\")) }",
         "iri" : "InstantiationDerived"
     }
 [[/inline]]
