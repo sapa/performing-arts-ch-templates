@@ -1214,7 +1214,8 @@ fields:
         } UNION {
           BIND(URI(REPLACE(REPLACE(?__token__, "[\\\\\\\\|*]", ""),"\\\\.$", "")) AS ?value)
           $value a rico:Instantiation .
-          OPTIONAL {?value rico:identifier $label .}
+          OPTIONAL {?value rico:identifier|rico:hasOrHadIdentifier/rdf:value $label_raw .}
+          BIND(COALESCE(?label_raw, ?value) AS ?label)
         }
         FILTER(!CONTAINS(STR(?value), "/u/"))
       }'
