@@ -1338,7 +1338,7 @@ fields:
 
   - id: InstantiationRecord
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationRecord
-    label: Record (part)
+    label: Record Resource
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     minOccurs: 1
     maxOccurs: 1
