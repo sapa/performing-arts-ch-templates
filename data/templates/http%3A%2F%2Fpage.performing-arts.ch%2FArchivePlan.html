@@ -35,7 +35,16 @@
               ?item rico:name ?l .
               BIND(LCASE(?l) AS ?label)             
             }
-          } ORDER BY ?identifier ?index ?la'
+            OPTIONAL {
+              ?item rico:hasOrHadIdentifier ?identifierTec .
+              ?identifierTec a rico:Identifier ;
+                    crm:P2_has_type spav:idtec ;
+                    rdf:value ?idTecValue .
+                    BIND(xsd:integer(STRAFTER(?idTecValue, "-")) AS ?idTecPart2)
+                    BIND(xsd:integer(STRBEFORE(?idTecValue, "-")) AS ?idTecPart1)
+                  
+            }
+          } ORDER BY ?idTecPart1 ?idTecPart2 ?identifier ?index ?la'
         parents-query='
           SELECT ?item ?parent WHERE {
             ?item rico:isOrWasIncludedIn ?parent .

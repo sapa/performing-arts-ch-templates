@@ -335,7 +335,7 @@
                 template='<h5>{{#each bindings}}{{label.value}}{{/each}}</h5>'>
             </semantic-query>
             <semantic-tree
-                 query='SELECT DISTINCT ?label ?node ?parent ?name ?index ?identifier ?level ?valueIDunique WHERE {
+                 query='SELECT DISTINCT ?label ?node ?parent ?name ?index ?identifier ?level ?valueIDunique ?idTecValue WHERE {
                     { ?? rico:isOrWasIncludedIn* ?node }
                     UNION
                     { ?node rico:isOrWasIncludedIn ?? } 
@@ -358,9 +358,15 @@
                             crm:P2_has_type spav:iduni ;
                             rdf:value ?valueIDunique .
                     }
+                    OPTIONAL {
+                        ?node rico:hasOrHadIdentifier ?identifierTec .
+                        ?identifierTec a rico:Identifier ;
+                              crm:P2_has_type spav:idtec ;
+                              rdf:value ?idTecValue .
+                      }
                     BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
                     OPTIONAL { ?node olo:index ?index }
-                  } ORDER BY ASC(?index) ASC(?identifier)
+                  } ORDER BY ASC(?idTecValue) ASC(?index) ASC(?identifier)
                   LIMIT 1000'
                collapsed="true"
                keys-opened='[[this]]'
