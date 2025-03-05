@@ -171,6 +171,16 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
+                    <!-- color  -->
+                    <semantic-query 
+                        query="SELECT ?color WHERE { ?? rdau:P60558 ?color . }"
+                        template='<div>
+                            <h5>[[i18n "field_color" bundle="sapa-fields"]]</h5>
+                            <ul class="list-unstyled">{{#each bindings}}
+                                <li><mp-label iri="{{color.value}}"></mp-label></li>
+                            {{/each}}</ul></div>'>
+                    </semantic-query>
+
                     <!-- video damage -->
                     <semantic-query 
                         query='SELECT ?value WHERE { ?? spao:hasVideoDamage ?value . }'
