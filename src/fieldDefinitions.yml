@@ -4035,6 +4035,7 @@ fields:
         (spav:rssrs)
         (spav:rsssr) 
         (spav:rsfil) 
+        (spav:rspar)
         }
       }'
 
