@@ -1219,6 +1219,7 @@ fields:
         }
         FILTER(!CONTAINS(STR(?value), "/u/"))
       }'
+      
   - id: InstantiationDerivedFrom
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationDerivedFrom
     label: Original instantiation
