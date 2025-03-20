@@ -4054,7 +4054,7 @@ fields:
       }'
       - insert: 'INSERT { $subject rico:hasRecordSetType $value} WHERE {}'
       - delete: 'DELETE { $subject rico:hasRecordSetType $value} WHERE {}'
-      - valueSet: 'SELECT $value ?label WHERE {
+      - valueSet: 'SELECT $value WHERE {
         VALUES ($value) {
         (spav:rssct)
         (spav:rsssc)
@@ -4062,7 +4062,8 @@ fields:
         (spav:rsfnd) 
         (spav:rssfn) 
         (spav:rssrs)
-        (spav:rsssr) 
+        (spav:rsssr)
+        (spav:rssss)
         (spav:rsfil) 
         (spav:rspar)
         }
