@@ -48,6 +48,17 @@ a:hover, a:focus {
     color: @link-hover;
 }
 
+details {
+    margin-bottom: 1rem;
+    &[open] summary::after {
+        content: " Hide";
+    }
+
+    &:not([open]) summary::after {
+        content: " Show";
+    }
+}
+
 
 div.semantic-form hr {
     border: 1px solid black;

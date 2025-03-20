@@ -28,6 +28,15 @@ a:hover,
 a:focus {
   color: #158ce4;
 }
+details {
+  margin-bottom: 1rem;
+}
+details[open] summary::after {
+  content: " Hide";
+}
+details:not([open]) summary::after {
+  content: " Show";
+}
 div.semantic-form hr {
   border: 1px solid black;
 }

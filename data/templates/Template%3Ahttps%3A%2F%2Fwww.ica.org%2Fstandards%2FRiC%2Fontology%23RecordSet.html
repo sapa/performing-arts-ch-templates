@@ -334,7 +334,9 @@
                 query='SELECT ?label WHERE { BIND ("[[i18n "field_record_hierarchy" bundle="sapa-fields"]]" AS ?label) . }'
                 template='<h5>{{#each bindings}}{{label.value}}{{/each}}</h5>'>
             </semantic-query>
-            <semantic-tree
+            <details>
+                <summary></summary>
+                <semantic-tree
                  query='SELECT DISTINCT ?label ?node ?parent ?name ?index ?identifier ?level ?valueIDunique ?idTecValue WHERE {
                     { ?? rico:isOrWasIncludedIn* ?node }
                     UNION
@@ -377,6 +379,8 @@
                     <span>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link uri="{{node.value}}"></semantic-link>{{#if valueIDunique}} ({{valueIDunique.value}}) {{/if}}{{#if level}} (<mp-label iri="{{level.value}}""></mp-label>){{/if}}</span>
                 </template>
             </semantic-tree>
+            </details>
+            
 
             <!-- related documents -->
             [[> sapaModule:RecordRelatedDocuments]]
