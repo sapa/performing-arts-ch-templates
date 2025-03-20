@@ -698,6 +698,21 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "iri" : "InstantiationDerived"
     }
 [[/inline]]
+ [[#*inline "InstantiationDerivedFrom"]]
+    {
+        "id" : "InstantiationDerivedFrom",
+
+            "label": "[[i18n "field_original_instantiation" bundle="sapa-fields"]]",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "domain" : "https://www.ica.org/standards/RiC/ontology#Instantiation",
+            "range" : "https://www.ica.org/standards/RiC/ontology#Instantiation",
+                "selectPattern" : "SELECT ?value WHERE { $subject rico:isDerivedFromInstantiation ?value . }",
+                "insertPattern" : "INSERT { $subject rico:isDerivedFromInstantiation $value . } WHERE { }",
+                "deletePattern" : "DELETE { $subject rico:isDerivedFromInstantiation $value} WHERE { }",
+                "autosuggestionPattern" : "SELECT $value $label WHERE { { $value a rico:Instantiation ; rico:identifier $label . FILTER(REGEX($label, \"?token\", \"i\")) } UNION { $value a rico:Instantiation ; rico:hasOrHadIdentifier ?identifier . ?identifier rdf:value $label . FILTER(REGEX($label, \"?token\", \"i\")) } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"),\"\\\\.$\", \"\")) AS ?value) $value a rico:Instantiation . OPTIONAL {?value rico:identifier|rico:hasOrHadIdentifier/rdf:value $label_raw .} BIND(COALESCE(?label_raw, ?value) AS ?label) } FILTER(!CONTAINS(STR(?value), \"/u/\")) }",
+        "iri" : "InstantiationDerivedFrom"
+    }
+[[/inline]]
  [[#*inline "InstantiationExtent"]]
     {
         "id" : "InstantiationExtent",
