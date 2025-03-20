@@ -38,7 +38,7 @@
         </bs-row>
   
   </bs-tab>
-  <bs-tab event-key='2' title='[[i18n "TabGroups" bundle="performing-arts-ch"]]'>
+  <bs-tab event-key='groups' title='[[i18n "TabGroups" bundle="performing-arts-ch"]]'>
   
     <semantic-query 
         query='SELECT DISTINCT ?fieldlabel ?group WHERE {
@@ -55,7 +55,7 @@
     </semantic-query>
           
   </bs-tab>
-  <bs-tab event-key='3' title='[[i18n "TabVenues" bundle="performing-arts-ch"]]'>
+  <bs-tab event-key='venues' title='[[i18n "TabVenues" bundle="performing-arts-ch"]]'>
   
     <semantic-query 
         query='SELECT DISTINCT ?fieldlabel ?venue WHERE {
@@ -73,7 +73,7 @@
     </semantic-query>
   
   </bs-tab>
-  <bs-tab event-key='4' title='[[i18n "TabPersons" bundle="performing-arts-ch"]]'>
+  <bs-tab event-key='persons' title='[[i18n "TabPersons" bundle="performing-arts-ch"]]'>
   
     <semantic-query 
         query='SELECT DISTINCT ?person ?fieldlabel (GROUP_CONCAT(DISTINCT ?eventstr; SEPARATOR=", ") AS ?lifedates)
