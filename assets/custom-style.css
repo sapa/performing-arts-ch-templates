@@ -28,12 +28,37 @@ a:hover,
 a:focus {
   color: #158ce4;
 }
+details {
+  margin-bottom: 1rem;
+}
+details[open] summary::after {
+  content: " Hide";
+}
+details:not([open]) summary::after {
+  content: " Show";
+}
 div.semantic-form hr {
   border: 1px solid black;
 }
 div.form-section {
   font-weight: bold;
   font-size: 1.2em;
+}
+#sapa-parts-module {
+  background-color: rgba(220, 216, 230, 0.575);
+  padding-left: 2%;
+  padding-right: 2%;
+}
+#sapa-parts-module > h5:first-child {
+  padding-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+#sapa-parts-module h6 {
+  margin-bottom: 1rem;
+}
+#sapa-parts-module h6 a {
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 pdfjs-viewer-element {
   height: 100%;
@@ -273,9 +298,6 @@ div.SemanticTreeInput--inputAndButtons {
   color: #999 !important;
 }
 .page__body-navtabs a[data-rb-event-key="about"][aria-selected="false"],
-.page__body-navtabs a[data-rb-event-key="groups"][aria-selected="false"],
-.page__body-navtabs a[data-rb-event-key="venues"][aria-selected="false"],
-.page__body-navtabs a[data-rb-event-key="persons"][aria-selected="false"],
 .page__body-navtabs a[data-rb-event-key="productions"][aria-selected="false"],
 .page__body-navtabs a[data-rb-event-key="video"][aria-selected="false"] {
   border: 1px solid #ccc;
