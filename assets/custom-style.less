@@ -48,6 +48,17 @@ a:hover, a:focus {
     color: @link-hover;
 }
 
+details {
+    margin-bottom: 1rem;
+    &[open] summary::after {
+        content: " Hide";
+    }
+
+    &:not([open]) summary::after {
+        content: " Show";
+    }
+}
+
 
 div.semantic-form hr {
     border: 1px solid black;
@@ -355,6 +366,7 @@ div.SemanticTreeInput--inputAndButtons {
     a[data-rb-event-key="groups"][aria-selected="false"],
     a[data-rb-event-key="venues"][aria-selected="false"],
     a[data-rb-event-key="persons"][aria-selected="false"],
+    a[data-rb-event-key="producers"][aria-selected="false"],
     a[data-rb-event-key="productions"][aria-selected="false"],
     a[data-rb-event-key="video"][aria-selected="false"]
     {
