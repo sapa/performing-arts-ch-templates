@@ -2555,7 +2555,7 @@ VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) { (ri
                 "selectPattern" : "SELECT ?value ?label WHERE { $subject rico:hasRecordSetType ?value. }",
                 "insertPattern" : "INSERT { $subject rico:hasRecordSetType $value} WHERE {}",
                 "deletePattern" : "DELETE { $subject rico:hasRecordSetType $value} WHERE {}",
-                "valueSetPattern" : "SELECT $value ?label WHERE { VALUES ($value) { (spav:rssct) (spav:rsssc) (spav:rsclt) (spav:rsfnd) (spav:rssfn) (spav:rssrs) (spav:rsssr) (spav:rsfil) (spav:rspar) } }",
+                "valueSetPattern" : "SELECT $value WHERE { VALUES ($value) { (spav:rssct) (spav:rsssc) (spav:rsclt) (spav:rsfnd) (spav:rssfn) (spav:rssrs) (spav:rsssr) (spav:rssss) (spav:rsfil) (spav:rspar) } }",
         "iri" : "RecordSetType"
     }
 [[/inline]]
