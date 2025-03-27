@@ -298,16 +298,18 @@ div.SemanticTreeInput--inputAndButtons {
   color: #999 !important;
 }
 .page__body-navtabs a[data-rb-event-key="about"][aria-selected="false"],
-.page__body-navtabs a[data-rb-event-key="groups"][aria-selected="false"],
-.page__body-navtabs a[data-rb-event-key="venues"][aria-selected="false"],
-.page__body-navtabs a[data-rb-event-key="persons"][aria-selected="false"],
-.page__body-navtabs a[data-rb-event-key="productions"][aria-selected="false"],
 .page__body-navtabs a[data-rb-event-key="producers"][aria-selected="false"],
 .page__body-navtabs a[data-rb-event-key="productions"][aria-selected="false"],
 .page__body-navtabs a[data-rb-event-key="video"][aria-selected="false"] {
   border: 1px solid #ccc;
   border-bottom: 1px solid #ddd;
   background-color: #efefef;
+}
+.transform.capitalize-first span {
+  display: block;
+}
+.transform.capitalize-first span::first-letter {
+  text-transform: uppercase;
 }
 nav.metaphacts-header-navbar.DEVELOPMENT,
 nav.metaphacts-header-navbar.dev\.performing-arts\.ch {

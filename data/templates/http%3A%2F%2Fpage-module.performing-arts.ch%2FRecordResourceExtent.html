@@ -29,7 +29,7 @@ query='SELECT ?order ?unit (GROUP_CONCAT(?value; SEPARATOR=", ") AS ?values) WHE
     } GROUP BY ?order ?unit
     ORDER BY ASC (?order)'
 template='{{#each bindings}}
-        <h5 style="text-transform: capitalize;"><mp-label iri="{{unit.value}}"></mp-label></h5>
+        <h5 class="transform capitalize-first"><mp-label iri="{{unit.value}}"></mp-label></h5>
         <p>{{values.value}}</p>
     {{/each}}'>
 </semantic-query>
