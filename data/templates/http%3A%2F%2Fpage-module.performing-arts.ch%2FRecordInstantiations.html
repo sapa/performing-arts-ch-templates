@@ -1,8 +1,8 @@
 <!-- instantiations -->
 <semantic-query 
     query="SELECT ?label ?order ?archivalstatus ?instantiation ?signatur  WHERE {
-            VALUES (?label) { ( '[[i18n "field_instantiation" bundle="sapa-fields"]]') }
-        
+        ?? rico:hasInstantiation ?instantiation .
+        ?instantiation spao:hasArchivalStatus ?archivalstatus .
         VALUES (?order ?archivalstatus) {
             ( 1 spav:asarm )
             ( 2 spav:asprc )
@@ -12,50 +12,45 @@
             ( 6 spav:asdcp )
             ( 7 spav:asdcd )
         }
-        ?? rico:hasInstantiation ?instantiation .
-        ?instantiation spao:hasArchivalStatus ?archivalstatus .
-        OPTIONAL { ?instantiation rico:identifier ?signatur . }
+        #OPTIONAL { ?instantiation rico:identifier ?signatur . }
     } ORDER BY ASC (?order)"
     template='{{> instantiation-properties }}'>
     <template id='instantiation-properties'>
-        {{#ifCond bindings.length ">" 0}}<hr/><h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
+        <hr/><h5>[[i18n "field_instantiation" bundle="sapa-fields"]]</h5>
         {{#each bindings}}
-        <!-- typed identifier -->
-        <semantic-query 
-            query="SELECT ?identifier ?type WHERE {
-                <{{instantiation.value}}> rico:hasOrHadIdentifier ?identifierUri .
-                ?identifierUri rdf:value ?identifier ;
-                    crm:P2_has_type ?type . 
-                # Exclude technical identifier and specify order
-                VALUES (?type ?order) {
-                    (<http://vocab.performing-arts.ch/iduni> '1'^^xsd:integer)
-                    (<http://vocab.performing-arts.ch/idcon> '2'^^xsd:integer)
-                    (<http://vocab.performing-arts.ch/idold> '3'^^xsd:integer)
-                    (<http://vocab.performing-arts.ch/idtec> '4'^^xsd:integer)
-                }
-            } ORDER BY ?order ?identifier"
-            template="{{> template}}">
-            <template id="template">
-                <p>
-                    <h5>[[i18n "field_typed_identifier" bundle="sapa-fields"]]</h5>
-                    <ul class="list-unstyled">
-                        {{#each bindings}}
-                            <li><span>{{identifier.value}}</span> (<mp-label iri="{{type.value}}"></mp-label>)</li>
-                        {{/each}}
-                </p>
-            </template>
-        </semantic-query>
-        {{#if signatur}}
-            <h5><semantic-link iri="{{instantiation.value}}"></semantic-link></h5>
-            <p><mp-label iri="{{archivalstatus.value}}"></mp-label></p>
-        {{else}}
-            <h5><semantic-link iri="{{instantiation.value}}"><mp-label iri="{{archivalstatus.value}}"></mp-label></semantic-link></h5>
-        {{/if}}
-        <semantic-query 
-            query='SELECT ?value WHERE {  <{{instantiation.value}}> rico:hasCarrierType ?value . }'
-            template='<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{value.value}}"></mp-label>{{else}}, <mp-label iri="{{value.value}}"></mp-label>{{/if}}{{/each}}</div>' >
-        </semantic-query>
-        <hr />
+            <!-- typed identifier -->
+            <semantic-query 
+                query="SELECT ?identifier ?type WHERE {
+                    <{{instantiation.value}}> rico:hasOrHadIdentifier ?identifierUri .
+                    ?identifierUri rdf:value ?identifier ;
+                        crm:P2_has_type ?type . 
+                    # Exclude technical identifier and specify order
+                    VALUES (?type ?order) {
+                        (<http://vocab.performing-arts.ch/iduni> '1'^^xsd:integer)
+                    }
+                } ORDER BY ?order ?identifier"
+                template="{{> template}}">
+                <template id="template">
+                    <p>
+                        <h5>[[i18n "field_typed_identifier" bundle="sapa-fields"]]</h5>
+                        <ul class="list-unstyled">
+                            {{#each bindings}}
+                                <li><span>{{identifier.value}}</span> (<mp-label iri="{{type.value}}"></mp-label>)</li>
+                            {{/each}}
+                    </p>
+                </template>
+            </semantic-query>
+            {{#if signatur}}
+                <h5><semantic-link iri="{{instantiation.value}}"></semantic-link></h5>
+                <p><mp-label iri="{{archivalstatus.value}}"></mp-label></p>
+            {{else}}
+                <h5><semantic-link iri="{{instantiation.value}}"><mp-label iri="{{archivalstatus.value}}"></mp-label></semantic-link></h5>
+            {{/if}}
+            <semantic-query 
+                query='SELECT ?value WHERE {  <{{instantiation.value}}> rico:hasCarrierType ?value . }'
+                template='<div>{{#each bindings}}{{#if @first}}<mp-label iri="{{value.value}}"></mp-label>{{else}}, <mp-label iri="{{value.value}}"></mp-label>{{/if}}{{/each}}</div>' >
+            </semantic-query>
+            <hr />
         {{/each}}
     </template>
 </semantic-query>
