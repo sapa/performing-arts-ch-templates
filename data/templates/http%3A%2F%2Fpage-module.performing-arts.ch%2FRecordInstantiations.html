@@ -29,9 +29,6 @@
                 # Exclude technical identifier and specify order
                 VALUES (?type ?order) {
                     (<http://vocab.performing-arts.ch/iduni> '1'^^xsd:integer)
-                    (<http://vocab.performing-arts.ch/idcon> '2'^^xsd:integer)
-                    (<http://vocab.performing-arts.ch/idold> '3'^^xsd:integer)
-                    (<http://vocab.performing-arts.ch/idtec> '4'^^xsd:integer)
                 }
             } ORDER BY ?order ?identifier"
             template="{{> template}}">
