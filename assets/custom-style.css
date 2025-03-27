@@ -309,6 +309,12 @@ div.SemanticTreeInput--inputAndButtons {
   border-bottom: 1px solid #ddd;
   background-color: #efefef;
 }
+.transform.capitalize-first span {
+  display: block;
+}
+.transform.capitalize-first span::first-letter {
+  text-transform: uppercase;
+}
 nav.metaphacts-header-navbar.DEVELOPMENT,
 nav.metaphacts-header-navbar.DEV,
 nav.metaphacts-header-navbar.dev\.performing-arts\.ch {

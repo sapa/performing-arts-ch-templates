@@ -377,6 +377,16 @@ div.SemanticTreeInput--inputAndButtons {
     }
 }
 
+.transform {
+    &.capitalize-first {
+        span {
+            display: block;
+            &::first-letter {
+                text-transform: uppercase;
+            }
+        }
+    }
+}
   
 // Overrides
 
