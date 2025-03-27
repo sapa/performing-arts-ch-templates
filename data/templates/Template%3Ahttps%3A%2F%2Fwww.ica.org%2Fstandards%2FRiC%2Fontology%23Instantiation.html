@@ -735,6 +735,22 @@
 
                 <bs-col sm="4">
 
+                    <!-- derived instantiation -->
+                    <semantic-query
+                        query="SELECT ?derivedInstantiation WHERE {
+                            ?? rico:hasDerivedInstantiation ?derivedInstantiation .
+                            }"
+                        template="{{> template}}">
+                        <template id="template">
+                            <h5>[[i18n "field_derived_instantiation" bundle="sapa-fields"]]</h5>
+                            <ul class="list-unstyled">
+                                {{#each bindings}}
+                                    <li><semantic-link iri="{{derivedInstantiation.value}}"></semantic-link></li>
+                                {{/each}}
+                            </ul>
+                        </template>
+                    </semantic-query>
+
                     <!-- location -->
                     [[#if (hasPermission "forms:ldp:*")]]
                         [[> sapaModule:LocationHierarchy]]
