@@ -1052,6 +1052,34 @@ fields:
         FILTER((LANGMATCHES(LANG(?venue_label), "")) || (LANGMATCHES(LANG(?venue_label), ?__userPreferredLanguage__)))
       } LIMIT 20'
 
+  - id: HasNote_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/HasNote_SPARQLMode
+    label: Note
+    description: A short note that helps to identify the entity.
+    datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#langString
+    domain: http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity
+    queries:
+      - select: 'SELECT ?value WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject crm:P3_has_note ?value.
+          }
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject crm:P3_has_note ?value.
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject crm:P3_has_note ?value.
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+
   - id: IdentifierType
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/IdentifierType
     label: Identifier type
