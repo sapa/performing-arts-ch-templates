@@ -1,0 +1,14 @@
+<!-- instantiations -->
+<semantic-query 
+    query="SELECT ?original_instantiation  WHERE {
+        ?original_instantiation rico:hasDerivedInstantiation ?? .
+    }"
+    template='{{> instantiation-properties }}'>
+    <template id='instantiation-properties'>
+        <hr/><h5>[[i18n "field_original_instantiation" bundle="sapa-fields"]]</h5>
+        {{#each bindings}}
+            <semantic-link iri="{{original_instantiation.value}}"></semantic-link>
+            <hr />
+        {{/each}}
+    </template>
+</semantic-query>
