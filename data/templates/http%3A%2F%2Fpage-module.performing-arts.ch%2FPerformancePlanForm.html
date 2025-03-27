@@ -14,6 +14,7 @@
       persistence='sparql' 
       form-id='performancePlan'
       fields='[
+        [[> HasNote_SPARQLMode]],
         [[> RDFSComment_SPARQLMode]],
         [[> RDFtype_SPARQLMode]],
         [[> Performance_External_ID_SPARQLMode]],
@@ -28,6 +29,7 @@
         <semantic-form-recover-notification></semantic-form-recover-notification>
         <div style="display: none;">
           <semantic-form-hidden-input for="RDFtype_SPARQLMode" default-value='[[resolvePrefix "frbroo:F25_Performance_Plan"]]'></semantic-form-hidden-input>
+          <semantic-form-hidden-input for="HasNote_SPARQLMode" default-value='ImportFormMinimal'></semantic-form-hidden-input>
         </div>
         <semantic-form-text-input for="Performance_Label_SPARQLMode" languages='["en","de","it","fr"]' ></semantic-form-text-input>
         <semantic-form-composite-input for="TitleEntity_SPARQLMode"
