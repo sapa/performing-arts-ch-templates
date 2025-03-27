@@ -102,69 +102,6 @@
                 >
             </mp-field-visualization> 
 
-            <semantic-chart type='donut' types='["pie", "donut"]'
-            query='SELECT ?producer (COUNT(?plan) AS ?plancount)
-            WHERE {
-                ?genericperformance crm:P8_took_place_on_or_within ?? ;
-                    a frbroo:F31_Performance ;
-                frbroo:R25_performed ?plan .
-                ?expressioncreation frbroo:R17_created ?plan ;
-                    crm:P9_consists_of ?production .
-                ?production crm:P2_has_type spav:muwgo ;
-                    crm:P14_carried_out_by ?producer .
-                FILTER(CONTAINS(STR(?producer), "/a/"))
-            } GROUP BY ?producer
-            ORDER BY DESC(?plancount)'
-            sets='[{"dataSetName": "Productions", "category": "producer", "value": "plancount"}]'
-            styles='[{
-              "provider": "chartjs",
-              "style": {
-                  "data": {
-                      "datasets": [
-                          { 
-                          "borderColor": "rgb(255, 255, 255, 1)",
-                          "borderWidth": "2"
-                          }
-                      ]
-                  },
-                  "options": {
-                      "layout": {
-                          "padding": {
-                              "top": "0"
-                          }
-                      },
-                      "legend": {
-                          "position": "none"
-                      }
-                  }
-              }
-             }]'
-          ></semantic-chart>
-
-          <semantic-query 
-            query='SELECT ?label ?producer (COUNT(?plan) AS ?plancount) WHERE {
-            VALUES (?label) { ( "[[i18n "field_producers" bundle="sapa-fields"]]") }
-        
-                ?genericperformance crm:P8_took_place_on_or_within ?? ;
-                    a frbroo:F31_Performance ;
-                frbroo:R25_performed ?plan .
-                ?expressioncreation frbroo:R17_created ?plan ;
-                    crm:P9_consists_of ?production .
-                ?production crm:P2_has_type spav:muwgo ;
-                    crm:P14_carried_out_by ?producer .
-                FILTER(CONTAINS(STR(?producer), "/a/"))
-            } GROUP BY ?label ?producer
-            ORDER BY DESC(?plancount)' 
-            template='{{> producer-list}}'>
-            <template id='producer-list'>
-                <div style="margin: 1em 0em;">
-                    {{#each bindings}}
-                    {{#if @first}}<h5>{{label.value}}</h5><semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{else}}, <semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{/if}}
-                    {{/each}}
-                </div>
-            </template>
-        </semantic-query>
-
         </bs-col>
 
         <bs-col sm="4">
@@ -232,6 +169,70 @@
 
         </bs-row>
 
+    </bs-tab>
+    <bs-tab event-key='producers' title='[[i18n "TabProducers" bundle="performing-arts-ch"]]'>
+        <semantic-chart type='donut' types='["pie", "donut"]'
+            query='SELECT ?producer (COUNT(?plan) AS ?plancount)
+            WHERE {
+                ?genericperformance crm:P8_took_place_on_or_within ?? ;
+                    a frbroo:F31_Performance ;
+                frbroo:R25_performed ?plan .
+                ?expressioncreation frbroo:R17_created ?plan ;
+                    crm:P9_consists_of ?production .
+                ?production crm:P2_has_type spav:muwgo ;
+                    crm:P14_carried_out_by ?producer .
+                FILTER(CONTAINS(STR(?producer), "/a/"))
+            } GROUP BY ?producer
+            ORDER BY DESC(?plancount)'
+            sets='[{"dataSetName": "Productions", "category": "producer", "value": "plancount"}]'
+            styles='[{
+            "provider": "chartjs",
+            "style": {
+                "data": {
+                    "datasets": [
+                        { 
+                        "borderColor": "rgb(255, 255, 255, 1)",
+                        "borderWidth": "2"
+                        }
+                    ]
+                },
+                "options": {
+                    "layout": {
+                        "padding": {
+                            "top": "0"
+                        }
+                    },
+                    "legend": {
+                        "position": "none"
+                    }
+                }
+            }
+            }]'
+        ></semantic-chart>
+
+        <semantic-query 
+            query='SELECT ?label ?producer (COUNT(?plan) AS ?plancount) WHERE {
+            VALUES (?label) { ( "[[i18n "field_producers" bundle="sapa-fields"]]") }
+        
+                ?genericperformance crm:P8_took_place_on_or_within ?? ;
+                    a frbroo:F31_Performance ;
+                frbroo:R25_performed ?plan .
+                ?expressioncreation frbroo:R17_created ?plan ;
+                    crm:P9_consists_of ?production .
+                ?production crm:P2_has_type spav:muwgo ;
+                    crm:P14_carried_out_by ?producer .
+                FILTER(CONTAINS(STR(?producer), "/a/"))
+            } GROUP BY ?label ?producer
+            ORDER BY DESC(?plancount)' 
+            template='{{> producer-list}}'>
+            <template id='producer-list'>
+                <div style="margin: 1em 0em;">
+                    {{#each bindings}}
+                    {{#if @first}}<h5>{{label.value}}</h5><semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{else}}, <semantic-link iri="{{producer.value}}"></semantic-link> ({{plancount.value}}){{/if}}
+                    {{/each}}
+                </div>
+            </template>
+        </semantic-query>
     </bs-tab>
     <bs-tab event-key='productions' title='[[i18n "TabProductions" bundle="performing-arts-ch"]]'>
 
