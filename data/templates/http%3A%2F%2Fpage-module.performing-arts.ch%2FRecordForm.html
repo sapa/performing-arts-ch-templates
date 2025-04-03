@@ -15,7 +15,6 @@
       form-id='recordsets'
       fields='[
         [[> RDFtype]],
-        [[> ThingIdentifier]],
         [[> ThingTypedIdentifier]],
         [[> ThingLegacyIdentifier]],
         [[> ScopeID]],
@@ -89,7 +88,6 @@
               <semantic-form-text-input for="IdentifierValue"></semantic-form-text-input>
               <semantic-form-select-input for="IdentifierType"></semantic-form-select-input>
             </semantic-form-composite-input>
-            <div class="sapa-component form-field-deprecated"><semantic-form-text-input for="ThingIdentifier"></semantic-form-text-input></div>
             <div class="sapa-component form-field-deprecated"><semantic-form-text-input for="ThingLegacyIdentifier"></semantic-form-text-input></div>
           </bs-col>
           <bs-col sm='8'>
@@ -165,14 +163,12 @@
             <semantic-form-tree-picker-input for="RecordResourceParent" >
               <semantic-form new-subject-template="http://data.performing-arts.ch/r/{{UUID}}" fields='[
                   [[> RDFtype]],
-                  [[> ThingIdentifier]],
                   [[> ThingName]],
                   [[> RecordSetType]]
                 ]'>
                 <div style="display: none;">
                     <semantic-form-hidden-input for="RDFtype" default-value='[[resolvePrefix "rico:RecordSet"]]'></semantic-form-hidden-input>
                 </div>
-                <semantic-form-text-input for="ThingIdentifier"></semantic-form-text-input>
                 <semantic-form-text-input for="ThingName"></semantic-form-text-input>
                 <semantic-form-select-input for="RecordSetType"></semantic-form-select-input>
                 <button name="submit" class="btn btn-secondary">[[i18n "FormCreateRecordSet" bundle="performing-arts-ch"]]</button>
@@ -432,7 +428,6 @@
           <bs-col sm='12'>
             <semantic-form-composite-input for="RecordParts" new-subject-template='http://data.performing-arts.ch/r/{{UUID}}' fields='[
               [[> RDFtype]],
-              [[> ThingIdentifier]],
               [[> ThingTypedIdentifier]],
               [[> ThingLegacyIdentifier]],
               [[> RecordResourceNameSingle]],
@@ -473,7 +468,6 @@
                     <semantic-form-text-input for="IdentifierValue"></semantic-form-text-input>
                     <semantic-form-select-input for="IdentifierType"></semantic-form-select-input>
                   </semantic-form-composite-input>
-                  <semantic-form-text-input for="ThingIdentifier"></semantic-form-text-input>
                   <semantic-form-text-input for="ThingLegacyIdentifier"></semantic-form-text-input>
                 </bs-col>
                 <bs-col sm='8'>
