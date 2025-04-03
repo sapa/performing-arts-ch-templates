@@ -316,6 +316,10 @@
 
                     [[> sapaModule:RecordOriginalInstantiations]]
 
+                    <!-- Derived Instantiations -->
+
+                    [[> sapaModule:RecordDerivedInstantiations]]
+
                     <!-- formats -->
                     <semantic-query 
                         query="SELECT ?format ?order WHERE {
@@ -734,11 +738,6 @@
                 </bs-col>
 
                 <bs-col sm="4">
-
-                    
-                    <!-- DERIVED INSTANTIATIONS -->
-
-                    [[> sapaModule:RecordDerivedInstantiations]]
 
                     <!-- location -->
                     [[#if (hasPermission "forms:ldp:*")]]
