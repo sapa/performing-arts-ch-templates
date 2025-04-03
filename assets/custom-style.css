@@ -309,7 +309,14 @@ div.SemanticTreeInput--inputAndButtons {
   border-bottom: 1px solid #ddd;
   background-color: #efefef;
 }
+.transform.capitalize-first span {
+  display: block;
+}
+.transform.capitalize-first span::first-letter {
+  text-transform: uppercase;
+}
 nav.metaphacts-header-navbar.DEVELOPMENT,
+nav.metaphacts-header-navbar.DEV,
 nav.metaphacts-header-navbar.dev\.performing-arts\.ch {
   background: #e6375c;
   background: repeating-linear-gradient(45deg, #c83535, #c83535 10px, #872828 10px, #87283d 20px) !important;

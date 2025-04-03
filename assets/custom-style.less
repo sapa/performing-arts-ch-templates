@@ -377,10 +377,20 @@ div.SemanticTreeInput--inputAndButtons {
     }
 }
 
+.transform {
+    &.capitalize-first {
+        span {
+            display: block;
+            &::first-letter {
+                text-transform: uppercase;
+            }
+        }
+    }
+}
   
 // Overrides
 
-nav.metaphacts-header-navbar.DEVELOPMENT, nav.metaphacts-header-navbar.dev\.performing-arts\.ch {
+nav.metaphacts-header-navbar.DEVELOPMENT, nav.metaphacts-header-navbar.DEV, nav.metaphacts-header-navbar.dev\.performing-arts\.ch {
     background: @sapa-red;
     background: repeating-linear-gradient(
       45deg,
