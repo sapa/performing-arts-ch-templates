@@ -192,33 +192,35 @@
                 {{/each}}</ul></div>'
             >
         </semantic-query>
-        <semantic-query 
-            query='SELECT ?label ?value  WHERE {
-            VALUES (?label) { ( "[[i18n "field_copyright_declaration" bundle="sapa-fields"]]") }
-        
-                <{{part.value}}> spao:hasCopyrightDeclaration ?value . }'
-            template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
-                <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
-        </semantic-query>
-        <semantic-query 
-            query='SELECT ?label ?value  WHERE {
-            VALUES (?label) { ( "[[i18n "field_usage_rights_still" bundle="sapa-fields"]]") }
-        
-                <{{part.value}}> spao:hasUsageRightsStill ?value . } LIMIT 1'
-            template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
-                <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
-        </semantic-query>
-        <semantic-query 
-            query='SELECT ?label ?value  WHERE {
-            VALUES (?label) { ( "[[i18n "field_usage_rights_streaming" bundle="sapa-fields"]]") }
-        
-                <{{part.value}}> spao:hasUsageRightsStreaming ?value . } LIMIT 1'
-            template='<div>{{#ifCond bindings.length ">" 0}}
-                <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
-                <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
-        </semantic-query>
+        [[#if (hasPermission 'forms:ldp:*')]]
+            <semantic-query 
+                query='SELECT ?label ?value  WHERE {
+                VALUES (?label) { ( "[[i18n "field_copyright_declaration" bundle="sapa-fields"]]") }
+            
+                    <{{part.value}}> spao:hasCopyrightDeclaration ?value . }'
+                template='<div>{{#ifCond bindings.length ">" 0}}
+                    <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+            <semantic-query 
+                query='SELECT ?label ?value  WHERE {
+                VALUES (?label) { ( "[[i18n "field_usage_rights_still" bundle="sapa-fields"]]") }
+            
+                    <{{part.value}}> spao:hasUsageRightsStill ?value . } LIMIT 1'
+                template='<div>{{#ifCond bindings.length ">" 0}}
+                    <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+            <semantic-query 
+                query='SELECT ?label ?value  WHERE {
+                VALUES (?label) { ( "[[i18n "field_usage_rights_streaming" bundle="sapa-fields"]]") }
+            
+                    <{{part.value}}> spao:hasUsageRightsStreaming ?value . } LIMIT 1'
+                template='<div>{{#ifCond bindings.length ">" 0}}
+                    <h6>{{bindings.0.label.value}}</h6>{{/ifCond}}
+                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
+            </semantic-query>
+        [[/if]]
         <semantic-query 
             query="SELECT ?label ?documentary_form  WHERE {
             VALUES (?label) { ( '[[i18n "field_documentary_form" bundle="sapa-fields"]]') }
