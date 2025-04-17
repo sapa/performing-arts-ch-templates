@@ -277,15 +277,17 @@
                     {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
-            <!-- copyright declaration -->
-            <semantic-query 
-                query='SELECT ?label ?value  WHERE {
-            VALUES (?label) { ( "[[i18n "field_copyright_declaration" bundle="sapa-fields"]]") }
-        
-                    ?? spao:hasCopyrightDeclaration ?value . }'
-                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
-                    {{#each bindings}}<div class="text-item"><mp-label iri="{{value.value}}"></mp-label></div>{{/each}}</div>'>
-            </semantic-query>
+            [[#if (hasPermission 'forms:ldp:*')]]
+                <!-- copyright declaration -->
+                <semantic-query 
+                    query='SELECT ?label ?value  WHERE {
+                VALUES (?label) { ( "[[i18n "field_copyright_declaration" bundle="sapa-fields"]]") }
+            
+                        ?? spao:hasCopyrightDeclaration ?value . }'
+                    template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
+                        {{#each bindings}}<div class="text-item"><mp-label iri="{{value.value}}"></mp-label></div>{{/each}}</div>'>
+                </semantic-query>
+            [[/if]]
 
             <!-- use rights -->
             <semantic-query 
@@ -307,25 +309,27 @@
                     {{#each bindings}}<div class="text-item">{{value.value}}</div>{{/each}}</div>'>
             </semantic-query>
 
-            <!-- use rights still -->
-            <semantic-query 
-                query='SELECT ?label ?value  WHERE {
-            VALUES (?label) { ( "[[i18n "field_usage_rights_still" bundle="sapa-fields"]]") }
-        
-                    ?? spao:hasUsageRightsStill ?value . }'
-                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
-                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
-            </semantic-query>
+            [[#if (hasPermission 'forms:ldp:*')]]
+                <!-- use rights still -->
+                <semantic-query 
+                    query='SELECT ?label ?value  WHERE {
+                VALUES (?label) { ( "[[i18n "field_usage_rights_still" bundle="sapa-fields"]]") }
+            
+                        ?? spao:hasUsageRightsStill ?value . }'
+                    template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
+                        <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
+                </semantic-query>
 
-            <!-- use rights streaming -->
-            <semantic-query 
-                query='SELECT ?label ?value  WHERE {
-            VALUES (?label) { ( "[[i18n "field_usage_rights_streaming" bundle="sapa-fields"]]") }
-        
-                    ?? spao:hasUsageRightsStreaming ?value . }'
-                template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
-                    <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
-            </semantic-query>
+                <!-- use rights streaming -->
+                <semantic-query 
+                    query='SELECT ?label ?value  WHERE {
+                VALUES (?label) { ( "[[i18n "field_usage_rights_streaming" bundle="sapa-fields"]]") }
+            
+                        ?? spao:hasUsageRightsStreaming ?value . }'
+                    template='<div>{{#ifCond bindings.length ">" 0}}<h5>{{bindings.0.label.value}}</h5>{{/ifCond}}
+                        <ul class="list-unstyled">{{#each bindings}}<li><mp-label iri="{{value.value}}"></mp-label></li>{{/each}}</ul></div>'>
+                </semantic-query>
+            [[/if]]
 
             <!-- credit -->
             <semantic-query 
