@@ -3078,29 +3078,62 @@ fields:
       - delete: 'DELETE { $subject schema:copyrightNotice $value. } WHERE {}'
 
 
-  - id: RecordResourceCreator
-    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreator
+  - id: RecordResourceCreatorA
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreatorA
     label: Creator
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     range: https://www.ica.org/standards/RiC/ontology#Person
     queries:
-      - select: 'SELECT ?value WHERE { $subject rico:hasCreator ?value . }'
+      - select: 'SELECT ?value WHERE { 
+          $subject rico:hasCreator ?value . 
+          FILTER regex(str(?value), "/a/")
+        }'
       - insert: 'INSERT { $subject rico:hasCreator $value . } WHERE {}'
       - delete: 'DELETE { $subject rico:hasCreator $value} WHERE {}'
-      - autosuggestion: 'SELECT ?value ?label WHERE {
-        {
-          ?value a rico:Person ;
-            rdfs:label ?label .
-          ?label bds:search ?__token__ ;
-          bds:relevance ?score ; 
-          bds:matchAllTerms "true"
-        } UNION {
-          BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
-          ?value a/rdfs:subClassOf* crm:E39_Actor ;
-            rdfs:label ?label .
-        }
-      } LIMIT 100'
+      - autosuggestion: 'SELECT DISTINCT ?value ?label WHERE {
+          {
+            ?value a rico:Person ;
+              rdfs:label ?label .
+            ?label bds:search ?__token__ ;
+            bds:relevance ?score ; 
+            bds:matchAllTerms "true"
+          } UNION {
+            BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
+            ?value a/rdfs:subClassOf* crm:E39_Actor ;
+              rdfs:label ?label .
+          }
+          FILTER regex(str(?value), "/a/")
+        } LIMIT 100'
+
+
+  - id: RecordResourceCreatorU
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreatorU
+    label: Creator /u/
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
+    range: https://www.ica.org/standards/RiC/ontology#Person
+    queries:
+      - select: 'SELECT ?value WHERE { 
+          $subject rico:hasCreator ?value . 
+          FILTER regex(str(?value), "/u/")
+        }'
+      - insert: 'INSERT { $subject rico:hasCreator $value . } WHERE {}'
+      - delete: 'DELETE { $subject rico:hasCreator $value} WHERE {}'
+      - autosuggestion: 'SELECT DISTINCT ?value ?label WHERE {
+          {
+            ?value a/rdfs:subClassOf* crm:E39_Actor ;
+              rdfs:label ?label .
+            ?label bds:search ?__token__ ;
+            bds:relevance ?score ; 
+            bds:matchAllTerms "true"
+          } UNION {
+            BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
+            ?value a/rdfs:subClassOf* crm:E39_Actor ;
+              rdfs:label ?label .
+          }
+          FILTER regex(str(?value), "/u/")
+        } LIMIT 100'
 
 
   - id: RecordResourceCredit

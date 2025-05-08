@@ -1872,19 +1872,34 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
         "iri" : "RecordResourceCopyrightNotice"
     }
 [[/inline]]
- [[#*inline "RecordResourceCreator"]]
+ [[#*inline "RecordResourceCreatorA"]]
     {
-        "id" : "RecordResourceCreator",
+        "id" : "RecordResourceCreatorA",
 
             "label": "[[i18n "field_creator" bundle="sapa-fields"]]",
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
             "domain" : "https://www.ica.org/standards/RiC/ontology#RecordResource",
             "range" : "https://www.ica.org/standards/RiC/ontology#Person",
-                "selectPattern" : "SELECT ?value WHERE { $subject rico:hasCreator ?value . }",
+                "selectPattern" : "SELECT ?value WHERE { $subject rico:hasCreator ?value . FILTER regex(str(?value), \"/a/\") }",
                 "insertPattern" : "INSERT { $subject rico:hasCreator $value . } WHERE {}",
                 "deletePattern" : "DELETE { $subject rico:hasCreator $value} WHERE {}",
-                "autosuggestionPattern" : "SELECT ?value ?label WHERE { { ?value a rico:Person ; rdfs:label ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } UNION { BIND(URI(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?value) ?value a/rdfs:subClassOf* crm:E39_Actor ; rdfs:label ?label . } } LIMIT 100",
-        "iri" : "RecordResourceCreator"
+                "autosuggestionPattern" : "SELECT DISTINCT ?value ?label WHERE { { ?value a rico:Person ; rdfs:label ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } UNION { BIND(URI(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?value) ?value a/rdfs:subClassOf* crm:E39_Actor ; rdfs:label ?label . } FILTER regex(str(?value), \"/a/\") } LIMIT 100",
+        "iri" : "RecordResourceCreatorA"
+    }
+[[/inline]]
+ [[#*inline "RecordResourceCreatorU"]]
+    {
+        "id" : "RecordResourceCreatorU",
+
+            "label": "[[i18n "field_creator__u_" bundle="sapa-fields"]]",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
+            "domain" : "https://www.ica.org/standards/RiC/ontology#RecordResource",
+            "range" : "https://www.ica.org/standards/RiC/ontology#Person",
+                "selectPattern" : "SELECT ?value WHERE { $subject rico:hasCreator ?value . FILTER regex(str(?value), \"/u/\") }",
+                "insertPattern" : "INSERT { $subject rico:hasCreator $value . } WHERE {}",
+                "deletePattern" : "DELETE { $subject rico:hasCreator $value} WHERE {}",
+                "autosuggestionPattern" : "SELECT DISTINCT ?value ?label WHERE { { ?value a/rdfs:subClassOf* crm:E39_Actor ; rdfs:label ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } UNION { BIND(URI(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?value) ?value a/rdfs:subClassOf* crm:E39_Actor ; rdfs:label ?label . } FILTER regex(str(?value), \"/u/\") } LIMIT 100",
+        "iri" : "RecordResourceCreatorU"
     }
 [[/inline]]
  [[#*inline "RecordResourceCredit"]]
