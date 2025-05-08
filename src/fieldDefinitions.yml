@@ -4862,36 +4862,93 @@ fields:
       - insert: 'INSERT { $subject spao:seeAlso $value. } WHERE {}'
       - delete: 'DELETE { $subject spao:seeAlso $value. } WHERE {}'
       - autosuggestion: 'SELECT $value $label WHERE {
-        {
-          { $value a rico:Concept . }
-          UNION
-          { $value rdf:type/rdfs:subClassOf* rico:Agent . }
-          UNION
-          { $value rdf:type rico:RecordSet . }
-          UNION
-          { $value rdf:type rico:Record . }
-          UNION
-          { $value rdf:type rico:RecordPart . }
-          UNION
-          { $value rdf:type rico:Instantiation . }
-          $value rdfs:label|rico:name $label .
-          FILTER(REGEX($label, "?token", "i"))
-          FILTER(!CONTAINS(STR(?value), "/u/"))
-        } UNION {
-          BIND(URI(REPLACE(REPLACE("?token", "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
-          $value rdfs:label|rico:name $label ;
-            a/rdfs:subClassOf* ?type .
-          VALUES (?type) {
-            ( rico:Concept )
-            ( rico:Agent )
-            ( rico:RecordSet )
-            ( rico:Record )
-            ( rico:RecordPart )
-            ( rico:Instantiation )
+          {
+            { $value a rico:Concept . }
+            UNION
+            { $value rdf:type/rdfs:subClassOf* rico:Agent . }
+            UNION
+            { $value rdf:type rico:RecordSet . }
+            UNION
+            { $value rdf:type rico:Record . }
+            UNION
+            { $value rdf:type rico:RecordPart . }
+            UNION
+            { $value rdf:type rico:Instantiation . }
+            $value rdfs:label|rico:name $label .
+            FILTER(REGEX($label, "?token", "i"))
+            FILTER(!CONTAINS(STR(?value), "/u/"))
+          } UNION {
+            BIND(URI(REPLACE(REPLACE("?token", "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
+            $value rdfs:label|rico:name $label ;
+              a/rdfs:subClassOf* ?type .
+            VALUES (?type) {
+              ( rico:Concept )
+              ( rico:Agent )
+              ( rico:RecordSet )
+              ( rico:Record )
+              ( rico:RecordPart )
+              ( rico:Instantiation )
+            }
           }
-        }
-      }'
+        }'
 
+  - id: ThingSeeAlso_SPARQLMode
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingSeeAlso
+    label: See also
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    domain: https://www.ica.org/standards/RiC/ontology#Thing
+    range: https://www.ica.org/standards/RiC/ontology#Thing
+    queries:
+      - select: 'SELECT $value WHERE { 
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+          GRAPH ?g {
+            $subject spao:seeAlso $value. 
+          }
+        }'
+      - insert: 'INSERT { 
+          GRAPH ?g {
+            $subject spao:seeAlso $value. 
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE { 
+          GRAPH ?g {
+            $subject spao:seeAlso $value. 
+            } 
+          } WHERE {
+            BIND(URI(CONCAT(STR($parent), "/container/context")) as ?g)
+          }'
+      - autosuggestion: 'SELECT $value $label WHERE {
+          {
+            { $value a rico:Concept . }
+            UNION
+            { $value rdf:type/rdfs:subClassOf* rico:Agent . }
+            UNION
+            { $value rdf:type rico:RecordSet . }
+            UNION
+            { $value rdf:type rico:Record . }
+            UNION
+            { $value rdf:type rico:RecordPart . }
+            UNION
+            { $value rdf:type rico:Instantiation . }
+            $value rdfs:label|rico:name $label .
+            FILTER(REGEX($label, "?token", "i"))
+            FILTER(!CONTAINS(STR(?value), "/u/"))
+          } UNION {
+            BIND(URI(REPLACE(REPLACE("?token", "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
+            $value rdfs:label|rico:name $label ;
+              a/rdfs:subClassOf* ?type .
+            VALUES (?type) {
+              ( rico:Concept )
+              ( rico:Agent )
+              ( rico:RecordSet )
+              ( rico:Record )
+              ( rico:RecordPart )
+              ( rico:Instantiation )
+            }
+          }
+        }'
 
   - id: ThingTermsProtection
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/ThingTermsProtection
