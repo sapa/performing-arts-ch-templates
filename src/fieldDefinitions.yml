@@ -3111,7 +3111,7 @@ fields:
 
   - id: RecordResourceCreatorU
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceCreatorU
-    label: Creator /u/
+    label: Creatoru
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     range: https://www.ica.org/standards/RiC/ontology#Person
@@ -3912,61 +3912,9 @@ fields:
       - insert: 'INSERT { $subject spao:hasResponsibleEmployee $value. } WHERE { }'
       - delete: 'DELETE { $subject spao:hasResponsibleEmployee $value. } WHERE {}'
 
-
   - id: RecordResourceSubjectA
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubjectA
     label: Subject
-    datatype: http://www.w3.org/2001/XMLSchema#anyURI
-    domain: https://www.ica.org/standards/RiC/ontology#RecordResource
-    range: http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan', 'http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object', 'https://www.ica.org/standards/RiC/ontology#Agent', 'https://www.ica.org/standards/RiC/ontology#Concept', 'https://www.ica.org/standards/RiC/ontology#Thing
-    queries:
-      - select: 'SELECT $value WHERE { 
-          $subject rico:hasOrHadSubject $value . 
-          BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator)
-          FILTER(?type_indicator = "a")
-        }'
-      - insert: 'INSERT { $subject rico:hasOrHadSubject $value . } WHERE {}'
-      - delete: 'DELETE { $subject rico:hasOrHadSubject $value} WHERE {}'
-      - autosuggestion: 'SELECT DISTINCT $value ?label WHERE {
-          BIND(?__userPreferredLanguage__ AS ?lang)
-          
-          VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) {
-            (rico:Person "person" "Person" "personne" "persona")
-            (rico:Group "group" "Gruppe" "groupe" "gruppo")
-            (rico:CorporateBody "group" "Gruppe" "groupe" "gruppo")
-            (rico:Family "group" "Gruppe" "groupe" "gruppo")
-            (rico:Record "Record" "Record" "Record" "Record")
-            (frbroo:F26_Recording "recording" "Aufnahme" "enregistrement" "registrazione")
-            (frbroo:F25_Performance_Plan "production" "Produktion" "production" "produzion")
-            (crm:E22_Man-Made_Object "venue" "Spielstätte" "lieu de représentation" "teatro")
-          }
-          BIND(
-            IF(?lang = "de", ?type_label_de, 
-            IF(?lang = "fr", ?type_label_fr, 
-            IF(?lang = "it", ?type_label_it, ?type_label_en)
-            )
-          ) AS ?type_label)
-          {
-            $value rdfs:label ?item_label .
-            ?item_label bds:search ?__token__ ;
-              bds:matchAllTerms "true" .
-            $value rdf:type ?type .
-          } UNION {
-            BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
-            $value rdf:type ?type ;
-              rdfs:label|rico:name ?item_label .
-          }
-          BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator)
-          FILTER(?type_indicator != "x")
-          FILTER(?type_indicator != "u")
-          OPTIONAL { $value crm:P2_has_type ?crmtype. }
-          FILTER((?type != crm:E22_Man-Made_Object) || (?crmtype = spav:dwmkn))
-          BIND(CONCAT(?item_label, " (", ?type_label, IF(BOUND(?place_label), CONCAT(", ", ?place_label), ""), ")") AS ?label)
-        } LIMIT 100'
-
-  - id: RecordResourceSubjectA
-    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubjectA
-    label: SubjectA
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     domain: https://www.ica.org/standards/RiC/ontology#RecordResource
     range: http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan', 'http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object', 'https://www.ica.org/standards/RiC/ontology#Agent', 'https://www.ica.org/standards/RiC/ontology#Concept', 'https://www.ica.org/standards/RiC/ontology#Thing
