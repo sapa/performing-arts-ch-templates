@@ -316,6 +316,10 @@
 
                     [[> sapaModule:RecordOriginalInstantiations]]
 
+                    <!-- Derived Instantiations -->
+
+                    [[> sapaModule:RecordDerivedInstantiations]]
+
                     <!-- formats -->
                     <semantic-query 
                         query="SELECT ?format ?order WHERE {
@@ -735,11 +739,6 @@
 
                 <bs-col sm="4">
 
-                    
-                    <!-- DERIVED INSTANTIATIONS -->
-
-                    [[> sapaModule:RecordDerivedInstantiations]]
-
                     <!-- location -->
                     [[#if (hasPermission "forms:ldp:*")]]
                         [[> sapaModule:LocationHierarchy]]
@@ -771,10 +770,15 @@
                     query='SELECT DISTINCT ?node ?parent WHERE {
                         { ?? rico:hasDerivedInstantiation* ?node }
                         UNION
-                        { ?node rico:hasDerivedInstantiation* ?? } 
+                        { ?node rico:hasDerivedInstantiation* ?? }
+                        UNION 
+                        { ?? rico:isDerivedFromInstantiation* ?node } 
+                        UNION 
+                        { ?node rico:isDerivedFromInstantiation* ?? } 
                         UNION
                         { BIND(?? AS ?node) }
                         OPTIONAL { ?p rico:hasDerivedInstantiation ?node . }
+                        OPTIONAL { ?node rico:isDerivedFromInstantiation ?p . }
                         OPTIONAL { ?record rico:hasInstantiation ?node . }
                         BIND(IF(BOUND(?p), ?p, ?record) AS ?parent)
                     }'
