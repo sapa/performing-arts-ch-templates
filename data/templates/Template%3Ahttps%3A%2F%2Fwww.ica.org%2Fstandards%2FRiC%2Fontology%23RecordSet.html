@@ -338,50 +338,54 @@
                 query='SELECT ?label WHERE { BIND ("[[i18n "field_record_hierarchy" bundle="sapa-fields"]]" AS ?label) . }'
                 template='<h5>{{#each bindings}}{{label.value}}{{/each}}</h5>'>
             </semantic-query>
-            <div style="height:500px">
-                <semantic-lazy-tree
-                    roots-query='SELECT DISTINCT ?item ?hasChildren WHERE {
-                        BIND(<http://data.performing-arts.ch/r/sapa> AS ?item)
-                        OPTIONAL {
-                            ?child rico:isOrWasIncludedIn ?item .
-                        }
-                        BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
-                    }'
-                    parents-query='SELECT DISTINCT ?item ?parent WHERE {
-                        ?item rico:isOrWasIncludedIn ?parent .
-                    }'
-                    focused-iri="[[this]]"
-                    children-query='SELECT DISTINCT ?item ?hasChildren WHERE {
-                        ?item rico:isOrWasIncludedIn ?parent .
-                        OPTIONAL {
-                            ?child rico:isOrWasIncludedIn ?item .
-                        }
-                        BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
-                    }'
-                    node-template="{{>node}}"
-                    node-data-query="SELECT DISTINCT ?item ?identifier ?valueIDunique ?level { 
-                        OPTIONAL { ?item rico:hasRecordSetType ?rslevel . }
-                        OPTIONAL { 
-                            ?item rico:hasOrHadIdentifier ?idCon .
-                            ?idCon a rico:Identifier ;
-                                crm:P2_has_type spav:idcon ;
-                                rdf:value ?identifier .
-                        }
-                        OPTIONAL { 
-                            ?item rico:hasOrHadIdentifier ?id .
-                            ?id a rico:Identifier ;
-                                crm:P2_has_type spav:iduni ;
-                                rdf:value ?valueIDunique .
-                        }
-                        BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
-                    }"
-                    pageSize="100"
-                >
-                    <template id='node'>
-                        <span>{{#if data.identifier}}{{data.identifier.value}}: {{/if}}<semantic-link uri="{{iri}}"></semantic-link>{{#if data.valueIDunique}} ({{data.valueIDunique.value}}) {{/if}}{{#if data.level}} (<mp-label iri="{{data.level.value}}""></mp-label>){{/if}}</span>
-                    </template>
-                </semantic-lazy-tree>
-            </div>
+            <details>
+                <summary></summary>
+                <semantic-tree
+                 query='SELECT DISTINCT ?label ?node ?parent ?name ?index ?identifier ?level ?valueIDunique ?idTecValue WHERE {
+                    { ?? rico:isOrWasIncludedIn* ?node }
+                    UNION
+                    { ?node rico:isOrWasIncludedIn ?? } 
+                    FILTER(ISIRI(?node))
+                    FILTER(CONTAINS(STR(?node), "/r/"))
+                    OPTIONAL {
+                        ?node rico:isOrWasIncludedIn ?parent.
+                        FILTER(ISIRI(?parent))
+                    }
+                    OPTIONAL { 
+                        ?node rico:hasOrHadIdentifier ?idCon .
+                        ?idCon a rico:Identifier ;
+                            crm:P2_has_type spav:idcon ;
+                            rdf:value ?identifier .
+                    }
+                    OPTIONAL { ?node rico:hasRecordSetType ?rslevel . }
+                    OPTIONAL { 
+                        ?node rico:hasOrHadIdentifier ?id .
+                        ?id a rico:Identifier ;
+                            crm:P2_has_type spav:iduni ;
+                            rdf:value ?valueIDunique .
+                    }
+                    OPTIONAL {
+                        ?node rico:hasOrHadIdentifier ?identifierTec .
+                        ?identifierTec a rico:Identifier ;
+                              crm:P2_has_type spav:idtec ;
+                              rdf:value ?idTecValue .
+                      }
+                    BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
+                    OPTIONAL { ?node olo:index ?index }
+                  } ORDER BY ASC(?idTecValue) ASC(?index) ASC(?identifier)
+                  LIMIT 1000'
+               collapsed="true"
+               keys-opened='[[this]]'
+               parent-binding-name="parent"
+               node-binding-name="node"
+               tuple-template='{{> node}}'>
+                <template id='node'>
+                    <span>{{#if identifier}}{{identifier.value}}: {{/if}}<semantic-link uri="{{node.value}}"></semantic-link>{{#if valueIDunique}} ({{valueIDunique.value}}) {{/if}}{{#if level}} (<mp-label iri="{{level.value}}""></mp-label>){{/if}}</span>
+                </template>
+            </semantic-tree>
+            </details>
+            
+
             <!-- related documents -->
             [[> sapaModule:RecordRelatedDocuments]]
 
