@@ -385,6 +385,27 @@
             </semantic-tree>
             </details>
             
+            <semantic-lazy-tree
+                roots-query='SELECT DISTINCT ?item ?hasChildren WHERE {
+                    BIND(<http://data.performing-arts.ch/r/sapa> AS ?item)
+                    OPTIONAL {
+                        ?child rico:isOrWasIncludedIn ?item .
+                    }
+                    BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
+                }'
+                parents-query='SELECT DISTINCT ?item ?parent WHERE {
+                    ?item rico:isOrWasIncludedIn ?parent .
+                }'
+                focused="<[[this]]>"
+                children-query='SELECT DISTINCT ?item ?hasChildren WHERE {
+                    ?item rico:isOrWasIncludedIn ?parent .
+                    OPTIONAL {
+                        ?child rico:isOrWasIncludedIn ?item .
+                    }
+                    BIND(IF(BOUND(?child), true, false) AS ?hasChildren)
+                }'
+            >
+            </semantic-lazy-tree>
 
             <!-- related documents -->
             [[> sapaModule:RecordRelatedDocuments]]
