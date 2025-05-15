@@ -24,13 +24,15 @@
         [[> RecordSetType]],
         [[> RecordResourceParent]],
         [[> RecordResourceProvenance]],
-        [[> RecordResourceCreator]],
+        [[> RecordResourceCreatorA]],
+        [[> RecordResourceCreatorU]],
         [[> RecordResourceAcquisition]],
         [[> DeliveryNumber]],
         [[> RecordSetDocumentaryForm]],
         [[> RecordResourceDescription]],
         [[> RecordResourceLanguage]],
-        [[> RecordResourceSubject]],
+        [[> RecordResourceSubjectA]],
+        [[> RecordResourceSubjectU]],
         [[> RecordResourcePlace]],
         [[> RecordResourceLegacyDate]],
         [[> RecordResourceDate]],
@@ -204,7 +206,8 @@
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-select-input for="RecordResourceAcquisition"></semantic-form-select-input>
-            <semantic-form-autocomplete-input for="RecordResourceCreator"></semantic-form-autocomplete-input>
+            <semantic-form-autocomplete-input for="RecordResourceCreatorA"></semantic-form-autocomplete-input>
+            <semantic-form-autocomplete-input for="RecordResourceCreatorU"></semantic-form-autocomplete-input>
           </bs-col>
         </bs-row>
         <bs-row>
@@ -222,7 +225,8 @@
             <semantic-form-text-input for="RecordResourceDescription" multiline=true></semantic-form-text-input>
           </bs-col>
           <bs-col sm='4'>
-            <semantic-form-autocomplete-input for="RecordResourceSubject"></semantic-form-autocomplete-input>
+            <semantic-form-autocomplete-input for="RecordResourceSubjectA"></semantic-form-autocomplete-input>
+            <semantic-form-autocomplete-input for="RecordResourceSubjectU"></semantic-form-autocomplete-input>
             <semantic-form-tree-picker-input for="RecordResourcePlace"></semantic-form-tree-picker-input>
           </bs-col>
         </bs-row>
