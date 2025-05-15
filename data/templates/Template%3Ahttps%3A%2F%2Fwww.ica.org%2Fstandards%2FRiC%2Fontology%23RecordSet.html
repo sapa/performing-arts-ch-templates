@@ -396,7 +396,7 @@
                 parents-query='SELECT DISTINCT ?item ?parent WHERE {
                     ?item rico:isOrWasIncludedIn ?parent .
                 }'
-                focused="<[[this]]>"
+                focused-iri="[[this]]"
                 children-query='SELECT DISTINCT ?item ?hasChildren WHERE {
                     ?item rico:isOrWasIncludedIn ?parent .
                     OPTIONAL {
