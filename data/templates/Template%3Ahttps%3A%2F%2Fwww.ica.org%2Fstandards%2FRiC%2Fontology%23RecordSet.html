@@ -375,10 +375,13 @@
                         }
                         BIND(IF(BOUND(?rslevel), ?rslevel, spav:rsitm) AS ?level)
                     }"
-                    pageSize="100"
+                    pageSize="10"
+                    query-limit="10"
                 >
                     <template id='node'>
-                        <span>{{#if data.identifier}}{{data.identifier.value}}: {{/if}}<semantic-link uri="{{iri}}"></semantic-link>{{#if data.valueIDunique}} ({{data.valueIDunique.value}}) {{/if}}{{#if data.level}} (<mp-label iri="{{data.level.value}}""></mp-label>){{/if}}</span>
+                        <span>
+                            {{#if data.identifier}}{{data.identifier.value}}: {{/if}}<semantic-link uri="{{iri}}"></semantic-link>{{#if data.valueIDunique}} ({{data.valueIDunique.value}}) {{/if}}{{#if data.level}} (<mp-label iri="{{data.level.value}}""></mp-label>){{/if}}
+                        </span>
                     </template>
                 </semantic-lazy-tree>
             </div>
