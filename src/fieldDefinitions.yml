@@ -4932,12 +4932,18 @@ fields:
             { $value rdf:type rico:RecordPart . }
             UNION
             { $value rdf:type rico:Instantiation . }
-            $value rdfs:label|rico:name $label .
+            UNION 
+            { $value rdf:type frbroo:F26_Recording . }
+            UNION 
+            { $value rdf:type frbroo:F31_Performance . }
+            UNION 
+            { $value rdf:type frbroo:F25_Performance_Plan . }
+            $value rdfs:label|rico:name|rico:hasOrHadIdentifier/rdf:value $label .
             FILTER(REGEX($label, "?token", "i"))
             FILTER(!CONTAINS(STR(?value), "/u/"))
           } UNION {
             BIND(URI(REPLACE(REPLACE("?token", "[\\\\\\\\|*]", ""), "\\\\.$", "")) AS ?value)
-            $value rdfs:label|rico:name $label ;
+            $value rdfs:label|rico:name|rico:hasOrHadIdentifier/rdf:value $label ;
               a/rdfs:subClassOf* ?type .
             VALUES (?type) {
               ( rico:Concept )
@@ -4946,6 +4952,9 @@ fields:
               ( rico:Record )
               ( rico:RecordPart )
               ( rico:Instantiation )
+              ( frbroo:F26_Recording )
+              ( frbroo:F31_Performance )
+              ( frbroo:F25_Performance_Plan )
             }
           }
         }'
