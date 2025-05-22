@@ -39,7 +39,7 @@
         <semantic-query
           query="SELECT ?date_begin ?date_end ?subPerformance ?premiereType WHERE {
             BIND(<{{performance.value}}> AS ?performance)
-            ?performance crm:P9_consists_of ?subPerformance .
+            ?subPerformance crm:P9i_forms_part_of ?performance .
             ?subPerformance crm:P4_has_time-span ?timespan .
             ?timespan crm:P82a_begin_of_the_begin ?date_begin ;
               crm:P82b_end_of_the_end ?date_end .
