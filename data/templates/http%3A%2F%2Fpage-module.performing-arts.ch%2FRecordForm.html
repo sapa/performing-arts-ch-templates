@@ -216,7 +216,17 @@
           <bs-col sm='4'>
             <semantic-form-select-input for="RecordResourceAcquisition"></semantic-form-select-input>
             <semantic-form-autocomplete-input for="RecordResourceCreatorA"></semantic-form-autocomplete-input>
-            <semantic-form-autocomplete-input for="RecordResourceCreatorU"></semantic-form-autocomplete-input>
+
+            <semantic-form-autocomplete-input for="RecordResourceCreatorU">
+              <semantic-form new-subject-template="http://data.performing-arts.ch/u/{{UUID}}" fields='[
+                  [[> RDFtype]],
+                  [[> RDFSLabel]]
+              ]'>
+                  <semantic-form-hidden-input for="RDFtype" default-values='["[[resolvePrefix "crm:E39_Actor"]]"]'></semantic-form-hidden-input>
+                  <semantic-form-text-input for="RDFSLabel"></semantic-form-text-input>
+                  <button name="submit" class="btn btn-secondary">Create Person</button>
+                </semantic-form>
+              </semantic-form-autocomplete-input> 
             <semantic-form-autocomplete-input for="RecordResourceProvenance"></semantic-form-autocomplete-input>
           </bs-col>
         </bs-row>
