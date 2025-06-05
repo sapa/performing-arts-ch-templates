@@ -75,7 +75,14 @@ query='SELECT DISTINCT ?subject WHERE {
     ?subject crm:P2_has_type ?crmtype . 
     FILTER(?__domain__ != crm:E22_Man-Made_Object || ?crmtype = spav:dwmkn )
   }
-  ?subject rdfs:label|(crm:P131_is_identified_by/rdf:value)|(crm:P102_has_title/rdf:value) ?label .
+  {
+    ?subject rdfs:label|(crm:P131_is_identified_by/rdf:value)|(crm:P102_has_title/rdf:value) ?label .
+  } UNION {
+    ?subject crm:P3_has_note ?note .
+        ?note a crm:E62_String ;
+          crm:P2_has_type <http://vocab.performing-arts.ch/eoept>; 
+            rdf:value ?label .
+  }
   SERVICE <http://www.bigdata.com/rdf/search#search> {
     ?label bds:search ?__token__ ;
     bds:minRelevance "0.1" ;
