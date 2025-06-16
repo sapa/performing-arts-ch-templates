@@ -3982,7 +3982,7 @@ fields:
           BIND(CONCAT(?item_label, " (", ?type_label, IF(BOUND(?place_label), CONCAT(", ", ?place_label), ""), ")") AS ?label)
         } LIMIT 100'
 
-  - id: RecordResourceSubjectA
+  - id: RecordResourceSubjectARW
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceSubjectA
     label: Subject
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
@@ -4026,7 +4026,7 @@ fields:
               rdfs:label|rico:name ?item_label .
           }
           BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator)
-          FILTER(?type_indicator = "a")
+          FILTER(?type_indicator = "a" || ?type_indicator = "r" || ?type_indicator = "w")
           OPTIONAL { $value crm:P2_has_type ?crmtype. }
           FILTER((?type != crm:E22_Man-Made_Object) || (?crmtype = spav:dwmkn))
           BIND(CONCAT(?item_label, " (", ?type_label, IF(BOUND(?place_label), CONCAT(", ", ?place_label), ""), ")") AS ?label)
