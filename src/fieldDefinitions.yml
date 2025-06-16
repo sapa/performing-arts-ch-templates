@@ -3992,7 +3992,7 @@ fields:
       - select: 'SELECT $value WHERE {
           $subject rico:hasOrHadSubject $value . 
           BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator)
-          FILTER(?type_indicator = "a")
+          FILTER(?type_indicator = "a" || ?type_indicator = "r" || ?type_indicator = "w")
         }'
       - insert: 'INSERT { $subject rico:hasOrHadSubject $value . } WHERE {}'
       - delete: 'DELETE { $subject rico:hasOrHadSubject $value} WHERE {}'
