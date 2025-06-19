@@ -4420,6 +4420,42 @@ fields:
           BIND(CONCAT(?item_label, " (", ?type_label, IF(BOUND(?place_label), CONCAT(", ", ?place_label), ""), ")") AS ?label)
         } LIMIT 100'
 
+  - id: RecordingSource
+    label: Source
+    datatype: xsd:anyURI
+    queries:
+      - select: 'SELECT ?value WHERE {
+          $subject crm:P130_shows_features_of ?value .
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject crm:P130_shows_features_of $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject crm:P130_shows_features_of $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - autosuggestion: 'SELECT DISTINCT ?value ?label WHERE {
+          {
+            ?value a frbroo:F26_Recording ;
+              rdfs:label ?label .
+            ?label bds:search ?__token__ ; 
+              bds:relevance ?score ; 
+              bds:matchAllTerms "true" 
+          } UNION {
+            BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
+            ?value rdfs:label ?label .
+          }
+          BIND(SUBSTR(STR(?value), 32 , 1 ) AS ?type_indicator)
+          FILTER(?type_indicator = "w" || ?type_indicator = "r")
+        }'
+
   - id: RecordingTitle
     label: Title
     datatype: xsd:anyURI

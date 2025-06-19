@@ -2713,6 +2713,19 @@ BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FILTER(?type_indicator != 
         "iri" : "RecordingProduction"
     }
 [[/inline]]
+ [[#*inline "RecordingSource"]]
+    {
+        "id" : "RecordingSource",
+
+            "label": "[[i18n "field_source" bundle="sapa-fields"]]",
+            "xsdDatatype" : "xsd:anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P130_shows_features_of ?value . }",
+                "insertPattern" : "INSERT { GRAPH ?g { $subject crm:P130_shows_features_of $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "deletePattern" : "DELETE { GRAPH ?g { $subject crm:P130_shows_features_of $value . } } WHERE { BIND(URI(CONCAT(STR($subject), \"/container/context\")) as ?g) }",
+                "autosuggestionPattern" : "SELECT DISTINCT ?value ?label WHERE { { ?value a frbroo:F26_Recording ; rdfs:label ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" } UNION { BIND(URI(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?value) ?value rdfs:label ?label . } BIND(SUBSTR(STR(?value), 32 , 1 ) AS ?type_indicator) FILTER(?type_indicator = \"w\" || ?type_indicator = \"r\") }",
+        "iri" : "RecordingSource"
+    }
+[[/inline]]
  [[#*inline "RecordingTitle"]]
     {
         "id" : "RecordingTitle",
