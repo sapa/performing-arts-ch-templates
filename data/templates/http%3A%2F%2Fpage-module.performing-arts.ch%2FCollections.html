@@ -1,14 +1,16 @@
 <bs-row>
-    <bs-col sm="12">
-        <!-- record sets -->
-        <semantic-query 
-        query='SELECT ?label  WHERE {
-        VALUES (?label) { ( "[[i18n "field_archival_holdings" bundle="sapa-fields"]]") }
-
-                ?record rico:hasOrHadSubject ?? .
-            } LIMIT 1'
-        template='<h5>{{#each bindings}}{{label.value}}{{/each}}</h5>'>
+    <bs-col md="4">
+        <h5>Provenance</h5>
+        <semantic-query
+            query="SELECT ?item WHERE {
+                ?item rico:hasProvenance ?? .
+            }"
+            no-result-template="No data found"
+        >
         </semantic-query>
+    </bs-col>
+    <bs-col md="4">
+        <h5>Subject of</h5>
         <semantic-tree
             query='SELECT DISTINCT ?node ?parent ?identifier ?level ?idTecValue WHERE {
                 {
@@ -44,34 +46,13 @@
             </template>
         </semantic-tree>
     </bs-col>
-</bs-row>
-<bs-row>
-    <bs-col md="4">
-        <h5>Provenance</h5
-        <semantic-tree
-            query="SELECT ?node ?parent WHERE {
-                ?node rico:hasProvenance ?? .
-                ?parent rico:hasProvenance* ?node .
-            }"
-        >
-        </semantic-tree>
-    </bs-col>
-    <bs-col md="4">
-        <h5>Subject of</h5>
-        <semantic-tree
-            query='SELECT ?node ?parent WHERE {
-                ?node rico:hasOrHadSubject ?? .
-                ?parent rico:hasOrHadSubject* ?node .
-            }'
-        ></semantic-tree>
-    </bs-col>
     <bs-col md="4">
         <h5>Creator of</h5>
-        <semantic-tree
-            query='SELECT ?node ?parent WHERE {
-                ?node rico:hasCreator ?? .
-                ?parent rico:hasCreator* ?node .
+        <semantic-query
+            query='SELECT ?item  WHERE {
+                ?item rico:hasCreator ?? .
             }'
-        ></semantic-tree>
+            no-result-template="No data found"
+        ></semantic-query>
     </bs-col>
 </bs-row>
