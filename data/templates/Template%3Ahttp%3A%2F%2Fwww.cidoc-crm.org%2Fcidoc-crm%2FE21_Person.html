@@ -207,7 +207,7 @@
             </bs-tab>
         [[/if]]
 
-        [[#if (ask "ASK { ?record rico:hasOrHadSubject ?? .}")]]
+        [[#if (ask "ASK { ?thing rico:hasOrHadSubject|rico:hasProvenance|rico:hasCreator ?? .}")]]
             <bs-tab event-key="collections" title='[[i18n "TabCollections" bundle="performing-arts-ch"]]'>
                 [[> sapaModule:Collections]]
             </bs-tab>
