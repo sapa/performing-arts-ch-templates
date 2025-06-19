@@ -49,6 +49,19 @@
             </ul></div>'>
           </semantic-query>
 
+        <!-- source -->
+        <semantic-query 
+          query='SELECT ?value WHERE {
+            ?? crm:P130_shows_features_of ?value .
+            }'
+          template='<div>
+              <h5>Source</h5>
+              <ul class="list-unstyled">
+                {{#each bindings}}<li><semantic-link iri="{{value.value}}"></semantic-link></li>{{/each}}
+              </ul>
+            </div>'>
+          </semantic-query>
+
         <!-- documents -->
         <semantic-query 
           query='SELECT ?source WHERE { 
