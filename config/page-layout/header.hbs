@@ -1,9 +1,9 @@
-<bs-navbar class='metaphacts-header-navbar navbar-logo-name {{deploymentTitle}}' data-fixed='top' data-variant='dark' data-bg='primary' data-expand='md'
+<bs-navbar class='metaphacts-header-navbar navbar-logo-name {{deploymentTitle}} DEV' data-fixed='top' data-variant='dark' data-bg='primary' data-expand='md'
   data-role='navigation'>
 
   <div class='navbar-logo'>
     <bs-navbar-brand data-href='/'>
-      {{deploymentTitle}}
+      DEV {{deploymentTitle}}
     </bs-navbar-brand>
   </div>
 
@@ -18,6 +18,9 @@
 
         <ul class='nav mr-auto'></ul>
         <ul class='nav navbar-nav'>
+            <bs-nav-item>
+                <a href="http://tls.performing-arts.ch" class="nav-link" title='Theaterlexikon der Schweiz'>Theaterlexikon der Schweiz</a>
+            </bs-nav-item>
             <bs-nav-item>
                 <mp-link class="nav-link" url='/resource/sapa:About' title='About'>About</mp-link>
             </bs-nav-item>

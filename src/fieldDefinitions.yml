@@ -3297,17 +3297,57 @@ fields:
     domain: https://www.ica.org/standards/RiC/ontology#Date
     queries:
       - select: 'SELECT $value WHERE {
-        $subject rico:expressedDate $value .
+          $subject rico:expressedDate $value .
       }'
       - insert: 'INSERT {
-        $subject rico:expressedDate $value ;
-        rico:normalizedDateValue $value ;
-        rico:dateStandard "ISO 8601"
+          $subject rico:expressedDate $value ;
+          rico:normalizedDateValue $value ;
+          rico:dateStandard "ISO 8601"
       } WHERE { }'
       - delete: 'DELETE {
-        $subject rico:expressedDate $value ;
-        rico:normalizedDateValue $value ;
-        rico:dateStandard "ISO 8601"
+          $subject rico:expressedDate $value ;
+          rico:normalizedDateValue $value ;
+          rico:dateStandard "ISO 8601"
+      } WHERE {}'
+      - ask: 'ASK { FILTER(REGEX($value, "^([\\\\+-]?\\\\d{4}(?!\\\\d{2}\\\\b))((-?)((0[1-9]|1[0-2])(\\\\3([12]\\\\d|0[1-9]|3[01]))?))?$")) }'
+
+
+  - id: RecordResourceDateValueExpressed
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue
+    label: Expressed Date
+    datatype: http://www.w3.org/2001/XMLSchema#string
+    minOccurs: 1
+    maxOccurs: 1
+    domain: https://www.ica.org/standards/RiC/ontology#Date
+    queries:
+      - select: 'SELECT $value WHERE {
+          $subject rico:expressedDate $value .
+      }'
+      - insert: 'INSERT {
+          $subject rico:expressedDate $value ;
+      } WHERE { }'
+      - delete: 'DELETE {
+          $subject rico:expressedDate $value ;
+      } WHERE {}'
+
+  - id: RecordResourceDateValueNormalized
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue
+    label: Normalized Date
+    datatype: http://www.w3.org/2001/XMLSchema#string
+    minOccurs: 1
+    maxOccurs: 1
+    domain: https://www.ica.org/standards/RiC/ontology#Date
+    queries:
+      - select: 'SELECT $value WHERE {
+          $subject rico:normalizedDateValue $value .
+      }'
+      - insert: 'INSERT {
+          $subject rico:normalizedDateValue $value ;
+          rico:dateStandard "ISO 8601"
+      } WHERE { }'
+      - delete: 'DELETE {
+          $subject rico:normalizedDateValue $value ;
+          rico:dateStandard "ISO 8601"
       } WHERE {}'
       - ask: 'ASK { FILTER(REGEX($value, "^([\\\\+-]?\\\\d{4}(?!\\\\d{2}\\\\b))((-?)((0[1-9]|1[0-2])(\\\\3([12]\\\\d|0[1-9]|3[01]))?))?$")) }'
 
@@ -4242,7 +4282,10 @@ fields:
       - delete: 'DELETE { $subject rico:hasRecordSetType $value} WHERE {}'
       - valueSet: 'SELECT $value WHERE {
           $value skos:broader* spav:rstyp
+<<<<<<< 896-formrecord-and-formrecordset-subject-of-o -- Incoming Change
           FILTER($value != spav:rstyp)
+=======
+>>>>>>> develop -- Current Change
         }'
 
 
@@ -4420,6 +4463,42 @@ fields:
           FILTER(!BOUND(?place_label_lang) || ?place_label_lang = ?lang)
           BIND(CONCAT(?item_label, " (", ?type_label, IF(BOUND(?place_label), CONCAT(", ", ?place_label), ""), ")") AS ?label)
         } LIMIT 100'
+
+  - id: RecordingSource
+    label: Source
+    datatype: xsd:anyURI
+    queries:
+      - select: 'SELECT ?value WHERE {
+          $subject crm:P130_shows_features_of ?value .
+        }'
+      - insert: 'INSERT {
+          GRAPH ?g {
+            $subject crm:P130_shows_features_of $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - delete: 'DELETE {
+          GRAPH ?g {
+            $subject crm:P130_shows_features_of $value .
+          }
+        } WHERE {
+          BIND(URI(CONCAT(STR($subject), "/container/context")) as ?g)
+        }'
+      - autosuggestion: 'SELECT DISTINCT ?value ?label WHERE {
+          {
+            ?value a frbroo:F26_Recording ;
+              rdfs:label ?label .
+            ?label bds:search ?__token__ ; 
+              bds:relevance ?score ; 
+              bds:matchAllTerms "true" 
+          } UNION {
+            BIND(URI(REPLACE(?__token__, "[\\\\\\\\|*]", "")) AS ?value)
+            ?value rdfs:label ?label .
+          }
+          BIND(SUBSTR(STR(?value), 32 , 1 ) AS ?type_indicator)
+          FILTER(?type_indicator = "w" || ?type_indicator = "r")
+        }'
 
   - id: RecordingTitle
     label: Title
