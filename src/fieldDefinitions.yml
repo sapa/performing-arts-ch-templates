@@ -4242,6 +4242,7 @@ fields:
       - delete: 'DELETE { $subject rico:hasRecordSetType $value} WHERE {}'
       - valueSet: 'SELECT $value WHERE {
           $value skos:broader* spav:rstyp
+          FILTER($value != spav:rstyp)
         }'
 
 
