@@ -4241,19 +4241,9 @@ fields:
       - insert: 'INSERT { $subject rico:hasRecordSetType $value} WHERE {}'
       - delete: 'DELETE { $subject rico:hasRecordSetType $value} WHERE {}'
       - valueSet: 'SELECT $value WHERE {
-        VALUES ($value) {
-        (spav:rssct)
-        (spav:rsssc)
-        (spav:rsclt) 
-        (spav:rsfnd) 
-        (spav:rssfn) 
-        (spav:rssrs)
-        (spav:rsssr)
-        (spav:rssss)
-        (spav:rsfil) 
-        (spav:rspar)
-        }
-      }'
+          $value skos:broader* spav:rstyp
+          FILTER($value != spav:rstyp)
+        }'
 
 
   - id: RecordSetVirtual
