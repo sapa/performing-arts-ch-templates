@@ -2500,20 +2500,20 @@ VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) { (ri
         "iri" : "RecordResourceSubject"
     }
 [[/inline]]
- [[#*inline "RecordResourceSubjectARW"]]
+ [[#*inline "RecordResourceSubjectARWO"]]
     {
-        "id" : "RecordResourceSubjectARW",
+        "id" : "RecordResourceSubjectARWO",
 
             "label": "[[i18n "field_subject" bundle="sapa-fields"]]",
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
             "domain" : "https://www.ica.org/standards/RiC/ontology#RecordResource",
             "range" : "http://iflastandards.info/ns/fr/frbr/frbroo/F25_Performance_Plan&#x27;, &#x27;http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object&#x27;, &#x27;https://www.ica.org/standards/RiC/ontology#Agent&#x27;, &#x27;https://www.ica.org/standards/RiC/ontology#Concept&#x27;, &#x27;https://www.ica.org/standards/RiC/ontology#Thing",
-                "selectPattern" : "SELECT $value WHERE { $subject rico:hasOrHadSubject $value . BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FILTER(?type_indicator = \"a\" || ?type_indicator = \"r\" || ?type_indicator = \"w\") }",
+                "selectPattern" : "SELECT $value WHERE { $subject rico:hasOrHadSubject $value . BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FILTER(?type_indicator = \"a\" || ?type_indicator = \"r\" || ?type_indicator = \"w\"  || ?type_indicator = \"o\") }",
                 "insertPattern" : "INSERT { $subject rico:hasOrHadSubject $value . } WHERE {}",
                 "deletePattern" : "DELETE { $subject rico:hasOrHadSubject $value} WHERE {}",
                 "autosuggestionPattern" : "SELECT DISTINCT $value ?label WHERE { BIND(?__userPreferredLanguage__ AS ?lang)
-VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) { (rico:Person \"person\" \"Person\" \"personne\" \"persona\") (rico:Group \"group\" \"Gruppe\" \"groupe\" \"gruppo\") (rico:CorporateBody \"group\" \"Gruppe\" \"groupe\" \"gruppo\") (rico:Family \"group\" \"Gruppe\" \"groupe\" \"gruppo\") (rico:Record \"Record\" \"Record\" \"Record\" \"Record\") (frbroo:F26_Recording \"recording\" \"Aufnahme\" \"enregistrement\" \"registrazione\") (frbroo:F25_Performance_Plan \"production\" \"Produktion\" \"production\" \"produzion\") (crm:E22_Man-Made_Object \"venue\" \"Spielstätte\" \"lieu de représentation\" \"teatro\") } BIND( IF(?lang = \"de\", ?type_label_de, IF(?lang = \"fr\", ?type_label_fr, IF(?lang = \"it\", ?type_label_it, ?type_label_en) ) ) AS ?type_label) { $value rdfs:label ?item_label . ?item_label bds:search ?__token__ ; bds:matchAllTerms \"true\" . $value rdf:type ?type . } UNION { BIND(URI(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?value) $value rdf:type ?type ; rdfs:label|rico:name ?item_label . } BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FILTER(?type_indicator = \"a\" || ?type_indicator = \"r\" || ?type_indicator = \"w\") OPTIONAL { $value crm:P2_has_type ?crmtype. } FILTER((?type != crm:E22_Man-Made_Object) || (?crmtype = spav:dwmkn)) BIND(CONCAT(?item_label, \" (\", ?type_label, IF(BOUND(?place_label), CONCAT(\", \", ?place_label), \"\"), \")\") AS ?label) } LIMIT 100",
-        "iri" : "RecordResourceSubjectARW"
+VALUES (?type ?type_label_en ?type_label_de ?type_label_fr ?type_label_it) { (rico:Person \"person\" \"Person\" \"personne\" \"persona\") (rico:Group \"group\" \"Gruppe\" \"groupe\" \"gruppo\") (rico:CorporateBody \"group\" \"Gruppe\" \"groupe\" \"gruppo\") (rico:Family \"group\" \"Gruppe\" \"groupe\" \"gruppo\") (rico:Record \"Record\" \"Record\" \"Record\" \"Record\") (frbroo:F26_Recording \"recording\" \"Aufnahme\" \"enregistrement\" \"registrazione\") (frbroo:F25_Performance_Plan \"production\" \"Produktion\" \"production\" \"produzion\") (crm:E22_Man-Made_Object \"venue\" \"Spielstätte\" \"lieu de représentation\" \"teatro\") } BIND( IF(?lang = \"de\", ?type_label_de, IF(?lang = \"fr\", ?type_label_fr, IF(?lang = \"it\", ?type_label_it, ?type_label_en) ) ) AS ?type_label) { $value rdfs:label ?item_label . ?item_label bds:search ?__token__ ; bds:matchAllTerms \"true\" . $value rdf:type ?type . } UNION { BIND(URI(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\")) AS ?value) $value rdf:type ?type ; rdfs:label|rico:name ?item_label . } BIND(SUBSTR(STR($value), 32 , 1 ) AS ?type_indicator) FILTER(?type_indicator = \"a\" || ?type_indicator = \"r\" || ?type_indicator = \"w\"  || ?type_indicator = \"o\") OPTIONAL { $value crm:P2_has_type ?crmtype. } FILTER((?type != crm:E22_Man-Made_Object) || (?crmtype = spav:dwmkn)) BIND(CONCAT(?item_label, \" (\", ?type_label, IF(BOUND(?place_label), CONCAT(\", \", ?place_label), \"\"), \")\") AS ?label) } LIMIT 100",
+        "iri" : "RecordResourceSubjectARWO"
     }
 [[/inline]]
  [[#*inline "RecordResourceSubjectU"]]
