@@ -35,7 +35,7 @@
         [[> RecordResourcePhotoType]],
         [[> RecordParts]],
         [[> RecordResourceSubjectU]],
-        [[> RecordResourceSubjectARW]],
+        [[> RecordResourceSubjectARWO]],
         [[> RecordResourcePlace]],
         [[> RecordResourceDate]],
         [[> RecordResourceExtent]],
@@ -105,12 +105,14 @@
               <semantic-form-switch-case label='Single Date'>
                 <semantic-form-composite-input for="RecordResourceDate" new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[
                   [[> RecordResourceDateType]],
-                  [[> RecordResourceDateValue]],
+                  [[> RecordResourceDateValueExpressed]],
+                  [[> RecordResourceDateValueNormalized]],
                   [[> RecordResourceDateQualifier]],
                   [[> RecordResourceDateCertainty]]
                 ]'>
                   <semantic-form-hidden-input for="RecordResourceDateType" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
-                  <semantic-form-text-input for="RecordResourceDateValue"></semantic-form-text-input>
+                  <semantic-form-text-input for="RecordResourceDateValueExpressed"></semantic-form-text-input>
+                  <semantic-form-text-input for="RecordResourceDateValueNormalized"></semantic-form-text-input>
                   <semantic-form-checklist-input row=true for="RecordResourceDateQualifier"></semantic-form-checklist-input>
                   <semantic-form-checklist-input row=true for="RecordResourceDateCertainty"></semantic-form-checklist-input>
                 </semantic-form-composite-input>
@@ -124,23 +126,27 @@
                   <semantic-form-hidden-input for="RecordResourceDateType" default-value='[[resolvePrefix "rico:DateRange"]]'></semantic-form-hidden-input>
                   <semantic-form-composite-input for="RecordResourceDateBeginning" new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[
                     [[> RecordResourceDateType]],
-                    [[> RecordResourceDateValue]],
+                    [[> RecordResourceDateValueExpressed]],
+                    [[> RecordResourceDateValueNormalized]],
                     [[> RecordResourceDateQualifier]],
                     [[> RecordResourceDateCertainty]]
                   ]'>
                     <semantic-form-hidden-input for="RecordResourceDateType" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
-                    <semantic-form-text-input for="RecordResourceDateValue"></semantic-form-text-input>
+                    <semantic-form-text-input for="RecordResourceDateValueExpressed"></semantic-form-text-input>
+                    <semantic-form-text-input for="RecordResourceDateValueNormalized"></semantic-form-text-input>
                     <semantic-form-checklist-input row=true for="RecordResourceDateQualifier"></semantic-form-checklist-input>
                     <semantic-form-checklist-input row=true for="RecordResourceDateCertainty"></semantic-form-checklist-input>
                   </semantic-form-composite-input>   
                   <semantic-form-composite-input for="RecordResourceDateEnd" new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[
                     [[> RecordResourceDateType]],
-                    [[> RecordResourceDateValue]],
+                    [[> RecordResourceDateValueExpressed]],
+                    [[> RecordResourceDateValueNormalized]],
                     [[> RecordResourceDateQualifier]],
                     [[> RecordResourceDateCertainty]]
                   ]'>
                     <semantic-form-hidden-input for="RecordResourceDateType" default-value='[[resolvePrefix "rico:SingleDate"]]'></semantic-form-hidden-input>
-                    <semantic-form-text-input for="RecordResourceDateValue"></semantic-form-text-input>
+                    <semantic-form-text-input for="RecordResourceDateValueExpressed"></semantic-form-text-input>
+                    <semantic-form-text-input for="RecordResourceDateValueNormalized"></semantic-form-text-input>
                     <semantic-form-checklist-input row=true for="RecordResourceDateQualifier"></semantic-form-checklist-input>
                     <semantic-form-checklist-input row=true for="RecordResourceDateCertainty"></semantic-form-checklist-input>
                   </semantic-form-composite-input>
@@ -236,7 +242,7 @@
             <semantic-form-text-input for="RecordResourceDescription" multiline=true></semantic-form-text-input>
           </bs-col>
           <bs-col sm='4'>
-            <semantic-form-autocomplete-input for="RecordResourceSubjectARW"></semantic-form-autocomplete-input>
+            <semantic-form-autocomplete-input for="RecordResourceSubjectARWO"></semantic-form-autocomplete-input>
             <semantic-form-autocomplete-input for="RecordResourceSubjectU">
               <semantic-form new-subject-template="http://data.performing-arts.ch/u/{{UUID}}" fields='[
                   [[> RDFtype]],
@@ -454,7 +460,7 @@
               [[> ThingLegacyIdentifier]],
               [[> RecordResourceNameSingle]],
               [[> RecordResourceDate]],
-              [[> RecordResourceSubjectARW]],
+              [[> RecordResourceSubjectARWO]],
               [[> RecordResourceSubjectU]],
               [[> RecordDocumentaryForm]],
               [[> RecordResourceDescription]],
@@ -559,7 +565,7 @@
                   <semantic-form-text-input for="RecordResourceDescription" multiline=true></semantic-form-text-input>
                 </bs-col>
                 <bs-col sm='4'>
-                  <semantic-form-autocomplete-input for="RecordResourceSubjectARW"></semantic-form-autocomplete-input>
+                  <semantic-form-autocomplete-input for="RecordResourceSubjectARWO"></semantic-form-autocomplete-input>
                   <semantic-form-autocomplete-input for="RecordResourceSubjectU">
                     <semantic-form new-subject-template="http://data.performing-arts.ch/u/{{UUID}}" fields='[
                         [[> RDFtype]],
