@@ -6,13 +6,17 @@
             [[> sapaModule:GroupSummary]]
         </bs-tab>
 
-        <bs-tab event-key='productions' title='[[i18n "TabProductions" bundle="performing-arts-ch"]]'>
-            [[> sapaModule:GroupProductions]]
-        </bs-tab>
+        [[#if (ask "ASK { ?personactivity crm:P14_carried_out_by ?? . { ?referencecreation crm:P9_consists_of ?personactivity ; frbroo:R17_created ?reference . ?plan frbroo:R14_incorporates ?reference . } UNION { ?expressioncreation crm:P9_consists_of ?personactivity ; frbroo:R17_created ?plan . } UNION { ?genericperformance crm:P9_consists_of ?personactivity ; frbroo:R25_performed ?plan . } ?plan a frbroo:F25_Performance_Plan . }")]]
+            <bs-tab event-key='productions' title='[[i18n "TabProductions" bundle="performing-arts-ch"]]'>
+                [[> sapaModule:GroupProductions]]
+            </bs-tab>
+        [[/if]]
 
-        <bs-tab event-key="collections" title='[[i18n "TabCollections" bundle="performing-arts-ch"]]'>
-            [[> sapaModule:Collections]]
-        </bs-tab>
+        [[#if (ask "ASK { ?thing rico:hasOrHadSubject|rico:hasProvenance|rico:hasCreator ?? .}")]]
+            <bs-tab event-key="collections" title='[[i18n "TabCollections" bundle="performing-arts-ch"]]'>
+                [[> sapaModule:Collections]]
+            </bs-tab>
+        [[/if]]
 
         [[#if (hasPermission "forms:ldp:*")]] 
         <bs-tab event-key='group' title='[[i18n "TabEdit" bundle="performing-arts-ch"]]'>
