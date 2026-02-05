@@ -218,7 +218,6 @@ fields:
     domain: http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object', 'http://www.cidoc-crm.org/cidoc-crm/E74_Group
     queries:
       - select: 'SELECT $value WHERE {
-        BIND(IRI(CONCAT ("http://data.performing-arts.ch/x/", MD5(CONCAT(STR(?subject), "byline")))) AS $identifier)
         $subject crm:P131_is_identified_by $identifier .
         $identifier a crm:E41_Appellation ;
         crm:P2_has_type spav:yauzw ;
