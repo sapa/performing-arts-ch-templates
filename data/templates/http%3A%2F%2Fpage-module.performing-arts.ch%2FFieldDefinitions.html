@@ -1570,6 +1570,62 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
         "iri" : "PersonHistory"
     }
 [[/inline]]
+ [[#*inline "PersonManagement"]]
+    {
+        "id" : "PersonManagement",
+
+            "label": "[[i18n "field_management" bundle="sapa-fields"]]",
+            "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P14i_performed ?value . ?value a crm:E7_Activity ; crm:P2_has_type spav:mufv . }",
+                "insertPattern" : "INSERT { $subject crm:P14i_performed ?value . ?value a crm:E7_Activity ; crm:P2_has_type spav:mufv . } WHERE {}",
+                "deletePattern" : "DELETE { $subject crm:P14i_performed ?value . ?value a crm:E7_Activity ; crm:P2_has_type spav:mufv . } WHERE {}",
+        "iri" : "PersonManagement"
+    }
+[[/inline]]
+ [[#*inline "PersonManagementDateFrom"]]
+    {
+        "id" : "PersonManagementDateFrom",
+
+            "label": "[[i18n "field_from" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#string",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P4_has_time-span ?timespan . ?timespan a crm:E52_Time-Span ; crm:P82a_begin_of_the_begin ?value_raw . BIND(STR(?value_raw) AS ?value) }",
+                "insertPattern" : "INSERT { $subject crm:P4_has_time-span ?timespan . ?timespan a crm:E52_Time-Span ; crm:P82a_begin_of_the_begin ?value_processed . } WHERE { BIND( IF( REGEX(STR(?value), \"^[0-9]{4}$\"), CONCAT(STR(?value), \"-01-01\"), IF( REGEX(STR(?value), \"^[0-9]{4}-[0-9]{2}$\"), CONCAT(STR(?value), \"-01\"), STR(?value) ) ) AS ?date_lex ) BIND(xsd:date(?date_lex) AS ?value_processed) BIND(IRI(CONCAT(STR($subject), \"/timespan\")) AS ?timespan) }",
+                "deletePattern" : "DELETE { $subject crm:P4_has_time-span ?timespan . ?timespan a crm:E52_Time-Span ; crm:P82a_begin_of_the_begin ?value . } WHERE {}",
+                "askPattern" : "ASK { FILTER(REGEX($value, \"^([\\\\+-]?\\\\d{4}(?!\\\\d{2}\\\\b))((-?)((0[1-9]|1[0-2])(\\\\3([12]\\\\d|0[1-9]|3[01]))?))?$\")) }",
+        "iri" : "PersonManagementDateFrom"
+    }
+[[/inline]]
+ [[#*inline "PersonManagementDateTo"]]
+    {
+        "id" : "PersonManagementDateTo",
+
+            "label": "[[i18n "field_to" bundle="sapa-fields"]]",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#string",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P4_has_time-span ?timespan . ?timespan a crm:E52_Time-Span ; crm:P82b_end_of_the_end ?value . }",
+                "insertPattern" : "INSERT { $subject crm:P4_has_time-span ?timespan . ?timespan a crm:E52_Time-Span ; crm:P82b_end_of_the_end ?value_processed . } WHERE { BIND( IF( REGEX(STR(?value), \"^[0-9]{4}$\"), CONCAT(STR(?value), \"-12-31\"), IF( REGEX(STR(?value), \"^[0-9]{4}-[0-9]{2}$\"), CONCAT(STR(?value), \"-31\"), STR(?value) ) ) AS ?date_lex_common ) BIND(SUBSTR(?date_lex_common, 6, 2) AS ?month) BIND( IF( ?month = \"02\", REPLACE(?date_lex_common, \"-31$\", \"-28\"), IF( ?month = \"04\" || ?month = \"06\" || ?month = \"09\" || ?month= \"11\", REPLACE(?date_lex_common, \"-31$\", \"-30\"), ?date_lex_common ) ) AS ?date_lex ) BIND(xsd:date(?date_lex) AS ?value_processed) BIND(IRI(CONCAT(STR($subject), \"/timespan\")) AS ?timespan) }",
+                "deletePattern" : "DELETE { $subject crm:P4_has_time-span ?timespan . ?timespan a crm:E52_Time-Span ; crm:P82b_end_of_the_end ?value . } WHERE {}",
+                "askPattern" : "ASK { FILTER(REGEX($value, \"^([\\\\+-]?\\\\d{4}(?!\\\\d{2}\\\\b))((-?)((0[1-9]|1[0-2])(\\\\3([12]\\\\d|0[1-9]|3[01]))?))?$\")) }",
+        "iri" : "PersonManagementDateTo"
+    }
+[[/inline]]
+ [[#*inline "PersonManagementInstitution"]]
+    {
+        "id" : "PersonManagementInstitution",
+
+            "label": "[[i18n "field_institution" bundle="sapa-fields"]]",
+            "minOccurs" : "1",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#anyURI",
+                "selectPattern" : "SELECT ?value WHERE { $subject crm:P16_used_specific_object ?value . }",
+                "insertPattern" : "INSERT { $subject crm:P16_used_specific_object ?value . } WHERE {}",
+                "deletePattern" : "DELETE { $subject crm:P16_used_specific_object ?value . } WHERE {}",
+                "autosuggestionPattern" : "SELECT $value $label WHERE { $value a rico:CorporateBody ; rdfs:label $label . { $label bds:search ?__token__ ; bds:matchAllTerms \"true\" . } UNION { BIND(URI(REPLACE(REPLACE(?__token__, \"[\\\\\\\\|*]\", \"\"), \"\\\\.$\", \"\")) AS ?value) } FILTER(CONTAINS(STR(?value), \"/a/\")) } LIMIT 10",
+        "iri" : "PersonManagementInstitution"
+    }
+[[/inline]]
  [[#*inline "PersonMiscAppellation"]]
     {
         "id" : "PersonMiscAppellation",
