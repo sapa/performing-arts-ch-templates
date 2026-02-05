@@ -728,6 +728,19 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
         "iri" : "InstantiationConditionStatementDamage"
     }
 [[/inline]]
+ [[#*inline "InstantiationConditionStatementHistory"]]
+    {
+        "id" : "InstantiationConditionStatementHistory",
+
+            "label": "[[i18n "field_history" bundle="sapa-fields"]]",
+            "maxOccurs" : "1",
+            "xsdDatatype" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#string",
+                "selectPattern" : "SELECT ?value WHERE { $subject rico:history ?value . }",
+                "insertPattern" : "INSERT { $subject rico:history $value . } WHERE {}",
+                "deletePattern" : "DELETE { $subject rico:history $value . } WHERE {}",
+        "iri" : "InstantiationConditionStatementHistory"
+    }
+[[/inline]]
  [[#*inline "InstantiationCopyPath"]]
     {
         "id" : "InstantiationCopyPath",

@@ -1253,6 +1253,17 @@ fields:
       schemePattern: '?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:dm '
       relationPattern: '?item skos:broader ?parent'
 
+  - id: InstantiationConditionStatementHistory
+    label: History
+    datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#string
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE { 
+          $subject rico:history ?value .
+          }'
+      - insert: 'INSERT { $subject rico:history $value . } WHERE {}'
+      - delete: 'DELETE { $subject rico:history $value . } WHERE {}'       
+
   - id: InstantiationCopyPath
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCopyPath
     label: Copy path
