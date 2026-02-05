@@ -26,6 +26,7 @@
         [[> InstantiationHistory]],
         [[> InstantiationIntegrity]],
         [[> InstantiationCondition]],
+        [[> InstantiationConditionStatement]],
         [[> InstantiationMaterial]],
         [[> InstantiationExtent]],
         [[> ThingNoteInternal]],
@@ -107,6 +108,17 @@
           </bs-col>
           <bs-col sm='4'>
             <semantic-form-select-input for="InstantiationCondition"></semantic-form-select-input>
+            <semantic-form-composite-input for="InstantiationConditionStatement" new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[
+              [[> InstantiationConditionStatementCondition]],
+              [[> InstantiationConditionStatementDamage]],
+              [[> InstantiationConditionStatementHistory]]
+            ]'>
+            <bs-row>
+              <bs-col sm='12'><semantic-form-select-input for="InstantiationConditionStatementCondition"></semantic-form-select-input></bs-col>
+              <bs-col sm='12'><semantic-form-tree-picker-input for="InstantiationConditionStatementDamage"></semantic-form-tree-picker-input></bs-col>
+              <bs-col sm='12'><semantic-form-text-input for="InstantiationConditionStatementHistory" multiline=true></semantic-form-text-input></bs-col>
+            </bs-row>
+          </semantic-form-composite-input>
             <semantic-form-tree-picker-input for="ThingLocation"></semantic-form-tree-picker-input>
           </bs-col>
         </bs-row>

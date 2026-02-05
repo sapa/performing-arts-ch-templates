@@ -1191,7 +1191,7 @@ fields:
 
   - id: InstantiationCondition
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCondition
-    label: Condition
+    label: Condition (deprecated)
     datatype: http://www.w3.org/2001/XMLSchema#anyURI
     domain: https://www.ica.org/standards/RiC/ontology#Instantiation
     range: http://www.w3.org/2004/02/skos/core#Concept
@@ -1205,6 +1205,63 @@ fields:
       schemePattern: '?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:cd '
       relationPattern: '?item skos:broader ?parent'
 
+  - id: InstantiationConditionStatement
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantationConditionStatement
+    label: Condition
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    domain: https://www.ica.org/standards/RiC/ontology#Instantiation
+    queries:
+      - select: 'SELECT ?value WHERE { 
+          $subject rico:isAssociatedWithEvent ?value . 
+          ?value spao:hasCondition ?type .
+          ?type skos:inScheme spav:cd .
+        }'
+      - insert: 'INSERT { $subject rico:isAssociatedWithEvent $value} WHERE {}'
+      - delete: 'DELETE { $subject rico:isAssociatedWithEvent $value} WHERE {}'
+
+  - id: InstantiationConditionStatementCondition
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationConditionStatementCondition
+    label: Condition
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    minOccurs: 1
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE { 
+          $subject spao:hasCondition ?value .
+          ?value skos:inScheme spav:cd .
+        }'
+      - insert: 'INSERT { $subject spao:hasCondition $value . } WHERE {}'
+      - delete: 'DELETE { $subject spao:hasCondition $value . } WHERE {}'
+      - valueSet: 'SELECT $value WHERE { 
+          $value skos:inScheme spav:cd .
+        }'
+
+  - id: InstantiationConditionStatementDamage
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationConditionStatementDamage
+    label: Damage
+    datatype: http://www.w3.org/2001/XMLSchema#anyURI
+    queries:
+      - select: 'SELECT ?value WHERE { 
+          $subject rico:hasEventType ?value .
+          ?value skos:inScheme spav:dm .
+        }'
+      - insert: 'INSERT { $subject rico:hasEventType $value . } WHERE {}'
+      - delete: 'DELETE { $subject rico:hasEventType $value . } WHERE {}'
+    treePatterns:
+      type: simple
+      schemePattern: '?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:dm '
+      relationPattern: '?item skos:broader ?parent'
+
+  - id: InstantiationConditionStatementHistory
+    label: History
+    datatype: http://www.w3.org/1999/02/22-rdf-syntax-ns#string
+    maxOccurs: 1
+    queries:
+      - select: 'SELECT ?value WHERE { 
+          $subject rico:history ?value .
+          }'
+      - insert: 'INSERT { $subject rico:history $value . } WHERE {}'
+      - delete: 'DELETE { $subject rico:history $value . } WHERE {}'       
 
   - id: InstantiationCopyPath
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationCopyPath
