@@ -21,6 +21,7 @@
         [[> PersonMiscAppellation]],
         [[> PersonGender]],
         [[> PersonSwiss]],
+        [[> PersonManagement]],
         [[> PersonBirthDate]],
         [[> PersonBirthPlace]],
         [[> PersonDeathDate]],
@@ -96,6 +97,27 @@
         <bs-row>
           <bs-col sm='12'>
             <semantic-form-text-input for="AgentBibliography" multiline=true languages='["en","de","fr","it"]'></semantic-form-text-input>
+          </bs-col>
+        </bs-row>
+        <bs-row>
+          <bs-col sm='12'>
+            <semantic-form-composite-input for="PersonManagement" new-subject-template='http://data.performing-arts.ch/x/{{UUID}}' fields='[
+              [[> PersonManagementDateFrom]],
+              [[> PersonManagementDateTo]],
+              [[> PersonManagementInstitution]]
+            ]'>
+              <bs-row>
+                <bs-col sm='6'>
+                    <semantic-form-autocomplete-input for="PersonManagementInstitution"></semantic-form-autocomplete-input>
+                </bs-col>
+                <bs-col sm='3'>
+                    <semantic-form-text-input for="PersonManagementDateFrom"></semantic-form-text-input>
+                </bs-col>
+                <bs-col sm='3'>
+                    <semantic-form-text-input for="PersonManagementDateTo"></semantic-form-text-input>
+                </bs-col>
+              </bs-row>
+            </semantic-form-composite-input>
           </bs-col>
         </bs-row>
         <hr />
