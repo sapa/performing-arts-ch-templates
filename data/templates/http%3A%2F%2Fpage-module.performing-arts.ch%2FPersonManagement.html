@@ -1,0 +1,52 @@
+<semantic-table 
+  query='SELECT ?institution ?from ?to WHERE {
+      ?this crm:P14i_performed ?management .
+      ?management crm:P2_has_type spav:mufv ;
+        crm:P16_used_specific_object ?institution .
+      OPTIONAL { 
+        ?management crm:P4_has_time-span ?timespan .
+        OPTIONAL {
+          ?timespan crm:P82a_begin_of_the_begin ?from ;
+        }
+        OPTIONAL {
+          ?timespan crm:P82b_end_of_the_end ?to .
+        }
+      }
+    }'
+  column-configuration='[
+    {
+      "variableName": "institution",
+      "displayName": "[[i18n "ManagementTableInstitution" bundle="performing-arts-ch" escapeHTML=false]]"
+    },
+    {
+      "variableName": "from",
+      "displayName": "[[i18n "ManagementTableFrom" bundle="performing-arts-ch" escapeHTML=false]]"
+    },
+    {
+      "variableName": "to",
+      "displayName": "[[i18n "ManagementTableTo" bundle="performing-arts-ch" escapeHTML=false]]"
+    }
+  ]'
+>
+</semantic-table>
+<mp-sparql-download 
+  id='csv-result' 
+  query='SELECT ?institution (MIN(?institution_label) as ?label) ?from ?to WHERE {
+    ?this crm:P14i_performed ?management .
+    ?management crm:P2_has_type spav:mufv ;
+      crm:P16_used_specific_object ?institution .
+    ?institution rdfs:label ?institution_label .
+    OPTIONAL { 
+      ?management crm:P4_has_time-span ?timespan .
+      OPTIONAL {
+        ?timespan crm:P82a_begin_of_the_begin ?from ;
+      }
+      OPTIONAL {
+        ?timespan crm:P82b_end_of_the_end ?to .
+      }
+    }
+  } GROUP BY ?institution ?from ?to'
+  header="text/csv"
+  filename="management-[[singleValueFromSelect 'SELECT ?label WHERE { ?? rdfs:label ?label }']].csv">
+    <button class="btn btn-secondary">[[i18n "DownloadCSV" bundle="performing-arts-ch"]]</button>
+</mp-sparql-download>
