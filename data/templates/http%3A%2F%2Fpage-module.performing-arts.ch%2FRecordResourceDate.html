@@ -32,13 +32,13 @@
             MINUS { ?date rico:normalizedDateValue ?expressed_date . }
             OPTIONAL {
                 ?date rico:hasBeginningDate ?b .
-                ?b rico:normalizedDateValue ?beginning_date .
+                ?b rico:expressedDate ?beginning_date .
                 OPTIONAL { ?b rico:dateQualifier ?beginning_qualifier . }
                 OPTIONAL { ?b rico:certainty ?beginning_certainty . }
             }
             OPTIONAL {
                 ?date rico:hasEndDate ?e .
-                ?e rico:normalizedDateValue ?end_date .
+                ?e rico:expressedDate ?end_date .
                 OPTIONAL { ?e rico:dateQualifier ?end_qualifier . }
                 OPTIONAL { ?e rico:certainty ?end_certainty . }
             }

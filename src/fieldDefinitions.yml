@@ -3489,17 +3489,57 @@ fields:
     domain: https://www.ica.org/standards/RiC/ontology#Date
     queries:
       - select: 'SELECT $value WHERE {
-        $subject rico:expressedDate $value .
+          $subject rico:expressedDate $value .
       }'
       - insert: 'INSERT {
-        $subject rico:expressedDate $value ;
-        rico:normalizedDateValue $value ;
-        rico:dateStandard "ISO 8601"
+          $subject rico:expressedDate $value ;
+          rico:normalizedDateValue $value ;
+          rico:dateStandard "ISO 8601"
       } WHERE { }'
       - delete: 'DELETE {
-        $subject rico:expressedDate $value ;
-        rico:normalizedDateValue $value ;
-        rico:dateStandard "ISO 8601"
+          $subject rico:expressedDate $value ;
+          rico:normalizedDateValue $value ;
+          rico:dateStandard "ISO 8601"
+      } WHERE {}'
+      - ask: 'ASK { FILTER(REGEX($value, "^([\\\\+-]?\\\\d{4}(?!\\\\d{2}\\\\b))((-?)((0[1-9]|1[0-2])(\\\\3([12]\\\\d|0[1-9]|3[01]))?))?$")) }'
+
+
+  - id: RecordResourceDateValueExpressed
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue
+    label: Expressed Date
+    datatype: http://www.w3.org/2001/XMLSchema#string
+    minOccurs: 1
+    maxOccurs: 1
+    domain: https://www.ica.org/standards/RiC/ontology#Date
+    queries:
+      - select: 'SELECT $value WHERE {
+          $subject rico:expressedDate $value .
+      }'
+      - insert: 'INSERT {
+          $subject rico:expressedDate $value ;
+      } WHERE { }'
+      - delete: 'DELETE {
+          $subject rico:expressedDate $value ;
+      } WHERE {}'
+
+  - id: RecordResourceDateValueNormalized
+    iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/RecordResourceDateValue
+    label: Normalized Date
+    datatype: http://www.w3.org/2001/XMLSchema#string
+    minOccurs: 1
+    maxOccurs: 1
+    domain: https://www.ica.org/standards/RiC/ontology#Date
+    queries:
+      - select: 'SELECT $value WHERE {
+          $subject rico:normalizedDateValue $value .
+      }'
+      - insert: 'INSERT {
+          $subject rico:normalizedDateValue $value ;
+          rico:dateStandard "ISO 8601"
+      } WHERE { }'
+      - delete: 'DELETE {
+          $subject rico:normalizedDateValue $value ;
+          rico:dateStandard "ISO 8601"
       } WHERE {}'
       - ask: 'ASK { FILTER(REGEX($value, "^([\\\\+-]?\\\\d{4}(?!\\\\d{2}\\\\b))((-?)((0[1-9]|1[0-2])(\\\\3([12]\\\\d|0[1-9]|3[01]))?))?$")) }'
 
@@ -4434,7 +4474,10 @@ fields:
       - delete: 'DELETE { $subject rico:hasRecordSetType $value} WHERE {}'
       - valueSet: 'SELECT $value WHERE {
           $value skos:broader* spav:rstyp
+<<<<<<< 896-formrecord-and-formrecordset-subject-of-o -- Incoming Change
           FILTER($value != spav:rstyp)
+=======
+>>>>>>> develop -- Current Change
         }'
 
 
