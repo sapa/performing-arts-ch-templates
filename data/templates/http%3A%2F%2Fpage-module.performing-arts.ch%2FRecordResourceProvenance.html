@@ -29,9 +29,10 @@
             <!-- acquisition -->
             <semantic-query 
                 query="SELECT ?label ?acquisition  WHERE {
-            VALUES (?label) { ( '[[i18n "field_mode_of_acquisition" bundle="sapa-fields"]]') }
-        
-                    ?? rico:isAssociatedWithEvent [ a rico:Event ; rico:hasEventType ?acquisition ] . }"
+                    VALUES (?label) { ( '[[i18n "field_mode_of_acquisition" bundle="sapa-fields"]]') }
+                    ?? rico:isAssociatedWithEvent [ a rico:Event ; rico:hasEventType ?acquisition ] .
+                    <http://vocab.performing-arts.ch/etmoc> skos:narrower ?acquisition
+                 }"
                 template='<div>
                     {{#ifCond bindings.length ">" 0}}
                         <h5>{{bindings.0.label.value}}</h5>
