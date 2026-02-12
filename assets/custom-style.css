@@ -303,6 +303,7 @@ div.SemanticTreeInput--inputAndButtons {
 .page__body-navtabs a[data-rb-event-key="persons"][aria-selected="false"],
 .page__body-navtabs a[data-rb-event-key="producers"][aria-selected="false"],
 .page__body-navtabs a[data-rb-event-key="productions"][aria-selected="false"],
+.page__body-navtabs a[data-rb-event-key="management"][aria-selected="false"],
 .page__body-navtabs a[data-rb-event-key="collections"][aria-selected="false"],
 .page__body-navtabs a[data-rb-event-key="video"][aria-selected="false"] {
   border: 1px solid #ccc;

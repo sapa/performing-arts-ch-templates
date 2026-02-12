@@ -207,6 +207,12 @@
             </bs-tab>
         [[/if]]
 
+        [[#if (ask "ASK { ?? crm:P14i_performed ?management . ?management crm:P2_has_type spav:mufv . }")]]
+            <bs-tab event-key='management' title='[[i18n "TabManagement" bundle="performing-arts-ch"]]'>
+                [[> sapaModule:PersonManagement]]
+            </bs-tab>
+        [[/if]]
+        
         [[#if (ask "ASK { ?thing rico:hasOrHadSubject|rico:hasProvenance|rico:hasCreator ?? .}")]]
             <bs-tab event-key="collections" title='[[i18n "TabCollections" bundle="performing-arts-ch"]]'>
                 [[> sapaModule:Collections]]
