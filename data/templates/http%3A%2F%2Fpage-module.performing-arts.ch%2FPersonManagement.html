@@ -1,18 +1,33 @@
 <semantic-table 
   query='SELECT ?institution ?from ?to WHERE {
-    ?this crm:P14i_performed ?management .
-    ?management crm:P2_has_type spav:mufv ;
-      crm:P16_used_specific_object ?institution .
-    OPTIONAL { 
-      ?management crm:P4_has_time-span ?timespan .
-      OPTIONAL {
-        ?timespan crm:P82a_begin_of_the_begin ?from ;
+      ?this crm:P14i_performed ?management .
+      ?management crm:P2_has_type spav:mufv ;
+        crm:P16_used_specific_object ?institution .
+      OPTIONAL { 
+        ?management crm:P4_has_time-span ?timespan .
+        OPTIONAL {
+          ?timespan crm:P82a_begin_of_the_begin ?from ;
+        }
+        OPTIONAL {
+          ?timespan crm:P82b_end_of_the_end ?to .
+        }
       }
-      OPTIONAL {
-        ?timespan crm:P82b_end_of_the_end ?to .
-      }
+    }'
+  column-configuration='[
+    {
+      "variableName": "institution",
+      "displayName": "Institution"
+    },
+    {
+      "variableName": "from",
+      "displayName": "From"
+    },
+    {
+      "variableName": "to",
+      "displayName": "To"
     }
-  }'>
+  ]'
+>
 </semantic-table>
 <mp-sparql-download 
   id='csv-result' 
