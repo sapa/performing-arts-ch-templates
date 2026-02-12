@@ -691,8 +691,8 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
             "domain" : "https://www.ica.org/standards/RiC/ontology#Instantiation",
                 "selectPattern" : "SELECT ?value WHERE { $subject rico:isAssociatedWithEvent ?value . ?value spao:hasCondition ?type . ?type skos:inScheme spav:cd . }",
-                "insertPattern" : "INSERT { $subject rico:isAssociatedWithEvent $value} WHERE {}",
-                "deletePattern" : "DELETE { $subject rico:isAssociatedWithEvent $value} WHERE {}",
+                "insertPattern" : "INSERT { $subject rico:isAssociatedWithEvent $value . $value a rico:Event . } WHERE {}",
+                "deletePattern" : "DELETE { $subject rico:isAssociatedWithEvent $value . $value a rico:Event . } WHERE {}",
         "iri" : "InstantiationConditionStatement"
     }
 [[/inline]]

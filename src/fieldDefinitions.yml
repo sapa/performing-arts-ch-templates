@@ -1216,8 +1216,14 @@ fields:
           ?value spao:hasCondition ?type .
           ?type skos:inScheme spav:cd .
         }'
-      - insert: 'INSERT { $subject rico:isAssociatedWithEvent $value} WHERE {}'
-      - delete: 'DELETE { $subject rico:isAssociatedWithEvent $value} WHERE {}'
+      - insert: 'INSERT { 
+          $subject rico:isAssociatedWithEvent $value .
+          $value a rico:Event .
+        } WHERE {}'
+      - delete: 'DELETE { 
+          $subject rico:isAssociatedWithEvent $value .  
+          $value a rico:Event .
+        } WHERE {}'
 
   - id: InstantiationConditionStatementCondition
     iri: http://performing-arts.ch/ldp-assets/fieldDefinitionContainer/InstantiationConditionStatementCondition
