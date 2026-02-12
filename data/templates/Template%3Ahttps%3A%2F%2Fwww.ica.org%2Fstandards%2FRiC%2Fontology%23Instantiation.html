@@ -151,7 +151,7 @@
                         template='<div><h5>Copy path</h5><ul class="list-unstyled">{{#each bindings}}<li>{{path.value}}</li>{{/each}}</ul></div>'>
                     </semantic-query>
                     
-                    <!-- condition -->
+                    <!-- condition (deprecated)-->
                     <semantic-query 
                         query="SELECT ?value WHERE { ?? spao:hasCondition ?value . } ORDER BY ASC (?value)"
                         template='<div>
@@ -161,6 +161,41 @@
                             {{/each}}</ul></div>'>
                     </semantic-query>
 
+                    <!-- condition -->
+                    <semantic-query
+                        query="SELECT ?condition (GROUP_CONCAT(?damage;SEPARATOR='||') as ?damages) ?history WHERE {
+                            ?? rico:isAssociatedWithEvent ?damage_event .
+                            ?damage_event a rico:Event ;
+                                spao:hasCondition ?condition .
+                            OPTIONAL {
+                                ?damage_event rico:hasEventType ?damage .
+                            }
+                            OPTIONAL {
+                                ?damage_event rico:history ?history .
+                            }
+                        } GROUP BY ?condition ?history" 
+                        template="{{> condition-template}}"
+                    >
+                        <template id="condition-template">
+                            <div>
+                                <h5>Condition</h5>
+                                <ul class="list-unstyled">
+                                    {{#each bindings}}
+                                        <li>
+                                            <mp-label iri="{{condition.value}}"></mp-label>
+                                            {{#if damages.value}}
+                                                ({{#each (split damages.value "||")}}{{#if @first}}{{else}}, {{/if}}<mp-label iri="{{this}}"></mp-label>{{/each}})
+                                            {{/if}}
+                                            {{#if history.value}}
+                                                <p><small><em>{{history.value}}</em></small></p>
+                                            {{/if}}
+                                        </li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+                        </template>
+                    </semantic-query>
+                
                     <!-- display mode -->
                     <semantic-query 
                         query="SELECT ?display_mode WHERE { ?? spao:displayMode ?display_mode . }"
