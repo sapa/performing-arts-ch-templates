@@ -718,9 +718,11 @@ BIND(IF(BOUND(?parent_label), CONCAT(?venue_label, \" (\", ?parent_label, IF(BOU
             "label": "[[i18n "field_damage" bundle="sapa-fields"]]",
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
             "treePatterns": {
-                "type": "simple",
-                "schemePattern": "?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:dm ",
-                "relationPattern": "?item skos:broader ?parent"
+                "type": "full",
+                "rootsQuery": "SELECT DISTINCT ?item ?hasChildren WHERE { spav:dm skos:hasTopConcept ?item . OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) }",
+                "childrenQuery": "SELECT DISTINCT ?item ?hasChildren WHERE { ?item skos:broader ?parent. OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) }",
+                "parentsQuery": "SELECT DISTINCT ?item ?parent WHERE { ?item skos:broader ?parent . }",
+                "searchQuery": "SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE { ?item skos:inScheme spav:dm ; skos:prefLabel ?label . ?label bds:search ?__token__ ; bds:relevance ?score ; bds:matchAllTerms \"true\" OPTIONAL { ?child skos:broader ?item. } BIND(BOUND(?child) AS ?hasChildren) } ORDER BY DESC (?score) (?label) LIMIT 200"
             },
                 "selectPattern" : "SELECT ?value WHERE { $subject rico:hasEventType ?value . ?value skos:inScheme spav:dm . }",
                 "insertPattern" : "INSERT { $subject rico:hasEventType $value . } WHERE {}",
