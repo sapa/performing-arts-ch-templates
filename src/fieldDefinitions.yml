@@ -1254,9 +1254,31 @@ fields:
       - insert: 'INSERT { $subject rico:hasEventType $value . } WHERE {}'
       - delete: 'DELETE { $subject rico:hasEventType $value . } WHERE {}'
     treePatterns:
-      type: simple
-      schemePattern: '?item <http://www.w3.org/2004/02/skos/core#inScheme> spav:dm '
-      relationPattern: '?item skos:broader ?parent'
+      type: full
+      rootsQuery: 'SELECT DISTINCT ?item ?hasChildren WHERE {
+          spav:dm skos:hasTopConcept ?item .
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }'
+      childrenQuery: 'SELECT DISTINCT ?item  ?hasChildren WHERE {
+          ?item skos:broader ?parent.
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }'
+      parentsQuery: 'SELECT DISTINCT ?item ?parent WHERE {
+          ?item skos:broader ?parent .
+        }'
+      searchQuery: 'SELECT DISTINCT ?item ?label ?score ?hasChildren WHERE {
+          ?item skos:inScheme spav:dm ;
+            skos:prefLabel ?label . 
+          ?label bds:search ?__token__ ; 
+          bds:relevance ?score ; 
+          bds:matchAllTerms "true"
+          OPTIONAL { ?child skos:broader ?item. }
+          BIND(BOUND(?child) AS ?hasChildren)
+        }
+        ORDER BY DESC (?score) (?label)
+        LIMIT 200'
 
   - id: InstantiationConditionStatementHistory
     label: History
