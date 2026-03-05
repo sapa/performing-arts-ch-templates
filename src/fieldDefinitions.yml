@@ -1260,7 +1260,7 @@ fields:
           OPTIONAL { ?child skos:broader ?item. }
           BIND(BOUND(?child) AS ?hasChildren)
         }'
-      childrenQuery: 'SELECT DISTINCT ?item  ?hasChildren WHERE {
+      childrenQuery: 'SELECT DISTINCT ?item ?hasChildren WHERE {
           ?item skos:broader ?parent.
           OPTIONAL { ?child skos:broader ?item. }
           BIND(BOUND(?child) AS ?hasChildren)
