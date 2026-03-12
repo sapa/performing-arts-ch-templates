@@ -12,16 +12,21 @@
 
         <!-- additional type -->
         <semantic-query
-          query="SELECT ?additionalType WHERE {
+          query="SELECT ?type WHERE {
             BIND(<{{performance.value}}> AS ?performance)
-            ?performance schema:additionalType ?additionalType
+            {
+              ?performance schema:additionalType ?type
+            } UNION {
+              ?performance crm:P2_has_type ?type .
+              ?type skos:inScheme spav:hl .
+            }
           }"
-          template="{{> template-additionalType}}">
-          <template id="template-additionalType">
+          template="{{> template-type}}">
+          <template id="template-type">
             <ul class="list-unstyled">
             {{#each bindings}}
               <li>
-                <mp-label iri="{{additionalType.value}}"></mp-label>
+                <mp-label iri="{{type.value}}"></mp-label>
               </li>
             {{/each}}
             </ul>
