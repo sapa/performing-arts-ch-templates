@@ -10,6 +10,25 @@
       {{#each bindings}}
         <h6><semantic-link iri="{{performance.value}}"></semantic-link></h6>
 
+        <!-- season -->
+        <semantic-query
+          query="SELECT ?season WHERE {
+            BIND(<{{performance.value}}> AS ?performance)
+            ?performance crm:P10_falls_within ?season .
+          }"
+          template="{{> template-season}}"
+          >
+            <template id="template-season">
+              <ul class="list-unstyled">
+              {{#each bindings}}
+                <li>
+                  <semantic-link iri="{{season.value}}"></semantic-link>
+                </li>
+              {{/each}}
+              </ul>
+            </template>
+          </semantic-query>
+
         <!-- venue -->
         <semantic-query 
           query='SELECT ?type ?venue ?unidentified
