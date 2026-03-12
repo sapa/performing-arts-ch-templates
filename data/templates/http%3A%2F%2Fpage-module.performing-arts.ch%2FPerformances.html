@@ -10,6 +10,24 @@
       {{#each bindings}}
         <h6><semantic-link iri="{{performance.value}}"></semantic-link></h6>
 
+        <!-- additional type -->
+        <semantic-query
+          query="SELECT ?additionalType WHERE {
+            BIND(<{{performance.value}}> AS ?performance)
+            ?performance schema:additionalType ?additionalType
+          }"
+          template="{{> template-additionalType}}">
+          <template id="template-additionalType">
+            <ul class="list-unstyled">
+            {{#each bindings}}
+              <li>
+                <mp-label iri="{{additionalType.value}}"></mp-label>
+              </li>
+            {{/each}}
+            </ul>
+          </template>>
+        </semantic-query>
+
         <!-- venue -->
         <semantic-query 
           query='SELECT ?type ?venue ?unidentified
