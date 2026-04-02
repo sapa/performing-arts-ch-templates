@@ -10,31 +10,6 @@
       {{#each bindings}}
         <h6><semantic-link iri="{{performance.value}}"></semantic-link></h6>
 
-        <!-- additional type -->
-        <semantic-query
-          query="SELECT ?type WHERE {
-            BIND(<{{performance.value}}> AS ?performance)
-            {
-              ?performance schema:additionalType ?type .
-              BIND('1' as ?order)
-            } UNION {
-              ?performance crm:P2_has_type ?type .
-              ?type skos:inScheme spav:hl .
-              BIND('2' as ?order)
-            }
-          } ORDER BY ?order"
-          template="{{> template-type}}">
-          <template id="template-type">
-            <ul class="list-unstyled">
-            {{#each bindings}}
-              <li>
-                <mp-label iri="{{type.value}}"></mp-label>
-              </li>
-            {{/each}}
-            </ul>
-          </template>>
-        </semantic-query>
-      
         <!-- season -->
         <semantic-query
           query="SELECT ?season WHERE {
