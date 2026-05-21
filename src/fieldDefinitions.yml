@@ -3235,6 +3235,7 @@ fields:
         $subject rico:isAssociatedWithEvent ?event .
         ?event a rico:Event ;
         rico:hasEventType $value .
+        $value skos:broader spav:etmoc .
       }'
       - insert: 'INSERT {
         $subject rico:isAssociatedWithEvent ?event .

@@ -1938,7 +1938,7 @@ BIND (IRI(CONCAT(\"http://data.performing-arts.ch/w/\" , ?UUID1, \"/p\") ) AS ?p
             "xsdDatatype" : "http://www.w3.org/2001/XMLSchema#anyURI",
             "domain" : "https://www.ica.org/standards/RiC/ontology#RecordResource",
             "range" : "http://www.w3.org/2004/02/skos/core#Concept",
-                "selectPattern" : "SELECT ?value WHERE { $subject rico:isAssociatedWithEvent ?event . ?event a rico:Event ; rico:hasEventType $value . }",
+                "selectPattern" : "SELECT ?value WHERE { $subject rico:isAssociatedWithEvent ?event . ?event a rico:Event ; rico:hasEventType $value . $value skos:broader spav:etmoc . }",
                 "insertPattern" : "INSERT { $subject rico:isAssociatedWithEvent ?event . ?event a rico:Event ; rico:hasEventType $value . } WHERE { BIND(IRI(CONCAT(\"http://data.performing-arts.ch/x/\", MD5(CONCAT(STR(?subject), \"acquisition_event\", STR($value))))) as ?event) }",
                 "deletePattern" : "DELETE { $subject rico:isAssociatedWithEvent ?event . ?event a rico:Event ; rico:hasEventType $value . } WHERE {}",
                 "valueSetPattern" : "SELECT ?value WHERE { ?value skos:broader spav:etmoc . }",
